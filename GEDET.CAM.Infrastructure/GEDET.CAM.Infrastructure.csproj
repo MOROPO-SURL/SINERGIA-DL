@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>MOROPO.GEDET.CAM.Infrastructure</AssemblyName>
+		<RootNamespace>MOROPO.GEDET.CAM.Infrastructure</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GEDET.CAM.Core\GEDET.CAM.Core.csproj" />
+	</ItemGroup>
+
+</Project>
