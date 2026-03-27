@@ -1,11 +1,12 @@
-﻿using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Contract;
-using MOROPO.GEDET.CAM.Domain.Common.Ports.Service;
+﻿using MOROPO.GEDET.CAM.Domain.Aggretates.TraceAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.TraceAggregate.Abstractions;
 
 public abstract class AbstractTrace<TEntity, TEntityId> : AbstractEntity<TraceId>, IPersistenceSignable where TEntity : AbstractEntity<TEntityId>
 {
-    protected AbstractTrace(IDataIntegrityServicePort dataIntegrityService, TraceId id, Enumerations.TraceKind kind, string author, DateTime createAt, TEntity target, TEntityId targetId, string? beforeData, string? afterData) : base(id)
+    protected AbstractTrace(TraceId id, Enumerations.TraceKind kind, string author, DateTime createAt, TEntity target, TEntityId targetId, string signature, string? beforeData, string? afterData) : base(id)
     {
         Kind = kind;
         Author = author;
@@ -14,7 +15,7 @@ public abstract class AbstractTrace<TEntity, TEntityId> : AbstractEntity<TraceId
         TargetId = targetId;
         BeforeData = beforeData;
         AfterData = afterData;
-        Signature = dataIntegrityService.GetEntitySignature(this);
+        Signature = signature;
     }
 
     public Enumerations.TraceKind Kind { get; set; }

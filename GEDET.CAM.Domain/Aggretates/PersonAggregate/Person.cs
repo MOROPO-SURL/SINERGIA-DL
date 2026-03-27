@@ -1,11 +1,15 @@
 ﻿using MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate;
+using MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate.Values;
 using MOROPO.GEDET.CAM.Domain.Aggretates.PersonAggregate.Enumerations;
+using MOROPO.GEDET.CAM.Domain.Aggretates.PersonAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Bridges;
 using MOROPO.GEDET.CAM.Domain.Common.Aggregate;
-using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Contract;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.PersonAggregate;
 
-public class Person : AbstractAuditableEntity<PersonId>, IAggregateRoot, INamedEntity<PersonId>, IArchivableEntity<PersonId>, IEnableableEntity<PersonId>, IPriorizableEntity<PersonId>
+public class Person : AbstractAuditableEntity<PersonId>, IAggregateRoot<PersonId>, INamedEntity<PersonId>, IArchivableEntity<PersonId>, IEnableableEntity<PersonId>, IPriorizableEntity<PersonId>
 {
     public Person(PersonId id, string? alias, DateTime? bornDate, string? about, int priority, bool enabled, bool isArchived, string name, string lastName, Sex sex, CivilStatus civilStatus, Image image, ImageId? imageId, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteContact> webSites, PersonOrganizationBrigde[] organizationBrigdes): base(id)
     {

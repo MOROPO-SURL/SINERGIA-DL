@@ -1,15 +1,19 @@
-namespace GEDET.CAM.Presentation.API
+using MOROPO.GEDET.CAM.Infrastructure.Extensions;
+
+namespace MOROPO.GEDET.CAM.Presentation.API;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-            var app = builder.Build();
+        var builder = WebApplication.CreateBuilder(args);
 
-            app.MapGet("/", () => "Hello World!");
+        builder.Services.UseInfrastructure(builder.Configuration);
 
-            app.Run();
-        }
+        var app = builder.Build();
+
+        app.MapGet("/", () => "Hello World!");
+
+        app.Run();
     }
 }

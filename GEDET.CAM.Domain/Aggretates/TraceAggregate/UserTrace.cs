@@ -1,10 +1,11 @@
-﻿using MOROPO.GEDET.CAM.Domain.Common.Ports.Service;
+﻿using MOROPO.GEDET.CAM.Domain.Aggretates.TraceAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate.Values;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.TraceAggregate;
 
-public sealed class UserTrace : Abstractions.AbstractTrace<UserAggregate.User, UserAggregate.UserId>
+public sealed class UserTrace : Abstractions.AbstractTrace<UserAggregate.User, UserId>
 {
-    public UserTrace(IDataIntegrityServicePort dataIntegrityService, TraceId id, Enumerations.TraceKind kind, string author, DateTime createAt, UserAggregate.User user, UserAggregate.UserId userId, string? beforeData, string? afterData) : base(dataIntegrityService, id, kind, author, createAt, user, userId, beforeData, afterData)
+    public UserTrace(TraceId id, Enumerations.TraceKind kind, string author, DateTime createAt, UserAggregate.User user, UserId userId, string signature, string? beforeData, string? afterData) : base(id, kind, author, createAt, user, userId, signature, beforeData, afterData)
     {
     }
 }

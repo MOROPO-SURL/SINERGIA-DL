@@ -1,11 +1,14 @@
-﻿using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Contract;
-using MOROPO.GEDET.CAM.Domain.Common.Ports.Service;
+﻿using MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Bridges;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate;
 
-public class User : AbstractAuditableEntity<UserId>, IAggregateRoot, IEnableableEntity<UserId>, IPersistenceSignable
+public class User : AbstractAuditableEntity<UserId>, IAggregateRoot<UserId>, IEnableableEntity<UserId>, IPersistenceSignable
 {
-    public User(IDataIntegrityServicePort dataIntegrityService, UserId id, bool enabled, string password, bool passwordChangeRequired, bool hasFullAccess, int failAuthenticationCount, string name, string? lastName, DateTime? lastSessionDate, ImageAggregate.Image? image, ImageAggregate.ImageId? imageId, UserRoleBridge[] roleBridges) : base(id)
+    public User(UserId id, bool enabled, string password, bool passwordChangeRequired, bool hasFullAccess, int failAuthenticationCount, string signature, string name, string? lastName, DateTime? lastSessionDate, ImageAggregate.Image? image, ImageId? imageId, UserRoleBridge[] roleBridges) : base(id)
     {
         Enabled = enabled;
         Password = password;
@@ -18,7 +21,7 @@ public class User : AbstractAuditableEntity<UserId>, IAggregateRoot, IEnableable
         Image = image;
         ImageId = imageId;
         RoleBridges = [.. roleBridges];
-        Signature = dataIntegrityService.GetEntitySignature(this);
+        Signature = signature;
     }
 
     public bool Enabled { get; set; }
@@ -38,7 +41,7 @@ public class User : AbstractAuditableEntity<UserId>, IAggregateRoot, IEnableable
     public string? LastName { get; set; }
 
     public ImageAggregate.Image? Image { get; set; }
-    public ImageAggregate.ImageId? ImageId { get; set; }
+    public ImageId? ImageId { get; set; }
 
     public string Signature { get; set; }
 

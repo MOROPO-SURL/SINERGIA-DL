@@ -1,8 +1,10 @@
-﻿using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Contract;
+﻿using MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate;
 
-public class Image : AbstractAuditableEntity<ImageId>, IAggregateRoot
+public class Image : AbstractAuditableEntity<ImageId>, IAggregateRoot<ImageId>
 {
     public Image(ImageId id, string contentType, long length, string? about, int height, int width) : base(id)
     {

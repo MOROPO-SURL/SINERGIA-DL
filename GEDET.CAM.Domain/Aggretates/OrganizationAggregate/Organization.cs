@@ -1,11 +1,14 @@
-﻿using MOROPO.GEDET.CAM.Domain.Common.Aggregate;
-using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Contract;
+﻿using MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Aggretates.OrganizationAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
+using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.OrganizationAggregate;
 
-public class Organization : AbstractAuditableEntity<OrganizationId>, IAggregateRoot, IArchivableEntity<OrganizationId>, IEnableableEntity<OrganizationId>, INamedEntity<OrganizationId>, IPriorizableEntity<OrganizationId>
+public class Organization : AbstractAuditableEntity<OrganizationId>, IAggregateRoot<OrganizationId>, IArchivableEntity<OrganizationId>, IEnableableEntity<OrganizationId>, INamedEntity<OrganizationId>, IPriorizableEntity<OrganizationId>
 {
-    public Organization(OrganizationId id, bool isArchived, bool enabled, string name, int priority, Organization owner, OrganizationId? ownerId, ImageAggregate.Image image, ImageAggregate.ImageId? imageId, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteContact> webSites): base(id)
+    public Organization(OrganizationId id, bool isArchived, bool enabled, string name, int priority, Organization owner, OrganizationId? ownerId, ImageAggregate.Image image, ImageId? imageId, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteContact> webSites): base(id)
     {
         IsArchived = isArchived;
         Enabled = enabled;
@@ -33,7 +36,7 @@ public class Organization : AbstractAuditableEntity<OrganizationId>, IAggregateR
     public OrganizationId? OwnerId { get; set; }
 
     public ImageAggregate.Image? Image { get; set; }
-    public ImageAggregate.ImageId? ImageId { get; set; }
+    public ImageId? ImageId { get; set; }
 
     public List<EmailAddress> EmailAddresses { get; set; }
 
