@@ -8,9 +8,9 @@ public interface IBridgeCommandRepositoryPort<TBridge, TMainEntity, TMainEntityI
     where TMainEntity : AbstractEntity<TMainEntityId>
     where TLinkedEntity : AbstractEntity<TLinkedEntityId>
 {
-    TBridge Add(TBridge bridge, string author, bool commit = true);
+    Task<TBridge> AddAsync(TBridge bridge, string author, bool commit = true);
 
-    TBridge Update(TBridge bridge, string author, bool commit = true);
+    Task<TBridge> UpdateAsync(TBridge bridge, string author, bool commit = true);
 
-    void Delete(TBridge bridge, string author, bool commit = true);
+    Task DeleteAsync(TBridge bridge, string author, bool commit = true);
 }

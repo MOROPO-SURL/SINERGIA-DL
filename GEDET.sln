@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDET.CAM.Core", "GEDET.CAM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDET.CAM.Infrastructure", "GEDET.CAM.Infrastructure\GEDET.CAM.Infrastructure.csproj", "{AF6E7C21-C244-451A-8143-8A586A9D77E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEDET.CAM.Interop.Contract", "GEDET.CAM.Interop.Contract\GEDET.CAM.Interop.Contract.csproj", "{334F2B6B-F155-425E-B72B-B492D9719FDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDET.CAM.Interop.Contracts", "GEDET.CAM.Interop.Contracts\GEDET.CAM.Interop.Contracts.csproj", "{4197CD18-256B-4E1E-9376-BD821C7401EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{AF6E7C21-C244-451A-8143-8A586A9D77E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF6E7C21-C244-451A-8143-8A586A9D77E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF6E7C21-C244-451A-8143-8A586A9D77E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{334F2B6B-F155-425E-B72B-B492D9719FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{334F2B6B-F155-425E-B72B-B492D9719FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{334F2B6B-F155-425E-B72B-B492D9719FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{334F2B6B-F155-425E-B72B-B492D9719FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4197CD18-256B-4E1E-9376-BD821C7401EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4197CD18-256B-4E1E-9376-BD821C7401EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4197CD18-256B-4E1E-9376-BD821C7401EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4197CD18-256B-4E1E-9376-BD821C7401EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

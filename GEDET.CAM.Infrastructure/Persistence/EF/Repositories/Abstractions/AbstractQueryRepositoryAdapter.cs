@@ -14,45 +14,40 @@ internal abstract class AbstractQueryRepositoryAdapter<TEntity, TId> : IEntityQu
         baseQueryableDbSet = dbContext.Set<TEntity>().AsNoTracking();
     }
 
-    protected virtual Func<TEntity, bool> GetKeySelector(TId key)
+    protected virtual IQueryable<TEntity> GetQueryableDbSet() => baseQueryableDbSet;
+
+    public Task<int> CountAsync()
     {
-        return e => e.Id.Equals(key);
+        return baseQueryableDbSet.CountAsync();
     }
 
-    protected virtual IQueryable<TEntity> GetQueryableDbSet() => baseQueryableDbSet;
+    public Task<int> CountAsync(Expression<Func<TEntity, bool>> criteria)
+    {
+        return baseQueryableDbSet.Where(criteria).CountAsync();
+    }
+
+    public Task<TEntity> GetAsync(TId id)
+    {
+        return GetQueryableDbSet().Where(entity => entity.Id.Equals(id)).FirstAsync();
+    }
+
+    public Task<TEntity?> FindOneByAsync(Expression<Func<TEntity, bool>> criteria)
+    {
+        return GetQueryableDbSet().Where(criteria).FirstOrDefaultAsync();
+    }
 
     public IQueryable<TEntity> GetAllQueryable()
     {
         return GetQueryableDbSet();
     }
 
-    public int Count()
+    public IQueryable<TEntity> GetFindByQueryable(Expression<Func<TEntity, bool>> criteria)
     {
-        return baseQueryableDbSet.Count();
+        return GetQueryableDbSet().Where(criteria);
     }
 
-    public int Count(Expression<Func<TEntity, bool>> criteria)
+    public IQueryable<TEntity> GetPageQueryable(int page, int limit)
     {
-        return baseQueryableDbSet.Where(criteria).Count();
-    }
-
-    public TEntity Get(TId id)
-    {
-        return GetQueryableDbSet().Where(GetKeySelector(id)).First();
-    }
-
-    public TEntity? FindOneBy(Expression<Func<TEntity, bool>> criteria)
-    {
-        return GetQueryableDbSet().Where(criteria).FirstOrDefault();
-    }
-
-    public TEntity[] FindBy(Expression<Func<TEntity, bool>> criteria)
-    {
-        return [.. GetQueryableDbSet().Where(criteria)];
-    }
-
-    public TEntity[] GetPage(int page, int limit)
-    {
-        return [.. GetQueryableDbSet().Skip(page * limit).Take(limit)];
+        return GetQueryableDbSet().Skip(page * limit).Take(limit);
     }
 }

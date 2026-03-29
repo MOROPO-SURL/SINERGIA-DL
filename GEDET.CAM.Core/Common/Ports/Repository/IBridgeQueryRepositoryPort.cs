@@ -9,17 +9,17 @@ public interface IBridgeQueryRepositoryPort<TBridge, TMainEntity, TMainEntityId,
     where TMainEntity : AbstractEntity<TMainEntityId>
     where TLinkedEntity : AbstractEntity<TLinkedEntityId>
 {
-    TBridge Get(TMainEntityId mainId, TLinkedEntityId linkedId);
+    Task<TBridge> GetAsync(TMainEntityId mainId, TLinkedEntityId linkedId);
 
-    TBridge FindOneBy(Expression<Func<TBridge, bool>> criteria);
+    Task<TBridge> FindOneByAsync(Expression<Func<TBridge, bool>> criteria);
 
-    IQueryable<TBridge> FindBy(Expression<Func<TBridge, bool>> criteria);
+    IQueryable<TBridge> GetFindByQueryable(Expression<Func<TBridge, bool>> criteria);
 
-    IQueryable<TBridge> GetAll();
+    IQueryable<TBridge> GetAllQueryable();
 
-    TBridge[] GetPage(int page, int limit);
+    IQueryable<TBridge> GetPageQueryable(int page, int limit);
 
-    int Count();
+    Task<int> CountAsync();
 
-    int Count(Expression<Func<TBridge, bool>> criteria);
+    Task<int> CountAsync(Expression<Func<TBridge, bool>> criteria);
 }

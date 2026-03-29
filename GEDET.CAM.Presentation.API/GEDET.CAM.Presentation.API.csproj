@@ -9,14 +9,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Mapster.DependencyInjection" Version="10.0.6" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.25">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
+	  <PackageReference Include="NSwag.AspNetCore" Version="14.6.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\GEDET.CAM.Infrastructure\GEDET.CAM.Infrastructure.csproj" />
+	  <ProjectReference Include="..\GEDET.CAM.Interop.Contracts\GEDET.CAM.Interop.Contracts.csproj" />
 	</ItemGroup>
 
 </Project>

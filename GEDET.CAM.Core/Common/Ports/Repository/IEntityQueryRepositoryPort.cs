@@ -5,17 +5,17 @@ namespace MOROPO.GEDET.CAM.Core.Common.Ports.Repository;
 
 public interface IEntityQueryRepositoryPort<TEntity, TId> where TEntity : class, IEntity<TId>
 {
+    Task<int> CountAsync();
+
+    Task<int> CountAsync(Expression<Func<TEntity, bool>> criteria);
+
+    Task<TEntity> GetAsync(TId id);
+
+    Task<TEntity?> FindOneByAsync(Expression<Func<TEntity, bool>> criteria);
+
     IQueryable<TEntity> GetAllQueryable();
 
-    int Count();
+    IQueryable<TEntity> GetFindByQueryable(Expression<Func<TEntity, bool>> criteria);
 
-    int Count(Expression<Func<TEntity, bool>> criteria);
-
-    TEntity Get(TId id);
-
-    TEntity? FindOneBy(Expression<Func<TEntity, bool>> criteria);
-
-    TEntity[] FindBy(Expression<Func<TEntity, bool>> criteria);
-
-    TEntity[] GetPage(int page, int limit);
+    IQueryable<TEntity> GetPageQueryable(int page, int limit);
 }
