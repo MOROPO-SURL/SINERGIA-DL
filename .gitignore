@@ -417,3 +417,4 @@ FodyWeavers.xsd
 *.msm
 *.msp
 /GEDET.CAM.Presentation.API/appsettings.Development.json
+/GEDET.CAM.Presentation.Web.BackOffice.Razor/dpkeys
