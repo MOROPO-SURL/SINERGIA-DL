@@ -1,4 +1,5 @@
 ﻿using MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Aggretates.TerritoryPotentialAggregate.Values;
 using MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate.Values;
 using MOROPO.GEDET.CAM.Domain.Bridges;
 using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;

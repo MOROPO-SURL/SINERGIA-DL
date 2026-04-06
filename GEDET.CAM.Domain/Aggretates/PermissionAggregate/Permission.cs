@@ -1,4 +1,5 @@
-﻿using MOROPO.GEDET.CAM.Domain.Aggretates.PermissionAggregate.Values;
+﻿using MOROPO.GEDET.CAM.Domain.Aggretates.OrganizationAggregate.Values;
+using MOROPO.GEDET.CAM.Domain.Aggretates.PermissionAggregate.Values;
 using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
 using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
