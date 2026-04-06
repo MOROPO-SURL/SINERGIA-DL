@@ -5,6 +5,8 @@ namespace MOROPO.GEDET.CAM.Domain.Aggretates.ObjectiveAggregate.Entities;
 
 public class ObjectiveProjection : AbstractAuditableEntity<ObjectiveProjectionId>
 {
+    private ObjectiveProjection() : base(new ObjectiveProjectionId(default)) { }
+
     public ObjectiveProjection(ObjectiveProjectionId id, int index, string title, string? description = null) : base(id)
     {
         Index = index;
@@ -16,7 +18,7 @@ public class ObjectiveProjection : AbstractAuditableEntity<ObjectiveProjectionId
 
     public int Index { get; set; }
 
-    public string Title { get; set; }
+    public string Title { get; set; } = null!;
 
     public string? Description { get; set; }
 }

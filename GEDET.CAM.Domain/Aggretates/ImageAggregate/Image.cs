@@ -6,16 +6,18 @@ namespace MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate;
 
 public class Image : AbstractAuditableEntity<ImageId>, IAggregateRoot<ImageId>
 {
-    public Image(ImageId id, string contentType, long length, string? about, int height, int width) : base(id)
+    private Image () : base(new ImageId(default)) { }
+
+    public Image(ImageId id, string contentType, long length, int height, int width, string? about) : base(id)
     {
         ContentType = contentType;
         Length = length;
-        About = about;
         Height = height;
         Width = width;
+        About = about;
     }
 
-    public string ContentType { get; set; }
+    public string ContentType { get; set; } = null!;
 
     public long Length { get; set; }
 
