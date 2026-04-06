@@ -6,21 +6,19 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Bridges;
 
-public class ObjectiveKeyVariableBridge : IBridge<Objective, ObjectiveId, KeyVariable, KeyVariableId>
+public class ObjectiveKeyVariableBridge : IBridge<Objective, ObjectiveId, Guid, KeyVariable, KeyVariableId, Guid>
 {
     private ObjectiveKeyVariableBridge() { }
 
-    public ObjectiveKeyVariableBridge(ObjectiveId mainId, Objective main, KeyVariableId linkedId, KeyVariable linked)
+    public ObjectiveKeyVariableBridge(ObjectiveId mainId, KeyVariableId linkedId)
     {
         MainId = mainId;
-        Main = main;
         LinkedId = linkedId;
-        Linked = linked;
     }
 
     public ObjectiveId MainId { get; set; }
-    public Objective Main { get; set; } = null!;
+    public Objective? Main { get; set; }
 
     public KeyVariableId LinkedId { get; set; }
-    public KeyVariable Linked { get; set; } = null!;
+    public KeyVariable? Linked { get; set; }
 }

@@ -8,21 +8,25 @@ namespace MOROPO.GEDET.CAM.Core.UseCases.Roles.CQRS.Command.Create;
 
 internal class RoleCreateCommandHandler : IRequestHandler<RoleCreateCommand, RoleDetailDto>
 {
-    private readonly IRoleCommandRepositoryPort roleCommandRepository;
+    private readonly IRoleCommandRepositoryPort entityCommandRepository;
+    private readonly IRoleQueryRepositoryPort entityQueryRepository;
     private readonly IMapper mapper;
 
-    public RoleCreateCommandHandler(IRoleCommandRepositoryPort roleCommandRepository, IMapper mapper)
+    public RoleCreateCommandHandler(IRoleCommandRepositoryPort roleCommandRepository, IRoleQueryRepositoryPort roleQueryRepository, IMapper mapper)
     {
-        this.roleCommandRepository = roleCommandRepository;
+        this.entityCommandRepository = roleCommandRepository;
+        this.entityQueryRepository = roleQueryRepository;
         this.mapper = mapper;
     }
 
-    public async Task<RoleDetailDto> Handle(RoleCreateCommand command, CancellationToken cancellationToken)
+    public async Task<RoleDetailDto> Handle(RoleCreateCommand request, CancellationToken cancellationToken)
     {
-        var entity = mapper.Map<RoleCreateCommand, Role>(command);
+        Role entity = mapper.Map<RoleCreateCommand, Role>(request);
 
-        await roleCommandRepository.AddAsync(entity);
+        entity.PermissionBridges = [.. request.Permissions.Select(item => new Domain.Bridges.RolePermissionBridge(entity.Id, new Domain.Aggretates.PermissionAggregate.Values.PermissionId(item)))];
 
-        return mapper.Map<Role, RoleDetailDto>(entity);
+        await entityCommandRepository.AddAsync(entity);
+
+        return mapper.Map<Role, RoleDetailDto>(await entityQueryRepository.GetAsync(entity.Id));
     }
 }

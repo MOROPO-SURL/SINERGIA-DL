@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>MOROPO.GEDET.CAM.Presentation.Web.BackOffice.Razor</AssemblyName>
+		<RootNamespace>MOROPO.GEDET.CAM.Presentation.Web.BackOffice.Razor</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="dpkeys\**" />
+	  <Content Remove="dpkeys\**" />
+	  <EmbeddedResource Remove="dpkeys\**" />
+	  <None Remove="dpkeys\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Mapster.DependencyInjection" Version="10.0.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.25">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GEDET.CAM.Core\GEDET.CAM.Core.csproj" />
+	  <ProjectReference Include="..\GEDET.CAM.Infrastructure\GEDET.CAM.Infrastructure.csproj" />
+	</ItemGroup>
+
+</Project>

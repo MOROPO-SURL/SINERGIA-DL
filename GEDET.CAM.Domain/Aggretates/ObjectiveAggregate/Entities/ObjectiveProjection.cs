@@ -3,7 +3,7 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.ObjectiveAggregate.Entities;
 
-public class ObjectiveProjection : AbstractAuditableEntity<ObjectiveProjectionId>
+public class ObjectiveProjection : AbstractAuditableEntity<ObjectiveProjectionId, Guid>
 {
     public ObjectiveProjection(ObjectiveProjectionId id, int index, string title, string? description = null) : base(id)
     {

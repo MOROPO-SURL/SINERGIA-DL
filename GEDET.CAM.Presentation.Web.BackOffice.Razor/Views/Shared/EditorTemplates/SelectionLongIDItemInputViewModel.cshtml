@@ -1,0 +1,13 @@
+﻿@model MOROPO.GEDET.CAM.Presentation.Web.BackOffice.Razor.Models.View.Common.Input.SelectionItemInputViewModel<long>
+
+<div class="col-md-6">
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Label)
+    
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(model => model.Selected)
+            @Model.Label
+        </label>
+    </div>
+</div>

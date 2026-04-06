@@ -4,7 +4,7 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.KeyVariableAggregate;
 
-public class KeyVariable : AbstractEntity<KeyVariableId>, IAggregateRoot<KeyVariableId>, IPriorizableEntity<KeyVariableId>, IArchivableEntity<KeyVariableId>, INamedEntity<KeyVariableId>
+public class KeyVariable : AbstractEntity<KeyVariableId, Guid>, IAggregateRoot<KeyVariableId, Guid>, IPriorizableEntity<KeyVariableId, Guid>, IArchivableEntity<KeyVariableId, Guid>, INamedEntity<KeyVariableId, Guid>
 {
     public KeyVariable(KeyVariableId id, bool isArchived, int priority, string name, string? alias = null, string? description = null) : base(id)
     {

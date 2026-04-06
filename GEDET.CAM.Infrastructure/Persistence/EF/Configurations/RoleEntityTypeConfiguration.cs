@@ -13,7 +13,7 @@ internal class RoleEntityTypeConfiguration : IEntityTypeConfiguration<Role>
     {
         builder.ToTable(ROOT_TABLE_NAME);
 
-        builder.HasKey(t => t.Id);
+        builder.HasKey(entity => entity.Id);
 
         builder.Property(entity => entity.Id)
             .ValueGeneratedNever()
@@ -22,6 +22,9 @@ internal class RoleEntityTypeConfiguration : IEntityTypeConfiguration<Role>
         builder.Property(entity => entity.Name)
             .HasMaxLength(120);
 
-        builder.HasIndex(t => t.Name);
+        builder.Property(entity => entity.Description)
+            .HasMaxLength(480);
+
+        builder.HasIndex(entity => entity.Name);
     }
 }

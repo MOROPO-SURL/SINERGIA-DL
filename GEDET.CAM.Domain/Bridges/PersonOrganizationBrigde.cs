@@ -6,21 +6,19 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Bridges;
 
-public class PersonOrganizationBrigde : IBridge<Person, PersonId, Organization, OrganizationId>
+public class PersonOrganizationBrigde : IBridge<Person, PersonId, Guid, Organization, OrganizationId, Guid>
 {
     private PersonOrganizationBrigde() { }
 
-    public PersonOrganizationBrigde(PersonId mainId, Person main, OrganizationId linkedId, Organization linked)
+    public PersonOrganizationBrigde(PersonId mainId, OrganizationId linkedId)
     {
         MainId = mainId;
-        Main = main;
         LinkedId = linkedId;
-        Linked = linked;
     }
 
     public PersonId MainId { get; set; }
-    public Person Main { get; set; } = null!;
+    public Person? Main { get; set; }
 
     public OrganizationId LinkedId { get; set; }
-    public Organization Linked { get; set; } = null!;
+    public Organization? Linked { get; set; }
 }

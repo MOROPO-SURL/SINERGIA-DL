@@ -12,4 +12,4 @@ public record UserDetailModel(
     string? LastName,
     DateTime? LastSessionDate,
     ImageModel? Image,
-    Role.DTOs.RoleEssentialModel[] Roles);
+    Role.DTOs.RoleBasiclModel[] Roles);

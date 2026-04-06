@@ -1,4 +1,5 @@
 ﻿using MOROPO.GEDET.CAM.Core.UseCases.Roles.Ports.Repository;
+using MOROPO.GEDET.CAM.Domain.Aggretates.RoleAggregate;
 using MOROPO.GEDET.CAM.Domain.Aggretates.RoleAggregate.Values;
 
 namespace MOROPO.GEDET.CAM.Core.UseCases.Roles.CQRS.Command.Remove;
@@ -16,7 +17,7 @@ internal class RoleRemoveCommandHandler : MediatR.IRequestHandler<RoleRemoveComm
 
     public async Task Handle(RoleRemoveCommand request, CancellationToken cancellationToken)
     {
-        var entity = await roleQueryRepository.GetAsync(new RoleId(request.Id));
+        Role entity = await roleQueryRepository.GetAsync(new RoleId(request.Id));
 
         await roleCommandRepository.DeleteAsync(entity);
 

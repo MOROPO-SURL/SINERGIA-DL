@@ -3,7 +3,7 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.ObjectiveAggregate.Entities;
 
-public class ObjectiveChallenge : AbstractAuditableEntity<ObjectiveChallengeId>
+public class ObjectiveChallenge : AbstractAuditableEntity<ObjectiveChallengeId, Guid>
 {
     public ObjectiveChallenge(ObjectiveChallengeId id, int index, string title, string? description = null) : base(id)
     {

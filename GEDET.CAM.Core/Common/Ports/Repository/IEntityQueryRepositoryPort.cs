@@ -3,7 +3,9 @@ using System.Linq.Expressions;
 
 namespace MOROPO.GEDET.CAM.Core.Common.Ports.Repository;
 
-public interface IEntityQueryRepositoryPort<TEntity, TId> where TEntity : class, IEntity<TId>
+public interface IEntityQueryRepositoryPort<TEntity, TId, TIdValue>
+    where TEntity : class, IEntity<TId, TIdValue>
+    where TId : struct, IId<TIdValue>
 {
     Task<int> CountAsync();
 
@@ -17,5 +19,5 @@ public interface IEntityQueryRepositoryPort<TEntity, TId> where TEntity : class,
 
     IQueryable<TEntity> GetFindByQueryable(Expression<Func<TEntity, bool>> criteria);
 
-    IQueryable<TEntity> GetPageQueryable(int page, int limit);
+    IQueryable<TEntity> GetPageQueryable(int page, int limit, Expression<Func<TEntity, bool>>? criteria = null);
 }

@@ -3,14 +3,16 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Core.Common.Ports.Repository;
 
-public interface IBridgeCommandRepositoryPort<TBridge, TMainEntity, TMainEntityId, TLinkedEntity, TLinkedEntityId>
-    where TBridge : class, IBridge<TMainEntity, TMainEntityId, TLinkedEntity, TLinkedEntityId>
-    where TMainEntity : AbstractEntity<TMainEntityId>
-    where TLinkedEntity : AbstractEntity<TLinkedEntityId>
+public interface IBridgeCommandRepositoryPort<TBridge, TMainEntity, TMainEntityId, TMainEntityIdValue, TLinkedEntity, TLinkedEntityId, TLinkedEntityIdValue>
+    where TBridge : class, IBridge<TMainEntity, TMainEntityId, TMainEntityIdValue, TLinkedEntity, TLinkedEntityId, TLinkedEntityIdValue>
+    where TMainEntity : AbstractEntity<TMainEntityId, TMainEntityIdValue>
+    where TMainEntityId : struct, IId<TMainEntityIdValue>
+    where TLinkedEntity : AbstractEntity<TLinkedEntityId, TLinkedEntityIdValue>
+    where TLinkedEntityId : struct, IId<TLinkedEntityIdValue>
 {
-    Task<TBridge> AddAsync(TBridge bridge, string author, bool commit = true);
+    Task<TBridge> AddAsync(TBridge bridge, bool commit = true);
 
-    Task<TBridge> UpdateAsync(TBridge bridge, string author, bool commit = true);
+    Task<TBridge> UpdateAsync(TBridge bridge, bool commit = true);
 
-    Task DeleteAsync(TBridge bridge, string author, bool commit = true);
+    Task DeleteAsync(TBridge bridge, bool commit = true);
 }

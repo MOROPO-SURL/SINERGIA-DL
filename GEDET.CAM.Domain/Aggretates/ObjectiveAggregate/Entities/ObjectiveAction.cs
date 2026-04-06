@@ -3,7 +3,7 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.ObjectiveAggregate.Entities;
 
-public class ObjectiveAction : AbstractEntity<ObjectiveActionId>
+public class ObjectiveAction : AbstractEntity<ObjectiveActionId, Guid>
 {
     public ObjectiveAction(ObjectiveActionId id, int index, string title, string? description = null) : base(id)
     {

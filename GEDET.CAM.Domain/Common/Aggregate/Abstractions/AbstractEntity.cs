@@ -2,7 +2,7 @@
 
 namespace MOROPO.GEDET.CAM.Domain.Common.Aggregate.Abstractions;
 
-public abstract class AbstractEntity<TId> : IEntity<TId>
+public abstract class AbstractEntity<TId, TIdValue> : IEntity<TId, TIdValue> where TId : struct, IId<TIdValue>
 {
     protected AbstractEntity(TId id)
     {

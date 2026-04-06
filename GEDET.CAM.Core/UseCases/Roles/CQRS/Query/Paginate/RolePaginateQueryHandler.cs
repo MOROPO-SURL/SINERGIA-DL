@@ -1,5 +1,4 @@
 ﻿using Mapster;
-using MapsterMapper;
 using MediatR;
 using MOROPO.GEDET.CAM.Core.Common.Models;
 using MOROPO.GEDET.CAM.Core.UseCases.Roles.DTOs;
@@ -7,40 +6,38 @@ using MOROPO.GEDET.CAM.Core.UseCases.Roles.Ports.Repository;
 
 namespace MOROPO.GEDET.CAM.Core.UseCases.Roles.CQRS.Query.Paginate;
 
-internal class RolePaginateQueryHandler : IRequestHandler<RolePaginateQuery, PaginateQueryResultModel<RoleEssentialDto>>
+internal class AbstractPaginateQueryHandler : IRequestHandler<RolePaginateQuery, PaginateQueryResultModel<RoleBasicDto>>
 {
-    private readonly IRoleQueryRepositoryPort roleQueryRepository;
-    private readonly IMapper mapper;
+    private readonly IRoleQueryRepositoryPort entityQueryRepository;
 
-    public RolePaginateQueryHandler(IRoleQueryRepositoryPort roleQueryRepository, IMapper mapper)
+    public AbstractPaginateQueryHandler(IRoleQueryRepositoryPort roleQueryRepository)
     {
-        this.roleQueryRepository = roleQueryRepository;
-        this.mapper = mapper;
+        this.entityQueryRepository = roleQueryRepository;
     }
 
-    public async Task<PaginateQueryResultModel<RoleEssentialDto>> Handle(RolePaginateQuery query, CancellationToken cancellationToken)
+    public async Task<PaginateQueryResultModel<RoleBasicDto>> Handle(RolePaginateQuery request, CancellationToken cancellationToken)
     {
-        int count = await roleQueryRepository.CountAsync();
+        int count = request.Criteria == null ? await entityQueryRepository.CountAsync() : await entityQueryRepository.CountAsync(request.Criteria);
 
-        int rest = count % query.Limit;
+        int rest = count % request.Limit;
 
-        int maxPageCount = count / query.Limit;
+        int maxPageCount = count / request.Limit;
 
         if (rest > 0) maxPageCount += 1;
 
-        int page = query.Page;
+        int page = request.Page;
 
-        if (query.Page < 0 || query.Page > maxPageCount)
+        if (request.Page < 0 || request.Page > maxPageCount)
         {
             page = 1;
         }
 
-        RoleEssentialDto[] result = count <= 0 ? [] : [.. roleQueryRepository.GetPageQueryable(page, query.Limit).ProjectToType<RoleEssentialDto>()];
+        RoleBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, request.Criteria).ProjectToType<RoleBasicDto>()];
 
-        return new PaginateQueryResultModel<RoleEssentialDto>
+        return new PaginateQueryResultModel<RoleBasicDto>
         {
             Page = page,
-            Limit = query.Limit,
+            Limit = request.Limit,
             Items = result,
             HasPrevious = page > 1,
             HasNext = page < maxPageCount,

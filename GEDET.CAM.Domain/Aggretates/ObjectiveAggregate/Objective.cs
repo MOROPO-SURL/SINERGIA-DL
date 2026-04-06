@@ -6,7 +6,7 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.ObjectiveAggregate;
 
-public class Objective : AbstractAuditableEntity<ObjectiveId>, IAggregateRoot<ObjectiveId>, IEnableableEntity<ObjectiveId>, IArchivableEntity<ObjectiveId>
+public class Objective : AbstractAuditableEntity<ObjectiveId, Guid>, IAggregateRoot<ObjectiveId, Guid>, IEnableableEntity<ObjectiveId, Guid>, IArchivableEntity<ObjectiveId, Guid>
 {
     private readonly List<ObjectiveAction> actions = [];
     private readonly List<ObjectiveProjection> projections = [];
@@ -17,7 +17,7 @@ public class Objective : AbstractAuditableEntity<ObjectiveId>, IAggregateRoot<Ob
     public Objective(ObjectiveId id, bool isArchived, bool enabled, int index, string title, ObjectiveAction[] actions, ObjectiveProjection[] projections, string? description = null) : base(id)
     {
         IsArchived = isArchived;
-        Enabled = enabled;
+        IsEnabled = enabled;
         Index = index;
         Title = title;
         Description = description;
@@ -28,7 +28,7 @@ public class Objective : AbstractAuditableEntity<ObjectiveId>, IAggregateRoot<Ob
 
     public bool IsArchived { get; set; }
 
-    public bool Enabled { get; set; }
+    public bool IsEnabled { get; set; }
 
     public int Index { get; set; }
 

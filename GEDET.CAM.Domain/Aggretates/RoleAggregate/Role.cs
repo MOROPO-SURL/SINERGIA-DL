@@ -5,20 +5,19 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.RoleAggregate;
 
-public class Role : AbstractAuditableEntity<RoleId>, IAggregateRoot<RoleId>, INamedEntity<RoleId>
+public class Role : AbstractAuditableEntity<RoleId, Guid>, IAggregateRoot<RoleId, Guid>, INamedEntity<RoleId, Guid>
 {
     private Role() : base(default) { }
 
-    public Role(RoleId id, string name, RolePermissionBridge[] permissionBridges, string? description = null) : base(id)
+    public Role(RoleId id, string name, string? description = null) : base(id)
     {
         Name = name;
         Description = description;
-        PermissionBridges = [.. permissionBridges];
     }
 
     public string Name { get; set; } = null!;
 
     public string? Description { get; set; }
 
-    public List<RolePermissionBridge> PermissionBridges { get; set; } = null!;
+    public List<RolePermissionBridge> PermissionBridges { get; set; } = [];
 }

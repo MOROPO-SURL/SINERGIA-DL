@@ -2,11 +2,13 @@
 
 namespace MOROPO.GEDET.CAM.Core.Common.Ports.Repository;
 
-public interface IEntityCommandRepositoryPort<TEntity, TId> where TEntity : class, IEntity<TId>
+public interface IEntityCommandRepositoryPort<TEntity, TId, TIdValue> 
+    where TEntity : class, IEntity<TId, TIdValue>
+    where TId : struct, IId<TIdValue>
 {
-    Task<TEntity> AddAsync(TEntity entity, bool commit = true);
+    Task AddAsync(TEntity entity, bool commit = true);
 
-    Task<TEntity> UpdateAsync(TEntity entity, bool commit = true);
+    Task UpdateAsync(TEntity entity, bool commit = true);
 
     Task DeleteAsync(TEntity entity, bool commit = true);
 }

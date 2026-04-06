@@ -4,9 +4,9 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.PermissionAggregate;
 
-public class Permission : AbstractEntity<PermissionId>, IAggregateRoot<PermissionId>
+public class Permission : AbstractEntity<PermissionId, string>, IAggregateRoot<PermissionId, string>
 {
-    public Permission(PermissionId id, string family, string description) : base(id)
+    public Permission(PermissionId id, string? family = null, string? description = null) : base(id)
     {
         Family = family;
         Description = description;
@@ -16,4 +16,3 @@ public class Permission : AbstractEntity<PermissionId>, IAggregateRoot<Permissio
 
     public string? Description { get; set; }
 }
-

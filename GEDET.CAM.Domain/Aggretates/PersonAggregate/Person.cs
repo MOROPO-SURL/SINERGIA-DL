@@ -9,7 +9,7 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.PersonAggregate;
 
-public class Person : AbstractAuditableEntity<PersonId>, IAggregateRoot<PersonId>, INamedEntity<PersonId>, IArchivableEntity<PersonId>, IEnableableEntity<PersonId>, IPriorizableEntity<PersonId>
+public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<PersonId, Guid>, INamedEntity<PersonId, Guid>, IArchivableEntity<PersonId, Guid>, IEnableableEntity<PersonId, Guid>, IPriorizableEntity<PersonId, Guid>
 {
     public Person(PersonId id, string? alias, DateTime? bornDate, string? about, int priority, bool enabled, bool isArchived, string name, string lastName, Sex sex, CivilStatus civilStatus, Image image, ImageId? imageId, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteContact> webSites, PersonOrganizationBrigde[] organizationBrigdes): base(id)
     {
@@ -17,7 +17,7 @@ public class Person : AbstractAuditableEntity<PersonId>, IAggregateRoot<PersonId
         BornDate = bornDate;
         About = about;
         Priority = priority;
-        Enabled = enabled;
+        IsEnabled = enabled;
         IsArchived = isArchived;
         Name = name;
         LastName = lastName;
@@ -40,7 +40,7 @@ public class Person : AbstractAuditableEntity<PersonId>, IAggregateRoot<PersonId
 
     public int Priority { get ; set ; }
     
-    public bool Enabled { get ; set ; }
+    public bool IsEnabled { get ; set ; }
     
     public bool IsArchived { get ; set ; }
     

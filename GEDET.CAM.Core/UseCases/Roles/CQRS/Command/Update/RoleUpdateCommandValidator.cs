@@ -6,6 +6,5 @@ internal class RoleUpdateCommandValidator : AbstractValidator<RoleUpdateCommand>
 {
     public RoleUpdateCommandValidator()
     {
-
     }
 }

@@ -22,6 +22,40 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("About")
+                        .HasMaxLength(240)
+                        .HasColumnType("character varying(240)");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("integer");
+
+                    b.Property<long>("Length")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("images", (string)null);
+                });
+
             modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Aggretates.KeyVariableAggregate.KeyVariable", b =>
                 {
                     b.Property<Guid>("Id")
@@ -60,15 +94,12 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .HasMaxLength(2048)
                         .HasColumnType("character varying(2048)");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean");
 
                     b.Property<int>("Index")
                         .HasColumnType("integer");
@@ -76,13 +107,16 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.Property<bool>("IsArchived")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(360)
                         .HasColumnType("character varying(360)");
 
-                    b.Property<DateTime?>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -115,25 +149,83 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasMaxLength(480)
+                        .HasColumnType("character varying(480)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("character varying(120)");
 
-                    b.Property<DateTime?>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name");
 
                     b.ToTable("roles", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("FailAuthenticationCount")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("HasFullAccess")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPasswordChangeRequired")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<DateTime?>("LastSessionDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("Signature")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageId")
+                        .IsUnique();
+
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Bridges.ObjectiveKeyVariableBridge", b =>
@@ -164,6 +256,26 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.HasIndex("LinkedId");
 
                     b.ToTable("role_permission_bridges", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Bridges.UserRoleBridge", b =>
+                {
+                    b.Property<string>("MainId")
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<Guid>("LinkedId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Signature")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("MainId", "LinkedId");
+
+                    b.HasIndex("LinkedId");
+
+                    b.ToTable("user_role_bridges", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Aggretates.ObjectiveAggregate.Objective", b =>
@@ -209,8 +321,8 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                             b1.Property<Guid>("ObjectiveId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<DateTime>("CreateAt")
-                                .HasColumnType("timestamp with time zone");
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
 
                             b1.Property<string>("Description")
                                 .HasMaxLength(2048)
@@ -224,8 +336,8 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                                 .HasMaxLength(360)
                                 .HasColumnType("character varying(360)");
 
-                            b1.Property<DateTime?>("UpdateAt")
-                                .HasColumnType("timestamp with time zone");
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
 
                             b1.HasKey("Id", "ObjectiveId");
 
@@ -248,8 +360,8 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                             b1.Property<Guid>("ObjectiveId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<DateTime>("CreateAt")
-                                .HasColumnType("timestamp with time zone");
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
 
                             b1.Property<string>("Description")
                                 .HasMaxLength(2048)
@@ -263,8 +375,8 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                                 .HasMaxLength(360)
                                 .HasColumnType("character varying(360)");
 
-                            b1.Property<DateTime?>("UpdateAt")
-                                .HasColumnType("timestamp with time zone");
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
 
                             b1.HasKey("Id", "ObjectiveId");
 
@@ -284,6 +396,16 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.Navigation("Challenges");
 
                     b.Navigation("Projections");
+                });
+
+            modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate.User", b =>
+                {
+                    b.HasOne("MOROPO.GEDET.CAM.Domain.Aggretates.ImageAggregate.Image", "Image")
+                        .WithOne()
+                        .HasForeignKey("MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate.User", "ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Bridges.ObjectiveKeyVariableBridge", b =>
@@ -324,6 +446,25 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.Navigation("Main");
                 });
 
+            modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Bridges.UserRoleBridge", b =>
+                {
+                    b.HasOne("MOROPO.GEDET.CAM.Domain.Aggretates.RoleAggregate.Role", "Linked")
+                        .WithMany()
+                        .HasForeignKey("LinkedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate.User", "Main")
+                        .WithMany("RoleBridges")
+                        .HasForeignKey("MainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Linked");
+
+                    b.Navigation("Main");
+                });
+
             modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Aggretates.ObjectiveAggregate.Objective", b =>
                 {
                     b.Navigation("KeyVariableBridges");
@@ -332,6 +473,11 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
             modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Aggretates.RoleAggregate.Role", b =>
                 {
                     b.Navigation("PermissionBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.GEDET.CAM.Domain.Aggretates.UserAggregate.User", b =>
+                {
+                    b.Navigation("RoleBridges");
                 });
 #pragma warning restore 612, 618
         }

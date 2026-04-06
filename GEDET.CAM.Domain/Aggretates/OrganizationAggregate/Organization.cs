@@ -6,12 +6,12 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Aggretates.OrganizationAggregate;
 
-public class Organization : AbstractAuditableEntity<OrganizationId>, IAggregateRoot<OrganizationId>, IArchivableEntity<OrganizationId>, IEnableableEntity<OrganizationId>, INamedEntity<OrganizationId>, IPriorizableEntity<OrganizationId>
+public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggregateRoot<OrganizationId, Guid>, IArchivableEntity<OrganizationId, Guid>, IEnableableEntity<OrganizationId, Guid>, INamedEntity<OrganizationId, Guid>, IPriorizableEntity<OrganizationId, Guid>
 {
     public Organization(OrganizationId id, bool isArchived, bool enabled, string name, int priority, Organization owner, OrganizationId? ownerId, ImageAggregate.Image image, ImageId? imageId, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteContact> webSites): base(id)
     {
         IsArchived = isArchived;
-        Enabled = enabled;
+        IsEnabled = enabled;
         Name = name;
         Priority = priority;
         Owner = owner;
@@ -26,7 +26,7 @@ public class Organization : AbstractAuditableEntity<OrganizationId>, IAggregateR
 
     public bool IsArchived { get ; set ; }
 
-    public bool Enabled { get ; set ; }
+    public bool IsEnabled { get ; set ; }
     
     public string Name { get ; set ; }
     

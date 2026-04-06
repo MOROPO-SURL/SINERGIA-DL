@@ -6,21 +6,19 @@ using MOROPO.GEDET.CAM.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.GEDET.CAM.Domain.Bridges;
 
-public class RolePermissionBridge : IBridge<Role, RoleId, Permission, PermissionId>
+public class RolePermissionBridge : IBridge<Role, RoleId, Guid, Permission, PermissionId, string>
 {
     private RolePermissionBridge() { }
 
-    public RolePermissionBridge(RoleId mainId, Role main, PermissionId linkedId, Permission linked)
+    public RolePermissionBridge(RoleId mainId, PermissionId linkedId)
     {
         MainId = mainId;
-        Main = main;
         LinkedId = linkedId;
-        Linked = linked;
     }
 
     public RoleId MainId { get; set; }
-    public Role Main { get; set; } = null!;
+    public Role? Main { get; set; }
 
     public PermissionId LinkedId { get; set; }
-    public Permission Linked { get; set; } = null!;
+    public Permission? Linked { get; set; }
 }

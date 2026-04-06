@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>MOROPO.GEDET.CAM.Presentation.Web.API</AssemblyName>
+		<RootNamespace>MOROPO.GEDET.CAM.Presentation.Web.API</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Mapster.DependencyInjection" Version="10.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.25" />
+		<PackageReference Include="NSwag.AspNetCore" Version="14.6.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GEDET.CAM.Core\GEDET.CAM.Core.csproj" />
+		<ProjectReference Include="..\GEDET.CAM.Infrastructure\GEDET.CAM.Infrastructure.csproj" />
+		<ProjectReference Include="..\GEDET.CAM.Interop.Contracts\GEDET.CAM.Interop.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>
