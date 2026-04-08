@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Mapster.DependencyInjection" Version="10.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.25" />
+		<PackageReference Include="NSwag.AspNetCore" Version="14.6.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GEDEL.CAMCMG.Core\GEDEL.CAMCMG.Core.csproj" />
+		<ProjectReference Include="..\GEDEL.CAMCMG.Infrastructure\GEDEL.CAMCMG.Infrastructure.csproj" />
+		<ProjectReference Include="..\GEDEL.CAMCMG.Interop.Contracts\GEDEL.CAMCMG.Interop.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>

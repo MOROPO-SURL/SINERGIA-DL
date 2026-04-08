@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GEDEL.CAMCMG.Interop.Contracts\GEDEL.CAMCMG.Interop.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>

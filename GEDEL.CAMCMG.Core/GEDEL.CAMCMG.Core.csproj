@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="12.1.1" />
+		<PackageReference Include="Mapster" Version="10.0.6" />
+		<PackageReference Include="MediatR" Version="14.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GEDEL.CAMCMG.Domain\GEDEL.CAMCMG.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="UseCases\ApiKeys\CQRS\Command\Update\" />
+	  <Folder Include="UseCases\ApiKeys\CQRS\Command\Remove\" />
+	</ItemGroup>
+
+</Project>
