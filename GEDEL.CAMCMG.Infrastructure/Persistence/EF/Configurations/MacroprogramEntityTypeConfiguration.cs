@@ -7,11 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class MacroprogramEntityTypeConfiguration : IEntityTypeConfiguration<Macroprogram>
 {
-    private const string MACROPROGRAMS_TABLE_NAME = "macroprograms";
+    private const string TABLE_NAME = "macroprograms";
 
     public void Configure(EntityTypeBuilder<Macroprogram> builder)
     {
-        builder.ToTable(MACROPROGRAMS_TABLE_NAME);
+        builder.ToTable(TABLE_NAME);
 
         builder.HasKey(t => t.Id);
 

@@ -7,11 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class TerritoryPotentialEntityTypeConfiguration : IEntityTypeConfiguration<TerritoryPotential>
 {
-    private const string TERRITORYPOTENTIALS_TABLE_NAME = "territory_potentials";
+    private const string TABLE_NAME = "territorypotentials";
 
     public void Configure(EntityTypeBuilder<TerritoryPotential> builder)
     {
-        builder.ToTable(TERRITORYPOTENTIALS_TABLE_NAME);
+        builder.ToTable(TABLE_NAME);
 
         builder.HasKey(entity => entity.Id);
 
@@ -26,6 +26,5 @@ internal class TerritoryPotentialEntityTypeConfiguration : IEntityTypeConfigurat
             .HasMaxLength(2048);
 
         builder.HasIndex(entity => entity.Title);
-
     }
 }

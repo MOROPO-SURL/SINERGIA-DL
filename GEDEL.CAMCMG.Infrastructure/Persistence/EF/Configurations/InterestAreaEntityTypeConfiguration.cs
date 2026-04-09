@@ -7,11 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class InterestAreaEntityTypeConfiguration : IEntityTypeConfiguration<InterestArea>
 {
-    private const string INTERESTAREAS_TABLE_NAME = "interestareas";
+    private const string TABLE_NAME = "interestareas";
 
     public void Configure(EntityTypeBuilder<InterestArea> builder)
     {
-        builder.ToTable(INTERESTAREAS_TABLE_NAME);
+        builder.ToTable(TABLE_NAME);
 
         builder.HasKey(t => t.Id);
 

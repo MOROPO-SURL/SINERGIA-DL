@@ -1,7 +1,7 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
@@ -14,11 +14,12 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggrega
         private readonly List<ProgramExecutionProject> programExecutionProjects = [];
         private readonly List<ProgramObjetive> programObjetives = [];
         private readonly List<ProgramImpact> programImpacts = [];
+        private readonly List<StrategicProgramOrganizationBridge> organizationBridges = [];
 
 
         private StrategicProgram() : base(new StrategicProgramId(default)) { }
 
-        public StrategicProgram(StrategicProgramId id, StrategicLineId strategicLineId, StrategicAxesId strategicAxesId, bool isEnabled, string name, bool isArchived, int index, PersonId coordinatorId, ProgramAction[] programActions, ProgramIdeaProject[] programIdeaProyects, ProgramExecutionProject[] programExecutionProyects, ProgramObjetive[] programObjetives, ProgramImpact[] programImpacts, Person? coordinator = null, string? description = null) : base(id)
+        public StrategicProgram(StrategicProgramId id, StrategicLineId strategicLineId, StrategicAxesId strategicAxesId, bool isEnabled, string name, bool isArchived, int index, PersonId coordinatorId, ProgramAction[] programActions, ProgramIdeaProject[] programIdeaProyects, ProgramExecutionProject[] programExecutionProyects, ProgramObjetive[] programObjetives, ProgramImpact[] programImpacts, StrategicProgramOrganizationBridge[] organizationBridges, Person? coordinator = null, string? description = null) : base(id)
         {
             StrategicLineId = strategicLineId;
             StrategicAxesId = strategicAxesId;
@@ -35,6 +36,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggrega
             this.programExecutionProjects = [.. programExecutionProyects];
             this.programObjetives = [.. programObjetives];
             this.programImpacts = [.. programImpacts];
+            this.organizationBridges = [.. organizationBridges];
         }
 
         public StrategicAxesId StrategicAxesId { get; set; }
@@ -60,10 +62,10 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggrega
 
         public ProgramExecutionProject[] ProgramExecutionProjects => [.. programExecutionProjects];
 
-        public ProgramObjetive[] ProgramObjetive => [.. programObjetives];
+        public ProgramObjetive[] ProgramObjetives => [.. programObjetives];
 
-        public ProgramImpact[] ProgramImpact => [.. programImpacts];
+        public ProgramImpact[] ProgramImpacts => [.. programImpacts];
 
-        public List<StrategicProgramOrganizationBridge> OrganizationBridges { get; set; } = [];
+        public List<StrategicProgramOrganizationBridge> OrganizationBridges => [.. organizationBridges];
     }
 }

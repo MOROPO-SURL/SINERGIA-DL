@@ -7,11 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class PublicPolicyEntityTypeConfiguration : IEntityTypeConfiguration<PublicPolicy>
 {
-    private const string PUBLICPOLICYS_TABLE_NAME = "public_policys";
+    private const string TABLE_NAME = "publicpolicies";
 
     public void Configure(EntityTypeBuilder<PublicPolicy> builder)
     {
-        builder.ToTable(PUBLICPOLICYS_TABLE_NAME);
+        builder.ToTable(TABLE_NAME);
 
         builder.HasKey(entity => entity.Id);
 

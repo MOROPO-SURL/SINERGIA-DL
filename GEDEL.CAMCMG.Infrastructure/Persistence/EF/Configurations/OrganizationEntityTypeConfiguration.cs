@@ -7,11 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class OrganizationEntityTypeConfiguration : IEntityTypeConfiguration<Organization>
 {
-    private const string ORGANIZATIONS_TABLE_NAME = "organizations";
+    private const string TABLE_NAME = "organizations";
 
     public void Configure(EntityTypeBuilder<Organization> builder)
     {
-        builder.ToTable(ORGANIZATIONS_TABLE_NAME);
+        builder.ToTable(TABLE_NAME);
 
         builder.HasKey(entity => entity.Id);
 

@@ -7,11 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class ClasificationEntityTypeConfiguration : IEntityTypeConfiguration<Clasification>
 {
-    private const string CLASIFICATIONS_TABLE_NAME = "clasifications";
+    private const string TABLE_NAME = "clasifications";
 
     public void Configure(EntityTypeBuilder<Clasification> builder)
     {
-        builder.ToTable(CLASIFICATIONS_TABLE_NAME);
+        builder.ToTable(TABLE_NAME);
 
         builder.HasKey(t => t.Id);
 

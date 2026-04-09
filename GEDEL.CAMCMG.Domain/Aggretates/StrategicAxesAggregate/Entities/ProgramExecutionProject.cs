@@ -1,5 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
@@ -7,9 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggrega
 
 public class ProgramExecutionProject : AbstractAuditableEntity<ProgramExecutionProjectId, Guid>, INamedEntity<ProgramExecutionProjectId, Guid>, IArchivableEntity<ProgramExecutionProjectId, Guid>, IEnableableEntity<ProgramExecutionProjectId, Guid>
 {
+    //private readonly List<ProgramExecutionProjectProgramObjetiveBridge> programObjetiveBridges = [];
+
     private ProgramExecutionProject() : base(new ProgramExecutionProjectId(default)) { }
 
-    public ProgramExecutionProject(ProgramExecutionProjectId id, StrategicProgramId strategicProgramId, StrategicLineId strategicLineId, StrategicAxesId strategicAxesId, bool isEnabled, bool isArchived, string name, string? description = null) : base(id)
+    public ProgramExecutionProject(ProgramExecutionProjectId id, StrategicProgramId strategicProgramId, StrategicLineId strategicLineId, StrategicAxesId strategicAxesId, bool isEnabled, bool isArchived, string name,/* ProgramExecutionProjectProgramObjetiveBridge[] programObjetiveBridges,*/ string? description = null) : base(id)
     {
         StrategicProgramId = strategicProgramId;
         StrategicLineId = strategicLineId;
@@ -18,6 +20,8 @@ public class ProgramExecutionProject : AbstractAuditableEntity<ProgramExecutionP
         IsArchived = isArchived;
         Name = name;
         Description = description;
+
+        //this.programObjetiveBridges = [.. programObjetiveBridges];
     }
 
     public StrategicAxesId StrategicAxesId { get; set; }
@@ -34,5 +38,5 @@ public class ProgramExecutionProject : AbstractAuditableEntity<ProgramExecutionP
 
     public string? Description { get; set; }
 
-    public List<ProgramExecutionProyectProgramObjetiveBridge> ProgramObjetiveBridges { get; set; } = [];
+    //public ProgramExecutionProjectProgramObjetiveBridge[] ProgramObjetiveBridges => [.. programObjetiveBridges];
 }

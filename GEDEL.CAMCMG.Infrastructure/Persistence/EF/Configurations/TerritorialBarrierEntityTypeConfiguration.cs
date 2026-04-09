@@ -7,11 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class TerritorialBarrierEntityTypeConfiguration : IEntityTypeConfiguration<TerritorialBarrier>
 {
-    private const string TERRITORIALBARRIERS_TABLE_NAME = "territorial_barriers";
+    private const string TABLE_NAME = "territorialbarriers";
 
     public void Configure(EntityTypeBuilder<TerritorialBarrier> builder)
     {
-        builder.ToTable(TERRITORIALBARRIERS_TABLE_NAME);
+        builder.ToTable(TABLE_NAME);
 
         builder.HasKey(entity => entity.Id);
 

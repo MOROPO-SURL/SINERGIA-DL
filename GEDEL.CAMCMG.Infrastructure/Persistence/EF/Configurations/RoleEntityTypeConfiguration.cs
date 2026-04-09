@@ -7,11 +7,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class RoleEntityTypeConfiguration : IEntityTypeConfiguration<Role>
 {
-    private const string ROOT_TABLE_NAME = "roles";
+    private const string TABLE_NAME = "roles";
 
     public void Configure(EntityTypeBuilder<Role> builder)
     {
-        builder.ToTable(ROOT_TABLE_NAME);
+        builder.ToTable(TABLE_NAME);
 
         builder.HasKey(entity => entity.Id);
 

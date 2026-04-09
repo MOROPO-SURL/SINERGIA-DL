@@ -1,10 +1,11 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Entities;
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate;
 
-public class OrganizationKind : AbstractAuditableEntity<OrganizationKindId, Guid>, IPriorizableEntity<OrganizationKindId, Guid>, IArchivableEntity<OrganizationKindId, Guid>, IEnableableEntity<OrganizationKindId, Guid>, INamedEntity<OrganizationKindId, Guid>
+public class OrganizationKind : AbstractAuditableEntity<OrganizationKindId, Guid>, IAggregateRoot<OrganizationKindId, Guid>, IPriorizableEntity<OrganizationKindId, Guid>, IArchivableEntity<OrganizationKindId, Guid>, IEnableableEntity<OrganizationKindId, Guid>, INamedEntity<OrganizationKindId, Guid>
 {
     private OrganizationKind() : base(new OrganizationKindId(default)) { }
 
@@ -16,8 +17,6 @@ public class OrganizationKind : AbstractAuditableEntity<OrganizationKindId, Guid
         Name = name;
         Description = description;
     }
-
-    public OrganizationId OrganizationId { get; set; }
 
     public bool IsEnabled { get; set; }
 

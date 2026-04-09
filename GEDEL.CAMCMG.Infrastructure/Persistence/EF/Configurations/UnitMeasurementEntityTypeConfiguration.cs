@@ -7,7 +7,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
 
 internal class UnitMeasurementEntityTypeConfiguration : IEntityTypeConfiguration<UnitMeasurement>
 {
-    private const string UNITMEASUREMENTS_TABLE_NAME = "unit_measurements";
+    private const string UNITMEASUREMENTS_TABLE_NAME = "unitmeasurements";
 
     public void Configure(EntityTypeBuilder<UnitMeasurement> builder)
     {

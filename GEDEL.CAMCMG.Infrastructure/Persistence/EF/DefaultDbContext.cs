@@ -6,6 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.KeyVariableAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
@@ -40,6 +41,7 @@ public class DefaultDbContext : DbContext
     public DbSet<Clasification> Clasifications { get; set; }
     public DbSet<InterestArea> InterestAreas { get; set; }
     public DbSet<Macroprogram> Macroprograms { get; set; }
+    public DbSet<OrganizationKind> OrganizationKinds { get; set; }
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<OrganizationClasificationBridge> OrganizationClasificationBridges { get; set; }
     public DbSet<Person> People { get; set; }
@@ -49,10 +51,7 @@ public class DefaultDbContext : DbContext
     public DbSet<TerritoryPotential> TerritoryPotentials { get; set; }
     public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
     public DbSet<StrategicAxes> StrategicAxes { get; set; }
-    public DbSet<ProgramActionInterestAreaBridge> ProgramActionInterestAreaBridges { get; set; }
-    public DbSet<ProgramExecutionProyectProgramObjetiveBridge> ProgramExecutionProyectProgramObjetiveBridges { get; set; }
-    public DbSet<StrategicLineOrganizationBridge> StrategicLineOrganizationBridges { get; set; }
-    public DbSet<StrategicProgramOrganizationBridge> StrategicProgramOrganizationBridges { get; set; }
+    //public DbSet<ProgramExecutionProyectProgramObjetiveBridge> ProgramExecutionProyectProgramObjetiveBridges { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
