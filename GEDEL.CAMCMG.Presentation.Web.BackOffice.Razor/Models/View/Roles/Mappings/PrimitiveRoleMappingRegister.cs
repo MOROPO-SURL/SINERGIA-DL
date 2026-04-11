@@ -17,10 +17,10 @@ internal sealed class PrimitiveRoleMappingRegister : IRegister
         config.NewConfig<Guid, RoleDetailQuery>()
             .Map(dest => dest.Id, src => src);
 
-        config.NewConfig<RoleDetailDto, Guid>()
-            .MapWith(src => src.Id);
-
         config.NewConfig<Guid, RoleRemoveCommand>()
             .Map(dest => dest.Id, src => src);
+
+        config.NewConfig<RoleDetailDto, Guid>()
+            .MapWith(src => src.Id);
     }
 }

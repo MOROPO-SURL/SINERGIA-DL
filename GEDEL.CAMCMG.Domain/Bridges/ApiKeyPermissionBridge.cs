@@ -8,6 +8,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges;
 
 public sealed class ApiKeyPermissionBridge : IBridge<ApiKey, ApiKeyId, Guid, Permission, PermissionId, string>, IPersistenceSignable
 {
+    private ApiKeyPermissionBridge() { }
+
     public ApiKeyPermissionBridge(ApiKeyId mainId, PermissionId linkedId, ApiKey? main = null, Permission? linked = null)
     {
         MainId = mainId;

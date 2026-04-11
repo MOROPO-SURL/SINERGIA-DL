@@ -33,6 +33,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRolePermissionBridgeCommandRepositoryPort, RolePermissionBridgeCommandRepositoryPortAdapter>();
 
         services.AddScoped<IApiKeyQueryRepositoryPort, ApiKeyQueryRepositoryPortAdapter>();
+        services.AddScoped<IApiKeyCommandRepositoryPort, ApiKeyCommandRepositoryPortAdapter>();
+        services.AddScoped<IApiKeyPermissionBridgeCommandRepositoryPort, ApiKeyPermissionBridgeCommandRepositoryPortAdapter>();
 
         services.AddScoped<IUserQueryRepositoryPort, UserQueryRepositoryPortAdapter>();
         services.AddScoped<IUserCommandRepositoryPort, UserCommandRepositoryPortAdapter>();

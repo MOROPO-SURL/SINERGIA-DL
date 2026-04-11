@@ -4,11 +4,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Exte
 
 public static class ClaimPrincipalExtensions
 {
-    public static bool IsAuthorized(this System.Security.Claims.ClaimsPrincipal target, string permission, HttpContext httpContext)
+    public static bool IsAuthorized(this System.Security.Claims.ClaimsPrincipal self, string permission, HttpContext httpContext)
     {
-        if (target.HasClaim(claim => claim.Type.Equals(AuthorizationConstants.ClaimTypes.FULL_ACCESS))) return true;
+        if (self.HasClaim(claim => claim.Type.Equals(AuthorizationConstants.ClaimTypes.FULL_ACCESS))) return true;
 
-        var roleIds = target.Claims.Where(item => item.Type == System.Security.Claims.ClaimsIdentity.DefaultRoleClaimType).Select(item => item.Value).ToArray();
+        var roleIds = self.Claims.Where(item => item.Type == System.Security.Claims.ClaimsIdentity.DefaultRoleClaimType).Select(item => item.Value).ToArray();
 
         foreach (var roleId in roleIds)
         {

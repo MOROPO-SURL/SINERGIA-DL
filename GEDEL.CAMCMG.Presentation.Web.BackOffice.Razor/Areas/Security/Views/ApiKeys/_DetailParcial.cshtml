@@ -1,0 +1,19 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.ApiKeys
+
+@model ApiKeyDetailViewModel
+
+<dl class="mb-0">
+    <dt>Nombre</dt>
+    <dd>@Model.Name</dd>
+    <dt>Expira</dt>
+    <dd>@Model.ExpireAt</dd>
+    <dt>Descripción</dt>
+    @if (!string.IsNullOrEmpty(Model.Description))
+    {
+        <dd class="mb-0">@Model.Description</dd>
+    }
+    else
+    {
+        <dd class="mb-0">---</dd>
+    }
+</dl>

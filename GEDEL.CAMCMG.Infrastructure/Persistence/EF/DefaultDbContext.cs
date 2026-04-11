@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ClasificationAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.InterestAreaAggregate;
@@ -36,6 +37,8 @@ public class DefaultDbContext : DbContext
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<RolePermissionBridge> RolePermissionBridges { get; set; }
+    public DbSet<ApiKey> ApiKeys { get; set; }
+    public DbSet<ApiKeyPermissionBridge> ApiKeyPermissionBridges { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserRoleBridge> UserRoleBridges { get; set; }
     public DbSet<KeyVariable> KeyVariables { get; set; }
@@ -89,6 +92,14 @@ public class DefaultDbContext : DbContext
                 PermissionConstants.ROLE_CREATE_PERMISSION,
                 PermissionConstants.ROLE_UPDATE_PERMISSION,
                 PermissionConstants.ROLE_REMOVE_PERMISSION
+            ]),
+            new(PermissionFamilyConstants.APIKEY_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.APIKEY_LIST_PERMISSION,
+                PermissionConstants.APIKEY_VIEW_PERMISSION,
+                PermissionConstants.APIKEY_CREATE_PERMISSION,
+                PermissionConstants.APIKEY_UPDATE_PERMISSION,
+                PermissionConstants.APIKEY_REMOVE_PERMISSION
             ]),
             new (PermissionFamilyConstants.PERSON_PERMISSIONS_FAMILY,
             [

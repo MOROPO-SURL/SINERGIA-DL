@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Common.Input;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Common.Input;
 using System.ComponentModel.DataAnnotations;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Roles.Abstractions;
 
 public abstract class AbstractRoleConfigurationViewModel
 {
-    [Required(ErrorMessage = "RequiredValidationErrorMessage"), StringLength(50, MinimumLength = 3, ErrorMessage = "StringLengthMinMaxValidationErrorMessage")]
-    [Display(Name = "Name")]
+    [Required]
+    [StringLength(50, MinimumLength = 3)]
+    [Display(Name = nameof(Name))]
     public string Name { get; set; } = null!;
 
     [DataType(DataType.MultilineText)]
-    [Display(Name = "Description")]
+    [Display(Name = nameof(Description))]
     public string? Description { get; set; }
 
     public SelectionDescriptedItemInputViewModel<string>[] SelectedPermissions { get; set; } = [];

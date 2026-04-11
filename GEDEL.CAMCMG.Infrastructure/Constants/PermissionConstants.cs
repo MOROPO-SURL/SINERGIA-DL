@@ -16,6 +16,12 @@ public static class PermissionConstants
     public const string ROLE_UPDATE_PERMISSION = "role-update-permission";
     public const string ROLE_REMOVE_PERMISSION = "role-remove-permission";
 
+    public const string APIKEY_LIST_PERMISSION = "apikey-list-permission";
+    public const string APIKEY_VIEW_PERMISSION = "apikey-view-permission";
+    public const string APIKEY_CREATE_PERMISSION = "apikey-create-permission";
+    public const string APIKEY_UPDATE_PERMISSION = "apikey-update-permission";
+    public const string APIKEY_REMOVE_PERMISSION = "roapikeyle-remove-permission";
+
     public const string PERSON_LIST_PERMISSION = "person-list-permission";
     public const string PERSON_VIEW_PERMISSION = "person-view-permission";
     public const string PERSON_CREATE_PERMISSION = "person-create-permission";

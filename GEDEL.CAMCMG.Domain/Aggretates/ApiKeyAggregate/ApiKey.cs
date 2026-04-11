@@ -9,13 +9,14 @@ public sealed class ApiKey : AbstractAuditableEntity<ApiKeyId, Guid>, INamedEnti
 {
     private ApiKey() : base(new ApiKeyId(default)) { }
 
-    public ApiKey(ApiKeyId id, string name, string token, bool isEnabled, DateTime expirateAt, string? host = null) : base(id)
+    public ApiKey(ApiKeyId id, string name, string token, bool isEnabled, DateTime expirateAt, string? description = null, string? host = null) : base(id)
     {
         Name = name;
         Token = token;
         IsEnabled = isEnabled;
         ExpirateAt = expirateAt;
         Host = host;
+        Description = description;
     }
 
     public string Name { get; set; } = null!;
@@ -27,6 +28,8 @@ public sealed class ApiKey : AbstractAuditableEntity<ApiKeyId, Guid>, INamedEnti
     public DateTime ExpirateAt { get; set; }
 
     public string? Host { get; set; }
+
+    public string? Description { get; set; }
 
     public List<ApiKeyPermissionBridge> PermissionBridges { get; set; } = [];
 }
