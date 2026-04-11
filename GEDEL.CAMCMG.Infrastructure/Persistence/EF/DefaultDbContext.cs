@@ -13,6 +13,9 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TerritorialBarrierAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TerritoryPotentialAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate;
@@ -50,8 +53,11 @@ public class DefaultDbContext : DbContext
     public DbSet<TerritorialBarrier> TerritorialBarriers { get; set; }
     public DbSet<TerritoryPotential> TerritoryPotentials { get; set; }
     public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
-    public DbSet<StrategicAxes> StrategicAxes { get; set; }
-    //public DbSet<ProgramExecutionProyectProgramObjetiveBridge> ProgramExecutionProyectProgramObjetiveBridges { get; set; }
+    public DbSet<StrategicAxe> StrategicAxes { get; set; }
+    public DbSet<StrategicLine> StrategicLines { get; set; }
+    public DbSet<StrategicProgram> StrategicPrograms { get; set; }
+    public DbSet<StrategicProject> StrategicProjects { get; set; }
+    public DbSet<StrategicProgramOrganizationBridge> StrategicProgramOrganizationBridges { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

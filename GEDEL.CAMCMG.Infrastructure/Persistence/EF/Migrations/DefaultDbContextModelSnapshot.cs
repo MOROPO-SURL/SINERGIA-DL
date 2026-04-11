@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
     partial class DefaultDbContextModelSnapshot : ModelSnapshot
@@ -453,9 +453,84 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.ToTable("roles", (string)null);
                 });
 
-            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.StrategicAxes", b =>
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.StrategicAxe", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(360)
+                        .HasColumnType("character varying(360)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("strategicaxes", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine", b =>
+                {
+                    b.Property<int>("StrategicLineId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StrategicAxeId")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("CoordinadorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(360)
+                        .HasColumnType("character varying(360)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("StrategicLineId", "StrategicAxeId");
+
+                    b.HasIndex("CoordinadorId");
+
+                    b.HasIndex("StrategicAxeId");
+
+                    b.ToTable("strategiclines", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CoordinatorId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
@@ -479,15 +554,73 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                         .HasMaxLength(360)
                         .HasColumnType("character varying(360)");
 
+                    b.Property<int>("StrategicAxeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StrategicLineId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("StrategicLineId1")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("StrategicLineStrategicAxeId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Index")
+                    b.HasIndex("CoordinatorId");
+
+                    b.HasIndex("StrategicLineId1", "StrategicLineStrategicAxeId");
+
+                    b.HasIndex("Index", "Id", "StrategicLineId", "StrategicAxeId")
                         .IsUnique();
 
-                    b.ToTable("strategicaxes", (string)null);
+                    b.ToTable("strategicprograms", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.StrategicProject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(360)
+                        .HasColumnType("character varying(360)");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ProgramId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.HasIndex("Name", "Id", "ProgramId")
+                        .IsUnique();
+
+                    b.ToTable("strategicprojects", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TerritorialBarrierAggregate.TerritorialBarrier", b =>
@@ -702,6 +835,21 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.HasIndex("LinkedId");
 
                     b.ToTable("role_permission_bridges", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges.StrategicProgramOrganizationBridge", b =>
+                {
+                    b.Property<Guid>("MainId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("LinkedId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("MainId", "LinkedId");
+
+                    b.HasIndex("LinkedId");
+
+                    b.ToTable("strategicprogram_organization_bridges", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges.UserRoleBridge", b =>
@@ -1117,17 +1265,171 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.Navigation("WebSites");
                 });
 
-            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.StrategicAxes", b =>
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine", b =>
                 {
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.StrategicLine", "Lines", b1 =>
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Coordinator")
+                        .WithMany()
+                        .HasForeignKey("CoordinadorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.StrategicAxe", "StrategicAxe")
+                        .WithMany()
+                        .HasForeignKey("StrategicAxeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities.StrategicLineAction", "StrategicActions", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid>("StrategicAxesId")
+                            b1.Property<int>("StrategicLineId")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("StrategicAxeId")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("Description")
+                                .HasMaxLength(2048)
+                                .HasColumnType("character varying(2048)");
+
+                            b1.Property<int>("Priority")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("Title")
+                                .IsRequired()
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.HasKey("Id", "StrategicLineId", "StrategicAxeId");
+
+                            b1.HasIndex("StrategicLineId", "StrategicAxeId");
+
+                            b1.ToTable("strategicline_strategicactions", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("StrategicLineId", "StrategicAxeId");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges.StrategicLineOrganizationBridge", "OrganizationBridges", b1 =>
+                        {
+                            b1.Property<int>("StrategicLineId")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("StrategicAxesId")
+                                .HasColumnType("integer");
+
+                            b1.Property<Guid>("LinkedId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid>("CoordinadorId")
+                            b1.HasKey("StrategicLineId", "StrategicAxesId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("strategicline_organization_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("StrategicLineId", "StrategicAxesId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.Navigation("Coordinator");
+
+                    b.Navigation("OrganizationBridges");
+
+                    b.Navigation("StrategicActions");
+
+                    b.Navigation("StrategicAxe");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Coordinator")
+                        .WithMany()
+                        .HasForeignKey("CoordinatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine", "StrategicLine")
+                        .WithMany()
+                        .HasForeignKey("StrategicLineId1", "StrategicLineStrategicAxeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramAction", "Actions", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("StrategicProgramId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Description")
+                                .HasMaxLength(2048)
+                                .HasColumnType("character varying(2048)");
+
+                            b1.Property<int>("Priority")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("Title")
+                                .IsRequired()
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.HasKey("Id", "StrategicProgramId");
+
+                            b1.HasIndex("StrategicProgramId");
+
+                            b1.ToTable("strategicprogram_actions", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("StrategicProgramId");
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.ProgramActionInterestAreaBridge", "InterestAreaBridges", b2 =>
+                                {
+                                    b2.Property<Guid>("ProgramActionId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("StrategicProgramId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("LinkedId")
+                                        .HasColumnType("uuid");
+
+                                    b2.HasKey("ProgramActionId", "StrategicProgramId", "LinkedId");
+
+                                    b2.HasIndex("LinkedId");
+
+                                    b2.ToTable("strategicprogram_action_interestarea_bridges", (string)null);
+
+                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.InterestAreaAggregate.InterestArea", "Linked")
+                                        .WithMany()
+                                        .HasForeignKey("LinkedId")
+                                        .OnDelete(DeleteBehavior.Cascade)
+                                        .IsRequired();
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("ProgramActionId", "StrategicProgramId");
+
+                                    b2.Navigation("Linked");
+                                });
+
+                            b1.Navigation("InterestAreaBridges");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramObjective", "Objetives", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .HasColumnType("integer");
+
+                            b1.Property<Guid>("StrategicProgramId")
                                 .HasColumnType("uuid");
 
                             b1.Property<DateTime>("CreatedAt")
@@ -1136,12 +1438,6 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                             b1.Property<string>("Description")
                                 .HasMaxLength(2048)
                                 .HasColumnType("character varying(2048)");
-
-                            b1.Property<int>("Index")
-                                .HasColumnType("integer");
-
-                            b1.Property<bool>("IsArchived")
-                                .HasColumnType("boolean");
 
                             b1.Property<bool>("IsEnabled")
                                 .HasColumnType("boolean");
@@ -1154,114 +1450,155 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                             b1.Property<DateTime?>("UpdatedAt")
                                 .HasColumnType("timestamp without time zone");
 
-                            b1.HasKey("Id", "StrategicAxesId");
+                            b1.HasKey("Id", "StrategicProgramId");
 
-                            b1.HasIndex("CoordinadorId");
+                            b1.HasIndex("StrategicProgramId");
 
-                            b1.HasIndex("StrategicAxesId");
-
-                            b1.HasIndex("Index", "Id", "StrategicAxesId")
-                                .IsUnique();
-
-                            b1.ToTable("strategicaxe_strategiclines", (string)null);
-
-                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Coordinator")
-                                .WithMany()
-                                .HasForeignKey("CoordinadorId")
-                                .OnDelete(DeleteBehavior.Restrict)
-                                .IsRequired();
+                            b1.ToTable("strategicprogram_objetives", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("StrategicAxesId");
+                                .HasForeignKey("StrategicProgramId");
 
-                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.StrategicLineOrganizationBridge", "OrganizationBridges", b2 =>
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.ProgramObjectiveStrategicProjectBridge", "StrategicProjectBridges", b2 =>
                                 {
-                                    b2.Property<Guid>("StrategicLineId")
-                                        .HasColumnType("uuid");
+                                    b2.Property<int>("ProgramObjectiveId")
+                                        .HasColumnType("integer");
 
-                                    b2.Property<Guid>("StrategicAxesId")
+                                    b2.Property<Guid>("StrategicProgramId")
                                         .HasColumnType("uuid");
 
                                     b2.Property<Guid>("LinkedId")
                                         .HasColumnType("uuid");
 
-                                    b2.HasKey("StrategicLineId", "StrategicAxesId", "LinkedId");
+                                    b2.HasKey("ProgramObjectiveId", "StrategicProgramId", "LinkedId");
 
                                     b2.HasIndex("LinkedId");
 
-                                    b2.ToTable("strategicaxe_strategicline_organization_bridges", (string)null);
+                                    b2.ToTable("strategicprogram_objective_strategicproject_bridges", (string)null);
 
-                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "Linked")
+                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.StrategicProject", "Linked")
                                         .WithMany()
                                         .HasForeignKey("LinkedId")
-                                        .OnDelete(DeleteBehavior.Restrict)
+                                        .OnDelete(DeleteBehavior.Cascade)
                                         .IsRequired();
 
                                     b2.WithOwner()
-                                        .HasForeignKey("StrategicLineId", "StrategicAxesId");
+                                        .HasForeignKey("ProgramObjectiveId", "StrategicProgramId")
+                                        .HasConstraintName("FK_strategicprogram_objective_strategicproject_bridges_strate~1");
 
                                     b2.Navigation("Linked");
                                 });
 
-                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.StrategicAction", "StrategicActions", b2 =>
+                            b1.Navigation("StrategicProjectBridges");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramProjectIdea", "ProjectIdeas", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("StrategicProgramId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<string>("Description")
+                                .HasMaxLength(2048)
+                                .HasColumnType("character varying(2048)");
+
+                            b1.Property<bool>("IsArchived")
+                                .HasColumnType("boolean");
+
+                            b1.Property<bool>("IsEnabled")
+                                .HasColumnType("boolean");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.Property<int>("Priority")
+                                .HasColumnType("integer");
+
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("Id", "StrategicProgramId");
+
+                            b1.HasIndex("StrategicProgramId");
+
+                            b1.HasIndex("Name", "Id", "StrategicProgramId")
+                                .IsUnique();
+
+                            b1.ToTable("strategicprogram_projectideas", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("StrategicProgramId");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values.ProgramImpact", "Impacts", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("StrategicProgramId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<string>("Description")
+                                .HasMaxLength(2048)
+                                .HasColumnType("character varying(2048)");
+
+                            b1.Property<bool>("IsArchived")
+                                .HasColumnType("boolean");
+
+                            b1.Property<bool>("IsEnabled")
+                                .HasColumnType("boolean");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.Property<int>("Priority")
+                                .HasColumnType("integer");
+
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("Id", "StrategicProgramId");
+
+                            b1.HasIndex("StrategicProgramId");
+
+                            b1.HasIndex("Name", "Id", "StrategicProgramId")
+                                .IsUnique();
+
+                            b1.ToTable("strategicprogram_impacts", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("StrategicProgramId");
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ImpactIndicator", "ImpactIndicator", b2 =>
                                 {
                                     b2.Property<Guid>("Id")
                                         .HasColumnType("uuid");
 
-                                    b2.Property<Guid>("StrategicLineId")
+                                    b2.Property<Guid>("ProgramImpactId")
                                         .HasColumnType("uuid");
 
-                                    b2.Property<Guid>("StrategicAxesId")
+                                    b2.Property<Guid>("StrategicProgramId")
                                         .HasColumnType("uuid");
 
-                                    b2.Property<string>("Description")
-                                        .HasMaxLength(2048)
-                                        .HasColumnType("character varying(2048)");
-
-                                    b2.Property<int>("Index")
-                                        .HasColumnType("integer");
-
-                                    b2.Property<string>("Title")
+                                    b2.Property<string>("Alias")
                                         .IsRequired()
                                         .HasMaxLength(360)
                                         .HasColumnType("character varying(360)");
 
-                                    b2.HasKey("Id", "StrategicLineId", "StrategicAxesId");
-
-                                    b2.HasIndex("StrategicLineId", "StrategicAxesId");
-
-                                    b2.HasIndex("Index", "Id", "StrategicLineId", "StrategicAxesId")
-                                        .IsUnique();
-
-                                    b2.ToTable("strategicaxe_strategicactions", (string)null);
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("StrategicLineId", "StrategicAxesId");
-                                });
-
-                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.StrategicProgram", "StrategicProgram", b2 =>
-                                {
-                                    b2.Property<Guid>("Id")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("StrategicLineId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("StrategicAxesId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("CoordinatorId")
-                                        .HasColumnType("uuid");
-
                                     b2.Property<DateTime>("CreatedAt")
                                         .HasColumnType("timestamp without time zone");
-
-                                    b2.Property<string>("Description")
-                                        .HasMaxLength(2048)
-                                        .HasColumnType("character varying(2048)");
-
-                                    b2.Property<int>("Index")
-                                        .HasColumnType("integer");
 
                                     b2.Property<bool>("IsArchived")
                                         .HasColumnType("boolean");
@@ -1269,432 +1606,68 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                                     b2.Property<bool>("IsEnabled")
                                         .HasColumnType("boolean");
 
+                                    b2.Property<float>("Meta")
+                                        .HasColumnType("real");
+
                                     b2.Property<string>("Name")
                                         .IsRequired()
                                         .HasMaxLength(360)
                                         .HasColumnType("character varying(360)");
 
+                                    b2.Property<Guid>("UnitMeasurementId")
+                                        .HasColumnType("uuid");
+
                                     b2.Property<DateTime?>("UpdatedAt")
                                         .HasColumnType("timestamp without time zone");
 
-                                    b2.HasKey("Id", "StrategicLineId", "StrategicAxesId");
+                                    b2.HasKey("Id", "ProgramImpactId", "StrategicProgramId");
 
-                                    b2.HasIndex("CoordinatorId");
+                                    b2.HasIndex("UnitMeasurementId");
 
-                                    b2.HasIndex("StrategicLineId", "StrategicAxesId");
+                                    b2.HasIndex("ProgramImpactId", "StrategicProgramId");
 
-                                    b2.HasIndex("Index", "Id", "StrategicLineId", "StrategicAxesId")
+                                    b2.HasIndex("Name", "Id", "ProgramImpactId", "StrategicProgramId")
                                         .IsUnique();
 
-                                    b2.ToTable("strategicaxe_strategicprograms", (string)null);
+                                    b2.ToTable("strategicprogram_impactindicators", (string)null);
 
-                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Coordinator")
+                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate.UnitMeasurement", "UnitMeasurement")
                                         .WithMany()
-                                        .HasForeignKey("CoordinatorId")
-                                        .OnDelete(DeleteBehavior.Cascade)
+                                        .HasForeignKey("UnitMeasurementId")
+                                        .OnDelete(DeleteBehavior.Restrict)
                                         .IsRequired();
 
                                     b2.WithOwner()
-                                        .HasForeignKey("StrategicLineId", "StrategicAxesId");
+                                        .HasForeignKey("ProgramImpactId", "StrategicProgramId");
 
-                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.StrategicProgramOrganizationBridge", "OrganizationBridges", b3 =>
-                                        {
-                                            b3.Property<Guid>("StrategicProgramId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicLineId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicAxesId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("LinkedId")
-                                                .HasColumnType("uuid");
-
-                                            b3.HasKey("StrategicProgramId", "StrategicLineId", "StrategicAxesId", "LinkedId");
-
-                                            b3.HasIndex("LinkedId");
-
-                                            b3.ToTable("strategicaxe_strategicprogram_organization_bridges", (string)null);
-
-                                            b3.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "Linked")
-                                                .WithMany()
-                                                .HasForeignKey("LinkedId")
-                                                .OnDelete(DeleteBehavior.Restrict)
-                                                .IsRequired();
-
-                                            b3.WithOwner()
-                                                .HasForeignKey("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.Navigation("Linked");
-                                        });
-
-                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.ProgramAction", "ProgramActions", b3 =>
-                                        {
-                                            b3.Property<Guid>("Id")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicProgramId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicLineId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicAxesId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<string>("Description")
-                                                .HasMaxLength(2048)
-                                                .HasColumnType("character varying(2048)");
-
-                                            b3.Property<int>("Index")
-                                                .HasColumnType("integer");
-
-                                            b3.Property<string>("Title")
-                                                .IsRequired()
-                                                .HasMaxLength(360)
-                                                .HasColumnType("character varying(360)");
-
-                                            b3.HasKey("Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("Index", "Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId")
-                                                .IsUnique();
-
-                                            b3.ToTable("strategicaxe_programactions", (string)null);
-
-                                            b3.WithOwner()
-                                                .HasForeignKey("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.ProgramActionInterestAreaBridge", "InterestAreaBridges", b4 =>
-                                                {
-                                                    b4.Property<Guid>("ProgramActionId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<Guid>("StrategicProgramId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<Guid>("StrategicLineId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<Guid>("StrategicAxesId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<Guid>("LinkedId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.HasKey("ProgramActionId", "StrategicProgramId", "StrategicLineId", "StrategicAxesId", "LinkedId");
-
-                                                    b4.HasIndex("LinkedId");
-
-                                                    b4.ToTable("strategicaxe_programaction_interestarea_bridges", (string)null);
-
-                                                    b4.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.InterestAreaAggregate.InterestArea", "Linked")
-                                                        .WithMany()
-                                                        .HasForeignKey("LinkedId")
-                                                        .OnDelete(DeleteBehavior.Cascade)
-                                                        .IsRequired();
-
-                                                    b4.WithOwner()
-                                                        .HasForeignKey("ProgramActionId", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                                    b4.Navigation("Linked");
-                                                });
-
-                                            b3.Navigation("InterestAreaBridges");
-                                        });
-
-                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.ProgramExecutionProject", "ProgramExecutionProjects", b3 =>
-                                        {
-                                            b3.Property<Guid>("Id")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicProgramId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicLineId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicAxesId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<DateTime>("CreatedAt")
-                                                .HasColumnType("timestamp without time zone");
-
-                                            b3.Property<string>("Description")
-                                                .HasMaxLength(2048)
-                                                .HasColumnType("character varying(2048)");
-
-                                            b3.Property<bool>("IsArchived")
-                                                .HasColumnType("boolean");
-
-                                            b3.Property<bool>("IsEnabled")
-                                                .HasColumnType("boolean");
-
-                                            b3.Property<string>("Name")
-                                                .IsRequired()
-                                                .HasMaxLength(360)
-                                                .HasColumnType("character varying(360)");
-
-                                            b3.Property<DateTime?>("UpdatedAt")
-                                                .HasColumnType("timestamp without time zone");
-
-                                            b3.HasKey("Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("Name", "Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId")
-                                                .IsUnique();
-
-                                            b3.ToTable("strategicaxe_programexecutionprojects", (string)null);
-
-                                            b3.WithOwner()
-                                                .HasForeignKey("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-                                        });
-
-                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.ProgramIdeaProject", "ProgramIdeaProjects", b3 =>
-                                        {
-                                            b3.Property<Guid>("Id")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicProgramId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicLineId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicAxesId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<DateTime>("CreatedAt")
-                                                .HasColumnType("timestamp without time zone");
-
-                                            b3.Property<string>("Description")
-                                                .HasMaxLength(2048)
-                                                .HasColumnType("character varying(2048)");
-
-                                            b3.Property<bool>("IsArchived")
-                                                .HasColumnType("boolean");
-
-                                            b3.Property<bool>("IsEnabled")
-                                                .HasColumnType("boolean");
-
-                                            b3.Property<string>("Name")
-                                                .IsRequired()
-                                                .HasMaxLength(360)
-                                                .HasColumnType("character varying(360)");
-
-                                            b3.Property<DateTime?>("UpdatedAt")
-                                                .HasColumnType("timestamp without time zone");
-
-                                            b3.HasKey("Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("Name", "Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId")
-                                                .IsUnique();
-
-                                            b3.ToTable("strategicaxe_programideaprojects", (string)null);
-
-                                            b3.WithOwner()
-                                                .HasForeignKey("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-                                        });
-
-                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.ProgramImpact", "ProgramImpacts", b3 =>
-                                        {
-                                            b3.Property<Guid>("Id")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicProgramId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicLineId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicAxesId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<DateTime>("CreatedAt")
-                                                .HasColumnType("timestamp without time zone");
-
-                                            b3.Property<string>("Description")
-                                                .HasMaxLength(2048)
-                                                .HasColumnType("character varying(2048)");
-
-                                            b3.Property<bool>("IsArchived")
-                                                .HasColumnType("boolean");
-
-                                            b3.Property<bool>("IsEnabled")
-                                                .HasColumnType("boolean");
-
-                                            b3.Property<string>("Name")
-                                                .IsRequired()
-                                                .HasMaxLength(360)
-                                                .HasColumnType("character varying(360)");
-
-                                            b3.Property<DateTime?>("UpdatedAt")
-                                                .HasColumnType("timestamp without time zone");
-
-                                            b3.HasKey("Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("Name", "Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId")
-                                                .IsUnique();
-
-                                            b3.ToTable("strategicaxe_programimpacts", (string)null);
-
-                                            b3.WithOwner()
-                                                .HasForeignKey("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.ImpactIndicator", "ImpactIndicator", b4 =>
-                                                {
-                                                    b4.Property<Guid>("Id")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<Guid>("ProgramImpactId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<Guid>("StrategicProgramId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<Guid>("StrategicLineId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<Guid>("StrategicAxesId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<string>("Alias")
-                                                        .IsRequired()
-                                                        .HasMaxLength(360)
-                                                        .HasColumnType("character varying(360)");
-
-                                                    b4.Property<DateTime>("CreatedAt")
-                                                        .HasColumnType("timestamp without time zone");
-
-                                                    b4.Property<bool>("IsArchived")
-                                                        .HasColumnType("boolean");
-
-                                                    b4.Property<bool>("IsEnabled")
-                                                        .HasColumnType("boolean");
-
-                                                    b4.Property<float>("Meta")
-                                                        .HasColumnType("real");
-
-                                                    b4.Property<string>("Name")
-                                                        .IsRequired()
-                                                        .HasMaxLength(360)
-                                                        .HasColumnType("character varying(360)");
-
-                                                    b4.Property<Guid>("UnitMeasurementId")
-                                                        .HasColumnType("uuid");
-
-                                                    b4.Property<DateTime?>("UpdatedAt")
-                                                        .HasColumnType("timestamp without time zone");
-
-                                                    b4.HasKey("Id", "ProgramImpactId", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                                    b4.HasIndex("UnitMeasurementId");
-
-                                                    b4.HasIndex("ProgramImpactId", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                                    b4.HasIndex("Name", "Id", "ProgramImpactId", "StrategicProgramId", "StrategicLineId", "StrategicAxesId")
-                                                        .IsUnique();
-
-                                                    b4.ToTable("impactindicators", (string)null);
-
-                                                    b4.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate.UnitMeasurement", "UnitMeasurement")
-                                                        .WithMany()
-                                                        .HasForeignKey("UnitMeasurementId")
-                                                        .OnDelete(DeleteBehavior.Restrict)
-                                                        .IsRequired();
-
-                                                    b4.WithOwner()
-                                                        .HasForeignKey("ProgramImpactId", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                                    b4.Navigation("UnitMeasurement");
-                                                });
-
-                                            b3.Navigation("ImpactIndicator");
-                                        });
-
-                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Entities.ProgramObjetive", "ProgramObjetives", b3 =>
-                                        {
-                                            b3.Property<Guid>("Id")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicProgramId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicLineId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<Guid>("StrategicAxesId")
-                                                .HasColumnType("uuid");
-
-                                            b3.Property<DateTime>("CreatedAt")
-                                                .HasColumnType("timestamp without time zone");
-
-                                            b3.Property<string>("Description")
-                                                .HasMaxLength(2048)
-                                                .HasColumnType("character varying(2048)");
-
-                                            b3.Property<int>("Index")
-                                                .HasColumnType("integer");
-
-                                            b3.Property<bool>("IsArchived")
-                                                .HasColumnType("boolean");
-
-                                            b3.Property<bool>("IsEnabled")
-                                                .HasColumnType("boolean");
-
-                                            b3.Property<string>("Name")
-                                                .IsRequired()
-                                                .HasMaxLength(360)
-                                                .HasColumnType("character varying(360)");
-
-                                            b3.Property<DateTime?>("UpdatedAt")
-                                                .HasColumnType("timestamp without time zone");
-
-                                            b3.HasKey("Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-
-                                            b3.HasIndex("Index", "Id", "StrategicProgramId", "StrategicLineId", "StrategicAxesId")
-                                                .IsUnique();
-
-                                            b3.ToTable("strategicaxe_programobjetives", (string)null);
-
-                                            b3.WithOwner()
-                                                .HasForeignKey("StrategicProgramId", "StrategicLineId", "StrategicAxesId");
-                                        });
-
-                                    b2.Navigation("Coordinator");
-
-                                    b2.Navigation("OrganizationBridges");
-
-                                    b2.Navigation("ProgramActions");
-
-                                    b2.Navigation("ProgramExecutionProjects");
-
-                                    b2.Navigation("ProgramIdeaProjects");
-
-                                    b2.Navigation("ProgramImpacts");
-
-                                    b2.Navigation("ProgramObjetives");
+                                    b2.Navigation("UnitMeasurement");
                                 });
 
-                            b1.Navigation("Coordinator");
-
-                            b1.Navigation("OrganizationBridges");
-
-                            b1.Navigation("StrategicActions");
-
-                            b1.Navigation("StrategicProgram");
+                            b1.Navigation("ImpactIndicator");
                         });
 
-                    b.Navigation("Lines");
+                    b.Navigation("Actions");
+
+                    b.Navigation("Coordinator");
+
+                    b.Navigation("Impacts");
+
+                    b.Navigation("Objetives");
+
+                    b.Navigation("ProjectIdeas");
+
+                    b.Navigation("StrategicLine");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.StrategicProject", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", "Program")
+                        .WithMany()
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Program");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate.User", b =>
@@ -1783,6 +1756,25 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
                     b.Navigation("Main");
                 });
 
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges.StrategicProgramOrganizationBridge", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "Linked")
+                        .WithMany()
+                        .HasForeignKey("LinkedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", "Main")
+                        .WithMany("OrganizationBridges")
+                        .HasForeignKey("MainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Linked");
+
+                    b.Navigation("Main");
+                });
+
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges.UserRoleBridge", b =>
                 {
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate.Role", "Linked")
@@ -1820,6 +1812,11 @@ namespace MOROPO.GEDET.CAM.Infrastructure.Persistence.EF.Migrations
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate.Role", b =>
                 {
                     b.Navigation("PermissionBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", b =>
+                {
+                    b.Navigation("OrganizationBridges");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate.User", b =>
