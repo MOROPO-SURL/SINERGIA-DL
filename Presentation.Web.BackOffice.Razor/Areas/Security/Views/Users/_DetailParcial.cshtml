@@ -1,0 +1,19 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Users
+
+@model UserDetailViewModel
+
+<dl class="mb-0">
+    <dt>Nombre de Usuario</dt>
+    <dd>@Model.Id</dd>
+    <dt>Nombre</dt>
+    <dd>@Model.Name</dd>
+    <dt>Apellidos</dt>
+    @if (!string.IsNullOrEmpty(Model.LastName))
+    {
+        <dd class="mb-0">@Model.LastName</dd>
+    }
+    else
+    {
+        <dd class="mb-0">---</dd>
+    }
+</dl>

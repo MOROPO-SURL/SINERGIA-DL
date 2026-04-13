@@ -1,0 +1,41 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.ApiKeys
+
+@model ApiKeyDetailViewModel
+
+<dl class="mb-0">
+    <dt>Nombre</dt>
+    <dd>@Model.Name</dd>
+    <dt>Creada</dt>
+    <dd>@Model.CreatedAt</dd>
+    <dt>Editada</dt>
+    @if (Model.UpdatedAt != null)
+    {
+        <dd class="mb-0">@Model.UpdatedAt</dd>
+    }
+    else
+    {
+        <dd class="mb-0">---</dd>
+    }
+    <dt>Expira</dt>
+    <dd>@Model.ExpireAt</dd>
+    <dt>Token</dt>
+    <dd>@Model.Token</dd>
+    <dt>Dirección del cliente</dt>
+    @if (!string.IsNullOrEmpty(Model.Host))
+    {
+        <dd class="mb-0">@Model.Host</dd>
+    }
+    else
+    {
+        <dd class="mb-0">---</dd>
+    }
+    <dt>Descripción</dt>
+    @if (!string.IsNullOrEmpty(Model.Description))
+    {
+        <dd class="mb-0">@Model.Description</dd>
+    }
+    else
+    {
+        <dd class="mb-0">---</dd>
+    }
+</dl>
