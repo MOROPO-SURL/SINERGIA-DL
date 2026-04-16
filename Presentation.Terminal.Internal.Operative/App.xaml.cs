@@ -8,4 +8,11 @@ public partial class App : Application
 
         MainPage = new UI.Shells.AppShell();
     }
+
+    protected override void OnStart()
+    {
+        base.OnStart();
+
+        Windows[0].Title = $"GEDEL Operaciones CAM Camagüey v{Microsoft.Maui.ApplicationModel.AppInfo.Current.VersionString}";
+    }
 }

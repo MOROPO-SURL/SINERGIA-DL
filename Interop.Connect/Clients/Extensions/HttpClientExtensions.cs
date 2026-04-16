@@ -6,6 +6,12 @@ internal static class HttpClientExtensions
 {
     private const string CONTENT_TYPE = "application/json";
 
+    private readonly static JsonSerializerOptions DEFAULT_JSON_SERIALIZER_OPTIONS = new()
+    {
+        PropertyNameCaseInsensitive = false,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
     public static async Task<TResponse> SendGetAsync<TResponse>(this HttpClient target, string url)
     {
         var response = await target.GetAsync(url);
@@ -14,7 +20,7 @@ internal static class HttpClientExtensions
 
         var responseContent = await response.Content.ReadAsStringAsync();
 
-        return JsonSerializer.Deserialize<TResponse>(responseContent)!;
+        return JsonSerializer.Deserialize<TResponse>(responseContent, DEFAULT_JSON_SERIALIZER_OPTIONS)!;
     }
 
     public static async Task SendPostAsync<TRequest>(this HttpClient target, string urlOrResource, TRequest request)
@@ -36,7 +42,9 @@ internal static class HttpClientExtensions
 
         var responseContent = await response.Content.ReadAsStringAsync();
 
-        return JsonSerializer.Deserialize<TResponse>(responseContent)!;
+        TResponse result = JsonSerializer.Deserialize<TResponse>(responseContent, DEFAULT_JSON_SERIALIZER_OPTIONS)!;
+
+        return result;
     }
 
     public static async Task SendPostFormAsync(this HttpClient target, string urlOrResource, MultipartFormDataContent multipartFormDataContent)
@@ -63,7 +71,7 @@ internal static class HttpClientExtensions
 
         var responseContent = await response.Content.ReadAsStringAsync();
 
-        return JsonSerializer.Deserialize<TResponse>(responseContent)!;
+        return JsonSerializer.Deserialize<TResponse>(responseContent, DEFAULT_JSON_SERIALIZER_OPTIONS)!;
     }
 
     public static async Task SendPutAsync<TRequest>(this HttpClient target, string urlOrResource, TRequest request)

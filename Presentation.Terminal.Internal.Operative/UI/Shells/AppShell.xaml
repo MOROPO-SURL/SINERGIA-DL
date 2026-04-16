@@ -3,11 +3,164 @@
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Shells.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages"
-    Shell.FlyoutBehavior="Flyout"
-    Title="Navegación">
+    xmlns:local_ui_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages"
+    Title="Navegación"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
+    <Shell.FlyoutHeader>
+        <Grid Padding="0,0,0,8">
+            <Image 
+                Source="shell_header.jpg" />
+            <Image 
+                VerticalOptions="End"
+                Source="{AppThemeBinding Light='shell_header_frame_artwork_light.png', Dark='shell_header_frame_artwork_dark.png'}" />
+        </Grid>
+    </Shell.FlyoutHeader>
     <ShellContent
-        Title="Inicio"
+        Title="Panel de control"
         Route="MainPage"
-        ContentTemplate="{DataTemplate local_pages:MainPage}" />
+        ContentTemplate="{DataTemplate local_ui_pages:MainPage}">
+        <ShellContent.FlyoutIcon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphDashboard}" />
+        </ShellContent.FlyoutIcon>
+    </ShellContent>
+    <ShellContent
+        Title="Diagnóstico"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.FlyoutIcon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphContext}" />
+        </ShellContent.FlyoutIcon>
+    </ShellContent>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Objetivos"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphObjective}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Barreras"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphBarrier}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Potencialidades"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphPotential}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Políticas públicas"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphPublicPolicy}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphPerson}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Entidades"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphOrganization}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+    </FlyoutItem>
+    <ShellContent
+        Title="Estrategia"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.FlyoutIcon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphEDL}" />
+        </ShellContent.FlyoutIcon>
+    </ShellContent>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Ejes estratégicos"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphAxe}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Líneas estratégicas"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphLine}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Programas"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphProgram}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Proyectos"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphProject}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+    </FlyoutItem>
+    <ShellContent
+        Title="Unidades de medida"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.FlyoutIcon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphUnitMeasurement}" />
+        </ShellContent.FlyoutIcon>
+    </ShellContent>
 </Shell>

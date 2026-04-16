@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Authentication.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Authentication.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Authentication.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Authentication.DTOs;
 using System.Net;
@@ -26,9 +27,9 @@ public class AuthenticationController : ControllerBase
     {
         try
         {
-            var command = mapper.Map<AuthenticateCommand>(model);
+            AuthenticateCommand command = mapper.Map<AuthenticateCommand>(model);
 
-            var result = await mediator.Send(command);
+            AuthenticationIdentityDto result = await mediator.Send(command);
 
             return Ok(mapper.Map<AuthenticatedSessionModel>(result));
         }

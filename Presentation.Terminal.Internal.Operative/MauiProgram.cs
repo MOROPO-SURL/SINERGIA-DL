@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Helper;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative;
 
@@ -7,15 +10,22 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        var builder = MauiApp.CreateBuilder();
+        MauiAppBuilder builder = MauiApp.CreateBuilder();
+        
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UsePresentationCommonDefaults()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            });
+                fonts.AddFont("materialdesignicons-webfont.ttf", "MaterialDesignIcons");
+            })
+            .Services
+                .AddSingleton<IHttpClientProviderPort, Ports.Adapter.Provider.HttpClientHelperProvider>()
+                .AddSingleton<IExceptionHandlingHelperPort, Ports.Adapter.Helper.ExceptionHandlingHelperPortAdapter>()
+                .AddSingleton<ILocalizationHelperPort, Ports.Adapter.Helper.LocalizationHelperPortAdapter>();
 
 #if DEBUG
         builder.Logging.AddDebug();

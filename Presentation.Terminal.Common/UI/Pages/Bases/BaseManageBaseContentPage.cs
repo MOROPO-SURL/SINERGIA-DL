@@ -3,7 +3,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.A
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Helper;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages;
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
 public class BaseManageBaseContentPage<TBasicModel, TDetailModel, TManagePageModel, TConfigurationPageModel> : BaseListBaseContentPage<TBasicModel, TDetailModel, TManagePageModel>
     where TManagePageModel : AbstractListEntityPageModel<TBasicModel>, new()

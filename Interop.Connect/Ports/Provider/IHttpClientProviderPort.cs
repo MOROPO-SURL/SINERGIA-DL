@@ -3,4 +3,6 @@
 public interface IHttpClientProviderPort
 {
     public HttpClient GetHttpClient();
+
+    public void Reset();
 }

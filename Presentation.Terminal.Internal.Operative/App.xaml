@@ -2,14 +2,33 @@
 <Application 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative"
+    xmlns:common_style_resources="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.App">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <common_style_resources:SharedStylesDictionary />
+                
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <x:String x:Key="FontMaterialDesignIcons">MaterialDesignIcons</x:String>
+
+            <x:String x:Key="IconGlyphDashboard">&#xF9E7;</x:String>
+            <x:String x:Key="IconGlyphUnitMeasurement">&#xF472;</x:String>
+            <x:String x:Key="IconGlyphObjective">&#xF8C8;</x:String>
+            <x:String x:Key="IconGlyphAxe">&#xFD51;</x:String>
+            <x:String x:Key="IconGlyphLine">&#xF054;</x:String>
+            <x:String x:Key="IconGlyphProgram">&#xF030F;</x:String>
+            <x:String x:Key="IconGlyphProject">&#xF00AB;</x:String>
+            <x:String x:Key="IconGlyphBarrier">&#xF4A1;</x:String>
+            <x:String x:Key="IconGlyphPotential">&#xF0090;</x:String>
+            <x:String x:Key="IconGlyphPublicPolicy">&#xF5D1;</x:String>
+            <x:String x:Key="IconGlyphPerson">&#xF013;</x:String>
+            <x:String x:Key="IconGlyphOrganization">&#xF1D7;</x:String>
+            <x:String x:Key="IconGlyphContext">&#xF002B;</x:String>
+            <x:String x:Key="IconGlyphEDL">&#xFA1C;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

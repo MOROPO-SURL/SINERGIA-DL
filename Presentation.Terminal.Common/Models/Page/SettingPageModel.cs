@@ -1,10 +1,11 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Bases;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Validators;
 using System.ComponentModel.DataAnnotations;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page;
 
-public class SettingPageModel : BasePageModel
+public class SettingPageModel : BasePageModel, Interfaces.IValidableConfigurationPageModel
 {
     public static string ProxyServerAddressValidableProperty => nameof(ProxyServerAddress);
     public static string ProxyUsernameValidableProperty => nameof(ProxyUsername);
@@ -23,7 +24,7 @@ public class SettingPageModel : BasePageModel
     {
         this.validationCallbackAction = validationCallbackAction;
 
-        var settingManager = IPlatformApplication.Current!.Services.GetRequiredService<ISettingManagerPort>();
+        ISettingManagerPort settingManager = IPlatformApplication.Current!.Services.GetRequiredService<ISettingManagerPort>();
 
         useProxyServer = settingManager.UseProxyServer;
         proxyServerAddress = settingManager.ProxyServerAddress;
@@ -34,7 +35,7 @@ public class SettingPageModel : BasePageModel
         ApplyChangesCommand = new Command(
             execute: () =>
             {
-                var validator = new SettingValidator();
+                SettingValidator validator = new();
 
                 ValidationResult = null;
                 ValidationResult = validator.Validate(this);

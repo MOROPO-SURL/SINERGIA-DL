@@ -2,7 +2,7 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Helper;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages;
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
 public class BaseConfigurationBaseContentPage<TBasicModel, TDetailModel, TConfigurationPageModel> : BaseContentPage
     where TConfigurationPageModel : AbstractConfigurationPageModel<TBasicModel>
@@ -27,7 +27,7 @@ public class BaseConfigurationBaseContentPage<TBasicModel, TDetailModel, TConfig
 
         BindingContext = bindingContextModel;
 
-       ConcreteBindingContext.PropertyChanged += PageModel_PropertyChanged!;
+        ConcreteBindingContext.PropertyChanged += PageModel_PropertyChanged!;
     }
 
     protected override bool OnBackButtonPressed()

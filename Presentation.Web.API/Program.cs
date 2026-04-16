@@ -35,6 +35,7 @@ public class Program
         builder.Services.UseInfrastructureLayer(builder.Configuration);
 
         TypeAdapterConfig.GlobalSettings.Apply(
+            new Models.Authentication.Mappings.AuthenticateCommandMappingRegister(),
             new Models.Authentication.Mappings.AuthenticatedSessionModelMappingRegister(jwtConfigurationOptions)
         );
 

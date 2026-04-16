@@ -1,8 +1,9 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.User.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Bases;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
-public abstract class AbstractConfigurationPageModel<TModel> : BasePageModel
+public abstract class AbstractConfigurationPageModel<TModel> : BasePageModel, Interfaces.IValidableConfigurationPageModel
 {
     private FluentValidation.Results.ValidationResult? validationResult;
 

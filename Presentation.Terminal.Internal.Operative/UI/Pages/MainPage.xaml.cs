@@ -1,23 +1,26 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
-
     public MainPage()
     {
         InitializeComponent();
     }
 
-    private void OnCounterClicked(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-        count++;
+        base.OnAppearing();
 
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
+        var sessionManager = IPlatformApplication.Current!.Services.GetRequiredService<ISessionManagerPort>();
 
-        SemanticScreenReader.Announce(CounterBtn.Text);
+        //BindingContextPageModel.User = sessionManager.CurrentSession?.User;
+
+        if (sessionManager.CurrentSession?.User == null)
+        {
+            this.NavigationPushModalPageAsync(new UserAuthenticationPage());
+        }
     }
 }

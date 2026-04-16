@@ -12,6 +12,7 @@
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
 		<OutputType>Exe</OutputType>
+		<AssemblyName>GEDEL-CAMCMG-Operative</AssemblyName>
 		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -22,7 +23,7 @@
 		<ApplicationTitle>GEDEL Operaciones CAM Camagüey</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>cu.moropo.pdlcolabcmg.gedel.camcmg.presentation.terminal.internal.operative</ApplicationId>
+		<ApplicationId>cu.moropo.pdlcolabcmg.gedel.camcmg.operative</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
@@ -47,7 +48,6 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -57,18 +57,49 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
+	  <None Remove="Resources\Images\shell_header.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="UI\Views\" />
+	  <ProjectReference Include="..\Interop.Connect.Internal.Operative\Interop.Connect.Internal.Operative.csproj" />
+	  <ProjectReference Include="..\Presentation.Terminal.Common\Presentation.Terminal.Common.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Interop.Connect.Internal.Operative\Interop.Connect.Internal.Operative.csproj" />
-	  <ProjectReference Include="..\Presentation.Terminal.Common\Presentation.Terminal.Common.csproj" />
+	  <Compile Update="LocalizationResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>LocalizationResources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
+	    <DependentUpon>UserAuthenticationPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="LocalizationResources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>LocalizationResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\SubtitleSectionShellMenuItemView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\TitleSectionShellMenuItemView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
