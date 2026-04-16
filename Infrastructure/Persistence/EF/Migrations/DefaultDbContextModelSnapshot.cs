@@ -602,12 +602,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<int>("StrategicLineId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("StrategicLineId1")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("StrategicLineStrategicAxeId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
@@ -615,7 +609,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                     b.HasIndex("CoordinatorId");
 
-                    b.HasIndex("StrategicLineId1", "StrategicLineStrategicAxeId");
+                    b.HasIndex("StrategicLineId", "StrategicAxeId");
 
                     b.HasIndex("Index", "Id", "StrategicLineId", "StrategicAxeId")
                         .IsUnique();
@@ -1416,13 +1410,14 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Coordinator")
                         .WithMany()
                         .HasForeignKey("CoordinatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine", "StrategicLine")
                         .WithMany()
-                        .HasForeignKey("StrategicLineId1", "StrategicLineStrategicAxeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("StrategicLineId", "StrategicAxeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramAction", "Actions", b1 =>
                         {

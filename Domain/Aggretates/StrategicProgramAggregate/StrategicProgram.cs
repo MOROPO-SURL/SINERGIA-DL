@@ -19,7 +19,6 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
     private readonly List<ProgramImpact> impacts = [];
     private readonly List<StrategicProgramOrganizationBridge> organizationBridges = [];
 
-
     private StrategicProgram() : base(new StrategicProgramId(default)) { }
 
     public StrategicProgram(StrategicProgramId id, StrategicLineId strategicLineId, StrategicAxeId strategicAxesId, bool isEnabled, string name, bool isArchived, int index, PersonId coordinatorId, ProgramObjective[] objetives, ProgramAction[] actions, ProgramProjectIdea[] projectIdeas, ProgramImpact[] impacts, StrategicProgramOrganizationBridge[] organizationBridges, Person? coordinator = null, string? description = null) : base(id)
@@ -56,7 +55,7 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
     public int Index { get; set; }
 
     public Person? Coordinator { get; set; }
-    public PersonId CoordinatorId { get; set; } // TODO Put on ORM configuration !!!
+    public PersonId CoordinatorId { get; set; }
 
     public ProgramObjective[] Objetives => [.. objetives];
 

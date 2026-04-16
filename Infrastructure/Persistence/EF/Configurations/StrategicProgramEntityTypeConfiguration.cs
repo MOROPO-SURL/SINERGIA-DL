@@ -54,7 +54,9 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
 
         builder.HasIndex(entity => new { entity.Index, entity.Id, entity.StrategicLineId, entity.StrategicAxeId }).IsUnique();
 
-        builder.HasOne(entity => entity.StrategicLine).WithMany().HasPrincipalKey(entity => new { entity.StrategicLineId, entity.StrategicAxeId }).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(entity => entity.StrategicLine).WithMany().HasForeignKey(entity => new { entity.StrategicLineId, entity.StrategicAxeId }).OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(entity => entity.Coordinator).WithMany().HasForeignKey(entity => entity.CoordinatorId).OnDelete(DeleteBehavior.Restrict);
 
         builder
             .OwnsMany(entity => entity.Objetives, Configure)
