@@ -101,6 +101,50 @@ public class DefaultDbContext : DbContext
                 PermissionConstants.PERSON_DISABLE_PERMISSION,
                 PermissionConstants.PERSON_ARCHIVE_PERMISSION,
                 PermissionConstants.PERSON_UNARCHIVE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.UNITMEASUREMENT_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.UNITMEASUREMENT_LIST_PERMISSION,
+                PermissionConstants.UNITMEASUREMENT_VIEW_PERMISSION,
+                PermissionConstants.UNITMEASUREMENT_CREATE_PERMISSION,
+                PermissionConstants.UNITMEASUREMENT_UPDATE_PERMISSION,
+                PermissionConstants.UNITMEASUREMENT_REMOVE_PERMISSION,
+                PermissionConstants.UNITMEASUREMENT_ARCHIVE_PERMISSION,
+                PermissionConstants.UNITMEASUREMENT_UNARCHIVE_PERMISSION,
+                PermissionConstants.UNITMEASUREMENT_ENABLE_PERMISSION,
+                PermissionConstants.UNITMEASUREMENT_DISABLE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.INTERESTAREA_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.INTERESTAREA_LIST_PERMISSION,
+                PermissionConstants.INTERESTAREA_VIEW_PERMISSION,
+                PermissionConstants.INTERESTAREA_CREATE_PERMISSION,
+                PermissionConstants.INTERESTAREA_UPDATE_PERMISSION,
+                PermissionConstants.INTERESTAREA_REMOVE_PERMISSION,
+                PermissionConstants.INTERESTAREA_ARCHIVE_PERMISSION,
+                PermissionConstants.INTERESTAREA_UNARCHIVE_PERMISSION,
+                PermissionConstants.INTERESTAREA_ENABLE_PERMISSION,
+                PermissionConstants.INTERESTAREA_DISABLE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.MACROPROGRAM_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.MACROPROGRAM_LIST_PERMISSION,
+                PermissionConstants.MACROPROGRAM_VIEW_PERMISSION,
+                PermissionConstants.MACROPROGRAM_CREATE_PERMISSION,
+                PermissionConstants.MACROPROGRAM_UPDATE_PERMISSION,
+                PermissionConstants.MACROPROGRAM_REMOVE_PERMISSION,
+                PermissionConstants.MACROPROGRAM_ARCHIVE_PERMISSION,
+                PermissionConstants.MACROPROGRAM_UNARCHIVE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.PUBLICPOLICY_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.PUBLICPOLICY_LIST_PERMISSION,
+                PermissionConstants.PUBLICPOLICY_VIEW_PERMISSION,
+                PermissionConstants.PUBLICPOLICY_CREATE_PERMISSION,
+                PermissionConstants.PUBLICPOLICY_UPDATE_PERMISSION,
+                PermissionConstants.PUBLICPOLICY_REMOVE_PERMISSION,
+                PermissionConstants.PUBLICPOLICY_ARCHIVE_PERMISSION,
+                PermissionConstants.PUBLICPOLICY_UNARCHIVE_PERMISSION
             ])
         ];
 

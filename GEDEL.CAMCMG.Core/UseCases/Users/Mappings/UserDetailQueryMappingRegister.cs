@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate.Values;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Users.Mappings;
 
-internal sealed class UserKeyDetailQueryMappingRegister : IRegister
+internal sealed class UserDetailQueryMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

@@ -2,8 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeys.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreas.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Permissions.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicys.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Users.Mappings;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
@@ -17,7 +21,7 @@ public static class ServiceProviderExtensions
         TypeAdapterConfig.GlobalSettings.Apply(
             new UserDetailDtoMappingRegister(),
             new UserBasicDtoMappingRegister(provider.GetService<IDataIntegrityServicePort>()!),
-            new UserKeyDetailQueryMappingRegister(),
+            new UserDetailQueryMappingRegister(),
             new UserCreateCommandMappingRegister(stringHashingService),
             new UserUpdateCommandMappingRegister(),
             new PasswordUserUpdateCommandMappingRegister(stringHashingService),
@@ -32,7 +36,35 @@ public static class ServiceProviderExtensions
             new ApiKeyDetailDtoMappingRegister(),
             new ApiKeyKeyDetailQueryMappingRegister(),
 
-            new PermissionDetailDtoMappingRegister()
+            new PermissionDetailDtoMappingRegister(),
+
+            new PrimitivesUnitMeasurementMappingRegister(),
+            new UnitMeasurementBasicDtoMappingRegister(),
+            new UnitMeasurementCreateCommandMappingRegister(),
+            new UnitMeasurementDetailDtoMappingRegister(),
+            new UnitMeasurementDetailQueryMappingRegister(),
+            new UnitMeasurementUpdateCommandMappingRegister(),
+
+            new PrimitivesInterestAreaMappingRegister(),
+            new InterestAreaBasicDtoMappingRegister(),
+            new InterestAreaCreateCommandMappingRegister(),
+            new InterestAreaDetailDtoMappingRegister(),
+            new InterestAreaDetailQueryMappingRegister(),
+            new InterestAreaUpdateCommandMappingRegister(),
+
+            new PrimitivesMacroprogramMappingRegister(),
+            new MacroprogramBasicDtoMappingRegister(),
+            new MacroprogramCreateCommandMappingRegister(),
+            new MacroprogramDetailDtoMappingRegister(),
+            new MacroprogramDetailQueryMappingRegister(),
+            new MacroprogramUpdateCommandMappingRegister(),
+
+            new PrimitivesPublicPolicyMappingRegister(),
+            new PublicPolicyBasicDtoMappingRegister(),
+            new PublicPolicyCreateCommandMappingRegister(),
+            new PublicPolicyDetailDtoMappingRegister(),
+            new PublicPolicyDetailQueryMappingRegister(),
+            new PublicPolicyUpdateCommandMappingRegister()
         );
     }
 }

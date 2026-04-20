@@ -4,14 +4,22 @@ using Microsoft.Extensions.DependencyInjection;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeys.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Authentication.Ports.Service;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreas.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Permissions.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicys.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Users.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.ApiKeys;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.InterestAreas;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Macroprograms;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Permissions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.PublicPolicys;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Roles;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.UnitMeasurements;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Users;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Service.Authentication;
@@ -37,6 +45,18 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUserQueryRepositoryPort, UserQueryRepositoryPortAdapter>();
         services.AddScoped<IUserCommandRepositoryPort, UserCommandRepositoryPortAdapter>();
         services.AddScoped<IUserRoleBridgeCommandRepositoryPort, UserRoleBridgeCommandRepositoryPortAdapter>();
+
+        services.AddScoped<IUnitMeasurementQueryRepositoryPort, UnitMeasurementQueryRepositoryPortAdapter>();
+        services.AddScoped<IUnitMeasurementCommandRepositoryPort, UnitMeasurementCommandRepositoryPortAdapter>();
+
+        services.AddScoped<IInterestAreaQueryRepositoryPort, InterestAreaQueryRepositoryPortAdapter>();
+        services.AddScoped<IInterestAreaCommandRepositoryPort, InterestAreaCommandRepositoryPortAdapter>();
+
+        services.AddScoped<IMacroprogramQueryRepositoryPort, MacroprogramQueryRepositoryPortAdapter>();
+        services.AddScoped<IMacroprogramCommandRepositoryPort, MacroprogramCommandRepositoryPortAdapter>();
+
+        services.AddScoped<IPublicPolicyQueryRepositoryPort, PublicPolicyQueryRepositoryPortAdapter>();
+        services.AddScoped<IPublicPolicyCommandRepositoryPort, PublicPolicyCommandRepositoryPortAdapter>();
 
         services.AddScoped<IIdentityAuthenticationServicePort, LocalIdentityAuthenticationServicePortAdapter>();
 
