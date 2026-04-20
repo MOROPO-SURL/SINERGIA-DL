@@ -14,8 +14,8 @@ public sealed class AuthenticationApiClient
         this.httpClientProvider = httpClientProvider;
     }
 
-    public Task<AuthenticatedSessionModel> AuthenticateAsync(AuthenticationRequestModel model)
+    public Task<AuthenticatedSessionDtoModel> AuthenticateAsync(AuthenticationRequestModel model)
     {
-        return httpClientProvider.GetHttpClient().SendPostAsync<AuthenticationRequestModel, AuthenticatedSessionModel>("api/auth", model);
+        return httpClientProvider.GetHttpClient().SendPostAsync<AuthenticationRequestModel, AuthenticatedSessionDtoModel>("api/auth", model);
     }
 }

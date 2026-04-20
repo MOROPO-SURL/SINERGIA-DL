@@ -97,7 +97,7 @@ internal class ObjectiveEntityTypeConfiguration : IEntityTypeConfiguration<Objec
 
         builder.Property(entity => entity.Id)
             .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new ObjectiveProjectionId(value));
+            .HasConversion(id => id.Value, value => new ObjectivActionId(value));
 
         builder.Property(entity => entity.Title)
             .HasMaxLength(360);

@@ -19,5 +19,5 @@ public interface IEntityQueryRepositoryPort<TEntity, TId, TIdValue>
 
     IQueryable<TEntity> GetFindByQueryable(Expression<Func<TEntity, bool>> criteria);
 
-    IQueryable<TEntity> GetPageQueryable(int page, int limit, Expression<Func<TEntity, bool>>? criteria = null);
+    IQueryable<TEntity> GetPageQueryable(int page, int limit, Expression<Func<TEntity, object>> orderExpression, bool isOrderDesending = false, Expression<Func<TEntity, bool>>? criteria = null);
 }

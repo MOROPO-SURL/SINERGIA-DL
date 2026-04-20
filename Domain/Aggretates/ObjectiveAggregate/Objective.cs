@@ -36,11 +36,11 @@ public class Objective : AbstractAuditableEntity<ObjectiveId, Guid>, IAggregateR
 
     public string? Description { get; set; }
 
-    public ObjectiveAction[] Actions => [.. actions];
+    public IReadOnlyList<ObjectiveAction> Actions => [.. actions];
 
-    public ObjectiveProjection[] Projections => [.. projections];
+    public IReadOnlyList<ObjectiveProjection> Projections => [.. projections];
 
-    public ObjectiveChallenge[] Challenges => [.. challenges];
+    public IReadOnlyList<ObjectiveChallenge> Challenges => [.. challenges];
 
     public List<ObjectiveKeyVariableBridge> KeyVariableBridges { get; set; } = null!;
 }

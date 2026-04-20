@@ -184,7 +184,7 @@
 
     <Style TargetType="Editor">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BackgroundColor" Value="{OnPlatform Default='Transparent', WinUI={AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
@@ -206,7 +206,7 @@
 
     <Style TargetType="Entry">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BackgroundColor" Value="{OnPlatform Default='Transparent', WinUI={AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
@@ -228,9 +228,10 @@
 
     <Style TargetType="Frame">
         <Setter Property="HasShadow" Value="False" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#AFFFFFFF, Dark=#60000000}" />
-        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Padding" Value="16" />
     </Style>
 
     <Style TargetType="ImageButton">
@@ -286,7 +287,7 @@
     <Style TargetType="Picker">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="TitleColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+        <Setter Property="BackgroundColor" Value="{OnPlatform Default='Transparent', WinUI={AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
@@ -351,7 +352,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="PlaceholderColor" Value="{StaticResource Gray500}" />
         <Setter Property="CancelButtonColor" Value="{StaticResource Gray500}" />
-        <Setter Property="BackgroundColor" Value="{OnPlatform Default='Transparent', WinUI={AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}}" />
+        <Setter Property="BackgroundColor" Value="{OnPlatform Default='Transparent', WinUI={AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
@@ -481,7 +482,7 @@
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
         <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
         <Setter Property="Shell.ForegroundColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource SecondaryDarkText}}" />
-        <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource SecondaryDarkText}}" />
+        <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="Shell.DisabledColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray200}}" />
         <Setter Property="Shell.NavBarHasShadow" Value="False" />
@@ -676,11 +677,15 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="Caption" />
-        <Setter Property="Margin" Value="0,16,0,0" />
+        <Setter Property="Margin" Value="0,8,0,0" />
     </Style>
 
     <Style TargetType="Label" x:Key="ValuePropertyLabelStyle">
         <Setter Property="FontSize" Value="Default" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="OffLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OffBlack}, Dark={StaticResource OffWhite}}" />
     </Style>
 
     <Style TargetType="Label" x:Key="ValidationMessageLabelStyle">
@@ -694,6 +699,54 @@
 
     <Style TargetType="local_ui_views:BusyView">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#A7FFFFFF, Dark=#A7000000}" />
+    </Style>
+
+    <Style TargetType="SearchBar" x:Key="ListEntityPageSearchBarStyle">
+        <Setter Property="Margin" Value="16,16,16,0" />
+    </Style>
+
+    <Style TargetType="CollectionView" x:Key="ListEntityPageCollectionViewStyle">
+        <Setter Property="Margin" Value="8" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ListEntityPageEmptyViewLabelStyle">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="Text" Value="Sin elementos que mostrar" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="ListEntityPageLoadMoreButtonStyle">
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Text" Value="Mostrar más" />
+    </Style>
+
+    <Style TargetType="VerticalStackLayout" x:Key="DetailScrollRootVerticalStackLayoutStyle">
+        <Setter Property="Margin" Value="16" />
+        <Setter Property="Spacing" Value="0" />
+    </Style>
+
+    <Style TargetType="VerticalStackLayout" x:Key="FormScrollRootVerticalStackLayoutStyle">
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="Spacing" Value="0" />
+    </Style>
+
+    <Style TargetType="VerticalStackLayout" x:Key="FormScrollRootVerticalStackLayoutChildVerticalStackLayoutStyle">
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="Spacing" Value="6" />
+    </Style>
+
+    <Style TargetType="StackLayout" x:Key="FormScrollRootVerticalStackLayoutChildStackLayoutStyle">
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="Spacing" Value="6" />
+    </Style>
+
+    <Style TargetType="Grid" x:Key="FormScrollRootVerticalStackLayoutChildVerticalLayoutStyle">
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="ColumnSpacing" Value="6" />
+        <Setter Property="RowSpacing" Value="6" />
     </Style>
 
     <!--#endregion-->

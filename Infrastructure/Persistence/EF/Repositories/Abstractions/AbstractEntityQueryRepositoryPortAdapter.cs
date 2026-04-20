@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
 using System.Linq.Expressions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Repositories.Abstractions;
@@ -49,13 +48,23 @@ internal abstract class AbstractEntityQueryRepositoryPortAdapter<TEntity, TId, T
         return GetQueryableDbSet().Where(criteria);
     }
 
-    public IQueryable<TEntity> GetPageQueryable(int page, int limit, Expression<Func<TEntity, bool>>? criteria = null)
+    public IQueryable<TEntity> GetPageQueryable(int page, int limit, Expression<Func<TEntity, object>> orderExpression, bool isOrderDescending = false, Expression<Func<TEntity, bool>>? criteria = null)
     {
         if (criteria != null)
         {
-            return GetAllQueryable().Where(criteria).Skip((page - 1) * limit).Take(limit);
+            if (isOrderDescending)
+            {
+                return GetQueryableDbSet().Where(criteria).OrderByDescending(orderExpression).Skip((page - 1) * limit).Take(limit);
+            }
+
+            return GetAllQueryable().Where(criteria).OrderBy(orderExpression).Skip((page - 1) * limit).Take(limit);
         }
 
-        return GetQueryableDbSet().Skip((page - 1) * limit).Take(limit);
+        if (isOrderDescending)
+        {
+            return GetQueryableDbSet().OrderByDescending(orderExpression).Skip((page - 1) * limit).Take(limit);
+        }
+
+        return GetQueryableDbSet().OrderBy(orderExpression).Skip((page - 1) * limit).Take(limit);
     }
 }

@@ -7,7 +7,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Man
 
 public class DefaultSessionManagerPortAdapter : ISessionManagerPort
 {
-    public AuthenticatedSessionModel? CurrentSession { get; private set; }
+    public AuthenticatedSessionDtoModel? CurrentSession { get; private set; }
 
     public async Task SignInAsync(string login, string password)
     {

@@ -1,14 +1,17 @@
 ﻿using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Command.Create;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Command.Remove;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Query.Paginate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Command.Create;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Role.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Role.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Command.Update;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Command.Remove;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers;
 
@@ -26,16 +29,30 @@ public class RolesController : ControllerBase
     }
 
     [HttpGet]
-    [Route("page")]
-    [Route("page/{sheet}")]
     [Route("page/{sheet}/limit/{limit}")]
-    public async Task<ActionResult<PaginateResultModel<RoleBasiclModel>>> GetAsync(int sheet = 1, int limit = 20)
+    public async Task<ActionResult<PaginateResultModel<RoleBasicDtoModel>>> GetAsync(int sheet, int limit)
     {
         try
         {
-            var result = await mediator.Send(new RolePaginateQuery(sheet, limit));
+            PaginateQueryResultModel<RoleBasicDto> result = await mediator.Send(new RolePaginateQuery(sheet, limit));
 
-            return Ok(mapper.Map<PaginateResultModel<RoleBasiclModel>>(result));
+            return Ok(mapper.Map<PaginateResultModel<RoleBasicDtoModel>>(result));
+        }
+        catch (Exception)
+        {
+            return Problem();
+        }
+    }
+
+    [HttpGet]
+    [Route("page/{sheet}/limit/{limit}/filter/{parameter}")]
+    public async Task<ActionResult<PaginateResultModel<RoleBasicDtoModel>>> FilterAsync(int sheet, int limit, string parameter)
+    {
+        try
+        {
+            PaginateQueryResultModel<RoleBasicDto> result = await mediator.Send(new RolePaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+
+            return Ok(mapper.Map<PaginateResultModel<RoleBasicDtoModel>>(result));
         }
         catch (Exception)
         {
@@ -44,13 +61,13 @@ public class RolesController : ControllerBase
     }
 
     [HttpGet("{key}")]
-    public async Task<ActionResult<RoleDetailModel>> GetAsync(Guid key)
+    public async Task<ActionResult<RoleDetailDtoModel>> GetAsync(Guid key)
     {
         try
         {
-            var result = await mediator.Send(new RoleDetailQuery(key));
+            RoleDetailDto result = await mediator.Send(new RoleDetailQuery(key));
 
-            return Ok(mapper.Map<RoleDetailModel>(result));
+            return Ok(mapper.Map<RoleDetailDtoModel>(result));
         }
         catch (Exception)
         {
@@ -59,15 +76,15 @@ public class RolesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<RoleDetailModel>> CreateAsync(RoleCreateRequestModel model)
+    public async Task<ActionResult<RoleDetailDtoModel>> CreateAsync(RoleCreateRequestModel model)
     {
         try
         {
-            var command = mapper.Map<RoleCreateRequestModel, RoleCreateCommand>(model);
+            RoleCreateCommand command = mapper.Map<RoleCreateCommand>(model);
 
-            var result = await mediator.Send(command);
+            RoleDetailDto result = await mediator.Send(command);
 
-            return Ok(mapper.Map<RoleDetailModel>(result));
+            return Ok(mapper.Map<RoleDetailDtoModel>(result));
         }
         catch (Exception)
         {
@@ -76,15 +93,15 @@ public class RolesController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult<RoleDetailModel>> UpdateAsync(RoleUpdateRequestModel model)
+    public async Task<ActionResult<RoleDetailDtoModel>> UpdateAsync(RoleUpdateRequestModel model)
     {
         try
         {
-            var command = mapper.Map<RoleUpdateRequestModel, RoleUpdateCommand>(model);
+            RoleUpdateCommand command = mapper.Map<RoleUpdateCommand>(model);
 
-            var result = await mediator.Send(command);
+            RoleDetailDto result = await mediator.Send(command);
 
-            return Ok(mapper.Map<RoleDetailModel>(result));
+            return Ok(mapper.Map<RoleDetailDtoModel>(result));
         }
         catch (Exception)
         {

@@ -7,7 +7,7 @@ public class ImageBasicModelToImageSourceConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, System.Globalization.CultureInfo culture)
     {
-        if (value == null || value is not ImageBasicModel concreteValue) return null;
+        if (value == null || value is not ImageBasicDtoModel concreteValue) return null;
 
         return concreteValue.ToImageSource();
     }

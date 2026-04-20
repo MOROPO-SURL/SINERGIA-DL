@@ -5,7 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate;
 
-public sealed class ApiKey : AbstractAuditableEntity<ApiKeyId, Guid>, INamedEntity<ApiKeyId, Guid>
+public sealed class ApiKey : AbstractAuditableEntity<ApiKeyId, Guid>, INamedEntity<ApiKeyId, Guid>, IEnableableEntity<ApiKeyId, Guid>
 {
     private ApiKey() : base(new ApiKeyId(default)) { }
 

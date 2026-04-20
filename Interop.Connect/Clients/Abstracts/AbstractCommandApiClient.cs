@@ -15,7 +15,7 @@ public abstract class AbstractCommandApiClient<TId, TCreateRequestModel, TUpdate
 
     protected abstract string GetUseCaseBaseUriSegment();
 
-    public Task<TDetailDtoModel> AddAsync(TCreateRequestModel model)
+    public Task<TDetailDtoModel> CreateAsync(TCreateRequestModel model)
     {
         return httpClientProvider.GetHttpClient().SendPostAsync<TCreateRequestModel, TDetailDtoModel>(GetUseCaseBaseUriSegment(), model);
     }

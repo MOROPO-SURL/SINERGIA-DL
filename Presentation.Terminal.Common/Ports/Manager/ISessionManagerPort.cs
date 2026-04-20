@@ -4,7 +4,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Man
 
 public interface ISessionManagerPort
 {
-    public AuthenticatedSessionModel? CurrentSession { get; }
+    public AuthenticatedSessionDtoModel? CurrentSession { get; }
 
     public Task SignInAsync(string login, string password);
 

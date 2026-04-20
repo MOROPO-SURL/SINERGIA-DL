@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeys.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Permissions.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Users.Mappings;
@@ -30,10 +31,17 @@ public static class ServiceProviderExtensions
 
             new ApiKeyBasicDtoMappingRegister(),
             new ApiKeyDetailDtoMappingRegister(),
-            new ApiKeyKeyDetailQueryMappingRegister(),
+            new ApiKeyDetailQueryMappingRegister(),
             new ApiKeyCreateCommandMappingRegister(stringHashingService),
             new ApiKeyUpdateCommandMappingRegister(),
             new PrimitivesApiKeyMappingRegister(),
+
+            new ObjectiveBasicDtoMappingRegister(),
+            new ObjectiveDetailDtoMappingRegister(),
+            new ObjectiveDetailQueryMappingRegister(),
+            new ObjectiveCreateCommandMappingRegister(),
+            new ObjectiveUpdateCommandMappingRegister(),
+            new PrimitivesObjectiveMappingRegister(),
 
             new PermissionDetailDtoMappingRegister()
         );

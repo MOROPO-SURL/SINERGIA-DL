@@ -17,78 +17,76 @@ public class UserAuthenticationPageModel : BasePageModel, Interfaces.IValidableC
 
     public UserAuthenticationPageModel()
     {
-        ApplyCommand = new Command(
-            execute: () =>
+        ApplyCommand = new Command(() =>
+        {
+            UserAuthenticationValidator validator = new();
+
+            ValidationResult = null;
+            ValidationResult = validator.Validate(this);
+
+            if (!ValidationResult.IsValid) return;
+
+            IsBusy = true;
+
+            IPlatformApplication.Current!.Services.GetRequiredService<ISessionManagerPort>().SignInAsync(UserName!, Password!).ContinueWith(task =>
             {
-                UserAuthenticationValidator validator = new();
-
-                ValidationResult = null;
-                ValidationResult = validator.Validate(this);
-
-                if (!ValidationResult.IsValid) return;
-
-                IsBusy = true;
-
-                IPlatformApplication.Current!.Services.GetRequiredService<ISessionManagerPort>().SignInAsync(UserName!, Password!).ContinueWith(task =>
+                Application.Current!.Dispatcher.Dispatch(() =>
                 {
-                    Application.Current!.Dispatcher.Dispatch(() =>
+                    if (task.IsCanceled || task.Exception != null)
                     {
-                        if (task.IsCanceled || task.Exception != null)
+                        var message = "Problemas no esperados en el sistema.";
+
+                        if (task.Exception == null)
                         {
-                            var message = "Problemas no esperados en el sistema.";
+                            message = "El sistema ha tardado demasiado tiempo en responder.";
+                        }
+                        else
+                        {
+                            Exception targetException = task.Exception;
 
-                            if (task.Exception == null)
+                            while (targetException is AggregateException)
                             {
-                                message = "El sistema ha tardado demasiado tiempo en responder.";
-                            }
-                            else
-                            {
-                                Exception targetException = task.Exception;
-
-                                while (targetException is AggregateException)
-                                {
-                                    targetException = targetException.InnerException!;
-                                }
-
-                                if (targetException is HttpRequestException || targetException is System.Net.WebException)
-                                {
-                                    message = "No se puede acceder al servidor. Revise su conexión de red y/o la disponibilidad del servicio.";
-                                }
-                                //else if (targetException is Guama.Core.Presentation.API.Connect.UnspectedHttpStatusException)
-                                //{
-                                //    var unspectedHttpStatus = (targetException as Framework.Guama.Core.Presentation.API.Connect.UnspectedHttpStatusException).HttpStatusCode;
-
-                                //    if (unspectedHttpStatus == System.Net.HttpStatusCode.BadRequest)
-                                //    {
-                                //        message = "Datos incorrectos.";
-                                //    }
-                                //    else if (unspectedHttpStatus == System.Net.HttpStatusCode.Forbidden)
-                                //    {
-                                //        message = "Usuario no autorizado.";
-                                //    }
-                                //    else if (unspectedHttpStatus == System.Net.HttpStatusCode.Unauthorized)
-                                //    {
-                                //        message = "Usuario y/o contraseña incorrectos.";
-                                //    }
-                                //    else if (unspectedHttpStatus == System.Net.HttpStatusCode.ServiceUnavailable)
-                                //    {
-                                //        message = "Servicio no disponible en este momento.";
-                                //    }
-                                //}
+                                targetException = targetException.InnerException!;
                             }
 
-                            IsBusy = false;
+                            if (targetException is HttpRequestException || targetException is System.Net.WebException)
+                            {
+                                message = "No se puede acceder al servidor. Revise su conexión de red y/o la disponibilidad del servicio.";
+                            }
+                            //else if (targetException is Guama.Core.Presentation.API.Connect.UnspectedHttpStatusException)
+                            //{
+                            //    var unspectedHttpStatus = (targetException as Framework.Guama.Core.Presentation.API.Connect.UnspectedHttpStatusException).HttpStatusCode;
 
-                            Application.Current!.MainPage!.DisplayAlert("Error", message, "Aceptar");
-
-                            return;
+                            //    if (unspectedHttpStatus == System.Net.HttpStatusCode.BadRequest)
+                            //    {
+                            //        message = "Datos incorrectos.";
+                            //    }
+                            //    else if (unspectedHttpStatus == System.Net.HttpStatusCode.Forbidden)
+                            //    {
+                            //        message = "Usuario no autorizado.";
+                            //    }
+                            //    else if (unspectedHttpStatus == System.Net.HttpStatusCode.Unauthorized)
+                            //    {
+                            //        message = "Usuario y/o contraseña incorrectos.";
+                            //    }
+                            //    else if (unspectedHttpStatus == System.Net.HttpStatusCode.ServiceUnavailable)
+                            //    {
+                            //        message = "Servicio no disponible en este momento.";
+                            //    }
+                            //}
                         }
 
-                        Application.Current!.MainPage!.NavigationPopModalPageAsync();
-                    });
+                        IsBusy = false;
+
+                        Application.Current!.MainPage!.DisplayAlert("Error", message, "Aceptar");
+
+                        return;
+                    }
+
+                    Application.Current!.MainPage!.NavigationPopModalPageAsync();
                 });
-            }
-        );
+            });
+        });
     }
 
     public System.Windows.Input.ICommand ApplyCommand { get; private set; }

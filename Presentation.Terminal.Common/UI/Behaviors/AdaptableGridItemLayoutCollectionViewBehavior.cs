@@ -1,7 +1,12 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Interfaces;
+using System.Windows.Input;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;
 
 public sealed class AdaptableGridItemLayoutCollectionViewBehavior : Behavior
 {
+    private ICommand? itemsLayoutConfiguredCommand;
+
     public double ItemWidth { get; set; }
 
     public double ItemSpacing { get; set; }
@@ -10,27 +15,37 @@ public sealed class AdaptableGridItemLayoutCollectionViewBehavior : Behavior
     {
         base.OnAttachedTo(bindable);
 
-        if (bindable is not CollectionView) return;
-
-        var collectionView = bindable as CollectionView;
+        if (bindable is not CollectionView collectionView) return;
 
         if (collectionView!.ItemsLayout is not GridItemsLayout) return;
 
         collectionView.SizeChanged += CollectionView_SizeChanged!;
+        collectionView.BindingContextChanged += CollectionView_BindingContextChanged;
+    }
+
+    private void CollectionView_BindingContextChanged(object? sender, EventArgs eventArgs)
+    {
+        if (((BindableObject)sender!).BindingContext is ICollectionViewSizeChangeReloadItemsPageModel sizeChangeItemsReloadPageModel)
+        {
+            itemsLayoutConfiguredCommand = sizeChangeItemsReloadPageModel.ReloadCommand;
+        }
     }
 
     protected override void OnDetachingFrom(BindableObject bindable)
     {
         base.OnDetachingFrom(bindable);
 
+        itemsLayoutConfiguredCommand = null;
+
         var collectionView = bindable as CollectionView;
 
         if (collectionView!.ItemsLayout is not GridItemsLayout) return;
 
         collectionView.SizeChanged -= CollectionView_SizeChanged!;
+        collectionView.BindingContextChanged -= CollectionView_BindingContextChanged;
     }
 
-    private void CollectionView_SizeChanged(object sender, EventArgs e)
+    private void CollectionView_SizeChanged(object sender, EventArgs eventArgs)
     {
         var collectionView = sender as CollectionView;
 
@@ -49,5 +64,7 @@ public sealed class AdaptableGridItemLayoutCollectionViewBehavior : Behavior
         }
 
         (collectionView.ItemsLayout as GridItemsLayout)!.Span = columnCount;
+
+        itemsLayoutConfiguredCommand?.Execute(null);
     }
 }

@@ -32,7 +32,7 @@ internal class RolePaginateQueryHandler : IRequestHandler<RolePaginateQuery, Pag
             page = 1;
         }
 
-        RoleBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, request.Criteria).ProjectToType<RoleBasicDto>()];
+        RoleBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, entity => entity.CreatedAt, true, request.Criteria).ProjectToType<RoleBasicDto>()];
 
         return new PaginateQueryResultModel<RoleBasicDto>
         {

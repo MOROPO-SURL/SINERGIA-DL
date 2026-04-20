@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate.Values;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeys.Mappings;
 
-internal sealed class ApiKeyKeyDetailQueryMappingRegister : IRegister
+internal sealed class ApiKeyDetailQueryMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

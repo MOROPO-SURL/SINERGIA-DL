@@ -23,7 +23,7 @@ public class AuthenticationController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<AuthenticatedSessionModel>> AuthenticateAsync(AuthenticationRequestModel model)
+    public async Task<ActionResult<AuthenticatedSessionDtoModel>> AuthenticateAsync(AuthenticationRequestModel model)
     {
         try
         {
@@ -31,7 +31,7 @@ public class AuthenticationController : ControllerBase
 
             AuthenticationIdentityDto result = await mediator.Send(command);
 
-            return Ok(mapper.Map<AuthenticatedSessionModel>(result));
+            return Ok(mapper.Map<AuthenticatedSessionDtoModel>(result));
         }
         catch (ArgumentOutOfRangeException)
         {

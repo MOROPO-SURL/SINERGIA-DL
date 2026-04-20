@@ -21,7 +21,7 @@ public class BaseBindableModel : System.ComponentModel.INotifyPropertyChanged, I
     }
 
     #region IDisposable Support
-    private bool disposedValue = false; // To detect redundant calls
+    private bool disposedValue = false;
 
     private void Dispose(bool disposing)
     {
@@ -29,12 +29,8 @@ public class BaseBindableModel : System.ComponentModel.INotifyPropertyChanged, I
         {
             if (disposing)
             {
-                // TODO: elimine el estado administrado (objetos administrados).
                 DisposeManagedResources();
             }
-
-            // TODO: libere los recursos no administrados (objetos no administrados) y reemplace el siguiente finalizador.
-            // TODO: configure los campos grandes en nulos.
 
             DisposeUnmanagedResources();
 
@@ -46,19 +42,9 @@ public class BaseBindableModel : System.ComponentModel.INotifyPropertyChanged, I
 
     protected virtual void DisposeUnmanagedResources() { }
 
-    // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-    // ~BaseViewModel() {
-    //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-    //   Dispose(false);
-    // }
-
-    // This code added to correctly implement the disposable pattern.
     public void Dispose()
     {
-        // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
         Dispose(true);
-        // TODO: uncomment the following line if the finalizer is overridden above.
-        // GC.SuppressFinalize(this);
     }
     #endregion
 }

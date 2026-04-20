@@ -92,6 +92,24 @@ internal static class HttpClientExtensions
         response.EnsureSuccessStatusCode();
     }
 
+    public static async Task SendPathcAsync<TRequest>(this HttpClient target, string urlOrResource, TRequest request)
+    {
+        var content = new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, CONTENT_TYPE);
+
+        var response = await target.PatchAsync(urlOrResource, content);
+
+        response.EnsureSuccessStatusCode();
+    }
+
+    public static async Task SendPatchAsync(this HttpClient target, string urlOrResource)
+    {
+        var content = new StringContent(string.Empty, System.Text.Encoding.UTF8, CONTENT_TYPE);
+
+        var response = await target.PatchAsync(urlOrResource, content);
+
+        response.EnsureSuccessStatusCode();
+    }
+
     public static async Task SendDeleteAsync(this HttpClient target, string url)
     {
         var response = await target.DeleteAsync(url);

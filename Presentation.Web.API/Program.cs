@@ -4,6 +4,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Configurations;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Extensions;
 using System.Runtime.CompilerServices;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API;
@@ -21,11 +22,11 @@ public class Program
     {
         JWTConfiguration jwtConfiguration = new();
 
-        var builder = WebApplication.CreateBuilder(args);
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         builder.Configuration.Bind("JWT", jwtConfiguration);
 
-        var jwtConfigurationOptions = Options.Create(jwtConfiguration);
+        IOptions<JWTConfiguration> jwtConfigurationOptions = Options.Create(jwtConfiguration);
 
         builder.Services.AddSingleton(jwtConfigurationOptions);
 
@@ -33,11 +34,6 @@ public class Program
 
         builder.Services.UseCoreLayer();
         builder.Services.UseInfrastructureLayer(builder.Configuration);
-
-        TypeAdapterConfig.GlobalSettings.Apply(
-            new Models.Authentication.Mappings.AuthenticateCommandMappingRegister(),
-            new Models.Authentication.Mappings.AuthenticatedSessionModelMappingRegister(jwtConfigurationOptions)
-        );
 
         builder.Services.AddMapster();
 
@@ -65,6 +61,7 @@ public class Program
         var app = builder.Build();
 
         app.Services.ApplyCoreMappings();
+        app.Services.ApplyMappins();
 
         app.UseHttpsRedirection();
         app.UseAuthentication();

@@ -3,11 +3,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities;
 
-public class ObjectiveProjection : AbstractAuditableEntity<ObjectiveProjectionId, Guid>
+public class ObjectiveProjection : AbstractAuditableEntity<ObjectivActionId, Guid>
 {
-    private ObjectiveProjection() : base(new ObjectiveProjectionId(default)) { }
+    private ObjectiveProjection() : base(new ObjectivActionId(default)) { }
 
-    public ObjectiveProjection(ObjectiveProjectionId id, ObjectiveId objectiveId, int index, string title, string? description = null) : base(id)
+    public ObjectiveProjection(ObjectivActionId id, ObjectiveId objectiveId, int index, string title, string? description = null) : base(id)
     {
         ObjectiveId = objectiveId;
         Index = index;

@@ -5,7 +5,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extension
 
 public static class ImageBasicModelExtensions
 {
-    public static ImageSource ToImageSource(this ImageBasicModel self)
+    public static ImageSource ToImageSource(this ImageBasicDtoModel self)
     {
         var result = (UriImageSource)ImageSource.FromUri(new Uri($"{IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>().GetHttpClient().BaseAddress}media/images/{self.Id}{self.Extension}"));
 

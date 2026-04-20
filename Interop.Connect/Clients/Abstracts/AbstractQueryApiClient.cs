@@ -33,6 +33,11 @@ public abstract class AbstractQueryApiClient<TId, TBasicDtoModel, TDetailDtoMode
 
     public Task<PaginateResultModel<TBasicDtoModel>> GetPageAsync(int page, int limit)
     {
-        return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<TBasicDtoModel>>($"{GetUseCaseBaseUriSegment()}/sheet/{page}/limit/{limit}");
+        return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<TBasicDtoModel>>($"{GetUseCaseBaseUriSegment()}/page/{page}/limit/{limit}");
+    }
+
+    public Task<PaginateResultModel<TBasicDtoModel>> FilterPageAsync(int page, int limit, string parameter)
+    {
+        return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<TBasicDtoModel>>($"{GetUseCaseBaseUriSegment()}/page/{page}/limit/{limit}/filter/{parameter}");
     }
 }

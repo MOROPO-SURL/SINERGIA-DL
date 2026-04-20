@@ -36,11 +36,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
 
         public const string CANCEL_ACTION = "Cancelar";
 
-        public void HandleException(Exception? exception, Page page, Action<Exception>? callbackAction = null)
+        public void HandleException(Exception? exception, Action<Exception>? callbackAction = null)
         {
             if (exception == null)
             {
-                page.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, TASK_CANCELED_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+                Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, TASK_CANCELED_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
 
                 return;
             }
@@ -66,11 +66,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
             else*/
             if (exception.InnerException is HttpRequestException || exception.InnerException?.InnerException is System.Net.Sockets.SocketException)
             {
-                page.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, NETWORK_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+                Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, NETWORK_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
             }
             else
             {
-                page.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, UNSPECTED_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+                Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, UNSPECTED_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
             }
             // TODO Handle native exceptions
             //else
