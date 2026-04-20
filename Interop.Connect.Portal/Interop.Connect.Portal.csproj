@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Portal</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Portal</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Presentation.Web.API\Presentation.Web.API.csproj" />
+	</ItemGroup>
+
+</Project>

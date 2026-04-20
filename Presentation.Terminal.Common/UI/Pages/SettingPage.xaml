@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page"
+    xmlns:local_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors"
+    xmlns:local_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters"
+    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.SettingPage"
+    x:DataType="local_page_models:SettingPageModel"
+    Title="Configuración"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="480"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout Spacing="10">
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Configuración"
+                                FontAttributes="Bold"
+                                FontSize="Medium" />
+                            <StackLayout Orientation="Vertical" Spacing="6">
+                                <Label
+                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                    Text="Usar proxy de red" />
+                                <Switch 
+                                    VerticalOptions="Center"
+                                    IsToggled="{Binding UseProxyServer}" />
+                            </StackLayout>
+                            <VerticalStackLayout IsVisible="{Binding UseProxyServer}" Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                    Text="Dirección del servidor proxy" />
+                                <Entry
+                                    Placeholder="http(s)://proxy.address.net(:3128)"
+                                    Text="{Binding ProxyServerAddress}" />
+                                <Label>
+                                    <Label.Behaviors>
+                                        <local_ui_behaviors:ValidationMessageLabelBehavior 
+                                            TargetValidationPropertyName="{Static local_page_models:SettingPageModel.ProxyServerAddressValidableProperty}"
+                                            InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                                    </Label.Behaviors>
+                                </Label>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout IsVisible="{Binding UseProxyServer}" Spacing="10">
+                                <StackLayout Orientation="Horizontal" Spacing="4">
+                                    <Label
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                        Text="Proxy requiere autenticación" />
+                                    <Switch 
+                                        VerticalOptions="Center"
+                                        IsToggled="{Binding UseProxyAuthentication}" />
+                                </StackLayout>
+                                <VerticalStackLayout IsVisible="{Binding UseProxyAuthentication}" Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Text="Usuario de proxy" />
+                                    <Entry Text="{Binding ProxyUsername}" />
+                                    <Label>
+                                        <Label.Behaviors>
+                                            <local_ui_behaviors:ValidationMessageLabelBehavior 
+                                                TargetValidationPropertyName="{Static local_page_models:SettingPageModel.ProxyUsernameValidableProperty}"
+                                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                                        </Label.Behaviors>
+                                    </Label>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout IsVisible="{Binding UseProxyAuthentication}" Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Text="Contraseña de proxy" />
+                                    <Entry Text="{Binding ProxyPassword}" IsPassword="True" />
+                                    <Label>
+                                        <Label.Behaviors>
+                                            <local_ui_behaviors:ValidationMessageLabelBehavior 
+                                                TargetValidationPropertyName="{Static local_page_models:SettingPageModel.ProxyPasswordValidableProperty}"
+                                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                                        </Label.Behaviors>
+                                    </Label>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Aplicar"
+                                Command="{Binding ApplyChangesCommand}" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Cancelar"
+                                Clicked="DismissControl_Invoked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

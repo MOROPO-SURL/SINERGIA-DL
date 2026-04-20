@@ -3,31 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Domain", "GEDEL.CAMCMG.Domain\GEDEL.CAMCMG.Domain.csproj", "{17A3AE9A-84AA-413C-B002-BA07BB143A6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{17A3AE9A-84AA-413C-B002-BA07BB143A6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Core", "GEDEL.CAMCMG.Core\GEDEL.CAMCMG.Core.csproj", "{61AD8944-B7D6-4757-87E7-8C196F0FEBDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{61AD8944-B7D6-4757-87E7-8C196F0FEBDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Infrastructure", "GEDEL.CAMCMG.Infrastructure\GEDEL.CAMCMG.Infrastructure.csproj", "{AF6E7C21-C244-451A-8143-8A586A9D77E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{AF6E7C21-C244-451A-8143-8A586A9D77E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Interop.Contracts", "GEDEL.CAMCMG.Interop.Contracts\GEDEL.CAMCMG.Interop.Contracts.csproj", "{4197CD18-256B-4E1E-9376-BD821C7401EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interop.Contracts", "Interop.Contracts\Interop.Contracts.csproj", "{4197CD18-256B-4E1E-9376-BD821C7401EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Presentation.Web.API", "GEDEL.CAMCMG.Presentation.Web.API\GEDEL.CAMCMG.Presentation.Web.API.csproj", "{6A852F53-D569-4F07-A661-D4F3C1E9D726}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Web.API", "Presentation.Web.API\Presentation.Web.API.csproj", "{6A852F53-D569-4F07-A661-D4F3C1E9D726}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor", "GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor\GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.csproj", "{C8337D36-1EC6-486E-9610-0AE935156040}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Web.BackOffice.Razor", "Presentation.Web.BackOffice.Razor\Presentation.Web.BackOffice.Razor.csproj", "{C8337D36-1EC6-486E-9610-0AE935156040}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Interop.Connect", "GEDEL.CAMCMG.Interop.Connect\GEDEL.CAMCMG.Interop.Connect.csproj", "{25F2E2A5-D54A-469A-8997-5BD9F457E051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interop.Connect", "Interop.Connect\Interop.Connect.csproj", "{25F2E2A5-D54A-469A-8997-5BD9F457E051}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Interop.Connect.BackOffice", "GEDEL.CAMCMG.Interop.Connect.BackOffice\GEDEL.CAMCMG.Interop.Connect.BackOffice.csproj", "{BF773BE7-8444-41DF-AD94-F2B110701B08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interop.Connect.BackOffice", "Interop.Connect.BackOffice\Interop.Connect.BackOffice.csproj", "{BF773BE7-8444-41DF-AD94-F2B110701B08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Presentation.Web.Portal", "GEDEL.CAMCMG.Presentation.Web.Portal\GEDEL.CAMCMG.Presentation.Web.Portal.csproj", "{81C57D98-1A83-4AB3-B1E1-6FAFEB6F0CF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Web.Portal", "Presentation.Web.Portal\Presentation.Web.Portal.csproj", "{81C57D98-1A83-4AB3-B1E1-6FAFEB6F0CF0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Interop.Connect.Portal", "GEDEL.CAMCMG.Interop.Connect.Portal\GEDEL.CAMCMG.Interop.Connect.Portal.csproj", "{D5F9B45F-B934-4BB6-ABC4-9CABD751EAED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interop.Connect.Portal", "Interop.Connect.Portal\Interop.Connect.Portal.csproj", "{D5F9B45F-B934-4BB6-ABC4-9CABD751EAED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative", "GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative\GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.csproj", "{B4FA20E9-8F04-4325-8904-A43F9CAAB9B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Terminal.Internal.Operative", "Presentation.Terminal.Internal.Operative\Presentation.Terminal.Internal.Operative.csproj", "{B4FA20E9-8F04-4325-8904-A43F9CAAB9B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEDEL.CAMCMG.Presentation.Terminal.Common", "GEDEL.CAMCMG.Presentation.Terminal.Common\GEDEL.CAMCMG.Presentation.Terminal.Common.csproj", "{73FB3C8B-4672-4BBD-B4FB-274C37943706}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Terminal.Common", "Presentation.Terminal.Common\Presentation.Terminal.Common.csproj", "{73FB3C8B-4672-4BBD-B4FB-274C37943706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEDEL.CAMCMG.Interop.Connect.Internal.Operative", "GEDEL.CAMCMG.Interop.Connect.Internal.Operative\GEDEL.CAMCMG.Interop.Connect.Internal.Operative.csproj", "{C05DEEBC-E4EC-42E4-AB54-11A742E210D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interop.Connect.Internal.Operative", "Interop.Connect.Internal.Operative\Interop.Connect.Internal.Operative.csproj", "{C05DEEBC-E4EC-42E4-AB54-11A742E210D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

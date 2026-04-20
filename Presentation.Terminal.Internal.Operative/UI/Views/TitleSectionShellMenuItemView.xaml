@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Views.TitleSectionShellMenuItemView">
+    <VerticalStackLayout Padding="12" Spacing="8">
+        <Label
+            Text="{Binding Text}"
+            FontAttributes="Bold" />
+        <BoxView
+            Color="DimGray"
+            HeightRequest="1" />
+    </VerticalStackLayout>
+</ContentView>

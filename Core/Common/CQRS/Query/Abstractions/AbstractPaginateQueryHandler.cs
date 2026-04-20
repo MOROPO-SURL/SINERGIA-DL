@@ -1,0 +1,72 @@
+﻿using Mapster;
+using MediatR;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Query.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
+using System.Linq.Expressions;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Query.Abstractions;
+
+internal abstract class AbstractPaginateQueryHandler<TEntity, TId, TIdValue, TPaginateQuery, TBasicDto> : IRequestHandler<TPaginateQuery, PaginateQueryResultModel<TBasicDto>>
+    where TEntity : class, IEntity<TId, TIdValue>
+    where TId : struct, IId<TIdValue>
+    where TPaginateQuery : IPaginateQuery<TEntity, TId, TIdValue, TBasicDto>
+    where TBasicDto : IDto
+{
+    private readonly IEntityQueryRepositoryPort<TEntity, TId, TIdValue> entityQueryRepository;
+
+    protected AbstractPaginateQueryHandler(IEntityQueryRepositoryPort<TEntity, TId, TIdValue> entityQueryRepository)
+    {
+        this.entityQueryRepository = entityQueryRepository;
+    }
+
+    public async Task<PaginateQueryResultModel<TBasicDto>> Handle(TPaginateQuery request, CancellationToken cancellationToken)
+    {
+        Expression<Func<TEntity, bool>>? filter = GlobalSelector;
+
+        if (filter == null)
+        {
+            filter = request.Criteria;
+        }
+        else if (request.Criteria != null)
+        {
+            filter = filter.CombineForAndCondition(request.Criteria);
+        }
+
+        int count = filter == null ? await entityQueryRepository.CountAsync() : await entityQueryRepository.CountAsync(filter);
+
+        int rest = count % request.Limit;
+
+        int maxPageCount = count / request.Limit;
+
+        if (rest > 0) maxPageCount += 1;
+
+        int page = request.Page;
+
+        if (request.Page < 0 || request.Page > maxPageCount)
+        {
+            page = 1;
+        }
+
+        TBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, OrderExpression, IsOrderDescending, filter).ProjectToType<TBasicDto>()];
+
+        return new PaginateQueryResultModel<TBasicDto>
+        {
+            Page = page,
+            Limit = request.Limit,
+            Items = result,
+            HasPrevious = page > 1,
+            HasNext = page < maxPageCount,
+            MaxPageCount = maxPageCount,
+        };
+    }
+
+    protected virtual Expression<Func<TEntity, bool>>? GlobalSelector => null;
+
+    protected virtual Expression<Func<TEntity, object>> OrderExpression => entity => entity.Id;
+
+    protected virtual bool IsOrderDescending => false;
+}
