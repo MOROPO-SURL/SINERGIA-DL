@@ -230,7 +230,7 @@
         <Setter Property="HasShadow" Value="False" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}" />
-        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="CornerRadius" Value="8" />
         <Setter Property="Padding" Value="16" />
     </Style>
 
@@ -512,7 +512,7 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="BorderWidth" Value="0"/>
-        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
@@ -710,7 +710,6 @@
     </Style>
 
     <Style TargetType="Label" x:Key="ListEntityPageEmptyViewLabelStyle">
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="4" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
         <Setter Property="FontAttributes" Value="Italic" />

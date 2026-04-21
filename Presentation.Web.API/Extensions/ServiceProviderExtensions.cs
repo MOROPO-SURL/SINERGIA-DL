@@ -16,9 +16,7 @@ internal static class ServiceProviderExtensions
             new AuthenticateCommandMappingRegister(),
             new AuthenticatedSessionDtoModelMappingRegister(jwtConfigurationOptions),
 
-            new ObjectiveCreateRequestModelMappingRegister(),
-            new ObjectiveUpdateRequestModelMappingRegister(),
-            new PrimitiveObjectiveMappingRegister()
+            new ObjectiveMappingRegister()
         );
 
         return self;

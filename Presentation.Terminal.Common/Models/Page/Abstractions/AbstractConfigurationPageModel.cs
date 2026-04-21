@@ -12,8 +12,9 @@ public abstract class AbstractConfigurationPageModel<TInModel, TOutModel> : Base
     private readonly IValidator validator;
     private readonly Action<TOutModel> successCallbackAction;
 
-    private bool hasChangesFlag;
     private FluentValidation.Results.ValidationResult? validationResult;
+
+    protected bool hasChangesFlag;
 
     protected AbstractConfigurationPageModel(TInModel? model, Action<TOutModel> successCallbackAction, IValidator validator)
     {

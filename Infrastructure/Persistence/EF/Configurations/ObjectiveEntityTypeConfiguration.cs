@@ -34,15 +34,21 @@ internal class ObjectiveEntityTypeConfiguration : IEntityTypeConfiguration<Objec
 
         builder
             .OwnsMany(entity => entity.Projections, Configure)
-            .Navigation(entity => entity.Projections).UsePropertyAccessMode(PropertyAccessMode.Field);
+            .Navigation(entity => entity.Projections)
+            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .HasField("projections");
 
         builder
             .OwnsMany(entity => entity.Challenges, Configure)
-            .Navigation(entity => entity.Challenges).UsePropertyAccessMode(PropertyAccessMode.Field);
+            .Navigation(entity => entity.Challenges)
+            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .HasField("challenges");
 
         builder
             .OwnsMany(entity => entity.Actions, Configure)
-            .Navigation(entity => entity.Actions).UsePropertyAccessMode(PropertyAccessMode.Field);
+            .Navigation(entity => entity.Actions)
+            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .HasField("actions");
     }
 
     private static void Configure(OwnedNavigationBuilder<Objective, ObjectiveChallenge> builder)
@@ -97,7 +103,7 @@ internal class ObjectiveEntityTypeConfiguration : IEntityTypeConfiguration<Objec
 
         builder.Property(entity => entity.Id)
             .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new ObjectivActionId(value));
+            .HasConversion(id => id.Value, value => new ObjectiveProjectionId(value));
 
         builder.Property(entity => entity.Title)
             .HasMaxLength(360);

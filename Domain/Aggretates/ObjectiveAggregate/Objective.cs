@@ -14,7 +14,7 @@ public class Objective : AbstractAuditableEntity<ObjectiveId, Guid>, IAggregateR
 
     private Objective() : base(new ObjectiveId(default)) { }
 
-    public Objective(ObjectiveId id, bool isArchived, bool enabled, int index, string title, ObjectiveAction[] actions, ObjectiveProjection[] projections, string? description = null) : base(id)
+    public Objective(ObjectiveId id, bool isArchived, bool enabled, int index, string title, ObjectiveChallenge[] challenges, ObjectiveProjection[] projections, ObjectiveAction[] actions, string? description = null) : base(id)
     {
         IsArchived = isArchived;
         IsEnabled = enabled;
@@ -22,8 +22,9 @@ public class Objective : AbstractAuditableEntity<ObjectiveId, Guid>, IAggregateR
         Title = title;
         Description = description;
 
-        this.actions = [.. actions];
+        this.challenges = [.. challenges];
         this.projections = [.. projections];
+        this.actions = [.. actions];
     }
 
     public bool IsArchived { get; set; }
@@ -43,4 +44,34 @@ public class Objective : AbstractAuditableEntity<ObjectiveId, Guid>, IAggregateR
     public IReadOnlyList<ObjectiveChallenge> Challenges => [.. challenges];
 
     public List<ObjectiveKeyVariableBridge> KeyVariableBridges { get; set; } = null!;
+
+    public void AddChallange(ObjectiveChallenge entity)
+    {
+        challenges.Add(entity);
+    }
+
+    public void RemoveChallange(ObjectiveChallenge entity)
+    {
+        challenges.Remove(challenges.First(_entity => _entity.Id == entity.Id));
+    }
+
+    public void AddProjection(ObjectiveProjection entity)
+    {
+        projections.Add(entity);
+    }
+
+    public void RemoveProjection(ObjectiveProjection entity)
+    {
+        projections.Remove(projections.First(_entity => _entity.Id == entity.Id));
+    }
+
+    public void AddAction(ObjectiveAction entity)
+    {
+        actions.Add(entity);
+    }
+
+    public void RemoveAction(ObjectiveAction entity)
+    {
+        actions.Remove(actions.First(_entity => _entity.Id == entity.Id));
+    }
 }

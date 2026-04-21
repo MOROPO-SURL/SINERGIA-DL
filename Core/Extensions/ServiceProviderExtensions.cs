@@ -21,8 +21,8 @@ public static class ServiceProviderExtensions
 
         TypeAdapterConfig.GlobalSettings.Apply(
             new UserDetailDtoMappingRegister(),
-            new UserBasicDtoMappingRegister(provider.GetService<IDataIntegrityServicePort>()!),
-            new UserDetailQueryMappingRegister(),
+            new UserBasicDtoMappingRegister(provider.GetRequiredService<IDataIntegrityServicePort>()),
+            new UserKeyDetailQueryMappingRegister(),
             new UserCreateCommandMappingRegister(stringHashingService),
             new UserUpdateCommandMappingRegister(),
             new PasswordUserUpdateCommandMappingRegister(stringHashingService),
@@ -40,12 +40,7 @@ public static class ServiceProviderExtensions
             new ApiKeyUpdateCommandMappingRegister(),
             new PrimitivesApiKeyMappingRegister(),
 
-            new ObjectiveBasicDtoMappingRegister(),
-            new ObjectiveDetailDtoMappingRegister(),
-            new ObjectiveDetailQueryMappingRegister(),
-            new ObjectiveCreateCommandMappingRegister(),
-            new ObjectiveUpdateCommandMappingRegister(),
-            new PrimitivesObjectiveMappingRegister(),
+            new ObjectiveEntityMappingRegister(),
 
             new PermissionDetailDtoMappingRegister(),
 

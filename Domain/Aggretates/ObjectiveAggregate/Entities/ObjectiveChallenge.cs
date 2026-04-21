@@ -22,4 +22,16 @@ public class ObjectiveChallenge : AbstractAuditableEntity<ObjectiveChallengeId, 
     public string Title { get; set; } = null!;
 
     public string? Description { get; set; }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || obj is not ObjectiveChallenge entity) return false;
+
+        return Id.Equals(entity.Id);
+    }
+
+    public override int GetHashCode()
+    {
+       return Id.GetHashCode();
+    }
 }
