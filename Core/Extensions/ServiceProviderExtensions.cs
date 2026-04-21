@@ -22,7 +22,7 @@ public static class ServiceProviderExtensions
         TypeAdapterConfig.GlobalSettings.Apply(
             new UserDetailDtoMappingRegister(),
             new UserBasicDtoMappingRegister(provider.GetRequiredService<IDataIntegrityServicePort>()),
-            new UserKeyDetailQueryMappingRegister(),
+            new UserDetailQueryMappingRegister(),
             new UserCreateCommandMappingRegister(stringHashingService),
             new UserUpdateCommandMappingRegister(),
             new PasswordUserUpdateCommandMappingRegister(stringHashingService),
