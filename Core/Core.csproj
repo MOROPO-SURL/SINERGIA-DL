@@ -18,11 +18,4 @@
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="UseCases\UnitMeasurements\CQRS\" />
-	  <Folder Include="UseCases\UnitMeasurements\DTOs\" />
-	  <Folder Include="UseCases\UnitMeasurements\Mappings\" />
-	  <Folder Include="UseCases\UnitMeasurements\Ports\" />
-	</ItemGroup>
-
 </Project>
