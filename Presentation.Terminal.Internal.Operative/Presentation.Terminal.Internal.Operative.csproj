@@ -73,6 +73,12 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LocalizationResources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\Configuration\ObjectiveChallengeConfigurationPage.xaml.cs">
+	    <DependentUpon>ObjectiveChallengeConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Detail\ObjectiveChallengeDetailPage.xaml.cs">
+	    <DependentUpon>ObjectiveChallengeDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
 	    <DependentUpon>UserAuthenticationPage.xaml</DependentUpon>
 	  </Compile>
@@ -86,10 +92,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveActionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveChallengeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveProjectionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Detail\ObjectiveActionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Detail\ObjectiveChallengeDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Detail\ObjectiveDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Detail\ObjectiveProjectionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Management\ObjectivesManagementPage.xaml">

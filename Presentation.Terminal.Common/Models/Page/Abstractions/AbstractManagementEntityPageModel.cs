@@ -1,7 +1,6 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Helper;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Presenters;
-using System;
 using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
@@ -51,5 +50,5 @@ public abstract class AbstractManagementEntityPageModel<TBasicModel, TDetailMode
         this.presenter = presenter;
     }
 
-    public ICommand CreateCommand { get; set; }
+    public ICommand CreateCommand { get; private set; }
 }

@@ -1,3 +1,18 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.CQRS.Command;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.DTOs;
 
-public record ObjectiveUpdateRequestModel(Guid Id, int Index, string Title, ObjectiveChallangeUpdateRequestModel[] Challanges, ObjectiveProjectionUpdateRequestModel[] Projections, ObjectiveActionUpdateRequestModel[] Actions, string? Description = null);
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.CQRS.Command;
+
+public record ObjectiveUpdateRequestModel(
+    Guid Id, 
+    int Index, 
+    string Title,
+    ObjectiveChallengeCreateRequestModel[] InChallenges,
+    ObjectiveChallengeUpdateRequestModel[] PatchChallenges,
+    ObjectiveChallengeDetailDtoModel[] OutChallenges,
+    ObjectiveProjectionCreateRequestModel[] InProjections,
+    ObjectiveProjectionUpdateRequestModel[] PatchProjections,
+    ObjectiveProjectionDetailDtoModel[] OutProjections,
+    ObjectiveActionCreateRequestModel[] InActions,
+    ObjectiveActionUpdateRequestModel[] PatchActions,
+    ObjectiveActionDetailDtoModel[] OutActions,
+    string? Description = null);

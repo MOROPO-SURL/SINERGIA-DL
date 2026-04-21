@@ -26,7 +26,7 @@ internal abstract class AbstractCreateCommandHandler<TEntity, TId, TIdValue, TCr
 
     public async Task<TDetailDto> Handle(TCreateCommand request, CancellationToken cancellationToken)
     {
-        TEntity entity = mapper.Map<TCreateCommand, TEntity>(request);
+        TEntity entity = mapper.Map<TEntity>(request);
 
         await ApplyManualMappingAsync(request, entity);
 

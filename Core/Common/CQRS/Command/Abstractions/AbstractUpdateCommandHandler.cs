@@ -25,6 +25,8 @@ internal abstract class AbstractUpdateCommandHandler<TEntity, TId, TIdValue, TUp
     {
         TEntity entity = await entityQueryRepository.GetAsync(mapper.Map<TId>(request.Id!));
 
+        entityCommandRepository.TrackChanges(entity);
+
         entity = mapper.Map(request, entity);
 
         await ApplyManualMappingAsync(request, entity);
