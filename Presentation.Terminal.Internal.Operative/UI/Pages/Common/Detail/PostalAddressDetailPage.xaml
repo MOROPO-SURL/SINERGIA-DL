@@ -26,25 +26,24 @@
                             FontSize="Medium" />
                         <Label
                             Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Margin="0"
                             Text="Calles" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Model.Street}" />
                         <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
                             Text="Número" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Model.Number, TargetNullValue='---'}" />
                         <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
                             Text="Código postal" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Model.ZipCode, TargetNullValue='---'}" />
                         <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
                             Text="Nombre" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"

@@ -79,6 +79,7 @@
                                     <VerticalStackLayout Spacing="4">
                                         <Border 
                                             HorizontalOptions="Center"
+                                            Margin="0,8"
                                             StrokeThickness="4"
                                             StrokeLineJoin="Bevel">
                                             <Border.StrokeShape>

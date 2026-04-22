@@ -90,6 +90,7 @@
                                         <VerticalStackLayout>
                                             <Label 
                                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                Margin="0,8,0,0"
                                                 Text="Descripción" />
                                             <Label
                                                 Style="{StaticResource OffLabelStyle}"

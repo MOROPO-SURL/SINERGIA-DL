@@ -677,7 +677,10 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="Caption" />
-        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+
+    <Style TargetType="Label" BasedOn="{StaticResource CaptionPropertyLabelStyle}" x:Key="CaptionPropertySpacedLabelStyle">
+        <Setter Property="Margin" Value="0,16,0,0" />
     </Style>
 
     <Style TargetType="Label" x:Key="ValuePropertyLabelStyle">
@@ -729,20 +732,21 @@
         <Setter Property="Text" Value="Mostrar más" />
     </Style>
 
-    <Style TargetType="VerticalStackLayout" x:Key="DetailScrollRootVerticalStackLayoutStyle">
-        <Setter Property="Margin" Value="16" />
+    <Style TargetType="VerticalStackLayout" x:Key="FormScrollRootVerticalStackLayoutStyle">
+        <Setter Property="Margin" Value="8" />
         <Setter Property="Spacing" Value="0" />
+    </Style>
+
+    <Style TargetType="BoxView" x:Key="DetailSectionSeparatorBoxViewStyle">
+        <Setter Property="Margin" Value="0,4" />
+        <Setter Property="HeightRequest" Value="2" />
+        <Setter Property="Color" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
     </Style>
 
     <Style TargetType="BoxView" x:Key="FormFluentChildSeparatorBoxViewStyle">
         <Setter Property="Margin" Value="8,16,8,8" />
         <Setter Property="HeightRequest" Value="2" />
         <Setter Property="Color" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
-    </Style>
-
-    <Style TargetType="VerticalStackLayout" x:Key="FormScrollRootVerticalStackLayoutStyle">
-        <Setter Property="Margin" Value="8" />
-        <Setter Property="Spacing" Value="0" />
     </Style>
 
     <Style TargetType="VerticalStackLayout" x:Key="FormFluentChildVerticalStackLayoutStyle">

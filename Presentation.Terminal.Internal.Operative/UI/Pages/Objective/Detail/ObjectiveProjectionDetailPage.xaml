@@ -26,19 +26,18 @@
                             FontSize="Medium" />
                         <Label
                             Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Margin="0"
                             Text="Título" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Model.Title}" />
                         <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
                             Text="Índice" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Model.Index}" />
                         <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
                             Text="Descripción" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"

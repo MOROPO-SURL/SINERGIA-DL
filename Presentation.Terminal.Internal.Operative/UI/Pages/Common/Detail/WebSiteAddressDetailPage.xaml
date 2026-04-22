@@ -26,13 +26,12 @@
                             FontSize="Medium" />
                         <Label
                             Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Margin="0"
                             Text="Nombre" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Model.Name}" />
                         <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
                             Text="Dirección" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
