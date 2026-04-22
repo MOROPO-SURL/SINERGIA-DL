@@ -35,6 +35,6 @@ public partial class UserAuthenticationPage : BaseBindingContextedContentPage<Us
     {
         IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>().Reset();
 
-        this.PresentToastNotification(Common.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+        this.PresentToastNotification(Terminal.Common.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
     }
 }

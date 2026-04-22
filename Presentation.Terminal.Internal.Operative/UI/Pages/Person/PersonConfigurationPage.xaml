@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseConfigurationEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Person"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_common_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Person.PersonConfigurationPage"
+    x:TypeArguments="interop_dto_models:PersonBasicDtoModel,interop_dto_models:PersonDetailDtoModel,local_configuration_page_models:PersonConfigurationPageModel"
+    x:DataType="local_configuration_page_models:PersonConfigurationPageModel"
+    Shell.TabBarIsVisible="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Command="{Binding ApplyCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xf12c;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Command="{Binding CancelCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xf156;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <FlexLayout Wrap="Wrap">
+                    <Frame
+                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                        Padding="0">
+                        <Frame.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}" />
+                        </Frame.Behaviors>
+                        <Grid>
+                            <Image Source="{Binding ImageSource, TargetNullValue='default_person_picture.jpg'}" />
+                            <Grid BackgroundColor="#A7000000">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
+                                </Grid.GestureRecognizers>
+                                <Label
+                                    Text="&#xF8CB;"
+                                    TextColor="White"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="96" />
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                </FlexLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre(s)" />
+                        <Entry Text="{Binding Name}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:PersonConfigurationPageModel.NameValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Apellidos (opcional)" />
+                        <Entry Text="{Binding LastName}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:PersonConfigurationPageModel.LastNameValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=5, MediumContainerColumn=6, SmallContainerColumn=8}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Alias (opcional)" />
+                        <Entry Text="{Binding Alias}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:PersonConfigurationPageModel.AliasValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acerca de (Opcional)" />
+                    <Editor Text="{Binding About}" HeightRequest="120" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:PersonConfigurationPageModel.AboutValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <FlexLayout Wrap="Wrap">                  
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Teléfonos" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Command="{Binding CreatePhoneNumberCommand, Mode=OneTime}" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="DimGray" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding PhoneNumbers}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_dto_models:PhoneNumberDetailDtoModel">
+                                            <Frame 
+                                                Padding="8"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <Label
+                                                        Margin="8"
+                                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Value, Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xF2FD;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailPhoneNumberCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xF90B;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdatePhoneNumberCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xFA78;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemovePhoneNumberCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Correos electrónicos" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Command="{Binding CreateEmailAddressCommand, Mode=OneTime}" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="DimGray" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding EmailAddresses}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_dto_models:EmailAddressDetailDtoModel">
+                                            <Frame 
+                                                Padding="8"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <Label
+                                                        Margin="8"
+                                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Value, Mode=OneTime}"/>
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xF2FD;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailEmailAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xF90B;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdateEmailAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xFA78;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemoveEmailAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Direcciones postales" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Command="{Binding CreatePostalAddressCommand, Mode=OneTime}" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="DimGray" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding PostalAddresses}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_dto_models:PostalAddressDetailDtoModel">
+                                            <Frame 
+                                                Padding="8"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <Label
+                                                        Margin="8"
+                                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                        LineBreakMode="TailTruncation">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Street}" />
+                                                                <Span Text="{Binding Number, StringFormat=', {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xF2FD;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailPostalAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xF90B;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdatePostalAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xFA78;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemovePostalAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sitios webs" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Command="{Binding CreateWebSiteAddressCommand, Mode=OneTime}" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="DimGray" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding WebSiteAddresses}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_dto_models:WebSiteAddressDetailDtoModel">
+                                            <Frame 
+                                                Padding="8"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <Label
+                                                        Margin="8"
+                                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Url, Mode=OneTime}"/>
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xF2FD;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailWebSiteAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xF90B;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdateWebSiteAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                    <Button
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                        VerticalOptions="Center"
+                                                        Text="&#xFA78;"
+                                                        Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemoveWebSiteAddressCommand, Mode=OneTime}"
+                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout Wrap="Wrap">
+                    <Grid Style="{StaticResource FormFlexWrappedChildGridStyle}">
+                        <Grid.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}" />
+                        </Grid.Behaviors>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Priority}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Maximum="100"
+                            Value="{Binding Priority}" />
+                    </Grid>                    
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</common_ui_base_pages:BaseConfigurationEntityPage>

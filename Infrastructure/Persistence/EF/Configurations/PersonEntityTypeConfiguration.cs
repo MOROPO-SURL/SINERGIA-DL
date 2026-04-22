@@ -23,22 +23,38 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
                 .HasMaxLength(360);
 
             builder.Property(entity => entity.Alias)
-            .HasMaxLength(360);
+                .HasMaxLength(360);
 
             builder.Property(entity => entity.LastName)
-            .HasMaxLength(360);
+                .HasMaxLength(360);
 
             builder.Property(entity => entity.About)
                 .HasMaxLength(2048);
 
 
-            builder.OwnsMany(entity => entity.EmailAddresses);
+            builder
+                .OwnsMany(entity => entity.EmailAddresses, _ => { })
+                .Navigation(entity => entity.EmailAddresses)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("emailAddresses");
 
-            builder.OwnsMany(entity => entity.PostalAddresses);
+            builder
+                .OwnsMany(entity => entity.PostalAddresses, _ => { })
+                .Navigation(entity => entity.PostalAddresses)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("postalAddresses");
 
-            builder.OwnsMany(entity => entity.WebSites);
+            builder
+                .OwnsMany(entity => entity.WebSiteAddresses, _ => { })
+                .Navigation(entity => entity.WebSiteAddresses)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("webSiteAddresses");
 
-            builder.OwnsMany(entity => entity.PhoneNumbers);
+            builder
+                .OwnsMany(entity => entity.PhoneNumbers, _ => { })
+                .Navigation(entity => entity.PhoneNumbers)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("phoneNumbers");
 
             builder.HasOne(entity => entity.Image).WithOne().HasForeignKey<Person>(entity => entity.ImageId).OnDelete(DeleteBehavior.Restrict);
         }

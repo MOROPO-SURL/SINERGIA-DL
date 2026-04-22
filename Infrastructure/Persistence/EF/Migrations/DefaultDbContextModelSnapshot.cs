@@ -929,7 +929,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Objective", b =>
                 {
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Objective.Actions#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveAction", "Actions", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveAction", "Actions", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -962,7 +962,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                 .HasForeignKey("ObjectiveId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Objective.Challenges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveChallenge", "Challenges", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveChallenge", "Challenges", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -1001,7 +1001,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                 .HasForeignKey("ObjectiveId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Objective.Projections#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveProjection", "Projections", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveProjection", "Projections", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -1065,7 +1065,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "OwnerId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization.EmailAddresses#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.EmailAddress", "EmailAddresses", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.EmailAddress", "EmailAddresses", b1 =>
                         {
                             b1.Property<Guid>("OrganizationId")
                                 .HasColumnType("uuid");
@@ -1085,13 +1085,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.HasKey("OrganizationId", "Id");
 
-                            b1.ToTable("organizations_EmailAddresses", (string)null);
+                            b1.ToTable("organizations_EmailAddresses");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrganizationId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization.PhoneNumbers#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PhoneNumber", "PhoneNumbers", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PhoneNumber", "PhoneNumbers", b1 =>
                         {
                             b1.Property<Guid>("OrganizationId")
                                 .HasColumnType("uuid");
@@ -1111,13 +1111,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.HasKey("OrganizationId", "Id");
 
-                            b1.ToTable("organizations_PhoneNumbers", (string)null);
+                            b1.ToTable("organizations_PhoneNumbers");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrganizationId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization.PostalAddresses#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PostalAddress", "PostalAddresses", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PostalAddress", "PostalAddresses", b1 =>
                         {
                             b1.Property<Guid>("OrganizationId")
                                 .HasColumnType("uuid");
@@ -1127,6 +1127,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                 .HasColumnType("integer");
 
                             NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+
+                            b1.Property<string>("Context")
+                                .HasColumnType("text");
 
                             b1.Property<string>("Name")
                                 .HasColumnType("text");
@@ -1143,13 +1146,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.HasKey("OrganizationId", "Id");
 
-                            b1.ToTable("organizations_PostalAddresses", (string)null);
+                            b1.ToTable("organizations_PostalAddresses");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrganizationId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization.WebSites#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.WebSiteContact", "WebSites", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.WebSiteAddress", "WebSites", b1 =>
                         {
                             b1.Property<Guid>("OrganizationId")
                                 .HasColumnType("uuid");
@@ -1170,7 +1173,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.HasKey("OrganizationId", "Id");
 
-                            b1.ToTable("organizations_WebSites", (string)null);
+                            b1.ToTable("organizations_WebSites");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrganizationId");
@@ -1198,7 +1201,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "ImageId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person.EmailAddresses#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.EmailAddress", "EmailAddresses", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.EmailAddress", "EmailAddresses", b1 =>
                         {
                             b1.Property<Guid>("PersonId")
                                 .HasColumnType("uuid");
@@ -1218,13 +1221,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.HasKey("PersonId", "Id");
 
-                            b1.ToTable("people_EmailAddresses", (string)null);
+                            b1.ToTable("people_EmailAddresses");
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person.PhoneNumbers#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PhoneNumber", "PhoneNumbers", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PhoneNumber", "PhoneNumbers", b1 =>
                         {
                             b1.Property<Guid>("PersonId")
                                 .HasColumnType("uuid");
@@ -1244,13 +1247,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.HasKey("PersonId", "Id");
 
-                            b1.ToTable("people_PhoneNumbers", (string)null);
+                            b1.ToTable("people_PhoneNumbers");
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person.PostalAddresses#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PostalAddress", "PostalAddresses", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PostalAddress", "PostalAddresses", b1 =>
                         {
                             b1.Property<Guid>("PersonId")
                                 .HasColumnType("uuid");
@@ -1260,6 +1263,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                 .HasColumnType("integer");
 
                             NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+
+                            b1.Property<string>("Context")
+                                .HasColumnType("text");
 
                             b1.Property<string>("Name")
                                 .HasColumnType("text");
@@ -1276,13 +1282,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.HasKey("PersonId", "Id");
 
-                            b1.ToTable("people_PostalAddresses", (string)null);
+                            b1.ToTable("people_PostalAddresses");
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person.WebSites#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.WebSiteContact", "WebSites", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.WebSiteAddress", "WebSiteAddresses", b1 =>
                         {
                             b1.Property<Guid>("PersonId")
                                 .HasColumnType("uuid");
@@ -1303,7 +1309,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.HasKey("PersonId", "Id");
 
-                            b1.ToTable("people_WebSites", (string)null);
+                            b1.ToTable("people_WebSiteAddresses");
 
                             b1.WithOwner()
                                 .HasForeignKey("PersonId");
@@ -1317,7 +1323,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                     b.Navigation("PostalAddresses");
 
-                    b.Navigation("WebSites");
+                    b.Navigation("WebSiteAddresses");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine", b =>
@@ -1334,7 +1340,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine.StrategicActions#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities.StrategicLineAction", "StrategicActions", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities.StrategicLineAction", "StrategicActions", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -1367,7 +1373,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                 .HasForeignKey("StrategicLineId", "StrategicAxeId");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine.OrganizationBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges.StrategicLineOrganizationBridge", "OrganizationBridges", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges.StrategicLineOrganizationBridge", "OrganizationBridges", b1 =>
                         {
                             b1.Property<int>("StrategicLineId")
                                 .HasColumnType("integer");
@@ -1419,7 +1425,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram.Actions#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramAction", "Actions", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramAction", "Actions", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -1448,7 +1454,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.WithOwner()
                                 .HasForeignKey("StrategicProgramId");
 
-                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram.Actions#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramAction.InterestAreaBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.ProgramActionInterestAreaBridge", "InterestAreaBridges", b2 =>
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.ProgramActionInterestAreaBridge", "InterestAreaBridges", b2 =>
                                 {
                                     b2.Property<Guid>("ProgramActionId")
                                         .HasColumnType("uuid");
@@ -1480,7 +1486,120 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.Navigation("InterestAreaBridges");
                         });
 
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram.Impacts#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values.ProgramImpact", "Impacts", b1 =>
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramObjective", "Objetives", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .HasColumnType("integer");
+
+                            b1.Property<Guid>("StrategicProgramId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<string>("Description")
+                                .HasMaxLength(2048)
+                                .HasColumnType("character varying(2048)");
+
+                            b1.Property<bool>("IsEnabled")
+                                .HasColumnType("boolean");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("Id", "StrategicProgramId");
+
+                            b1.HasIndex("StrategicProgramId");
+
+                            b1.ToTable("strategicprogram_objetives", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("StrategicProgramId");
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.ProgramObjectiveStrategicProjectBridge", "StrategicProjectBridges", b2 =>
+                                {
+                                    b2.Property<int>("ProgramObjectiveId")
+                                        .HasColumnType("integer");
+
+                                    b2.Property<Guid>("StrategicProgramId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("LinkedId")
+                                        .HasColumnType("uuid");
+
+                                    b2.HasKey("ProgramObjectiveId", "StrategicProgramId", "LinkedId");
+
+                                    b2.HasIndex("LinkedId");
+
+                                    b2.ToTable("strategicprogram_objective_strategicproject_bridges", (string)null);
+
+                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.StrategicProject", "Linked")
+                                        .WithMany()
+                                        .HasForeignKey("LinkedId")
+                                        .OnDelete(DeleteBehavior.Cascade)
+                                        .IsRequired();
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("ProgramObjectiveId", "StrategicProgramId")
+                                        .HasConstraintName("FK_strategicprogram_objective_strategicproject_bridges_strate~1");
+
+                                    b2.Navigation("Linked");
+                                });
+
+                            b1.Navigation("StrategicProjectBridges");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramProjectIdea", "ProjectIdeas", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("StrategicProgramId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<string>("Description")
+                                .HasMaxLength(2048)
+                                .HasColumnType("character varying(2048)");
+
+                            b1.Property<bool>("IsArchived")
+                                .HasColumnType("boolean");
+
+                            b1.Property<bool>("IsEnabled")
+                                .HasColumnType("boolean");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.Property<int>("Priority")
+                                .HasColumnType("integer");
+
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("Id", "StrategicProgramId");
+
+                            b1.HasIndex("StrategicProgramId");
+
+                            b1.HasIndex("Name", "Id", "StrategicProgramId")
+                                .IsUnique();
+
+                            b1.ToTable("strategicprogram_projectideas", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("StrategicProgramId");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values.ProgramImpact", "Impacts", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -1524,7 +1643,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.WithOwner()
                                 .HasForeignKey("StrategicProgramId");
 
-                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram.Impacts#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values.ProgramImpact.ImpactIndicator#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ImpactIndicator", "ImpactIndicator", b2 =>
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ImpactIndicator", "ImpactIndicator", b2 =>
                                 {
                                     b2.Property<Guid>("Id")
                                         .HasColumnType("uuid");
@@ -1587,119 +1706,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                 });
 
                             b1.Navigation("ImpactIndicator");
-                        });
-
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram.Objetives#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramObjective", "Objetives", b1 =>
-                        {
-                            b1.Property<int>("Id")
-                                .HasColumnType("integer");
-
-                            b1.Property<Guid>("StrategicProgramId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<DateTime>("CreatedAt")
-                                .HasColumnType("timestamp without time zone");
-
-                            b1.Property<string>("Description")
-                                .HasMaxLength(2048)
-                                .HasColumnType("character varying(2048)");
-
-                            b1.Property<bool>("IsEnabled")
-                                .HasColumnType("boolean");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasMaxLength(360)
-                                .HasColumnType("character varying(360)");
-
-                            b1.Property<DateTime?>("UpdatedAt")
-                                .HasColumnType("timestamp without time zone");
-
-                            b1.HasKey("Id", "StrategicProgramId");
-
-                            b1.HasIndex("StrategicProgramId");
-
-                            b1.ToTable("strategicprogram_objetives", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("StrategicProgramId");
-
-                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram.Objetives#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramObjective.StrategicProjectBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Bridges.ProgramObjectiveStrategicProjectBridge", "StrategicProjectBridges", b2 =>
-                                {
-                                    b2.Property<int>("ProgramObjectiveId")
-                                        .HasColumnType("integer");
-
-                                    b2.Property<Guid>("StrategicProgramId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<Guid>("LinkedId")
-                                        .HasColumnType("uuid");
-
-                                    b2.HasKey("ProgramObjectiveId", "StrategicProgramId", "LinkedId");
-
-                                    b2.HasIndex("LinkedId");
-
-                                    b2.ToTable("strategicprogram_objective_strategicproject_bridges", (string)null);
-
-                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.StrategicProject", "Linked")
-                                        .WithMany()
-                                        .HasForeignKey("LinkedId")
-                                        .OnDelete(DeleteBehavior.Cascade)
-                                        .IsRequired();
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("ProgramObjectiveId", "StrategicProgramId")
-                                        .HasConstraintName("FK_strategicprogram_objective_strategicproject_bridges_strate~1");
-
-                                    b2.Navigation("Linked");
-                                });
-
-                            b1.Navigation("StrategicProjectBridges");
-                        });
-
-                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram.ProjectIdeas#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramProjectIdea", "ProjectIdeas", b1 =>
-                        {
-                            b1.Property<Guid>("Id")
-                                .HasColumnType("uuid");
-
-                            b1.Property<Guid>("StrategicProgramId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<DateTime>("CreatedAt")
-                                .HasColumnType("timestamp without time zone");
-
-                            b1.Property<string>("Description")
-                                .HasMaxLength(2048)
-                                .HasColumnType("character varying(2048)");
-
-                            b1.Property<bool>("IsArchived")
-                                .HasColumnType("boolean");
-
-                            b1.Property<bool>("IsEnabled")
-                                .HasColumnType("boolean");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasMaxLength(360)
-                                .HasColumnType("character varying(360)");
-
-                            b1.Property<int>("Priority")
-                                .HasColumnType("integer");
-
-                            b1.Property<DateTime?>("UpdatedAt")
-                                .HasColumnType("timestamp without time zone");
-
-                            b1.HasKey("Id", "StrategicProgramId");
-
-                            b1.HasIndex("StrategicProgramId");
-
-                            b1.HasIndex("Name", "Id", "StrategicProgramId")
-                                .IsUnique();
-
-                            b1.ToTable("strategicprogram_projectideas", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("StrategicProgramId");
                         });
 
                     b.Navigation("Actions");

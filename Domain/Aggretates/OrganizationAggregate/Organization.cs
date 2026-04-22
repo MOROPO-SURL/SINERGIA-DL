@@ -14,7 +14,7 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
 {
     private Organization() : base(new OrganizationId(default)) { }
 
-    public Organization(OrganizationId id, bool isArchived, bool enabled, string name, int priority, OrganizationKindId organizationKindId, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteContact> webSites, OrganizationKind? organizationKind = null, Organization? owner = null, OrganizationId? ownerId = null, Image? image = null, ImageId? imageId = null) : base(id)
+    public Organization(OrganizationId id, bool isArchived, bool enabled, string name, int priority, OrganizationKindId organizationKindId, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteAddress> webSites, OrganizationKind? organizationKind = null, Organization? owner = null, OrganizationId? ownerId = null, Image? image = null, ImageId? imageId = null) : base(id)
     {
         IsArchived = isArchived;
         IsEnabled = enabled;
@@ -55,7 +55,7 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
 
     public List<PostalAddress> PostalAddresses { get; set; } = null!;
 
-    public List<WebSiteContact> WebSites { get; set; } = null!;
+    public List<WebSiteAddress> WebSites { get; set; } = null!;
 
     public List<OrganizationClasificationBridge> ClasificationBridges { get; set; } = [];
 }

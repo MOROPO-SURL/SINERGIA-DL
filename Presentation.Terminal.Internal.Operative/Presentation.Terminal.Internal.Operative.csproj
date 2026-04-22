@@ -58,6 +58,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
+	  <None Remove="Resources\Images\default_organization_picture.png" />
+	  <None Remove="Resources\Images\default_person_picture.jpg" />
 	  <None Remove="Resources\Images\shell_header.jpg" />
 	</ItemGroup>
 
@@ -73,10 +75,10 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LocalizationResources.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="UI\Pages\Configuration\ObjectiveChallengeConfigurationPage.xaml.cs">
+	  <Compile Update="UI\Pages\Objective\Configuration\ObjectiveChallengeConfigurationPage.xaml.cs">
 	    <DependentUpon>ObjectiveChallengeConfigurationPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="UI\Pages\Detail\ObjectiveChallengeDetailPage.xaml.cs">
+	  <Compile Update="UI\Pages\Objective\Detail\ObjectiveChallengeDetailPage.xaml.cs">
 	    <DependentUpon>ObjectiveChallengeDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
@@ -92,31 +94,64 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveActionConfigurationPage.xaml">
+	  <MauiXaml Update="UI\Pages\Common\Configuration\EmailAddressConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveChallengeConfigurationPage.xaml">
+	  <MauiXaml Update="UI\Pages\Common\Configuration\PhoneNumberConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveConfigurationPage.xaml">
+	  <MauiXaml Update="UI\Pages\Common\Configuration\PostalAddressConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveProjectionConfigurationPage.xaml">
+	  <MauiXaml Update="UI\Pages\Common\Configuration\WebSiteAddressConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\ObjectiveActionDetailPage.xaml">
+	  <MauiXaml Update="UI\Pages\Common\Detail\PhoneNumberDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\ObjectiveChallengeDetailPage.xaml">
+	  <MauiXaml Update="UI\Pages\Common\Detail\PostalAddressDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\ObjectiveDetailPage.xaml">
+	  <MauiXaml Update="UI\Pages\Common\Detail\WebSiteAddressDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\ObjectiveProjectionDetailPage.xaml">
+	  <MauiXaml Update="UI\Pages\Objective\Configuration\ObjectiveActionConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Management\ObjectivesManagementPage.xaml">
+	  <MauiXaml Update="UI\Pages\Objective\Configuration\ObjectiveChallengeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Objective\Configuration\ObjectiveConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Objective\Configuration\ObjectiveProjectionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Common\Detail\EmailAddressDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Objective\Detail\ObjectiveActionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Objective\Detail\ObjectiveChallengeDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Objective\Detail\ObjectiveDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Objective\Detail\ObjectiveProjectionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\ObjectivesManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\PersonsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Person\PersonConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Person\PersonDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
@@ -128,10 +163,6 @@
 	  <MauiXaml Update="UI\Views\TitleSectionShellMenuItemView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="UI\Pages\Pick\" />
 	</ItemGroup>
 
 	<ItemGroup>

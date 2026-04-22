@@ -709,8 +709,15 @@
         <Setter Property="Margin" Value="8" />
     </Style>
 
-    <Style TargetType="Label" x:Key="ListEntityPageEmptyViewLabelStyle">
-        <Setter Property="Margin" Value="4" />
+    <Style TargetType="Label" x:Key="CollectionPageEmptyViewLabelStyle">
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="Text" Value="Sin elementos que mostrar" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="CollectionFrameEmptyViewLabelStyle">
         <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
         <Setter Property="FontAttributes" Value="Italic" />
         <Setter Property="Text" Value="Sin elementos que mostrar" />
@@ -727,23 +734,45 @@
         <Setter Property="Spacing" Value="0" />
     </Style>
 
+    <Style TargetType="BoxView" x:Key="FormFluentChildSeparatorBoxViewStyle">
+        <Setter Property="Margin" Value="8,16,8,8" />
+        <Setter Property="HeightRequest" Value="2" />
+        <Setter Property="Color" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+    </Style>
+
     <Style TargetType="VerticalStackLayout" x:Key="FormScrollRootVerticalStackLayoutStyle">
         <Setter Property="Margin" Value="8" />
         <Setter Property="Spacing" Value="0" />
     </Style>
 
-    <Style TargetType="VerticalStackLayout" x:Key="FormScrollRootVerticalStackLayoutChildVerticalStackLayoutStyle">
+    <Style TargetType="VerticalStackLayout" x:Key="FormFluentChildVerticalStackLayoutStyle">
         <Setter Property="Margin" Value="8" />
         <Setter Property="Spacing" Value="6" />
     </Style>
 
-    <Style TargetType="StackLayout" x:Key="FormScrollRootVerticalStackLayoutChildStackLayoutStyle">
+    <Style TargetType="VerticalStackLayout" x:Key="FormFlexWrappedChildVerticalStackLayoutStyle">
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Spacing" Value="6" />
+    </Style>
+
+    <Style TargetType="StackLayout" x:Key="FormFluentChildStackLayoutStyle">
         <Setter Property="Margin" Value="8" />
         <Setter Property="Spacing" Value="6" />
     </Style>
 
-    <Style TargetType="Grid" x:Key="FormScrollRootVerticalStackLayoutChildVerticalLayoutStyle">
+    <Style TargetType="StackLayout" x:Key="FormFlexWrappedChildStackLayoutStyle">
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Spacing" Value="6" />
+    </Style>
+
+    <Style TargetType="Grid" x:Key="FormFluentChildGridStyle">
         <Setter Property="Margin" Value="8" />
+        <Setter Property="ColumnSpacing" Value="6" />
+        <Setter Property="RowSpacing" Value="6" />
+    </Style>
+
+    <Style TargetType="Grid" x:Key="FormFlexWrappedChildGridStyle">
+        <Setter Property="Margin" Value="4" />
         <Setter Property="ColumnSpacing" Value="6" />
         <Setter Property="RowSpacing" Value="6" />
     </Style>

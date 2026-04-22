@@ -11,9 +11,14 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 
 public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<PersonId, Guid>, INamedEntity<PersonId, Guid>, IArchivableEntity<PersonId, Guid>, IEnableableEntity<PersonId, Guid>, IPriorizableEntity<PersonId, Guid>
 {
+    private List<EmailAddress> emailAddresses = [];
+    private List<PhoneNumber> phoneNumbers = [];
+    private List<PostalAddress> postalAddresses = [];
+    private List<WebSiteAddress> webSiteAddresses = [];
+
     private Person() : base(new PersonId(default)) { }
 
-    public Person(PersonId id, int priority, bool isEnabled, bool isArchived, string name, Sex sex, CivilStatus civilStatus, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteContact> webSites, string? lastName = null, string? alias = null, DateTime? bornDate = null, string? about = null, Image? image = null, ImageId? imageId = null) : base(id)
+    public Person(PersonId id, int priority, bool isEnabled, bool isArchived, string name, Sex sex, CivilStatus civilStatus, EmailAddress[] emailAddresses, PhoneNumber[] phoneNumbers, PostalAddress[] postalAddresses, WebSiteAddress[] webSiteAddresses, string? lastName = null, string? alias = null, DateTime? bornDate = null, string? about = null, Image? image = null, ImageId? imageId = null) : base(id)
     {
         Alias = alias;
         BornDate = bornDate;
@@ -27,10 +32,11 @@ public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<Pe
         CivilStatus = civilStatus;
         Image = image;
         ImageId = imageId;
-        EmailAddresses = emailAddresses;
-        PhoneNumbers = phoneNumbers;
-        PostalAddresses = postalAddresses;
-        WebSites = webSites;
+
+        this.emailAddresses = [.. emailAddresses];
+        this.phoneNumbers = [.. phoneNumbers];
+        this.postalAddresses = [.. postalAddresses];
+        this.webSiteAddresses = [.. webSiteAddresses];
     }
 
     public string? Alias { get; set; }
@@ -56,13 +62,53 @@ public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<Pe
     public Image? Image { get; set; }
     public ImageId? ImageId { get; set; }
 
-    public List<EmailAddress> EmailAddresses { get; set; } = null!;
+    public IReadOnlyList<EmailAddress> EmailAddresses => [.. emailAddresses];
 
-    public List<PhoneNumber> PhoneNumbers { get; set; } = null!;
+    public IReadOnlyList<PhoneNumber> PhoneNumbers => [.. phoneNumbers];
 
-    public List<PostalAddress> PostalAddresses { get; set; } = null!;
+    public IReadOnlyList<PostalAddress> PostalAddresses => [.. postalAddresses];
 
-    public List<WebSiteContact> WebSites { get; set; } = null!;
+    public IReadOnlyList<WebSiteAddress> WebSiteAddresses => [.. webSiteAddresses];
 
     public List<PersonOrganizationBrigde> OrganizationBrigde { get; set; } = [];
+
+    public void Add(EmailAddress value)
+    {
+        emailAddresses.Add(value);
+    }
+
+    public void Remove(EmailAddress value)
+    {
+        emailAddresses.Remove(value);
+    }
+
+    public void Add(PhoneNumber value)
+    {
+        phoneNumbers.Add(value);
+    }
+
+    public void Remove(PhoneNumber value)
+    {
+        phoneNumbers.Remove(value);
+    }
+
+    public void Add(PostalAddress value) 
+    { 
+        postalAddresses.Add(value);
+    }
+
+    public void Remove(PostalAddress value)
+    {
+        postalAddresses.Remove(value);
+    }
+
+    public void Add(WebSiteAddress value) 
+    {  
+        webSiteAddresses.Add(value); 
+    }
+
+    public void Remove(WebSiteAddress value)
+    {
+        webSiteAddresses.Remove(value);
+    }
 }

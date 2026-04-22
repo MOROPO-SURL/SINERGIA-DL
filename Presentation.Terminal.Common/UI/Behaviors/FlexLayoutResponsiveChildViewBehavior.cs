@@ -12,12 +12,24 @@ public sealed class FlexLayoutResponsiveChildViewBehavior : Behavior<View>
     {
         base.OnAttachedTo(bindable);
 
-        if (bindable.Parent is not FlexLayout) throw new InvalidOperationException();
+        bindable.ParentChanged += View_ParentChanged;
+    }
+
+    protected override void OnDetachingFrom(View bindable)
+    {
+        base.OnDetachingFrom(bindable);
+
+        bindable.ParentChanged -= View_ParentChanged;
+    }
+
+    private void View_ParentChanged(object? sender, EventArgs eventArgs)
+    {
+        if (sender is not View view || view.Parent is not FlexLayout) throw new InvalidOperationException("FlexLayoutResponsiveChildViewBehavior attaching on a not FlexLayout child view!!!.");
 
         Binding binding = new()
         {
             Mode = BindingMode.OneWay,
-            Source = bindable.Parent,
+            Source = view.Parent,
             Path = nameof(VisualElement.Width),
             Converter = new Converters.FlexLayoutIWithToResponsiveChildWithConverter
             {
@@ -27,8 +39,8 @@ public sealed class FlexLayoutResponsiveChildViewBehavior : Behavior<View>
             ConverterParameter = ResponsiveColumnConfiguration
         };
 
-        bindable.Margin = new Thickness(SingleSpacing);
+        view.Margin = new Thickness(SingleSpacing);
 
-        bindable.SetBinding(VisualElement.WidthProperty, binding);
+        view.SetBinding(VisualElement.WidthRequestProperty, binding);
     }
 }

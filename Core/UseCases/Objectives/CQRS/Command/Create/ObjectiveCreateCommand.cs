@@ -4,4 +4,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.CQRS.Command.Create;
 
-public record ObjectiveCreateCommand(Guid Id, int Index, string Title, ObjectiveChallengeCreateCommandAddon[] Challenges, ObjectiveProjectionCreateCommandAddon[] Projections, ObjectiveActionCreateCommandAddon[] Actions, string? Description = null) : ICreateCommand<ObjectiveDetailDto>;
+public record ObjectiveCreateCommand(
+    Guid Id, 
+    int Index, 
+    string Title, 
+    ObjectiveChallengeCreateCommandAddon[] Challenges, 
+    ObjectiveProjectionCreateCommandAddon[] Projections, 
+    ObjectiveActionCreateCommandAddon[] Actions, 
+    string? Description = null) : ICreateCommand<ObjectiveDetailDto>;

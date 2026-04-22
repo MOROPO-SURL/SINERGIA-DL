@@ -23,11 +23,13 @@ public class UsersController : ControllerBase
 {
     private readonly ISender mediator;
     private readonly IMapper mapper;
+    private readonly ILogger logger;
 
-    public UsersController(ISender mediator, IMapper mapper)
+    public UsersController(ISender mediator, IMapper mapper, ILogger<UsersController> logger)
     {
         this.mediator = mediator;
         this.mapper = mapper;
+        this.logger = logger;
     }
 
     [HttpGet]
@@ -40,8 +42,10 @@ public class UsersController : ControllerBase
 
             return Ok(mapper.Map<PaginateResultModel<UserBasicDtoModel>>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -56,8 +60,10 @@ public class UsersController : ControllerBase
 
             return Ok(mapper.Map<PaginateResultModel<UserBasicDtoModel>>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -71,8 +77,10 @@ public class UsersController : ControllerBase
 
             return Ok(mapper.Map<UserDetailDtoModel>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -88,8 +96,10 @@ public class UsersController : ControllerBase
 
             return Ok(mapper.Map<UserDetailDtoModel>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -105,8 +115,10 @@ public class UsersController : ControllerBase
 
             return Ok(mapper.Map<UserDetailDtoModel>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -120,8 +132,10 @@ public class UsersController : ControllerBase
 
             return Ok();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -135,8 +149,10 @@ public class UsersController : ControllerBase
 
             return Ok();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -150,8 +166,10 @@ public class UsersController : ControllerBase
 
             return Ok();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }

@@ -2,7 +2,14 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Validators;
 
+
+/* Cambio no fusionado mediante combinación del proyecto 'Presentation.Terminal.Internal.Operative (net8.0-maccatalyst)'
+Antes:
 internal sealed class ObjectiveConfigurationValidator : AbstractValidator<Models.Page.Configuration.ObjectiveConfigurationPageModel>
+Después:
+internal sealed class ObjectiveConfigurationValidator : AbstractValidator<ObjectiveConfigurationPageModel>
+*/
+internal sealed class ObjectiveConfigurationValidator : AbstractValidator<Models.Page.Objective.Configuration.ObjectiveConfigurationPageModel>
 {
     public ObjectiveConfigurationValidator()
     {

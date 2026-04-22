@@ -107,7 +107,7 @@ public class ObjectivesController : ControllerBase
 
             return Ok(mapper.Map<ObjectiveDetailDtoModel>(result));
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return Problem();
         }

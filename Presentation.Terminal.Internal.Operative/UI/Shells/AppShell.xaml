@@ -3,7 +3,6 @@
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Shells.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_management_ui_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Management"
     xmlns:local_ui_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages"
     Title="Navegación"
     FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}">
@@ -43,7 +42,7 @@
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Objetivos"
-            ContentTemplate="{DataTemplate local_management_ui_pages:ObjectivesManagementPage}">
+            ContentTemplate="{DataTemplate local_ui_pages:ObjectivesManagementPage}">
             <ShellContent.FlyoutIcon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
@@ -83,7 +82,7 @@
         </ShellContent>
         <ShellContent
             Title="Personas"
-            ContentTemplate="{DataTemplate ContentPage}">
+            ContentTemplate="{DataTemplate local_ui_pages:PersonsManagementPage}">
             <ShellContent.FlyoutIcon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"

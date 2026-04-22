@@ -10,6 +10,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicys.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Users.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Images.Mappings;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
 
@@ -70,7 +72,11 @@ public static class ServiceProviderExtensions
             new PublicPolicyCreateCommandMappingRegister(),
             new PublicPolicyDetailDtoMappingRegister(),
             new PublicPolicyDetailQueryMappingRegister(),
-            new PublicPolicyUpdateCommandMappingRegister()
+            new PublicPolicyUpdateCommandMappingRegister(),
+
+            new ImageEntityMappingRegister(),
+
+            new PersonEntityMappingRegister()
         );
     }
 }

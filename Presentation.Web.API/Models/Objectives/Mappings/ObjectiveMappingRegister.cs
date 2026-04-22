@@ -15,7 +15,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.CQRS.Co
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Objectives.Mappings;
 
-public class ObjectiveMappingRegister : IRegister
+internal class ObjectiveMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
