@@ -75,11 +75,29 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LocalizationResources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\TerritoryPotentialsManagementPage.xaml.cs">
+	    <DependentUpon>TerritoryPotentialsManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\TerritorialBarriersManagementPage.xaml.cs">
+	    <DependentUpon>TerritorialBarriersManagementPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\Objective\Configuration\ObjectiveChallengeConfigurationPage.xaml.cs">
 	    <DependentUpon>ObjectiveChallengeConfigurationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\Objective\Detail\ObjectiveChallengeDetailPage.xaml.cs">
 	    <DependentUpon>ObjectiveChallengeDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\TerritorialBarrier\TerritorialBarrierConfigurationPage.xaml.cs">
+	    <DependentUpon>TerritorialBarrierConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\TerritorialBarrier\TerritorialBarrierDetailPage.xaml.cs">
+	    <DependentUpon>TerritorialBarrierDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\TerritoryPotential\TerritoryPotentialConfigurationPage.xaml.cs">
+	    <DependentUpon>TerritoryPotentialConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\TerritoryPotential\TerritoryPotentialDetailPage.xaml.cs">
+	    <DependentUpon>TerritoryPotentialDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
 	    <DependentUpon>UserAuthenticationPage.xaml</DependentUpon>
@@ -113,6 +131,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Common\Detail\WebSiteAddressDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\TerritoryPotentialsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\TerritorialBarriersManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Objective\Configuration\ObjectiveActionConfigurationPage.xaml">
@@ -152,6 +176,18 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Person\PersonDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\TerritorialBarrier\TerritorialBarrierConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\TerritorialBarrier\TerritorialBarrierDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\TerritoryPotential\TerritoryPotentialConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\TerritoryPotential\TerritoryPotentialDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">

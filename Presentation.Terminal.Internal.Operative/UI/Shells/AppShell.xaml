@@ -52,7 +52,7 @@
         </ShellContent>
         <ShellContent
             Title="Barreras"
-            ContentTemplate="{DataTemplate ContentPage}">
+            ContentTemplate="{DataTemplate local_ui_pages:TerritorialBarriersManagementPage}">
             <ShellContent.FlyoutIcon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
@@ -62,7 +62,7 @@
         </ShellContent>
         <ShellContent
             Title="Potencialidades"
-            ContentTemplate="{DataTemplate ContentPage}">
+            ContentTemplate="{DataTemplate local_ui_pages:TerritoryPotentialsManagementPage}">
             <ShellContent.FlyoutIcon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
@@ -78,26 +78,6 @@
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphPublicPolicy}" />
-            </ShellContent.FlyoutIcon>
-        </ShellContent>
-        <ShellContent
-            Title="Personas"
-            ContentTemplate="{DataTemplate local_ui_pages:PersonsManagementPage}">
-            <ShellContent.FlyoutIcon>
-                <FontImageSource
-                    FontFamily="{StaticResource FontMaterialDesignIcons}"
-                    Color="{AppThemeBinding Light=Black, Dark=White}" 
-                    Glyph="{StaticResource IconGlyphPerson}" />
-            </ShellContent.FlyoutIcon>
-        </ShellContent>
-        <ShellContent
-            Title="Entidades"
-            ContentTemplate="{DataTemplate ContentPage}">
-            <ShellContent.FlyoutIcon>
-                <FontImageSource
-                    FontFamily="{StaticResource FontMaterialDesignIcons}"
-                    Color="{AppThemeBinding Light=Black, Dark=White}" 
-                    Glyph="{StaticResource IconGlyphOrganization}" />
             </ShellContent.FlyoutIcon>
         </ShellContent>
     </FlyoutItem>
@@ -153,6 +133,26 @@
             </ShellContent.FlyoutIcon>
         </ShellContent>
     </FlyoutItem>
+    <ShellContent
+        Title="Personas"
+        ContentTemplate="{DataTemplate local_ui_pages:PersonsManagementPage}">
+        <ShellContent.FlyoutIcon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphPerson}" />
+        </ShellContent.FlyoutIcon>
+    </ShellContent>
+    <ShellContent
+        Title="Entidades"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.FlyoutIcon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphOrganization}" />
+        </ShellContent.FlyoutIcon>
+    </ShellContent>
     <ShellContent
         Title="Unidades de medida"
         ContentTemplate="{DataTemplate ContentPage}">

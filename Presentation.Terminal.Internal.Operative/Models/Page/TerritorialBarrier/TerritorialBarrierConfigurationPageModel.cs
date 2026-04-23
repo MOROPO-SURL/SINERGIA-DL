@@ -1,0 +1,58 @@
+﻿using FluentValidation;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.TerritorialBarrier.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.TerritorialBarrier.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Validators;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.TerritorialBarrier;
+
+public sealed class TerritorialBarrierConfigurationPageModel : AbstractConfigurationPageModel<TerritorialBarrierDetailDtoModel, TerritorialBarrierDetailDtoModel>
+{
+    public static string TitleValidableProperty => nameof(Title);
+    public static string DescriptionValidableProperty => nameof(Description);
+
+    private string title = null!;
+    private string? description;
+
+    public TerritorialBarrierConfigurationPageModel(TerritorialBarrierDetailDtoModel? model, Action<TerritorialBarrierDetailDtoModel> successCallbackAction) : base(model, successCallbackAction, new TerritorialBarrierConfigurationValidator())
+    {
+        if (model is null) return;
+
+        Id = model.Id;
+        title = model.Title;
+        description = model.Description;
+    }
+
+    public Guid? Id { get; set; }
+
+    public string Title { get => title; set => SetProperty(ref title, value); }
+
+    public string? Description { get => description; set => SetProperty(ref description, value); }
+
+    protected override Task<TerritorialBarrierDetailDtoModel> PerformCreationAsync()
+    {
+        TerritorialBarrierCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+
+        return apiClient.CreateAsync(new TerritorialBarrierCreateRequestModel
+            (
+                Title!,
+                Description
+            ));
+    }
+
+    protected override Task<TerritorialBarrierDetailDtoModel> PerformEditionAsync()
+    {
+        TerritorialBarrierCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+
+        return apiClient.UpdateAsync(new TerritorialBarrierUpdateRequestModel
+            (
+                Id!.Value,
+                Title!,
+                Description
+            ));
+    }
+
+    public override IValidationContext? ValidationContext => new ValidationContext<TerritorialBarrierConfigurationPageModel>(this);
+}

@@ -181,15 +181,15 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     public Guid? Id { get; set; }
 
-    public int Priority { get => priority; set => priority = value; }
+    public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-    public string Name { get => name; set => name = value; }
+    public string Name { get => name; set => SetProperty(ref name, value); }
 
-    public string? LastName { get => lastName; set => lastName = value; }
+    public string? LastName { get => lastName; set => SetProperty(ref lastName, value); }
 
-    public string? Alias { get => alias; set => alias = value; }
+    public string? Alias { get => alias; set => SetProperty(ref alias, value); }
 
-    public string? About { get => about; set => about = value; }
+    public string? About { get => about; set => SetProperty(ref about, value); }
 
     public ObservableCollection<PhoneNumberDetailDtoModel> PhoneNumbers { get; set; } = [];
 

@@ -13,7 +13,7 @@
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.ObjectivesManagementPage"
     x:TypeArguments="interop_dto_models:ObjectiveBasicDtoModel,interop_dto_models:ObjectiveDetailDtoModel,local_management_page_models:ObjectivesManagementPageModel,local_configuration_page_models:ObjectiveConfigurationPageModel"
     x:DataType="local_management_page_models:ObjectivesManagementPageModel"
-    Title="Gestión de Objetivos"
+    Title="Diagnóstico: Objetivos"
     IsEnabled="{Binding IsEnabled}">
     <ContentPage.Resources>
         <ResourceDictionary>
