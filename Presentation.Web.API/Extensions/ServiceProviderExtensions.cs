@@ -2,8 +2,11 @@
 using Microsoft.Extensions.Options;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Authentication.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.InterestAreas.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Macroprograms.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Objectives.Mappings;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.PublicPolicys.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.PublicPolicies.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.UnitMeasurements.Mappings;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Extensions;
 
@@ -18,7 +21,10 @@ internal static class ServiceProviderExtensions
             new AuthenticatedSessionDtoModelMappingRegister(jwtConfigurationOptions),
 
             new ObjectiveMappingRegister(),
-            new PublicPolicyMappingRegister()
+            new PublicPolicyMappingRegister(),
+            new UnitMeasurementMappingRegister(),
+            new MacroprogramMappingRegister(),
+            new InterestAreaMappingRegister()
         );
 
         return self;

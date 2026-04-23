@@ -189,7 +189,7 @@ public class DefaultDbContext : DbContext
                 PermissionConstants.TERRITORYPOTENTIAL_ARCHIVE_PERMISSION,
                 PermissionConstants.TERRITORYPOTENTIAL_UNARCHIVE_PERMISSION
             ]),
-            new (PermissionFamilyConstants.ORGANIZATIONKIND_PERMISSIONS_FAMILY,
+            new (PermissionFamilyConstants.CLASIFICATION_PERMISSIONS_FAMILY,
             [
                 PermissionConstants.CLASIFICATION_LIST_PERMISSION,
                 PermissionConstants.CLASIFICATION_VIEW_PERMISSION,
@@ -210,6 +210,17 @@ public class DefaultDbContext : DbContext
                 PermissionConstants.KEYVARIABLE_REMOVE_PERMISSION,
                 PermissionConstants.KEYVARIABLE_ARCHIVE_PERMISSION,
                 PermissionConstants.KEYVARIABLE_UNARCHIVE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.ORGANIZATION_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.ORGANIZATION_VIEW_PERMISSION,
+                PermissionConstants.ORGANIZATION_CREATE_PERMISSION,
+                PermissionConstants.ORGANIZATION_UPDATE_PERMISSION,
+                PermissionConstants.ORGANIZATION_REMOVE_PERMISSION,
+                PermissionConstants.ORGANIZATION_ARCHIVE_PERMISSION,
+                PermissionConstants.ORGANIZATION_UNARCHIVE_PERMISSION,
+                PermissionConstants.ORGANIZATION_ENABLE_PERMISSION,
+                PermissionConstants.ORGANIZATION_DISABLE_PERMISSION
             ])
         ];
 
