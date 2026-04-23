@@ -23,7 +23,7 @@
             <x:String x:Key="IconGlyphProgram">&#xF030F;</x:String>
             <x:String x:Key="IconGlyphProject">&#xF00AB;</x:String>
             <x:String x:Key="IconGlyphBarrier">&#xF4A1;</x:String>
-            <x:String x:Key="IconGlyphPotential">&#xF0090;</x:String>
+            <x:String x:Key="IconGlyphPotential">&#xF008F;</x:String>
             <x:String x:Key="IconGlyphPublicPolicy">&#xF5D1;</x:String>
             <x:String x:Key="IconGlyphPerson">&#xF013;</x:String>
             <x:String x:Key="IconGlyphOrganization">&#xF1D7;</x:String>

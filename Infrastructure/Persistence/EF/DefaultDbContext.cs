@@ -156,6 +156,60 @@ public class DefaultDbContext : DbContext
                 PermissionConstants.PUBLICPOLICY_REMOVE_PERMISSION,
                 PermissionConstants.PUBLICPOLICY_ARCHIVE_PERMISSION,
                 PermissionConstants.PUBLICPOLICY_UNARCHIVE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.ORGANIZATIONKIND_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.ORGANIZATIONKIND_LIST_PERMISSION,
+                PermissionConstants.ORGANIZATIONKIND_VIEW_PERMISSION,
+                PermissionConstants.ORGANIZATIONKIND_CREATE_PERMISSION,
+                PermissionConstants.ORGANIZATIONKIND_UPDATE_PERMISSION,
+                PermissionConstants.ORGANIZATIONKIND_REMOVE_PERMISSION,
+                PermissionConstants.ORGANIZATIONKIND_ARCHIVE_PERMISSION,
+                PermissionConstants.ORGANIZATIONKIND_UNARCHIVE_PERMISSION,
+                PermissionConstants.ORGANIZATIONKIND_ENABLE_PERMISSION,
+                PermissionConstants.ORGANIZATIONKIND_DISABLE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.TERRITORIALBARRIER_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.TERRITORIALBARRIER_LIST_PERMISSION,
+                PermissionConstants.TERRITORIALBARRIER_VIEW_PERMISSION,
+                PermissionConstants.TERRITORIALBARRIER_CREATE_PERMISSION,
+                PermissionConstants.TERRITORIALBARRIER_UPDATE_PERMISSION,
+                PermissionConstants.TERRITORIALBARRIER_REMOVE_PERMISSION,
+                PermissionConstants.TERRITORIALBARRIER_ARCHIVE_PERMISSION,
+                PermissionConstants.TERRITORIALBARRIER_UNARCHIVE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.TERRITORYPOTENTIAL_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.TERRITORYPOTENTIAL_LIST_PERMISSION,
+                PermissionConstants.TERRITORYPOTENTIAL_VIEW_PERMISSION,
+                PermissionConstants.TERRITORYPOTENTIAL_CREATE_PERMISSION,
+                PermissionConstants.TERRITORYPOTENTIAL_UPDATE_PERMISSION,
+                PermissionConstants.TERRITORYPOTENTIAL_REMOVE_PERMISSION,
+                PermissionConstants.TERRITORYPOTENTIAL_ARCHIVE_PERMISSION,
+                PermissionConstants.TERRITORYPOTENTIAL_UNARCHIVE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.ORGANIZATIONKIND_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.CLASIFICATION_LIST_PERMISSION,
+                PermissionConstants.CLASIFICATION_VIEW_PERMISSION,
+                PermissionConstants.CLASIFICATION_CREATE_PERMISSION,
+                PermissionConstants.CLASIFICATION_UPDATE_PERMISSION,
+                PermissionConstants.CLASIFICATION_REMOVE_PERMISSION,
+                PermissionConstants.CLASIFICATION_ARCHIVE_PERMISSION,
+                PermissionConstants.CLASIFICATION_UNARCHIVE_PERMISSION,
+                PermissionConstants.CLASIFICATION_ENABLE_PERMISSION,
+                PermissionConstants.CLASIFICATION_DISABLE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.KEYVARIABLE_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.KEYVARIABLE_LIST_PERMISSION,
+                PermissionConstants.KEYVARIABLE_VIEW_PERMISSION,
+                PermissionConstants.KEYVARIABLE_CREATE_PERMISSION,
+                PermissionConstants.KEYVARIABLE_UPDATE_PERMISSION,
+                PermissionConstants.KEYVARIABLE_REMOVE_PERMISSION,
+                PermissionConstants.KEYVARIABLE_ARCHIVE_PERMISSION,
+                PermissionConstants.KEYVARIABLE_UNARCHIVE_PERMISSION
             ])
         ];
 
@@ -163,7 +217,7 @@ public class DefaultDbContext : DbContext
         {
             foreach (string item in group.Value)
             {
-                PermissionId id = new PermissionId(item);
+                PermissionId id = new(item);
 
                 if (!Permissions.Any(entity => entity.Id == id))
                 {

@@ -17,4 +17,16 @@ internal static class PermissionFamilyConstants
     public const string MACROPROGRAM_PERMISSIONS_FAMILY = "macroprogram-permission-family";
 
     public const string PUBLICPOLICY_PERMISSIONS_FAMILY = "publicpolicy-permission-family";
+
+    public const string ORGANIZATIONKIND_PERMISSIONS_FAMILY = "organizationkind-permission-family";
+
+    public const string ORGANIZATION_PERMISSIONS_FAMILY = "organization-permission-family";
+
+    public const string TERRITORIALBARRIER_PERMISSIONS_FAMILY = "territorialbarrier-permission-family";
+
+    public const string TERRITORYPOTENTIAL_PERMISSIONS_FAMILY = "territorypotential-permission-family";
+
+    public const string CLASIFICATION_PERMISSIONS_FAMILY = "clasification-permission-family";
+
+    public const string KEYVARIABLE_PERMISSIONS_FAMILY = "keyvariable-permission-family";
 }

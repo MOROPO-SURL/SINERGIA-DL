@@ -8,7 +8,7 @@ public class Clasification : AbstractAuditableEntity<ClasificationId, Guid>, IAg
 {
     private Clasification() : base(new ClasificationId(default)) { }
 
-    public Clasification(ClasificationId id, int priority, string name, string? description, bool isEnabled, bool isArchived) : base(id)
+    public Clasification(ClasificationId id, int priority, bool isEnabled, bool isArchived, string name, string? description = null) : base(id)
     {
         Priority = priority;
         Name = name;

@@ -38,8 +38,8 @@ internal sealed class PersonEntityMappingRegister : IRegister
             .MapWith(src => new(
                 new PersonId(Guid.NewGuid()),
                 src.Priority,
+                src.IsEnabled,
                 false,
-                true,
                 src.Name,
                 src.Sex,
                 src.CivilStatus,

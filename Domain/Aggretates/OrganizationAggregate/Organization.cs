@@ -12,9 +12,17 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregat
 
 public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggregateRoot<OrganizationId, Guid>, IArchivableEntity<OrganizationId, Guid>, IEnableableEntity<OrganizationId, Guid>, INamedEntity<OrganizationId, Guid>, IPriorizableEntity<OrganizationId, Guid>
 {
+    private readonly List<EmailAddress> emailAddresses = [];
+
+    private readonly List<PhoneNumber> phoneNumbers = [];
+
+    private readonly List<PostalAddress> postalAddresses = [];
+
+    private readonly List<WebSiteAddress> webSiteAddresses = [];
+
     private Organization() : base(new OrganizationId(default)) { }
 
-    public Organization(OrganizationId id, bool isArchived, bool enabled, string name, int priority, OrganizationKindId organizationKindId, List<EmailAddress> emailAddresses, List<PhoneNumber> phoneNumbers, List<PostalAddress> postalAddresses, List<WebSiteAddress> webSites, OrganizationKind? organizationKind = null, Organization? owner = null, OrganizationId? ownerId = null, Image? image = null, ImageId? imageId = null) : base(id)
+    public Organization(OrganizationId id, bool isArchived, bool enabled, string name, int priority, OrganizationKindId organizationKindId, EmailAddress[] emailAddresses, PhoneNumber[] phoneNumbers, PostalAddress[] postalAddresses, WebSiteAddress[] webSiteAddresses, OrganizationKind? organizationKind = null, Organization? owner = null, OrganizationId? ownerId = null, string? about = null, Image? image = null, ImageId? imageId = null) : base(id)
     {
         IsArchived = isArchived;
         IsEnabled = enabled;
@@ -26,10 +34,12 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
         ImageId = imageId;
         OrganizationKindId = organizationKindId;
         OrganizationKind = organizationKind;
-        EmailAddresses = emailAddresses;
-        PhoneNumbers = phoneNumbers;
-        PostalAddresses = postalAddresses;
-        WebSites = webSites;
+        About = about;
+
+        this.emailAddresses = [.. emailAddresses];
+        this.phoneNumbers = [.. phoneNumbers];
+        this.postalAddresses = [.. postalAddresses];
+        this.webSiteAddresses = [.. webSiteAddresses];
     }
 
     public bool IsArchived { get; set; }
@@ -40,6 +50,8 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
 
     public int Priority { get; set; }
 
+    public string? About { get; set; }
+
     public Organization? Owner { get; set; }
     public OrganizationId? OwnerId { get; set; }
 
@@ -49,13 +61,53 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
     public OrganizationKind? OrganizationKind { get; set; }
     public OrganizationKindId OrganizationKindId { get; set; }
 
-    public List<EmailAddress> EmailAddresses { get; set; } = null!;
+    public IReadOnlyList<EmailAddress> EmailAddresses => [.. emailAddresses];
 
-    public List<PhoneNumber> PhoneNumbers { get; set; } = null!;
+    public IReadOnlyList<PhoneNumber> PhoneNumbers => [.. phoneNumbers];
 
-    public List<PostalAddress> PostalAddresses { get; set; } = null!;
+    public IReadOnlyList<PostalAddress> PostalAddresses => [.. postalAddresses];
 
-    public List<WebSiteAddress> WebSites { get; set; } = null!;
+    public IReadOnlyList<WebSiteAddress> WebSiteAddresses => [.. webSiteAddresses];
 
     public List<OrganizationClasificationBridge> ClasificationBridges { get; set; } = [];
+
+    public void Add(EmailAddress value)
+    {
+        emailAddresses.Add(value);
+    }
+
+    public void Remove(EmailAddress value)
+    {
+        emailAddresses.Remove(value);
+    }
+
+    public void Add(PhoneNumber value)
+    {
+        phoneNumbers.Add(value);
+    }
+
+    public void Remove(PhoneNumber value)
+    {
+        phoneNumbers.Remove(value);
+    }
+
+    public void Add(PostalAddress value)
+    {
+        postalAddresses.Add(value);
+    }
+
+    public void Remove(PostalAddress value)
+    {
+        postalAddresses.Remove(value);
+    }
+
+    public void Add(WebSiteAddress value)
+    {
+        webSiteAddresses.Add(value);
+    }
+
+    public void Remove(WebSiteAddress value)
+    {
+        webSiteAddresses.Remove(value);
+    }
 }

@@ -11,10 +11,10 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 
 public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<PersonId, Guid>, INamedEntity<PersonId, Guid>, IArchivableEntity<PersonId, Guid>, IEnableableEntity<PersonId, Guid>, IPriorizableEntity<PersonId, Guid>
 {
-    private List<EmailAddress> emailAddresses = [];
-    private List<PhoneNumber> phoneNumbers = [];
-    private List<PostalAddress> postalAddresses = [];
-    private List<WebSiteAddress> webSiteAddresses = [];
+    private readonly List<EmailAddress> emailAddresses = [];
+    private readonly List<PhoneNumber> phoneNumbers = [];
+    private readonly List<PostalAddress> postalAddresses = [];
+    private readonly List<WebSiteAddress> webSiteAddresses = [];
 
     private Person() : base(new PersonId(default)) { }
 

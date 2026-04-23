@@ -26,7 +26,7 @@ internal class OrganizationEntityTypeConfiguration : IEntityTypeConfiguration<Or
 
         builder.OwnsMany(entity => entity.PostalAddresses);
 
-        builder.OwnsMany(entity => entity.WebSites);
+        builder.OwnsMany(entity => entity.WebSiteAddresses);
 
         builder.OwnsMany(entity => entity.PhoneNumbers);
 

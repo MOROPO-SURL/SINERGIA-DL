@@ -5,6 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicys.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicys.Ports.Repository;
+using System.Linq.Expressions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicys.CQRS.Query.Paginate;
 
@@ -14,4 +15,10 @@ IRequestHandler<PublicPolicyPaginateQuery, PaginateQueryResultModel<PublicPolicy
     public PublicPolicyPaginateQueryHandler(IPublicPolicyQueryRepositoryPort entityQueryRepository) : base(entityQueryRepository)
     {
     }
+
+    protected override Expression<Func<PublicPolicy, bool>>? GlobalSelector => entity => !entity.IsArchived;
+
+    protected override Expression<Func<PublicPolicy, object>> OrderExpression => entity => entity.PublisheAt;
+
+    protected override bool IsOrderDescending => true;
 }

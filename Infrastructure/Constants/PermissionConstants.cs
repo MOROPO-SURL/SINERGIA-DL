@@ -67,4 +67,58 @@ public static class PermissionConstants
     public const string PUBLICPOLICY_REMOVE_PERMISSION = "publicpolicy-remove-permission";
     public const string PUBLICPOLICY_ARCHIVE_PERMISSION = "publicpolicy-archive-permission";
     public const string PUBLICPOLICY_UNARCHIVE_PERMISSION = "publicpolicy-unarchive-permission";
+
+    public const string ORGANIZATIONKIND_LIST_PERMISSION = "organizationkind-list-permission";
+    public const string ORGANIZATIONKIND_VIEW_PERMISSION = "organizationkind-view-permission";
+    public const string ORGANIZATIONKIND_CREATE_PERMISSION = "organizationkind-create-permission";
+    public const string ORGANIZATIONKIND_UPDATE_PERMISSION = "organizationkind-update-permission";
+    public const string ORGANIZATIONKIND_REMOVE_PERMISSION = "organizationkind-remove-permission";
+    public const string ORGANIZATIONKIND_ARCHIVE_PERMISSION = "organizationkind-archive-permission";
+    public const string ORGANIZATIONKIND_UNARCHIVE_PERMISSION = "organizationkind-unarchive-permission";
+    public const string ORGANIZATIONKIND_ENABLE_PERMISSION = "organizationkind-enable-permission";
+    public const string ORGANIZATIONKIND_DISABLE_PERMISSION = "organizationkind-disable-permission";
+
+    public const string ORGANIZATION_LIST_PERMISSION = "organization-list-permission";
+    public const string ORGANIZATION_VIEW_PERMISSION = "organization-view-permission";
+    public const string ORGANIZATION_CREATE_PERMISSION = "organization-create-permission";
+    public const string ORGANIZATION_UPDATE_PERMISSION = "organization-update-permission";
+    public const string ORGANIZATION_REMOVE_PERMISSION = "organization-remove-permission";
+    public const string ORGANIZATION_ARCHIVE_PERMISSION = "organization-archive-permission";
+    public const string ORGANIZATION_UNARCHIVE_PERMISSION = "organization-unarchive-permission";
+    public const string ORGANIZATION_ENABLE_PERMISSION = "organization-enable-permission";
+    public const string ORGANIZATION_DISABLE_PERMISSION = "organization-disable-permission";
+
+    public const string TERRITORIALBARRIER_LIST_PERMISSION = "territorialbarrier-list-permission";
+    public const string TERRITORIALBARRIER_VIEW_PERMISSION = "territorialbarrier-view-permission";
+    public const string TERRITORIALBARRIER_CREATE_PERMISSION = "territorialbarrier-create-permission";
+    public const string TERRITORIALBARRIER_UPDATE_PERMISSION = "territorialbarrier-update-permission";
+    public const string TERRITORIALBARRIER_REMOVE_PERMISSION = "territorialbarrier-remove-permission";
+    public const string TERRITORIALBARRIER_ARCHIVE_PERMISSION = "territorialbarrier-archive-permission";
+    public const string TERRITORIALBARRIER_UNARCHIVE_PERMISSION = "territorialbarrier-unarchive-permission";
+
+    public const string TERRITORYPOTENTIAL_LIST_PERMISSION = "territorypotential-list-permission";
+    public const string TERRITORYPOTENTIAL_VIEW_PERMISSION = "territorypotential-view-permission";
+    public const string TERRITORYPOTENTIAL_CREATE_PERMISSION = "territorypotential-create-permission";
+    public const string TERRITORYPOTENTIAL_UPDATE_PERMISSION = "territorypotential-update-permission";
+    public const string TERRITORYPOTENTIAL_REMOVE_PERMISSION = "territorypotential-remove-permission";
+    public const string TERRITORYPOTENTIAL_ARCHIVE_PERMISSION = "territorypotential-archive-permission";
+    public const string TERRITORYPOTENTIAL_UNARCHIVE_PERMISSION = "territorypotential-unarchive-permission";
+
+    public const string CLASIFICATION_LIST_PERMISSION = "clasification-list-permission";
+    public const string CLASIFICATION_VIEW_PERMISSION = "clasification-view-permission";
+    public const string CLASIFICATION_CREATE_PERMISSION = "clasification-create-permission";
+    public const string CLASIFICATION_UPDATE_PERMISSION = "clasification-update-permission";
+    public const string CLASIFICATION_REMOVE_PERMISSION = "clasification-remove-permission";
+    public const string CLASIFICATION_ARCHIVE_PERMISSION = "clasification-archive-permission";
+    public const string CLASIFICATION_UNARCHIVE_PERMISSION = "clasification-unarchive-permission";
+    public const string CLASIFICATION_ENABLE_PERMISSION = "clasification-enable-permission";
+    public const string CLASIFICATION_DISABLE_PERMISSION = "clasification-disable-permission";
+
+    public const string KEYVARIABLE_LIST_PERMISSION = "keyvariable-list-permission";
+    public const string KEYVARIABLE_VIEW_PERMISSION = "keyvariable-view-permission";
+    public const string KEYVARIABLE_CREATE_PERMISSION = "keyvariable-create-permission";
+    public const string KEYVARIABLE_UPDATE_PERMISSION = "keyvariable-update-permission";
+    public const string KEYVARIABLE_REMOVE_PERMISSION = "keyvariable-remove-permission";
+    public const string KEYVARIABLE_ARCHIVE_PERMISSION = "keyvariable-archive-permission";
+    public const string KEYVARIABLE_UNARCHIVE_PERMISSION = "keyvariable-unarchive-permission";
 }

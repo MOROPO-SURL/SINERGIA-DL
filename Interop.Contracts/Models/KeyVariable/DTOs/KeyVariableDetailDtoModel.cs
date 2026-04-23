@@ -1,0 +1,3 @@
+﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.KeyVariable.DTOs;
+
+public record KeyVariableDetailDtoModel(Guid Id, string Name, int Priority, string? Alias = null, string? Description = null);
