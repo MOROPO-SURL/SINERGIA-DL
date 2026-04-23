@@ -25,11 +25,13 @@ public class ObjectivesController : ControllerBase
 {
     private readonly ISender mediator;
     private readonly IMapper mapper;
+    private readonly ILogger logger;
 
-    public ObjectivesController(ISender mediator, IMapper mapper)
+    public ObjectivesController(ISender mediator, IMapper mapper, ILogger<ObjectivesController> logger)
     {
         this.mediator = mediator;
         this.mapper = mapper;
+        this.logger = logger;
     }
 
     [HttpGet]
@@ -42,8 +44,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok(mapper.Map<PaginateResultModel<ObjectiveBasicDtoModel>>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -58,8 +62,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok(mapper.Map<PaginateResultModel<ObjectiveBasicDtoModel>>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -73,8 +79,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok(mapper.Map<ObjectiveDetailDtoModel>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -90,8 +98,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok(mapper.Map<ObjectiveDetailDtoModel>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -107,8 +117,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok(mapper.Map<ObjectiveDetailDtoModel>(result));
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -122,8 +134,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -137,8 +151,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -152,8 +168,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -167,8 +185,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
@@ -182,8 +202,10 @@ public class ObjectivesController : ControllerBase
 
             return Ok();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            logger.LogError(exception, exception.Message);
+
             return Problem();
         }
     }
