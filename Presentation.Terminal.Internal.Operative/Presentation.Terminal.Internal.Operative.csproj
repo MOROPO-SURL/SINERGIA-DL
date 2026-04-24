@@ -114,6 +114,9 @@
 	  <Compile Update="UI\Pages\TerritoryPotential\TerritoryPotentialDetailPage.xaml.cs">
 	    <DependentUpon>TerritoryPotentialDetailPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\UnitMeasurement\UnitMeasurementConfigurationPage.xaml.cs">
+	    <DependentUpon>UnitMeasurementConfigurationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
 	    <DependentUpon>UserAuthenticationPage.xaml</DependentUpon>
 	  </Compile>
@@ -224,6 +227,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\TerritoryPotential\TerritoryPotentialDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\UnitMeasurementsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\UnitMeasurement\UnitMeasurementConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\UnitMeasurement\UnitMeasurementDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">

@@ -1,0 +1,64 @@
+﻿using FluentValidation;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.UnitMeasurement.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.UnitMeasurement.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Validators;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.UnitMeasurement;
+
+public sealed class UnitMeasurementConfigurationPageModel: AbstractConfigurationPageModel<UnitMeasurementDetailDtoModel, UnitMeasurementDetailDtoModel>
+{
+    public static string NameValidableProperty => nameof(Name);
+    public static string SymbolValidableProperty => nameof(Symbol);
+
+    private string name = null!;
+    private string symbol = null!;
+    private bool prefixed;
+
+    public UnitMeasurementConfigurationPageModel(UnitMeasurementDetailDtoModel? model, Action<UnitMeasurementDetailDtoModel> successCallbackAction) : base(model, successCallbackAction, new UnitMeasurementConfigurationValidator())
+    {
+        if (model is null) return;
+
+        Id = model.Id;
+        name = model.Name;
+        symbol = model.Symbol;
+        prefixed = model.Prefixed;
+    }
+
+    public Guid? Id { get; set; }
+
+    public string Name { get => name; set => SetProperty(ref name, value); }
+
+    public string Symbol { get => symbol; set => SetProperty(ref symbol, value); }
+
+    public bool Prefixed { get => prefixed; set => SetProperty(ref prefixed, value); }
+
+    protected override Task<UnitMeasurementDetailDtoModel> PerformCreationAsync()
+    {
+        UnitMeasurementCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+
+        return apiClient.CreateAsync(new UnitMeasurementCreateRequestModel
+            (
+                Name!,
+                Symbol!,
+                Prefixed
+            ));
+    }
+
+    protected override Task<UnitMeasurementDetailDtoModel> PerformEditionAsync()
+    {
+        UnitMeasurementCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+
+        return apiClient.UpdateAsync(new UnitMeasurementUpdateRequestModel
+            (
+                Id!.Value,
+                Name!,
+                Symbol!,
+                Prefixed
+            ));
+    }
+
+    public override IValidationContext? ValidationContext => new ValidationContext<UnitMeasurementConfigurationPageModel>(this);
+}
