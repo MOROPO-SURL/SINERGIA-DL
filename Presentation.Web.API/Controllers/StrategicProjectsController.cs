@@ -1,208 +1,205 @@
 ﻿using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.UnitMeasurement.CQRS.Command;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.UnitMeasurement.DTOs;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers;
+
+[ApiController]
+[Route("api/strategicprojects")]
+public class StrategicProjectsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/strategicprojects")]
-    public class StrategicProjectsController: ControllerBase
+    private readonly ISender mediator;
+    private readonly IMapper mapper;
+    private readonly ILogger logger;
+
+    public StrategicProjectsController(ISender mediator, IMapper mapper, ILogger<StrategicProjectsController> logger)
     {
-        private readonly ISender mediator;
-        private readonly IMapper mapper;
-        private readonly ILogger logger;
+        this.mediator = mediator;
+        this.mapper = mapper;
+        this.logger = logger;
+    }
 
-        public StrategicProjectsController(ISender mediator, IMapper mapper, ILogger<StrategicProjectsController> logger)
+    [HttpGet]
+    [Route("page/{sheet}/limit/{limit}")]
+    public async Task<ActionResult<PaginateResultModel<StrategicProjectBasicDtoModel>>> GetAsync(int sheet, int limit)
+    {
+        try
         {
-            this.mediator = mediator;
-            this.mapper = mapper;
-            this.logger = logger;
+            //PaginateQueryResultModel<StrategiProjectBasicDto> result = await mediator.Send(new StrategiProjectPaginateQuery(sheet, limit));
+
+            //return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
+            return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(null!));
         }
-
-        [HttpGet]
-        [Route("page/{sheet}/limit/{limit}")]
-        public async Task<ActionResult<PaginateResultModel<StrategicProjectBasicDtoModel>>> GetAsync(int sheet, int limit)
+        catch (Exception exception)
         {
-            try
-            {
-                //PaginateQueryResultModel<UnitMeasurementBasicDto> result = await mediator.Send(new UnitMeasurementPaginateQuery(sheet, limit));
+            logger.LogError(exception, exception.Message);
 
-                //return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
-                return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(null!));
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
-
-                return Problem();
-            }
+            return Problem();
         }
+    }
 
-        [HttpGet]
-        [Route("page/{sheet}/limit/{limit}/filter/{parameter}")]
-        public async Task<ActionResult<PaginateResultModel<StrategicProjectBasicDtoModel>>> FilterAsync(int sheet, int limit, string parameter)
+    [HttpGet]
+    [Route("page/{sheet}/limit/{limit}/filter/{parameter}")]
+    public async Task<ActionResult<PaginateResultModel<StrategicProjectBasicDtoModel>>> FilterAsync(int sheet, int limit, string parameter)
+    {
+        try
         {
-            try
-            {
-                //PaginateQueryResultModel<UnitMeasurementBasicDto> result = await mediator.Send(new UnitMeasurementPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            //PaginateQueryResultModel<StrategiProjectBasicDto> result = await mediator.Send(new StrategiProjectPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
-                //return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
-                return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(null!));
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
-
-                return Problem();
-            }
+            //return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
+            return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(null!));
         }
-
-        [HttpGet("{key}")]
-        public async Task<ActionResult<UnitMeasurementDetailDto>> GetAsync(Guid key)
+        catch (Exception exception)
         {
-            try
-            {
-                //UnitMeasurementDetailDto result = await mediator.Send(new UnitMeasurementDetailQuery(key));
+            logger.LogError(exception, exception.Message);
 
-                //return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(result));
-                return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(null!));
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
-
-                return Problem();
-            }
+            return Problem();
         }
+    }
 
-        [HttpPost]
-        public async Task<ActionResult<UnitMeasurementDetailDtoModel>> CreateAsync(UnitMeasurementCreateRequestModel model)
+    [HttpGet("{key}")]
+    public async Task<ActionResult<StrategicProjectDetailDtoModel>> GetAsync(Guid key)
+    {
+        try
         {
-            try
-            {
-                //UnitMeasurementCreateCommand command = mapper.Map<UnitMeasurementCreateCommand>(model);
+            //StrategiProjectDetailDto result = await mediator.Send(new StrategiProjectDetailQuery(key));
 
-                //UnitMeasurementDetailDto result = await mediator.Send(command);
-
-                //return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(result));
-                return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(null!));
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
-
-                return Problem();
-            }
+            //return Ok(mapper.Map<StrategiProjectDetailDtoModel>(result));
+            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(null!));
         }
-
-        [HttpPut]
-        public async Task<ActionResult<UnitMeasurementDetailDtoModel>> UpdateAsync(UnitMeasurementUpdateRequestModel model)
+        catch (Exception exception)
         {
-            try
-            {
-                //UnitMeasurementUpdateCommand command = mapper.Map<UnitMeasurementUpdateCommand>(model);
+            logger.LogError(exception, exception.Message);
 
-                //UnitMeasurementDetailDto result = await mediator.Send(command);
-
-                //return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(result));
-                return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(null!));
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
-
-                return Problem();
-            }
+            return Problem();
         }
+    }
 
-        [HttpPatch("{key}/enable")]
-        public async Task<IActionResult> EnableAsync(Guid key)
+    [HttpPost]
+    public async Task<ActionResult<StrategicProjectDetailDtoModel>> CreateAsync(StrategicProjectCreateRequestModel model)
+    {
+        try
         {
-            try
-            {
-                //await mediator.Send(new UnitMeasurementEnableCommand(key));
+            //StrategiProjectCreateCommand command = mapper.Map<StrategiProjectCreateCommand>(model);
 
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
+            //StrategiProjectDetailDto result = await mediator.Send(command);
 
-                return Problem();
-            }
+            //return Ok(mapper.Map<StrategiProjectDetailDtoModel>(result));
+            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(null!));
         }
-
-        [HttpPatch("{key}/disable")]
-        public async Task<IActionResult> DisableAsync(Guid key)
+        catch (Exception exception)
         {
-            try
-            {
-                //await mediator.Send(new UnitMeasurementDisableCommand(key));
+            logger.LogError(exception, exception.Message);
 
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
-
-                return Problem();
-            }
+            return Problem();
         }
+    }
 
-        [HttpPatch("{key}/unarchive")]
-        public async Task<IActionResult> UnarchiveAsync(Guid key)
+    [HttpPut]
+    public async Task<ActionResult<StrategicProjectDetailDtoModel>> UpdateAsync(StrategicProjectUpdateRequestModel model)
+    {
+        try
         {
-            try
-            {
-                //await mediator.Send(new UnitMeasurementUnarchiveCommand(key));
+            //StrategiProjectUpdateCommand command = mapper.Map<StrategiProjectUpdateCommand>(model);
 
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
+            //StrategiProjectDetailDto result = await mediator.Send(command);
 
-                return Problem();
-            }
+            //return Ok(mapper.Map<StrategiProjectDetailDtoModel>(result));
+            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(null!));
         }
-
-        [HttpPatch("{key}/archive")]
-        public async Task<IActionResult> ArchiveAsync(Guid key)
+        catch (Exception exception)
         {
-            try
-            {
-                //await mediator.Send(new UnitMeasurementArchiveCommand(key));
+            logger.LogError(exception, exception.Message);
 
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
-
-                return Problem();
-            }
+            return Problem();
         }
+    }
 
-        [HttpDelete("{key}")]
-        public async Task<IActionResult> DeleteAsync(Guid key)
+    [HttpPatch("{key}/enable")]
+    public async Task<IActionResult> EnableAsync(Guid key)
+    {
+        try
         {
-            try
-            {
-                //await mediator.Send(new UnitMeasurementRemoveCommand(key));
+            //await mediator.Send(new StrategiProjectEnableCommand(key));
 
-                return Ok();
-            }
-            catch (Exception exception)
-            {
-                logger.LogError(exception, exception.Message);
+            return Ok();
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
 
-                return Problem();
-            }
+            return Problem();
+        }
+    }
+
+    [HttpPatch("{key}/disable")]
+    public async Task<IActionResult> DisableAsync(Guid key)
+    {
+        try
+        {
+            //await mediator.Send(new StrategiProjectDisableCommand(key));
+
+            return Ok();
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpPatch("{key}/unarchive")]
+    public async Task<IActionResult> UnarchiveAsync(Guid key)
+    {
+        try
+        {
+            //await mediator.Send(new StrategiProjectUnarchiveCommand(key));
+
+            return Ok();
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpPatch("{key}/archive")]
+    public async Task<IActionResult> ArchiveAsync(Guid key)
+    {
+        try
+        {
+            //await mediator.Send(new StrategiProjectArchiveCommand(key));
+
+            return Ok();
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpDelete("{key}")]
+    public async Task<IActionResult> DeleteAsync(Guid key)
+    {
+        try
+        {
+            //await mediator.Send(new StrategiProjectRemoveCommand(key));
+
+            return Ok();
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
         }
     }
 }

@@ -1,3 +1,5 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;
 
-public record StrategicProjectDetailDtoModel(Guid Id, string Name, int Priority, bool IsEnable, string? Description = null);
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
+
+public record StrategicProjectDetailDtoModel(Guid Id, string Name, int Priority, bool IsEnable, StrategicProgramDetailDtoModel Program, string? Description = null);
