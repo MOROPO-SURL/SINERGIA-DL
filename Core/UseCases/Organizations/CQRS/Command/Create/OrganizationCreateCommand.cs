@@ -15,6 +15,5 @@ public record OrganizationCreateCommand(
     PhoneNumberDetailDto[] PhoneNumbers,
     PostalAddressDetailDto[] PostalAddresses,
     WebSiteAddressDetailDto[] WebSiteAddresses,
-    string? Alias = null,
     string? About = null,
     ImageCreateCommand? Image = null) : ICreateCommand<OrganizationDetailDto>;

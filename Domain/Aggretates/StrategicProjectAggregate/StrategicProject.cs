@@ -10,14 +10,14 @@ public class StrategicProject : AbstractAuditableEntity<StrategicProjectId, Guid
 {
     private StrategicProject() : base(new StrategicProjectId(default)) { }
 
-    public StrategicProject(StrategicProjectId id, StrategicProgramId programId, bool isEnabled, bool isArchived, string name, string? description = null, StrategicProgram? program = null) : base(id)
+    public StrategicProject(StrategicProjectId id, StrategicProgramId programId, bool isEnabled, bool isArchived, string name,int priority, string? description = null, StrategicProgram? program = null) : base(id)
     {
         ProgramId = programId;
         IsEnabled = isEnabled;
         IsArchived = isArchived;
         Name = name;
         Description = description;
-
+        Priority = priority;
         Program = program;
     }
 

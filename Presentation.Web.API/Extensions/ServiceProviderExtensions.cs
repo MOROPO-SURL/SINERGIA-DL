@@ -5,6 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Authentication
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.InterestAreas.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Macroprograms.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Objectives.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Organizations.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.PublicPolicies.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.UnitMeasurements.Mappings;
 
@@ -24,7 +25,8 @@ internal static class ServiceProviderExtensions
             new PublicPolicyMappingRegister(),
             new UnitMeasurementMappingRegister(),
             new MacroprogramMappingRegister(),
-            new InterestAreaMappingRegister()
+            new InterestAreaMappingRegister(),
+            new OrganizationMappingRegister()
         );
 
         return self;
