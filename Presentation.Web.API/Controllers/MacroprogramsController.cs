@@ -69,7 +69,7 @@ public class MacroprogramsController: ControllerBase
     }
 
     [HttpGet("{key}")]
-    public async Task<ActionResult<MacroprogramDetailDto>> GetAsync(Guid key)
+    public async Task<ActionResult<MacroprogramDetailDtoModel>> GetAsync(Guid key)
     {
         try
         {

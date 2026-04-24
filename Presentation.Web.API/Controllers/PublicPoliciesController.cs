@@ -69,7 +69,7 @@ public class PublicPoliciesController: ControllerBase
     }
 
     [HttpGet("{key}")]
-    public async Task<ActionResult<PublicPolicyDetailDto>> GetAsync(Guid key)
+    public async Task<ActionResult<PublicPolicyDetailDtoModel>> GetAsync(Guid key)
     {
         try
         {

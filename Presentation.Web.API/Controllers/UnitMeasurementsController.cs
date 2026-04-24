@@ -71,7 +71,7 @@ public class UnitMeasurementsController: ControllerBase
     }
 
     [HttpGet("{key}")]
-    public async Task<ActionResult<UnitMeasurementDetailDto>> GetAsync(Guid key)
+    public async Task<ActionResult<UnitMeasurementDetailDtoModel>> GetAsync(Guid key)
     {
         try
         {
