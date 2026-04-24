@@ -71,7 +71,7 @@ public class InterestAreasController: ControllerBase
     }
 
     [HttpGet("{key}")]
-    public async Task<ActionResult<InterestAreaDetailDto>> GetAsync(Guid key)
+    public async Task<ActionResult<InterestAreaDetailDtoModel>> GetAsync(Guid key)
     {
         try
         {
