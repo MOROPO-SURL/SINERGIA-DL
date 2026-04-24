@@ -17,6 +17,7 @@
 
             <x:String x:Key="IconGlyphDashboard">&#xF9E7;</x:String>
             <x:String x:Key="IconGlyphUnitMeasurement">&#xF472;</x:String>
+            <x:String x:Key="IconGlyphFeature">&#xF134;</x:String>
             <x:String x:Key="IconGlyphObjective">&#xF8C8;</x:String>
             <x:String x:Key="IconGlyphAxe">&#xFD51;</x:String>
             <x:String x:Key="IconGlyphLine">&#xF054;</x:String>

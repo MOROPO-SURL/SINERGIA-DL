@@ -1,5 +1,6 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Factories;
 using System.Net.Http.Headers;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Ports.Adapter.Provider
@@ -22,15 +23,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
         {
             var settingManager = IPlatformApplication.Current!.Services.GetRequiredService<ISettingManagerPort>();
 
-            httpClient = new HttpClient(new HttpClientHandler
-            {
-                Proxy = !settingManager.UseProxyServer ? null : new System.Net.WebProxy
-                {
-                    Address = new Uri(settingManager.ProxyServerAddress),
-                    Credentials = !settingManager.UseProxyAuthentication ? null : new System.Net.NetworkCredential(settingManager.ProxyUsername, settingManager.ProxyPassword)
-                },
-                ServerCertificateCustomValidationCallback = (message, certificate, chain, errors) => true,
-            })
+            httpClient = new HttpClient(HttpClientHandlerFactory.Build())
             {
                 BaseAddress = new Uri(DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7235" : "https://localhost:7235")
             };

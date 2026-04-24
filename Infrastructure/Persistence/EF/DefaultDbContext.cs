@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ClasificationAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.FeatureAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.FeatureKindAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.InterestAreaAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.KeyVariableAggregate;
@@ -61,6 +63,8 @@ public class DefaultDbContext : DbContext
     public DbSet<StrategicProgram> StrategicPrograms { get; set; }
     public DbSet<StrategicProject> StrategicProjects { get; set; }
     public DbSet<StrategicProgramOrganizationBridge> StrategicProgramOrganizationBridges { get; set; }
+    public DbSet<FeatureKind> FeatureKinds { get; set; }
+    public DbSet<Feature> Features { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -210,6 +214,16 @@ public class DefaultDbContext : DbContext
                 PermissionConstants.KEYVARIABLE_REMOVE_PERMISSION,
                 PermissionConstants.KEYVARIABLE_ARCHIVE_PERMISSION,
                 PermissionConstants.KEYVARIABLE_UNARCHIVE_PERMISSION
+            ]),
+            new (PermissionFamilyConstants.FEATUREKIND_PERMISSIONS_FAMILY,
+            [
+                PermissionConstants.FEATUREKIND_LIST_PERMISSION,
+                PermissionConstants.FEATUREKIND_VIEW_PERMISSION,
+                PermissionConstants.FEATUREKIND_CREATE_PERMISSION,
+                PermissionConstants.FEATUREKIND_UPDATE_PERMISSION,
+                PermissionConstants.FEATUREKIND_REMOVE_PERMISSION,
+                PermissionConstants.FEATUREKIND_ENABLE_PERMISSION,
+                PermissionConstants.FEATUREKIND_DISABLE_PERMISSION
             ])
         ];
 

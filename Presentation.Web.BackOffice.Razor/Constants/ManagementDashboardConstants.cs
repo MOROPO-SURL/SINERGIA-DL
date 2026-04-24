@@ -20,6 +20,7 @@ public static class ManagementDashboardConstants
                 new  ManagementDashboardSectionViewModel("Macroprogramas", "macroprograms", "Index", "Complement", "mdi mdi-folder-pound", "any"),
                 new  ManagementDashboardSectionViewModel("Areas de Interés", "interestareas", "Index", "Complement", "mdi mdi-chart-bubble", "any"),
                 new  ManagementDashboardSectionViewModel("Variables Clave", "keyvariables", "Index", "Complement", "mdi mdi-star-four-points", "any"),
+                new  ManagementDashboardSectionViewModel("Tipos de Carct. Terr.", "featurekinds", "Index", "Complement", "mdi mdi-checkbox-multiple-marked-circle-outline", "any"),
                 new  ManagementDashboardSectionViewModel("Unidades de medida", "unitmeasurements", "Index", "Complement", "mdi mdi-scale", "any"),
                 new  ManagementDashboardSectionViewModel("Personas", "persons", "Index", "Complement", "mdi mdi-account", "any"),
                 new  ManagementDashboardSectionViewModel("Entidades", "organizations", "Index", "Complement", "mdi mdi-domain", "any"),
@@ -29,6 +30,7 @@ public static class ManagementDashboardConstants
         new KeyValuePair<string, ManagementDashboardSectionViewModel[]>(
             "Diagnóstico",
             [
+                new  ManagementDashboardSectionViewModel("Caracter. Territ.", "features", "Index", "Diagnostic", "mdi mdi-checkbox-marked-circle-outline", "any"),
                 new  ManagementDashboardSectionViewModel("Objetivos", "objectives", "Index", "Diagnostic", "mdi mdi-bullseye-arrow", "any"),
                 new  ManagementDashboardSectionViewModel("Barreras", "territorialbarriers", "Index", "Diagnostic", "mdi mdi-sign-caution", "any"),
                 new  ManagementDashboardSectionViewModel("Potencialidades", "territorypotentials", "Index", "Diagnostic", "mdi mdi-arm-flex", "any"),

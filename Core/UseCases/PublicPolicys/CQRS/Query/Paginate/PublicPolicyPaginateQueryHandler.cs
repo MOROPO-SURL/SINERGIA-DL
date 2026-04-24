@@ -18,7 +18,7 @@ IRequestHandler<PublicPolicyPaginateQuery, PaginateQueryResultModel<PublicPolicy
 
     protected override Expression<Func<PublicPolicy, bool>>? GlobalSelector => entity => !entity.IsArchived;
 
-    protected override Expression<Func<PublicPolicy, object>> OrderExpression => entity => entity.PublisheAt;
+    protected override Expression<Func<PublicPolicy, object>> OrderExpression => entity => entity.PublishedAt;
 
     protected override bool IsOrderDescending => true;
 }

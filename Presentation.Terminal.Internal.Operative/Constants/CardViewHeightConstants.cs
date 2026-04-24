@@ -13,4 +13,7 @@ public static class CardViewHeightConstants
 
     public static double TERRITORYPORTENTIAL_DEFAULT_CARD_VIEW_HEIGHT = 76;
     public static double TERRITORYPORTENTIAL_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double PUBLICPOLICY_DEFAULT_CARD_VIEW_HEIGHT = 120;
+    public static double PUBLICPOLICY_DEFAULT_CARD_VIEW_WIDTH = 400;
 }

@@ -1,0 +1,129 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Feature.DTOs
+@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.DTOs
+@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal.Models.View
+
+@model DiagnosticReportViewModel
+
+@{
+    Layout = "_ReportLayout";
+}
+
+@section styles {
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.0;
+        }
+
+        .text-muted {
+            color: dimgray;
+            font-style: italic;
+            font-size: 0.92rem;
+        }
+    </style>
+}
+
+<h1>Diagnóstico</h1>
+
+<h3>Resumen</h3>
+
+<h5>Características del territorio</h5>
+<hr />
+@foreach (FeatureDetailDtoModel item in Model.Features)
+{
+    <h3>@item.Kind.Name</h3>
+    <p>@item.Description</p>
+}
+
+<h5>Objetivos</h5>
+<hr />
+@foreach (ObjectiveDetailDtoModel item in Model.Objectives)
+{
+    <h3>@item.Index<span>. </span>@item.Title</h3>
+    if (!string.IsNullOrEmpty(item.Description))
+    {
+        <p>@item.Description</p>
+    }
+
+    <h5><i>Retos</i></h5>
+    @foreach (var challange in item.Challanges)
+    {
+        <div>@challange.Index<span>. </span>@challange.Title</div>
+        if (!string.IsNullOrEmpty(challange.Description))
+        {
+            <p>@challange.Description</p>
+        }
+    }
+
+    <h5><i>Proyecciones</i></h5>
+    @foreach (var projection in item.Projections)
+    {
+        <div>@projection.Index<span>. </span>@projection.Title</div>
+        if (!string.IsNullOrEmpty(projection.Description))
+        {
+            <p>@projection.Description</p>
+        }
+    }
+
+    <h5><i>Acciones</i></h5>
+    @foreach (var action in item.Actions)
+    {
+        <div>@action.Index<span>. </span>@action.Title</div>
+        if (!string.IsNullOrEmpty(action.Description))
+        {
+            <p>@action.Description</p>
+        }
+    }
+}
+
+<h5>Barreras en el territorio</h5>
+<hr />
+<ul>
+    @foreach (var item in Model.TerritorialBarriers)
+    {
+        <li>
+            <p>@item.Title</p>
+            @if (!string.IsNullOrEmpty(item.Description))
+            {
+                <p>@item.Description</p>
+            }
+        </li>
+    }
+</ul>
+
+<h5>Potencialidades del territorio</h5>
+<hr />
+<ul>
+    @foreach (var item in Model.TerritoryPotentials)
+    {
+        <li>
+            <p>@item.Title</p>
+            @if (!string.IsNullOrEmpty(item.Description))
+            {
+                <p>@item.Description</p>
+            }
+        </li>
+    }
+</ul>
+
+<h5>Políticas públicas</h5>
+<hr />
+@foreach (var group in Model.PublicPolicyGroups)
+{
+    <h5><i>@group.Kind</i></h5>
+    <ul>
+        @foreach (var item in group.Items)
+        {
+            <li>
+                <p>@item.Title</p>
+                <p style="color: dimgray">@item.PublishedAt.ToShortDateString()</p>
+                @if (!string.IsNullOrEmpty(item.Description))
+                {
+                    <p>@item.Description</p>
+                }
+            </li>
+        }
+    </ul>
+}

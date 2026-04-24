@@ -31,7 +31,7 @@
     </ShellContent>
     <ShellContent
         Title="Diagnóstico"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate local_ui_pages:DiagnosticSummaryPage}">
         <ShellContent.FlyoutIcon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
@@ -40,6 +40,16 @@
         </ShellContent.FlyoutIcon>
     </ShellContent>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Caracter. del territ."
+            ContentTemplate="{DataTemplate local_ui_pages:FeaturesManagementPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphFeature}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
         <ShellContent
             Title="Objetivos"
             ContentTemplate="{DataTemplate local_ui_pages:ObjectivesManagementPage}">
@@ -72,7 +82,7 @@
         </ShellContent>
         <ShellContent
             Title="Políticas públicas"
-            ContentTemplate="{DataTemplate ContentPage}">
+            ContentTemplate="{DataTemplate local_ui_pages:PublicPoliciesManagementPage}">
             <ShellContent.FlyoutIcon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"

@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Presentation.Web.API\Presentation.Web.API.csproj" />
+	  <ProjectReference Include="..\Interop.Connect\Interop.Connect.csproj" />
 	</ItemGroup>
 
 </Project>

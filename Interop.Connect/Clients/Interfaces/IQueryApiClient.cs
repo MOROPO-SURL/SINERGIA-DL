@@ -8,7 +8,7 @@ public interface IQueryApiClient<TId, TBasicDtoModel, TDetailDtoModel>
 
     public abstract Task<TDetailDtoModel> GetAsync(TId id);
 
-    public abstract Task<TBasicDtoModel[]> GetAllAsync();
+    public abstract Task<TDetailDtoModel[]> GetAllAsync();
 
     public abstract Task<PaginateResultModel<TBasicDtoModel>> GetPageAsync(int page, int limit);
 }

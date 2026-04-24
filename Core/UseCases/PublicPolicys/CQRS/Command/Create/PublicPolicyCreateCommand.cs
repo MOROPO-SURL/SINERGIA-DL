@@ -4,5 +4,5 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.En
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicys.CQRS.Command.Create;
 
-public record PublicPolicyCreateCommand(Guid Id, string Title, string? Description, PublicPolicyKind Kind, DateTime PublisheAt) : ICreateCommand<PublicPolicyDetailDto>;
+public record PublicPolicyCreateCommand(Guid Id, string Title, string? Description, PublicPolicyKind Kind, DateTime PublishedAt) : ICreateCommand<PublicPolicyDetailDto>;
 

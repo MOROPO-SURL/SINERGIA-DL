@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
 
-internal sealed class ApiKeyEntityTypeCoonfiguration : IEntityTypeConfiguration<ApiKey>
+internal sealed class ApiKeyEntityTypeConfiguration : IEntityTypeConfiguration<ApiKey>
 {
     private const string TABLE_NAME = "apikeys";
 

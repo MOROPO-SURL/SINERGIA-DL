@@ -75,6 +75,21 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LocalizationResources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\Feature\FeatureConfigurationPage.xaml.cs">
+	    <DependentUpon>FeatureConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Feature\FeatureDetailPage.xaml.cs">
+	    <DependentUpon>FeatureDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\FeaturesManagementPage.xaml.cs">
+	    <DependentUpon>FeaturesManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\PublicPolicy\PublicPolicyConfigurationPage.xaml.cs">
+	    <DependentUpon>PublicPolicyConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\PublicPolicy\PublicPolicyDetailPage.xaml.cs">
+	    <DependentUpon>PublicPolicyDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\TerritoryPotentialsManagementPage.xaml.cs">
 	    <DependentUpon>TerritoryPotentialsManagementPage.xaml</DependentUpon>
 	  </Compile>
@@ -131,6 +146,27 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Common\Detail\WebSiteAddressDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DiagnosticSummaryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Feature\FeatureConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Feature\FeatureDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\FeaturesManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\PublicPoliciesManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\TerritoryPotentialsManagementPage.xaml">

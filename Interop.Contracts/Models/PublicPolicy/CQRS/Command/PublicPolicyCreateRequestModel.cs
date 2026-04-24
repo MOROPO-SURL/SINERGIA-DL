@@ -2,5 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PublicPolicy.CQRS.Command;
 
-public record PublicPolicyCreateRequestModel(Guid Id, string Title, string? Description, PublicPolicyKind Kind, DateTime PublisheAt);
-
+public record PublicPolicyCreateRequestModel(string Title, PublicPolicyKind Kind, DateTime PublishedAt, string? Description = null);

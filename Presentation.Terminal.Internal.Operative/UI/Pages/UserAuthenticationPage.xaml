@@ -41,7 +41,7 @@
                                     HorizontalTextAlignment="Center"
                                     FontAttributes="Bold"
                                     FontSize="Large"
-                                    Text="GEDEL" />
+                                    Text="Gestión del Desarrollo Local" />
                                 <Label
                                     HorizontalTextAlignment="Center"
                                     FontAttributes="Bold"

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseBindingContextedContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_view_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.View"
+    xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page"
+    xmlns:interop_feat_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Feature.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_obj_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_tb_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.TerritorialBarrier.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_tp_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.TerritoryPotential.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_pp_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PublicPolicy.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.DiagnosticSummaryPage"
+    x:TypeArguments="local_page_models:DiagnosticSummaryPageModel"
+    x:DataType="local_page_models:DiagnosticSummaryPageModel"
+    Title="Diagnóstico">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+            Clicked="ReloadToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xF450;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Exportar"
+            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+            Clicked="DownloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"  
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xF1DA;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        Text="Resumen" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label
+                        FontAttributes="Bold"
+                        Text="Características del territorio" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Features}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_feat_dto_models:FeatureDetailDtoModel">
+                                <VerticalStackLayout Spacing="8">
+                                    <Label 
+                                        FontSize="Medium"
+                                        Text="{Binding Kind.Name}" />
+                                    <Label Text="{Binding Description}" />
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Label
+                        Margin="0,12,0,0"
+                        FontAttributes="Bold"
+                        Text="Objetivos" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Objectives}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_obj_dto_models:ObjectiveDetailDtoModel">
+                                <VerticalStackLayout Spacing="8">
+                                    <StackLayout Spacing="8" Orientation="Horizontal">
+                                        <Label
+                                            VerticalOptions="Start"
+                                            FontSize="Medium"
+                                            Text="{Binding Index, StringFormat='{0}.'}" />
+                                        <Label 
+                                            FontSize="Medium"
+                                            Text="{Binding Title}" />
+                                    </StackLayout>
+                                    <Label
+                                        IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                        Style="{StaticResource OffLabelStyle}"
+                                        Text="{Binding Description}" />
+                                    <VerticalStackLayout>
+                                        <Label
+                                            Style="{StaticResource OffLabelStyle}"
+                                            FontAttributes="Italic,Bold" 
+                                            Text="Retos" />
+                                        <CollectionView ItemsSource="{Binding Challanges}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+                                            <CollectionView.EmptyView>
+                                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                            </CollectionView.EmptyView>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="interop_obj_dto_models:ObjectiveChallengeDetailDtoModel">
+                                                    <VerticalStackLayout>
+                                                        <Label>
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding Index, StringFormat='{0}.'}" />
+                                                                    <Span Text=" " />
+                                                                    <Span Text="{Binding Title}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                        <Label
+                                                            IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                                            Style="{StaticResource OffLabelStyle}"
+                                                            Text="{Binding Description}" />
+                                                    </VerticalStackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label 
+                                            Style="{StaticResource OffLabelStyle}"
+                                            FontAttributes="Italic,Bold"
+                                            Text="Proyecciones" />
+                                        <CollectionView ItemsSource="{Binding Projections}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+                                            <CollectionView.EmptyView>
+                                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                            </CollectionView.EmptyView>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="interop_obj_dto_models:ObjectiveProjectionDetailDtoModel">
+                                                    <VerticalStackLayout>
+                                                        <Label>
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding Index, StringFormat='{0}.'}" />
+                                                                    <Span Text=" " />
+                                                                    <Span Text="{Binding Title}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                        <Label
+                                                            IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                                            Style="{StaticResource OffLabelStyle}"
+                                                            Text="{Binding Description}" />
+                                                    </VerticalStackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label 
+                                            Style="{StaticResource OffLabelStyle}"
+                                            FontAttributes="Italic,Bold"
+                                            Text="Acciones" />
+                                        <CollectionView ItemsSource="{Binding Actions}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+                                            <CollectionView.EmptyView>
+                                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                            </CollectionView.EmptyView>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="interop_obj_dto_models:ObjectiveActionDetailDtoModel">
+                                                    <VerticalStackLayout>
+                                                        <Label>
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding Index, StringFormat='{0}.'}" />
+                                                                    <Span Text=" " />
+                                                                    <Span Text="{Binding Title}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                        <Label
+                                                            IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                                            Style="{StaticResource OffLabelStyle}"
+                                                            Text="{Binding Description}" />
+                                                    </VerticalStackLayout>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Label
+                        Margin="0,12,0,0"
+                        FontAttributes="Bold"
+                        Text="Barreras en el territorio" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding TerritorialBarriers}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_tb_dto_models:TerritorialBarrierDetailDtoModel">
+                                <Grid ColumnSpacing="4" RowSpacing="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Grid.Column="0" Grid.RowSpan="2"
+                                        Margin="0,4,0,0"
+                                        VerticalOptions="Start"
+                                        FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                        Text="&#xFA12;" />
+                                    <Label 
+                                        Grid.Column="1" Grid.Row="0"
+                                        Text="{Binding Title}" />
+                                    <Label  
+                                        Grid.Column="1" Grid.Row="1"
+                                        IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                        Text="{Binding Description}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Label
+                        Margin="0,12,0,0"
+                        FontAttributes="Bold"
+                        Text="Fortalezas del territorio" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding TerritoryPotentials}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_tp_dto_models:TerritoryPotentialDetailDtoModel">
+                                <Grid ColumnSpacing="4" RowSpacing="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Grid.Column="0" Grid.RowSpan="2"
+                                        Margin="0,4,0,0"
+                                        VerticalOptions="Start"
+                                        FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                        Text="&#xFA12;" />
+                                    <Label 
+                                        Grid.Column="1" Grid.Row="0"
+                                        Text="{Binding Title}" />
+                                    <Label  
+                                        Grid.Column="1" Grid.Row="1"
+                                        IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                        Text="{Binding Description}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Label
+                        Margin="0,12,0,0"
+                        FontAttributes="Bold"
+                        Text="Políticas públicas" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding PublicPolicyGroups}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="local_view_models:PublicPolicyGroupViewModel">
+                                <VerticalStackLayout>
+                                    <Label 
+                                        Style="{StaticResource OffLabelStyle}"
+                                        FontAttributes="Italic,Bold"
+                                        Text="{Binding Kind}" />
+                                    <CollectionView ItemsSource="{Binding Items}">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.EmptyView>
+                                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                        </CollectionView.EmptyView>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="interop_pp_dto_models:PublicPolicyDetailDtoModel">
+                                                <Grid ColumnSpacing="4" RowSpacing="4">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Label
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        Margin="0,4,0,0"
+                                                        VerticalOptions="Start"
+                                                        FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                                        Text="&#xFA12;" />
+                                                    <Label 
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Title}" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        TextColor="DimGray"
+                                                        Text="{Binding PublishedAt}" />
+                                                    <Label
+                                                        IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                                        Grid.Column="1" Grid.Row="2"
+                                                        Style="{StaticResource OffLabelStyle}"
+                                                        Text="{Binding Description}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</common_ui_base_pages:BaseBindingContextedContentPage>

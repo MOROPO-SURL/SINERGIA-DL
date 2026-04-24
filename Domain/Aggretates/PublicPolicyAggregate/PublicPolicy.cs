@@ -13,7 +13,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregat
         {
             IsArchived = isArchived;
             Title = title;
-            PublisheAt = publisheAt;
+            PublishedAt = publisheAt;
             Kind = kind;
             Description = description;
         }
@@ -22,7 +22,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregat
 
         public string Title { get; set; } = null!;
 
-        public DateTime PublisheAt { get; set; }
+        public DateTime PublishedAt { get; set; }
 
         public PublicPolicyKind Kind { get; set; }
 

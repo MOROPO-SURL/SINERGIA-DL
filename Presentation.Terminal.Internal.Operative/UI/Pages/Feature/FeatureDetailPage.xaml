@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseDetailEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Feature"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Feature.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_common_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Feature.FeatureDetailPage"
+    x:TypeArguments="interop_dto_models:FeatureDetailDtoModel,local_detail_page_models:FeatureDetailPageModel"
+    x:DataType="local_detail_page_models:FeatureDetailPageModel"
+    Shell.TabBarIsVisible="False"
+    Title="Detalles de Característica del territorio">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Modificar"
+            Command="{Binding ModifyCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"  
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xF90B;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Eliminar"
+            Command="{Binding RemoveCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xFA79;"  />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+            <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Tipo" />
+                <Label Text="{Binding Model.Kind.Name}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Descripción" />
+                <Label Text="{Binding Model.Description}" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</common_ui_base_pages:BaseDetailEntityPage>

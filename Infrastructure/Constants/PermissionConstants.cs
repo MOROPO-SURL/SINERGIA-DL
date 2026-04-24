@@ -121,4 +121,12 @@ public static class PermissionConstants
     public const string KEYVARIABLE_REMOVE_PERMISSION = "keyvariable-remove-permission";
     public const string KEYVARIABLE_ARCHIVE_PERMISSION = "keyvariable-archive-permission";
     public const string KEYVARIABLE_UNARCHIVE_PERMISSION = "keyvariable-unarchive-permission";
+
+    public const string FEATUREKIND_LIST_PERMISSION = "featurekind-list-permission";
+    public const string FEATUREKIND_VIEW_PERMISSION = "featurekind-view-permission";
+    public const string FEATUREKIND_CREATE_PERMISSION = "featurekind-create-permission";
+    public const string FEATUREKIND_UPDATE_PERMISSION = "featurekind-update-permission";
+    public const string FEATUREKIND_REMOVE_PERMISSION = "featurekind-remove-permission";
+    public const string FEATUREKIND_ENABLE_PERMISSION = "featurekind-enable-permission";
+    public const string FEATUREKIND_DISABLE_PERMISSION = "featurekind-disable-permission";
 }

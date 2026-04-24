@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeys.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Features.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Images.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreas.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.KeyVariables.Mappings;
@@ -91,7 +93,11 @@ public static class ServiceProviderExtensions
 
             new TerritoryPotentialEntityMappingRegister(),
 
-            new KeyVariableEntityMappingRegister()
+            new KeyVariableEntityMappingRegister(),
+
+            new FeatureKindEntityMappingRegister(),
+
+            new FeatureEntityMappingRegister()
         );
     }
 }

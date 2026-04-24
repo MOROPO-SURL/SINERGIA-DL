@@ -29,4 +29,6 @@ internal static class PermissionFamilyConstants
     public const string CLASIFICATION_PERMISSIONS_FAMILY = "clasification-permission-family";
 
     public const string KEYVARIABLE_PERMISSIONS_FAMILY = "keyvariable-permission-family";
+
+    public const string FEATUREKIND_PERMISSIONS_FAMILY = "featurekind-permission-family";
 }

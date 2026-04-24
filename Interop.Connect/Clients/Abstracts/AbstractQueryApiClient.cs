@@ -21,9 +21,9 @@ public abstract class AbstractQueryApiClient<TId, TBasicDtoModel, TDetailDtoMode
         return httpClientProvider.GetHttpClient().SendGetAsync<int>($"{GetUseCaseBaseUriSegment()}/count");
     }
 
-    public Task<TBasicDtoModel[]> GetAllAsync()
+    public Task<TDetailDtoModel[]> GetAllAsync()
     {
-        return httpClientProvider.GetHttpClient().SendGetAsync<TBasicDtoModel[]>(GetUseCaseBaseUriSegment());
+        return httpClientProvider.GetHttpClient().SendGetAsync<TDetailDtoModel[]>(GetUseCaseBaseUriSegment());
     }
 
     public Task<TDetailDtoModel> GetAsync(TId id)
