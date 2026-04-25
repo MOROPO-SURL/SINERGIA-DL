@@ -5,6 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Extensions;
+using NSwag;
 using System.Runtime.CompilerServices;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API;
@@ -56,7 +57,28 @@ public class Program
 
         builder.Services.AddControllers();
 
-        builder.Services.AddOpenApiDocument();
+        builder.Services.AddOpenApiDocument(options => {
+            options.PostProcess = document =>
+            {
+                document.Info = new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "GEDEL API",
+                    Description = "API pública de la Plataforma de Gestión del Desarrollo Local del CAM de Camagüey",
+                    TermsOfService = "https://portal.gedel.gobcmg.com.cu/terms",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Contacto",
+                        Url = "https://portal.gedel.gobcmg.com.cu/contact"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Licencia opensource",
+                        Url = "https://portal.gedel.gobcmg.com.cu/license"
+                    }
+                };
+            };
+        });
 
         var app = builder.Build();
 

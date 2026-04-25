@@ -1,7 +1,6 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Enumerations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
@@ -27,7 +26,7 @@ public partial class ObjectivesManagementPage :
 
     public Task PresentItemCreateUserInterfaceAsync()
     {
-        Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new ObjectiveConfigurationPage(new ObjectiveConfigurationPageModel(null, CreateItemSuccess_Callback))));
+        Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new ObjectiveConfigurationPage(new ObjectiveConfigurationPageModel(null, model => ConcreteBindingContext.LoadItems(true)))));
 
         return Task.CompletedTask;
     }
@@ -51,11 +50,4 @@ public partial class ObjectivesManagementPage :
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.OBJECTIVE_DEFAULT_CARD_VIEW_HEIGHT;
-
-    private void CreateItemSuccess_Callback(ObjectiveDetailDtoModel model)
-    {
-        this.PresentToastNotification(NotificationKind.Success, "Cambios aplicados con éxito.", delay: TimeSpan.FromMilliseconds(500));
-
-        ConcreteBindingContext.LoadItems(true);
-    }
 }

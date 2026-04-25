@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate;
 
-public class UnitMeasurement : AbstractAuditableEntity<UnitMeasurementId, Guid>, IAggregateRoot<UnitMeasurementId, Guid>, INamedEntity<UnitMeasurementId, Guid>, IArchivableEntity<UnitMeasurementId, Guid>, IEnableableEntity<UnitMeasurementId, Guid>
+public class UnitMeasurement : AbstractAuditableEntity<UnitMeasurementId, Guid>, IAggregateRoot<UnitMeasurementId, Guid>, INamedEntity<UnitMeasurementId, Guid>, IArchivableEntity<UnitMeasurementId, Guid>, IEnableableEntity<UnitMeasurementId, Guid>, IPriorizableEntity<UnitMeasurementId, Guid>
 {
     private UnitMeasurement() : base(new UnitMeasurementId(default)) { }
 
@@ -20,6 +20,8 @@ public class UnitMeasurement : AbstractAuditableEntity<UnitMeasurementId, Guid>,
     public bool IsEnabled { get; set; }
 
     public bool IsArchived { get; set; }
+
+    public int Priority { get; set; }
 
     public string Name { get; set; } = null!;
 

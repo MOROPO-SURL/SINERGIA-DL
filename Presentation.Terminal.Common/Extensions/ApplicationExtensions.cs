@@ -1,21 +1,23 @@
 ﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
 
-public static class ContentPageExtensions
+public static class ApplicationExtensions
 {
-    public static void PresentToastNotification(this ContentPage target, Enumerations.NotificationKind kind, string message, TimeSpan? delay = null, TimeSpan? time = null)
+    public static void PresentToastNotification(this Application self, Enumerations.NotificationKind kind, string message, TimeSpan? delay = null, TimeSpan? time = null)
     {
         //#if WINDOWS
         if (string.IsNullOrEmpty(message) || string.IsNullOrWhiteSpace(message)) return;
 
-        if (target.Content is not Grid toastContainerGrid)
+        if ((Application.Current!.MainPage as Shell)?.CurrentPage is not ContentPage targetPage) return;
+
+        if (targetPage.Content is not Grid toastContainerGrid)
         {
-            if (target.Content is ScrollView targetScrollViewContent && targetScrollViewContent.Content is not Grid)
+            if (targetPage.Content is ScrollView targetScrollViewContent && targetScrollViewContent.Content is not Grid targetScrollViewContentGrid)
             {
                 throw new InvalidOperationException();
             }
             else
             {
-                toastContainerGrid = (Grid)((ScrollView)target.Content).Content;
+                toastContainerGrid = (Grid)((ScrollView)targetPage.Content).Content;
             }
         }
 
@@ -43,17 +45,17 @@ public static class ContentPageExtensions
 
         Task.Delay(delay ?? TimeSpan.FromMilliseconds(100)).ContinueWith(_ =>
         {
-            target.Dispatcher.Dispatch(() =>
+            self.Dispatcher.Dispatch(() =>
             {
                 toastFrame.FadeTo(1).ContinueWith(async _ =>
                 {
                     await Task.Delay(time ?? TimeSpan.FromSeconds(3));
 
-                    target.Dispatcher.Dispatch(() =>
+                    self.Dispatcher.Dispatch(() =>
                     {
                         toastFrame.FadeTo(0).ContinueWith(_ =>
                         {
-                            target.Dispatcher.Dispatch(() =>
+                            self.Dispatcher.Dispatch(() =>
                             {
                                 toastContainerGrid.Remove(toastFrame);
 

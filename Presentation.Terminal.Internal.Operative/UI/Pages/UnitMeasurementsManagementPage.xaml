@@ -13,7 +13,7 @@
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.UnitMeasurementsManagementPage"
     x:TypeArguments="interop_dto_models:UnitMeasurementBasicDtoModel,interop_dto_models:UnitMeasurementDetailDtoModel,local_management_page_models:UnitMeasurementsManagementPageModel,local_configuration_page_models:UnitMeasurementConfigurationPageModel"
     x:DataType="local_management_page_models:UnitMeasurementsManagementPageModel"
-    Title="Diagnóstico: Unidades de Medidad"
+    Title="Gestión de Unidades de Medidad"
     IsEnabled="{Binding IsEnabled}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -47,7 +47,7 @@
             <StackLayout Orientation="Vertical">
                 <SearchBar 
                     Style="{StaticResource ListEntityPageSearchBarStyle}"
-                    Placeholder="-- buscar por nombre --"
+                    Placeholder="-- buscar por nombre o símbolo --"
                     Text="{Binding SearchParameter}"
                     SearchCommand="{Binding SearchCommand, Mode=OneTime}" />
                 <Grid VerticalOptions="FillAndExpand">
@@ -75,9 +75,12 @@
                                     </Frame.GestureRecognizers>
                                     <VerticalStackLayout>
                                         <Label
-                                            MaxLines="2"
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Name}" />
+                                        <Label
+                                            Style="{StaticResource OffLabelStyle}"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Symbol}" />
                                     </VerticalStackLayout>
                                 </Frame>
                             </DataTemplate>

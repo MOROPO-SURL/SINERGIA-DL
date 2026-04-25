@@ -9,6 +9,8 @@ public sealed class WebSiteAddressDetailPageModel : AbstractDetailEntityPageMode
     {
     }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task PerformRemotionAsync(WebSiteAddressDetailDtoModel model)
     {
         throw new NotImplementedException();

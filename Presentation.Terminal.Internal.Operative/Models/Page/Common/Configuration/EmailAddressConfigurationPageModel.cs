@@ -24,6 +24,8 @@ public class EmailAddressConfigurationPageModel : AbstractConfigurationPageModel
 
     public string? Name { get => name; set => SetProperty(ref name, value); }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task<EmailAddressDetailDtoModel> PerformCreationAsync()
     {
         return Task.FromResult(new EmailAddressDetailDtoModel(Value, Name));

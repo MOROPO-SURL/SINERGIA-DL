@@ -9,6 +9,8 @@ public sealed class ObjectiveProjectionDetailPageModel : AbstractDetailEntityPag
     {
     }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task PerformRemotionAsync(ObjectiveProjectionDetailDtoModel model)
     {
         throw new NotImplementedException();

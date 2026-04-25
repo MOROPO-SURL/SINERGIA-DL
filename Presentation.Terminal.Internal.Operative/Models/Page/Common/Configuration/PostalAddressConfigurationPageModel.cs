@@ -35,6 +35,8 @@ public sealed class PostalAddressConfigurationPageModel : AbstractConfigurationP
 
     public string? Name { get => name; set => SetProperty(ref name, value); }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task<PostalAddressDetailDtoModel> PerformCreationAsync()
     {
         return Task.FromResult(new PostalAddressDetailDtoModel(Street, Number, Context, ZipCode, Name));

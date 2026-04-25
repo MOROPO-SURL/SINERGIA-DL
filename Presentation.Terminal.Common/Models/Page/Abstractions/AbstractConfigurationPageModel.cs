@@ -54,13 +54,21 @@ public abstract class AbstractConfigurationPageModel<TInModel, TOutModel> : Base
 
             task.ContinueWith(task =>
             {
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() =>
+                Dispatcher.Dispatch(() =>
                 {
                     if (!task.IsFaulted && !task.IsCanceled)
                     {
                         this.successCallbackAction.Invoke(task.Result);
 
-                        Application.Current!.MainPage!.NavigationPopPageAsync();
+                        Application.Current!.MainPage!.NavigationPopPageAsync().ContinueWith(_task =>
+                        {
+                            if (!PresentChangeNotification) return;
+
+                            Dispatcher.Dispatch(() =>
+                            {
+                                Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+                            });
+                        });
                     }
                     else
                     {
@@ -85,7 +93,7 @@ public abstract class AbstractConfigurationPageModel<TInModel, TOutModel> : Base
             {
                 if (!task.Result) return;
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() => Application.Current!.MainPage!.NavigationPopPageAsync());
+                Dispatcher.Dispatch(() => Application.Current!.MainPage!.NavigationPopPageAsync());
             });
         });
     }
@@ -98,6 +106,8 @@ public abstract class AbstractConfigurationPageModel<TInModel, TOutModel> : Base
 
         validationResult = null;
     }
+
+    protected virtual bool PresentChangeNotification => true;
 
     public bool OnEditionMode { get; private set; }
 

@@ -29,7 +29,7 @@ public sealed class DiagnosticSummaryPageModel : BasePageModel
 
     public ObservableCollection<PublicPolicyGroupViewModel> PublicPolicyGroups { get; set; } = [];
 
-    public void LoadSummary(IDispatcher dispatcher)
+    public void LoadSummary()
     {
         if (IsBusy) return;
 
@@ -59,7 +59,7 @@ public sealed class DiagnosticSummaryPageModel : BasePageModel
                 new PublicPolicyGroupViewModel(PublicPolicyKind.Municipal, [.. publicPolicies.Where(item => item.Kind == PublicPolicyKind.Municipal)])    
             ];
 
-            dispatcher.Dispatch(() =>
+            Dispatcher.Dispatch(() =>
             {
                 LoadedAt = DateTime.Now;
 
@@ -102,7 +102,7 @@ public sealed class DiagnosticSummaryPageModel : BasePageModel
             });
         }).ContinueWith(task =>
         {
-            dispatcher.Dispatch(() =>
+            Dispatcher.Dispatch(() =>
             {
                 if (task.IsFaulted || task.IsCanceled)
                 {

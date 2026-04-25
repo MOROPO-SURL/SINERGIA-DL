@@ -32,6 +32,8 @@ public sealed class ObjectiveProjectionConfigurationPageModel : AbstractConfigur
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task<ObjectiveProjectionDetailDtoModel> PerformCreationAsync()
     {
         return Task.FromResult(new ObjectiveProjectionDetailDtoModel(Guid.NewGuid(), Index, Title!, Description));

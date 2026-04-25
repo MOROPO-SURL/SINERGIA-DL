@@ -9,10 +9,16 @@
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.UnitMeasurement.UnitMeasurementConfigurationPage"
     x:TypeArguments="interop_dto_models:UnitMeasurementBasicDtoModel,interop_dto_models:UnitMeasurementDetailDtoModel,local_configuration_page_models:UnitMeasurementConfigurationPageModel"
     x:DataType="local_configuration_page_models:UnitMeasurementConfigurationPageModel"
     Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:BoolToObjectConverter x:Key="BoolToPrefixedStringConverter" TrueObject="(Símbolo antes)" FalseObject="(Símbolo después)" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"
@@ -38,28 +44,75 @@
     <Grid>
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
-                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                    <Entry Text="{Binding Name}" />
-                    <Label>
-                        <Label.Behaviors>
-                            <common_ui_behaviors:ValidationMessageLabelBehavior 
-                                TargetValidationPropertyName="{Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.NameValidableProperty}"
-                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
-                        </Label.Behaviors>
-                    </Label>
-                </VerticalStackLayout>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Símbolo" />
-                    <Entry Text="{Binding Symbol}" />
-                    <Label>
-                        <Label.Behaviors>
-                            <common_ui_behaviors:ValidationMessageLabelBehavior 
-                                TargetValidationPropertyName="{Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.SymbolValidableProperty}"
-                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
-                        </Label.Behaviors>
-                    </Label>
-                </VerticalStackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=11, ExtraLargeContainerColumn=10, LargeContainerColumn=9, SmallContainerColumn=8}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                            <Entry Text="{Binding Name}" />
+                            <Label>
+                                <Label.Behaviors>
+                                    <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                        TargetValidationPropertyName="{Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.NameValidableProperty}"
+                                        InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                                </Label.Behaviors>
+                            </Label>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Símbolo" />
+                        <Entry Text="{Binding Symbol}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.SymbolValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <BoxView Style="{StaticResource FormFluentChildSeparatorBoxViewStyle}" />
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=5, SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Presentar como prefijo?" />
+                        <Switch IsToggled="{Binding Prefixed}" />
+                        <Label Text="{Binding Prefixed, Converter={StaticResource BoolToPrefixedStringConverter}}" />
+                    </VerticalStackLayout>
+                    <Grid Style="{StaticResource FormFlexWrappedChildGridStyle}">
+                        <Grid.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}" />
+                        </Grid.Behaviors>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Priority}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Maximum="100"
+                            Value="{Binding Priority}" />
+                    </Grid>
+                </FlexLayout>
             </VerticalStackLayout>
         </ScrollView>
         <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>

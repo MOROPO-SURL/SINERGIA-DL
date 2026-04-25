@@ -9,6 +9,8 @@ public sealed class PostalAddressDetailPageModel : AbstractDetailEntityPageModel
     {
     }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task PerformRemotionAsync(PostalAddressDetailDtoModel model)
     {
         throw new NotImplementedException();

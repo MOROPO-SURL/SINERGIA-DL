@@ -9,6 +9,8 @@ public sealed class EmailAddressDetailPageModel : AbstractDetailEntityPageModel<
     {
     }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task PerformRemotionAsync(EmailAddressDetailDtoModel model)
     {
         throw new NotImplementedException();

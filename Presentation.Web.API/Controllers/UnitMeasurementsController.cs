@@ -58,7 +58,7 @@ public class UnitMeasurementsController: ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<UnitMeasurementBasicDto> result = await mediator.Send(new UnitMeasurementPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            PaginateQueryResultModel<UnitMeasurementBasicDto> result = await mediator.Send(new UnitMeasurementPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%") || EF.Functions.ILike(entity.Symbol, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<UnitMeasurementBasicDtoModel>>(result));
         }

@@ -32,6 +32,8 @@ public sealed class ObjectiveChallengeConfigurationPageModel : AbstractConfigura
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task<ObjectiveChallengeDetailDtoModel> PerformCreationAsync()
     {
         return Task.FromResult(new ObjectiveChallengeDetailDtoModel(Guid.NewGuid(), Index, Title!, Description));

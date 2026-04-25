@@ -63,7 +63,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             {
                 if (!task.Result) return;
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() => PhoneNumbers.Remove(model));
+                Dispatcher.Dispatch(() => PhoneNumbers.Remove(model));
 
                 hasChangesFlag = true;
             });
@@ -94,7 +94,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             {
                 if (!task.Result) return;
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() => EmailAddresses.Remove(model));
+                Dispatcher.Dispatch(() => EmailAddresses.Remove(model));
 
                 hasChangesFlag = true;
             });
@@ -125,7 +125,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             {
                 if (!task.Result) return;
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() => PostalAddresses.Remove(model));
+                Dispatcher.Dispatch(() => PostalAddresses.Remove(model));
 
                 hasChangesFlag = true;
             });
@@ -156,7 +156,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             {
                 if (!task.Result) return;
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() => WebSiteAddresses.Remove(model));
+                Dispatcher.Dispatch(() => WebSiteAddresses.Remove(model));
 
                 hasChangesFlag = true;
             });

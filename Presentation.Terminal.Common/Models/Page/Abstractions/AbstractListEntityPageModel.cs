@@ -51,7 +51,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel, TDetailModel> : B
             {
                 if (!task.IsFaulted && !task.IsCanceled) return;
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() =>
+                Dispatcher.Dispatch(() =>
                 {
                     IsBusy = false;
 
@@ -126,7 +126,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel, TDetailModel> : B
 
         FetchItemsAsync(currentItemsPageNumber, currentItemsPageLimit).ContinueWith(task =>
         {
-            Application.Current!.MainPage!.Dispatcher.Dispatch(() =>
+            Dispatcher.Dispatch(() =>
             {
                 if (task.Exception != null || task.IsCanceled)
                 {

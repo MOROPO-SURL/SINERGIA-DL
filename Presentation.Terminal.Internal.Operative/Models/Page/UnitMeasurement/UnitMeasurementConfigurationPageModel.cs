@@ -16,6 +16,7 @@ public sealed class UnitMeasurementConfigurationPageModel: AbstractConfiguration
     private string name = null!;
     private string symbol = null!;
     private bool prefixed;
+    private int priority = 1;
 
     public UnitMeasurementConfigurationPageModel(UnitMeasurementDetailDtoModel? model, Action<UnitMeasurementDetailDtoModel> successCallbackAction) : base(model, successCallbackAction, new UnitMeasurementConfigurationValidator())
     {
@@ -25,6 +26,7 @@ public sealed class UnitMeasurementConfigurationPageModel: AbstractConfiguration
         name = model.Name;
         symbol = model.Symbol;
         prefixed = model.Prefixed;
+        priority = model.Priority;
     }
 
     public Guid? Id { get; set; }
@@ -35,6 +37,8 @@ public sealed class UnitMeasurementConfigurationPageModel: AbstractConfiguration
 
     public bool Prefixed { get => prefixed; set => SetProperty(ref prefixed, value); }
 
+    public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
     protected override Task<UnitMeasurementDetailDtoModel> PerformCreationAsync()
     {
         UnitMeasurementCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
@@ -43,7 +47,8 @@ public sealed class UnitMeasurementConfigurationPageModel: AbstractConfiguration
             (
                 Name!,
                 Symbol!,
-                Prefixed
+                Prefixed,
+                Priority
             ));
     }
 
@@ -56,7 +61,8 @@ public sealed class UnitMeasurementConfigurationPageModel: AbstractConfiguration
                 Id!.Value,
                 Name!,
                 Symbol!,
-                Prefixed
+                Prefixed,
+                Priority
             ));
     }
 

@@ -18,7 +18,5 @@ IRequestHandler<UnitMeasurementPaginateQuery, PaginateQueryResultModel<UnitMeasu
 
     protected override Expression<Func<UnitMeasurement, bool>>? GlobalSelector => entity => !entity.IsArchived;
 
-    protected override Expression<Func<UnitMeasurement, object>> OrderExpression => entity => entity.CreatedAt;
-
-    protected override bool IsOrderDescending => true;
+    protected override Expression<Func<UnitMeasurement, object>> OrderExpression => entity => entity.Priority;
 }

@@ -10,7 +10,7 @@ internal sealed class UnitMeasurementCreateCommandMappingRegister : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<UnitMeasurementCreateCommand, UnitMeasurement>()
-            .Map(dest => dest.Id, src => new UnitMeasurementId(src.Id))
+            .Map(dest => dest.Id, src => new UnitMeasurementId(Guid.NewGuid()))
             .Map(dest => dest, src => src);
     }
 }

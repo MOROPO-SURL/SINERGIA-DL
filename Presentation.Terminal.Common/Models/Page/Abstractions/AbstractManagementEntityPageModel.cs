@@ -35,7 +35,7 @@ public abstract class AbstractManagementEntityPageModel<TBasicModel, TDetailMode
             {
                 if (!task.IsFaulted && !task.IsCanceled) return;
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() =>
+                Dispatcher.Dispatch(() =>
                 {
                     IsBusy = false;
 

@@ -30,7 +30,7 @@ public partial class DiagnosticSummaryPage : BaseBindingContextedContentPage<Dia
 
     private void ReloadToolbarItem_Clicked(object sender, EventArgs eventArgs)
     {
-        ConcreteBindingContext.LoadSummary(Dispatcher);
+        ConcreteBindingContext.LoadSummary();
     }
 
     private void DownloadToolbarItems_Clicked(object sender, EventArgs eventArgs)
@@ -46,7 +46,7 @@ public partial class DiagnosticSummaryPage : BaseBindingContextedContentPage<Dia
             Timeout = TimeSpan.FromSeconds(30.0)
         };
 
-        httpClient.GetByteArrayAsync($"https://localhost:7045/report/diagnostic/print").ContinueWith(task =>
+        httpClient.GetByteArrayAsync(Constants.InteropConstants.REPORT_DIAGNOSTIC_URL).ContinueWith(task =>
         {
             Dispatcher.Dispatch(async () =>
             {
@@ -60,11 +60,11 @@ public partial class DiagnosticSummaryPage : BaseBindingContextedContentPage<Dia
 
                     if (fileSaverResult.IsSuccessful)
                     {
-                        this.PresentToastNotification(NotificationKind.Success, "Archivo descargado con éxito.");
+                        Application.Current!.PresentToastNotification(NotificationKind.Success, "Archivo descargado con éxito.");
                     }
                     else if (fileSaverResult.FilePath != null)
                     {
-                        this.PresentToastNotification(NotificationKind.Error, "No fue posible salvar el archivo.");
+                        Application.Current!.PresentToastNotification(NotificationKind.Error, "No fue posible salvar el archivo.");
                     }
                 }
 

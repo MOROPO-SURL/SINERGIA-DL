@@ -165,7 +165,7 @@
     </ShellContent>
     <ShellContent
         Title="Unidades de medida"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate local_ui_pages:UnitMeasurementsManagementPage}">
         <ShellContent.FlyoutIcon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"

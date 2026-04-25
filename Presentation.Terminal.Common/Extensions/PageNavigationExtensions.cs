@@ -14,7 +14,7 @@ public static class PageNavigationExtensions
 
     public static Task NavigationPopPageAsync(this Page self, bool animate = true, Action<Page>? callbackAction = null)
     {
-        return self.Navigation.PopAsync(animate).ContinueWith((task) =>
+        return self.Navigation.PopAsync(animate).ContinueWith(task =>
         {
             task.Result.Dispatcher.Dispatch(() =>
             {
@@ -30,7 +30,7 @@ public static class PageNavigationExtensions
 
     public static Task NavigationPopModalPageAsync(this Page self, bool animate = true, Action<Page>? callbackAction = null)
     {
-        return self.Navigation.PopModalAsync(animate).ContinueWith((task) =>
+        return self.Navigation.PopModalAsync(animate).ContinueWith(task =>
         {
             task.Result.Dispatcher.Dispatch(() =>
             {

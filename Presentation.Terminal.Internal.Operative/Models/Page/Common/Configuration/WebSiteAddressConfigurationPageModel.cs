@@ -24,6 +24,8 @@ public sealed class WebSiteAddressConfigurationPageModel : AbstractConfiguration
 
     public string Name { get => name; set => SetProperty(ref name, value); }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task<WebSiteAddressDetailDtoModel> PerformCreationAsync()
     {
         return Task.FromResult(new WebSiteAddressDetailDtoModel(Name, Url));

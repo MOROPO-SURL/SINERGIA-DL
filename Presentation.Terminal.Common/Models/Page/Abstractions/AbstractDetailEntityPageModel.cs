@@ -38,7 +38,7 @@ public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageMode
             {
                 if (!task.IsFaulted && !task.IsCanceled) return;
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() =>
+                Dispatcher.Dispatch(() =>
                 {
                     IsBusy = false;
 
@@ -67,13 +67,21 @@ public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageMode
 
                 PerformRemotionAsync(Model).ContinueWith(task =>
                 {
-                    Application.Current!.MainPage!.Dispatcher.Dispatch(() =>
+                    Dispatcher.Dispatch(() =>
                     {
                         if (!task.IsFaulted && !task.IsCanceled)
                         {
                             changeCallbackAction?.Invoke();
 
-                            Application.Current!.MainPage!.NavigationPopPageAsync();
+                            Application.Current!.MainPage!.NavigationPopPageAsync().ContinueWith(_task =>
+                            {
+                                if (!PresentChangeNotification) return;
+
+                                Dispatcher.Dispatch(() =>
+                                {
+                                    Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+                                });
+                            });
                         }
                         else
                         {
@@ -87,6 +95,8 @@ public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageMode
         });
 
     }
+
+    protected virtual bool PresentChangeNotification => true;
 
     protected virtual string? EditionPermissionCode => null;
 
@@ -110,5 +120,7 @@ public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageMode
         Model = model;
 
         changeCallbackAction?.Invoke();
+
+        Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
     }
 }

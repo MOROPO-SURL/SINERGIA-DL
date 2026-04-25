@@ -416,6 +416,7 @@
                         </Frame>
                     </VerticalStackLayout>
                 </FlexLayout>
+                <BoxView Style="{StaticResource FormFluentChildSeparatorBoxViewStyle}" />
                 <FlexLayout Wrap="Wrap">
                     <Grid Style="{StaticResource FormFlexWrappedChildGridStyle}">
                         <Grid.Behaviors>

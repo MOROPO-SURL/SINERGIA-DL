@@ -6,17 +6,18 @@
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.UnitMeasurement.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:interop_common_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.UnitMeasurement.UnitMeasurementDetailPage"
     x:TypeArguments="interop_dto_models:UnitMeasurementDetailDtoModel,local_detail_page_models:UnitMeasurementDetailPageModel"
     x:DataType="local_detail_page_models:UnitMeasurementDetailPageModel"
     Shell.TabBarIsVisible="False"
-    Title="Detalles de la Unidad de Medidad">
+    Title="Detalles de Unidad de medidad">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+            <communitytoolkit_converters:BoolToObjectConverter x:Key="BoolToPrefixedStringConverter" TrueObject="Símbolo antes" FalseObject="Símbolo después" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -41,16 +42,47 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <ScrollView Orientation="Vertical">
-        <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
-            <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
-                <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Nombre" />
-                <Label Text="{Binding Model.Name, TargetNullValue='---'}" />
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=5, MediumContainerColumn=6, SmallContainerColumn=8}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Nombre" />
+                        <Label Text="{Binding Model.Name}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, MediumContainerColumn=3, SmallContainerColumn=4}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Símbolo" />
+                        <Label Text="{Binding Model.Symbol}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel MediumContainerColumn=3, SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Presentación" />
+                        <Label Text="{Binding Model.Prefixed, Converter={StaticResource BoolToPrefixedStringConverter}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionPropertyLabelStyle}" Text="Prioridad" />
+                        <Label Text="{Binding Model.Priority}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
             </VerticalStackLayout>
-            <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
-                <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Símbolo" />
-                <Label Text="{Binding Model.Symbol, TargetNullValue='---'}" />
-            </VerticalStackLayout>
-        </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
 </common_ui_base_pages:BaseDetailEntityPage>

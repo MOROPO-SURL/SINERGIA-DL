@@ -25,7 +25,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
 
             httpClient = new HttpClient(HttpClientHandlerFactory.Build())
             {
-                BaseAddress = new Uri(DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7235" : "https://localhost:7235")
+                BaseAddress = new Uri(Constants.InteropConstants.API_BASE_URL)
             };
 
             KeyValuePair<string, string> authorizationHeader = GetAuthorizeHeader();

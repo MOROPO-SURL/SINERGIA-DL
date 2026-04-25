@@ -9,6 +9,8 @@ public sealed class ObjectiveChallengeDetailPageModel : AbstractDetailEntityPage
     {
     }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task PerformRemotionAsync(ObjectiveChallengeDetailDtoModel model)
     {
         throw new NotImplementedException();

@@ -3,5 +3,4 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.CQRS.Command.Create;
 
-public record UnitMeasurementCreateCommand(Guid Id, string Name, string Symbol, bool Prefixed, bool IsEnable) : ICreateCommand<UnitMeasurementDetailDto>;
-
+public record UnitMeasurementCreateCommand(string Name, string Symbol, bool Prefixed, bool IsEnable, int Priority) : ICreateCommand<UnitMeasurementDetailDto>;

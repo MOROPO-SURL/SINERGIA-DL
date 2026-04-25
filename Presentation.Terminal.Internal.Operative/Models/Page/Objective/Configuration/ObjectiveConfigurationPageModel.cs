@@ -89,7 +89,7 @@ public sealed class ObjectiveConfigurationPageModel : AbstractConfigurationPageM
                     outChallanges.Add(model);
                 }
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() => Challanges.Remove(model));
+                Dispatcher.Dispatch(() => Challanges.Remove(model));
 
                 hasChangesFlag = true;
             });
@@ -150,7 +150,7 @@ public sealed class ObjectiveConfigurationPageModel : AbstractConfigurationPageM
                     outProjections.Add(model);
                 }
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() => Projections.Remove(model));
+                Dispatcher.Dispatch(() => Projections.Remove(model));
 
                 hasChangesFlag = true;
             });
@@ -211,7 +211,7 @@ public sealed class ObjectiveConfigurationPageModel : AbstractConfigurationPageM
                     outActions.Add(model);
                 }
 
-                Application.Current!.MainPage!.Dispatcher.Dispatch(() => Actions.Remove(model));
+                Dispatcher.Dispatch(() => Actions.Remove(model));
 
                 hasChangesFlag = true;
             });

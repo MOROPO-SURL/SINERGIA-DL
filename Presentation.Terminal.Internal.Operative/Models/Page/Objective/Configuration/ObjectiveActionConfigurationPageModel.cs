@@ -32,6 +32,8 @@ public sealed class ObjectiveActionConfigurationPageModel : AbstractConfiguratio
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
+    protected override bool PresentChangeNotification => false;
+
     protected override Task<ObjectiveActionDetailDtoModel> PerformCreationAsync()
     {
         return Task.FromResult(new ObjectiveActionDetailDtoModel(Guid.NewGuid(), Index, Title!, Description));
