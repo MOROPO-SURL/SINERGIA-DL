@@ -2,5 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreas.DTOs;
 
-public record InterestAreaDetailDto(Guid Id, string Name, string? Description, bool IsEnabled) : IDetailDto;
-
+public record InterestAreaDetailDto(Guid Id, string Name, bool IsEnabled, string? Description = null) : IDetailDto;

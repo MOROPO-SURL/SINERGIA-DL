@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities;
@@ -20,13 +20,13 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
     {
         builder.ToTable(ROOT_TABLE_NAME);
 
-        builder.HasKey(entity => new { entity.StrategicLineId, entity.StrategicAxeId });
+        builder.HasKey(entity => new { entity.FirstId, entity.SecoundId });
 
-        builder.Property(entity => entity.StrategicLineId)
+        builder.Property(entity => entity.FirstId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicLineId(value));
 
-        builder.Property(entity => entity.StrategicAxeId)
+        builder.Property(entity => entity.SecoundId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicAxeId(value));
 
@@ -36,7 +36,7 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.Property(entity => entity.Description)
             .HasMaxLength(2048);
 
-        builder.HasOne(entity => entity.StrategicAxe).WithMany().HasForeignKey(entity => entity.StrategicAxeId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(entity => entity.StrategicAxe).WithMany().HasForeignKey(entity => entity.SecoundId).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(entity => entity.Coordinator).WithMany().HasForeignKey(entity => entity.CoordinadorId).OnDelete(DeleteBehavior.Restrict);
 
         builder

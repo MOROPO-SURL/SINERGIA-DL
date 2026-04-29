@@ -17,7 +17,5 @@ internal sealed class TerritorialBarrierPaginateQueryHandler :
     {
     }
 
-    protected override Expression<Func<TerritorialBarrier, bool>>? GlobalSelector => entity => !entity.IsArchived;
-
     protected override Expression<Func<TerritorialBarrier, object>> OrderExpression => entity => entity.CreatedAt;
 }

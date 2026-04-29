@@ -72,6 +72,26 @@ public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<Pe
 
     public List<PersonOrganizationBrigde> OrganizationBrigde { get; set; } = [];
 
+    public void ClearPhones()
+    {
+        phoneNumbers.Clear();
+    }
+
+    public void ClearEmailAddresses()
+    {
+        emailAddresses.Clear();
+    }
+
+    public void ClearPostalAddresses()
+    {
+        postalAddresses.Clear();
+    }
+
+    public void ClearWebSIteAddresses()
+    {
+        webSiteAddresses.Clear();
+    }
+
     public void Add(EmailAddress value)
     {
         emailAddresses.Add(value);

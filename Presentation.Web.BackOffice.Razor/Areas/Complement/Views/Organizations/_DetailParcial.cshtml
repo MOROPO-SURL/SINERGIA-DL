@@ -1,0 +1,19 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Organizations
+
+@model OrganizationDetailViewModel
+
+<dl class="mb-0">
+    <dt>Nombre</dt>
+    <dd>@Model.Name</dd>
+    <dt>Descripción</dt>
+    @if (!string.IsNullOrEmpty(Model.About))
+    {
+        <dd>@Model.About</dd>
+    }
+    else
+    {
+        <dd>---</dd>
+    }
+    <dt>Prioridad</dt>
+    <dd class="mb-0">@Model.Priority</dd>
+</dl>

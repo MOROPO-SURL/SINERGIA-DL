@@ -40,7 +40,7 @@ public class PersonsController : ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<PersonBasicDto> result = await mediator.Send(new PersonPaginateQuery(sheet, limit));
+            PaginateQueryResultModel<PersonBasicDto> result = await mediator.Send(new PersonPaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
             return Ok(mapper.Map<PaginateResultModel<PersonBasicDtoModel>>(result));
         }
@@ -61,7 +61,7 @@ public class PersonsController : ControllerBase
             PaginateQueryResultModel<PersonBasicDto> result = await mediator.Send(new PersonPaginateQuery(
                 sheet, 
                 limit, 
-                entity => EF.Functions.ILike(entity.Name, $"%{parameter}%") || (!string.IsNullOrEmpty(entity.LastName) && EF.Functions.ILike(entity.LastName!, $"%{parameter}%")) || (!string.IsNullOrEmpty(entity.Alias) && EF.Functions.ILike(entity.Alias!, $"%{parameter}%"))));
+                entity => !entity.IsArchived && (EF.Functions.ILike(entity.Name, $"%{parameter}%") || (!string.IsNullOrEmpty(entity.LastName) && EF.Functions.ILike(entity.LastName!, $"%{parameter}%")) || (!string.IsNullOrEmpty(entity.Alias) && EF.Functions.ILike(entity.Alias!, $"%{parameter}%")))));
 
             return Ok(mapper.Map<PaginateResultModel<PersonBasicDtoModel>>(result));
         }

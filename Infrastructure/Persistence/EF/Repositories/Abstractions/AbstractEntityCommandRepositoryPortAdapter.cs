@@ -16,6 +16,7 @@ public abstract class AbstractEntityCommandRepositoryPortAdapter<TEntity, TId, T
     }
 
     private DbSet<TEntity> DbSet => dbContext.Set<TEntity>();
+
     public void TrackChanges(TEntity entity)
     {
         dbContext.Attach(entity);

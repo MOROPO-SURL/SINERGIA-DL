@@ -25,10 +25,10 @@ internal abstract class AbstractEnableCommandHandler<TEntity, TId, TIdValue, TEn
     {
         TEntity entity = await entityQueryRepository.GetAsync(mapper.Map<TId>(request.Id!));
 
+        entityCommandRepository.TrackChanges(entity);
+
         entity.IsEnabled = true;
 
         await entityCommandRepository.UpdateAsync(entity);
-
-        return;
     }
 }

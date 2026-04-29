@@ -69,7 +69,7 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
 
     public IReadOnlyList<WebSiteAddress> WebSiteAddresses => [.. webSiteAddresses];
 
-    public List<OrganizationClasificationBridge> ClasificationBridges { get; set; } = [];
+    public List<OrganizationClassificationBridge> ClassificationBridges { get; set; } = [];
 
     public void Add(EmailAddress value)
     {

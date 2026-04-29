@@ -1,12 +1,15 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Values;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate;
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate;
 
 public class StrategicAxe :
-    AbstractAuditableEntity<StrategicAxeId, int>, IAggregateRoot<StrategicAxeId, int>, IArchivableEntity<StrategicAxeId, int>,
-    INamedEntity<StrategicAxeId, int>, IEnableableEntity<StrategicAxeId, int>
+    AbstractAuditableEntity<StrategicAxeId, int>, 
+    IAggregateRoot<StrategicAxeId, int>, 
+    IArchivableEntity<StrategicAxeId, int>,
+    INamedEntity<StrategicAxeId, int>, 
+    IEnableableEntity<StrategicAxeId, int>
 {
     private StrategicAxe() : base(new StrategicAxeId(default)) { }
 

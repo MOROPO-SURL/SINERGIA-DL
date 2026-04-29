@@ -28,4 +28,15 @@
 	  <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Areas\EDL\Views\StrategicLines\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="Areas\EDL\Views\StrategicLines\Index.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
 </Project>

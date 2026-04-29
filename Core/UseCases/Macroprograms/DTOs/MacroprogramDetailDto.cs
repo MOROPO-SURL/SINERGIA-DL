@@ -2,5 +2,5 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
 
-public record MacroprogramDetailDto(Guid Id, string Title, string? Description, int Index) : IDetailDto;
+public record MacroprogramDetailDto(Guid Id, int Index, string Title, DateTime CreatedAt, DateTime? UpdatedAt = null, string? Description = null) : IDetailDto;
 

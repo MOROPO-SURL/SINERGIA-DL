@@ -1,11 +1,11 @@
 ﻿using Mapster;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.Mappings;
@@ -57,10 +57,36 @@ internal sealed class PersonEntityMappingRegister : IRegister
 
         config.NewConfig<PersonUpdateCommand, Person>()
             .Map(dest => dest.Id, src => new PersonId(src.Id))
-            .Map(dest => dest.EmailAddresses, src => src.EmailAddresses.Select(entity => entity.Adapt<EmailAddress>()))
-            .Map(dest => dest.PhoneNumbers, src => src.PhoneNumbers.Select(entity => entity.Adapt<PhoneNumber>()))
-            .Map(dest => dest.PostalAddresses, src => src.PostalAddresses.Select(entity => entity.Adapt<PostalAddress>()))
-            .Map(dest => dest.WebSiteAddresses, src => src.WebSiteAddresses.Select(entity => entity.Adapt<WebSiteAddress>()))
-            .Map(dest => dest, src => src);
+            .Map(dest => dest, src => src)
+            .AfterMapping((src, dest) =>
+            {
+                dest.ClearPhones();
+
+                foreach (var item in src.PhoneNumbers)
+                {
+                    dest.Add(item.Adapt<PhoneNumber>());
+                }
+
+                dest.ClearEmailAddresses();
+
+                foreach (var item in src.EmailAddresses)
+                {
+                    dest.Add(item.Adapt<EmailAddress>());
+                }
+
+                dest.ClearPostalAddresses();
+
+                foreach (var item in src.PostalAddresses)
+                {
+                    dest.Add(item.Adapt<PostalAddress>());
+                }
+
+                dest.ClearWebSIteAddresses();
+
+                foreach (var item in src.WebSiteAddresses)
+                {
+                    dest.Add(item.Adapt<WebSiteAddress>());
+                }
+            });
     }
 }

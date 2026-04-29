@@ -9,6 +9,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeys.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeys.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Permissions.CQRS.Query.List;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Permissions.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.ApiKeys;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Common.Input;
 
@@ -16,7 +18,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Cont
 
 [Route("management/[area]/[controller]")]
 [Area("security")]
-public class ApiKeysController : Abstractions.AbstractBaseManagementController<Guid, ApiKeyBasicViewModel, ApiKeyDetailViewModel, ApiKeyCreateViewModel, ApiKeyUpdateViewModel, ApiKeyBasicDto, ApiKeyDetailDto, ApiKeyPaginateQuery, ApiKeyDetailQuery, ApiKeyCreateCommand, ApiKeyUpdateCommand, ApiKeyRemoveCommand>
+public class ApiKeysController : Abstractions.AbstractBaseManagementController<ApiKey, ApiKeyId, Guid, ApiKeyBasicViewModel, ApiKeyDetailViewModel, ApiKeyCreateViewModel, ApiKeyUpdateViewModel, ApiKeyBasicDto, ApiKeyDetailDto, ApiKeyPaginateQuery, ApiKeyDetailQuery, ApiKeyCreateCommand, ApiKeyUpdateCommand, ApiKeyRemoveCommand>
 {
     public ApiKeysController(IMapper mapper, ISender mediator) : base(mapper, mediator)
     {

@@ -26,7 +26,5 @@ internal abstract class AbstractRemoveCommandHandler<TEntity, TId, TIdValue, TRe
         TEntity entity = await entityQueryRepository.GetAsync(mapper.Map<TId>(request.Id!));
 
         await entityCommandRepository.DeleteAsync(entity);
-
-        return;
     }
 }

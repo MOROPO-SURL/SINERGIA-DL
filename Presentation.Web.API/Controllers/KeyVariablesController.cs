@@ -38,7 +38,7 @@ public class KeyVariablesController : ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<KeyVariableBasicDto> result = await mediator.Send(new KeyVariablePaginateQuery(sheet, limit));
+            PaginateQueryResultModel<KeyVariableBasicDto> result = await mediator.Send(new KeyVariablePaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
             return Ok(mapper.Map<PaginateResultModel<KeyVariableBasicDtoModel>>(result));
         }
@@ -59,7 +59,7 @@ public class KeyVariablesController : ControllerBase
             PaginateQueryResultModel<KeyVariableBasicDto> result = await mediator.Send(new KeyVariablePaginateQuery(
                 sheet,
                 limit,
-                entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+                entity => !entity.IsArchived && EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<KeyVariableBasicDtoModel>>(result));
         }

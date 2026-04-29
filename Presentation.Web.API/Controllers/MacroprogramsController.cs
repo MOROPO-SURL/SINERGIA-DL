@@ -38,7 +38,7 @@ public class MacroprogramsController: ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<MacroprogramBasicDto> result = await mediator.Send(new MacroprogramPaginateQuery(sheet, limit));
+            PaginateQueryResultModel<MacroprogramBasicDto> result = await mediator.Send(new MacroprogramPaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
             return Ok(mapper.Map<PaginateResultModel<MacroprogramBasicDtoModel>>(result));
         }
@@ -56,7 +56,7 @@ public class MacroprogramsController: ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<MacroprogramBasicDto> result = await mediator.Send(new MacroprogramPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Title, $"%{parameter}%")));
+            PaginateQueryResultModel<MacroprogramBasicDto> result = await mediator.Send(new MacroprogramPaginateQuery(sheet, limit, entity => !entity.IsArchived && EF.Functions.ILike(entity.Title, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<MacroprogramBasicDtoModel>>(result));
         }

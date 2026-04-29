@@ -41,7 +41,7 @@ public class ObjectivesController : ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<ObjectiveBasicDto> result = await mediator.Send(new ObjectivePaginateQuery(sheet, limit));
+            PaginateQueryResultModel<ObjectiveBasicDto> result = await mediator.Send(new ObjectivePaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
             return Ok(mapper.Map<PaginateResultModel<ObjectiveBasicDtoModel>>(result));
         }
@@ -59,7 +59,7 @@ public class ObjectivesController : ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<ObjectiveBasicDto> result = await mediator.Send(new ObjectivePaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Title, $"%{parameter}%")));
+            PaginateQueryResultModel<ObjectiveBasicDto> result = await mediator.Send(new ObjectivePaginateQuery(sheet, limit, entity => !entity.IsArchived && EF.Functions.ILike(entity.Title, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<ObjectiveBasicDtoModel>>(result));
         }

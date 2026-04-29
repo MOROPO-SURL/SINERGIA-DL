@@ -2,5 +2,5 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.DTOs;
 
-public record StrategicProjectBasicDto(Guid Id, string Name, string? Description = null) : IDto;
+public record StrategicProjectBasicDto(Guid Id, string Name, bool IsEnabled, bool IsArchived, string? Description = null) : IDto;
 

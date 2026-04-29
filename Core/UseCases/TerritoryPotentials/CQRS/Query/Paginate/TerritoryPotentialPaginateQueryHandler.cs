@@ -17,7 +17,5 @@ internal sealed class TerritoryPotentialPaginateQueryHandler :
     {
     }
 
-    protected override Expression<Func<TerritoryPotential, bool>>? GlobalSelector => entity => !entity.IsArchived;
-
     protected override Expression<Func<TerritoryPotential, object>> OrderExpression => entity => entity.CreatedAt;
 }

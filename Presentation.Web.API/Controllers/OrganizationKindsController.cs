@@ -40,7 +40,7 @@ public class OrganizationKindsController : ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<OrganizationKindBasicDto> result = await mediator.Send(new OrganizationKindPaginateQuery(sheet, limit));
+            PaginateQueryResultModel<OrganizationKindBasicDto> result = await mediator.Send(new OrganizationKindPaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
             return Ok(mapper.Map<PaginateResultModel<OrganizationKindBasicDtoModel>>(result));
         }
@@ -61,7 +61,7 @@ public class OrganizationKindsController : ControllerBase
             PaginateQueryResultModel<OrganizationKindBasicDto> result = await mediator.Send(new OrganizationKindPaginateQuery(
                 sheet,
                 limit,
-                entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+                entity => !entity.IsArchived && EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<OrganizationKindBasicDtoModel>>(result));
         }

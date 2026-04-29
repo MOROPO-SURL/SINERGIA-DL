@@ -40,7 +40,7 @@ public class InterestAreasController: ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<InterestAreaBasicDto> result = await mediator.Send(new InterestAreaPaginateQuery(sheet, limit));
+            PaginateQueryResultModel<InterestAreaBasicDto> result = await mediator.Send(new InterestAreaPaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
             return Ok(mapper.Map<PaginateResultModel<InterestAreaBasicDtoModel>>(result));
         }
@@ -58,7 +58,7 @@ public class InterestAreasController: ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<InterestAreaBasicDto> result = await mediator.Send(new InterestAreaPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            PaginateQueryResultModel<InterestAreaBasicDto> result = await mediator.Send(new InterestAreaPaginateQuery(sheet, limit, entity => !entity.IsArchived && EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<InterestAreaBasicDtoModel>>(result));
         }

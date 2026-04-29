@@ -2,5 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.DTOs;
 
-public record UnitMeasurementBasicDto(Guid Id, string Name, string Symbol) : IDto;
-
+public record UnitMeasurementBasicDto(Guid Id, string Name, string Symbol, bool IsEnabled, bool IsArchived) : IDto;

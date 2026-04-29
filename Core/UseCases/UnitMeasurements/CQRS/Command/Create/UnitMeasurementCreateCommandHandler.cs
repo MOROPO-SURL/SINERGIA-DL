@@ -14,6 +14,4 @@ internal sealed class UnitMeasurementCreateCommandHandler : AbstractCreateComman
         : base(entityCommandRepository, entityQueryRepository, mapper)
     { 
     }
-
-
 }

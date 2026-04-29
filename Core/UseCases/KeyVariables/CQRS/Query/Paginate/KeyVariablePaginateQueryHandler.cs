@@ -17,7 +17,5 @@ internal sealed class KeyVariablePaginateQueryHandler :
     {
     }
 
-    protected override Expression<Func<KeyVariable, bool>>? GlobalSelector => entity => !entity.IsArchived;
-
     protected override Expression<Func<KeyVariable, object>> OrderExpression => entity => entity.Priority;
 }

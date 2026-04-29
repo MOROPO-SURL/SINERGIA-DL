@@ -7,13 +7,15 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Comma
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.OrganizationKinds;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.Complement;
 
 [Route("management/[area]/[controller]")]
 [Area("complement")]
-public class OrganizationKindsController : Abstractions.AbstractBaseManagementController<Guid, OrganizationKindBasicViewModel, OrganizationKindDetailViewModel, OrganizationKindCreateViewModel, OrganizationKindUpdateViewModel, OrganizationKindBasicDto, OrganizationKindDetailDto, OrganizationKindPaginateQuery, OrganizationKindDetailQuery, OrganizationKindCreateCommand, OrganizationKindUpdateCommand, OrganizationKindRemoveCommand>
+public class OrganizationKindsController : Abstractions.AbstractBaseManagementController<OrganizationKind, OrganizationKindId, Guid, OrganizationKindBasicViewModel, OrganizationKindDetailViewModel, OrganizationKindCreateViewModel, OrganizationKindUpdateViewModel, OrganizationKindBasicDto, OrganizationKindDetailDto, OrganizationKindPaginateQuery, OrganizationKindDetailQuery, OrganizationKindCreateCommand, OrganizationKindUpdateCommand, OrganizationKindRemoveCommand>
 {
     public OrganizationKindsController(IMapper mapper, ISender mediator) : base(mapper, mediator)
     {

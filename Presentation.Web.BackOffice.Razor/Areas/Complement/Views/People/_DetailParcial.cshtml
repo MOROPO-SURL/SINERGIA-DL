@@ -1,0 +1,37 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Persons
+
+@model PersonDetailViewModel
+
+<dl class="mb-0">
+    <dt>Nombre(s)</dt>
+    <dd>@Model.Name</dd>
+    <dt>Apellidos</dt>
+    @if (!string.IsNullOrEmpty(Model.LastName))
+    {
+        <dd>@Model.LastName</dd>
+    }
+    else
+    {
+        <dd>---</dd>
+    }
+    <dt>Alias</dt>
+    @if (!string.IsNullOrEmpty(Model.Alias))
+    {
+        <dd>@Model.Alias</dd>
+    }
+    else
+    {
+        <dd>---</dd>
+    }
+    <dt>Descripción</dt>
+    @if (!string.IsNullOrEmpty(Model.About))
+    {
+        <dd>@Model.About</dd>
+    }
+    else
+    {
+        <dd>---</dd>
+    }
+    <dt>Prioridad</dt>
+    <dd class="mb-0">@Model.Priority</dd>
+</dl>

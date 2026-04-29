@@ -16,8 +16,6 @@ IRequestHandler<InterestAreaPaginateQuery, PaginateQueryResultModel<InterestArea
     {
     }
 
-    protected override Expression<Func<InterestArea, bool>>? GlobalSelector => entity => !entity.IsArchived;
-
     protected override Expression<Func<InterestArea, object>> OrderExpression => entity => entity.CreatedAt;
 
     protected override bool IsOrderDescending => true;

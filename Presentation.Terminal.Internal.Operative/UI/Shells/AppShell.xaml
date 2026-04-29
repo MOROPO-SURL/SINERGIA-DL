@@ -144,33 +144,85 @@
         </ShellContent>
     </FlyoutItem>
     <ShellContent
-        Title="Personas"
-        ContentTemplate="{DataTemplate local_ui_pages:PersonsManagementPage}">
-        <ShellContent.FlyoutIcon>
-            <FontImageSource
-                FontFamily="{StaticResource FontMaterialDesignIcons}"
-                Color="{AppThemeBinding Light=Black, Dark=White}" 
-                Glyph="{StaticResource IconGlyphPerson}" />
-        </ShellContent.FlyoutIcon>
-    </ShellContent>
-    <ShellContent
-        Title="Entidades"
+        Title="Complementarios"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.FlyoutIcon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" 
-                Glyph="{StaticResource IconGlyphOrganization}" />
+                Glyph="{StaticResource IconGlyphComplements}" />
         </ShellContent.FlyoutIcon>
     </ShellContent>
-    <ShellContent
-        Title="Unidades de medida"
-        ContentTemplate="{DataTemplate local_ui_pages:UnitMeasurementsManagementPage}">
-        <ShellContent.FlyoutIcon>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate local_ui_pages:PersonsManagementPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphPerson}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Entidades"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphOrganization}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+        <ShellContent
+            Title="Unidades de medida"
+            ContentTemplate="{DataTemplate local_ui_pages:UnitMeasurementsManagementPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphUnitMeasurement}" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+    </FlyoutItem>
+    <MenuItem
+        Text="Configuración"
+        Clicked="ConfigurationMenuItem_Clicked">
+        <MenuItem.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" 
-                Glyph="{StaticResource IconGlyphUnitMeasurement}" />
-        </ShellContent.FlyoutIcon>
-    </ShellContent>
+                Glyph="{StaticResource IconGlyphConfig}" />
+        </MenuItem.IconImageSource>
+    </MenuItem>
+    <MenuItem
+        Text="Centro de Ayuda"
+        Clicked="HelpMenuItem_Clicked">
+        <MenuItem.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphHelp}" />
+        </MenuItem.IconImageSource>
+    </MenuItem>
+    <MenuItem
+        Text="Perfil de Usuario"
+        Clicked="UserProfileMenuItem_Clicked">
+        <MenuItem.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphUserProfile}" />
+        </MenuItem.IconImageSource>
+    </MenuItem>
+    <MenuItem
+        Text="Salir del Sistema"
+        Clicked="LogOutMenuItem_Clicked">
+        <MenuItem.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphLogOut}" />
+        </MenuItem.IconImageSource>
+    </MenuItem>
 </Shell>

@@ -7,13 +7,15 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Command.Up
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.FeatureKindAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.FeatureKindAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.FeatureKinds;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.Complement;
 
 [Route("management/[area]/[controller]")]
 [Area("complement")]
-public class FeatureKindsController : Abstractions.AbstractBaseManagementController<Guid, FeatureKindBasicViewModel, FeatureKindDetailViewModel, FeatureKindCreateViewModel, FeatureKindUpdateViewModel, FeatureKindBasicDto, FeatureKindDetailDto, FeatureKindPaginateQuery, FeatureKindDetailQuery, FeatureKindCreateCommand, FeatureKindUpdateCommand, FeatureKindRemoveCommand>
+public class FeatureKindsController : Abstractions.AbstractBaseManagementController<FeatureKind, FeatureKindId, Guid, FeatureKindBasicViewModel, FeatureKindDetailViewModel, FeatureKindCreateViewModel, FeatureKindUpdateViewModel, FeatureKindBasicDto, FeatureKindDetailDto, FeatureKindPaginateQuery, FeatureKindDetailQuery, FeatureKindCreateCommand, FeatureKindUpdateCommand, FeatureKindRemoveCommand>
 {
     public FeatureKindsController(IMapper mapper, ISender mediator) : base(mapper, mediator)
     {

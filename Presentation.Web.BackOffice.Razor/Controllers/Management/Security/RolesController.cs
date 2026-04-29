@@ -11,12 +11,14 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Roles;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Common.Input;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.Security;
 
 [Route("management/[area]/[controller]")]
 [Area("security")]
-public sealed class RolesController : Abstractions.AbstractBaseManagementController<Guid, RoleBasicViewModel, RoleDetailViewModel, RoleCreateViewModel, RoleUpdateViewModel, RoleBasicDto, RoleDetailDto, RolePaginateQuery, RoleDetailQuery, RoleCreateCommand, RoleUpdateCommand, RoleRemoveCommand>
+public sealed class RolesController : Abstractions.AbstractBaseManagementController<Role, RoleId, Guid, RoleBasicViewModel, RoleDetailViewModel, RoleCreateViewModel, RoleUpdateViewModel, RoleBasicDto, RoleDetailDto, RolePaginateQuery, RoleDetailQuery, RoleCreateCommand, RoleUpdateCommand, RoleRemoveCommand>
 {
     public RolesController(IMapper mapper, ISender mediator) : base(mapper, mediator)
     {

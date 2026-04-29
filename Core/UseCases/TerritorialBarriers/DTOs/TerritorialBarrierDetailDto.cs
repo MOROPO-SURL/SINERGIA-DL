@@ -2,4 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.TerritorialBarriers.DTOs;
 
-public record TerritorialBarrierDetailDto(Guid Id, string Title, DateTime CreatedAt, DateTime? Updated = null, string? Description = null) : IDetailDto;
+public record TerritorialBarrierDetailDto(Guid Id, string Title, bool IsArchived, DateTime CreatedAt, DateTime? UpdatedAt = null, string? Description = null) : IDetailDto;

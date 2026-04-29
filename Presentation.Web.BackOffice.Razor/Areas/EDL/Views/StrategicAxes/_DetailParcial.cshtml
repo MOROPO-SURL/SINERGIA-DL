@@ -1,0 +1,17 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.StrategicAxes
+
+@model StrategicAxeDetailViewModel
+
+<dl class="mb-0">
+    <dt>No. y Nombre</dt>
+    <dd><span>@Model.Id</span><span>. </span><span>@Model.Name</span></dd>
+    <dt>Descripción</dt>
+    @if (!string.IsNullOrEmpty(Model.Description))
+    {
+        <dd class="mb-0">@Model.Description</dd>
+    }
+    else
+    {
+        <dd class="mb-0">---</dd>
+    }
+</dl>

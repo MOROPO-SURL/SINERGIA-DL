@@ -9,7 +9,7 @@ public static class ManagementDashboardConstants
         new KeyValuePair<string, ManagementDashboardSectionViewModel[]>(
             "Seguridad",
             [
-                new  ManagementDashboardSectionViewModel("Usuarios", "users", "Index", "Security", "mdi mdi-account-box", "any"),
+                new  ManagementDashboardSectionViewModel("Usuarios", "users", "Index", "Security", "mdi mdi-account-key", "any"),
                 new  ManagementDashboardSectionViewModel("Roles", "roles", "Index", "Security", "mdi mdi-account-group", "any"),
                 new  ManagementDashboardSectionViewModel("Llaves API", "apikeys", "Index", "Security", "mdi mdi-key", "any"),
                 new  ManagementDashboardSectionViewModel("Registros", "traces", "Index", "Security", "mdi mdi-foot-print", "any")
@@ -22,7 +22,7 @@ public static class ManagementDashboardConstants
                 new  ManagementDashboardSectionViewModel("Variables Clave", "keyvariables", "Index", "Complement", "mdi mdi-star-four-points", "any"),
                 new  ManagementDashboardSectionViewModel("Tipos de Carct. Terr.", "featurekinds", "Index", "Complement", "mdi mdi-checkbox-multiple-marked-circle-outline", "any"),
                 new  ManagementDashboardSectionViewModel("Unidades de medida", "unitmeasurements", "Index", "Complement", "mdi mdi-scale", "any"),
-                new  ManagementDashboardSectionViewModel("Personas", "persons", "Index", "Complement", "mdi mdi-account", "any"),
+                new  ManagementDashboardSectionViewModel("Personas", "people", "Index", "Complement", "mdi mdi-account", "any"),
                 new  ManagementDashboardSectionViewModel("Entidades", "organizations", "Index", "Complement", "mdi mdi-domain", "any"),
                 new  ManagementDashboardSectionViewModel("Tipos de Entidad", "organizationkinds", "Index", "Complement", "mdi mdi-office-building", "any"),
                 new  ManagementDashboardSectionViewModel("Clasificaciones", "classifications", "Index", "Complement", "mdi mdi-star-box-outline", "any")
@@ -39,10 +39,10 @@ public static class ManagementDashboardConstants
         new KeyValuePair<string, ManagementDashboardSectionViewModel[]>(
             "Estrategia",
             [
-                new  ManagementDashboardSectionViewModel("Ejes", "objectives", "Index", "EDL", "mdi mdi-forwardburger", "any"),
-                new  ManagementDashboardSectionViewModel("Líneas", "territorialbarriers", "Index", "EDL", "mdi mdi-arrow-right", "any"),
-                new  ManagementDashboardSectionViewModel("Programas", "territorypotentials", "Index", "EDL", "mdi mdi-folder-table-outline", "any"),
-                new  ManagementDashboardSectionViewModel("Proyectos", "publicpolicies", "Index", "EDL", "mdi mdi-folder-settings-variant-outline", "any")
+                new  ManagementDashboardSectionViewModel("Ejes", "strategicaxes", "Index", "EDL", "mdi mdi-forwardburger", "any"),
+                new  ManagementDashboardSectionViewModel("Líneas", "strategiclines", "Index", "EDL", "mdi mdi-arrow-right", "any"),
+                new  ManagementDashboardSectionViewModel("Programas", "strategicprograms", "Index", "EDL", "mdi mdi-folder-table-outline", "any"),
+                new  ManagementDashboardSectionViewModel("Proyectos", "strategicprojects", "Index", "EDL", "mdi mdi-folder-settings-variant-outline", "any")
             ])
     ];
 }

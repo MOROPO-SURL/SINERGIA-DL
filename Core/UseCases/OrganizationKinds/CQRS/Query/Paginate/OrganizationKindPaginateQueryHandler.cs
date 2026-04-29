@@ -17,7 +17,5 @@ internal sealed class OrganizationKindPaginateQueryHandler :
     {
     }
 
-    protected override Expression<Func<OrganizationKind, bool>>? GlobalSelector => entity => !entity.IsArchived;
-
     protected override Expression<Func<OrganizationKind, object>> OrderExpression => entity => entity.Priority;
 }

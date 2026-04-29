@@ -16,7 +16,5 @@ IRequestHandler<MacroprogramPaginateQuery, PaginateQueryResultModel<Macroprogram
     {
     }
 
-    protected override Expression<Func<Macroprogram, bool>>? GlobalSelector => entity => !entity.IsArchived;
-
     protected override Expression<Func<Macroprogram, object>> OrderExpression => entity => entity.Index;
 }

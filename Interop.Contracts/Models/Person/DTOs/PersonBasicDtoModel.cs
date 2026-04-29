@@ -2,4 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 
-public record PersonBasicDtoModel(Guid Id, string Name, string? LastName = null, ImageBasicDtoModel? Image = null);
+public record PersonBasicDtoModel(Guid Id, string Name, bool IsEnabled, string? LastName = null, ImageBasicDtoModel? Image = null);

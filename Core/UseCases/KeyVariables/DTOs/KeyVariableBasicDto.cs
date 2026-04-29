@@ -2,4 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.KeyVariables.DTOs;
 
-public record KeyVariableBasicDto(Guid Id, string Name, bool IsEnabled, bool IsArchived, string? Alias = null) : IDto;
+public record KeyVariableBasicDto(Guid Id, string Name, bool IsArchived, string? Alias = null) : IDto;

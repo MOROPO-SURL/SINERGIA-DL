@@ -11,6 +11,7 @@ internal sealed class UnitMeasurementCreateCommandMappingRegister : IRegister
     {
         config.NewConfig<UnitMeasurementCreateCommand, UnitMeasurement>()
             .Map(dest => dest.Id, src => new UnitMeasurementId(Guid.NewGuid()))
+            .Map(dest => dest.IsArchived, src => false)
             .Map(dest => dest, src => src);
     }
 }

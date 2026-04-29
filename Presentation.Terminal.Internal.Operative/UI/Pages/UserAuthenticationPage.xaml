@@ -85,7 +85,7 @@
                     Style="{StaticResource FontIconImageButtonStyle}"
                     HorizontalOptions="End" VerticalOptions="Start"
                     Margin="16"
-                    Text="&#xF66A;"
+                    Text="{StaticResource IconGlyphConfig}"
                     Clicked="SettingButton_Clicked" />
                 <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>
             </Grid>

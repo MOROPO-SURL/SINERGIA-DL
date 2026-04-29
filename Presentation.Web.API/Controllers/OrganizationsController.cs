@@ -52,7 +52,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers
         {
             try
             {
-                PaginateQueryResultModel<OrganizationBasicDto> result = await mediator.Send(new OrganizationPaginateQuery(sheet, limit));
+                PaginateQueryResultModel<OrganizationBasicDto> result = await mediator.Send(new OrganizationPaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
                 return Ok(mapper.Map<PaginateResultModel<OrganizationBasicDtoModel>>(result));
             }
@@ -73,7 +73,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers
                 PaginateQueryResultModel<OrganizationBasicDto> result = await mediator.Send(new OrganizationPaginateQuery(
                     sheet,
                     limit,
-                    entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+                    entity => !entity.IsArchived && EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
                 return Ok(mapper.Map<PaginateResultModel<OrganizationBasicDtoModel>>(result));
             }

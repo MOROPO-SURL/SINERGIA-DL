@@ -181,33 +181,13 @@
                                 </td>
                                 <td style="vertical-align: middle;" title="Nombre de Usuario">@item.Id</td>
                                 <td style="vertical-align: middle; text-align: center;" title="Habilitado?">
-                                    @if (item.Id != User.Identity!.Name)
+                                    @if (item.IsEnabled)
                                     {
-                                        <form method="post" asp-action="@Html.Raw(item.IsEnabled ? "disable" : "enable")">
-                                            <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
-
-                                            <button type="submit" class="btn btn-link">
-                                                @if (item.IsEnabled)
-                                                {
-                                                    <i class="mdi mdi-checkbox-marked-outline"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="mdi mdi-checkbox-blank-outline"></i>
-                                                }
-                                            </button>
-                                        </form>
+                                        <i class="mdi mdi-checkbox-marked-outline"></i>
                                     }
                                     else
                                     {
-                                        @if (item.IsEnabled)
-                                        {
-                                            <i class="mdi mdi-checkbox-marked-outline"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="mdi mdi-checkbox-blank-outline"></i>
-                                        }
+                                        <i class="mdi mdi-checkbox-blank-outline"></i>
                                     }
                                 </td>
                                 <td style="vertical-align: middle; text-align: center;" title="Acceso Total?">

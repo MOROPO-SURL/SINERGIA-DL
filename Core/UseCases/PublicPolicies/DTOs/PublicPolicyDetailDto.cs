@@ -3,4 +3,4 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.En
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.DTOs;
 
-public record PublicPolicyDetailDto(Guid Id, string Title, string? Description, PublicPolicyKind Kind, DateTime PublishedAt) : IDetailDto;
+public record PublicPolicyDetailDto(Guid Id, string Title, bool IsArchived, PublicPolicyKind Kind, DateTime PublishedAt, DateTime CreatedAt, DateTime? UpdatedAt = null, string? Description = null) : IDetailDto;

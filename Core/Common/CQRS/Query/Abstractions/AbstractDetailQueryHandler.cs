@@ -24,7 +24,7 @@ internal abstract class AbstractDetailQueryHandler<TEntity, TId, TIdValue, TDeta
 
     public async Task<TDetailDto> Handle(TDetailQuery request, CancellationToken cancellationToken)
     {
-        var entity = await entityQueryRepository.GetAsync(mapper.Map<TId>(request.Id!));
+        TEntity entity = await entityQueryRepository.GetAsync(mapper.Map<TId>(request.Id!));
 
         return mapper.Map<TDetailDto>(entity);
     }

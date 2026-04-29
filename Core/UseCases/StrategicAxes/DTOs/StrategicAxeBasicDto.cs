@@ -2,5 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.DTOs;
 
-public record StrategicAxeBasicDto(Guid Id, string Name, string? Description = null) : IDto;
-
+public record StrategicAxeBasicDto(int Id, string Name, string? Description = null) : IDto;

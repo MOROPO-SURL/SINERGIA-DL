@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ClasificationAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ClassificationAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.FeatureAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.FeatureKindAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate;
@@ -15,7 +15,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate.Valu
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate;
@@ -46,12 +46,12 @@ public class DefaultDbContext : DbContext
     public DbSet<KeyVariable> KeyVariables { get; set; }
     public DbSet<Objective> Objectives { get; set; }
     public DbSet<ObjectiveKeyVariableBridge> ObjectiveKeyVariableBridges { get; set; }
-    public DbSet<Clasification> Clasifications { get; set; }
+    public DbSet<Classification> Classifications { get; set; }
     public DbSet<InterestArea> InterestAreas { get; set; }
     public DbSet<Macroprogram> Macroprograms { get; set; }
     public DbSet<OrganizationKind> OrganizationKinds { get; set; }
     public DbSet<Organization> Organizations { get; set; }
-    public DbSet<OrganizationClasificationBridge> OrganizationClasificationBridges { get; set; }
+    public DbSet<OrganizationClassificationBridge> OrganizationClasificationBridges { get; set; }
     public DbSet<Person> People { get; set; }
     public DbSet<PersonOrganizationBrigde> PersonOrganizationBrigdes { get; set; }
     public DbSet<PublicPolicy> PublicPolicies { get; set; }

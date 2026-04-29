@@ -1,6 +1,6 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxesAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
@@ -11,7 +11,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
 
-public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid>, IAggregateRoot<StrategicProgramId, Guid>, IArchivableEntity<StrategicProgramId, Guid>, INamedEntity<StrategicProgramId, Guid>, IEnableableEntity<StrategicProgramId, Guid>
+public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid>, IAggregateRoot<StrategicProgramId, Guid>, IArchivableEntity<StrategicProgramId, Guid>, INamedEntity<StrategicProgramId, Guid>, IEnableableEntity<StrategicProgramId, Guid>, IPriorizableEntity<StrategicProgramId, Guid>
 {
     private readonly List<ProgramObjective> objetives = [];
     private readonly List<ProgramAction> actions = [];
@@ -21,7 +21,7 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
 
     private StrategicProgram() : base(new StrategicProgramId(default)) { }
 
-    public StrategicProgram(StrategicProgramId id, StrategicLineId strategicLineId, StrategicAxeId strategicAxesId, bool isEnabled, string name, bool isArchived, int index, PersonId coordinatorId, ProgramObjective[] objetives, ProgramAction[] actions, ProgramProjectIdea[] projectIdeas, ProgramImpact[] impacts, StrategicProgramOrganizationBridge[] organizationBridges, Person? coordinator = null, string? description = null) : base(id)
+    public StrategicProgram(StrategicProgramId id, StrategicLineId strategicLineId, StrategicAxeId strategicAxesId, bool isEnabled, string name, bool isArchived, int priority, PersonId coordinatorId, ProgramObjective[] objetives, ProgramAction[] actions, ProgramProjectIdea[] projectIdeas, ProgramImpact[] impacts, StrategicProgramOrganizationBridge[] organizationBridges, Person? coordinator = null, string? description = null) : base(id)
     {
         StrategicLineId = strategicLineId;
         StrategicAxeId = strategicAxesId;
@@ -29,7 +29,7 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
         Name = name;
         IsArchived = isArchived;
         Description = description;
-        Index = index;
+        Priority = priority;
         CoordinatorId = coordinatorId;
         Coordinator = coordinator;
 
@@ -52,7 +52,7 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
 
     public string? Description { get; set; }
 
-    public int Index { get; set; }
+    public int Priority { get; set; }
 
     public Person? Coordinator { get; set; }
     public PersonId CoordinatorId { get; set; }

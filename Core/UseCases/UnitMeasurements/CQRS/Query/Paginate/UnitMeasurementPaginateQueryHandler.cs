@@ -9,14 +9,13 @@ using System.Linq.Expressions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.CQRS.Query.Paginate;
 
-internal sealed class UnitMeasurementPaginateQueryHandler: AbstractPaginateQueryHandler<UnitMeasurement, UnitMeasurementId, Guid, UnitMeasurementPaginateQuery, UnitMeasurementBasicDto>,
-IRequestHandler<UnitMeasurementPaginateQuery, PaginateQueryResultModel<UnitMeasurementBasicDto>>
+internal sealed class UnitMeasurementPaginateQueryHandler : 
+    AbstractPaginateQueryHandler<UnitMeasurement, UnitMeasurementId, Guid, UnitMeasurementPaginateQuery, UnitMeasurementBasicDto>,
+    IRequestHandler<UnitMeasurementPaginateQuery, PaginateQueryResultModel<UnitMeasurementBasicDto>>
 {
     public UnitMeasurementPaginateQueryHandler(IUnitMeasurementQueryRepositoryPort entityQueryRepository) : base(entityQueryRepository)
     {
     }
-
-    protected override Expression<Func<UnitMeasurement, bool>>? GlobalSelector => entity => !entity.IsArchived;
 
     protected override Expression<Func<UnitMeasurement, object>> OrderExpression => entity => entity.Priority;
 }

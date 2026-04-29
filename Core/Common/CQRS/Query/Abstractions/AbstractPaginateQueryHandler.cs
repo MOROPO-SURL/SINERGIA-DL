@@ -4,7 +4,6 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Query.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Repository;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 using System.Linq.Expressions;
 
@@ -25,18 +24,7 @@ internal abstract class AbstractPaginateQueryHandler<TEntity, TId, TIdValue, TPa
 
     public async Task<PaginateQueryResultModel<TBasicDto>> Handle(TPaginateQuery request, CancellationToken cancellationToken)
     {
-        Expression<Func<TEntity, bool>>? filter = GlobalSelector;
-
-        if (filter == null)
-        {
-            filter = request.Criteria;
-        }
-        else if (request.Criteria != null)
-        {
-            filter = filter.CombineForAndCondition(request.Criteria);
-        }
-
-        int count = filter == null ? await entityQueryRepository.CountAsync() : await entityQueryRepository.CountAsync(filter);
+        int count = request.Criteria == null ? await entityQueryRepository.CountAsync() : await entityQueryRepository.CountAsync(request.Criteria);
 
         int rest = count % request.Limit;
 
@@ -51,7 +39,7 @@ internal abstract class AbstractPaginateQueryHandler<TEntity, TId, TIdValue, TPa
             page = 1;
         }
 
-        TBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, OrderExpression, IsOrderDescending, filter).ProjectToType<TBasicDto>()];
+        TBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, OrderExpression, IsOrderDescending, request.Criteria).ProjectToType<TBasicDto>()];
 
         return new PaginateQueryResultModel<TBasicDto>
         {
@@ -63,8 +51,6 @@ internal abstract class AbstractPaginateQueryHandler<TEntity, TId, TIdValue, TPa
             MaxPageCount = maxPageCount,
         };
     }
-
-    protected virtual Expression<Func<TEntity, bool>>? GlobalSelector => null;
 
     protected virtual Expression<Func<TEntity, object>> OrderExpression => entity => entity.Id;
 

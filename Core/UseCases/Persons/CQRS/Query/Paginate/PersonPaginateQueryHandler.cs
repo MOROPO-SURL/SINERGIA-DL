@@ -17,7 +17,5 @@ internal sealed class PersonPaginateQueryHandler :
     {
     }
 
-    protected override Expression<Func<Person, bool>>? GlobalSelector => entity => !entity.IsArchived;
-
     protected override Expression<Func<Person, object>> OrderExpression => entity => entity.Priority;
 }

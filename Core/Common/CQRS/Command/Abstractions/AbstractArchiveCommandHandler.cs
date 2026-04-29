@@ -25,10 +25,10 @@ internal abstract class AbstractArchiveCommandHandler<TEntity, TId, TIdValue, TA
     {
         TEntity entity = await entityQueryRepository.GetAsync(mapper.Map<TId>(request.Id!));
 
+        entityCommandRepository.TrackChanges(entity);
+
         entity.IsArchived = true;
 
         await entityCommandRepository.UpdateAsync(entity);
-
-        return;
     }
 }

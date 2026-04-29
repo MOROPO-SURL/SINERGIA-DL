@@ -29,7 +29,6 @@ public class SessionController : AbstractBaseController
     }
 
     [HttpGet]
-    [Route("[action]")]
     [ChangePasswordRequiredActionFilter]
     public async Task<IActionResult> IndexAsync()
     {
