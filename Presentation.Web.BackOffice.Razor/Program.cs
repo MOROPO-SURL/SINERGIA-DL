@@ -12,10 +12,12 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Constants;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Ports.Adapters.Manager;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Ports.Adapters.Service;
 using System.Runtime.CompilerServices;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor;
@@ -38,6 +40,8 @@ public class Program
 
         builder.Services.UseCoreLayer();
         builder.Services.UseInfrastructureLayer(builder.Configuration);
+
+        builder.Services.AddScoped<IDomainChangeAuthorProvisionServicePort, DomainChangeAuthorProvisionServicePortAdapter>();
 
         builder.Services.AddMapster();
 

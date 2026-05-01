@@ -16,6 +16,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.V
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers;
 
+[Authorize]
 [Route("[controller]")]
 public class SessionController : AbstractBaseController
 {

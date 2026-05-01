@@ -5,7 +5,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate;
 
 public sealed class RoleTrace : Abstractions.AbstractTrace<RoleAggregate.Role, RoleId, Guid>
 {
-    public RoleTrace(TraceId id, Enumerations.TraceKind kind, string author, DateTime createAt, RoleAggregate.Role role, RoleId roleId, string signature, string? beforeData, string? afterData) : base(id, kind, author, createAt, role, roleId, signature, beforeData, afterData)
+    private RoleTrace() { }
+
+    public RoleTrace(TraceId id, Enumerations.TraceKind kind, string author, DateTime createAt, string signature, string? beforeData = null, string? afterData = null, RoleId? roleId = null, RoleAggregate.Role? role = null) : base(id, kind, author, createAt, signature, beforeData, afterData, roleId, role)
     {
     }
 }

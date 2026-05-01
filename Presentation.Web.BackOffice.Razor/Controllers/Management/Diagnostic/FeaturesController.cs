@@ -12,9 +12,10 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.V
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.Diagnostic;
 
+[Microsoft.AspNetCore.Authorization.Authorize]
 [Route("management/[area]/[controller]")]
 [Area("diagnostic")]
-public class FeaturesController : AbstractBaseViewingController<
+public class FeaturesController : AbstractBaseRemotionController<
     Feature,
     FeatureId,
     Guid,

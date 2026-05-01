@@ -16,6 +16,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.Security;
 
+[Microsoft.AspNetCore.Authorization.Authorize]
 [Route("management/[area]/[controller]")]
 [Area("security")]
 public sealed class RolesController : Abstractions.AbstractBaseManagementController<Role, RoleId, Guid, RoleBasicViewModel, RoleDetailViewModel, RoleCreateViewModel, RoleUpdateViewModel, RoleBasicDto, RoleDetailDto, RolePaginateQuery, RoleDetailQuery, RoleCreateCommand, RoleUpdateCommand, RoleRemoveCommand>

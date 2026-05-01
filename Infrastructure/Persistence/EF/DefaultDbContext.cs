@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ClassificationAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.FeatureAggregate;
@@ -21,6 +22,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregat
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TerritorialBarrierAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TerritoryPotentialAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges;
@@ -31,8 +33,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
 
 public class DefaultDbContext : DbContext
 {
-    public DefaultDbContext(DbContextOptions options) : base(options)
+    private readonly IEnumerable<ISaveChangesInterceptor> saveChangesInterceptors;
+
+    public DefaultDbContext(DbContextOptions options, IEnumerable<ISaveChangesInterceptor> saveChangesInterceptors) : base(options)
     {
+        this.saveChangesInterceptors = saveChangesInterceptors;
     }
 
     public DbSet<Image> Images { get; set; }
@@ -66,11 +71,40 @@ public class DefaultDbContext : DbContext
     public DbSet<FeatureKind> FeatureKinds { get; set; }
     public DbSet<Feature> Features { get; set; }
 
+    public DbSet<ApiKeyTrace> ApiKeyTraces { get; set; }
+    public DbSet<ClassificationTrace> ClassificationTraces { get; set; }
+    public DbSet<FeatureTrace> FeatureTraces { get; set; }
+    public DbSet<FeatureKindTrace> FeatureKindsTraces { get; set; }
+    public DbSet<InterestAreaTrace> InterestAreaTraces { get; set; }
+    public DbSet<KeyVariableTrace> KeyVariableTraces { get; set; }
+    public DbSet<MacroprogramTrace> MacroprogramTraces { get; set; }
+    public DbSet<ObjectiveTrace> ObjectivesTraces { get; set; }
+    public DbSet<OrganizationTrace> OrganizationTraces { get; set; }
+    public DbSet<OrganizationKindTrace> OrganizationKindTraces { get; set; }
+    public DbSet<PersonTrace> PersonTraces { get; set; }
+    public DbSet<PublicPolicyTrace> PublicPolicyTraces { get; set; }
+    public DbSet<RoleTrace> RoleTraces { get; set; }
+    public DbSet<StrategicAxeTrace> StrategicAxeTraces { get; set; }
+    // TODO public DbSet<StrategicLineTrace>
+    public DbSet<StrategicProgramTrace> StrategicProgramTraces { get; set; }
+    public DbSet<StrategicProjectTrace> StrategicProjectTraces { get; set; }
+    public DbSet<TerritorialBarrierTrace> TerritorialBarrierTraces { get; set; }
+    public DbSet<TerritoryPotentialTrace> TerritoryPotentialTraces { get; set; }
+    public DbSet<UnitMeasurementTrace> UnitMeasurementTraces { get; set; }
+    public DbSet<UserTrace> UserTraces { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
         base.OnModelCreating(builder);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(saveChangesInterceptors);
+
+        base.OnConfiguring(optionsBuilder);
     }
 
     public bool LoadCoreSeeding()

@@ -16,6 +16,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.V
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.Security;
 
+[Microsoft.AspNetCore.Authorization.Authorize]
 [Route("management/[area]/[controller]")]
 [Area("security")]
 public class ApiKeysController : Abstractions.AbstractBaseManagementController<ApiKey, ApiKeyId, Guid, ApiKeyBasicViewModel, ApiKeyDetailViewModel, ApiKeyCreateViewModel, ApiKeyUpdateViewModel, ApiKeyBasicDto, ApiKeyDetailDto, ApiKeyPaginateQuery, ApiKeyDetailQuery, ApiKeyCreateCommand, ApiKeyUpdateCommand, ApiKeyRemoveCommand>

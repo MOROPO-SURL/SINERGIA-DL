@@ -16,6 +16,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.V
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.EDL;
 
+[Microsoft.AspNetCore.Authorization.Authorize]
 [Route("management/[area]/programs")]
 [Area("edl")]
 public sealed class StrategicProgramsController : AbstractBaseAdministrationArchivableEnableableController<

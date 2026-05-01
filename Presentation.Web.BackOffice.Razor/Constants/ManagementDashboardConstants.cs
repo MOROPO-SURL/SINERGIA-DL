@@ -12,7 +12,7 @@ public static class ManagementDashboardConstants
                 new  ManagementDashboardSectionViewModel("Usuarios", "users", "Index", "Security", "mdi mdi-account-key", "any"),
                 new  ManagementDashboardSectionViewModel("Roles", "roles", "Index", "Security", "mdi mdi-account-group", "any"),
                 new  ManagementDashboardSectionViewModel("Llaves API", "apikeys", "Index", "Security", "mdi mdi-key", "any"),
-                new  ManagementDashboardSectionViewModel("Registros", "traces", "Index", "Security", "mdi mdi-foot-print", "any")
+                new  ManagementDashboardSectionViewModel("Registros", "usertraces", "Index", "Security", "mdi mdi-foot-print", "any")
             ]),
         new KeyValuePair<string, ManagementDashboardSectionViewModel[]>(
             "Complementarios",

@@ -16,6 +16,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.V
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.Complement;
 
+[Microsoft.AspNetCore.Authorization.Authorize]
 [Route("management/[area]/[controller]")]
 [Area("complement")]
 public class ClassificationsController : AbstractBaseAdministrationArchivableEnableableController<

@@ -1,0 +1,39 @@
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Abstractions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Interceptors.Abstractions;
+
+internal abstract class AbstractChangeDomainTracingInterceptor<TEntityTrace, TEntity, TId, TIdValue> : SaveChangesInterceptor
+    where TId : struct, IId<TIdValue>
+    where TEntity : AbstractEntity<TId, TIdValue>
+    where TEntityTrace : AbstractTrace<TEntity, TId, TIdValue>
+{
+    //public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
+    //{
+    //    IEnumerable<EntityEntry<TEntity>> changeEntries = eventData.Context!.ChangeTracker.Entries<TEntity>();
+
+    //    foreach (EntityEntry<TEntity> changeEntry in changeEntries)
+    //    {
+    //        eventData.Context.Add(BuildTraceEntity(changeEntry));
+    //    };
+
+    //    return base.SavingChanges(eventData, result);
+    //}
+
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+    {
+        EntityEntry<TEntity>[] changeEntries = eventData.Context!.ChangeTracker.Entries<TEntity>().ToArray();
+
+        foreach (EntityEntry<TEntity> changeEntry in changeEntries)
+        {
+            eventData.Context.Add(BuildTraceEntity(changeEntry));
+        };
+
+        return base.SavingChangesAsync(eventData, result, cancellationToken);
+    }
+
+    protected abstract TEntityTrace BuildTraceEntity(EntityEntry<TEntity> changeEntry);
+}

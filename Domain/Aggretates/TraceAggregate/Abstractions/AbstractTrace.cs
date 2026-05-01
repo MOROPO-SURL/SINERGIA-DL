@@ -9,11 +9,13 @@ public abstract class AbstractTrace<TEntity, TId, TIdValue> : AbstractEntity<Tra
     where TEntity : AbstractEntity<TId, TIdValue>
     where TId : struct, IId<TIdValue>
 {
-    protected AbstractTrace(TraceId id, TraceKind kind, string author, DateTime createAt, TEntity target, TId targetId, string signature, string? beforeData, string? afterData) : base(id)
+    protected AbstractTrace() : base(new TraceId(default)) { }
+
+    protected AbstractTrace(TraceId id, TraceKind kind, string author, DateTime createAt, string signature, string? beforeData = null, string? afterData = null, TId? targetId = null, TEntity? target = null) : base(id)
     {
         Kind = kind;
         Author = author;
-        CreateAt = createAt;
+        CreatedAt = createAt;
         Target = target;
         TargetId = targetId;
         BeforeData = beforeData;
@@ -23,22 +25,22 @@ public abstract class AbstractTrace<TEntity, TId, TIdValue> : AbstractEntity<Tra
 
     public TraceKind Kind { get; set; }
 
-    public string Author { get; set; }
+    public string Author { get; set; } = null!;
 
-    public DateTime CreateAt { get; private set; }
+    public DateTime CreatedAt { get; private set; }
 
-    public TEntity Target { get; set; }
+    public TEntity? Target { get; set; }
 
-    public TId TargetId { get; set; }
+    public TId? TargetId { get; set; }
 
     public string? BeforeData { get; set; }
 
     public string? AfterData { get; set; }
 
-    public string Signature { get; set; }
+    public string Signature { get; set; } = null!;
 
     public virtual object GetSignableEntityModel()
     {
-        return new { Id, Kind, Author, CreateAt, BeforeData, AfterData };
+        return new { Id, Kind, Author, CreatedAt, BeforeData, AfterData, TargetId };
     }
 }

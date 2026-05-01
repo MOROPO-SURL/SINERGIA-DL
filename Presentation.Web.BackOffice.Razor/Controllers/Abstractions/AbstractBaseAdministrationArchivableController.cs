@@ -22,7 +22,7 @@ public abstract class AbstractBaseAdministrationArchivableController<
     TRemoveCommand,
     TArchiveCommand,
     TUnarchiveCommand>
-    : AbstractBaseViewingController<TEntity, TId, TIdValue, TBasicViewModel, TDetailViewModel, TBasicDto, TDetailDto, TPaginateQuery, TDetailQuery, TRemoveCommand>
+    : AbstractBaseRemotionController<TEntity, TId, TIdValue, TBasicViewModel, TDetailViewModel, TBasicDto, TDetailDto, TPaginateQuery, TDetailQuery, TRemoveCommand>
     where TEntity : class, IEntity<TId, TIdValue>
     where TId : struct, IId<TIdValue>
     where TPaginateQuery : IPaginateQuery<TEntity, TId, TIdValue, TBasicDto>, IRequest<PaginateQueryResultModel<TBasicDto>>

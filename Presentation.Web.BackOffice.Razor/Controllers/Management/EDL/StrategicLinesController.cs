@@ -17,6 +17,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.V
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.EDL;
 
+[Microsoft.AspNetCore.Authorization.Authorize]
 [Route("management/[area]/lines")]
 [Area("edl")]
 public sealed class StrategicLinesController : AbstractBaseController

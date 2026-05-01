@@ -18,6 +18,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.V
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Management.Security;
 
+[Microsoft.AspNetCore.Authorization.Authorize]
 [Route("management/[area]/[controller]")]
 [Area("security")]
 public sealed class UsersController : AbstractBaseManagementController<

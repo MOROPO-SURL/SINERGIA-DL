@@ -24,7 +24,7 @@ public abstract class AbstractBaseManagementController<
     TCreateCommand,
     TUpdateCommand,
     TRemoveCommand>
-    : AbstractBaseViewingController<TEntity, TId, TIdValue, TBasicViewModel, TDetailViewModel,TBasicDto, TDetailDto, TPaginateQuery, TDetailQuery, TRemoveCommand>
+    : AbstractBaseRemotionController<TEntity, TId, TIdValue, TBasicViewModel, TDetailViewModel,TBasicDto, TDetailDto, TPaginateQuery, TDetailQuery, TRemoveCommand>
     where TEntity : class, IEntity<TId, TIdValue>
     where TId : struct, IId<TIdValue>
     where TPaginateQuery : IPaginateQuery<TEntity, TId, TIdValue, TBasicDto>, IRequest<PaginateQueryResultModel<TBasicDto>>
@@ -105,7 +105,7 @@ public abstract class AbstractBaseManagementController<
 
     [HttpGet]
     [Route("edit/{key}")]
-    public virtual async Task<IActionResult> EditAsync(TId key)
+    public virtual async Task<IActionResult> EditAsync(TIdValue key)
     {
         try
         {

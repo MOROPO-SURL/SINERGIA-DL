@@ -3,8 +3,10 @@ using Microsoft.Extensions.Options;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Configurations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Extensions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Ports.Adapter.Service;
 using NSwag;
 using System.Runtime.CompilerServices;
 
@@ -35,6 +37,8 @@ public class Program
 
         builder.Services.UseCoreLayer();
         builder.Services.UseInfrastructureLayer(builder.Configuration);
+
+        builder.Services.AddScoped<IDomainChangeAuthorProvisionServicePort, DomainChangeAuthorProvisionServicePortAdapter>();
 
         builder.Services.AddMapster();
 

@@ -5,7 +5,6 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Query.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Enumerations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Controllers.Abstractions;
@@ -19,15 +18,13 @@ public abstract class AbstractBaseViewingController<
     TBasicDto,
     TDetailDto,
     TPaginateQuery,
-    TDetailQuery,
-    TRemoveCommand>
+    TDetailQuery>
     : AbstractBaseController
     where TEntity : class, IEntity<TId, TIdValue>
     where TId : struct, IId<TIdValue>
     where TPaginateQuery : IPaginateQuery<TEntity, TId, TIdValue, TBasicDto>, IRequest<PaginateQueryResultModel<TBasicDto>>
     where TDetailQuery : IRequest<TDetailDto>
     where TBasicDto : IDto
-    where TRemoveCommand : IRequest
 {
     protected readonly IMapper mapper;
     protected readonly ISender mediator;
@@ -77,45 +74,4 @@ public abstract class AbstractBaseViewingController<
             return Problem();
         }
     }
-
-    [HttpPost]
-    [Route("remove")]
-    [ValidateAntiForgeryToken]
-    public virtual async Task<IActionResult> RemoveAsync(TIdValue id)
-    {
-        try
-        {
-            var command = mapper.Map<TRemoveCommand>(id!);
-
-            await mediator.Send(command);
-
-            PushNotification(NotificationKind.Success, GetDeletionSuccessMessage());
-
-            return GetDefaultActionResult();
-        }
-        catch { }
-
-        PushNotification(NotificationKind.Danger, GetNotFoundMessage());
-
-        return GetDefaultActionResult();
-    }
-
-    #region ActionResults
-
-    protected virtual IActionResult GetDefaultActionResult()
-    {
-        return RedirectToAction("index");
-    }
-
-    #endregion
-
-    #region Messages
-
-    protected virtual string GetNotFoundMessage() => "NotFoundMessage";
-
-    protected virtual string GetWorkflowBreakMessage() => "WorkflowBreakMessage";
-
-    protected virtual string GetDeletionSuccessMessage() => "DeletionSuccessMessage";
-
-    #endregion
 }

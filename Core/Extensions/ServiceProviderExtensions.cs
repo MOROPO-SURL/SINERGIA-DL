@@ -13,8 +13,10 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Permissions.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PersonTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.RoleTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.Mappings;
@@ -22,6 +24,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.TerritorialBarriers.Mappings
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.TerritoryPotentials.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Users.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UserTraces.Mappings;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
 
@@ -106,7 +109,13 @@ public static class ServiceProviderExtensions
 
             new StrategicLineEntityMappingRegister(),
 
-            new StrategicProgramEntityMappingRegister()
+            new StrategicProgramEntityMappingRegister(),
+
+            new UserTraceEntityMappingRegister(),
+
+            new RoleTraceEntityMappingRegister(),
+
+            new PersonTraceEntityMappingRegister()
         );
     }
 }

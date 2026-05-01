@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
@@ -19,6 +20,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.InterestArea.DTOs
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/interestareas")]
 public class InterestAreasController: ControllerBase
