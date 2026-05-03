@@ -13,7 +13,7 @@
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.UnitMeasurementsManagementPage"
     x:TypeArguments="interop_dto_models:UnitMeasurementBasicDtoModel,interop_dto_models:UnitMeasurementDetailDtoModel,local_management_page_models:UnitMeasurementsManagementPageModel,local_configuration_page_models:UnitMeasurementConfigurationPageModel"
     x:DataType="local_management_page_models:UnitMeasurementsManagementPageModel"
-    Title="Gestión de Unidades de Medidad"
+    Title="Gestión de Unidades de medidad"
     IsEnabled="{Binding IsEnabled}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -65,11 +65,11 @@
                         <CollectionView.Behaviors>
                             <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
                                 ItemSpacing="{Static local_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
-                                ItemWidth="{Static local_constants:CardViewHeightConstants.UNITMEASUREMENT_DEFAULT_CARD_VIEW_WIDTH}" />
+                                ItemWidth="{Static local_constants:CardViewSizeConstants.UNITMEASUREMENT_DEFAULT_CARD_VIEW_WIDTH}" />
                         </CollectionView.Behaviors>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_dto_models:UnitMeasurementBasicDtoModel">
-                                <Frame HeightRequest="{Static local_constants:CardViewHeightConstants.UNITMEASUREMENT_DEFAULT_CARD_VIEW_HEIGHT}">
+                                <Frame HeightRequest="{Static local_constants:CardViewSizeConstants.UNITMEASUREMENT_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
                                     </Frame.GestureRecognizers>

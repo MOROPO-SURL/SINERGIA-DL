@@ -47,5 +47,5 @@ public partial class TerritoryPotentialsManagementPage :
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.TERRITORYPORTENTIAL_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.TERRITORYPORTENTIAL_DEFAULT_CARD_VIEW_HEIGHT;
 }

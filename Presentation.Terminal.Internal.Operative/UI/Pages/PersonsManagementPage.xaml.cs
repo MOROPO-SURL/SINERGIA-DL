@@ -10,7 +10,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class PersonsManagementPage :
-    BaseManagementEntityPage<PersonBasicDtoModel, PersonDetailDtoModel, PersonsManagementPageModel, PersonConfigurationPageModel>,
+    BaseListEntityPage<PersonBasicDtoModel, PersonsManagementPageModel>,
     IListItemsPageModelPresenter<PersonBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
@@ -47,5 +47,5 @@ public partial class PersonsManagementPage :
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.OBJECTIVE_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT;
 }

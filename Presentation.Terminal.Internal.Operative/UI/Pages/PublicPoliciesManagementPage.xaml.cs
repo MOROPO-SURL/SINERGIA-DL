@@ -47,5 +47,5 @@ public partial class PublicPoliciesManagementPage :
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.PUBLICPOLICY_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.PUBLICPOLICY_DEFAULT_CARD_VIEW_HEIGHT;
 }

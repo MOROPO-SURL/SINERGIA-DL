@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.A
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Feature;
 
-public sealed class FeaturesManagementPageModel : AbstractManagementEntityPageModel<FeatureBasicDtoModel, FeatureDetailDtoModel>
+public sealed class FeaturesManagementPageModel : AbstractManagementEntityPageModel<FeatureBasicDtoModel>
 {
     // TODO Set permissions !!!
 

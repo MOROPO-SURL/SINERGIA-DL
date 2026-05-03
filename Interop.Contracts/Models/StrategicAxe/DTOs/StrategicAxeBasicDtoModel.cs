@@ -1,4 +1,9 @@
 ﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;
 
-public record StrategicAxeBasicDtoModel(Guid Id, string Name, string? Description = null);
-
+public record StrategicAxeBasicDtoModel(int Id, string Name)
+{
+    public override string ToString()
+    {
+        return $"{Id}. {Name}";
+    }
+}

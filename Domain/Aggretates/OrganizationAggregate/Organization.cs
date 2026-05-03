@@ -32,8 +32,8 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
         OwnerId = ownerId;
         Image = image;
         ImageId = imageId;
-        OrganizationKindId = organizationKindId;
-        OrganizationKind = organizationKind;
+        KindId = organizationKindId;
+        Kind = organizationKind;
         About = about;
 
         this.emailAddresses = [.. emailAddresses];
@@ -58,8 +58,8 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
     public Image? Image { get; set; }
     public ImageId? ImageId { get; set; }
 
-    public OrganizationKind? OrganizationKind { get; set; }
-    public OrganizationKindId OrganizationKindId { get; set; }
+    public OrganizationKind? Kind { get; set; }
+    public OrganizationKindId KindId { get; set; }
 
     public IReadOnlyList<EmailAddress> EmailAddresses => [.. emailAddresses];
 

@@ -345,13 +345,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("boolean");
 
+                    b.Property<Guid>("KindId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(360)
                         .HasColumnType("character varying(360)");
-
-                    b.Property<Guid>("OrganizationKindId")
-                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("OwnerId")
                         .HasColumnType("uuid");
@@ -367,7 +367,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.HasIndex("ImageId")
                         .IsUnique();
 
-                    b.HasIndex("OrganizationKindId");
+                    b.HasIndex("KindId");
 
                     b.HasIndex("OwnerId")
                         .IsUnique();
@@ -1920,9 +1920,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "ImageId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.OrganizationKind", "OrganizationKind")
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.OrganizationKind", "Kind")
                         .WithMany()
-                        .HasForeignKey("OrganizationKindId")
+                        .HasForeignKey("KindId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -2049,7 +2049,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                     b.Navigation("Image");
 
-                    b.Navigation("OrganizationKind");
+                    b.Navigation("Kind");
 
                     b.Navigation("Owner");
 

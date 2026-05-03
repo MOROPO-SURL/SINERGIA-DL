@@ -4,4 +4,4 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.DTOs;
 
-public record StrategicLineDetailDto(int Id, string Name, bool IsEnabled, bool IsArchive, StrategicAxeBasicDto StrategicAxe, PersonDetailDto Coordinator, string? Description = null) : IDetailDto;
+public record StrategicLineDetailDto(int Id, StrategicAxeBasicDto StrategicAxe, string Name, bool IsEnabled, bool IsArchive, PersonDetailDto Coordinator, string? Description = null) : IDetailDto;

@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.A
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Objective;
 
-public sealed class ObjectivesManagementPageModel : AbstractManagementEntityPageModel<ObjectiveBasicDtoModel, ObjectiveDetailDtoModel>
+public sealed class ObjectivesManagementPageModel : AbstractManagementEntityPageModel<ObjectiveBasicDtoModel>
 {
     // TODO Set permissions !!!
 

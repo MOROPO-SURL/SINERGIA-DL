@@ -5,8 +5,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
-public class BaseManagementEntityPage<TBasicModel, TDetailModel, TManagePageModel, TConfigurationPageModel> : BaseListEntityPage<TBasicModel, TDetailModel, TManagePageModel>
-    where TManagePageModel : AbstractListEntityPageModel<TBasicModel, TDetailModel>, new()
+public class BaseManagementEntityPage<TBasicModel, TDetailModel, TManagePageModel, TConfigurationPageModel> : BaseListEntityPage<TBasicModel, TManagePageModel>
+    where TManagePageModel : AbstractListEntityPageModel<TBasicModel>, new()
     where TConfigurationPageModel : AbstractConfigurationPageModel<TDetailModel, TDetailModel>
 {
     public BaseManagementEntityPage() : base()

@@ -47,5 +47,5 @@ public partial class TerritorialBarriersManagementPage :
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.TERRITORIALBARRIER_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.TERRITORIALBARRIER_DEFAULT_CARD_VIEW_HEIGHT;
 }

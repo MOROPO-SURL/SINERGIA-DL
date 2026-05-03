@@ -1,3 +1,3 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
+﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.CQRS.Command;
 
-public record StrategicLineUpdateRequestModel(bool IsEnabled, string Name, int Priority, string? Description = null);
+public record StrategicLineUpdateRequestModel(int Id, int AxeId, bool IsEnabled, string Name, string? Description = null);

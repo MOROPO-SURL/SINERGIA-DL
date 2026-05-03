@@ -8,8 +8,4 @@
 		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts</RootNamespace>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Folder Include="Models\Macroprogram\CQRS\Query\" />
-	</ItemGroup>
-
 </Project>

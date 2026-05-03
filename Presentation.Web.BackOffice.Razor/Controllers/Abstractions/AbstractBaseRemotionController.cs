@@ -41,11 +41,6 @@ public abstract class AbstractBaseRemotionController<
     {
     }
 
-    protected virtual TPaginateQuery Review(TPaginateQuery query)
-    {
-        return query;
-    }
-
     [HttpPost]
     [Route("remove")]
     [ValidateAntiForgeryToken]

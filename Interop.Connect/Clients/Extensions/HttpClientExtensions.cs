@@ -2,7 +2,7 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients.Extensions;
 
-internal static class HttpClientExtensions
+public static class HttpClientExtensions
 {
     private const string CONTENT_TYPE = "application/json";
 

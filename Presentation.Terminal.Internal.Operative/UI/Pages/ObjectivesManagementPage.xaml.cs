@@ -49,5 +49,5 @@ public partial class ObjectivesManagementPage :
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.OBJECTIVE_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.OBJECTIVE_DEFAULT_CARD_VIEW_HEIGHT;
 }

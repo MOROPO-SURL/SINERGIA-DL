@@ -2,9 +2,21 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Archive;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Create;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Disable;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Enable;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Remove;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Unarchive;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Update;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Query.Detail;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Query.Paginate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers;
 
@@ -26,14 +38,13 @@ public class StrategicLinesController : ControllerBase
 
     [HttpGet]
     [Route("page/{sheet}/limit/{limit}")]
-    public async Task<ActionResult<PaginateResultModel<StrategicLineBasicDtoModel>>> GetAsync(int sheet, int limit)
+    public async Task<ActionResult<PaginateResultModel<StrategicLineBasicDtoModel>>> GetPageAsync(int sheet, int limit)
     {
         try
         {
-            //PaginateQueryResultModel<StrategicLineBasicDto> result = await mediator.Send(new StrategicLinePaginateQuery(sheet, limit));
+            PaginateQueryResultModel<StrategicLineBasicDto> result = await mediator.Send(new StrategicLinePaginateQuery(sheet, limit));
 
-            //return Ok(mapper.Map<PaginateResultModel<StrategicLineBasicDtoModel>>(result));
-            return Ok(mapper.Map<PaginateResultModel<StrategicLineBasicDtoModel>>(null!));
+            return Ok(mapper.Map<PaginateResultModel<StrategicLineBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -49,10 +60,9 @@ public class StrategicLinesController : ControllerBase
     {
         try
         {
-            //PaginateQueryResultModel<StrategicLineBasicDto> result = await mediator.Send(new StrategicLinePaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            PaginateQueryResultModel<StrategicLineBasicDto> result = await mediator.Send(new StrategicLinePaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
-            //return Ok(mapper.Map<PaginateResultModel<StrategicLineBasicDtoModel>>(result));
-            return Ok(mapper.Map<PaginateResultModel<StrategicLineBasicDtoModel>>(null!));
+            return Ok(mapper.Map<PaginateResultModel<StrategicLineBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -62,15 +72,14 @@ public class StrategicLinesController : ControllerBase
         }
     }
 
-    [HttpGet("{key}")]
-    public async Task<ActionResult<StrategicLineDetailDtoModel>> GetAsync(Guid key)
+    [HttpGet("{key}/axe/{axeId}")]
+    public async Task<ActionResult<StrategicLineDetailDtoModel>> GetAsync(int key, int axeId)
     {
         try
         {
-            //StrategicLineDetailDto result = await mediator.Send(new StrategicLineDetailQuery(key));
+            StrategicLineDetailDto result = await mediator.Send(new StrategicLineDetailQuery(key, axeId));
 
-            //return Ok(mapper.Map<StrategicLineDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicLineDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicLineDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -85,12 +94,11 @@ public class StrategicLinesController : ControllerBase
     {
         try
         {
-            //StrategicLineCreateCommand command = mapper.Map<StrategicLineCreateCommand>(model);
+            StrategicLineCreateCommand command = mapper.Map<StrategicLineCreateCommand>(model);
 
-            //StrategicLineDetailDto result = await mediator.Send(command);
+            StrategicLineDetailDto result = await mediator.Send(command);
 
-            //return Ok(mapper.Map<StrategicLineDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicLineDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicLineDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -105,12 +113,11 @@ public class StrategicLinesController : ControllerBase
     {
         try
         {
-            //StrategicLineUpdateCommand command = mapper.Map<StrategicLineUpdateCommand>(model);
+            StrategicLineUpdateCommand command = mapper.Map<StrategicLineUpdateCommand>(model);
 
-            //StrategicLineDetailDto result = await mediator.Send(command);
+            StrategicLineDetailDto result = await mediator.Send(command);
 
-            //return Ok(mapper.Map<StrategicLineDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicLineDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicLineDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -120,12 +127,12 @@ public class StrategicLinesController : ControllerBase
         }
     }
 
-    [HttpPatch("{key}/enable")]
-    public async Task<IActionResult> EnableAsync(Guid key)
+    [HttpPatch("{key}/axe/{axeId}/enable")]
+    public async Task<IActionResult> EnableAsync(int key, int axeId)
     {
         try
         {
-            //await mediator.Send(new StrategicLineEnableCommand(key));
+            await mediator.Send(new StrategicLineEnableCommand(key, axeId));
 
             return Ok();
         }
@@ -137,12 +144,12 @@ public class StrategicLinesController : ControllerBase
         }
     }
 
-    [HttpPatch("{key}/disable")]
-    public async Task<IActionResult> DisableAsync(Guid key)
+    [HttpPatch("{key}/axe/{axeId}/disable")]
+    public async Task<IActionResult> DisableAsync(int key, int axeId)
     {
         try
         {
-            //await mediator.Send(new StrategicLineDisableCommand(key));
+            await mediator.Send(new StrategicLineDisableCommand(key, axeId));
 
             return Ok();
         }
@@ -154,12 +161,12 @@ public class StrategicLinesController : ControllerBase
         }
     }
 
-    [HttpPatch("{key}/unarchive")]
-    public async Task<IActionResult> UnarchiveAsync(Guid key)
+    [HttpPatch("{key}/axe/{axeId}/unarchive")]
+    public async Task<IActionResult> UnarchiveAsync(int key, int axeId)
     {
         try
         {
-            //await mediator.Send(new StrategicLineUnarchiveCommand(key));
+            await mediator.Send(new StrategicLineUnarchiveCommand(key, axeId));
 
             return Ok();
         }
@@ -171,12 +178,12 @@ public class StrategicLinesController : ControllerBase
         }
     }
 
-    [HttpPatch("{key}/archive")]
-    public async Task<IActionResult> ArchiveAsync(Guid key)
+    [HttpPatch("{key}/axe/{axeId}/archive")]
+    public async Task<IActionResult> ArchiveAsync(int key, int axeId)
     {
         try
         {
-            //await mediator.Send(new StrategicLineArchiveCommand(key));
+            await mediator.Send(new StrategicLineArchiveCommand(key, axeId));
 
             return Ok();
         }
@@ -188,12 +195,12 @@ public class StrategicLinesController : ControllerBase
         }
     }
 
-    [HttpDelete("{key}")]
-    public async Task<IActionResult> DeleteAsync(Guid key)
+    [HttpDelete("{key}/axe/{axeId}")]
+    public async Task<IActionResult> DeleteAsync(int key, int axeId)
     {
         try
         {
-            //await mediator.Send(new StrategicLineRemoveCommand(key));
+            await mediator.Send(new StrategicLineRemoveCommand(key, axeId));
 
             return Ok();
         }

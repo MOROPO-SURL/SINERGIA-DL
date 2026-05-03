@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.A
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.PublicPolicy;
 
-public sealed class PublicPoliciesManagementPageModel : AbstractManagementEntityPageModel<PublicPolicyBasicDtoModel, PublicPolicyDetailDtoModel>
+public sealed class PublicPoliciesManagementPageModel : AbstractManagementEntityPageModel<PublicPolicyBasicDtoModel>
 {
     // TODO Set permissions !!!
 

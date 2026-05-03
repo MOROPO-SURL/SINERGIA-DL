@@ -2,8 +2,8 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
-public class BaseListEntityPage<TBasicModel, TDetailModel, TListPageModel> : BaseContentPage
-    where TListPageModel : AbstractListEntityPageModel<TBasicModel, TDetailModel>, new()
+public class BaseListEntityPage<TBasicModel, TListPageModel> : BaseContentPage
+    where TListPageModel : AbstractListEntityPageModel<TBasicModel>, new()
 {
     public BaseListEntityPage()
     {

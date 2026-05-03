@@ -21,8 +21,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
 
         public void Reset()
         {
-            var settingManager = IPlatformApplication.Current!.Services.GetRequiredService<ISettingManagerPort>();
-
             httpClient = new HttpClient(HttpClientHandlerFactory.Build())
             {
                 BaseAddress = new Uri(Constants.InteropConstants.API_BASE_URL)

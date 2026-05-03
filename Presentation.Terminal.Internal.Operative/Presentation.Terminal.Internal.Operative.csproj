@@ -84,6 +84,42 @@
 	  <Compile Update="UI\Pages\FeaturesManagementPage.xaml.cs">
 	    <DependentUpon>FeaturesManagementPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\StrategicLinesManagementPage.xaml.cs">
+	    <DependentUpon>StrategicLinesManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategicLine\Configuration\StrategicLineConfigurationPage.xaml.cs">
+	    <DependentUpon>StrategicLineConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategicLine\Detail\StrategicLineDetailPage.xaml.cs">
+	    <DependentUpon>StrategicLineDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategicAxe\Configuration\StrategicAxeConfigurationPage.xaml.cs">
+	    <DependentUpon>StrategicAxeConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategicAxe\Detail\StrategicAxeDetailPage.xaml.cs">
+	    <DependentUpon>StrategicAxeDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategicAxesManagementPage.xaml.cs">
+	    <DependentUpon>StrategicAxesManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Macroprogram\Configuration\MacroprogramConfigurationPage.xaml.cs">
+	    <DependentUpon>MacroprogramConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Macroprogram\Detail\MacroprogramDetailPage.xaml.cs">
+	    <DependentUpon>MacroprogramDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\MacroprogramsManagementPage.xaml.cs">
+	    <DependentUpon>MacroprogramsManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Organization\OrganizationConfigurationPage.xaml.cs">
+	    <DependentUpon>OrganizationConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Organization\OrganizationDetailPage.xaml.cs">
+	    <DependentUpon>OrganizationDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\OrganizationsManagementPage.xaml.cs">
+	    <DependentUpon>OrganizationsManagementPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\PublicPolicy\PublicPolicyConfigurationPage.xaml.cs">
 	    <DependentUpon>PublicPolicyConfigurationPage.xaml</DependentUpon>
 	  </Compile>
@@ -163,6 +199,45 @@
 	  <MauiXaml Update="UI\Pages\FeaturesManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Person\PersonPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicLinesManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicLine\Configuration\StrategicLineConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicLine\Detail\StrategicLineDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicAxe\Configuration\StrategicAxeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicAxe\Detail\StrategicAxeDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicAxesManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Macroprogram\Configuration\MacroprogramConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Macroprogram\Detail\MacroprogramDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\MacroprogramsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Organization\OrganizationConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Organization\OrganizationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OrganizationsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\PublicPoliciesManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -239,6 +314,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\PersonCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

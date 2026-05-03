@@ -34,6 +34,6 @@ internal class OrganizationEntityTypeConfiguration : IEntityTypeConfiguration<Or
 
         builder.HasOne(entity => entity.Owner).WithOne().HasForeignKey<Organization>(entity => entity.OwnerId).OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne(entity => entity.OrganizationKind).WithMany().HasForeignKey(entity => entity.OrganizationKindId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(entity => entity.Kind).WithMany().HasForeignKey(entity => entity.KindId).OnDelete(DeleteBehavior.Restrict);
     }
 }

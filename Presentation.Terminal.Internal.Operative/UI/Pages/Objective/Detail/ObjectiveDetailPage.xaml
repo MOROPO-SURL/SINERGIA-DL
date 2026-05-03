@@ -36,15 +36,23 @@
     <Grid>
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
-                <StackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}" Orientation="Horizontal">
+                <Grid 
+                    Style="{StaticResource FormFluentChildStackLayoutStyle}"
+                    ColumnSpacing="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
                     <Label
+                        Grid.Column="0"
                         VerticalOptions="Start"
                         FontSize="Medium"
                         Text="{Binding Model.Index, StringFormat='{0}.'}" />
                     <Label
+                        Grid.Column="1"
                         FontSize="Medium"
                         Text="{Binding Model.Title}" />
-                </StackLayout>
+                </Grid>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"

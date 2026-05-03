@@ -2,6 +2,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Archive;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Create;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Disable;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Enable;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Remove;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Unarchive;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Update;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Query.Detail;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Query.Paginate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
@@ -30,10 +42,9 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //PaginateQueryResultModel<StrategiProjectBasicDto> result = await mediator.Send(new StrategiProjectPaginateQuery(sheet, limit));
+            PaginateQueryResultModel<StrategicProjectBasicDto> result = await mediator.Send(new StrategicProjectPaginateQuery(sheet, limit));
 
-            //return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
-            return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(null!));
+            return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -49,10 +60,9 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //PaginateQueryResultModel<StrategiProjectBasicDto> result = await mediator.Send(new StrategiProjectPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            PaginateQueryResultModel<StrategicProjectBasicDto> result = await mediator.Send(new StrategicProjectPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
-            //return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
-            return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(null!));
+            return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -67,10 +77,9 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //StrategiProjectDetailDto result = await mediator.Send(new StrategiProjectDetailQuery(key));
+            StrategicProjectDetailDto result = await mediator.Send(new StrategicProjectDetailQuery(key));
 
-            //return Ok(mapper.Map<StrategiProjectDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -85,12 +94,11 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //StrategiProjectCreateCommand command = mapper.Map<StrategiProjectCreateCommand>(model);
+            StrategicProjectCreateCommand command = mapper.Map<StrategicProjectCreateCommand>(model);
 
-            //StrategiProjectDetailDto result = await mediator.Send(command);
+            StrategicProjectDetailDto result = await mediator.Send(command);
 
-            //return Ok(mapper.Map<StrategiProjectDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -105,12 +113,11 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //StrategiProjectUpdateCommand command = mapper.Map<StrategiProjectUpdateCommand>(model);
+            StrategicProjectUpdateCommand command = mapper.Map<StrategicProjectUpdateCommand>(model);
 
-            //StrategiProjectDetailDto result = await mediator.Send(command);
+            StrategicProjectDetailDto result = await mediator.Send(command);
 
-            //return Ok(mapper.Map<StrategiProjectDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicProjectDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -125,7 +132,7 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProjectEnableCommand(key));
+            await mediator.Send(new StrategicProjectEnableCommand(key));
 
             return Ok();
         }
@@ -142,7 +149,7 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProjectDisableCommand(key));
+            await mediator.Send(new StrategicProjectDisableCommand(key));
 
             return Ok();
         }
@@ -159,7 +166,7 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProjectUnarchiveCommand(key));
+            await mediator.Send(new StrategicProjectUnarchiveCommand(key));
 
             return Ok();
         }
@@ -176,7 +183,7 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProjectArchiveCommand(key));
+            await mediator.Send(new StrategicProjectArchiveCommand(key));
 
             return Ok();
         }
@@ -193,7 +200,7 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProjectRemoveCommand(key));
+            await mediator.Send(new StrategicProjectRemoveCommand(key));
 
             return Ok();
         }

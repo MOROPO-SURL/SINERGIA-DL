@@ -11,9 +11,13 @@ public class DefaultSessionManagerPortAdapter : ISessionManagerPort
 
     public async Task SignInAsync(string login, string password)
     {
-        var apiClient = new AuthenticationApiClient(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+        IHttpClientProviderPort httpClientProvider = IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>();
+
+        var apiClient = new AuthenticationApiClient(httpClientProvider);
 
         CurrentSession = await apiClient.AuthenticateAsync(new AuthenticationRequestModel(login, password));
+
+        httpClientProvider.Reset();
     }
 
     public Task SignOutAsync()

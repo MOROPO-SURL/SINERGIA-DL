@@ -1,0 +1,15 @@
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Macroprogram.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Macroprogram.Configuration;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Macroprogram.Configuration;
+
+public partial class MacroprogramConfigurationPage : BaseConfigurationEntityPage<MacroprogramBasicDtoModel, MacroprogramDetailDtoModel, MacroprogramConfigurationPageModel>
+{
+	public MacroprogramConfigurationPage(MacroprogramConfigurationPageModel bindingContextModel) : base(bindingContextModel)
+	{
+		InitializeComponent();
+	}
+
+    protected override string EntityTypeName => "Macroprograma";
+}

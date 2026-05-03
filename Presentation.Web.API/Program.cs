@@ -42,6 +42,8 @@ public class Program
 
         builder.Services.AddMapster();
 
+        builder.Services.AddHttpContextAccessor();
+
         builder.Services.AddAuthentication(options =>
         {
             options.DefaultScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme;

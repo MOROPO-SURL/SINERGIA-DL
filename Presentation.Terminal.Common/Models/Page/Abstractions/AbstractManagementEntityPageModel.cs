@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
-public abstract class AbstractManagementEntityPageModel<TBasicModel, TDetailModel> : AbstractListEntityPageModel<TBasicModel, TDetailModel>
+public abstract class AbstractManagementEntityPageModel<TBasicModel> : AbstractListEntityPageModel<TBasicModel>
 {
     protected virtual bool ConfigurationRequiredAsyncWorkPresentation => false;
 

@@ -46,5 +46,5 @@ public partial class UnitMeasurementsManagementPage : BaseManagementEntityPage<U
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.UNITMEASUREMENT_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.UNITMEASUREMENT_DEFAULT_CARD_VIEW_HEIGHT;
 }

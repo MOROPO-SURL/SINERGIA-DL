@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.A
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.UnitMeasurement;
 
-public sealed class UnitMeasurementsManagementPageModel: AbstractManagementEntityPageModel<UnitMeasurementBasicDtoModel, UnitMeasurementDetailDtoModel>
+public sealed class UnitMeasurementsManagementPageModel: AbstractManagementEntityPageModel<UnitMeasurementBasicDtoModel>
 {
     protected override Task<PaginateResultModel<UnitMeasurementBasicDtoModel>> FetchItemsAsync(int currentItemsPageNumber, int currentItemsPageLimit)
     {

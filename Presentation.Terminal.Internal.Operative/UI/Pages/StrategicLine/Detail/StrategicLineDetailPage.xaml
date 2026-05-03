@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseDetailEntityPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicLine.Detail"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicLine.Detail.StrategicLineDetailPage"
+    x:TypeArguments="interop_dto_models:StrategicLineDetailDtoModel,local_detail_page_models:StrategicLineDetailPageModel"
+    x:DataType="local_detail_page_models:StrategicLineDetailPageModel"
+    Shell.TabBarIsVisible="False"
+    Title="Detalles de Línea estratégica">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Modificar"
+            Command="{Binding ModifyCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"  
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xF90B;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Eliminar"
+            Command="{Binding RemoveCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xFA79;"  />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <Grid 
+                    Style="{StaticResource FormFluentChildStackLayoutStyle}"
+                    ColumnSpacing="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        VerticalOptions="Start"
+                        FontSize="Medium"
+                        Text="{Binding Model.Id, StringFormat='{0}.'}" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="Medium"
+                        Text="{Binding Model.Name}" />
+                </Grid>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                    <Label 
+                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                        Text="Descripción" />
+                    <Label
+                        Style="{StaticResource ValuePropertyLabelStyle}"
+                        Text="{Binding Model.Description, TargetNullValue='---'}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</common_ui_base_pages:BaseDetailEntityPage>

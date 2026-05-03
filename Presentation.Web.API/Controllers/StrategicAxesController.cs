@@ -2,6 +2,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Archive;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Create;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Disable;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Enable;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Remove;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Unarchive;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Update;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Query.Detail;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Query.Paginate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;
@@ -30,10 +42,9 @@ public class StrategicAxesController: ControllerBase
     {
         try
         {
-            //PaginateQueryResultModel<UnitMeasurementBasicDto> result = await mediator.Send(new UnitMeasurementPaginateQuery(sheet, limit));
+            PaginateQueryResultModel<StrategicAxeBasicDto> result = await mediator.Send(new StrategicAxePaginateQuery(sheet, limit));
 
-            //return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
-            return Ok(mapper.Map<PaginateResultModel<StrategicAxeBasicDtoModel>>(null!));
+            return Ok(mapper.Map<PaginateResultModel<StrategicAxeBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -49,10 +60,9 @@ public class StrategicAxesController: ControllerBase
     {
         try
         {
-            //PaginateQueryResultModel<UnitMeasurementBasicDto> result = await mediator.Send(new UnitMeasurementPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            PaginateQueryResultModel<StrategicAxeBasicDto> result = await mediator.Send(new StrategicAxePaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
-            //return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
-            return Ok(mapper.Map<PaginateResultModel<StrategicAxeBasicDtoModel>>(null!));
+            return Ok(mapper.Map<PaginateResultModel<StrategicAxeBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -63,14 +73,13 @@ public class StrategicAxesController: ControllerBase
     }
 
     [HttpGet("{key}")]
-    public async Task<ActionResult<StrategicAxeDetailDtoModel>> GetAsync(Guid key)
+    public async Task<ActionResult<StrategicAxeDetailDtoModel>> GetAsync(int key)
     {
         try
         {
-            //UnitMeasurementDetailDto result = await mediator.Send(new UnitMeasurementDetailQuery(key));
+            StrategicAxeDetailDto result = await mediator.Send(new StrategicAxeDetailQuery(key));
 
-            //return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicAxeDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicAxeDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -85,12 +94,11 @@ public class StrategicAxesController: ControllerBase
     {
         try
         {
-            //UnitMeasurementCreateCommand command = mapper.Map<UnitMeasurementCreateCommand>(model);
+            StrategicAxeCreateCommand command = mapper.Map<StrategicAxeCreateCommand>(model);
 
-            //UnitMeasurementDetailDto result = await mediator.Send(command);
+            StrategicAxeDetailDto result = await mediator.Send(command);
 
-            //return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicAxeDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicAxeDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -105,12 +113,11 @@ public class StrategicAxesController: ControllerBase
     {
         try
         {
-            //UnitMeasurementUpdateCommand command = mapper.Map<UnitMeasurementUpdateCommand>(model);
+            StrategicAxeUpdateCommand command = mapper.Map<StrategicAxeUpdateCommand>(model);
 
-            //UnitMeasurementDetailDto result = await mediator.Send(command);
+            StrategicAxeDetailDto result = await mediator.Send(command);
 
-            //return Ok(mapper.Map<UnitMeasurementDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicAxeDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicAxeDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -121,11 +128,11 @@ public class StrategicAxesController: ControllerBase
     }
 
     [HttpPatch("{key}/enable")]
-    public async Task<IActionResult> EnableAsync(Guid key)
+    public async Task<IActionResult> EnableAsync(int key)
     {
         try
         {
-            //await mediator.Send(new UnitMeasurementEnableCommand(key));
+            await mediator.Send(new StrategicAxeEnableCommand(key));
 
             return Ok();
         }
@@ -138,11 +145,11 @@ public class StrategicAxesController: ControllerBase
     }
 
     [HttpPatch("{key}/disable")]
-    public async Task<IActionResult> DisableAsync(Guid key)
+    public async Task<IActionResult> DisableAsync(int key)
     {
         try
         {
-            //await mediator.Send(new UnitMeasurementDisableCommand(key));
+            await mediator.Send(new StrategicAxeDisableCommand(key));
 
             return Ok();
         }
@@ -155,11 +162,11 @@ public class StrategicAxesController: ControllerBase
     }
 
     [HttpPatch("{key}/unarchive")]
-    public async Task<IActionResult> UnarchiveAsync(Guid key)
+    public async Task<IActionResult> UnarchiveAsync(int key)
     {
         try
         {
-            //await mediator.Send(new UnitMeasurementUnarchiveCommand(key));
+            await mediator.Send(new StrategicAxeUnarchiveCommand(key));
 
             return Ok();
         }
@@ -172,11 +179,11 @@ public class StrategicAxesController: ControllerBase
     }
 
     [HttpPatch("{key}/archive")]
-    public async Task<IActionResult> ArchiveAsync(Guid key)
+    public async Task<IActionResult> ArchiveAsync(int key)
     {
         try
         {
-            //await mediator.Send(new UnitMeasurementArchiveCommand(key));
+            await mediator.Send(new StrategicAxeArchiveCommand(key));
 
             return Ok();
         }
@@ -189,11 +196,11 @@ public class StrategicAxesController: ControllerBase
     }
 
     [HttpDelete("{key}")]
-    public async Task<IActionResult> DeleteAsync(Guid key)
+    public async Task<IActionResult> DeleteAsync(int key)
     {
         try
         {
-            //await mediator.Send(new UnitMeasurementRemoveCommand(key));
+            await mediator.Send(new StrategicAxeRemoveCommand(key));
 
             return Ok();
         }

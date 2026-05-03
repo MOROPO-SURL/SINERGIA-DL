@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
-public abstract class AbstractListEntityPageModel<TBasicModel, TDetailModel> : BasePageModel, ICollectionViewSizeChangeReloadItemsPageModel
+public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, ICollectionViewSizeChangeReloadItemsPageModel
 {
     private int currentItemsPageNumber;
     private int currentItemsPageLimit;

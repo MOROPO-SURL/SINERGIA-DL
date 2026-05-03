@@ -65,11 +65,11 @@
                         <CollectionView.Behaviors>
                             <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
                                 ItemSpacing="{Static local_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
-                                ItemWidth="{Static local_constants:CardViewHeightConstants.OBJECTIVE_DEFAULT_CARD_VIEW_WIDTH}" />
+                                ItemWidth="{Static local_constants:CardViewSizeConstants.OBJECTIVE_DEFAULT_CARD_VIEW_WIDTH}" />
                         </CollectionView.Behaviors>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_dto_models:ObjectiveBasicDtoModel">
-                                <Frame HeightRequest="{Static local_constants:CardViewHeightConstants.OBJECTIVE_DEFAULT_CARD_VIEW_HEIGHT}">
+                                <Frame HeightRequest="{Static local_constants:CardViewSizeConstants.OBJECTIVE_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
                                     </Frame.GestureRecognizers>

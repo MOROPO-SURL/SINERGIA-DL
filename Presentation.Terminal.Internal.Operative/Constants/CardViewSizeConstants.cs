@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Constants;
 
-public static class CardViewHeightConstants
+public static class CardViewSizeConstants
 {
     public static double OBJECTIVE_DEFAULT_CARD_VIEW_HEIGHT = 120;
     public static double OBJECTIVE_DEFAULT_CARD_VIEW_WIDTH = 320;
@@ -19,4 +19,19 @@ public static class CardViewHeightConstants
 
     public static double PUBLICPOLICY_DEFAULT_CARD_VIEW_HEIGHT = 120;
     public static double PUBLICPOLICY_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double FEATURE_DEFAULT_CARD_VIEW_HEIGHT = 120;
+    public static double FEATURE_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT = 120;
+    public static double ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH = 360;
+
+    public static double MACROPROGRAM_DEFAULT_CARD_VIEW_HEIGHT = 96;
+    public static double MACROPROGRAM_DEFAULT_CARD_VIEW_WIDTH = 320;
+
+    public static double STRATEGICAXE_DEFAULT_CARD_VIEW_HEIGHT = 96;
+    public static double STRATEGICAXE_DEFAULT_CARD_VIEW_WIDTH = 320;
+
+    public static double STRATEGICLINE_DEFAULT_CARD_VIEW_HEIGHT = 120;
+    public static double STRATEGICLINE_DEFAULT_CARD_VIEW_WIDTH = 320;
 }

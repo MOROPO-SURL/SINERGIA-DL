@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseManagementEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Constants"
+    xmlns:local_management_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization"
+    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.OrganizationsManagementPage"
+    x:TypeArguments="interop_dto_models:OrganizationBasicDtoModel,interop_dto_models:OrganizationDetailDtoModel,local_management_page_models:OrganizationsManagementPageModel,local_configuration_page_models:OrganizationConfigurationPageModel"
+    x:DataType="local_management_page_models:OrganizationsManagementPageModel"
+    Title="Gestión de Entidades"
+    IsEnabled="{Binding IsEnabled}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Agregar"
+            Command="{Binding CreateCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"  
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xf415;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Actualizar"
+            Command="{Binding ReloadCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xF450;"  />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar 
+                    Style="{StaticResource ListEntityPageSearchBarStyle}"
+                    Placeholder="-- buscar por nombre, apellidos o alias --"
+                    Text="{Binding SearchParameter}"
+                    SearchCommand="{Binding SearchCommand, Mode=OneTime}" />
+                <Grid VerticalOptions="FillAndExpand">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Style="{StaticResource ListEntityPageCollectionViewStyle}"
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical" 
+                                Span="2" 
+                                HorizontalItemSpacing="{Static local_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                VerticalItemSpacing="{Static local_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Behaviors>
+                            <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                ItemSpacing="{Static local_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static local_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH}" />
+                        </CollectionView.Behaviors>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:OrganizationBasicDtoModel">
+                                <Frame 
+                                    Padding="0"
+                                    HeightRequest="{Static local_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid ColumnSpacing="4" RowSpacing="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="3*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Grid.Column="0"
+                                            Aspect="AspectFill"
+                                            Source="{Binding Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                        <StackLayout 
+                                            Grid.Column="1"
+                                            Padding="8"
+                                            Orientation="Vertical">
+                                            <Label
+                                                VerticalOptions="FillAndExpand"
+                                                FontAttributes="Bold"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="3"
+                                                ToolTipProperties.Text="{Binding Name}"
+                                                Text="{Binding Name}" />
+                                            <Label 
+                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                Margin="0,8,0,0"
+                                                Text="Tipo" />
+                                            <Label
+                                                Style="{StaticResource OffLabelStyle}"
+                                                LineBreakMode="TailTruncation"
+                                                ToolTipProperties.Text="{Binding Kind.Name}"
+                                                Text="{Binding Kind.Name}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label
+                                Style="{StaticResource CollectionPageEmptyViewLabelStyle}"
+                                Margin="8"
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                    Style="{StaticResource ListEntityPageLoadMoreButtonStyle}"
+                                    Command="{Binding LoadMoreCommand, Mode=OneTime}" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</common_ui_base_pages:BaseManagementEntityPage>

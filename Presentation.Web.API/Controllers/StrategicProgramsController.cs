@@ -2,6 +2,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Archive;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Create;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Disable;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Enable;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Remove;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Unarchive;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Update;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Query.Detail;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Query.Paginate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
@@ -30,10 +42,9 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //PaginateQueryResultModel<StrategiProgramBasicDto> result = await mediator.Send(new StrategiProgramPaginateQuery(sheet, limit));
+            PaginateQueryResultModel<StrategicProgramBasicDto> result = await mediator.Send(new StrategicProgramPaginateQuery(sheet, limit));
 
-            //return Ok(mapper.Map<PaginateResultModel<StrategicProgramBasicDtoModel>>(result));
-            return Ok(mapper.Map<PaginateResultModel<StrategicProgramBasicDtoModel>>(null!));
+            return Ok(mapper.Map<PaginateResultModel<StrategicProgramBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -49,10 +60,9 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //PaginateQueryResultModel<StrategiProgramBasicDto> result = await mediator.Send(new StrategiProgramPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            PaginateQueryResultModel<StrategicProgramBasicDto> result = await mediator.Send(new StrategicProgramPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
-            //return Ok(mapper.Map<PaginateResultModel<StrategicProgramBasicDtoModel>>(result));
-            return Ok(mapper.Map<PaginateResultModel<StrategicProgramBasicDtoModel>>(null!));
+            return Ok(mapper.Map<PaginateResultModel<StrategicProgramBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -67,10 +77,9 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //StrategiProgramDetailDto result = await mediator.Send(new StrategiProgramDetailQuery(key));
+            StrategicProgramDetailDto result = await mediator.Send(new StrategicProgramDetailQuery(key));
 
-            //return Ok(mapper.Map<StrategiProgramDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicProgramDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicProgramDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -85,12 +94,11 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //StrategiProgramCreateCommand command = mapper.Map<StrategiProgramCreateCommand>(model);
+            StrategicProgramCreateCommand command = mapper.Map<StrategicProgramCreateCommand>(model);
 
-            //StrategiProgramDetailDto result = await mediator.Send(command);
+            StrategicProgramDetailDto result = await mediator.Send(command);
 
-            //return Ok(mapper.Map<StrategiProgramDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicProgramDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicProgramDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -105,12 +113,11 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //StrategiProgramUpdateCommand command = mapper.Map<StrategiProgramUpdateCommand>(model);
+            StrategicProgramUpdateCommand command = mapper.Map<StrategicProgramUpdateCommand>(model);
 
-            //StrategiProgramDetailDto result = await mediator.Send(command);
+            StrategicProgramDetailDto result = await mediator.Send(command);
 
-            //return Ok(mapper.Map<StrategiProgramDetailDtoModel>(result));
-            return Ok(mapper.Map<StrategicProgramDetailDtoModel>(null!));
+            return Ok(mapper.Map<StrategicProgramDetailDtoModel>(result));
         }
         catch (Exception exception)
         {
@@ -125,7 +132,7 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProgramEnableCommand(key));
+            await mediator.Send(new StrategicProgramEnableCommand(key));
 
             return Ok();
         }
@@ -142,7 +149,7 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProgramDisableCommand(key));
+            await mediator.Send(new StrategicProgramDisableCommand(key));
 
             return Ok();
         }
@@ -159,7 +166,7 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProgramUnarchiveCommand(key));
+            await mediator.Send(new StrategicProgramUnarchiveCommand(key));
 
             return Ok();
         }
@@ -176,7 +183,7 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProgramArchiveCommand(key));
+            await mediator.Send(new StrategicProgramArchiveCommand(key));
 
             return Ok();
         }
@@ -193,7 +200,7 @@ public class StrategicProgramsController : ControllerBase
     {
         try
         {
-            //await mediator.Send(new StrategiProgramRemoveCommand(key));
+            await mediator.Send(new StrategicProgramRemoveCommand(key));
 
             return Ok();
         }

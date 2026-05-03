@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.A
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.TerritoryPotential;
 
-public sealed class TerritoryPotentialsManagementPageModel : AbstractManagementEntityPageModel<TerritoryPotentialBasicDtoModel, TerritoryPotentialDetailDtoModel>
+public sealed class TerritoryPotentialsManagementPageModel : AbstractManagementEntityPageModel<TerritoryPotentialBasicDtoModel>
 {
     // TODO Set permissions !!!
 
