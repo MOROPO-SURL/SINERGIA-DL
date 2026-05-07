@@ -11,7 +11,7 @@ internal sealed class OrganizationKindDisableCommandHandler :
     AbstractDisableCommandHandler<OrganizationKind, OrganizationKindId, Guid, OrganizationKindDisableCommand>,
     IRequestHandler<OrganizationKindDisableCommand>
 {
-    public OrganizationKindDisableCommandHandler(IOrganizationKindCommandRepositoryPort entityCommandRepository, IOrganizationKindQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public OrganizationKindDisableCommandHandler(IOrganizationKindCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

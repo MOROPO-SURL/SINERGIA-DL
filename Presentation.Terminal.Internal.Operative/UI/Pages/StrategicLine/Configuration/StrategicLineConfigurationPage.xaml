@@ -4,8 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicLine.Configuration"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicLine.Configuration.StrategicLineConfigurationPage"
@@ -14,6 +16,9 @@
     Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+            <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToColorConverter" TrueValue="DimGray" FalseValue="Transparent" />
+
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -97,6 +102,63 @@
                         </Label.Behaviors>
                     </Label>
                 </VerticalStackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Coordinador" />
+                        <Frame>
+                            <Grid ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Border 
+                                    BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
+                                    Grid.Column="0"
+                                    StrokeThickness="4"
+                                    StrokeLineJoin="Bevel">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="36" />
+                                    </Border.StrokeShape>
+                                    <Image
+                                        WidthRequest="72" HeightRequest="72"
+                                        Source="{Binding Coordinator.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                </Border>
+                                <VerticalStackLayout 
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Spacing="8">                                    
+                                    <Label
+                                        BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
+                                        FontAttributes="Bold"
+                                        LineBreakMode="TailTruncation"
+                                        ToolTipProperties.Text="{Binding Coordinator.Name}"
+                                        Text="{Binding Coordinator.Name}" />
+                                    <Label
+                                        BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
+                                        MaxLines="1"
+                                        LineBreakMode="TailTruncation"
+                                        ToolTipProperties.Text="{Binding Coordinator.LastName}"
+                                        Text="{Binding Coordinator.LastName}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="CoordinatorPickButton_Clicked" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:StrategicLineConfigurationPageModel.CoordinatorValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                </FlexLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="200" />

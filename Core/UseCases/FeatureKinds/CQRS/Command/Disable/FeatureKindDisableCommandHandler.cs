@@ -11,7 +11,7 @@ internal sealed class FeatureKindDisableCommandHandler :
     AbstractDisableCommandHandler<FeatureKind, FeatureKindId, Guid, FeatureKindDisableCommand>,
     IRequestHandler<FeatureKindDisableCommand>
 {
-    public FeatureKindDisableCommandHandler(IFeatureKindCommandRepositoryPort entityCommandRepository, IFeatureKindQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public FeatureKindDisableCommandHandler(IFeatureKindCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

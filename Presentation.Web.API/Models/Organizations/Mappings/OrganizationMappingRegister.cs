@@ -18,43 +18,6 @@ internal class OrganizationMappingRegister: IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<(int Sheet, int Limit), OrganizationPaginateQuery>()
-            .Map(dest => dest.Page, src => src.Sheet)
-            .Map(dest => dest.Limit, src => src.Limit);
-
-        config.NewConfig<OrganizationDetailDto, Guid>()
-            .MapWith(src => src.Id);
-
-        config.NewConfig<Guid, OrganizationDetailQuery>()
-            .MapWith(src => new OrganizationDetailQuery(src));
-
-        config.NewConfig<Guid, OrganizationRemoveCommand>()
-            .MapWith(src => new OrganizationRemoveCommand(src));
-
-        config.NewConfig<Guid, OrganizationEnableCommand>()
-            .MapWith(src => new OrganizationEnableCommand(src));
-
-        config.NewConfig<Guid, OrganizationDisableCommand>()
-            .MapWith(src => new OrganizationDisableCommand(src));
-
-        config.NewConfig<Guid, OrganizationArchiveCommand>()
-            .MapWith(src => new OrganizationArchiveCommand(src));
-
-        config.NewConfig<Guid, OrganizationUnarchiveCommand>()
-            .MapWith(src => new OrganizationUnarchiveCommand(src));
-
-        config.NewConfig<OrganizationCreateRequestModel, OrganizationCreateCommand>()
-            .Map(dest => dest.EmailAddresses, src => src.EmailAddresses.Select(item => item.Adapt<EmailAddressDetailDto>()))
-            .Map(dest => dest.PhoneNumbers, src => src.PhoneNumbers.Select(item => item.Adapt<PhoneNumberDetailDto>()))
-            .Map(dest => dest.PostalAddresses, src => src.PostalAddresses.Select(item => item.Adapt<PostalAddressDetailDto>()))
-            .Map(dest => dest.WebSiteAddresses, src => src.WebSiteAddresses.Select(item => item.Adapt<WebSiteAddressDetailDto>()))
-            .Map(dest => dest, src => src);
-
-        config.NewConfig<OrganizationUpdateRequestModel, OrganizationUpdateCommand>()
-            .Map(dest => dest.EmailAddresses, src => src.EmailAddresses.Select(item => item.Adapt<EmailAddressDetailDto>()))
-            .Map(dest => dest.PhoneNumbers, src => src.PhoneNumbers.Select(item => item.Adapt<PhoneNumberDetailDto>()))
-            .Map(dest => dest.PostalAddresses, src => src.PostalAddresses.Select(item => item.Adapt<PostalAddressDetailDto>()))
-            .Map(dest => dest.WebSiteAddresses, src => src.WebSiteAddresses.Select(item => item.Adapt<WebSiteAddressDetailDto>()))
-            .Map(dest => dest, src => src);
+        // TODO Remove !!!
     }
 }

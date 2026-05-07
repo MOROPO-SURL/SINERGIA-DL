@@ -10,7 +10,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreas.CQRS.Comma
 internal sealed class InterestAreaEnableCommandHandler : AbstractEnableCommandHandler<InterestArea, InterestAreaId, Guid, InterestAreaEnableCommand>,
 IRequestHandler<InterestAreaEnableCommand>
 {
-    public InterestAreaEnableCommandHandler(IInterestAreaCommandRepositoryPort entityCommandRepository, IInterestAreaQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public InterestAreaEnableCommandHandler(IInterestAreaCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

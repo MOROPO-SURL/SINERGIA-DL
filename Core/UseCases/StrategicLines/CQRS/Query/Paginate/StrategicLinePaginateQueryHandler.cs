@@ -32,7 +32,7 @@ internal sealed class StrategicLinePaginateQueryHandler : IRequestHandler<Strate
             page = 1;
         }
 
-        StrategicLineBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, entity => entity.SecoundId.Value * 1000 + entity.FirstId.Value, false, request.Criteria).ProjectToType<StrategicLineBasicDto>()];
+        StrategicLineBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, request.Criteria).ProjectToType<StrategicLineBasicDto>()];
 
         return new PaginateQueryResultModel<StrategicLineBasicDto>
         {

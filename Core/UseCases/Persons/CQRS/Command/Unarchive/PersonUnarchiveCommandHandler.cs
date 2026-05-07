@@ -11,7 +11,7 @@ internal sealed class PersonUnarchiveCommandHandler :
     AbstractUnarchiveCommandHandler<Person, PersonId, Guid, PersonUnarchiveCommand>,
     IRequestHandler<PersonUnarchiveCommand>
 {
-    public PersonUnarchiveCommandHandler(IPersonCommandRepositoryPort entityCommandRepository, IPersonQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public PersonUnarchiveCommandHandler(IPersonCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

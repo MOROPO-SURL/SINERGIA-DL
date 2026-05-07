@@ -10,11 +10,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class PublicPoliciesManagementPage :
-    BaseManagementEntityPage<PublicPolicyBasicDtoModel, PublicPolicyDetailDtoModel, PublicPoliciesManagementPageModel, PublicPolicyConfigurationPageModel>,
+    BaseListEntityPage<PublicPolicyBasicDtoModel, PublicPoliciesManagementPageModel>,
     IListItemsPageModelPresenter<PublicPolicyBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-    public PublicPoliciesManagementPage()
+    public PublicPoliciesManagementPage() : base(new PublicPoliciesManagementPageModel())
     {
         InitializeComponent();
 

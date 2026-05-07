@@ -159,9 +159,7 @@
                                     </CollectionView.EmptyView>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="interop_common_dto_models:PhoneNumberDetailDtoModel">
-                                            <Frame 
-                                                Padding="8"
-                                                Margin="0,12,0,0">
+                                            <Frame Padding="8">
                                                 <StackLayout Orientation="Horizontal" Spacing="8">
                                                     <Label
                                                         Margin="8"
@@ -174,12 +172,12 @@
                                                         Text="&#xF2FD;"
                                                         Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailPhoneNumberCommand, Mode=OneTime}"
                                                         CommandParameter="{Binding Mode=OneTime}" />
-                                                    <Button
+                                                    <!--<Button
                                                         Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Center"
                                                         Text="&#xF90B;"
                                                         Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdatePhoneNumberCommand, Mode=OneTime}"
-                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                        CommandParameter="{Binding Mode=OneTime}" />-->
                                                     <Button
                                                         Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         VerticalOptions="Center"
@@ -230,9 +228,7 @@
                                     </CollectionView.EmptyView>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="interop_common_dto_models:EmailAddressDetailDtoModel">
-                                            <Frame 
-                                                Padding="8"
-                                                Margin="0,12,0,0">
+                                            <Frame Padding="8">
                                                 <StackLayout Orientation="Horizontal" Spacing="8">
                                                     <Label
                                                         Margin="8"
@@ -245,12 +241,12 @@
                                                         Text="&#xF2FD;"
                                                         Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailEmailAddressCommand, Mode=OneTime}"
                                                         CommandParameter="{Binding Mode=OneTime}" />
-                                                    <Button
+                                                    <!--<Button
                                                         Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Center"
                                                         Text="&#xF90B;"
                                                         Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdateEmailAddressCommand, Mode=OneTime}"
-                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                        CommandParameter="{Binding Mode=OneTime}" />-->
                                                     <Button
                                                         Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         VerticalOptions="Center"
@@ -303,9 +299,7 @@
                                     </CollectionView.EmptyView>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="interop_common_dto_models:PostalAddressDetailDtoModel">
-                                            <Frame 
-                                                Padding="8"
-                                                Margin="0,12,0,0">
+                                            <Frame Padding="8">
                                                 <StackLayout Orientation="Horizontal" Spacing="8">
                                                     <Label
                                                         Margin="8"
@@ -324,12 +318,12 @@
                                                         Text="&#xF2FD;"
                                                         Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailPostalAddressCommand, Mode=OneTime}"
                                                         CommandParameter="{Binding Mode=OneTime}" />
-                                                    <Button
+                                                    <!--<Button
                                                         Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Center"
                                                         Text="&#xF90B;"
                                                         Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdatePostalAddressCommand, Mode=OneTime}"
-                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                        CommandParameter="{Binding Mode=OneTime}" />-->
                                                     <Button
                                                         Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         VerticalOptions="Center"
@@ -380,9 +374,7 @@
                                     </CollectionView.EmptyView>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="interop_common_dto_models:WebSiteAddressDetailDtoModel">
-                                            <Frame 
-                                                Padding="8"
-                                                Margin="0,12,0,0">
+                                            <Frame Padding="8">
                                                 <StackLayout Orientation="Horizontal" Spacing="8">
                                                     <Label
                                                         Margin="8"
@@ -395,12 +387,12 @@
                                                         Text="&#xF2FD;"
                                                         Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailWebSiteAddressCommand, Mode=OneTime}"
                                                         CommandParameter="{Binding Mode=OneTime}" />
-                                                    <Button
+                                                    <!--<Button
                                                         Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Center"
                                                         Text="&#xF90B;"
                                                         Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdateWebSiteAddressCommand, Mode=OneTime}"
-                                                        CommandParameter="{Binding Mode=OneTime}" />
+                                                        CommandParameter="{Binding Mode=OneTime}" />-->
                                                     <Button
                                                         Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         VerticalOptions="Center"

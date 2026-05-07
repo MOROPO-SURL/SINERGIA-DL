@@ -11,7 +11,7 @@ internal sealed class StrategicAxeUnarchiveCommandHandler :
     AbstractUnarchiveCommandHandler<StrategicAxe, StrategicAxeId, int, StrategicAxeUnarchiveCommand>,
     IRequestHandler<StrategicAxeUnarchiveCommand>
 {
-    public StrategicAxeUnarchiveCommandHandler(IStrategicAxeCommandRepositoryPort entityCommandRepository, IStrategicAxeQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public StrategicAxeUnarchiveCommandHandler(IStrategicAxeCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

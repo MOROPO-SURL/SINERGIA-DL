@@ -15,6 +15,10 @@ internal sealed class StrategicLineConfigurationValidator : AbstractValidator<Mo
             .NotNull()
             .WithName("Eje estratégico");
 
+        RuleFor(model => model.Coordinator)
+            .NotNull()
+            .WithName("Coordinador");
+
         RuleFor(model => model.Description)
             .MaximumLength(2048)
             .WithName("Descripción");

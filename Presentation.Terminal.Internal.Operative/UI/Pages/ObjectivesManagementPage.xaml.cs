@@ -12,11 +12,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class ObjectivesManagementPage : 
-    BaseManagementEntityPage<ObjectiveBasicDtoModel, ObjectiveDetailDtoModel, ObjectivesManagementPageModel, ObjectiveConfigurationPageModel>, 
+    BaseListEntityPage<ObjectiveBasicDtoModel, ObjectivesManagementPageModel>, 
     IListItemsPageModelPresenter<ObjectiveBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-	public ObjectivesManagementPage()
+	public ObjectivesManagementPage() : base(new ObjectivesManagementPageModel())
 	{
 		InitializeComponent();
 

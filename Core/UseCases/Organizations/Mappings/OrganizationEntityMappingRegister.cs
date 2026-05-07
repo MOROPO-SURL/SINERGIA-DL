@@ -1,13 +1,13 @@
 ﻿using Mapster;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.Mappings;
 
@@ -57,10 +57,48 @@ internal sealed class OrganizationEntityMappingRegister : IRegister
 
         config.NewConfig<OrganizationUpdateCommand, Organization>()
             .Map(dest => dest.Id, src => new OrganizationId(src.Id))
-            .Map(dest => dest.EmailAddresses, src => src.EmailAddresses.Select(entity => entity.Adapt<EmailAddress>()))
-            .Map(dest => dest.PhoneNumbers, src => src.PhoneNumbers.Select(entity => entity.Adapt<PhoneNumber>()))
-            .Map(dest => dest.PostalAddresses, src => src.PostalAddresses.Select(entity => entity.Adapt<PostalAddress>()))
-            .Map(dest => dest.WebSiteAddresses, src => src.WebSiteAddresses.Select(entity => entity.Adapt<WebSiteAddress>()))
-            .Map(dest => dest, src => src);
+            .Map(dest => dest, src => src)
+            .AfterMapping((src, dest) =>
+            {
+                foreach (PhoneNumberDetailDto item in src.InPhoneNumbers)
+                {
+                    dest.Add(item.Adapt<PhoneNumber>());
+                }
+
+                foreach (PhoneNumberDetailDto item in src.OutPhoneNumbers)
+                {
+                    dest.Remove(item.Adapt<PhoneNumber>());
+                }
+
+                foreach (EmailAddressDetailDto item in src.InEmailAddresses)
+                {
+                    dest.Add(item.Adapt<EmailAddress>());
+                }
+
+                foreach (EmailAddressDetailDto item in src.OutEmailAddresses)
+                {
+                    dest.Remove(item.Adapt<EmailAddress>());
+                }
+
+                foreach (var item in src.InPostalAddresses)
+                {
+                    dest.Add(item.Adapt<PostalAddress>());
+                }
+
+                foreach (var item in src.OutPostalAddresses)
+                {
+                    dest.Remove(item.Adapt<PostalAddress>());
+                }
+
+                foreach (var item in src.InWebSiteAddresses)
+                {
+                    dest.Add(item.Adapt<WebSiteAddress>());
+                }
+
+                foreach (var item in src.OutWebSiteAddresses)
+                {
+                    dest.Remove(item.Adapt<WebSiteAddress>());
+                }
+            });
     }
 }

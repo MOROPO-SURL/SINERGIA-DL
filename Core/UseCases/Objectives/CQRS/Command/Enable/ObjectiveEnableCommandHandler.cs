@@ -11,7 +11,7 @@ internal sealed class ObjectiveEnableCommandHandler :
     AbstractEnableCommandHandler<Objective, ObjectiveId, Guid, ObjectiveEnableCommand>,
     IRequestHandler<ObjectiveEnableCommand>
 {
-    public ObjectiveEnableCommandHandler(IObjectiveCommandRepositoryPort entityCommandRepository, IObjectiveQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ObjectiveEnableCommandHandler(IObjectiveCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

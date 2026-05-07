@@ -7,7 +7,6 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.CQRS.Comma
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Presenters;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Common.Configuration;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Common.Configuration;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Common.Detail;
@@ -26,10 +25,14 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     private ImageCreateRequestModel? imagePickedModel;
 
-    private PhoneNumberDetailDtoModel? outgoingPhoneNumber;
-    private EmailAddressDetailDtoModel? outgoingEmailAddress;
-    private PostalAddressDetailDtoModel? outgoingPostalAddress;
-    private WebSiteAddressDetailDtoModel? outgoingWebSiteAddress;
+    private readonly List<PhoneNumberDetailDtoModel> inPhoneNumbers = [];
+    private readonly List<PhoneNumberDetailDtoModel> outPhoneNumbers = [];
+    private readonly List<EmailAddressDetailDtoModel> inEmailAddresses = [];
+    private readonly List<EmailAddressDetailDtoModel> outEmailAddresses = [];
+    private readonly List<PostalAddressDetailDtoModel> inPostalAddresses = [];
+    private readonly List<PostalAddressDetailDtoModel> outPostalAddresses = [];
+    private readonly List<WebSiteAddressDetailDtoModel> inWebSiteAddresses = [];
+    private readonly List<WebSiteAddressDetailDtoModel> outWebSiteAddresses = [];
 
     private int priority = 1;
     private string name = null!;
@@ -47,10 +50,10 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             await Application.Current!.MainPage!.NavigationPushPageAsync(new PhoneNumberConfigurationPage(new PhoneNumberConfigurationPageModel(null, PhoneNumberCreateSuccess_Callback, new PhoneNumberConfigurationValidator())));
         });
 
-        UpdatePhoneNumberCommand = new Command<PhoneNumberDetailDtoModel>(async model =>
-        {
-            await Application.Current!.MainPage!.NavigationPushPageAsync(new PhoneNumberConfigurationPage(new PhoneNumberConfigurationPageModel(model, PhoneNumberModifySuccess_Callback, new PhoneNumberConfigurationValidator())));
-        });
+        //UpdatePhoneNumberCommand = new Command<PhoneNumberDetailDtoModel>(async model =>
+        //{
+        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new PhoneNumberConfigurationPage(new PhoneNumberConfigurationPageModel(model, PhoneNumberModifySuccess_Callback, new PhoneNumberConfigurationValidator())));
+        //});
 
         DetailPhoneNumberCommand = new Command<PhoneNumberDetailDtoModel>(async model =>
         {
@@ -62,6 +65,24 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
             {
                 if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inPhoneNumbers)
+                {
+                    if (item != model) continue;
+
+                    inPhoneNumbers.Remove(item);
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outPhoneNumbers.Add(model);
+                }
 
                 Dispatcher.Dispatch(() => PhoneNumbers.Remove(model));
 
@@ -78,10 +99,10 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             await Application.Current!.MainPage!.NavigationPushPageAsync(new EmailAddressConfigurationPage(new EmailAddressConfigurationPageModel(null, EmailAddressCreateSuccess_Callback, new EmailAddressConfigurationValidator())));
         });
 
-        UpdateEmailAddressCommand = new Command<EmailAddressDetailDtoModel>(async model =>
-        {
-            await Application.Current!.MainPage!.NavigationPushPageAsync(new EmailAddressConfigurationPage(new EmailAddressConfigurationPageModel(model, EmailAddressModifySuccess_Callback, new EmailAddressConfigurationValidator())));
-        });
+        //UpdateEmailAddressCommand = new Command<EmailAddressDetailDtoModel>(async model =>
+        //{
+        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new EmailAddressConfigurationPage(new EmailAddressConfigurationPageModel(model, EmailAddressModifySuccess_Callback, new EmailAddressConfigurationValidator())));
+        //});
 
         DetailEmailAddressCommand = new Command<EmailAddressDetailDtoModel>(async model =>
         {
@@ -93,6 +114,24 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
             {
                 if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inEmailAddresses)
+                {
+                    if (item != model) continue;
+
+                    inEmailAddresses.Remove(item);
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outEmailAddresses.Add(model);
+                }
 
                 Dispatcher.Dispatch(() => EmailAddresses.Remove(model));
 
@@ -109,10 +148,10 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             await Application.Current!.MainPage!.NavigationPushPageAsync(new PostalAddressConfigurationPage(new PostalAddressConfigurationPageModel(null, PostalAddressCreateSuccess_Callback, new PostalAddressConfigurationValidator())));
         });
 
-        UpdatePostalAddressCommand = new Command<PostalAddressDetailDtoModel>(async model =>
-        {
-            await Application.Current!.MainPage!.NavigationPushPageAsync(new PostalAddressConfigurationPage(new PostalAddressConfigurationPageModel(model, PostalAddressModifySuccess_Callback, new PostalAddressConfigurationValidator())));
-        });
+        //UpdatePostalAddressCommand = new Command<PostalAddressDetailDtoModel>(async model =>
+        //{
+        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new PostalAddressConfigurationPage(new PostalAddressConfigurationPageModel(model, PostalAddressModifySuccess_Callback, new PostalAddressConfigurationValidator())));
+        //});
 
         DetailPostalAddressCommand = new Command<PostalAddressDetailDtoModel>(async model =>
         {
@@ -124,6 +163,24 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
             {
                 if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inPostalAddresses)
+                {
+                    if (item != model) continue;
+
+                    inPostalAddresses.Remove(item);
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outPostalAddresses.Add(model);
+                }
 
                 Dispatcher.Dispatch(() => PostalAddresses.Remove(model));
 
@@ -140,10 +197,10 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             await Application.Current!.MainPage!.NavigationPushPageAsync(new WebSiteAddressConfigurationPage(new WebSiteAddressConfigurationPageModel(null, WebSiteAddressCreateSuccess_Callback, new WebSiteAddressConfigurationValidator())));
         });
 
-        UpdateWebSiteAddressCommand = new Command<WebSiteAddressDetailDtoModel>(async model =>
-        {
-            await Application.Current!.MainPage!.NavigationPushPageAsync(new WebSiteAddressConfigurationPage(new WebSiteAddressConfigurationPageModel(model, WebSiteAddressModifySuccess_Callback, new WebSiteAddressConfigurationValidator())));
-        });
+        //UpdateWebSiteAddressCommand = new Command<WebSiteAddressDetailDtoModel>(async model =>
+        //{
+        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new WebSiteAddressConfigurationPage(new WebSiteAddressConfigurationPageModel(model, WebSiteAddressModifySuccess_Callback, new WebSiteAddressConfigurationValidator())));
+        //});
 
         DetailWebSiteAddressCommand = new Command<WebSiteAddressDetailDtoModel>(async model =>
         {
@@ -155,6 +212,24 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
             Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
             {
                 if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inWebSiteAddresses)
+                {
+                    if (item != model) continue;
+
+                    inWebSiteAddresses.Remove(item);
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outWebSiteAddresses.Add(model);
+                }
 
                 Dispatcher.Dispatch(() => WebSiteAddresses.Remove(model));
 
@@ -203,7 +278,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     public ICommand CreatePhoneNumberCommand { get; private set; }
 
-    public ICommand UpdatePhoneNumberCommand { get; private set; }
+    //public ICommand UpdatePhoneNumberCommand { get; private set; }
 
     public ICommand DetailPhoneNumberCommand { get; private set; }
 
@@ -211,7 +286,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     public ICommand CreateEmailAddressCommand { get; private set; }
 
-    public ICommand UpdateEmailAddressCommand { get; private set; }
+    //public ICommand UpdateEmailAddressCommand { get; private set; }
 
     public ICommand DetailEmailAddressCommand { get; private set; }
 
@@ -219,7 +294,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     public ICommand CreatePostalAddressCommand { get; private set; }
 
-    public ICommand UpdatePostalAddressCommand { get; private set; }
+    //public ICommand UpdatePostalAddressCommand { get; private set; }
 
     public ICommand DetailPostalAddressCommand { get; private set; }
 
@@ -227,7 +302,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     public ICommand CreateWebSiteAddressCommand { get; private set; }
 
-    public ICommand UpdateWebSiteAddressCommand { get; private set; }
+    //public ICommand UpdateWebSiteAddressCommand { get; private set; }
 
     public ICommand DetailWebSiteAddressCommand { get; private set; }
 
@@ -238,11 +313,6 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
         base.DisposeUnmanagedResources();
 
         imagePickedModel = null;
-
-        outgoingPhoneNumber = null;
-        outgoingEmailAddress = null;
-        outgoingPostalAddress = null;
-        outgoingWebSiteAddress = null;
     }
 
     protected override Task<PersonDetailDtoModel> PerformCreationAsync()
@@ -273,10 +343,14 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
                 Id!.Value,
                 Name!,
                 Priority,
-                [.. EmailAddresses],
-                [.. PhoneNumbers],
-                [.. PostalAddresses],
-                [.. WebSiteAddresses],
+                [.. inEmailAddresses],
+                [.. outEmailAddresses],
+                [.. inPhoneNumbers],
+                [.. outPhoneNumbers],
+                [.. inPostalAddresses],
+                [.. outPostalAddresses],
+                [.. inWebSiteAddresses],
+                [.. outWebSiteAddresses],
                 LastName,
                 Alias,
                 About,
@@ -288,67 +362,78 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     private void PhoneNumberCreateSuccess_Callback(PhoneNumberDetailDtoModel model)
     {
-        PhoneNumbers.Add(model);
-
-        hasChangesFlag = true;
-    }
-
-    private void PhoneNumberModifySuccess_Callback(PhoneNumberDetailDtoModel model)
-    {
-        if (outgoingPhoneNumber != null) PhoneNumbers.Remove(outgoingPhoneNumber);
+        inPhoneNumbers.Add(model);
 
         PhoneNumbers.Add(model);
 
         hasChangesFlag = true;
     }
+
+    //private void PhoneNumberModifySuccess_Callback(PhoneNumberDetailDtoModel model)
+    //{
+    //    if (outgoingPhoneNumber != null)
+    //    {
+    //        PhoneNumbers.Remove(outgoingPhoneNumber);
+    //    }
+
+    //    PhoneNumbers.Add(model);
+
+    //    hasChangesFlag = true;
+    //}
 
     private void EmailAddressCreateSuccess_Callback(EmailAddressDetailDtoModel model)
     {
-        EmailAddresses.Add(model);
-
-        hasChangesFlag = true;
-    }
-
-    private void EmailAddressModifySuccess_Callback(EmailAddressDetailDtoModel model)
-    {
-        if (outgoingEmailAddress != null) EmailAddresses.Remove(outgoingEmailAddress);
+        inEmailAddresses.Add(model);
 
         EmailAddresses.Add(model);
 
         hasChangesFlag = true;
     }
+
+    //private void EmailAddressModifySuccess_Callback(EmailAddressDetailDtoModel model)
+    //{
+    //    if (outgoingEmailAddress != null) EmailAddresses.Remove(outgoingEmailAddress);
+
+    //    EmailAddresses.Add(model);
+
+    //    hasChangesFlag = true;
+    //}
 
     private void PostalAddressCreateSuccess_Callback(PostalAddressDetailDtoModel model)
     {
-        PostalAddresses.Add(model);
-
-        hasChangesFlag = true;
-    }
-
-    private void PostalAddressModifySuccess_Callback(PostalAddressDetailDtoModel model)
-    {
-        if (outgoingPostalAddress != null) PostalAddresses.Remove(outgoingPostalAddress);
+        inPostalAddresses.Add(model);
 
         PostalAddresses.Add(model);
 
         hasChangesFlag = true;
     }
+
+    //private void PostalAddressModifySuccess_Callback(PostalAddressDetailDtoModel model)
+    //{
+    //    if (outgoingPostalAddress != null) PostalAddresses.Remove(outgoingPostalAddress);
+
+    //    PostalAddresses.Add(model);
+
+    //    hasChangesFlag = true;
+    //}
 
     private void WebSiteAddressCreateSuccess_Callback(WebSiteAddressDetailDtoModel model)
     {
-        WebSiteAddresses.Add(model);
-
-        hasChangesFlag = true;
-    }
-
-    private void WebSiteAddressModifySuccess_Callback(WebSiteAddressDetailDtoModel model)
-    {
-        if (outgoingWebSiteAddress != null) WebSiteAddresses.Remove(outgoingWebSiteAddress);
+        inWebSiteAddresses.Add(model);
 
         WebSiteAddresses.Add(model);
 
         hasChangesFlag = true;
     }
+
+    //private void WebSiteAddressModifySuccess_Callback(WebSiteAddressDetailDtoModel model)
+    //{
+    //    if (outgoingWebSiteAddress != null) WebSiteAddresses.Remove(outgoingWebSiteAddress);
+
+    //    WebSiteAddresses.Add(model);
+
+    //    hasChangesFlag = true;
+    //}
 
     internal void SetImagePickedModel(ImageCreateRequestModel model)
     {

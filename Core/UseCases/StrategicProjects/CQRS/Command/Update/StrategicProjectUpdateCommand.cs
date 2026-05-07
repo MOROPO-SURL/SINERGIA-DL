@@ -2,4 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Update;
 
-public record StrategicProjectUpdateCommand(Guid Id, string Name, int Priority, bool IsEnabled, string? Description = null) : IUpdateCommand<Guid, DTOs.StrategicProjectDetailDto>;
+public record StrategicProjectUpdateCommand(Guid Id, string Name, int Priority, bool IsEnabled, Guid KindId, Guid ProgramId, string? Description = null) : IUpdateCommand<Guid, DTOs.StrategicProjectDetailDto>;

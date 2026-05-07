@@ -14,7 +14,11 @@ internal sealed class StrategicLineQueryRepositoryPortAdapter : IStrategicLineQu
 
     public StrategicLineQueryRepositoryPortAdapter(DefaultDbContext dbContext)
     {
-        baseQueryableDbSet = dbContext.Set<StrategicLine>().AsNoTracking();
+        baseQueryableDbSet = dbContext.Set<StrategicLine>()
+            .AsNoTracking()
+            .AsSplitQuery()
+            .Include(entity => entity.StrategicAxe)
+            .Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image);
     }
 
     private IQueryable<StrategicLine> GetQueryableDbSet() => baseQueryableDbSet;
@@ -49,23 +53,13 @@ internal sealed class StrategicLineQueryRepositoryPortAdapter : IStrategicLineQu
         return GetQueryableDbSet().Where(criteria);
     }
 
-    public IQueryable<StrategicLine> GetPageQueryable(int page, int limit, Expression<Func<StrategicLine, object>> orderExpression, bool isOrderDescending = false, Expression<Func<StrategicLine, bool>>? criteria = null)
+    public IQueryable<StrategicLine> GetPageQueryable(int page, int limit, Expression<Func<StrategicLine, bool>>? criteria = null)
     {
         if (criteria != null)
         {
-            if (isOrderDescending)
-            {
-                return GetQueryableDbSet().Where(criteria).OrderByDescending(orderExpression).Skip((page - 1) * limit).Take(limit);
-            }
-
-            return GetAllQueryable().Where(criteria).OrderBy(orderExpression).Skip((page - 1) * limit).Take(limit);
+            return GetAllQueryable().Where(criteria).OrderBy(entity => entity.SecoundId).ThenBy(entity => entity.FirstId).Skip((page - 1) * limit).Take(limit);
         }
 
-        if (isOrderDescending)
-        {
-            return GetQueryableDbSet().OrderByDescending(orderExpression).Skip((page - 1) * limit).Take(limit);
-        }
-
-        return GetQueryableDbSet().OrderBy(orderExpression).Skip((page - 1) * limit).Take(limit);
+        return GetQueryableDbSet().OrderBy(entity => entity.SecoundId).ThenBy(entity => entity.FirstId).Skip((page - 1) * limit).Take(limit);
     }
 }

@@ -53,5 +53,5 @@ public class StrategicLine : IAggregateRoot
 
     public IReadOnlyList<StrategicLineAction> StrategicActions => [.. strategicActions];
 
-    public StrategicLineOrganizationBridge[] OrganizationBridges => [.. organizationBridges];
+    public IReadOnlyList<StrategicLineOrganizationBridge> OrganizationBridges => [.. organizationBridges];
 }

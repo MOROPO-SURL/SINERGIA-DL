@@ -12,11 +12,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class StrategicAxesManagementPage : 
-    BaseManagementEntityPage<StrategicAxeBasicDtoModel, StrategicAxeDetailDtoModel, StrategicAxesManagementPageModel, StrategicAxeConfigurationPageModel>, 
+    BaseListEntityPage<StrategicAxeBasicDtoModel, StrategicAxesManagementPageModel>, 
     IListItemsPageModelPresenter<StrategicAxeBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-	public StrategicAxesManagementPage()
+	public StrategicAxesManagementPage() : base(new StrategicAxesManagementPageModel())
 	{
 		InitializeComponent();
 

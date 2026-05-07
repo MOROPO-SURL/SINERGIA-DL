@@ -14,7 +14,7 @@ public partial class PersonsManagementPage :
     IListItemsPageModelPresenter<PersonBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-    public PersonsManagementPage()
+    public PersonsManagementPage() : base(new PersonsManagementPageModel())
     {
         InitializeComponent();
 

@@ -10,11 +10,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class FeaturesManagementPage :
-    BaseManagementEntityPage<FeatureBasicDtoModel, FeatureDetailDtoModel, FeaturesManagementPageModel, FeatureConfigurationPageModel>,
+    BaseListEntityPage<FeatureBasicDtoModel, FeaturesManagementPageModel>,
     IListItemsPageModelPresenter<FeatureBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-    public FeaturesManagementPage()
+    public FeaturesManagementPage() : base(new FeaturesManagementPageModel())
     {
         InitializeComponent();
 

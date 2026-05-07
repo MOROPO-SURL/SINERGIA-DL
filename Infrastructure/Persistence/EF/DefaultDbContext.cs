@@ -20,6 +20,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectKindAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TerritorialBarrierAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TerritoryPotentialAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate;
@@ -66,6 +67,7 @@ public class DefaultDbContext : DbContext
     public DbSet<StrategicAxe> StrategicAxes { get; set; }
     public DbSet<StrategicLine> StrategicLines { get; set; }
     public DbSet<StrategicProgram> StrategicPrograms { get; set; }
+    public DbSet<StrategicProjectKind> StrategicProjectKinds { get; set; }
     public DbSet<StrategicProject> StrategicProjects { get; set; }
     public DbSet<StrategicProgramOrganizationBridge> StrategicProgramOrganizationBridges { get; set; }
     public DbSet<FeatureKind> FeatureKinds { get; set; }
@@ -85,9 +87,10 @@ public class DefaultDbContext : DbContext
     public DbSet<PublicPolicyTrace> PublicPolicyTraces { get; set; }
     public DbSet<RoleTrace> RoleTraces { get; set; }
     public DbSet<StrategicAxeTrace> StrategicAxeTraces { get; set; }
-    // TODO public DbSet<StrategicLineTrace>
+    public DbSet<StrategicLineTrace> StrategicLineTraces { get; set; }
     public DbSet<StrategicProgramTrace> StrategicProgramTraces { get; set; }
     public DbSet<StrategicProjectTrace> StrategicProjectTraces { get; set; }
+    public DbSet<StrategicProjectKindTrace> StrategicProjectKindTraces { get; set; }
     public DbSet<TerritorialBarrierTrace> TerritorialBarrierTraces { get; set; }
     public DbSet<TerritoryPotentialTrace> TerritoryPotentialTraces { get; set; }
     public DbSet<UnitMeasurementTrace> UnitMeasurementTraces { get; set; }

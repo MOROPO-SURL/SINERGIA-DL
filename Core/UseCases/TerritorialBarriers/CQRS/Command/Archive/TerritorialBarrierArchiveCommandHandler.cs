@@ -11,7 +11,7 @@ internal sealed class TerritorialBarrierArchiveCommandHandler :
     AbstractArchiveCommandHandler<TerritorialBarrier, TerritorialBarrierId, Guid, TerritorialBarrierArchiveCommand>,
     IRequestHandler<TerritorialBarrierArchiveCommand>
 {
-    public TerritorialBarrierArchiveCommandHandler(ITerritorialBarrierCommandRepositoryPort entityCommandRepository, ITerritorialBarrierQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public TerritorialBarrierArchiveCommandHandler(ITerritorialBarrierCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

@@ -1,0 +1,215 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.OrganizationTraces
+
+@model PaginateResultViewModel<OrganizationTraceBasicViewModel>
+
+@{
+    const string HEADER = "Administración de Registros (Entidades)";
+
+    ViewData[SessionConstants.TITLE_DICTIONARY_KEY] = ViewData[SessionConstants.HEADER_DICTIONARY_KEY] = HEADER;
+
+    ViewData[SessionConstants.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel(
+            "<i class=\"mdi mdi-monitor-dashboard\"></i> Panel de Control",
+            Url.Action("Index", "Dashboard", new { Area = "management" })),
+        new BreadcrumbViewModel(HEADER)
+    };
+
+    Layout = "_BackendLayout";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $('.detail-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Elemento que disparó el modal
+
+            var url = button.attr("formaction");       // La URL del action
+
+            var modal = $(this);
+
+            modal.find('.modal-body').load(url);
+        });
+    </script>
+}
+
+<hr class="mt-0 mb-4" />
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="font-weight-bold text-primary">Listado de registros de cambios</h5>
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="usertraces">Usuarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="roletraces">Roles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="persontraces">Personas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Entidades</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="apikeytraces">Llaves API</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="classificationtraces">Clasificaciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="featurekindtraces">Tipos de Caract. Terr.</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        @if (Model.HasNext || Model.HasPrevious)
+        {
+            var paginationStart = (Model.Page - 1) * Model.Limit + 1;
+            var paginationEnd = paginationStart - 1 + Model.Items.Length;
+
+            <div class="row">
+                <div class="col mb-2">
+                    <span style="font-weight: 600;">Mostrando página @Model.Page</span>: del @paginationStart al @paginationEnd, <span style="font-weight: 600;">Total de páginas</span>: @Model.MaxPageCount
+                </div>
+                <div class="col-auto mb-2">
+                    <ul class="pagination">
+                        @if (Model.HasPrevious)
+                        {
+                            <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues!) {{"sheet", Model.Page - 1}})">&laquo;</a></li>
+                        }
+                        else
+                        {
+                            <li class="disabled page-item"><a class="page-link" href="#">&laquo;</a></li>
+                        }
+
+                        @if (Model.MaxPageCount > 5)
+                        {
+                            if (Model.Page > 3)
+                            {
+                                if (Model.MaxPageCount - Model.Page < 3)
+                                {
+                                    for (var i = Model.MaxPageCount - 4; i <= Model.MaxPageCount; i++)
+                                    {
+                                        if (i == Model.Page)
+                                        {
+                                            <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues!) {{"sheet", i}})">@i</a></li>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    for (var i = Model.Page - 2; i <= Model.Page + 2; i++)
+                                    {
+                                        if (i == Model.Page)
+                                        {
+                                            <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues!) {{"sheet", i}})">@i</a></li>
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                for (var i = 1; i <= 5; i++)
+                                {
+                                    if (i == Model.Page)
+                                    {
+                                        <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues!) {{"sheet", i}})">@i</a></li>
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (var i = 1; i <= Model.MaxPageCount; i++)
+                            {
+                                if (i == Model.Page)
+                                {
+                                    <li class="active page-item"><a class="page-link" href="#">@i <span class="sr-only">(current)</span></a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues!) {{"sheet", i}})">@i</a></li>
+                                }
+                            }
+                        }
+
+                        @if (Model.HasNext)
+                        {
+                            <li class="page-item"><a class="page-link" href="@Url.Action(Model.Action, new Microsoft.AspNetCore.Routing.RouteValueDictionary(Model.RouteValues!) {{"sheet", Model.Page + 1}})">&raquo;</a></li>
+                        }
+                        else
+                        {
+                            <li class="disabled page-item"><a class="page-link" href="#">&raquo;</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    
+        <div style="border: 1px solid #DDD; border-radius: 4px;">
+            <table class="table table-bordered table-striped m-0">
+                <thead>
+                    <tr>
+                        <th>Autor</th>
+                        <th>Fecha y hora</th>
+                        <th>Acción</th>
+                        <th class="fit" style="width: 128px;">Opciones</th>
+                    </tr>        
+                </thead>
+                <tbody>
+                    @if (Model.Items.Length > 0)
+                    {
+                        foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td style="vertical-align: middle;" title="Autor">@item.Author</td>
+                                <td style="vertical-align: middle;" title="Fecha y hora">@item.CreatedAt</td>
+                                <td style="vertical-align: middle;" title="Fecha y hora">@item.Kind</td>
+                                <td class="fit" style="vertical-align: middle;">
+                                    <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#descrip-@item.Id" asp-action="detail" asp-route-key="@item.Id">
+                                        <span class="mdi mdi-eye"></span>
+                                        <span>Detalles</span>
+                                    </button>
+                                    <div class="modal fade detail-modal" id="descrip-@item.Id" tabindex="-1" role="dialog" aria-labelledby="descrip-@item.Id-label" aria-hidden="true">
+                                        <div class="modal-dialog  modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title font-weight-bold text-primary" id="descrip-@item.Id-label">Detalles</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>Solicitando ...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4"><p style="margin: 0 5px;" class="text-muted">Sin elementos que mostrar</p></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -11,11 +11,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class OrganizationsManagementPage :
-    BaseManagementEntityPage<OrganizationBasicDtoModel, OrganizationDetailDtoModel, OrganizationsManagementPageModel, OrganizationConfigurationPageModel>,
+    BaseListEntityPage<OrganizationBasicDtoModel, OrganizationsManagementPageModel>,
     IListItemsPageModelPresenter<OrganizationBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-    public OrganizationsManagementPage()
+    public OrganizationsManagementPage() : base(new OrganizationsManagementPageModel())
     {
         InitializeComponent();
 

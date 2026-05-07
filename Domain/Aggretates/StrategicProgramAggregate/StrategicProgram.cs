@@ -57,13 +57,13 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
     public Person? Coordinator { get; set; }
     public PersonId CoordinatorId { get; set; }
 
-    public ProgramObjective[] Objetives => [.. objetives];
+    public IReadOnlyList<ProgramObjective> Objetives => [.. objetives];
 
-    public ProgramAction[] Actions => [.. actions];
+    public IReadOnlyList<ProgramAction> Actions => [.. actions];
 
-    public ProgramProjectIdea[] ProjectIdeas => [.. projectIdeas];
+    public IReadOnlyList<ProgramProjectIdea> ProjectIdeas => [.. projectIdeas];
 
-    public ProgramImpact[] Impacts => [.. impacts];
+    public IReadOnlyList<ProgramImpact> Impacts => [.. impacts];
 
-    public StrategicProgramOrganizationBridge[] OrganizationBridges => [.. organizationBridges];
+    public IReadOnlyList<StrategicProgramOrganizationBridge> OrganizationBridges => [.. organizationBridges];
 }

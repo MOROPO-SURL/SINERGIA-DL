@@ -11,7 +11,7 @@ internal sealed class ClassificationArchiveCommandHandler :
     AbstractArchiveCommandHandler<Classification, ClassificationId, Guid, ClassificationArchiveCommand>,
     IRequestHandler<ClassificationArchiveCommand>
 {
-    public ClassificationArchiveCommandHandler(IClassificationCommandRepositoryPort entityCommandRepository, IClassificationQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ClassificationArchiveCommandHandler(IClassificationCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

@@ -13,6 +13,6 @@ public partial class App : Application
     {
         base.OnStart();
 
-        Windows[0].Title = $"GEDEL Operaciones CAM Camagüey v{Microsoft.Maui.ApplicationModel.AppInfo.Current.VersionString}";
+        Windows[0].Title = $"SINERGIA DT Operaciones CAM Camagüey v{Microsoft.Maui.ApplicationModel.AppInfo.Current.VersionString}";
     }
 }

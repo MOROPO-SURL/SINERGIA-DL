@@ -10,11 +10,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class TerritorialBarriersManagementPage : 
-    BaseManagementEntityPage<TerritorialBarrierBasicDtoModel, TerritorialBarrierDetailDtoModel, TerritorialBarriersManagementPageModel, TerritorialBarrierConfigurationPageModel>, 
+    BaseListEntityPage<TerritorialBarrierBasicDtoModel, TerritorialBarriersManagementPageModel>, 
     IListItemsPageModelPresenter<TerritorialBarrierBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-	public TerritorialBarriersManagementPage()
+	public TerritorialBarriersManagementPage() : base(new TerritorialBarriersManagementPageModel())
 	{
 		InitializeComponent();
 

@@ -3,11 +3,11 @@
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
 public class BaseListEntityPage<TBasicModel, TListPageModel> : BaseContentPage
-    where TListPageModel : AbstractListEntityPageModel<TBasicModel>, new()
+    where TListPageModel : AbstractListEntityPageModel<TBasicModel>
 {
-    public BaseListEntityPage()
+    public BaseListEntityPage(TListPageModel model)
     {
-        BindingContext = new TListPageModel();
+        BindingContext = model;
     }
 
     protected TListPageModel ConcreteBindingContext => (TListPageModel)BindingContext;

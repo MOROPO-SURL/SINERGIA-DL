@@ -10,11 +10,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class TerritoryPotentialsManagementPage : 
-    BaseManagementEntityPage<TerritoryPotentialBasicDtoModel, TerritoryPotentialDetailDtoModel, TerritoryPotentialsManagementPageModel, TerritoryPotentialConfigurationPageModel>, 
+    BaseListEntityPage<TerritoryPotentialBasicDtoModel, TerritoryPotentialsManagementPageModel>, 
     IListItemsPageModelPresenter<TerritoryPotentialBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-	public TerritoryPotentialsManagementPage()
+	public TerritoryPotentialsManagementPage() : base(new TerritoryPotentialsManagementPageModel())
 	{
 		InitializeComponent();
 

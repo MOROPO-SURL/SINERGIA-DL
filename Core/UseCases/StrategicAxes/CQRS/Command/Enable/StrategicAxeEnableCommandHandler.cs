@@ -11,7 +11,7 @@ internal sealed class StrategicAxeEnableCommandHandler :
     AbstractEnableCommandHandler<StrategicAxe, StrategicAxeId, int, StrategicAxeEnableCommand>,
     IRequest<StrategicAxeEnableCommand>
 {
-    public StrategicAxeEnableCommandHandler(IStrategicAxeCommandRepositoryPort entityCommandRepository, IStrategicAxeQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public StrategicAxeEnableCommandHandler(IStrategicAxeCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

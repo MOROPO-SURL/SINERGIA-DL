@@ -19,5 +19,5 @@ public interface IStrategicLineQueryRepositoryPort
 
     IQueryable<StrategicLine> GetFindByQueryable(Expression<Func<StrategicLine, bool>> criteria);
 
-    IQueryable<StrategicLine> GetPageQueryable(int page, int limit, Expression<Func<StrategicLine, object>> orderExpression, bool isOrderDesending = false, Expression<Func<StrategicLine, bool>>? criteria = null);
+    IQueryable<StrategicLine> GetPageQueryable(int page, int limit, Expression<Func<StrategicLine, bool>>? criteria = null);
 }

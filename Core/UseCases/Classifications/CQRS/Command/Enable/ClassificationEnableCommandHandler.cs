@@ -11,7 +11,7 @@ internal sealed class ClassificationEnableCommandHandler :
     AbstractEnableCommandHandler<Classification, ClassificationId, Guid, ClassificationEnableCommand>,
     IRequest<ClassificationEnableCommand>
 {
-    public ClassificationEnableCommandHandler(IClassificationCommandRepositoryPort entityCommandRepository, IClassificationQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ClassificationEnableCommandHandler(IClassificationCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

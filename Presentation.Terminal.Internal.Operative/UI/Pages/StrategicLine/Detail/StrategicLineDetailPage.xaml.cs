@@ -18,7 +18,7 @@ public partial class StrategicLineDetailPage : BaseDetailEntityPage<StrategicLin
 
     public Task PresentItemModifyUserInterfaceAsync(StrategicLineDetailDtoModel model, Action<StrategicLineDetailDtoModel> configurationSuccessCallbackAction)
     {
-        Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.StrategicLineConfigurationPage(new StrategicLineConfigurationPageModel(model, [model.Axe], configurationSuccessCallbackAction))));
+        Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.StrategicLineConfigurationPage(new StrategicLineConfigurationPageModel(model, [model.StrategicAxe], configurationSuccessCallbackAction))));
 
         return Task.CompletedTask;
     }

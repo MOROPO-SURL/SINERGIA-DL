@@ -11,11 +11,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Intercep
 
 internal sealed class UserChangeDomainTracingInterceptor : Abstractions.AbstractChangeDomainTracingInterceptor<UserTrace, User, UserId, string>
 {
-    private readonly IDomainChangeAuthorProvisionServicePort traceAuthorProvisionService;
-
-    public UserChangeDomainTracingInterceptor(IDomainChangeAuthorProvisionServicePort traceAuthorProvisionService)
+    public UserChangeDomainTracingInterceptor(IDomainChangeAuthorProvisionServicePort traceAuthorProvisionService) : base(traceAuthorProvisionService)
     {
-        this.traceAuthorProvisionService = traceAuthorProvisionService;
     }
 
     protected override UserTrace BuildTraceEntity(EntityEntry<User> changeEntry)

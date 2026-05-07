@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Service;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Interceptors.Abstractions;
 
@@ -11,26 +12,24 @@ internal abstract class AbstractChangeDomainTracingInterceptor<TEntityTrace, TEn
     where TEntity : AbstractEntity<TId, TIdValue>
     where TEntityTrace : AbstractTrace<TEntity, TId, TIdValue>
 {
-    //public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
-    //{
-    //    IEnumerable<EntityEntry<TEntity>> changeEntries = eventData.Context!.ChangeTracker.Entries<TEntity>();
+    protected readonly IDomainChangeAuthorProvisionServicePort traceAuthorProvisionService;
 
-    //    foreach (EntityEntry<TEntity> changeEntry in changeEntries)
-    //    {
-    //        eventData.Context.Add(BuildTraceEntity(changeEntry));
-    //    };
-
-    //    return base.SavingChanges(eventData, result);
-    //}
+    public AbstractChangeDomainTracingInterceptor(IDomainChangeAuthorProvisionServicePort traceAuthorProvisionService)
+    {
+        this.traceAuthorProvisionService = traceAuthorProvisionService;
+    }
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
-        EntityEntry<TEntity>[] changeEntries = eventData.Context!.ChangeTracker.Entries<TEntity>().ToArray();
-
-        foreach (EntityEntry<TEntity> changeEntry in changeEntries)
+        if (traceAuthorProvisionService.GetChangeAuthor() is not null)
         {
-            eventData.Context.Add(BuildTraceEntity(changeEntry));
-        };
+            EntityEntry<TEntity>[] changeEntries = eventData.Context!.ChangeTracker.Entries<TEntity>().ToArray();
+
+            foreach (EntityEntry<TEntity> changeEntry in changeEntries)
+            {
+                eventData.Context.Add(BuildTraceEntity(changeEntry));
+            };
+        }
 
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }

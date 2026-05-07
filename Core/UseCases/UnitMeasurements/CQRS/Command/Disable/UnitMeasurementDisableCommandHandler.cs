@@ -10,7 +10,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.CQRS.Co
 internal sealed class UnitMeasurementDisableCommandHandler: AbstractDisableCommandHandler<UnitMeasurement, UnitMeasurementId, Guid, UnitMeasurementDisableCommand>,
 IRequestHandler<UnitMeasurementDisableCommand>
 {
-    public UnitMeasurementDisableCommandHandler(IUnitMeasurementCommandRepositoryPort entityCommandRepository, IUnitMeasurementQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public UnitMeasurementDisableCommandHandler(IUnitMeasurementCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

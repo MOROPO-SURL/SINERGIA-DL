@@ -10,7 +10,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.UnitMeasurements.CQRS.Co
 internal sealed class UnitMeasurementUnarchiveCommandHandler: AbstractUnarchiveCommandHandler<UnitMeasurement, UnitMeasurementId, Guid, UnitMeasurementUnarchiveCommand>,
 IRequestHandler<UnitMeasurementUnarchiveCommand>
 {
-    public UnitMeasurementUnarchiveCommandHandler(IUnitMeasurementCommandRepositoryPort entityCommandRepository, IUnitMeasurementQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public UnitMeasurementUnarchiveCommandHandler(IUnitMeasurementCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

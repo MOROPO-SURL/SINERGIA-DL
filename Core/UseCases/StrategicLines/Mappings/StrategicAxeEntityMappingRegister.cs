@@ -34,7 +34,7 @@ internal sealed class StrategicLineEntityMappingRegister : IRegister
                 src.IsEnabled,
                 src.Name,
                 false,
-                new Domain.Aggretates.PersonAggregate.Values.PersonId(src.CordinatorId),
+                new Domain.Aggretates.PersonAggregate.Values.PersonId(src.CoordinatorId),
                 new Domain.Aggretates.StrategicLineAggregate.Entities.StrategicLineAction[] { },
                 new Domain.Aggretates.StrategicLineAggregate.Bridges.StrategicLineOrganizationBridge[] { },
                 null,

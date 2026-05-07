@@ -11,7 +11,7 @@ internal sealed class TerritorialBarrierUnarchiveCommandHandler :
     AbstractUnarchiveCommandHandler<TerritorialBarrier, TerritorialBarrierId, Guid, TerritorialBarrierUnarchiveCommand>,
     IRequestHandler<TerritorialBarrierUnarchiveCommand>
 {
-    public TerritorialBarrierUnarchiveCommandHandler(ITerritorialBarrierCommandRepositoryPort entityCommandRepository, ITerritorialBarrierQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public TerritorialBarrierUnarchiveCommandHandler(ITerritorialBarrierCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

@@ -6,7 +6,7 @@ public interface IEntityCommandRepositoryPort<TEntity, TId, TIdValue>
     where TEntity : class, IEntity<TId, TIdValue>
     where TId : struct, IId<TIdValue>
 {
-    void TrackChanges(TEntity entity);
+    Task<TEntity> GetAsync(TId id);
 
     Task AddAsync(TEntity entity, bool commit = true);
 

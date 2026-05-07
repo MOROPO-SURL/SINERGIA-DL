@@ -10,7 +10,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.CQRS.Comma
 internal sealed class MacroprogramArchiveCommandHandler: AbstractArchiveCommandHandler<Macroprogram, MacroprogramId, Guid, MacroprogramArchiveCommand>,
 IRequestHandler<MacroprogramArchiveCommand>
 {
-    public MacroprogramArchiveCommandHandler(IMacroprogramCommandRepositoryPort entityCommandRepository, IMacroprogramQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public MacroprogramArchiveCommandHandler(IMacroprogramCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

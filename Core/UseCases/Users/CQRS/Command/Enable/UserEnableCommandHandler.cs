@@ -11,7 +11,7 @@ internal sealed class UserEnableCommandHandler :
     AbstractEnableCommandHandler<User, UserId, string, UserEnableCommand>,
     IRequest<UserEnableCommand>
 {
-    public UserEnableCommandHandler(IUserCommandRepositoryPort entityCommandRepository, IUserQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public UserEnableCommandHandler(IUserCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

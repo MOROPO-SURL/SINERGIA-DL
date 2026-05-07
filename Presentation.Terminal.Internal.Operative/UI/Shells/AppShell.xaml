@@ -22,177 +22,177 @@
         Title="Panel de control"
         Route="MainPage"
         ContentTemplate="{DataTemplate local_ui_pages:MainPage}">
-        <ShellContent.FlyoutIcon>
+        <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" 
                 Glyph="{StaticResource IconGlyphDashboard}" />
-        </ShellContent.FlyoutIcon>
+        </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Diagnóstico"
         ContentTemplate="{DataTemplate local_ui_pages:DiagnosticSummaryPage}">
-        <ShellContent.FlyoutIcon>
+        <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" 
                 Glyph="{StaticResource IconGlyphContext}" />
-        </ShellContent.FlyoutIcon>
+        </ShellContent.Icon>
     </ShellContent>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Caracter. del territ."
             ContentTemplate="{DataTemplate local_ui_pages:FeaturesManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphFeature}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Objetivos"
             ContentTemplate="{DataTemplate local_ui_pages:ObjectivesManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphObjective}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Barreras"
             ContentTemplate="{DataTemplate local_ui_pages:TerritorialBarriersManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphBarrier}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Potencialidades"
             ContentTemplate="{DataTemplate local_ui_pages:TerritoryPotentialsManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphPotential}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Políticas públicas"
             ContentTemplate="{DataTemplate local_ui_pages:PublicPoliciesManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphPublicPolicy}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
     </FlyoutItem>
     <ShellContent
         Title="Estrategia"
         ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.FlyoutIcon>
+        <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" 
                 Glyph="{StaticResource IconGlyphEDL}" />
-        </ShellContent.FlyoutIcon>
+        </ShellContent.Icon>
     </ShellContent>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Ejes estratégicos"
             ContentTemplate="{DataTemplate local_ui_pages:StrategicAxesManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphAxe}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Líneas estratégicas"
             ContentTemplate="{DataTemplate local_ui_pages:StrategicLinesManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphLine}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Programas"
-            ContentTemplate="{DataTemplate ContentPage}">
-            <ShellContent.FlyoutIcon>
+            ContentTemplate="{DataTemplate local_ui_pages:StrategicProgramsManagementPage}">
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphProgram}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Proyectos"
-            ContentTemplate="{DataTemplate ContentPage}">
-            <ShellContent.FlyoutIcon>
+            ContentTemplate="{DataTemplate local_ui_pages:StrategicProjectsManagementPage}">
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphProject}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
     </FlyoutItem>
     <ShellContent
         Title="Complementarios"
         ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.FlyoutIcon>
+        <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" 
                 Glyph="{StaticResource IconGlyphComplements}" />
-        </ShellContent.FlyoutIcon>
+        </ShellContent.Icon>
     </ShellContent>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Macroprogramas"
             ContentTemplate="{DataTemplate local_ui_pages:MacroprogramsManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphMacroprograms}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Personas"
             ContentTemplate="{DataTemplate local_ui_pages:PersonsManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphPerson}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Entidades"
             ContentTemplate="{DataTemplate local_ui_pages:OrganizationsManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphOrganization}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
         <ShellContent
             Title="Unidades de medida"
             ContentTemplate="{DataTemplate local_ui_pages:UnitMeasurementsManagementPage}">
-            <ShellContent.FlyoutIcon>
+            <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphUnitMeasurement}" />
-            </ShellContent.FlyoutIcon>
+            </ShellContent.Icon>
         </ShellContent>
     </FlyoutItem>
     <MenuItem

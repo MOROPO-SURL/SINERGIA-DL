@@ -24,6 +24,7 @@
             Orientation="Horizontal"
             Spacing="0">
             <Image 
+                IsVisible="{OnIdiom Default=true, Phone=false}"
                 HorizontalOptions="StartAndExpand"
                 Aspect="AspectFill"
                 Source="shell_header.jpg" />

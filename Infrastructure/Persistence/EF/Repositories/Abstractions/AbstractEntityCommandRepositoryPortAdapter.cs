@@ -17,9 +17,11 @@ public abstract class AbstractEntityCommandRepositoryPortAdapter<TEntity, TId, T
 
     private DbSet<TEntity> DbSet => dbContext.Set<TEntity>();
 
-    public void TrackChanges(TEntity entity)
+    protected virtual IQueryable<TEntity> GetQueryableDbSet() => dbContext.Set<TEntity>();
+
+    public Task<TEntity> GetAsync(TId id)
     {
-        dbContext.Attach(entity);
+        return GetQueryableDbSet().Where(entity => entity.Id.Equals(id)).FirstAsync();
     }
 
     public async Task AddAsync(TEntity entity, bool commit = true)

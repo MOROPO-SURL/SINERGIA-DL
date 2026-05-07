@@ -10,7 +10,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.CQRS.Comm
 internal sealed class PublicPolicyUnarchiveCommandHandler : AbstractUnarchiveCommandHandler<PublicPolicy, PublicPolicyId, Guid, PublicPolicyUnarchiveCommand>,
 IRequestHandler<PublicPolicyUnarchiveCommand>
 {
-    public PublicPolicyUnarchiveCommandHandler(IPublicPolicyCommandRepositoryPort entityCommandRepository, IPublicPolicyQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public PublicPolicyUnarchiveCommandHandler(IPublicPolicyCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

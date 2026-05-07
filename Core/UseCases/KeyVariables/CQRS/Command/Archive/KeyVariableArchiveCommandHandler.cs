@@ -11,7 +11,7 @@ internal sealed class KeyVariableArchiveCommandHandler :
     AbstractArchiveCommandHandler<KeyVariable, KeyVariableId, Guid, KeyVariableArchiveCommand>,
     IRequestHandler<KeyVariableArchiveCommand>
 {
-    public KeyVariableArchiveCommandHandler(IKeyVariableCommandRepositoryPort entityCommandRepository, IKeyVariableQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public KeyVariableArchiveCommandHandler(IKeyVariableCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

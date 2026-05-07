@@ -20,12 +20,13 @@ public static class ManagementDashboardConstants
                 new  ManagementDashboardSectionViewModel("Macroprogramas", "macroprograms", "Index", "Complement", "mdi mdi-folder-pound", "any"),
                 new  ManagementDashboardSectionViewModel("Areas de Interés", "interestareas", "Index", "Complement", "mdi mdi-chart-bubble", "any"),
                 new  ManagementDashboardSectionViewModel("Variables Clave", "keyvariables", "Index", "Complement", "mdi mdi-star-four-points", "any"),
-                new  ManagementDashboardSectionViewModel("Tipos de Carct. Terr.", "featurekinds", "Index", "Complement", "mdi mdi-checkbox-multiple-marked-circle-outline", "any"),
+                new  ManagementDashboardSectionViewModel("Tipos de Caract. Terr.", "featurekinds", "Index", "Complement", "mdi mdi-checkbox-multiple-marked-circle-outline", "any"),
                 new  ManagementDashboardSectionViewModel("Unidades de medida", "unitmeasurements", "Index", "Complement", "mdi mdi-scale", "any"),
                 new  ManagementDashboardSectionViewModel("Personas", "people", "Index", "Complement", "mdi mdi-account", "any"),
                 new  ManagementDashboardSectionViewModel("Entidades", "organizations", "Index", "Complement", "mdi mdi-domain", "any"),
                 new  ManagementDashboardSectionViewModel("Tipos de Entidad", "organizationkinds", "Index", "Complement", "mdi mdi-office-building", "any"),
-                new  ManagementDashboardSectionViewModel("Clasificaciones", "classifications", "Index", "Complement", "mdi mdi-star-box-outline", "any")
+                new  ManagementDashboardSectionViewModel("Clasificaciones", "classifications", "Index", "Complement", "mdi mdi-star-box-outline", "any"),
+                new  ManagementDashboardSectionViewModel("Tipos de Proyecto", "strategicprojectkinds", "Index", "Complement", "mdi mdi-folder-settings-variant-outline", "any")
             ]),
         new KeyValuePair<string, ManagementDashboardSectionViewModel[]>(
             "Diagnóstico",
@@ -42,7 +43,7 @@ public static class ManagementDashboardConstants
                 new  ManagementDashboardSectionViewModel("Ejes", "strategicaxes", "Index", "EDL", "mdi mdi-forwardburger", "any"),
                 new  ManagementDashboardSectionViewModel("Líneas", "strategiclines", "Index", "EDL", "mdi mdi-arrow-right", "any"),
                 new  ManagementDashboardSectionViewModel("Programas", "strategicprograms", "Index", "EDL", "mdi mdi-folder-table-outline", "any"),
-                new  ManagementDashboardSectionViewModel("Proyectos", "strategicprojects", "Index", "EDL", "mdi mdi-folder-settings-variant-outline", "any")
+                new  ManagementDashboardSectionViewModel("Proyectos", "strategicprojects", "Index", "EDL", "mdi mdi-folder-settings-variant", "any")
             ])
     ];
 }

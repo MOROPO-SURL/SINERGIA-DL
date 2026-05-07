@@ -11,7 +11,7 @@ internal sealed class OrganizationArchiveCommandHandler :
     AbstractArchiveCommandHandler<Organization, OrganizationId, Guid, OrganizationArchiveCommand>,
     IRequestHandler<OrganizationArchiveCommand>
 {
-    public OrganizationArchiveCommandHandler(IOrganizationCommandRepositoryPort entityCommandRepository, IOrganizationQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public OrganizationArchiveCommandHandler(IOrganizationCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

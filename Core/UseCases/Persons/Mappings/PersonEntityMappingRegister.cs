@@ -60,32 +60,44 @@ internal sealed class PersonEntityMappingRegister : IRegister
             .Map(dest => dest, src => src)
             .AfterMapping((src, dest) =>
             {
-                dest.ClearPhones();
-
-                foreach (var item in src.PhoneNumbers)
+                foreach (PhoneNumberDetailDto item in src.InPhoneNumbers)
                 {
                     dest.Add(item.Adapt<PhoneNumber>());
                 }
 
-                dest.ClearEmailAddresses();
+                foreach (PhoneNumberDetailDto item in src.OutPhoneNumbers)
+                {
+                    dest.Remove(item.Adapt<PhoneNumber>());
+                }
 
-                foreach (var item in src.EmailAddresses)
+                foreach (EmailAddressDetailDto item in src.InEmailAddresses)
                 {
                     dest.Add(item.Adapt<EmailAddress>());
                 }
 
-                dest.ClearPostalAddresses();
+                foreach (EmailAddressDetailDto item in src.OutEmailAddresses)
+                {
+                    dest.Remove(item.Adapt<EmailAddress>());
+                }
 
-                foreach (var item in src.PostalAddresses)
+                foreach (var item in src.InPostalAddresses)
                 {
                     dest.Add(item.Adapt<PostalAddress>());
                 }
 
-                dest.ClearWebSIteAddresses();
+                foreach (var item in src.OutPostalAddresses)
+                {
+                    dest.Remove(item.Adapt<PostalAddress>());
+                }
 
-                foreach (var item in src.WebSiteAddresses)
+                foreach (var item in src.InWebSiteAddresses)
                 {
                     dest.Add(item.Adapt<WebSiteAddress>());
+                }
+
+                foreach (var item in src.OutWebSiteAddresses)
+                {
+                    dest.Remove(item.Adapt<WebSiteAddress>());
                 }
             });
     }

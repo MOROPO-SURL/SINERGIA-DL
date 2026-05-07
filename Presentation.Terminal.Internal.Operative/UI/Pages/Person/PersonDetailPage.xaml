@@ -107,9 +107,7 @@
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="interop_common_dto_models:PhoneNumberDetailDtoModel">
-                                    <Frame 
-                                        Padding="8"
-                                        Margin="0,12,0,0">
+                                    <Frame Padding="8">
                                         <StackLayout Orientation="Horizontal" Spacing="8">
                                             <Label
                                                 Margin="8"
@@ -144,9 +142,7 @@
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="interop_common_dto_models:EmailAddressDetailDtoModel">
-                                    <Frame 
-                                        Padding="8"
-                                        Margin="0,12,0,0">
+                                    <Frame Padding="8">
                                         <StackLayout Orientation="Horizontal" Spacing="8">
                                             <Label
                                                 Margin="8"
@@ -183,9 +179,7 @@
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="interop_common_dto_models:PostalAddressDetailDtoModel">
-                                    <Frame 
-                                        Padding="8"
-                                        Margin="0,12,0,0">
+                                    <Frame Padding="8">
                                         <StackLayout Orientation="Horizontal" Spacing="8">
                                             <Label
                                                 Margin="8"
@@ -226,9 +220,7 @@
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="interop_common_dto_models:WebSiteAddressDetailDtoModel">
-                                    <Frame 
-                                        Padding="8"
-                                        Margin="0,12,0,0">
+                                    <Frame Padding="8">
                                         <StackLayout Orientation="Horizontal" Spacing="8">
                                             <Label
                                                 Margin="8"

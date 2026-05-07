@@ -11,7 +11,7 @@ internal sealed class ApiKeyDisableCommandHandler :
     AbstractDisableCommandHandler<ApiKey, ApiKeyId, Guid, ApiKeyDisableCommand>,
     IRequestHandler<ApiKeyDisableCommand>
 {
-    public ApiKeyDisableCommandHandler(IApiKeyCommandRepositoryPort entityCommandRepository, IApiKeyQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ApiKeyDisableCommandHandler(IApiKeyCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

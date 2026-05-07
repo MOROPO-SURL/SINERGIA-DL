@@ -11,7 +11,7 @@ internal sealed class StrategicProjectDisableCommandHandler :
     AbstractDisableCommandHandler<StrategicProject, StrategicProjectId, Guid, StrategicProjectDisableCommand>,
     IRequestHandler<StrategicProjectDisableCommand>
 {
-    public StrategicProjectDisableCommandHandler(IStrategicProjectCommandRepositoryPort entityCommandRepository, IStrategicProjectQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public StrategicProjectDisableCommandHandler(IStrategicProjectCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

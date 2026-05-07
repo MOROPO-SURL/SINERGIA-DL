@@ -11,7 +11,7 @@ internal sealed class StrategicProjectEnableCommandHandler :
     AbstractEnableCommandHandler<StrategicProject, StrategicProjectId, Guid, StrategicProjectEnableCommand>,
     IRequest<StrategicProjectEnableCommand>
 {
-    public StrategicProjectEnableCommandHandler(IStrategicProjectCommandRepositoryPort entityCommandRepository, IStrategicProjectQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public StrategicProjectEnableCommandHandler(IStrategicProjectCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<common_ui_base_pages:BaseManagementEntityPage 
+<common_ui_base_pages:BaseListEntityPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Constants"
     xmlns:local_management_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicLine"
-    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicLine.Configuration"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicLinesManagementPage"
-    x:TypeArguments="interop_dto_models:StrategicLineBasicDtoModel,interop_dto_models:StrategicLineDetailDtoModel,local_management_page_models:StrategicLinesManagementPageModel,local_configuration_page_models:StrategicLineConfigurationPageModel"
+    x:TypeArguments="interop_dto_models:StrategicLineBasicDtoModel,local_management_page_models:StrategicLinesManagementPageModel"
     x:DataType="local_management_page_models:StrategicLinesManagementPageModel"
     Title="Estrategia: Líneas estratégicas"
     IsEnabled="{Binding IsEnabled}">
@@ -73,17 +72,23 @@
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
                                     </Frame.GestureRecognizers>
-                                    <Grid ColumnSpacing="4" RowSpacing="4">
+                                    <Grid ColumnSpacing="0">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
                                         <Label
                                             Grid.Column="0"
                                             VerticalOptions="Start"
-                                            Text="{Binding Id, StringFormat='{0}.'}" />
+                                            Text="{Binding StrategicAxe.Id, StringFormat='{0}.'}" />
                                         <Label
                                             Grid.Column="1"
+                                            VerticalOptions="Start"
+                                            Text="{Binding Id, StringFormat='{0}.'}" />
+                                        <Label
+                                            Grid.Column="2"
+                                            Margin="4,0,0,0"
                                             MaxLines="3"
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Name}" />
@@ -110,4 +115,4 @@
             <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
         </Grid>
     </ContentPage.Content>
-</common_ui_base_pages:BaseManagementEntityPage>
+</common_ui_base_pages:BaseListEntityPage>

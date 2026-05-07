@@ -11,7 +11,7 @@ internal sealed class UserDisableCommandHandler :
     AbstractDisableCommandHandler<User, UserId, string, UserDisableCommand>,
     IRequestHandler<UserDisableCommand>
 {
-    public UserDisableCommandHandler(IUserCommandRepositoryPort entityCommandRepository, IUserQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public UserDisableCommandHandler(IUserCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

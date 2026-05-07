@@ -11,7 +11,7 @@ internal sealed class TerritoryPotentialArchiveCommandHandler :
     AbstractArchiveCommandHandler<TerritoryPotential, TerritoryPotentialId, Guid, TerritoryPotentialArchiveCommand>,
     IRequestHandler<TerritoryPotentialArchiveCommand>
 {
-    public TerritoryPotentialArchiveCommandHandler(ITerritoryPotentialCommandRepositoryPort entityCommandRepository, ITerritoryPotentialQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public TerritoryPotentialArchiveCommandHandler(ITerritoryPotentialCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

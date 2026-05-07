@@ -13,11 +13,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class StrategicLinesManagementPage : 
-    BaseManagementEntityPage<StrategicLineBasicDtoModel, StrategicLineDetailDtoModel, StrategicLinesManagementPageModel, StrategicLineConfigurationPageModel>, 
+    BaseListEntityPage<StrategicLineBasicDtoModel, StrategicLinesManagementPageModel>, 
     IListItemsPageModelPresenter<StrategicLineBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-	public StrategicLinesManagementPage()
+	public StrategicLinesManagementPage() : base(new StrategicLinesManagementPageModel())
 	{
 		InitializeComponent();
 
@@ -40,7 +40,7 @@ public partial class StrategicLinesManagementPage :
 
         StrategicLineQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
-        StrategicLineDetailDtoModel result = await apiClient.GetAsync(model.Id, model.Axe.Id);
+        StrategicLineDetailDtoModel result = await apiClient.GetAsync(model.Id, model.StrategicAxe.Id);
 
         Dispatcher.Dispatch(() =>
         {

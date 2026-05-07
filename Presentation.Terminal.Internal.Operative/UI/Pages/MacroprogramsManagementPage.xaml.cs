@@ -12,11 +12,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
 public partial class MacroprogramsManagementPage : 
-    BaseManagementEntityPage<MacroprogramBasicDtoModel, MacroprogramDetailDtoModel, MacroprogramsManagementPageModel, MacroprogramConfigurationPageModel>, 
+    BaseListEntityPage<MacroprogramBasicDtoModel, MacroprogramsManagementPageModel>, 
     IListItemsPageModelPresenter<MacroprogramBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-	public MacroprogramsManagementPage()
+	public MacroprogramsManagementPage() : base(new MacroprogramsManagementPageModel())
 	{
 		InitializeComponent();
 

@@ -11,7 +11,7 @@ internal sealed class UnitMeasurementArchiveCommandHandler :
 AbstractArchiveCommandHandler<UnitMeasurement, UnitMeasurementId, Guid, UnitMeasurementArchiveCommand>,
 IRequestHandler<UnitMeasurementArchiveCommand>
 {
-    public UnitMeasurementArchiveCommandHandler(IUnitMeasurementCommandRepositoryPort entityCommandRepository, IUnitMeasurementQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public UnitMeasurementArchiveCommandHandler(IUnitMeasurementCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

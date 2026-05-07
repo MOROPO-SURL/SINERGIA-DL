@@ -11,21 +11,17 @@ internal abstract class AbstractUnarchiveCommandHandler<TEntity, TId, TIdValue, 
     where TUnarchiveCommand : IUnarchiveCommand<TIdValue>
 {
     private readonly IEntityCommandRepositoryPort<TEntity, TId, TIdValue> entityCommandRepository;
-    private readonly IEntityQueryRepositoryPort<TEntity, TId, TIdValue> entityQueryRepository;
     private readonly IMapper mapper;
 
-    protected AbstractUnarchiveCommandHandler(IEntityCommandRepositoryPort<TEntity, TId, TIdValue> entityCommandRepository, IEntityQueryRepositoryPort<TEntity, TId, TIdValue> entityQueryRepository, IMapper mapper)
+    protected AbstractUnarchiveCommandHandler(IEntityCommandRepositoryPort<TEntity, TId, TIdValue> entityCommandRepository, IMapper mapper)
     {
         this.entityCommandRepository = entityCommandRepository;
-        this.entityQueryRepository = entityQueryRepository;
         this.mapper = mapper;
     }
 
     public async Task Handle(TUnarchiveCommand request, CancellationToken cancellationToken)
     {
-        TEntity entity = await entityQueryRepository.GetAsync(mapper.Map<TId>(request.Id!));
-
-        entityCommandRepository.TrackChanges(entity);
+        TEntity entity = await entityCommandRepository.GetAsync(mapper.Map<TId>(request.Id!));
 
         entity.IsArchived = false;
 

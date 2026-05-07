@@ -11,7 +11,7 @@ internal sealed class KeyVariableUnarchiveCommandHandler :
     AbstractUnarchiveCommandHandler<KeyVariable, KeyVariableId, Guid, KeyVariableUnarchiveCommand>,
     IRequestHandler<KeyVariableUnarchiveCommand>
 {
-    public KeyVariableUnarchiveCommandHandler(IKeyVariableCommandRepositoryPort entityCommandRepository, IKeyVariableQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public KeyVariableUnarchiveCommandHandler(IKeyVariableCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

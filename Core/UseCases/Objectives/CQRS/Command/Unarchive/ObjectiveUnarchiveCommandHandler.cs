@@ -11,7 +11,7 @@ internal sealed class ObjectiveUnarchiveCommandHandler :
     AbstractUnarchiveCommandHandler<Objective, ObjectiveId, Guid, ObjectiveUnarchiveCommand>,
     IRequestHandler<ObjectiveUnarchiveCommand>
 {
-    public ObjectiveUnarchiveCommandHandler(IObjectiveCommandRepositoryPort entityCommandRepository, IObjectiveQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ObjectiveUnarchiveCommandHandler(IObjectiveCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

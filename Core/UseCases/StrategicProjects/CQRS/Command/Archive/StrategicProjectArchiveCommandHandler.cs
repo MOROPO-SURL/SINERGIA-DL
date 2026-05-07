@@ -11,7 +11,7 @@ internal sealed class StrategicProjectArchiveCommandHandler :
     AbstractArchiveCommandHandler<StrategicProject, StrategicProjectId, Guid, StrategicProjectArchiveCommand>,
     IRequestHandler<StrategicProjectArchiveCommand>
 {
-    public StrategicProjectArchiveCommandHandler(IStrategicProjectCommandRepositoryPort entityCommandRepository, IStrategicProjectQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public StrategicProjectArchiveCommandHandler(IStrategicProjectCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

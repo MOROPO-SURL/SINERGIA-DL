@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.Ports.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
@@ -10,5 +11,13 @@ internal sealed class StrategicProgramQueryRepositoryPortAdapter : AbstractEntit
 {
     public StrategicProgramQueryRepositoryPortAdapter(DefaultDbContext dbContext) : base(dbContext)
     {
+    }
+
+    protected override IQueryable<StrategicProgram> GetQueryableDbSet()
+    {
+        return base.GetQueryableDbSet()
+            .AsSplitQuery()
+            .Include(entity => entity.StrategicLine).ThenInclude(entity => entity!.StrategicAxe)
+            .Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image);
     }
 }

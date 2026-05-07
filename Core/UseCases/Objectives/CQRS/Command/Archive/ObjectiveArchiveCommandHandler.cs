@@ -11,7 +11,7 @@ internal sealed class ObjectiveArchiveCommandHandler :
     AbstractArchiveCommandHandler<Objective, ObjectiveId, Guid, ObjectiveArchiveCommand>,
     IRequestHandler<ObjectiveArchiveCommand>
 {
-    public ObjectiveArchiveCommandHandler(IObjectiveCommandRepositoryPort entityCommandRepository, IObjectiveQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ObjectiveArchiveCommandHandler(IObjectiveCommandRepositoryPort entityCommandRepository, IMapper mapper) : base(entityCommandRepository, mapper)
     {
     }
 }

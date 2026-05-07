@@ -32,6 +32,12 @@ public static class CardViewSizeConstants
     public static double STRATEGICAXE_DEFAULT_CARD_VIEW_HEIGHT = 96;
     public static double STRATEGICAXE_DEFAULT_CARD_VIEW_WIDTH = 320;
 
-    public static double STRATEGICLINE_DEFAULT_CARD_VIEW_HEIGHT = 120;
+    public static double STRATEGICLINE_DEFAULT_CARD_VIEW_HEIGHT = 96;
     public static double STRATEGICLINE_DEFAULT_CARD_VIEW_WIDTH = 320;
+
+    public static double STRATEGICPROGRAM_DEFAULT_CARD_VIEW_HEIGHT = 96;
+    public static double STRATEGICPROGRAM_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double STRATEGICPROJECT_DEFAULT_CARD_VIEW_HEIGHT = 96;
+    public static double STRATEGICPROJECT_DEFAULT_CARD_VIEW_WIDTH = 400;
 }

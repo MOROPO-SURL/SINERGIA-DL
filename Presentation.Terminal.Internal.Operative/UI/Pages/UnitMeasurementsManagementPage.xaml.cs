@@ -9,11 +9,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.U
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
-public partial class UnitMeasurementsManagementPage : BaseManagementEntityPage<UnitMeasurementBasicDtoModel, UnitMeasurementDetailDtoModel, UnitMeasurementsManagementPageModel, UnitMeasurementConfigurationPageModel>,
+public partial class UnitMeasurementsManagementPage : BaseListEntityPage<UnitMeasurementBasicDtoModel, UnitMeasurementsManagementPageModel>,
     IListItemsPageModelPresenter<UnitMeasurementBasicDtoModel>,
     IManagementItemsPageModelPresenter
 {
-    public UnitMeasurementsManagementPage()
+    public UnitMeasurementsManagementPage() : base(new UnitMeasurementsManagementPageModel())
     {
         InitializeComponent();
 

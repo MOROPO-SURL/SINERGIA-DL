@@ -23,9 +23,7 @@ internal abstract class AbstractUpdateCommandHandler<TEntity, TId, TIdValue, TUp
 
     public async Task<TDetailDto> Handle(TUpdateCommand request, CancellationToken cancellationToken)
     {
-        TEntity entity = await entityQueryRepository.GetAsync(mapper.Map<TId>(request.Id!));
-
-        entityCommandRepository.TrackChanges(entity);
+        TEntity entity = await entityCommandRepository.GetAsync(mapper.Map<TId>(request.Id!));
 
         entity = mapper.Map(request, entity);
 

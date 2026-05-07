@@ -60,7 +60,7 @@ public class SessionController : AbstractBaseController
 
         if (ModelState.IsValid)
         {
-            var command = mapper.Map<EssentialUserUpdateCommand>(model);
+            EssentialUserUpdateCommand command = mapper.Map<EssentialUserUpdateCommand>(model);
 
             await mediator.Send(command);
 
