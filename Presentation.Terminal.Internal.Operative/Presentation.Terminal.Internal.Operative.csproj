@@ -26,8 +26,8 @@
 		<ApplicationId>cu.moropo.pdlcolab.sinergiadt.camcmg.operative</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>0.4.3</ApplicationDisplayVersion>
-		<ApplicationVersion>403</ApplicationVersion>
+		<ApplicationDisplayVersion>0.5.2</ApplicationDisplayVersion>
+		<ApplicationVersion>502</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
@@ -149,6 +149,9 @@
 	  </Compile>
 	  <Compile Update="UI\Pages\PublicPolicy\PublicPolicyDetailPage.xaml.cs">
 	    <DependentUpon>PublicPolicyDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategySummaryPage.xaml.cs">
+	    <DependentUpon>StrategySummaryPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\TerritoryPotentialsManagementPage.xaml.cs">
 	    <DependentUpon>TerritoryPotentialsManagementPage.xaml</DependentUpon>
@@ -287,6 +290,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategySummaryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\TerritoryPotentialsManagementPage.xaml">

@@ -11,7 +11,7 @@ public abstract class AbstractUserConfigurationViewModel
     public string Id { get; set; } = null!;
 
     [Display(Name = "Roles")]
-    public SelectionItemInputViewModel<Guid>[] SelectableRoles { get; set; } = null!;
+    public SelectionItemInputViewModel<Guid>[] SelectableRoles { get; set; } = [];
 
     public bool HasFullAccess { get; set; }
 

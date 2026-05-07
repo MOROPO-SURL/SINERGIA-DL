@@ -84,6 +84,7 @@ public abstract class AbstractBaseManagementController<
                 throw;
             }
 
+            //PushNotification(NotificationKind.Danger, GetInvalidMessage() + System.Text.Json.JsonSerializer.Serialize(ModelState));
             PushNotification(NotificationKind.Danger, GetInvalidMessage());
 
             await ConfigureViewModelAsync(model);

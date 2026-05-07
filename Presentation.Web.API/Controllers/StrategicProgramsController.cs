@@ -12,6 +12,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Comma
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Unarchive;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Query.Detail;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Query.List;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
@@ -63,6 +64,23 @@ public class StrategicProgramsController : ControllerBase
             PaginateQueryResultModel<StrategicProgramBasicDto> result = await mediator.Send(new StrategicProgramPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<StrategicProgramBasicDtoModel>>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet()]
+    public async Task<ActionResult<StrategicProgramDetailDtoModel[]>> GetAsync()
+    {
+        try
+        {
+            StrategicProgramDetailDto[] result = await mediator.Send(new StrategicProgramListQuery());
+
+            return Ok(mapper.Map<StrategicProgramDetailDtoModel[]>(result));
         }
         catch (Exception exception)
         {

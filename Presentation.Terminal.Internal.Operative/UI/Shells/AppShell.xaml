@@ -93,7 +93,7 @@
     </FlyoutItem>
     <ShellContent
         Title="Estrategia"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate local_ui_pages:StrategySummaryPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
