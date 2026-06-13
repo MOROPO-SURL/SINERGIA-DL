@@ -9,6 +9,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Command.Di
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Command.Enable;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Command.Remove;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Command.Update;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Query.Count;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.DTOs;
@@ -81,6 +82,23 @@ public class FeatureKindsController : ControllerBase
             FeatureKindDetailDto result = await mediator.Send(new FeatureKindDetailQuery(key));
 
             return Ok(mapper.Map<FeatureKindDetailDtoModel>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet("count")]
+    public async Task<ActionResult<int>> CountAsync()
+    {
+        try
+        {
+            int result = await mediator.Send(new FeatureKindCountQuery());
+
+            return Ok(result);
         }
         catch (Exception exception)
         {

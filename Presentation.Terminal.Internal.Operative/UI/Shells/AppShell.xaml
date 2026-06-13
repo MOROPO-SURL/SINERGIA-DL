@@ -145,7 +145,8 @@
     </FlyoutItem>
     <ShellContent
         Title="Complementarios"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Route="EnvironmentSummaryPage"
+        ContentTemplate="{DataTemplate local_ui_pages:EnvironmentSummaryPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
@@ -186,6 +187,7 @@
         </ShellContent>
         <ShellContent
             Title="Unidades de medida"
+            Route="UnitMeasurementsManagementPage"
             ContentTemplate="{DataTemplate local_ui_pages:UnitMeasurementsManagementPage}">
             <ShellContent.Icon>
                 <FontImageSource
