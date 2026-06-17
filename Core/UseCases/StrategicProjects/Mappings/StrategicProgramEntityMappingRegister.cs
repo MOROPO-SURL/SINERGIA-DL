@@ -34,6 +34,7 @@ internal sealed class StrategicProjectEntityMappingRegister : IRegister
                 src.IsEnabled,
                 false,
                 src.Name,
+                src.Objective,
                 src.Priority,
                 src.Description,
                 null,

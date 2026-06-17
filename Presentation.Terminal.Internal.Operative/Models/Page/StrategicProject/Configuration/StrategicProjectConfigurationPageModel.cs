@@ -33,7 +33,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
         Id = model.Id;
         name = model.Name;
         kind = availableKinds.First(item => item == model.Kind);
-        program = availablePrograms.First(item => item == model.Program);
+        program = availablePrograms.First(item => item.Id == model.Program.Id);
         description = model.Description;
         priority = model.Priority;
     }

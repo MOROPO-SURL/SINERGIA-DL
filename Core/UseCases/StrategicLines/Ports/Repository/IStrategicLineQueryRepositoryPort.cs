@@ -11,7 +11,7 @@ public interface IStrategicLineQueryRepositoryPort
 
     Task<int> CountAsync(Expression<Func<StrategicLine, bool>> criteria);
 
-    Task<StrategicLine> GetAsync(StrategicLineId id, StrategicAxeId axeId);
+    Task<StrategicLine> GetAsync(StrategicLineId id, StrategicAxeId? axeId);
 
     Task<StrategicLine?> FindOneByAsync(Expression<Func<StrategicLine, bool>> criteria);
 

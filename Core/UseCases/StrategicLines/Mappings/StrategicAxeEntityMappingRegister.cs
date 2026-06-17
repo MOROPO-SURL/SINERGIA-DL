@@ -30,13 +30,14 @@ internal sealed class StrategicLineEntityMappingRegister : IRegister
         config.NewConfig<StrategicLineCreateCommand, StrategicLine>()
             .MapWith(src => new(
                 new StrategicLineId(src.Id),
-                new StrategicAxeId(src.AxeId),
                 src.IsEnabled,
                 src.Name,
                 false,
                 new Domain.Aggretates.PersonAggregate.Values.PersonId(src.CoordinatorId),
-                new Domain.Aggretates.StrategicLineAggregate.Entities.StrategicLineAction[] { },
-                new Domain.Aggretates.StrategicLineAggregate.Bridges.StrategicLineOrganizationBridge[] { },
+                src.Objective,
+                Array.Empty<Domain.Aggretates.StrategicLineAggregate.Entities.StrategicLineAction>(),
+                Array.Empty<Domain.Aggretates.StrategicLineAggregate.Bridges.StrategicLineOrganizationBridge>(),
+                src.AxeId == null ? null : new StrategicAxeId(src.AxeId.Value),
                 null,
                 src.Description,
                 null
@@ -44,6 +45,12 @@ internal sealed class StrategicLineEntityMappingRegister : IRegister
 
         config.NewConfig<StrategicLineUpdateCommand, StrategicLine>()
             .Map(dest => dest.FirstId, src => new StrategicLineId(src.Id))
+            .Map(dest => dest.SecoundId, src => GetStrategicAxeId(src))
             .Map(dest => dest, src => src);
+    }
+
+    private StrategicAxeId? GetStrategicAxeId(StrategicLineUpdateCommand src)
+    {
+        return src.AxeId == null ? null : new StrategicAxeId(src.AxeId.Value);
     }
 }

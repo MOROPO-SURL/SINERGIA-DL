@@ -11,8 +11,9 @@ public class ProgramAction : AbstractEntity<ProgramActionId, Guid>, IPriorizable
 
     private ProgramAction() : base(new ProgramActionId(default)) { }
 
-    public ProgramAction(ProgramActionId id, string title, int priority, ProgramActionInterestAreaBridge[] interestAreaBridges, string? description = null) : base(id)
+    public ProgramAction(ProgramActionId id, StrategicProgramId strategicProgramId, string title, int priority, ProgramActionInterestAreaBridge[] interestAreaBridges, string? description = null) : base(id)
     {
+        StrategicProgramId = strategicProgramId;
         Priority = priority;
         Title = title;
         Description = description;

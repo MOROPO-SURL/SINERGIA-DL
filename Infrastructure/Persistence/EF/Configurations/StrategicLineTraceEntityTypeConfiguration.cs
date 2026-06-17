@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Converters;
 using System.Security.Cryptography;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
@@ -31,7 +32,7 @@ internal class StrategicLineTraceEntityTypeConfiguration : IEntityTypeConfigurat
         builder.Property(entity => entity.TargetSecoundaryId)
             .IsRequired(false)
             .ValueGeneratedNever()
-            .HasConversion(new NullableTargetSecoundaryIdConverter());
+            .HasConversion(new NullableStrategicAxeIdConverter());
 
         builder.Property(entity => entity.Author)
             .HasMaxLength(64);
@@ -48,16 +49,6 @@ internal class StrategicLineTraceEntityTypeConfiguration : IEntityTypeConfigurat
             : base(
                 id => id == null ? null : id.Value.Value,
                 value => value == null ? null : new StrategicLineId(value.Value))
-        {
-        }
-    }
-
-    private sealed class NullableTargetSecoundaryIdConverter : ValueConverter<StrategicAxeId?, int?>
-    {
-        public NullableTargetSecoundaryIdConverter()
-            : base(
-                id => id == null ? null : id.Value.Value,
-                value => value == null ? null : new StrategicAxeId(value.Value))
         {
         }
     }

@@ -32,6 +32,9 @@ internal sealed class StrategicProjectEntityTypeConfiguration : IEntityTypeConfi
         builder.Property(entity => entity.Name)
             .HasMaxLength(360);
 
+        builder.Property(entity => entity.Objective)
+            .HasMaxLength(1024);
+
         builder.Property(entity => entity.Description)
             .HasMaxLength(2048);
 

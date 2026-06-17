@@ -23,7 +23,7 @@ internal sealed class StrategicLineUpdateCommandHandler : IRequestHandler<Strate
 
     public async Task<StrategicLineDetailDto> Handle(StrategicLineUpdateCommand request, CancellationToken cancellationToken)
     {
-        StrategicLine entity = await entityQueryRepository.GetAsync(new StrategicLineId(request.Id), new StrategicAxeId(request.AxeId));
+        StrategicLine entity = await entityQueryRepository.GetAsync(new StrategicLineId(request.Id), request.AxeId == null ? null : new StrategicAxeId(request.AxeId.Value));
 
         entityCommandRepository.TrackChanges(entity);
 

@@ -24,5 +24,7 @@ internal class StrategicAxeEntityTypeConfiguration : IEntityTypeConfiguration<St
 
         builder.Property(entity => entity.Description)
             .HasMaxLength(2048);
+
+        builder.HasOne(entity => entity.Coordinator).WithMany().HasForeignKey(entity => entity.CoordinadorId).OnDelete(DeleteBehavior.SetNull);
     }
 }

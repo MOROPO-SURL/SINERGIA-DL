@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Converters;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
 
@@ -28,10 +28,13 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
 
         builder.Property(entity => entity.SecoundId)
             .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new StrategicAxeId(value));
+            .HasConversion(new NullableStrategicAxeIdConverter());
 
         builder.Property(entity => entity.Name)
             .HasMaxLength(360);
+
+        builder.Property(entity => entity.Objective)
+            .HasMaxLength(1024);
 
         builder.Property(entity => entity.Description)
             .HasMaxLength(2048);
@@ -65,7 +68,7 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
 
         builder.Property(entity => entity.StrategicAxesId)
             .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new StrategicAxeId(value));
+            .HasConversion(new NullableStrategicAxeIdConverter());
 
         builder.Property(entity => entity.LinkedId)
             .ValueGeneratedNever()
@@ -92,7 +95,7 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
 
         builder.Property(entity => entity.StrategicAxeId)
             .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new StrategicAxeId(value));
+            .HasConversion(new NullableStrategicAxeIdConverter());
 
         builder.Property(entity => entity.Title)
             .HasMaxLength(360);

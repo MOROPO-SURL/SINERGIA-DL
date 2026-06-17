@@ -32,6 +32,8 @@ internal sealed class StrategicAxeEntityMappingRegister : IRegister
                 false,
                 src.Name,
                 src.IsEnabled,
+                null,
+                src.CoordinatorId == null ? null : new Domain.Aggretates.PersonAggregate.Values.PersonId(src.CoordinatorId.Value),
                 src.Description
             ));
 

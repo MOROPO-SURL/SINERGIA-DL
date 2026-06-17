@@ -40,7 +40,7 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
         this.organizationBridges = [.. organizationBridges];
     }
 
-    public StrategicAxeId StrategicAxeId { get; set; }
+    public StrategicAxeId? StrategicAxeId { get; set; }
     public StrategicLineId StrategicLineId { get; set; }
     public StrategicLine? StrategicLine { get; set; }
 
@@ -57,13 +57,37 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
     public Person? Coordinator { get; set; }
     public PersonId CoordinatorId { get; set; }
 
+    // TODO Remove
     public IReadOnlyList<ProgramObjective> Objetives => [.. objetives];
 
     public IReadOnlyList<ProgramAction> Actions => [.. actions];
+    // TODO Cada accion tiene indicadores y metas anuales
 
+    // TODO Remove
     public IReadOnlyList<ProgramProjectIdea> ProjectIdeas => [.. projectIdeas];
 
+    // TODO Remove
     public IReadOnlyList<ProgramImpact> Impacts => [.. impacts];
 
     public IReadOnlyList<StrategicProgramOrganizationBridge> OrganizationBridges => [.. organizationBridges];
+
+    public void AddObjective(ProgramObjective entity)
+    {
+        objetives.Add(entity);
+    }
+
+    public void RemoveObjective(ProgramObjective entity)
+    {
+        objetives.Remove(objetives.First(_entity => _entity.Id == entity.Id));
+    }
+
+    public void AddAction(ProgramAction entity)
+    {
+        actions.Add(entity);
+    }
+
+    public void RemoveAction(ProgramAction entity)
+    {
+        actions.Remove(actions.First(_entity => _entity.Id == entity.Id));
+    }
 }

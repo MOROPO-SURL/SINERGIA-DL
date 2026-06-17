@@ -8,7 +8,7 @@ public record ObjectiveCreateCommand(
     Guid Id, 
     int Index, 
     string Title, 
-    ObjectiveChallengeCreateCommandAddon[] Challenges, 
-    ObjectiveProjectionCreateCommandAddon[] Projections, 
-    ObjectiveActionCreateCommandAddon[] Actions, 
+    ObjectiveChallengeAddonCreateCommand[] Challenges, 
+    ObjectiveProjectionAddonCreateCommand[] Projections, 
+    ObjectiveActionAddonCreateCommand[] Actions, 
     string? Description = null) : ICreateCommand<ObjectiveDetailDto>;

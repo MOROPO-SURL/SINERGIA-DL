@@ -48,7 +48,7 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
             .Map(dest => dest.Id, src => new ObjectiveChallengeId(src.Id))
             .Map(dest => dest, src => src);
 
-        config.NewConfig<ObjectiveChallengeCreateCommandAddon, ObjectiveChallenge>()
+        config.NewConfig<ObjectiveChallengeAddonCreateCommand, ObjectiveChallenge>()
             .Map(dest => dest.Id, src => new ObjectiveChallengeId(Guid.NewGuid()))
             .Map(dest => dest, src => src);
 
@@ -56,7 +56,7 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
             .Map(dest => dest.Id, src => new ObjectiveProjectionId(src.Id))
             .Map(dest => dest, src => src);
 
-        config.NewConfig<ObjectiveProjectionCreateCommandAddon, ObjectiveProjection>()
+        config.NewConfig<ObjectiveProjectionAddonCreateCommand, ObjectiveProjection>()
             .Map(dest => dest.Id, src => new ObjectiveProjectionId(Guid.NewGuid()))
             .Map(dest => dest, src => src);
 
@@ -64,7 +64,7 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
             .Map(dest => dest.Id, src => new ObjectiveActionId(src.Id))
             .Map(dest => dest, src => src);
 
-        config.NewConfig<ObjectiveActionCreateCommandAddon, ObjectiveAction>()
+        config.NewConfig<ObjectiveActionAddonCreateCommand, ObjectiveAction>()
             .Map(dest => dest.Id, src => new ObjectiveActionId(Guid.NewGuid()))
             .Map(dest => dest, src => src);
 

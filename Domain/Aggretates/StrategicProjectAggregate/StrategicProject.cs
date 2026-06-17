@@ -12,13 +12,14 @@ public class StrategicProject : AbstractAuditableEntity<StrategicProjectId, Guid
 {
     private StrategicProject() : base(new StrategicProjectId(default)) { }
 
-    public StrategicProject(StrategicProjectId id, StrategicProjectKindId kindId, StrategicProgramId programId, bool isEnabled, bool isArchived, string name,int priority, string? description = null, StrategicProjectKind? kind = null, StrategicProgram? program = null) : base(id)
+    public StrategicProject(StrategicProjectId id, StrategicProjectKindId kindId, StrategicProgramId programId, bool isEnabled, bool isArchived, string name, string objective, int priority, string? description = null, StrategicProjectKind? kind = null, StrategicProgram? program = null) : base(id)
     {
         KindId = kindId;
         ProgramId = programId;
         IsEnabled = isEnabled;
         IsArchived = isArchived;
         Name = name;
+        Objective = objective; 
         Description = description;
         Priority = priority;
         Kind = kind;
@@ -29,7 +30,9 @@ public class StrategicProject : AbstractAuditableEntity<StrategicProjectId, Guid
     public StrategicProjectKind? Kind { get; set; }
 
     public StrategicProgramId ProgramId { get; set; }
-    public StrategicProgram? Program { get; set; } 
+    public StrategicProgram? Program { get; set; }
+
+    // TODO Incluir otros programas
 
     public bool IsEnabled { get; set; }
 
@@ -38,6 +41,12 @@ public class StrategicProject : AbstractAuditableEntity<StrategicProjectId, Guid
     public int Priority { get; set; }
 
     public string Name { get; set; } = null!;
+
+    public string Objective { get; set; } = null!;
+
+    // TODO SpecificObjective
+
+    // TODO Indicadores con metas anuales
 
     public string? Description { get; set; }
 }

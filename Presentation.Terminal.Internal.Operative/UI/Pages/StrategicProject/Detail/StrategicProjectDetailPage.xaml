@@ -44,7 +44,7 @@
     <Grid>
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
                         Text="Nombre" />
@@ -70,7 +70,7 @@
                         <Label Text="{Binding Model.Program.Name}" />
                     </VerticalStackLayout>
                 </FlexLayout>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
                         Text="Descripción" />

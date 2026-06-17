@@ -555,6 +555,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<int>("Id")
                         .HasColumnType("integer");
 
+                    b.Property<Guid?>("CoordinadorId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
@@ -577,6 +580,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CoordinadorId");
 
                     b.ToTable("strategicaxes", (string)null);
                 });
@@ -609,6 +614,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .IsRequired()
                         .HasMaxLength(360)
                         .HasColumnType("character varying(360)");
+
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
@@ -651,7 +661,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<int>("Priority")
                         .HasColumnType("integer");
 
-                    b.Property<int>("StrategicAxeId")
+                    b.Property<int?>("StrategicAxeId")
                         .HasColumnType("integer");
 
                     b.Property<int>("StrategicLineId")
@@ -694,6 +704,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .IsRequired()
                         .HasMaxLength(360)
                         .HasColumnType("character varying(360)");
+
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer");
@@ -2317,6 +2332,16 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Navigation("WebSiteAddresses");
                 });
 
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.StrategicAxe", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Coordinator")
+                        .WithMany()
+                        .HasForeignKey("CoordinadorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Coordinator");
+                });
+
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine", b =>
                 {
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Coordinator")
@@ -2413,8 +2438,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.StrategicLine", "StrategicLine")
                         .WithMany()
                         .HasForeignKey("StrategicLineId", "StrategicAxeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramAction", "Actions", b1 =>
                         {

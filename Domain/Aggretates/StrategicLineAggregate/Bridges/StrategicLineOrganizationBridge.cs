@@ -9,7 +9,7 @@ public class StrategicLineOrganizationBridge
 {
     private StrategicLineOrganizationBridge() { }
 
-    public StrategicLineOrganizationBridge(StrategicLineId strategicLineId, StrategicAxeId strategicAxesId, OrganizationId linkedId, Organization? linked = null)
+    public StrategicLineOrganizationBridge(StrategicLineId strategicLineId, StrategicAxeId? strategicAxesId, OrganizationId linkedId, Organization? linked = null)
     {
         StrategicLineId = strategicLineId;
         StrategicAxesId = strategicAxesId;
@@ -19,7 +19,7 @@ public class StrategicLineOrganizationBridge
 
     public StrategicLineId StrategicLineId { get; set; }
 
-    public StrategicAxeId StrategicAxesId { get; set; }
+    public StrategicAxeId? StrategicAxesId { get; set; }
 
     public OrganizationId LinkedId { get; set; }
     public Organization? Linked { get; set; }

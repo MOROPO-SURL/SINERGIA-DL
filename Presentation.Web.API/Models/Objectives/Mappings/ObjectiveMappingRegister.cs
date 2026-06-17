@@ -46,20 +46,20 @@ internal class ObjectiveMappingRegister : IRegister
 
         config.NewConfig<ObjectiveCreateRequestModel, ObjectiveCreateCommand>()
             .Map(dest => dest.Id, src => Guid.NewGuid())
-            .Map(dest => dest.Challenges, src => src.Challenges.Select(item => new ObjectiveChallengeCreateCommandAddon(item.Index, item.Title, item.Description)))
-            .Map(dest => dest.Projections, src => src.Projections.Select(item => new ObjectiveProjectionCreateCommandAddon(item.Index, item.Title, item.Description)))
-            .Map(dest => dest.Actions, src => src.Actions.Select(item => new ObjectiveActionCreateCommandAddon(item.Index, item.Title, item.Description)))
+            .Map(dest => dest.Challenges, src => src.Challenges.Select(item => new ObjectiveChallengeAddonCreateCommand(item.Index, item.Title, item.Description)))
+            .Map(dest => dest.Projections, src => src.Projections.Select(item => new ObjectiveProjectionAddonCreateCommand(item.Index, item.Title, item.Description)))
+            .Map(dest => dest.Actions, src => src.Actions.Select(item => new ObjectiveActionAddonCreateCommand(item.Index, item.Title, item.Description)))
             .Map(dest => dest, src => src);
 
         config.NewConfig<ObjectiveUpdateRequestModel, ObjectiveUpdateCommand>()
-            .Map(dest => dest.InChallenges, src => src.InChallenges.Select(item => new ObjectiveChallengeCreateCommandAddon(item.Index, item.Title, item.Description)))
-            .Map(dest => dest.PatchChallenges, src => src.PatchChallenges.Select(item => new ObjectiveChallengeUpdateCommandAddon(item.Id, item.Index, item.Title, item.Description)))
+            .Map(dest => dest.InChallenges, src => src.InChallenges.Select(item => new ObjectiveChallengeAddonCreateCommand(item.Index, item.Title, item.Description)))
+            .Map(dest => dest.PatchChallenges, src => src.PatchChallenges.Select(item => new ObjectiveChallengeAddonUpdateCommand(item.Id, item.Index, item.Title, item.Description)))
             .Map(dest => dest.OutChallenges, src => src.OutChallenges.Select(item => new ObjectiveChallengeDetailDto(item.Id, item.Index, item.Title, item.Description)))
-            .Map(dest => dest.InProjections, src => src.InProjections.Select(item => new ObjectiveProjectionCreateCommandAddon(item.Index, item.Title, item.Description)))
-            .Map(dest => dest.PatchProjections, src => src.PatchProjections.Select(item => new ObjectiveProjectionUpdateCommandAddon(item.Id, item.Index, item.Title, item.Description)))
+            .Map(dest => dest.InProjections, src => src.InProjections.Select(item => new ObjectiveProjectionAddonCreateCommand(item.Index, item.Title, item.Description)))
+            .Map(dest => dest.PatchProjections, src => src.PatchProjections.Select(item => new ObjectiveProjectionAddonUpdateCommand(item.Id, item.Index, item.Title, item.Description)))
             .Map(dest => dest.OutProjections, src => src.OutProjections.Select(item => new ObjectiveProjectionDetailDto(item.Id, item.Index, item.Title, item.Description)))
-            .Map(dest => dest.InActions, src => src.InActions.Select(item => new ObjectiveActionCreateCommandAddon(item.Index, item.Title, item.Description)))
-            .Map(dest => dest.PatchActions, src => src.PatchActions.Select(item => new ObjectiveActionUpdateCommandAddon(item.Id, item.Index, item.Title, item.Description)))
+            .Map(dest => dest.InActions, src => src.InActions.Select(item => new ObjectiveActionAddonCreateCommand(item.Index, item.Title, item.Description)))
+            .Map(dest => dest.PatchActions, src => src.PatchActions.Select(item => new ObjectiveActionAddonUpdateCommand(item.Id, item.Index, item.Title, item.Description)))
             .Map(dest => dest.OutActions, src => src.OutActions.Select(item => new ObjectiveActionDetailDto(item.Id, item.Index, item.Title, item.Description)))
             .Map(dest => dest, src => src);
     }

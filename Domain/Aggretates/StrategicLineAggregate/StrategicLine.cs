@@ -16,7 +16,7 @@ public class StrategicLine : IAggregateRoot
 
     private StrategicLine() { }
 
-    public StrategicLine(StrategicLineId firstId, StrategicAxeId secoundId, bool isEnabled, string name, bool isArchived, PersonId coordinatorId, StrategicLineAction[] strategicActions, StrategicLineOrganizationBridge[] organizationBridges, Person? coordinator = null, string? description = null, StrategicAxe? strategicAxe = null)
+    public StrategicLine(StrategicLineId firstId, bool isEnabled, string name, bool isArchived, PersonId coordinatorId, string objective, StrategicLineAction[] strategicActions, StrategicLineOrganizationBridge[] organizationBridges, StrategicAxeId? secoundId = null, Person? coordinator = null, string? description = null, StrategicAxe? strategicAxe = null)
     {
         FirstId = firstId;
         SecoundId = secoundId;
@@ -26,6 +26,7 @@ public class StrategicLine : IAggregateRoot
         IsArchived = isArchived;
         CoordinadorId = coordinatorId;
         Coordinator = coordinator;
+        Objective = objective;
         StrategicAxe = strategicAxe;
 
         this.strategicActions = [.. strategicActions];
@@ -33,7 +34,7 @@ public class StrategicLine : IAggregateRoot
     }
 
     public StrategicLineId FirstId { get; set; }
-    public StrategicAxeId SecoundId { get; set; }
+    public StrategicAxeId? SecoundId { get; set; }
     public StrategicAxe? StrategicAxe { get; set; }
 
     public bool IsEnabled { get; set; }
@@ -41,6 +42,12 @@ public class StrategicLine : IAggregateRoot
     public bool IsArchived { get; set; }
 
     public string Name { get; set; } = null!;
+
+    public string Objective { get; set; } = null!;
+
+    // TODO SpecigficObjective
+
+    // TODO PublicPolicy Bridges !!
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
@@ -51,6 +58,7 @@ public class StrategicLine : IAggregateRoot
     public Person? Coordinator { get; set; } = null!;
     public PersonId CoordinadorId { get; set; }
 
+    // TODO Remove
     public IReadOnlyList<StrategicLineAction> StrategicActions => [.. strategicActions];
 
     public IReadOnlyList<StrategicLineOrganizationBridge> OrganizationBridges => [.. organizationBridges];

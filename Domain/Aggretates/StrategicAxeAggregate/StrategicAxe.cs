@@ -1,4 +1,6 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
@@ -13,12 +15,14 @@ public class StrategicAxe :
 {
     private StrategicAxe() : base(new StrategicAxeId(default)) { }
 
-    public StrategicAxe(StrategicAxeId id, bool isArchived, string name, bool isEnabled, string? description = null) : base(id)
+    public StrategicAxe(StrategicAxeId id, bool isArchived, string name, bool isEnabled, Person? coordinator = null, PersonId? coordinatorId = null, string? description = null) : base(id)
     {
         IsArchived = isArchived;
         Name = name;
         Description = description;
         IsEnabled = isEnabled;
+        CoordinadorId = coordinatorId;
+        Coordinator = coordinator;
     }
 
     public bool IsArchived { get; set; }
@@ -26,6 +30,9 @@ public class StrategicAxe :
     public string Name { get; set; } = null!;
 
     public bool IsEnabled { get; set; }
+
+    public Person? Coordinator { get; set; }
+    public PersonId? CoordinadorId { get; set; }
 
     public string? Description { get; set; }
 }

@@ -9,7 +9,7 @@ public class StrategicLineAction : AbstractEntity<StrategicLineActionId, Guid>, 
 {
     private StrategicLineAction() : base(new StrategicLineActionId(default)) { }
 
-    public StrategicLineAction(StrategicLineActionId id, StrategicLineId strategicLineId, StrategicAxeId strategicAxeId, string title, int priority, string? description = null) : base(id)
+    public StrategicLineAction(StrategicLineActionId id, StrategicLineId strategicLineId, string title, int priority, StrategicAxeId? strategicAxeId = null, string? description = null) : base(id)
     {
         StrategicLineId = strategicLineId;
         StrategicAxeId = strategicAxeId;
@@ -20,7 +20,7 @@ public class StrategicLineAction : AbstractEntity<StrategicLineActionId, Guid>, 
 
     public StrategicLineId StrategicLineId { get; set; }
 
-    public StrategicAxeId StrategicAxeId { get; set; }
+    public StrategicAxeId? StrategicAxeId { get; set; }
 
     public string Title { get; set; } = null!;
 

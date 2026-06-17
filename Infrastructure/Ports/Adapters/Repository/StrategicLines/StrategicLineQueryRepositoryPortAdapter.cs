@@ -43,7 +43,7 @@ internal sealed class StrategicLineQueryRepositoryPortAdapter : IStrategicLineQu
         return GetQueryableDbSet();
     }
 
-    public Task<StrategicLine> GetAsync(StrategicLineId firstId, StrategicAxeId secoundId)
+    public Task<StrategicLine> GetAsync(StrategicLineId firstId, StrategicAxeId? secoundId)
     {
         return GetQueryableDbSet().Where(entity => entity.FirstId.Equals(firstId) && entity.SecoundId.Equals(secoundId)).FirstAsync();
     }

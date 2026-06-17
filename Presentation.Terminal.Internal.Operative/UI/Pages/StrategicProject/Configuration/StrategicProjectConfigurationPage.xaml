@@ -14,14 +14,6 @@
     x:TypeArguments="interop_dto_models:StrategicProjectBasicDtoModel,interop_dto_models:StrategicProjectDetailDtoModel,local_configuration_page_models:StrategicProjectConfigurationPageModel"
     x:DataType="local_configuration_page_models:StrategicProjectConfigurationPageModel"
     Shell.TabBarIsVisible="False">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
-            <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToColorConverter" TrueValue="DimGray" FalseValue="Transparent" />
-
-            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"

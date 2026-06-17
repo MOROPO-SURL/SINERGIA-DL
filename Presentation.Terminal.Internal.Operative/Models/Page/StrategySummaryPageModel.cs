@@ -74,6 +74,8 @@ public sealed class StrategySummaryPageModel : BasePageModel
                 {
                     Axes.Add(item);
                 }
+
+                // TODO Cached Axes a s Json file on local storage for offline presentation!!
             });
         }).ContinueWith(task =>
         {
