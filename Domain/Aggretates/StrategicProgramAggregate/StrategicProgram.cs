@@ -20,12 +20,13 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
 
     private StrategicProgram() : base(new StrategicProgramId(default)) { }
 
-    public StrategicProgram(StrategicProgramId id, StrategicLineId lineId, bool isEnabled, string name, bool isArchived, int priority, PersonId coordinatorId, ProgramObjective[] objetives, ProgramAction[] actions, ProgramProjectIdea[] projectIdeas, ProgramImpact[] impacts, StrategicProgramOrganizationBridge[] organizationBridges, StrategicLine? line = null, Person? coordinator = null, string? description = null) : base(id)
+    public StrategicProgram(StrategicProgramId id, StrategicLineId lineId, bool isEnabled, string name, bool isArchived, int priority, PersonId coordinatorId, string objective, ProgramObjective[] objetives, ProgramAction[] actions, ProgramProjectIdea[] projectIdeas, ProgramImpact[] impacts, StrategicProgramOrganizationBridge[] organizationBridges, StrategicLine? line = null, Person? coordinator = null, string? description = null) : base(id)
     {
         LineId = lineId;
         IsEnabled = isEnabled;
         Name = name;
         IsArchived = isArchived;
+        Objective = objective;
         Description = description;
         Priority = priority;
         CoordinatorId = coordinatorId;
@@ -47,6 +48,8 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
     public string Name { get; set; } = null!;
 
     public bool IsArchived { get; set; }
+
+    public string Objective { get; set; } = null!;
 
     public string? Description { get; set; }
 

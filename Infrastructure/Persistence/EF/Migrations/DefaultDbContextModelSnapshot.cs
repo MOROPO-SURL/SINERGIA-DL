@@ -667,6 +667,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasMaxLength(360)
                         .HasColumnType("character varying(360)");
 
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
                     b.Property<int>("Priority")
                         .HasColumnType("integer");
 

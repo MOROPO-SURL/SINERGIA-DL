@@ -8,7 +8,6 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregat
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Converters;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
 
@@ -40,6 +39,9 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
 
         builder.Property(entity => entity.Name)
             .HasMaxLength(360);
+
+        builder.Property(entity => entity.Objective)
+            .HasMaxLength(1024);
 
         builder.Property(entity => entity.Description)
             .HasMaxLength(2048);

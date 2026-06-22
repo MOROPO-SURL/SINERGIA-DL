@@ -73,6 +73,14 @@
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
+                        Text="Objetivo" />
+                    <Label
+                        Style="{StaticResource ValuePropertyLabelStyle}"
+                        Text="{Binding Model.Objective}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label 
+                        Style="{StaticResource CaptionPropertyLabelStyle}"
                         Text="Descripción" />
                     <Label
                         Style="{StaticResource ValuePropertyLabelStyle}"

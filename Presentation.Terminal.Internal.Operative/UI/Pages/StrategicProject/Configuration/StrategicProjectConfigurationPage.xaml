@@ -89,6 +89,17 @@
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Objetivo" />
+                    <Editor Text="{Binding Objective}" HeightRequest="100" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:StrategicProjectConfigurationPageModel.ObjectiveValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="200" />
                     <Label>

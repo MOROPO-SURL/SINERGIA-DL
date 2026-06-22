@@ -6,11 +6,12 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.C
 
 public record StrategicProgramCreateCommand(
     Guid Id,
-    string Name, 
+    string Name,
     int Priority, 
     bool IsEnabled,
     Guid LineId,
     Guid CoordinatorId,
+    string Objective,
     ProgramObjectiveAddonCreateCommand[] Objectives,
     ProgramActionAddonCreateCommand[] Actions,
     string? Description = null) : ICreateCommand<StrategicProgramDetailDto>;

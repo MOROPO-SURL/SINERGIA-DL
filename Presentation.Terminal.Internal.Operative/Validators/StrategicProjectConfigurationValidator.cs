@@ -19,6 +19,11 @@ internal sealed class StrategicProjectConfigurationValidator : AbstractValidator
             .NotNull()
             .WithName("Programa");
 
+        RuleFor(model => model.Objective)
+            .NotEmpty()
+            .MaximumLength(1024)
+            .WithName("Objetivo");
+
         RuleFor(model => model.Description)
             .MaximumLength(2048)
             .WithName("Descripción");

@@ -88,9 +88,9 @@
                                                 LineBreakMode="TailTruncation">
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="{Binding StrategicLine.Axe.Id, StringFormat='{0}.'}" />
-                                                        <Span Text="{Binding StrategicLine.Index, StringFormat='{0}.'}" />
-                                                        <Span Text="{Binding StrategicLine.Name}" />
+                                                        <Span Text="{Binding Line.Axe.Id, StringFormat='{0}.'}" />
+                                                        <Span Text="{Binding Line.Index, StringFormat='{0}.'}" />
+                                                        <Span Text="{Binding Line.Name}" />
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>

@@ -15,11 +15,13 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
     public static string NameValidableProperty => nameof(Name);
     public static string KindValidableProperty => nameof(Kind);
     public static string ProgramValidableProperty => nameof(Program);
+    public static string ObjectiveValidableProperty => nameof(Objective);
     public static string DescriptionValidableProperty => nameof(Description);
 
     private string name = null!;
     private StrategicProjectKindBasicDtoModel kind = null!;
     private StrategicProgramBasicDtoModel program = null!;
+    private string objective = null!;
     private string? description;
     private int priority = 1;
 
@@ -34,6 +36,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
         name = model.Name;
         kind = availableKinds.First(item => item == model.Kind);
         program = availablePrograms.First(item => item.Id == model.Program.Id);
+        objective = model.Objective;
         description = model.Description;
         priority = model.Priority;
     }
@@ -47,6 +50,8 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
     public StrategicProgramBasicDtoModel Program { get => program; set => SetProperty(ref program, value); }
 
     public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+    public string? Objective { get => objective; set => SetProperty(ref objective, value); }
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
@@ -65,6 +70,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
                 program.Id,
                 priority,
                 true,
+                objective,
                 description
             ));
     }
@@ -81,6 +87,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
                 program.Id,
                 priority,
                 true,
+                objective,
                 description
             ));
     }

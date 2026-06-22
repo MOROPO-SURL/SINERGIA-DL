@@ -60,9 +60,9 @@
                         Style="{StaticResource ValuePropertyLabelStyle}">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding Model.StrategicLine.Axe.Id, StringFormat='{0}.'}" />
-                                <Span Text="{Binding Model.StrategicLine.Index, StringFormat='{0}.'}" />
-                                <Span Text="{Binding Model.StrategicLine.Name}" />
+                                <Span Text="{Binding Model.Line.Axe.Id, StringFormat='{0}.'}" />
+                                <Span Text="{Binding Model.Line.Index, StringFormat='{0}.'}" />
+                                <Span Text="{Binding Model.Line.Name}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -110,6 +110,14 @@
                         </Frame>
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                    <Label 
+                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                        Text="Objetivo" />
+                    <Label
+                        Style="{StaticResource ValuePropertyLabelStyle}"
+                        Text="{Binding Model.Objective}" />
+                </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"

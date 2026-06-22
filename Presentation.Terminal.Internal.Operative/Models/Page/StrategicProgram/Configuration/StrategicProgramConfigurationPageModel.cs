@@ -32,7 +32,7 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
         if (model is null) return;
 
         Id = model.Id;
-        line = availableLines.First(item => item == model.StrategicLine);
+        line = availableLines.First(item => item == model.Line);
         name = model.Name;
         objective = model.Objective;
         coordinator = model.Coordinator;

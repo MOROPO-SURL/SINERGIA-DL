@@ -11,6 +11,7 @@ public record StrategicProgramUpdateCommand(
     bool IsEnabled,
     Guid LineId,
     Guid CoordinatorId,
+    string Objective,
     ProgramObjectiveAddonCreateCommand[] InObjectives,
     ProgramObjectiveAddonUpdateCommand[] PatchObjectives,
     ProgramObjectiveDetailDto[] OutObjectives,
