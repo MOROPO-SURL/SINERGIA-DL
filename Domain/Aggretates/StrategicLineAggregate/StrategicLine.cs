@@ -5,37 +5,45 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Va
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 
-public class StrategicLine : IAggregateRoot
+public class StrategicLine : 
+    AbstractAuditableEntity<StrategicLineId, Guid>,
+    IAggregateRoot<StrategicLineId, Guid>,
+    IArchivableEntity<StrategicLineId, Guid>,
+    INamedEntity<StrategicLineId, Guid>,
+    IEnableableEntity<StrategicLineId, Guid>
 {
     private readonly List<StrategicLineAction> strategicActions = [];
     private readonly List<StrategicLineOrganizationBridge> organizationBridges = [];
 
-    private StrategicLine() { }
+    private StrategicLine() : base(new StrategicLineId(default)) { }
 
-    public StrategicLine(StrategicLineId firstId, bool isEnabled, string name, bool isArchived, PersonId coordinatorId, string objective, StrategicLineAction[] strategicActions, StrategicLineOrganizationBridge[] organizationBridges, StrategicAxeId? secoundId = null, Person? coordinator = null, string? description = null, StrategicAxe? strategicAxe = null)
+    public StrategicLine(StrategicLineId id, int index, bool isEnabled, string name, bool isArchived, PersonId coordinatorId, string objective, StrategicLineAction[] strategicActions, StrategicLineOrganizationBridge[] organizationBridges, StrategicAxeId? axeId = null, StrategicAxe? axe = null, Person? coordinator = null, string? description = null)
+        : base(id)
     {
-        FirstId = firstId;
-        SecoundId = secoundId;
+        Index = index;
         Description = description;
         IsEnabled = isEnabled;
         Name = name;
         IsArchived = isArchived;
-        CoordinadorId = coordinatorId;
+        CoordinatorId = coordinatorId;
         Coordinator = coordinator;
         Objective = objective;
-        StrategicAxe = strategicAxe;
+        AxeId = axeId;
+        Axe = axe;
 
         this.strategicActions = [.. strategicActions];
         this.organizationBridges = [.. organizationBridges];
     }
 
-    public StrategicLineId FirstId { get; set; }
-    public StrategicAxeId? SecoundId { get; set; }
-    public StrategicAxe? StrategicAxe { get; set; }
+    public int Index { get; set; }
+
+    public StrategicAxeId? AxeId { get; set; }
+    public StrategicAxe? Axe { get; set; }
 
     public bool IsEnabled { get; set; }
 
@@ -49,14 +57,10 @@ public class StrategicLine : IAggregateRoot
 
     // TODO PublicPolicy Bridges !!
 
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-    public DateTime? UpdatedAt { get; set; }
-
     public string? Description { get; set; }
 
     public Person? Coordinator { get; set; } = null!;
-    public PersonId CoordinadorId { get; set; }
+    public PersonId CoordinatorId { get; set; }
 
     // TODO Remove
     public IReadOnlyList<StrategicLineAction> StrategicActions => [.. strategicActions];

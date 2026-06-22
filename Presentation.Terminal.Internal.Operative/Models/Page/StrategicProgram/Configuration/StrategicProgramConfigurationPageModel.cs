@@ -15,11 +15,13 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
     public static string NameValidableProperty => nameof(Name);
     public static string LineValidableProperty => nameof(Line);
     public static string CoordinatorValidableProperty => nameof(Coordinator);
+    public static string ObjectiveValidableProperty => nameof(Objective);
     public static string DescriptionValidableProperty => nameof(Description);
 
     private StrategicLineBasicDtoModel line = null!;
     private string name = null!;
     private PersonBasicDtoModel coordinator = null!;
+    private string objective = null!;
     private string? description;
     private int priority = 1;
 
@@ -32,6 +34,7 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
         Id = model.Id;
         line = availableLines.First(item => item == model.StrategicLine);
         name = model.Name;
+        objective = model.Objective;
         coordinator = model.Coordinator;
         description = model.Description;
         priority = model.Priority;
@@ -47,6 +50,8 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
 
     public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
+    public string Objective { get => objective; set => SetProperty(ref objective, value); }
+
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
     public StrategicLineBasicDtoModel[] AvailableLines { get; private set; }
@@ -60,8 +65,8 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
                 name,
                 true,
                 line.Id,
-                line.StrategicAxe.Id,
                 coordinator.Id,
+                objective,
                 priority,
                 description
             ));
@@ -76,8 +81,8 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
                 Id,
                 name,
                 line.Id,
-                line.StrategicAxe.Id,
                 coordinator.Id,
+                objective,
                 priority,
                 true,
                 description

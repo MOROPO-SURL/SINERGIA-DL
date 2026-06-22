@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Converters;
 using System.Security.Cryptography;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
@@ -24,15 +22,10 @@ internal class StrategicLineTraceEntityTypeConfiguration : IEntityTypeConfigurat
             .ValueGeneratedOnAdd()
             .UseIdentityColumn();
 
-        builder.Property(entity => entity.TargetPrimaryId)
+        builder.Property(entity => entity.TargetId)
             .IsRequired(false)
             .ValueGeneratedNever()
             .HasConversion(new NullableTargetPrimaryIdConverter());
-
-        builder.Property(entity => entity.TargetSecoundaryId)
-            .IsRequired(false)
-            .ValueGeneratedNever()
-            .HasConversion(new NullableStrategicAxeIdConverter());
 
         builder.Property(entity => entity.Author)
             .HasMaxLength(64);
@@ -40,10 +33,10 @@ internal class StrategicLineTraceEntityTypeConfiguration : IEntityTypeConfigurat
         builder.Property(bridge => bridge.Signature)
             .HasMaxLength(HMACSHA512.HashSizeInBytes * 2);
 
-        builder.HasOne(entity => entity.Target).WithMany().HasForeignKey(entity => new { entity.TargetPrimaryId, entity.TargetSecoundaryId }).OnDelete(DeleteBehavior.SetNull);
+        builder.HasOne(entity => entity.Target).WithMany().HasForeignKey(entity => entity.TargetId).OnDelete(DeleteBehavior.SetNull);
     }
 
-    private sealed class NullableTargetPrimaryIdConverter : ValueConverter<StrategicLineId?, int?>
+    private sealed class NullableTargetPrimaryIdConverter : ValueConverter<StrategicLineId?, Guid?>
     {
         public NullableTargetPrimaryIdConverter()
             : base(

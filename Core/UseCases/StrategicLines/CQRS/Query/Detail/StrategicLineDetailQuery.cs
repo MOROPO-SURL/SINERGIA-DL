@@ -1,3 +1,6 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Query.Detail;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Query.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 
-public record StrategicLineDetailQuery(int Id, int AxeId) : MediatR.IRequest<DTOs.StrategicLineDetailDto>;
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Query.Detail;
+
+public record StrategicLineDetailQuery(Guid Id) : IDetailQuery<StrategicLineId, Guid, DTOs.StrategicLineDetailDto>;

@@ -11,8 +11,8 @@ internal sealed class ApiKeyRemoveCommandHandler :
     AbstractRemoveCommandHandler<ApiKey, ApiKeyId, Guid, ApiKeyRemoveCommand>,
     IRequestHandler<ApiKeyRemoveCommand>
 {
-    public ApiKeyRemoveCommandHandler(IApiKeyQueryRepositoryPort entityQueryRepository, IApiKeyCommandRepositoryPort entityCommandRepository, IMapper mapper)
-        : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ApiKeyRemoveCommandHandler(IApiKeyCommandRepositoryPort entityCommandRepository, IMapper mapper)
+        : base(entityCommandRepository, mapper)
     {
     }
 }

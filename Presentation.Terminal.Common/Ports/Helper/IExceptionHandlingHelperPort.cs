@@ -2,5 +2,5 @@
 
 public interface IExceptionHandlingHelperPort
 {
-    void HandleException(Exception? exception, Action<Exception>? callbackAction = null);
+    void HandleException(Exception? exception, Action<Exception?>? callbackAction = null);
 }

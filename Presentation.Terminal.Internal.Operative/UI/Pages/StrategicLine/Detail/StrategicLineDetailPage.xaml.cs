@@ -1,3 +1,6 @@
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
@@ -16,10 +19,12 @@ public partial class StrategicLineDetailPage : BaseDetailEntityPage<StrategicLin
         ConcreteBindingContext.BindPresenter(this);
 	}
 
-    public Task PresentItemModifyUserInterfaceAsync(StrategicLineDetailDtoModel model, Action<StrategicLineDetailDtoModel> configurationSuccessCallbackAction)
+    public async Task PresentItemModifyUserInterfaceAsync(StrategicLineDetailDtoModel model, Action<StrategicLineDetailDtoModel> configurationSuccessCallbackAction)
     {
-        Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.StrategicLineConfigurationPage(new StrategicLineConfigurationPageModel(model, [model.StrategicAxe], configurationSuccessCallbackAction))));
+        StrategicAxeQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
-        return Task.CompletedTask;
+        StrategicAxeBasicDtoModel[] axes = (await apiClient.GetPageAsync(1, 30)).Items;
+
+        Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.StrategicLineConfigurationPage(new StrategicLineConfigurationPageModel(model, axes, configurationSuccessCallbackAction))));
     }
 }

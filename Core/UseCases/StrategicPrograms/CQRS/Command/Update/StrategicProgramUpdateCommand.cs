@@ -9,6 +9,8 @@ public record StrategicProgramUpdateCommand(
     string Name, 
     int Priority, 
     bool IsEnabled,
+    Guid LineId,
+    Guid CoordinatorId,
     ProgramObjectiveAddonCreateCommand[] InObjectives,
     ProgramObjectiveAddonUpdateCommand[] PatchObjectives,
     ProgramObjectiveDetailDto[] OutObjectives,

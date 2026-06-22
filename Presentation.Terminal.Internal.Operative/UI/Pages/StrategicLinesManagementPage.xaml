@@ -81,11 +81,11 @@
                                         <Label
                                             Grid.Column="0"
                                             VerticalOptions="Start"
-                                            Text="{Binding StrategicAxe.Id, StringFormat='{0}.'}" />
+                                            Text="{Binding Axe.Id, StringFormat='{0}.'}" />
                                         <Label
                                             Grid.Column="1"
                                             VerticalOptions="Start"
-                                            Text="{Binding Id, StringFormat='{0}.'}" />
+                                            Text="{Binding Index, StringFormat='{0}.'}" />
                                         <Label
                                             Grid.Column="2"
                                             Margin="4,0,0,0"

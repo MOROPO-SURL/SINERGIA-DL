@@ -11,7 +11,8 @@ internal sealed class OrganizationRemoveCommandHandler :
     AbstractRemoveCommandHandler<Organization, OrganizationId, Guid, OrganizationRemoveCommand>,
     IRequestHandler<OrganizationRemoveCommand>
 {
-    public OrganizationRemoveCommandHandler(IOrganizationCommandRepositoryPort entityCommandRepository, IOrganizationQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public OrganizationRemoveCommandHandler(IOrganizationCommandRepositoryPort entityCommandRepository, IMapper mapper) 
+        : base(entityCommandRepository, mapper)
     {
     }
 }

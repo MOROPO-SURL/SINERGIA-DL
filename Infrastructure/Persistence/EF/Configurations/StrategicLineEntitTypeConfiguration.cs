@@ -20,13 +20,13 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
     {
         builder.ToTable(ROOT_TABLE_NAME);
 
-        builder.HasKey(entity => new { entity.FirstId, entity.SecoundId });
+        builder.HasKey(entity => new { entity.Id });
 
-        builder.Property(entity => entity.FirstId)
+        builder.Property(entity => entity.Id)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicLineId(value));
 
-        builder.Property(entity => entity.SecoundId)
+        builder.Property(entity => entity.AxeId)
             .ValueGeneratedNever()
             .HasConversion(new NullableStrategicAxeIdConverter());
 
@@ -39,8 +39,10 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.Property(entity => entity.Description)
             .HasMaxLength(2048);
 
-        builder.HasOne(entity => entity.StrategicAxe).WithMany().HasForeignKey(entity => entity.SecoundId).OnDelete(DeleteBehavior.Restrict);
-        builder.HasOne(entity => entity.Coordinator).WithMany().HasForeignKey(entity => entity.CoordinadorId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(entity => entity.Axe).WithMany().HasForeignKey(entity => entity.AxeId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(entity => entity.Coordinator).WithMany().HasForeignKey(entity => entity.CoordinatorId).OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(entity => new { entity.Index, entity.AxeId }).IsUnique();
 
         builder
             .OwnsMany(entity => entity.StrategicActions, Configure)
@@ -58,17 +60,13 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
     {
         builder.ToTable(STRATEGICLINE_ORGANIZATION_BRIDGES_TABLE_NAME);
 
-        builder.HasKey(bridge => new { bridge.StrategicLineId, bridge.StrategicAxesId, bridge.LinkedId });
+        builder.HasKey(bridge => new { bridge.MainId, bridge.LinkedId });
 
-        builder.WithOwner().HasForeignKey(bridge => new { bridge.StrategicLineId, bridge.StrategicAxesId });
+        builder.WithOwner().HasForeignKey(bridge => new { bridge.MainId });
 
-        builder.Property(entity => entity.StrategicLineId)
+        builder.Property(entity => entity.MainId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicLineId(value));
-
-        builder.Property(entity => entity.StrategicAxesId)
-            .ValueGeneratedNever()
-            .HasConversion(new NullableStrategicAxeIdConverter());
 
         builder.Property(entity => entity.LinkedId)
             .ValueGeneratedNever()
@@ -81,9 +79,9 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
     {
         builder.ToTable(ACTIONS_TABLE_NAME);
 
-        builder.HasKey(entity => new { entity.Id, entity.StrategicLineId, entity.StrategicAxeId });
+        builder.HasKey(entity => new { entity.Id, entity.StrategicLineId });
 
-        builder.WithOwner().HasForeignKey(entity => new { entity.StrategicLineId, entity.StrategicAxeId });
+        builder.WithOwner().HasForeignKey(entity => new { entity.StrategicLineId });
 
         builder.Property(entity => entity.Id)
             .ValueGeneratedNever()
@@ -92,10 +90,6 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.Property(entity => entity.StrategicLineId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicLineId(value));
-
-        builder.Property(entity => entity.StrategicAxeId)
-            .ValueGeneratedNever()
-            .HasConversion(new NullableStrategicAxeIdConverter());
 
         builder.Property(entity => entity.Title)
             .HasMaxLength(360);

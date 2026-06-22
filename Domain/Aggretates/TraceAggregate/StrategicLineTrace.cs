@@ -1,5 +1,4 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Enumerations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Values;
@@ -12,14 +11,13 @@ public class StrategicLineTrace : AbstractEntity<TraceId, long>, IPersistenceSig
 {
     private StrategicLineTrace() : base(new TraceId(default)) { }
 
-    public StrategicLineTrace(TraceId id, TraceKind kind, string author, DateTime createAt, string signature, string? beforeData = null, string? afterData = null, StrategicLineId? targetPrimaryId = null, StrategicAxeId? targetSecoundaryId = null, StrategicLine? target = null) : base(id)
+    public StrategicLineTrace(TraceId id, TraceKind kind, string author, DateTime createAt, string signature, string? beforeData = null, string? afterData = null, StrategicLineId? targetId = null, StrategicLine? target = null) : base(id)
     {
         Kind = kind;
         Author = author;
         CreatedAt = createAt;
         Target = target;
-        TargetPrimaryId = targetPrimaryId;
-        TargetSecoundaryId = targetSecoundaryId;
+        TargetId = targetId;
         BeforeData = beforeData;
         AfterData = afterData;
         Signature = signature;
@@ -33,9 +31,7 @@ public class StrategicLineTrace : AbstractEntity<TraceId, long>, IPersistenceSig
 
     public StrategicLine? Target { get; set; }
 
-    public StrategicLineId? TargetPrimaryId { get; set; }
-
-    public StrategicAxeId? TargetSecoundaryId { get; set; }
+    public StrategicLineId? TargetId { get; set; }
 
     public string? BeforeData { get; set; }
 
@@ -45,6 +41,6 @@ public class StrategicLineTrace : AbstractEntity<TraceId, long>, IPersistenceSig
 
     public virtual object GetSignableEntityModel()
     {
-        return new { Id, Kind, Author, CreatedAt, BeforeData, AfterData, TargetPrimaryId, TargetSecoundaryId };
+        return new { Id, Kind, Author, CreatedAt, BeforeData, AfterData, TargetId };
     }
 }

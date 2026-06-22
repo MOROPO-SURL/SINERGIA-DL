@@ -11,8 +11,8 @@ internal sealed class StrategicAxeRemoveCommandHandler :
     AbstractRemoveCommandHandler<StrategicAxe, StrategicAxeId, int, StrategicAxeRemoveCommand>,
     IRequestHandler<StrategicAxeRemoveCommand>
 {
-    public StrategicAxeRemoveCommandHandler(IStrategicAxeQueryRepositoryPort entityQueryRepository, IStrategicAxeCommandRepositoryPort entityCommandRepository, IMapper mapper)
-        : base(entityCommandRepository, entityQueryRepository, mapper)
+    public StrategicAxeRemoveCommandHandler(IStrategicAxeCommandRepositoryPort entityCommandRepository, IMapper mapper)
+        : base(entityCommandRepository, mapper)
     {
     }
 }

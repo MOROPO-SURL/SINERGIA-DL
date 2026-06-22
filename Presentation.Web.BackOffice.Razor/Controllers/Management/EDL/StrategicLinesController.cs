@@ -45,14 +45,14 @@ public sealed class StrategicLinesController : AbstractBaseController
     }
 
     [HttpGet]
-    [Route("{id}/axe/{axeId}")]
-    public async Task<IActionResult> DetailAsync(int id, int axeId)
+    [Route("{id}")]
+    public async Task<IActionResult> DetailAsync(Guid id)
     {
         if (Request.Headers.XRequestedWith != "XMLHttpRequest") return NotFound();
 
         try
         {
-            StrategicLineDetailQuery query = new(id, axeId);
+            StrategicLineDetailQuery query = new(id);
 
             StrategicLineDetailDto result = await mediator.Send(query);
 
@@ -67,11 +67,11 @@ public sealed class StrategicLinesController : AbstractBaseController
     [HttpPost]
     [Route("remove")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> RemoveAsync(int id, int axeId)
+    public async Task<IActionResult> RemoveAsync(Guid id)
     {
         try
         {
-            StrategicLineRemoveCommand command = new(id, axeId);
+            StrategicLineRemoveCommand command = new(id);
 
             await mediator.Send(command);
 
@@ -89,11 +89,11 @@ public sealed class StrategicLinesController : AbstractBaseController
     [HttpPost]
     [Route("archive")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ArchiveAsync(int id, int axeId)
+    public async Task<IActionResult> ArchiveAsync(Guid id)
     {
         try
         {
-            StrategicLineArchiveCommand command = new(id, axeId);
+            StrategicLineArchiveCommand command = new(id);
 
             await mediator.Send(command);
 
@@ -111,11 +111,11 @@ public sealed class StrategicLinesController : AbstractBaseController
     [HttpPost]
     [Route("unarchive")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> UnarchiveAsync(int id, int axeId)
+    public async Task<IActionResult> UnarchiveAsync(Guid id)
     {
         try
         {
-            StrategicLineUnarchiveCommand command = new(id, axeId);
+            StrategicLineUnarchiveCommand command = new(id);
 
             await mediator.Send(command);
 
@@ -133,11 +133,11 @@ public sealed class StrategicLinesController : AbstractBaseController
     [HttpPost]
     [Route("enable")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EnableAsync(int id, int axeId)
+    public async Task<IActionResult> EnableAsync(Guid id)
     {
         try
         {
-            StrategicLineEnableCommand command = new(id, axeId);
+            StrategicLineEnableCommand command = new(id);
 
             await mediator.Send(command);
 
@@ -155,11 +155,11 @@ public sealed class StrategicLinesController : AbstractBaseController
     [HttpPost]
     [Route("disable")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DisableAsync(int id, int axeId)
+    public async Task<IActionResult> DisableAsync(Guid id)
     {
         try
         {
-            StrategicLineDisableCommand command = new(id, axeId);
+            StrategicLineDisableCommand command = new(id);
 
             await mediator.Send(command);
 

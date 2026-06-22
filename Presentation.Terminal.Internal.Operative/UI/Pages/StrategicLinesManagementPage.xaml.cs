@@ -40,7 +40,7 @@ public partial class StrategicLinesManagementPage :
 
         StrategicLineQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
-        StrategicLineDetailDtoModel result = await apiClient.GetAsync(model.Id, model.StrategicAxe.Id);
+        StrategicLineDetailDtoModel result = await apiClient.GetAsync(model.Id);
 
         Dispatcher.Dispatch(() =>
         {

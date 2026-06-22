@@ -11,7 +11,8 @@ internal sealed class ObjectiveRemoveCommandHandler :
     AbstractRemoveCommandHandler<Objective, ObjectiveId, Guid, ObjectiveRemoveCommand>,
     IRequestHandler<ObjectiveRemoveCommand>
 {
-    public ObjectiveRemoveCommandHandler(IObjectiveCommandRepositoryPort entityCommandRepository, IObjectiveQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ObjectiveRemoveCommandHandler(IObjectiveCommandRepositoryPort entityCommandRepository, IMapper mapper) 
+        : base(entityCommandRepository, mapper)
     {
     }
 }

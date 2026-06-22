@@ -45,13 +45,13 @@ public sealed class StrategySummaryPageModel : BasePageModel
             {
                 List<DeepStrategicLineViewModel> deepLines = [];
 
-                StrategicLineDetailDtoModel[] axeLines = [.. lines.Where(item => item.StrategicAxe.Id == axe.Id)];
+                StrategicLineDetailDtoModel[] axeLines = [.. lines.Where(item => item.Axe.Id == axe.Id)];
 
                 foreach (StrategicLineDetailDtoModel line in axeLines)
                 {
                     List<DeepStrategicProgramViewModel> deepPrograms = [];
 
-                    StrategicProgramDetailDtoModel[] linePrograms = [.. programs.Where(item => item.StrategicLine.Id == line.Id && item.StrategicLine.StrategicAxe.Id == line.StrategicAxe.Id)];
+                    StrategicProgramDetailDtoModel[] linePrograms = [.. programs.Where(item => item.StrategicLine.Id == line.Id)];
 
                     foreach (StrategicProgramDetailDtoModel program in linePrograms)
                     {

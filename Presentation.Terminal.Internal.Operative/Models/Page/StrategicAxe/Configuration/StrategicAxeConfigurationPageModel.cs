@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
@@ -15,6 +16,7 @@ public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPa
 
     private int id = 1;
     private string? name;
+    private PersonBasicDtoModel? coordinator;
     private string? description;
 
     public StrategicAxeConfigurationPageModel(StrategicAxeDetailDtoModel? model, Action<StrategicAxeDetailDtoModel> successActionCallback) : base(model, successActionCallback, new StrategicAxeConfigurationValidator())
@@ -23,12 +25,15 @@ public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPa
 
         Id = model.Id;
         name = model.Name;
+        coordinator = model.Coordinator;
         description = model.Description;
     }
 
     public int Id { get => id; set => SetProperty(ref id, value); }
 
     public string? Name { get => name; set => SetProperty(ref name, value); }
+
+    public PersonBasicDtoModel? Coordinator { get => coordinator; set => SetProperty(ref coordinator, value); }
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
@@ -41,6 +46,7 @@ public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPa
                 Id,
                 true,
                 Name!,
+                Coordinator?.Id,
                 Description
             ));
     }
@@ -54,6 +60,7 @@ public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPa
                 Id!,
                 true,
                 Name!,
+                Coordinator?.Id,
                 Description
             ));
     }

@@ -60,9 +60,9 @@
                         Style="{StaticResource ValuePropertyLabelStyle}">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding Model.StrategicLine.StrategicAxe.Id}" />
-                                <Span Text="{Binding Model.StrategicLine.Id, StringFormat='.{0}'}" />
-                                <Span Text="{Binding Model.StrategicLine.Name, StringFormat='. {0}'}" />
+                                <Span Text="{Binding Model.StrategicLine.Axe.Id, StringFormat='{0}.'}" />
+                                <Span Text="{Binding Model.StrategicLine.Index, StringFormat='{0}.'}" />
+                                <Span Text="{Binding Model.StrategicLine.Name}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

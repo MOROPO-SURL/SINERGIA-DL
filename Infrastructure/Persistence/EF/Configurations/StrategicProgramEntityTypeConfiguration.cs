@@ -34,13 +34,9 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicProgramId(value));
 
-        builder.Property(entity => entity.StrategicLineId)
+        builder.Property(entity => entity.LineId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicLineId(value));
-
-        builder.Property(entity => entity.StrategicAxeId)
-            .ValueGeneratedNever()
-            .HasConversion(new NullableStrategicAxeIdConverter());
 
         builder.Property(entity => entity.Name)
             .HasMaxLength(360);
@@ -52,7 +48,7 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new PersonId(value));
 
-        builder.HasOne(entity => entity.StrategicLine).WithMany().HasForeignKey(entity => new { entity.StrategicLineId, entity.StrategicAxeId }).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(entity => entity.Line).WithMany().HasForeignKey(entity => entity.LineId).OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(entity => entity.Coordinator).WithMany().HasForeignKey(entity => entity.CoordinatorId).OnDelete(DeleteBehavior.Restrict);
 

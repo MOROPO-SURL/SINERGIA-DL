@@ -11,8 +11,8 @@ internal sealed class FeatureKindRemoveCommandHandler :
     AbstractRemoveCommandHandler<FeatureKind, FeatureKindId, Guid, FeatureKindRemoveCommand>,
     IRequestHandler<FeatureKindRemoveCommand>
 {
-    public FeatureKindRemoveCommandHandler(IFeatureKindQueryRepositoryPort entityQueryRepository, IFeatureKindCommandRepositoryPort entityCommandRepository, IMapper mapper)
-        : base(entityCommandRepository, entityQueryRepository, mapper)
+    public FeatureKindRemoveCommandHandler(IFeatureKindCommandRepositoryPort entityCommandRepository, IMapper mapper)
+        : base(entityCommandRepository, mapper)
     {
     }
 }

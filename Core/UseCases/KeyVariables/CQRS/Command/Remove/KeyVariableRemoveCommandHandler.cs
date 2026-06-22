@@ -11,8 +11,8 @@ internal sealed class KeyVariableRemoveCommandHandler :
     AbstractRemoveCommandHandler<KeyVariable, KeyVariableId, Guid, KeyVariableRemoveCommand>,
     IRequestHandler<KeyVariableRemoveCommand>
 {
-    public KeyVariableRemoveCommandHandler(IKeyVariableQueryRepositoryPort entityQueryRepository, IKeyVariableCommandRepositoryPort entityCommandRepository, IMapper mapper)
-        : base(entityCommandRepository, entityQueryRepository, mapper)
+    public KeyVariableRemoveCommandHandler(IKeyVariableCommandRepositoryPort entityCommandRepository, IMapper mapper)
+        : base(entityCommandRepository, mapper)
     {
     }
 }

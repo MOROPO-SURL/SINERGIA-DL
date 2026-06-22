@@ -11,8 +11,8 @@ internal sealed class TerritoryPotentialRemoveCommandHandler :
     AbstractRemoveCommandHandler<TerritoryPotential, TerritoryPotentialId, Guid, TerritoryPotentialRemoveCommand>,
     IRequestHandler<TerritoryPotentialRemoveCommand>
 {
-    public TerritoryPotentialRemoveCommandHandler(ITerritoryPotentialQueryRepositoryPort entityQueryRepository, ITerritoryPotentialCommandRepositoryPort entityCommandRepository, IMapper mapper)
-        : base(entityCommandRepository, entityQueryRepository, mapper)
+    public TerritoryPotentialRemoveCommandHandler(ITerritoryPotentialCommandRepositoryPort entityCommandRepository, IMapper mapper)
+        : base(entityCommandRepository, mapper)
     {
     }
 }

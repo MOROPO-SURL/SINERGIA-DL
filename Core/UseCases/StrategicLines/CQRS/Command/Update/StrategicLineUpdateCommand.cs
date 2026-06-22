@@ -1,3 +1,5 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Update;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
 
-public record StrategicLineUpdateCommand(int Id, string Name, int Priority, bool IsEnabled, int? AxeId = null, string? Description = null) : MediatR.IRequest<DTOs.StrategicLineDetailDto>;
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Update;
+
+public record StrategicLineUpdateCommand(Guid Id, int Index, string Name, int Priority, bool IsEnabled, Guid CoordinatorId, int? AxeId = null, string? Description = null) : IUpdateCommand<Guid, DTOs.StrategicLineDetailDto>;

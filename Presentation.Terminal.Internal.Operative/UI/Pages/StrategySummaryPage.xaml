@@ -99,8 +99,8 @@
                                                                 FontSize="Medium">
                                                                 <Label.FormattedText>
                                                                     <FormattedString>
-                                                                        <Span Text="{Binding Line.StrategicAxe.Id, StringFormat='{0}.'}" />
-                                                                        <Span Text="{Binding Line.Id, StringFormat='{0}.'}" />
+                                                                        <Span Text="{Binding Line.Axe.Id, StringFormat='{0}.'}" />
+                                                                        <Span Text="{Binding Line.Index, StringFormat='{0}.'}" />
                                                                     </FormattedString>
                                                                 </Label.FormattedText>
                                                             </Label>

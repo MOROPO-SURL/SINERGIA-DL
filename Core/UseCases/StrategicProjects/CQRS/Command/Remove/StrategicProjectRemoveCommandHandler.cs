@@ -11,8 +11,8 @@ internal sealed class StrategicProjectRemoveCommandHandler :
     AbstractRemoveCommandHandler<StrategicProject, StrategicProjectId, Guid, StrategicProjectRemoveCommand>,
     IRequestHandler<StrategicProjectRemoveCommand>
 {
-    public StrategicProjectRemoveCommandHandler(IStrategicProjectQueryRepositoryPort entityQueryRepository, IStrategicProjectCommandRepositoryPort entityCommandRepository, IMapper mapper)
-        : base(entityCommandRepository, entityQueryRepository, mapper)
+    public StrategicProjectRemoveCommandHandler(IStrategicProjectCommandRepositoryPort entityCommandRepository, IMapper mapper)
+        : base(entityCommandRepository, mapper)
     {
     }
 }

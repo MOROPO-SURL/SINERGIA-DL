@@ -43,7 +43,7 @@ public class StrategicAxesController: ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<StrategicAxeBasicDto> result = await mediator.Send(new StrategicAxePaginateQuery(sheet, limit));
+            PaginateQueryResultModel<StrategicAxeBasicDto> result = await mediator.Send(new StrategicAxePaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
             return Ok(mapper.Map<PaginateResultModel<StrategicAxeBasicDtoModel>>(result));
         }
@@ -61,7 +61,7 @@ public class StrategicAxesController: ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<StrategicAxeBasicDto> result = await mediator.Send(new StrategicAxePaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            PaginateQueryResultModel<StrategicAxeBasicDto> result = await mediator.Send(new StrategicAxePaginateQuery(sheet, limit, entity => !entity.IsArchived && EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<StrategicAxeBasicDtoModel>>(result));
         }

@@ -13,13 +13,14 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
 public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationPageModel<StrategicLineDetailDtoModel, StrategicLineDetailDtoModel>
 {
     public static string NameValidableProperty => nameof(Name);
-    public static string AxeValidableProperty => nameof(Axe);
     public static string CoordinatorValidableProperty => nameof(Coordinator);
+    public static string ObjectiveValidableProperty => nameof(Objective);
     public static string DescriptionValidableProperty => nameof(Description);
 
-    private int id = 1;
-    private StrategicAxeBasicDtoModel axe = null!;
+    private int index = 1;
+    private StrategicAxeBasicDtoModel? axe;
     private string name = null!;
+    private string objective = null!;
     private PersonBasicDtoModel coordinator = null!;
     private string? description;
 
@@ -30,17 +31,23 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
         if (model is null) return;
 
         Id = model.Id;
-        axe = availableAxes.First(item => item == model.StrategicAxe);
+        Index = model.Index;
+        axe = availableAxes.FirstOrDefault(item => item == model.Axe);
         name = model.Name;
+        objective = model.Objective;
         coordinator = model.Coordinator;
         description = model.Description;
     }
 
-    public int Id { get => id; set => SetProperty(ref id, value); }
+    public Guid? Id { get; set; }
 
-    public StrategicAxeBasicDtoModel Axe { get => axe; set => SetProperty(ref axe, value); }
+    public int Index { get => index; set => SetProperty(ref index, value); }
+
+    public StrategicAxeBasicDtoModel? Axe { get => axe; set => SetProperty(ref axe, value); }
 
     public string Name { get => name; set => SetProperty(ref name, value); }
+
+    public string Objective { get => objective; set => SetProperty(ref objective, value); }
 
     public PersonBasicDtoModel Coordinator { get => coordinator; set => SetProperty(ref coordinator, value); }
 
@@ -54,11 +61,12 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
         return apiClient.CreateAsync(new StrategicLineCreateRequestModel
             (
-                Id,
-                axe.Id,
+                Index,
                 true,
                 Name,
                 Coordinator.Id,
+                Objective,
+                axe?.Id,
                 Description
             ));
     }
@@ -69,11 +77,13 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
         return apiClient.UpdateAsync(new StrategicLineUpdateRequestModel
             (
-                Id!,
-                axe.Id,
+                Id!.Value,
+                Index,
                 true,
                 Name,
                 Coordinator.Id,
+                Objective,
+                axe?.Id,
                 Description
             ));
     }

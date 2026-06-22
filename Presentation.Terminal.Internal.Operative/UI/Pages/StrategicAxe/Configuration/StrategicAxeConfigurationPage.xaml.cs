@@ -1,4 +1,6 @@
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicAxe.Configuration;
 
@@ -12,4 +14,16 @@ public partial class StrategicAxeConfigurationPage : BaseConfigurationEntityPage
 	}
 
     protected override string EntityTypeName => "Eje estratégico";
+
+    private void CoordinatorPickButton_Clicked(object sender, EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new NavigationPage(new Person.PersonPickPage(CoordinatorPicked_Callback)));
+    }
+
+    private void CoordinatorPicked_Callback(PersonBasicDtoModel model)
+    {
+        ConcreteBindingContext.Coordinator = model;
+
+        this.NavigationPopModalPageAsync();
+    }
 }

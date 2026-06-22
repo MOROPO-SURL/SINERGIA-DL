@@ -36,7 +36,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
 
         public const string CANCEL_ACTION = "Cancelar";
 
-        public void HandleException(Exception? exception, Action<Exception>? callbackAction = null)
+        public void HandleException(Exception? exception, Action<Exception?>? callbackAction = null)
         {
             if (exception == null)
             {
@@ -45,26 +45,25 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
                 return;
             }
 
-            /*
-            if (exception.InnerException is Framework.Guama.Core.Presentation.API.Connect.UnspectedHttpStatusException)
+            if (exception.InnerException is HttpRequestException httpRequestException)
             {
-                var concreteException = exception.InnerException as Framework.Guama.Core.Presentation.API.Connect.UnspectedHttpStatusException;
-
-                if (concreteException.HttpStatusCode == System.Net.HttpStatusCode.UpgradeRequired)
+                if (httpRequestException != null)
                 {
-                    page.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, UPGRADE_REQUIRED_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
-                }
-                else
-                {
+                    if (httpRequestException.StatusCode == System.Net.HttpStatusCode.UpgradeRequired)
+                    {
+                        Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, UPGRADE_REQUIRED_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+                    }
+                    else
+                    {
 #if DEBUG
-                    page.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, string.Format("Respuesta del proveedor del sistema no esperada.{1}{1}Código del error: {2}{1}{1}{0}", SUPPORT_ORIENTATION_MESSAGE, System.Environment.NewLine, concreteException.HttpStatusCode), OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+                        Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, string.Format("Respuesta del proveedor del sistema no esperada.{1}{1}Código del error: {2}{1}{1}{0}", SUPPORT_ORIENTATION_MESSAGE, System.Environment.NewLine, httpRequestException.StatusCode), OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
 #else
-                    page.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, UNSPECTED_API_RESPONSE_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+                        Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, UNSPECTED_API_RESPONSE_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
 #endif
+                    }
                 }
             }
-            else*/
-            if (exception.InnerException is HttpRequestException || exception.InnerException?.InnerException is System.Net.Sockets.SocketException)
+            else if (exception.InnerException?.InnerException is System.Net.Sockets.SocketException)
             {
                 Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, NETWORK_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
             }

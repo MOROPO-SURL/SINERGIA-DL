@@ -43,7 +43,7 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<StrategicProjectBasicDto> result = await mediator.Send(new StrategicProjectPaginateQuery(sheet, limit));
+            PaginateQueryResultModel<StrategicProjectBasicDto> result = await mediator.Send(new StrategicProjectPaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
             return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
         }
@@ -61,7 +61,7 @@ public class StrategicProjectsController : ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<StrategicProjectBasicDto> result = await mediator.Send(new StrategicProjectPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+            PaginateQueryResultModel<StrategicProjectBasicDto> result = await mediator.Send(new StrategicProjectPaginateQuery(sheet, limit, entity => !entity.IsArchived && EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<StrategicProjectBasicDtoModel>>(result));
         }

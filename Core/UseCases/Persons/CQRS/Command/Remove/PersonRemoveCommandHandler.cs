@@ -11,7 +11,8 @@ internal sealed class PersonRemoveCommandHandler :
     AbstractRemoveCommandHandler<Person, PersonId, Guid, PersonRemoveCommand>,
     IRequestHandler<PersonRemoveCommand>
 {
-    public PersonRemoveCommandHandler(IPersonCommandRepositoryPort entityCommandRepository, IPersonQueryRepositoryPort entityQueryRepository, IMapper mapper) : base(entityCommandRepository, entityQueryRepository, mapper)
+    public PersonRemoveCommandHandler(IPersonCommandRepositoryPort entityCommandRepository, IMapper mapper) 
+        : base(entityCommandRepository, mapper)
     {
     }
 }

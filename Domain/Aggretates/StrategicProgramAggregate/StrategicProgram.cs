@@ -1,6 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
@@ -21,10 +20,9 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
 
     private StrategicProgram() : base(new StrategicProgramId(default)) { }
 
-    public StrategicProgram(StrategicProgramId id, StrategicLineId strategicLineId, StrategicAxeId strategicAxesId, bool isEnabled, string name, bool isArchived, int priority, PersonId coordinatorId, ProgramObjective[] objetives, ProgramAction[] actions, ProgramProjectIdea[] projectIdeas, ProgramImpact[] impacts, StrategicProgramOrganizationBridge[] organizationBridges, Person? coordinator = null, string? description = null) : base(id)
+    public StrategicProgram(StrategicProgramId id, StrategicLineId lineId, bool isEnabled, string name, bool isArchived, int priority, PersonId coordinatorId, ProgramObjective[] objetives, ProgramAction[] actions, ProgramProjectIdea[] projectIdeas, ProgramImpact[] impacts, StrategicProgramOrganizationBridge[] organizationBridges, StrategicLine? line = null, Person? coordinator = null, string? description = null) : base(id)
     {
-        StrategicLineId = strategicLineId;
-        StrategicAxeId = strategicAxesId;
+        LineId = lineId;
         IsEnabled = isEnabled;
         Name = name;
         IsArchived = isArchived;
@@ -32,6 +30,7 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
         Priority = priority;
         CoordinatorId = coordinatorId;
         Coordinator = coordinator;
+        Line = line;
 
         this.objetives = [.. objetives];
         this.actions = [.. actions];
@@ -40,9 +39,8 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
         this.organizationBridges = [.. organizationBridges];
     }
 
-    public StrategicAxeId? StrategicAxeId { get; set; }
-    public StrategicLineId StrategicLineId { get; set; }
-    public StrategicLine? StrategicLine { get; set; }
+    public StrategicLineId LineId { get; set; }
+    public StrategicLine? Line { get; set; }
 
     public bool IsEnabled { get; set; }
 

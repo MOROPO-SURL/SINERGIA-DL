@@ -4,13 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicAxe.Detail"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicAxe.Detail.StrategicAxeDetailPage"
     x:TypeArguments="interop_dto_models:StrategicAxeDetailDtoModel,local_detail_page_models:StrategicAxeDetailPageModel"
     x:DataType="local_detail_page_models:StrategicAxeDetailPageModel"
     Shell.TabBarIsVisible="False"
     Title="Detalles de Eje estratégico">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+            
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Modificar"
@@ -37,7 +49,7 @@
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
                 <Grid 
-                    Style="{StaticResource FormFluentChildStackLayoutStyle}"
+                    Style="{StaticResource FormFluentChildGridStyle}"
                     ColumnSpacing="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -53,7 +65,53 @@
                         FontSize="Medium"
                         Text="{Binding Model.Name}" />
                 </Grid>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Coordinador" />
+                        <Frame IsVisible="{Binding Model.Coordinator, Converter={StaticResource IsNotNullConverter}}">
+                            <Grid ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Border 
+                                    Grid.Column="0"
+                                    StrokeThickness="4"
+                                    StrokeLineJoin="Bevel">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="36" />
+                                    </Border.StrokeShape>
+                                    <Image
+                                        WidthRequest="72" HeightRequest="72"
+                                        Source="{Binding Model.Coordinator.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                </Border>
+                                <VerticalStackLayout 
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Spacing="8">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        LineBreakMode="TailTruncation"
+                                        ToolTipProperties.Text="{Binding Model.Coordinator.Name}"
+                                        Text="{Binding Model.Coordinator.Name}" />
+                                    <Label
+                                        MaxLines="1"
+                                        LineBreakMode="TailTruncation"
+                                        ToolTipProperties.Text="{Binding Model.Coordinator.LastName}"
+                                        Text="{Binding Model.Coordinator.LastName}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                        <Label
+                            IsVisible="{Binding Model.Coordinator, Converter={StaticResource IsNullConverter}}"
+                            Text="---" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
                         Text="Descripción" />

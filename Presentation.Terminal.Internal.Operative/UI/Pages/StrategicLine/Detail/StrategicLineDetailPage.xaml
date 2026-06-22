@@ -45,7 +45,7 @@
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
                 <Grid 
-                    Style="{StaticResource FormFluentChildStackLayoutStyle}"
+                    Style="{StaticResource FormFluentChildGridStyle}"
                     ColumnSpacing="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -56,19 +56,19 @@
                         Grid.Column="0"
                         FontSize="Medium"
                         VerticalOptions="Start"
-                        Text="{Binding Model.StrategicAxe.Id, StringFormat='{0}.'}" />
+                        Text="{Binding Model.Axe.Id, StringFormat='{0}.'}" />
                     <Label
                         Grid.Column="1"
                         VerticalOptions="Start"
                         FontSize="Medium"
-                        Text="{Binding Model.Id, StringFormat='{0}.'}" />
+                        Text="{Binding Model.Index, StringFormat='{0}.'}" />
                     <Label
                         Grid.Column="2"
                         Margin="4,0,0,0"
                         FontSize="Medium"
                         Text="{Binding Model.Name}" />
                 </Grid>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
                         Text="Eje estratégico" />
@@ -76,8 +76,8 @@
                         Style="{StaticResource ValuePropertyLabelStyle}">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding Model.StrategicAxe.Id}" />
-                                <Span Text="{Binding Model.StrategicAxe.Name, StringFormat='. {0}'}" />
+                                <Span Text="{Binding Model.Axe.Id, FallbackValue='---'}" />
+                                <Span Text="{Binding Model.Axe.Name, StringFormat='. {0}'}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -125,7 +125,15 @@
                         </Frame>
                     </VerticalStackLayout>
                 </FlexLayout>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label 
+                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                        Text="Objetivo" />
+                    <Label
+                        Style="{StaticResource ValuePropertyLabelStyle}"
+                        Text="{Binding Model.Objective}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
                         Text="Descripción" />

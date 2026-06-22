@@ -11,8 +11,8 @@ internal sealed class TerritorialBarrierRemoveCommandHandler :
     AbstractRemoveCommandHandler<TerritorialBarrier, TerritorialBarrierId, Guid, TerritorialBarrierRemoveCommand>,
     IRequestHandler<TerritorialBarrierRemoveCommand>
 {
-    public TerritorialBarrierRemoveCommandHandler(ITerritorialBarrierQueryRepositoryPort entityQueryRepository, ITerritorialBarrierCommandRepositoryPort entityCommandRepository, IMapper mapper)
-        : base(entityCommandRepository, entityQueryRepository, mapper)
+    public TerritorialBarrierRemoveCommandHandler(ITerritorialBarrierCommandRepositoryPort entityCommandRepository, IMapper mapper)
+        : base(entityCommandRepository, mapper)
     {
     }
 }

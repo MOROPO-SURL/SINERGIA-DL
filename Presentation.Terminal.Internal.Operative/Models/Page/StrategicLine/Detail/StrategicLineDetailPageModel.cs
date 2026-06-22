@@ -15,6 +15,6 @@ public sealed class StrategicLineDetailPageModel : AbstractDetailEntityPageModel
     {
         StrategicLineCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
-        await apiClient.ArchiveAsync(model.Id, model.StrategicAxe.Id);
+        await apiClient.ArchiveAsync(model.Id);
     }
 }

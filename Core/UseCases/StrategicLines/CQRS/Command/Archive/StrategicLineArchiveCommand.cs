@@ -2,4 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Archive;
 
-public record StrategicLineArchiveCommand(int Id, int AxeId) : MediatR.IRequest;
+public record StrategicLineArchiveCommand(Guid Id) : IArchiveCommand<Guid>;

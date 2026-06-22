@@ -1,5 +1,4 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
@@ -9,18 +8,15 @@ public class StrategicLineAction : AbstractEntity<StrategicLineActionId, Guid>, 
 {
     private StrategicLineAction() : base(new StrategicLineActionId(default)) { }
 
-    public StrategicLineAction(StrategicLineActionId id, StrategicLineId strategicLineId, string title, int priority, StrategicAxeId? strategicAxeId = null, string? description = null) : base(id)
+    public StrategicLineAction(StrategicLineActionId id, StrategicLineId strategicLineId, string title, int priority, string? description = null) : base(id)
     {
         StrategicLineId = strategicLineId;
-        StrategicAxeId = strategicAxeId;
         Title = title;
         Priority = priority;
         Description = description;
     }
 
     public StrategicLineId StrategicLineId { get; set; }
-
-    public StrategicAxeId? StrategicAxeId { get; set; }
 
     public string Title { get; set; } = null!;
 

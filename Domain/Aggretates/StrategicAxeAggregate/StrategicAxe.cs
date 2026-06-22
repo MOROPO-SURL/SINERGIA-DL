@@ -21,7 +21,7 @@ public class StrategicAxe :
         Name = name;
         Description = description;
         IsEnabled = isEnabled;
-        CoordinadorId = coordinatorId;
+        CoordinatorId = coordinatorId;
         Coordinator = coordinator;
     }
 
@@ -32,7 +32,7 @@ public class StrategicAxe :
     public bool IsEnabled { get; set; }
 
     public Person? Coordinator { get; set; }
-    public PersonId? CoordinadorId { get; set; }
+    public PersonId? CoordinatorId { get; set; }
 
     public string? Description { get; set; }
 }

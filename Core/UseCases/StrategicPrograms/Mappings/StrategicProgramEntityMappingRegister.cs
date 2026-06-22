@@ -33,7 +33,6 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
             .MapWith(src => new(
                 new StrategicProgramId(src.Id),
                 new Domain.Aggretates.StrategicLineAggregate.Values.StrategicLineId(src.LineId),
-                new Domain.Aggretates.StrategicAxeAggregate.Values.StrategicAxeId(src.AxeId),
                 src.IsEnabled,
                 src.Name,
                 false,
@@ -41,9 +40,10 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
                 new Domain.Aggretates.PersonAggregate.Values.PersonId(src.CoordinatorId),
                 src.Objectives.Select(item => new ProgramObjective(new ProgramObjectiveId(item.Id), new StrategicProgramId(src.Id), item.IsEnabled, item.Name, Array.Empty<ProgramObjectiveStrategicProjectBridge>(), item.Description)).ToArray(),
                 src.Actions.Select(item => new ProgramAction(new ProgramActionId(item.Id), new StrategicProgramId(src.Id), item.Title, item.Priority, Array.Empty<ProgramActionInterestAreaBridge>(), item.Description)).ToArray(),
-                new ProgramProjectIdea[] { },
-                new ProgramImpact[] { },
-                new Domain.Bridges.StrategicProgramOrganizationBridge[] { },
+                Array.Empty<ProgramProjectIdea>(),
+                Array.Empty<ProgramImpact>(),
+                Array.Empty<Domain.Bridges.StrategicProgramOrganizationBridge>(),
+                null,
                 null,
                 src.Description
             ));

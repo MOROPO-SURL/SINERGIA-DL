@@ -4,7 +4,16 @@
 
 <dl class="mb-0">
     <dt>No. y Nombre</dt>
-    <dd><span>@Model.AxeId</span><span>.</span><span>@Model.Id</span><span>. </span><span>@Model.Name</span></dd>
+    <dd>
+        @if (Model.AxeId == null)
+        {
+            <span>@Model.Id</span><span>. </span><span>@Model.Name</span>
+        }
+        else
+        {
+            <span>@Model.AxeId</span><span>.</span><span>@Model.Id</span><span>. </span><span>@Model.Name</span>
+        }
+    </dd>
     <dt>Descripción</dt>
     @if (!string.IsNullOrEmpty(Model.Description))
     {

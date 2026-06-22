@@ -1,14 +1,9 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.Ports.Repository;
 
-public interface IStrategicLineCommandRepositoryPort
+public interface IStrategicLineCommandRepositoryPort : IEntityCommandRepositoryPort<StrategicLine, StrategicLineId, Guid>
 {
-    void TrackChanges(StrategicLine entity);
-
-    Task AddAsync(StrategicLine entity, bool commit = true);
-
-    Task UpdateAsync(StrategicLine entity, bool commit = true);
-
-    Task DeleteAsync(StrategicLine entity, bool commit = true);
 }

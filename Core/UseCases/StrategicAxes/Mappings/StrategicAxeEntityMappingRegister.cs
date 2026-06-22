@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.CQRS.Query.Detail;
@@ -21,6 +22,7 @@ internal sealed class StrategicAxeEntityMappingRegister : IRegister
 
         config.NewConfig<StrategicAxe, StrategicAxeDetailDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
+            .Map(dest => dest.Coordinator, src => src.Coordinator == null ? null : src.Coordinator.Adapt<PersonBasicDto>())
             .Map(dest => dest, src => src);
 
         config.NewConfig<StrategicAxeDetailQuery, StrategicAxeId>()

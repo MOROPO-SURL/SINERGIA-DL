@@ -8,6 +8,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Objectives.Map
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Organizations.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.Persons.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.PublicPolicies.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.StrategicLines.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.UnitMeasurements.Mappings;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Extensions;
@@ -28,7 +29,8 @@ internal static class ServiceProviderExtensions
             new MacroprogramMappingRegister(),
             new InterestAreaMappingRegister(),
             new OrganizationMappingRegister(),
-            new PersonMappingRegister()
+            new PersonMappingRegister(),
+            new StrategicLineMappingRegister()
         );
 
         return self;

@@ -154,17 +154,30 @@
                                 <td style="vertical-align: middle;" title="No. y Nombre">
                                     @if (item.IsArchived)
                                     {
-                                        <span class="display-archived"><span>@item.AxeId</span><stap>.</stap><span>@item.Id</span><stap>. </stap><span>@item.Name</span></span>
+                                        if (item.AxeId == null)
+                                        {
+                                            <span class="display-archived"><span>@item.Index</span><stap>. </stap><span>@item.Name</span></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="display-archived"><span>@item.AxeId</span><stap>.</stap><span>@item.Index</span><stap>. </stap><span>@item.Name</span></span>
+                                        }
                                     }
                                     else
                                     {
-                                        <span><span>@item.AxeId</span><stap>.</stap><span>@item.Id</span><stap>. </stap><span>@item.Name</span></span>
+                                        if (item.AxeId == null)
+                                        {
+                                            <span>@item.Index</span><stap>. </stap><span>@item.Name</span>  
+                                        }
+                                        else
+                                        {
+                                            <span><span>@item.AxeId</span><stap>.</stap><span>@item.Index</span><stap>. </stap><span>@item.Name</span></span>
+                                        }
                                     }
                                 </td>
                                 <td style="vertical-align: middle; text-align: center;" title="Habilitada?">
                                     <form method="post" asp-action="@Html.Raw(item.IsEnabled ? "disable" : "enable")">
                                         @Html.Hidden("id", item.Id)
-                                        @Html.Hidden("axeId", item.AxeId)
 
                                         <button type="submit" class="btn btn-link">
                                             @if (item.IsEnabled)
@@ -184,7 +197,6 @@
                                     }
                                     <form method="post" asp-action="@archiveAction">
                                         @Html.Hidden("id", item.Id)
-                                        @Html.Hidden("axeId", item.AxeId)
 
                                         <div class="btn-group btn-group-sm">
                                             <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#descrip-@item.Id" asp-action="detail" asp-route-key="@item.Id">
@@ -231,7 +243,6 @@
                                             <div class="modal-content">
                                                 <form method="post" class="modal-content" asp-action="remove">
                                                     @Html.Hidden("id", item.Id)
-                                                    @Html.Hidden("axeId", item.AxeId)
 
                                                     <div class="modal-header">
                                                         <h5 class="modal-title font-weight-bold text-primary" id="delete-@item.Id-lable">Confirmar</h5>

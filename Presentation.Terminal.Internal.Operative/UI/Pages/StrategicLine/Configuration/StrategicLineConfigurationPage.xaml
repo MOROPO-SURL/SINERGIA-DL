@@ -66,41 +66,34 @@
                             Grid.Row="1"
                             BackgroundColor="Transparent"
                             IsReadOnly="True"
-                            Text="{Binding Id}" />
+                            Text="{Binding Index}" />
                         <Stepper
                             IsEnabled="{Binding OnEditionMode, Converter={StaticResource InvertedBoolConverter}}"
                             Grid.Row="1"
                             Margin="0,0,6,0"
                             HorizontalOptions="End" VerticalOptions="Center"
                             Minimum="1"
-                            Value="{Binding Id}" />
+                            Value="{Binding Index}" />
                     </Grid>
                     <VerticalStackLayout 
                         HorizontalOptions="FillAndExpand"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Eje estratégico" />
-                        <Picker 
-                            ItemsSource="{Binding AvailableAxes}"
-                            SelectedItem="{Binding Axe}" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                        <Entry Text="{Binding Name}" />
                         <Label>
                             <Label.Behaviors>
                                 <common_ui_behaviors:ValidationMessageLabelBehavior 
-                                    TargetValidationPropertyName="{Static local_configuration_page_models:StrategicLineConfigurationPageModel.AxeValidableProperty}"
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:StrategicLineConfigurationPageModel.NameValidableProperty}"
                                     InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
                             </Label.Behaviors>
                         </Label>
                     </VerticalStackLayout>
                 </StackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                    <Entry Text="{Binding Name}" />
-                    <Label>
-                        <Label.Behaviors>
-                            <common_ui_behaviors:ValidationMessageLabelBehavior 
-                                TargetValidationPropertyName="{Static local_configuration_page_models:StrategicLineConfigurationPageModel.NameValidableProperty}"
-                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
-                        </Label.Behaviors>
-                    </Label>
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Eje estratégico (opcional)" />
+                    <Picker 
+                        ItemsSource="{Binding AvailableAxes}"
+                        SelectedItem="{Binding Axe}" />
                 </VerticalStackLayout>
                 <FlexLayout Wrap="Wrap">
                     <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
@@ -159,6 +152,17 @@
                         </Label>
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Objetivo" />
+                    <Editor Text="{Binding Objective}" HeightRequest="100" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:StrategicLineConfigurationPageModel.ObjectiveValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="200" />

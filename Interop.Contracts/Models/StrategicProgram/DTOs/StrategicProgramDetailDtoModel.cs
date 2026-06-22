@@ -3,4 +3,4 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTO
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;
 
-public record StrategicProgramDetailDtoModel(Guid Id, string Name, int Priority, bool IsEnable, StrategicLineBasicDtoModel StrategicLine, PersonBasicDtoModel Coordinator, string? Description = null);
+public record StrategicProgramDetailDtoModel(Guid Id, string Name, int Priority, bool IsEnable, StrategicLineBasicDtoModel StrategicLine, PersonBasicDtoModel Coordinator, string Objective, string? Description = null);

@@ -17,7 +17,7 @@ internal sealed class StrategicProgramQueryRepositoryPortAdapter : AbstractEntit
     {
         return base.GetQueryableDbSet()
             .AsSplitQuery()
-            .Include(entity => entity.StrategicLine).ThenInclude(entity => entity!.StrategicAxe)
+            .Include(entity => entity.Line).ThenInclude(entity => entity!.Axe)
             .Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image);
     }
 }

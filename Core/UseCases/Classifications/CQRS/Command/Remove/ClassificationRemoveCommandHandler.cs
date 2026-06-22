@@ -11,8 +11,8 @@ internal sealed class ClassificationRemoveCommandHandler :
     AbstractRemoveCommandHandler<Classification, ClassificationId, Guid, ClassificationRemoveCommand>,
     IRequestHandler<ClassificationRemoveCommand>
 {
-    public ClassificationRemoveCommandHandler(IClassificationQueryRepositoryPort entityQueryRepository, IClassificationCommandRepositoryPort entityCommandRepository, IMapper mapper)
-        : base(entityCommandRepository, entityQueryRepository, mapper)
+    public ClassificationRemoveCommandHandler(IClassificationCommandRepositoryPort entityCommandRepository, IMapper mapper)
+        : base(entityCommandRepository, mapper)
     {
     }
 }
