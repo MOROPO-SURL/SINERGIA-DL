@@ -1,0 +1,32 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.StrategicLineTraces
+
+@model StrategicLineTraceDetailViewModel
+
+<dl class="mb-0">
+    <dt>No.</dt>
+    <dd>@Model.Id</dd>
+    <dt>Author</dt>
+    <dd>@Model.Author</dd>
+    <dt>Acción</dt>
+    <dd>@Model.Kind</dd>
+    <dt>Fecha y hora</dt>
+    <dd>@Model.CreatedAt</dd>
+    <dt>Datos previos</dt>
+    @if (!string.IsNullOrEmpty(Model.BeforeData))
+    {
+        <dd>@Model.BeforeData</dd>
+    }
+    else
+    {
+        <dd>---</dd>
+    }
+    <dt>Datos posteriores</dt>
+    @if (!string.IsNullOrEmpty(Model.AfterData))
+    {
+        <dd class="mb-0">@Model.AfterData</dd>
+    }
+    else
+    {
+        <dd class="mb-0">---</dd>
+    }
+</dl>
