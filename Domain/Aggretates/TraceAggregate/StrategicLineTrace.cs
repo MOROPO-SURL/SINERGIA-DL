@@ -1,46 +1,17 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Enumerations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate;
 
-public class StrategicLineTrace : AbstractEntity<TraceId, long>, IPersistenceSignable
+public class StrategicLineTrace : AbstractTrace<StrategicLine, StrategicLineId, Guid>, IPersistenceSignable
 {
-    private StrategicLineTrace() : base(new TraceId(default)) { }
+    private StrategicLineTrace() { }
 
-    public StrategicLineTrace(TraceId id, TraceKind kind, string author, DateTime createAt, string signature, string? beforeData = null, string? afterData = null, StrategicLineId? targetId = null, StrategicLine? target = null) : base(id)
+    public StrategicLineTrace(TraceId id, TraceKind kind, string author, DateTime createAt, string signature, string? beforeData = null, string? afterData = null, StrategicLineId? targetId = null, StrategicLine? target = null) : base(id, kind, author, createAt, signature, beforeData, afterData, targetId, target)
     {
-        Kind = kind;
-        Author = author;
-        CreatedAt = createAt;
-        Target = target;
-        TargetId = targetId;
-        BeforeData = beforeData;
-        AfterData = afterData;
-        Signature = signature;
-    }
-
-    public TraceKind Kind { get; set; }
-
-    public string Author { get; set; } = null!;
-
-    public DateTime CreatedAt { get; private set; }
-
-    public StrategicLine? Target { get; set; }
-
-    public StrategicLineId? TargetId { get; set; }
-
-    public string? BeforeData { get; set; }
-
-    public string? AfterData { get; set; }
-
-    public string Signature { get; set; } = null!;
-
-    public virtual object GetSignableEntityModel()
-    {
-        return new { Id, Kind, Author, CreatedAt, BeforeData, AfterData, TargetId };
     }
 }

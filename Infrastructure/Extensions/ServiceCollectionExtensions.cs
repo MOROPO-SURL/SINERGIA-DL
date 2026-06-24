@@ -174,6 +174,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISaveChangesInterceptor, RoleChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, PersonChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, OrganizationChangeDomainTracingInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, StrategicLineChangeDomainTracingInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, FeatureChangeDomainTracingInterceptor>();
 
         return services;
     }
