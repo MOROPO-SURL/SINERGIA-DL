@@ -4,6 +4,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.C
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.Values;
@@ -22,6 +23,10 @@ internal sealed class OrganizationEntityMappingRegister : IRegister
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest.Image, src => src.Image.Adapt<ImageBasicDto>())
             .Map(dest => dest, src => src);
+
+        //config.NewConfig<OrganizationBasicDto, Organization>()
+        //    .Map(dest => dest.ImageId, src => GetNullableImageId(src.Image))
+        //    .Map(dest => dest, src => src);
 
         config.NewConfig<Organization, OrganizationDetailDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
@@ -101,4 +106,9 @@ internal sealed class OrganizationEntityMappingRegister : IRegister
                 }
             });
     }
+
+    //private static ImageId? GetNullableImageId(ImageBasicDto? src)
+    //{
+    //    return src == null ? null : new ImageId(src.Id);
+    //}
 }

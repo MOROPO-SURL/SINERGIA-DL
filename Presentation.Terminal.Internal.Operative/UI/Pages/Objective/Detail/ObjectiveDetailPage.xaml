@@ -53,7 +53,7 @@
                         FontSize="Medium"
                         Text="{Binding Model.Title}" />
                 </Grid>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
                         Text="Descripción" />
@@ -61,7 +61,7 @@
                         Style="{StaticResource ValuePropertyLabelStyle}"
                         Text="{Binding Model.Description, TargetNullValue='---'}" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Retos" />
                     <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
                     <CollectionView ItemsSource="{Binding Model.Challanges}">
@@ -101,7 +101,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </VerticalStackLayout>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Proyecciones" />
                     <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
                     <CollectionView ItemsSource="{Binding Model.Projections}">
@@ -141,7 +141,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </VerticalStackLayout>
-                <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Acciones" />
                     <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
                     <CollectionView ItemsSource="{Binding Model.Actions}">

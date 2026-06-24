@@ -2386,6 +2386,32 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.Navigation("Linked");
                         });
 
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges.StrategicLinePublicPolicyBridge", "PublicPolicyBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("strategicline_publicpolicy_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.PublicPolicy", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities.StrategicLineAction", "StrategicActions", b1 =>
                         {
                             b1.Property<Guid>("Id")
@@ -2416,11 +2442,44 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                 .HasForeignKey("StrategicLineId");
                         });
 
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities.StrategicLineSpecificObjective", "SpecificObjectives", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("StrategicLineId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Content")
+                                .IsRequired()
+                                .HasMaxLength(2048)
+                                .HasColumnType("character varying(2048)");
+
+                            b1.Property<int>("Index")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("Id", "StrategicLineId");
+
+                            b1.HasIndex("StrategicLineId");
+
+                            b1.HasIndex("Index", "Id")
+                                .IsUnique();
+
+                            b1.ToTable("strategicline_specificobjectives", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("StrategicLineId");
+                        });
+
                     b.Navigation("Axe");
 
                     b.Navigation("Coordinator");
 
                     b.Navigation("OrganizationBridges");
+
+                    b.Navigation("PublicPolicyBridges");
+
+                    b.Navigation("SpecificObjectives");
 
                     b.Navigation("StrategicActions");
                 });

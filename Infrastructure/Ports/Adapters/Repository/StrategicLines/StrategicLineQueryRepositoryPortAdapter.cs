@@ -18,6 +18,9 @@ internal sealed class StrategicLineQueryRepositoryPortAdapter : AbstractEntityQu
         return base.GetQueryableDbSet()
             .AsSplitQuery()
             .Include(entity => entity.Axe)
-            .Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image);
+            .Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image)
+            .Include(entity => entity.PublicPolicyBridges).ThenInclude(bridge => bridge.Linked)
+            .Include(entity => entity.OrganizationBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.Kind)
+            .Include(entity => entity.OrganizationBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.Image);
     }
 }

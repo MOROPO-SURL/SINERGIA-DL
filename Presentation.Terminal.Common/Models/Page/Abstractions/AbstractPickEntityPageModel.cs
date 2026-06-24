@@ -1,4 +1,6 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
 public abstract class AbstractPickEntityPageModel<TBasicModel> : AbstractListEntityPageModel<TBasicModel>
 {
@@ -13,6 +15,8 @@ public abstract class AbstractPickEntityPageModel<TBasicModel> : AbstractListEnt
             if (IsBusy) return;
 
             this.pickedCallbackAction.Invoke(model);
+
+            Application.Current!.MainPage!.NavigationPopModalPageAsync();
         });
     }
 }

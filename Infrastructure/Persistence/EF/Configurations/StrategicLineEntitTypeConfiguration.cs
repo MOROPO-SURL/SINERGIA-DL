@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities;
@@ -14,7 +15,9 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
     private const string ROOT_TABLE_NAME = "strategiclines";
 
     private const string STRATEGICLINE_ORGANIZATION_BRIDGES_TABLE_NAME = "strategicline_organization_bridges";
+    private const string STRATEGICLINE_PUBLICPOLICY_BRIDGES_TABLE_NAME = "strategicline_publicpolicy_bridges";
     private const string ACTIONS_TABLE_NAME = "strategicline_strategicactions";
+    private const string SPECIFICOBJECTIVES_TABLE_NAME = "strategicline_specificobjectives";
 
     public void Configure(EntityTypeBuilder<StrategicLine> builder)
     {
@@ -46,14 +49,27 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
 
         builder
             .OwnsMany(entity => entity.StrategicActions, Configure)
-            .Navigation(entity => entity.StrategicActions).UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasField("strategicActions");
+            .Navigation(entity => entity.StrategicActions)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("strategicActions");
+
+        builder
+            .OwnsMany(entity => entity.SpecificObjectives, Configure)
+            .Navigation(entity => entity.SpecificObjectives)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("specificObjectives");
 
         builder
             .OwnsMany(entity => entity.OrganizationBridges, Configure)
             .Navigation(entity => entity.OrganizationBridges)
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasField("organizationBridges");
+
+        builder
+            .OwnsMany(entity => entity.PublicPolicyBridges, Configure)
+            .Navigation(entity => entity.PublicPolicyBridges)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("publicPolicyBridges");
     }
 
     private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineOrganizationBridge> builder)
@@ -62,7 +78,7 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
 
         builder.HasKey(bridge => new { bridge.MainId, bridge.LinkedId });
 
-        builder.WithOwner().HasForeignKey(bridge => new { bridge.MainId });
+        builder.WithOwner().HasForeignKey(bridge => bridge.MainId);
 
         builder.Property(entity => entity.MainId)
             .ValueGeneratedNever()
@@ -75,13 +91,52 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
     }
 
+    private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLinePublicPolicyBridge> builder)
+    {
+        builder.ToTable(STRATEGICLINE_PUBLICPOLICY_BRIDGES_TABLE_NAME);
+
+        builder.HasKey(bridge => new { bridge.MainId, bridge.LinkedId });
+
+        builder.WithOwner().HasForeignKey(bridge => bridge.MainId);
+
+        builder.Property(bridge => bridge.MainId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new StrategicLineId(value));
+
+        builder.Property(bridge => bridge.LinkedId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new PublicPolicyId(value));
+    }
+
+    private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineSpecificObjective> builder)
+    {
+        builder.ToTable(SPECIFICOBJECTIVES_TABLE_NAME);
+
+        builder.HasKey(entity => new { entity.Id, entity.StrategicLineId });
+
+        builder.WithOwner().HasForeignKey(entity => entity.StrategicLineId);
+
+        builder.Property(entity => entity.Id)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new StrategicLineSpecificObjectiveId(value));
+
+        builder.Property(entity => entity.StrategicLineId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new StrategicLineId(value));
+
+        builder.Property(entity => entity.Content)
+            .HasMaxLength(2048);
+
+        builder.HasIndex(entity => new { entity.Index, entity.Id }).IsUnique();
+    }
+
     private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineAction> builder)
     {
         builder.ToTable(ACTIONS_TABLE_NAME);
 
         builder.HasKey(entity => new { entity.Id, entity.StrategicLineId });
 
-        builder.WithOwner().HasForeignKey(entity => new { entity.StrategicLineId });
+        builder.WithOwner().HasForeignKey(entity => entity.StrategicLineId);
 
         builder.Property(entity => entity.Id)
             .ValueGeneratedNever()

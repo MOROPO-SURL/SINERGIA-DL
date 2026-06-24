@@ -37,6 +37,7 @@
 		<DefaultLanguage>es-ES</DefaultLanguage>
 		<PackageCertificateThumbprint>ABF288475B98FFB6E0AC11E6BAF085A3E9FBC705</PackageCertificateThumbprint>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
@@ -89,6 +90,9 @@
 	  </Compile>
 	  <Compile Update="UI\Pages\FeaturesManagementPage.xaml.cs">
 	    <DependentUpon>FeaturesManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Organization\OrganizationPickPage.xaml.cs">
+	    <DependentUpon>OrganizationPickPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\StrategicProjectsManagementPage.xaml.cs">
 	    <DependentUpon>StrategicProjectsManagementPage.xaml</DependentUpon>
@@ -229,7 +233,19 @@
 	  <MauiXaml Update="UI\Pages\FeaturesManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Organization\OrganizationPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Person\PersonPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicLine\Configuration\StrategicLineSpecificObjectiveConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicLine\Detail\StrategicLineSpecificObjectiveDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProjectsManagementPage.xaml">
@@ -367,7 +383,13 @@
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\OrganizationCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Views\Card\PersonCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\PublicPolicyCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

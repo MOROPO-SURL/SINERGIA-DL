@@ -23,7 +23,5 @@ public partial class StrategicLineConfigurationPage : BaseConfigurationEntityPag
     private void CoordinatorPicked_Callback(PersonBasicDtoModel model)
     {
         ConcreteBindingContext.Coordinator = model;
-
-        this.NavigationPopModalPageAsync();
     }
 }
