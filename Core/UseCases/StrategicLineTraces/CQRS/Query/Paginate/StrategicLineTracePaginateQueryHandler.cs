@@ -13,7 +13,7 @@ internal sealed class StrategicLineTracePaginateQueryHandler :
 AbstractPaginateQueryHandler<StrategicLineTrace, TraceId, long, StrategicLineTracePaginateQuery, StrategicLineTraceBasicDto>,
 IRequestHandler<StrategicLineTracePaginateQuery, PaginateQueryResultModel<StrategicLineTraceBasicDto>>
 {
-    public StrategicLineTracePaginateQueryHandler(IStategicLineTraceQueryRepositoryPort entityQueryRepository) : base(entityQueryRepository)
+    public StrategicLineTracePaginateQueryHandler(IStrategicLineTraceQueryRepositoryPort entityQueryRepository) : base(entityQueryRepository)
     {
     }
 

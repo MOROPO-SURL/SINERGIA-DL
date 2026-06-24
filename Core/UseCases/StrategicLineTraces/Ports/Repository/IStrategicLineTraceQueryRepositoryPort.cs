@@ -4,6 +4,6 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Values;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLineTraces.Ports.Repository;
 
-public interface IStategicLineTraceQueryRepositoryPort : IEntityQueryRepositoryPort<StrategicLineTrace, TraceId, long>
+public interface IStrategicLineTraceQueryRepositoryPort : IEntityQueryRepositoryPort<StrategicLineTrace, TraceId, long>
 {
 }

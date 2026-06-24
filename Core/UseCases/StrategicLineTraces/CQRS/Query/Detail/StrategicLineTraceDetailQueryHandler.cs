@@ -12,7 +12,7 @@ internal sealed class StrategicLineTraceDetailQueryHandler :
     AbstractDetailQueryHandler<StrategicLineTrace, TraceId, long, StrategicLineTraceDetailQuery, StrategicLineTraceDetailDto>,
     IRequestHandler<StrategicLineTraceDetailQuery, StrategicLineTraceDetailDto>
 {
-    public StrategicLineTraceDetailQueryHandler(IStategicLineTraceQueryRepositoryPort userQueryRepository, IMapper mapper) : base(userQueryRepository, mapper)
+    public StrategicLineTraceDetailQueryHandler(IStrategicLineTraceQueryRepositoryPort userQueryRepository, IMapper mapper) : base(userQueryRepository, mapper)
     {
     }
 }

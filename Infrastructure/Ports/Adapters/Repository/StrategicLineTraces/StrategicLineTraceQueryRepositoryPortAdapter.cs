@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Repositories
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicLineTraces;
 
-internal sealed class StrategicLineTraceQueryRepositoryPortAdapter : AbstractEntityQueryRepositoryPortAdapter<StrategicLineTrace, TraceId, long>, IStategicLineTraceQueryRepositoryPort
+internal sealed class StrategicLineTraceQueryRepositoryPortAdapter : AbstractEntityQueryRepositoryPortAdapter<StrategicLineTrace, TraceId, long>, IStrategicLineTraceQueryRepositoryPort
 {
     public StrategicLineTraceQueryRepositoryPortAdapter(DefaultDbContext dbContext) : base(dbContext)
     {
