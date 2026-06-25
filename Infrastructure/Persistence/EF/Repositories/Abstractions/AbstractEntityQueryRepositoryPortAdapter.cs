@@ -38,13 +38,37 @@ internal abstract class AbstractEntityQueryRepositoryPortAdapter<TEntity, TId, T
         return GetQueryableDbSet().Where(criteria).FirstOrDefaultAsync();
     }
 
-    public IQueryable<TEntity> GetAllQueryable()
+    public IQueryable<TEntity> GetAllQueryable(Expression<Func<TEntity, object>>? orderExpression = null, bool isOrderDesending = false)
     {
+        if (orderExpression != null)
+        {
+            if (isOrderDesending)
+            {
+                return GetQueryableDbSet().OrderByDescending(orderExpression);
+            }
+            else
+            {
+                return GetQueryableDbSet().OrderBy(orderExpression);
+            }
+        }
+
         return GetQueryableDbSet();
     }
 
-    public IQueryable<TEntity> GetFindByQueryable(Expression<Func<TEntity, bool>> criteria)
+    public IQueryable<TEntity> GetFindByQueryable(Expression<Func<TEntity, bool>> criteria, Expression<Func<TEntity, object>>? orderExpression = null, bool isOrderDesending = false)
     {
+        if (orderExpression != null)
+        {
+            if (isOrderDesending)
+            {
+                return GetQueryableDbSet().Where(criteria).OrderByDescending(orderExpression);
+            }
+            else
+            {
+                return GetQueryableDbSet().Where(criteria).OrderBy(orderExpression);
+            }
+        }
+
         return GetQueryableDbSet().Where(criteria);
     }
 
