@@ -1,6 +1,6 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
 public class BaseConfigurationEntityPage<TBasicModel, TDetailModel, TConfigurationPageModel> : BaseContentPage
     where TConfigurationPageModel : AbstractConfigurationPageModel<TDetailModel, TDetailModel>

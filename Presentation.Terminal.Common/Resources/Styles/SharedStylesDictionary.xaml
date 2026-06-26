@@ -3,8 +3,8 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views"
-    x:Class="MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles.SharedStylesDictionary">
+    xmlns:local_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Resources.Styles.SharedStylesDictionary">
     
     <!--#region Color Definitions -->
 

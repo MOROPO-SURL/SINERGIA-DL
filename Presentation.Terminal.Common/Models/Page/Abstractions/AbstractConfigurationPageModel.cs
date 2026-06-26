@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.User.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Bases;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Helper;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
 using System.Windows.Input;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
 public abstract class AbstractConfigurationPageModel<TInModel, TOutModel> : BasePageModel, Interfaces.IValidableConfigurationPageModel
 {
@@ -25,7 +25,7 @@ public abstract class AbstractConfigurationPageModel<TInModel, TOutModel> : Base
 
         PropertyChanged += PageModel_PropertyChanged!;
 
-        ApplyCommand = new Command(() => 
+        ApplyCommand = new Command(() =>
         {
             if (OnEditionMode && !hasChangesFlag)
             {
@@ -66,6 +66,20 @@ public abstract class AbstractConfigurationPageModel<TInModel, TOutModel> : Base
 
                             Dispatcher.Dispatch(() =>
                             {
+
+                                /* Cambio no fusionado mediante combinación del proyecto 'Presentation.Terminal.Common (net8.0-android)'
+                                Antes:
+                                                                Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+                                Después:
+                                                                Application.Current!.PresentToastNotification(NotificationKind.Success, "Cambios aplicados con éxito.");
+                                */
+
+                                /* Cambio no fusionado mediante combinación del proyecto 'Presentation.Terminal.Common (net8.0-android)'
+                                Antes:
+                                                                Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+                                Después:
+                                                                Application.Current!.PresentToastNotification(NotificationKind.Success, "Cambios aplicados con éxito.");
+                                */
                                 Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
                             });
                         });

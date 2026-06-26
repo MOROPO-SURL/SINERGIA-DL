@@ -1,9 +1,9 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Bases;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Validators;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Validators;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page;
 
 public class UserAuthenticationPageModel : BasePageModel, Interfaces.IValidableConfigurationPageModel
 {
@@ -103,14 +103,14 @@ public class UserAuthenticationPageModel : BasePageModel, Interfaces.IValidableC
         set => SetProperty(ref password, value);
     }
 
-    public FluentValidation.Results.ValidationResult? ValidationResult 
-    { 
-        get => validationResult; 
+    public FluentValidation.Results.ValidationResult? ValidationResult
+    {
+        get => validationResult;
         set => SetProperty(ref validationResult, value, () =>
         {
             if (ValidationResult == null || ValidationResult.IsValid) return;
 
             Application.Current!.MainPage!.DisplayAlert("Aviso", "La información especificada no es válida para aplicar los cambios en el sistema.", "Aceptar");
-        }); 
+        });
     }
 }

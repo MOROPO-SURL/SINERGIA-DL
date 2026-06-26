@@ -1,9 +1,9 @@
-namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Resources.Styles;
 
-public partial class SharedStylesDictionary : Microsoft.Maui.Controls.ResourceDictionary
+public partial class SharedStylesDictionary : ResourceDictionary
 {
-	public SharedStylesDictionary()
-	{
-		InitializeComponent();
-	}
+    public SharedStylesDictionary()
+    {
+        InitializeComponent();
+    }
 }

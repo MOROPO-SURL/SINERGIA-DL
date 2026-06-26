@@ -1,9 +1,8 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Factories;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
 using System.Net.Http.Headers;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Ports.Adapter.Provider
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Ports.Adapter.Provider
 {
     public class HttpClientHelperProvider : IHttpClientProviderPort
     {
@@ -21,7 +20,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
 
         public void Reset()
         {
-            httpClient = new HttpClient(HttpClientHandlerFactory.Build())
+            httpClient = new HttpClient(Common.Factories.HttpClientHandlerFactory.Build())
             {
                 BaseAddress = new Uri(Constants.InteropConstants.API_BASE_URL)
             };

@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative;
 
 public partial class App : Application
 {
@@ -13,6 +13,6 @@ public partial class App : Application
     {
         base.OnStart();
 
-        Windows[0].Title = $"SINERGIA DT Operaciones CAM Camagüey v{Microsoft.Maui.ApplicationModel.AppInfo.Current.VersionString}";
+        Windows[0].Title = $"SINERGIA-DL Operaciones CAM Camagüey v{AppInfo.Current.VersionString}";
     }
 }

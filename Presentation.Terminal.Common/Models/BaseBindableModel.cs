@@ -1,12 +1,7 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;
 
 public class BaseBindableModel : BindableObject, System.ComponentModel.INotifyPropertyChanged, IDisposable
 {
-    //protected void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
-    //{
-    //    PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-    //}
-
     protected void SetProperty<T>(ref T property, T newValue, Action? listener = null, [System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
     {
         if (Equals(property, newValue)) return;

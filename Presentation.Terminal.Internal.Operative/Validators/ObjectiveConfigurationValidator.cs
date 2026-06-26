@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Validators;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
 
 
 /* Cambio no fusionado mediante combinación del proyecto 'Presentation.Terminal.Internal.Operative (net8.0-maccatalyst)'

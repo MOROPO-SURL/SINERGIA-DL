@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Validators;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Validators;
 
 public class SettingValidator : AbstractValidator<Models.Page.SettingPageModel>
 {
