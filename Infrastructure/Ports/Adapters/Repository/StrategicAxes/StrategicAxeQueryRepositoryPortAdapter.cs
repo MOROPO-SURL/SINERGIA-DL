@@ -15,6 +15,8 @@ internal sealed class StrategicAxeQueryRepositoryPortAdapter : AbstractEntityQue
 
     protected override IQueryable<StrategicAxe> GetQueryableDbSet()
     {
-        return base.GetQueryableDbSet().Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image);
+        return base.GetQueryableDbSet()
+            .Include(entity => entity.MacroprogramBridges).ThenInclude(bridge => bridge.Linked)
+            .Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image);
     }
 }

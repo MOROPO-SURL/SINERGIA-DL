@@ -200,7 +200,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
             await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new MacroprogramPickPage(MacroprogramPicked_Callback)));
         });
 
-        RemoveOrganizationCommand = new Command<MacroprogramBasicDtoModel>(model => 
+        RemoveMacroprogramCommand = new Command<MacroprogramBasicDtoModel>(model => 
         {
             Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
             {
