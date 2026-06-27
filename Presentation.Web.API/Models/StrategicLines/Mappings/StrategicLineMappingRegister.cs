@@ -7,6 +7,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Update.Clipped;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.StrategicLines.Mappings;
 
@@ -19,6 +20,7 @@ public class StrategicLineMappingRegister : IRegister
             .Map(dest => dest.SpecificObjectives, src => src.SpecificObjectives.Select(item => item.Adapt<StrategicLineSpecificObjectiveClippedCreateCommand>()).ToArray())
             .Map(dest => dest.PublicPolicies, src => src.PublicPolicies.Select(item => item.Adapt<PublicPolicyBasicDto>()).ToArray())
             .Map(dest => dest.Organizations, src => src.Organizations.Select(item => item.Adapt<OrganizationBasicDto>()).ToArray())
+            .Map(dest => dest.Macroprograms, src => src.Macroprograms.Select(item => item.Adapt<MacroprogramBasicDto>()).ToArray())
             .Map(dest => dest, src => src);
 
         config.NewConfig<StrategicLineUpdateRequestModel, StrategicLineUpdateCommand>()
@@ -29,6 +31,8 @@ public class StrategicLineMappingRegister : IRegister
             .Map(dest => dest.OutPublicPolicies, dest => dest.OutPublicPolicies.Select(item => item.Adapt<PublicPolicyBasicDto>()).ToArray())
             .Map(dest => dest.InOrganizations, dest => dest.InOrganizations.Select(item => item.Adapt<OrganizationBasicDto>()).ToArray())
             .Map(dest => dest.OutOrganizations, dest => dest.OutOrganizations.Select(item => item.Adapt<OrganizationBasicDto>()).ToArray())
+            .Map(dest => dest.InMacroprograms, dest => dest.InMacroprograms.Select(item => item.Adapt<MacroprogramBasicDto>()).ToArray())
+            .Map(dest => dest.OutMacroprograms, dest => dest.OutMacroprograms.Select(item => item.Adapt<MacroprogramBasicDto>()).ToArray())
             .Map(dest => dest, src => src);
     }
 }

@@ -1,19 +1,21 @@
 ﻿using FluentValidation;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Macroprogram.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PublicPolicy.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Macroprogram;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Organization;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.PublicPolicy;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicLine.Configuration;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicLine.Detail;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -42,6 +44,9 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
     private readonly List<OrganizationBasicDtoModel> inOrganizations = [];
     private readonly List<OrganizationBasicDtoModel> outOrganizations = [];
+
+    private readonly List<MacroprogramBasicDtoModel> inMacroprograms = [];
+    private readonly List<MacroprogramBasicDtoModel> outMacroprograms = [];
 
     public StrategicLineConfigurationPageModel(StrategicLineDetailDtoModel? model, StrategicAxeBasicDtoModel[] availableAxes, Action<StrategicLineDetailDtoModel> successActionCallback) : base(model, successActionCallback, new StrategicLineConfigurationValidator())
     {
@@ -188,6 +193,45 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
         #endregion
 
+        #region Macroprograms
+
+        AddMacroprogramCommand = new Command(async () => 
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new MacroprogramPickPage(MacroprogramPicked_Callback)));
+        });
+
+        RemoveOrganizationCommand = new Command<MacroprogramBasicDtoModel>(model => 
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inMacroprograms)
+                {
+                    if (item.Id != model.Id) continue;
+
+                    inMacroprograms.Remove(inMacroprograms.First(item => item.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outMacroprograms.Add(model);
+                }
+
+                Dispatcher.Dispatch(() => Macroprograms.Remove(model));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        #endregion
+
         #endregion
 
         if (model is null) return;
@@ -203,6 +247,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
         SpecificObjectives = [.. model.SpecificObjectives];
         PublicPolicies = [.. model.PublicPolicies];
         Organizations = [.. model.Organizations];
+        Macroprograms = [.. model.Macroprograms];
     }
 
     public Guid? Id { get; set; }
@@ -241,6 +286,12 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
     public ICommand RemoveOrganizationCommand { get; private set; }
 
+    public ObservableCollection<MacroprogramBasicDtoModel> Macroprograms { get; private set; } = [];
+
+    public ICommand AddMacroprogramCommand { get; private set; }
+
+    public ICommand RemoveMacroprogramCommand { get; private set; }
+
     public StrategicAxeBasicDtoModel[] AvailableAxes { get; private set; }
 
     protected override Task<StrategicLineDetailDtoModel> PerformCreationAsync()
@@ -257,6 +308,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
                 [.. inSpecificObjectives],
                 [.. inPublicPolicies],
                 [.. inOrganizations],
+                [.. inMacroprograms],
                 axe?.Id,
                 Description
             ));
@@ -281,6 +333,8 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
                 [.. outPublicPolicies],
                 [.. inOrganizations],
                 [.. outOrganizations],
+                [.. inMacroprograms],
+                [.. outMacroprograms],
                 axe?.Id,
                 Description
             ));
@@ -302,6 +356,15 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
         inOrganizations.Add(model);
 
         Organizations.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void MacroprogramPicked_Callback(MacroprogramBasicDtoModel model)
+    {
+        inMacroprograms.Add(model);
+
+        Macroprograms.Add(model);
 
         hasChangesFlag = true;
     }

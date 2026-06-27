@@ -1,4 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Create.Clipped;
@@ -21,5 +22,7 @@ public record StrategicLineUpdateCommand(
     PublicPolicyBasicDto[] OutPublicPolicies,
     OrganizationBasicDto[] InOrganizations,
     OrganizationBasicDto[] OutOrganizations,
+    MacroprogramBasicDto[] InMacroprograms,
+    MacroprogramBasicDto[] OutMacroprograms,
     int? AxeId = null, 
     string? Description = null) : IUpdateCommand<Guid, StrategicLineDetailDto>;

@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.Values;
@@ -23,10 +24,11 @@ public class StrategicLine :
     private readonly List<StrategicLineSpecificObjective> specificObjectives = [];
     private readonly List<StrategicLineOrganizationBridge> organizationBridges = [];
     private readonly List<StrategicLinePublicPolicyBridge> publicPolicyBridges = [];
+    private readonly List<StrategicLineMacroprogramBridge> macroprogramBridges = [];
 
     private StrategicLine() : base(new StrategicLineId(default)) { }
 
-    public StrategicLine(StrategicLineId id, int index, bool isEnabled, string name, bool isArchived, PersonId coordinatorId, string objective, StrategicLineSpecificObjective[] specificObjectives, StrategicLineAction[] strategicActions, StrategicLineOrganizationBridge[] organizationBridges, StrategicLinePublicPolicyBridge[] publicPolicyBridges, StrategicAxeId? axeId = null, StrategicAxe? axe = null, Person? coordinator = null, string? description = null)
+    public StrategicLine(StrategicLineId id, int index, bool isEnabled, string name, bool isArchived, PersonId coordinatorId, string objective, StrategicLineSpecificObjective[] specificObjectives, StrategicLineAction[] strategicActions, StrategicLineOrganizationBridge[] organizationBridges, StrategicLinePublicPolicyBridge[] publicPolicyBridges, StrategicLineMacroprogramBridge[] macroprogramBridges, StrategicAxeId? axeId = null, StrategicAxe? axe = null, Person? coordinator = null, string? description = null)
         : base(id)
     {
         Index = index;
@@ -44,6 +46,7 @@ public class StrategicLine :
         this.strategicActions = [.. strategicActions];
         this.organizationBridges = [.. organizationBridges];
         this.publicPolicyBridges = [.. publicPolicyBridges];
+        this.macroprogramBridges = [.. macroprogramBridges];
     }
 
     public int Index { get; set; }
@@ -77,15 +80,21 @@ public class StrategicLine :
 
     public IReadOnlyList<StrategicLinePublicPolicyBridge> PublicPolicyBridges => [.. publicPolicyBridges];
 
+    public IReadOnlyList<StrategicLineMacroprogramBridge> MacroprogramBridges => [.. macroprogramBridges];
+
     public void AddSpecificObjective(StrategicLineSpecificObjective entity) => specificObjectives.Add(entity);
 
     public void RemoveSpecificObjective(StrategicLineSpecificObjective entity) => specificObjectives.Remove(entity);
 
-    public void AddOrganizationBridge(OrganizationId organizationId) => organizationBridges.Add(new StrategicLineOrganizationBridge(Id, organizationId));
+    public void LinkOrganizationById(OrganizationId organizationId) => organizationBridges.Add(new StrategicLineOrganizationBridge(Id, organizationId));
 
-    public void RemoveOrganizationBridge(OrganizationId organizationId) => organizationBridges.RemoveAll(bridge => bridge.LinkedId == organizationId);
+    public void UnlinkOrganizationById(OrganizationId organizationId) => organizationBridges.RemoveAll(bridge => bridge.LinkedId == organizationId);
 
-    public void AddPublicPolicyBridge(PublicPolicyId publicPolicyId) => publicPolicyBridges.Add(new StrategicLinePublicPolicyBridge(Id, publicPolicyId));
+    public void LinkPublicPolicyById(PublicPolicyId publicPolicyId) => publicPolicyBridges.Add(new StrategicLinePublicPolicyBridge(Id, publicPolicyId));
 
-    public void RemovePublicPolicyBridge(PublicPolicyId publicPolicyId) => publicPolicyBridges.RemoveAll(bridge => bridge.LinkedId == publicPolicyId);
+    public void UnlinkPublicPolicy(PublicPolicyId publicPolicyId) => publicPolicyBridges.RemoveAll(bridge => bridge.LinkedId == publicPolicyId);
+
+    public void LinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.Add(new StrategicLineMacroprogramBridge(Id, macroprogramId));
+
+    public void UnlinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.RemoveAll(bridge => bridge.LinkedId == macroprogramId);
 }
