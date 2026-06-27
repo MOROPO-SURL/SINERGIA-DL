@@ -1,5 +1,4 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Factories;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Enumerations;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
@@ -41,7 +40,7 @@ public partial class DiagnosticSummaryPage : BaseBindingContextedContentPage<Dia
 
         ConcreteBindingContext.IsBusy = true;
 
-        var httpClient = new HttpClient(HttpClientHandlerFactory.Build())
+        var httpClient = new HttpClient(Terminal.Common.Factories.HttpClientHandlerFactory.Build())
         {
             Timeout = TimeSpan.FromSeconds(30.0)
         };
@@ -56,7 +55,7 @@ public partial class DiagnosticSummaryPage : BaseBindingContextedContentPage<Dia
                 }
                 else
                 {
-                    var fileSaverResult = await CommunityToolkit.Maui.Storage.FileSaver.Default.SaveAsync($"Resumen de Diagnóstico {DateTime.Now:dd-MM-yyyy}.pdf", new System.IO.MemoryStream(task.Result));
+                    var fileSaverResult = await CommunityToolkit.Maui.Storage.FileSaver.Default.SaveAsync($"Resumen de Diagnóstico {DateTime.Now:dd-MM-yyyy}.pdf", new MemoryStream(task.Result));
 
                     if (fileSaverResult.IsSuccessful)
                     {
