@@ -15,6 +15,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureTraces.Ports.Reposito
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreas.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreaTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.KeyVariables.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.KeyVariableTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.Ports.Repository;
@@ -51,6 +52,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.F
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.InterestAreas;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.InterestAreaTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.KeyVariables;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.KeyVariableTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Macroprograms;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Objectives;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.OrganizationKinds;
@@ -167,6 +169,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IStrategicLineTraceQueryRepositoryPort, StrategicLineTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IFeatureTraceQueryRepositoryPort, FeatureTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IInterestAreaTraceQueryRepositoryPort, InterestAreaTraceQueryRepositoryPortAdapter>();
+        services.AddScoped<IKeyVariableTraceQueryRepositoryPort, KeyVariableTraceQueryRepositoryPortAdapter>();
 
         services.AddScoped<IIdentityAuthenticationServicePort, LocalIdentityAuthenticationServicePortAdapter>();
 
@@ -180,6 +183,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISaveChangesInterceptor, StrategicLineChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, FeatureChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, InterestAreaChangeDomainTracingInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, KeyVariableChangeDomainTracingInterceptor>();
 
         return services;
     }
