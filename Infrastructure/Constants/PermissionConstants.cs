@@ -129,4 +129,12 @@ public static class PermissionConstants
     public const string FEATUREKIND_REMOVE_PERMISSION = "featurekind-remove-permission";
     public const string FEATUREKIND_ENABLE_PERMISSION = "featurekind-enable-permission";
     public const string FEATUREKIND_DISABLE_PERMISSION = "featurekind-disable-permission";
+
+    public const string ECONOMICACTIVITY_LIST_PERMISSION = "economicactivity-list-permission";
+    public const string ECONOMICACTIVITY_VIEW_PERMISSION = "economicactivity-view-permission";
+    public const string ECONOMICACTIVITY_CREATE_PERMISSION = "economicactivity-create-permission";
+    public const string ECONOMICACTIVITY_UPDATE_PERMISSION = "economicactivity-update-permission";
+    public const string ECONOMICACTIVITY_REMOVE_PERMISSION = "economicactivity-remove-permission";
+    public const string ECONOMICACTIVITY_ENABLE_PERMISSION = "economicactivity-enable-permission";
+    public const string ECONOMICACTIVITY_DISABLE_PERMISSION = "economicactivity-disable-permission";
 }

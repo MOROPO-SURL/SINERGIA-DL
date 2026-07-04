@@ -19,9 +19,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
-            <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToColorConverter" TrueValue="DimGray" FalseValue="Transparent" />
 
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -98,14 +98,13 @@
                                 ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}" />
                         </VerticalStackLayout.Behaviors>
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Coordinador (opcional)" />
-                        <Frame>
+                        <Frame IsVisible="{Binding Coordinator, Converter={StaticResource IsNotNullConverter}}">
                             <Grid ColumnSpacing="8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Border 
-                                    BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
                                     Grid.Column="0"
                                     StrokeThickness="4"
                                     StrokeLineJoin="Bevel">
@@ -121,13 +120,11 @@
                                     VerticalOptions="Center"
                                     Spacing="8">
                                     <Label
-                                        BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
                                         FontAttributes="Bold"
                                         LineBreakMode="TailTruncation"
                                         ToolTipProperties.Text="{Binding Coordinator.Name}"
                                         Text="{Binding Coordinator.Name}" />
                                     <Label
-                                        BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
                                         MaxLines="1"
                                         LineBreakMode="TailTruncation"
                                         ToolTipProperties.Text="{Binding Coordinator.LastName}"

@@ -123,8 +123,17 @@
   <data name="Edition" xml:space="preserve">
     <value>Modificación</value>
   </data>
+  <data name="LegalPDL" xml:space="preserve">
+    <value>PDL con titularidad estatal</value>
+  </data>
+  <data name="NaturalPDL" xml:space="preserve">
+    <value>PDL con titularidad de persona natural</value>
+  </data>
   <data name="Remotion" xml:space="preserve">
     <value>Eliminación</value>
+  </data>
+  <data name="SRL" xml:space="preserve">
+    <value>Sociedad mercantil de Responsabilidad Limitada</value>
   </data>
   <data name="Visualization" xml:space="preserve">
     <value>Visualización</value>

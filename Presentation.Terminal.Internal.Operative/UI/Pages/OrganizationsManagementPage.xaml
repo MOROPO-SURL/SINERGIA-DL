@@ -50,7 +50,7 @@
             <StackLayout Orientation="Vertical">
                 <SearchBar 
                     Style="{StaticResource ListEntityPageSearchBarStyle}"
-                    Placeholder="-- buscar por nombre, apellidos o alias --"
+                    Placeholder="-- buscar por nombre o alias --"
                     Text="{Binding SearchParameter}"
                     SearchCommand="{Binding SearchCommand, Mode=OneTime}" />
                 <Grid VerticalOptions="FillAndExpand">

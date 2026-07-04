@@ -14,7 +14,7 @@ internal class PersonOrganizationBrigdeEntityTypeConfiguration : IEntityTypeConf
 
         builder.HasKey(bridge => new { bridge.MainId, bridge.LinkedId });
 
-        builder.HasOne(bridge => bridge.Main).WithMany(entity => entity.OrganizationBrigde).HasForeignKey(bridge => bridge.MainId).OnDelete(DeleteBehavior.Cascade);
-        builder.HasOne(bridge => bridge.Linked).WithMany().HasForeignKey(bridge => bridge.LinkedId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(bridge => bridge.Main).WithMany(entity => entity.OrganizationBrigdes).HasForeignKey(bridge => bridge.MainId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(bridge => bridge.Linked).WithMany(entity => entity.PersonBridges).HasForeignKey(bridge => bridge.LinkedId).OnDelete(DeleteBehavior.Cascade);
     }
 }

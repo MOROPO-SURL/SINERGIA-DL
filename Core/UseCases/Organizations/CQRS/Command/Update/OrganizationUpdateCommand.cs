@@ -1,7 +1,11 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Create.Clipped;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Update.Clipped;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Enumerations;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Update;
 
@@ -12,13 +16,17 @@ public record OrganizationUpdateCommand(
     bool IsArchived,
     int Priority,
     Guid OrganizationKindId,
-    EmailAddressDetailDto[] InEmailAddresses,
-    EmailAddressDetailDto[] OutEmailAddresses,
-    PhoneNumberDetailDto[] InPhoneNumbers,
-    PhoneNumberDetailDto[] OutPhoneNumbers,
-    PostalAddressDetailDto[] InPostalAddresses,
-    PostalAddressDetailDto[] OutPostalAddresses,
-    WebSiteAddressDetailDto[] InWebSiteAddresses,
-    WebSiteAddressDetailDto[] OutWebSiteAddresses,
+    IEnumerable<EmailAddressDetailDto> InEmailAddresses,
+    IEnumerable<EmailAddressDetailDto> OutEmailAddresses,
+    IEnumerable<PhoneNumberDetailDto> InPhoneNumbers,
+    IEnumerable<PhoneNumberDetailDto> OutPhoneNumbers,
+    IEnumerable<PostalAddressDetailDto> InPostalAddresses,
+    IEnumerable<PostalAddressDetailDto> OutPostalAddresses,
+    IEnumerable<WebSiteAddressDetailDto> InWebSiteAddresses,
+    IEnumerable<WebSiteAddressDetailDto> OutWebSiteAddresses,
+    IEnumerable<OrganizationPersonRelationshipClippedCreateCommand> InPersonRelationships,
+    IEnumerable<OrganizationPersonRelationshipClippedUpdateCommand> PatchPersonRelationships,
+    IEnumerable<PersonBasicDto> OutPersonRelationships,
+    DevelopmentActorProfileKind? DevelopmentActorProfileKind = null,
     string? About = null,
     ImageCreateCommand? Image = null) : IUpdateCommand<Guid, OrganizationDetailDto>;

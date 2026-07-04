@@ -80,11 +80,38 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Opera
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a PDL con titularidad estatal.
+        /// </summary>
+        internal static string LegalPDL {
+            get {
+                return ResourceManager.GetString("LegalPDL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PDL con titularidad de persona natural.
+        /// </summary>
+        internal static string NaturalPDL {
+            get {
+                return ResourceManager.GetString("NaturalPDL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Eliminación.
         /// </summary>
         internal static string Remotion {
             get {
                 return ResourceManager.GetString("Remotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sociedad mercantil de Responsabilidad Limitada.
+        /// </summary>
+        internal static string SRL {
+            get {
+                return ResourceManager.GetString("SRL", resourceCulture);
             }
         }
         

@@ -88,13 +88,13 @@ public class StrategicLine :
 
     public void LinkOrganizationById(OrganizationId organizationId) => organizationBridges.Add(new StrategicLineOrganizationBridge(Id, organizationId));
 
-    public void UnlinkOrganizationById(OrganizationId organizationId) => organizationBridges.RemoveAll(bridge => bridge.LinkedId == organizationId);
+    public void UnlinkOrganizationById(OrganizationId organizationId) => organizationBridges.Remove(organizationBridges.First(bridge => bridge.LinkedId == organizationId));
 
     public void LinkPublicPolicyById(PublicPolicyId publicPolicyId) => publicPolicyBridges.Add(new StrategicLinePublicPolicyBridge(Id, publicPolicyId));
 
-    public void UnlinkPublicPolicy(PublicPolicyId publicPolicyId) => publicPolicyBridges.RemoveAll(bridge => bridge.LinkedId == publicPolicyId);
+    public void UnlinkPublicPolicy(PublicPolicyId publicPolicyId) => publicPolicyBridges.Remove(publicPolicyBridges.First(bridge => bridge.LinkedId == publicPolicyId));
 
     public void LinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.Add(new StrategicLineMacroprogramBridge(Id, macroprogramId));
 
-    public void UnlinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.RemoveAll(bridge => bridge.LinkedId == macroprogramId);
+    public void UnlinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.Remove(macroprogramBridges.First(bridge => bridge.LinkedId == macroprogramId));
 }

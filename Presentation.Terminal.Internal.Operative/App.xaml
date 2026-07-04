@@ -36,6 +36,7 @@
             <x:String x:Key="IconGlyphLogOut">&#xFA47;</x:String>
             <x:String x:Key="IconGlyphComplements">&#xF638;</x:String>
             <x:String x:Key="IconGlyphMacroprograms">&#xFCE5;</x:String>
+            <x:String x:Key="IconGlyphEconomicActivities">&#xF027A;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

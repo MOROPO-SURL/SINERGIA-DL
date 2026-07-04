@@ -4,6 +4,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeys.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeyTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ClassificationTraces.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.EconomicActivities.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKindTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Features.Mappings;
@@ -145,7 +147,11 @@ public static class ServiceProviderExtensions
 
             new InterestAreaTraceEntityMappingRegister(),
 
-            new KeyVariableTraceEntityMappingRegister()
+            new KeyVariableTraceEntityMappingRegister(),
+
+            new EconomicActivityEntityMappingRegister(),
+
+            new DevelopmentActorProfileMappingRegister()
         );
     }
 }

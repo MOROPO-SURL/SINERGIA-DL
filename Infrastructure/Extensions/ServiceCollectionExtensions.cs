@@ -8,6 +8,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ApiKeyTraces.Ports.Repositor
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Authentication.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Classifications.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ClassificationTraces.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.EconomicActivities.Ports;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKindTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Features.Ports.Repository;
@@ -45,6 +47,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.A
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.ApiKeyTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Classifications;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.ClassificationTraces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.DevelopmentActorProfiles;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.EconomicActivities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.FeatureKinds;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.FeatureKindTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Features;
@@ -158,6 +162,12 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IStrategicProjectQueryRepositoryPort, StrategicProjectQueryRepositoryPortAdapter>();
         services.AddScoped<IStrategicProjectCommandRepositoryPort, StrategicProjectCommandRepositoryPortAdapter>();
+
+        services.AddScoped<IEconomicActivityQueryRepositoryPort, EconomicActivityQueryRepositoryPortAdapter>();
+        services.AddScoped<IEconomicActivityCommandRepositoryPort, EconomicActivityCommandRepositoryPortAdapter>();
+
+        services.AddScoped<ISRLDevelopmentActorProfileQueryRepositoryPort, SRLDevelopmentActorProfileQueryRepositoryPortAdapter>();
+        services.AddScoped<ISRLDevelopmentActorProfileCommandRepositoryPort, SRLDevelopmentActorProfileCommandRepositoryPortAdapter>();
 
         services.AddScoped<IUserTraceQueryRepositoryPort, UserTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IRoleTraceQueryRepositoryPort, RoleTraceQueryRepositoryPortAdapter>();

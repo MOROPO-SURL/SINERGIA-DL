@@ -82,7 +82,9 @@ public class OrganizationsController: ControllerBase
         {
             OrganizationDetailDto result = await mediator.Send(new OrganizationDetailQuery(key));
 
-            return Ok(mapper.Map<OrganizationDetailDtoModel>(result));
+            OrganizationDetailDtoModel model = mapper.Map<OrganizationDetailDtoModel>(result);
+
+            return Ok(model);
         }
         catch (Exception exception)
         {

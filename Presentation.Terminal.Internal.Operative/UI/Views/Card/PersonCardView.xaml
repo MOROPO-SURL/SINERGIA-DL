@@ -12,9 +12,6 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame>
-        <Frame.GestureRecognizers>
-            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
-        </Frame.GestureRecognizers>
         <VerticalStackLayout Spacing="4">
             <Border 
                 HorizontalOptions="Center"

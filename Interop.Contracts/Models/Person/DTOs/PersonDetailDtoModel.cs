@@ -1,5 +1,6 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.User.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 
@@ -15,4 +16,5 @@ public record PersonDetailDtoModel(
     string? LastName = null,
     string? Alias = null,
     string? About = null,
-    ImageBasicDtoModel? Image = null);
+    ImageBasicDtoModel? Image = null,
+    UserBasicDtoModel? User = null);

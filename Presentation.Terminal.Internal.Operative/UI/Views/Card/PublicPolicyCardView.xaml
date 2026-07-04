@@ -6,9 +6,6 @@
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Views.Card.PublicPolicyCardView"
     x:DataType="interop_dto_models:PublicPolicyBasicDtoModel">
     <Frame>
-        <Frame.GestureRecognizers>
-            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
-        </Frame.GestureRecognizers>
         <StackLayout Orientation="Vertical">
             <Label
                 VerticalOptions="FillAndExpand"

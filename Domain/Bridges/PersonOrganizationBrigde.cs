@@ -10,12 +10,13 @@ public class PersonOrganizationBrigde : IBridge<Person, PersonId, Guid, Organiza
 {
     private PersonOrganizationBrigde() { }
 
-    public PersonOrganizationBrigde(PersonId mainId, OrganizationId linkedId, Person? main = null, Organization? linked = null)
+    public PersonOrganizationBrigde(PersonId mainId, OrganizationId linkedId, bool isRepresentative, Person? main = null, Organization? linked = null)
     {
         MainId = mainId;
         LinkedId = linkedId;
         Main = main;
         Linked = linked;
+        IsRepresentative = isRepresentative;
     }
 
     public PersonId MainId { get; set; }
@@ -23,4 +24,6 @@ public class PersonOrganizationBrigde : IBridge<Person, PersonId, Guid, Organiza
 
     public OrganizationId LinkedId { get; set; }
     public Organization? Linked { get; set; }
+
+    public bool IsRepresentative { get; set; }
 }

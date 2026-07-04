@@ -12,5 +12,7 @@ public record OrganizationCreateRequestModel(
     PhoneNumberDetailDtoModel[] PhoneNumbers,
     PostalAddressDetailDtoModel[] PostalAddresses,
     WebSiteAddressDetailDtoModel[] WebSiteAddresses,
+    OrganizationPersonRelationshipConfigurationRequestModel[] PersonRelationships,
+    Enumerations.DevelopmentActorProfileKind? DevelopmentActorProfileKind = null,
     string? About = null,
     ImageCreateRequestModel? Image = null);

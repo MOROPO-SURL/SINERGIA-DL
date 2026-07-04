@@ -2,6 +2,7 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Users.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Enumerations;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.CQRS.Command.Create;
@@ -20,4 +21,5 @@ public record PersonCreateCommand(
     string? LastName = null,
     string? Alias = null,
     string? About = null,
-    ImageCreateCommand? Image = null) : ICreateCommand<PersonDetailDto>;
+    ImageCreateCommand? Image = null,
+    UserBasicDto? User = null) : ICreateCommand<PersonDetailDto>;

@@ -46,5 +46,5 @@ public class StrategicAxe :
 
     public void LinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.Add(new StrategicAxeMacroprogramBridge(Id, macroprogramId));
 
-    public void UnlinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.RemoveAll(bridge => bridge.LinkedId == macroprogramId);
+    public void UnlinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.Remove(macroprogramBridges.First(bridge => bridge.LinkedId == macroprogramId));
 }

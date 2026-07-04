@@ -7,6 +7,7 @@ public static class CardViewSizeConstants
 
     public static double PERSON_DEFAULT_CARD_VIEW_HEIGHT = 208;
     public static double PERSON_DEFAULT_CARD_VIEW_WIDTH = 160;
+    public static double PERSON_CONFIGURATION_CARD_VIEW_WIDTH = 216;
 
     public static double TERRITORIALBARRIER_DEFAULT_CARD_VIEW_HEIGHT = 76;
     public static double TERRITORIALBARRIER_DEFAULT_CARD_VIEW_WIDTH = 400;
@@ -40,4 +41,10 @@ public static class CardViewSizeConstants
 
     public static double STRATEGICPROJECT_DEFAULT_CARD_VIEW_HEIGHT = 96;
     public static double STRATEGICPROJECT_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double ECONOMICACTIVITY_DEFAULT_CARD_VIEW_HEIGHT = 96;
+    public static double ECONOMICACTIVITY_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double USER_DEFAULT_CARD_VIEW_HEIGHT = 76;
+    public static double USER_DEFAULT_CARD_VIEW_WIDTH = 320;
 }

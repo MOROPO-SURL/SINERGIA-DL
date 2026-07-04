@@ -82,6 +82,12 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LocalizationResources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\EconomicActivitiesManagementPage.xaml.cs">
+	    <DependentUpon>EconomicActivitiesManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\EconomicActivity\EconomicActivityDetailPage.xaml.cs">
+	    <DependentUpon>EconomicActivityDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\Feature\FeatureConfigurationPage.xaml.cs">
 	    <DependentUpon>FeatureConfigurationPage.xaml</DependentUpon>
 	  </Compile>
@@ -219,6 +225,18 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\DiagnosticSummaryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\EconomicActivitiesManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\EnvironmentSummaryPage.xaml">
@@ -386,6 +404,12 @@
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\User\UserPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\EconomicActivityCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Views\Card\MacroprogramCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -396,6 +420,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Views\Card\PublicPolicyCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\UserCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

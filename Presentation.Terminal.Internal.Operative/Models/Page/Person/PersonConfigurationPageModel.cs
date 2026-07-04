@@ -5,12 +5,14 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.User.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Common.Configuration;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Common.Configuration;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Common.Detail;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.User;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -40,9 +42,15 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
     private string? alias;
     private string? about;
     private ImageSource? imageSource;
+    private UserBasicDtoModel? user;
 
     public PersonConfigurationPageModel(PersonDetailDtoModel? model, Action<PersonDetailDtoModel> successCallbackAction) : base(model, successCallbackAction, new PersonConfigurationValidator())
     {
+        PickUserCommand = new Command(async () =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new UserPickPage(UserPicked_Callback)));
+        });
+
         #region PhoneNumber
 
         CreatePhoneNumberCommand = new Command(async () =>
@@ -247,6 +255,7 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
         lastName = model.LastName;
         alias = model.Alias;
         about = model.About;
+        user = model.User;
 
         PhoneNumbers = [.. model.PhoneNumbers];
         EmailAddresses = [.. model.EmailAddresses];
@@ -266,6 +275,8 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     public string? About { get => about; set => SetProperty(ref about, value); }
 
+    public UserBasicDtoModel? User { get => user; set => SetProperty(ref user, value); }
+
     public ObservableCollection<PhoneNumberDetailDtoModel> PhoneNumbers { get; set; } = [];
 
     public ObservableCollection<EmailAddressDetailDtoModel> EmailAddresses { get; set; } = [];
@@ -276,9 +287,9 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     public ImageSource? ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
 
-    public ICommand CreatePhoneNumberCommand { get; private set; }
+    public ICommand PickUserCommand { get; private set; }
 
-    //public ICommand UpdatePhoneNumberCommand { get; private set; }
+    public ICommand CreatePhoneNumberCommand { get; private set; }
 
     public ICommand DetailPhoneNumberCommand { get; private set; }
 
@@ -286,23 +297,17 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
     public ICommand CreateEmailAddressCommand { get; private set; }
 
-    //public ICommand UpdateEmailAddressCommand { get; private set; }
-
     public ICommand DetailEmailAddressCommand { get; private set; }
 
     public ICommand RemoveEmailAddressCommand { get; private set; }
 
     public ICommand CreatePostalAddressCommand { get; private set; }
 
-    //public ICommand UpdatePostalAddressCommand { get; private set; }
-
     public ICommand DetailPostalAddressCommand { get; private set; }
 
     public ICommand RemovePostalAddressCommand { get; private set; }
 
     public ICommand CreateWebSiteAddressCommand { get; private set; }
-
-    //public ICommand UpdateWebSiteAddressCommand { get; private set; }
 
     public ICommand DetailWebSiteAddressCommand { get; private set; }
 
@@ -321,16 +326,17 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
         return apiClient.CreateAsync(new PersonCreateRequestModel
             (
-                Name!,
-                Priority,
+                name!,
+                priority,
                 [.. EmailAddresses],
                 [.. PhoneNumbers],
                 [.. PostalAddresses],
                 [.. WebSiteAddresses],
-                LastName,
-                Alias,
-                About,
-                imagePickedModel
+                lastName,
+                alias,
+                about,
+                imagePickedModel,
+                user
             ));
     }
 
@@ -341,8 +347,8 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
         return apiClient.UpdateAsync(new PersonUpdateRequestModel
             (
                 Id!.Value,
-                Name!,
-                Priority,
+                name!,
+                priority,
                 [.. inEmailAddresses],
                 [.. outEmailAddresses],
                 [.. inPhoneNumbers],
@@ -351,14 +357,22 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
                 [.. outPostalAddresses],
                 [.. inWebSiteAddresses],
                 [.. outWebSiteAddresses],
-                LastName,
-                Alias,
-                About,
-                imagePickedModel
+                lastName,
+                alias,
+                about,
+                imagePickedModel,
+                user
             ));
     }
 
     public override IValidationContext? ValidationContext => new ValidationContext<PersonConfigurationPageModel>(this);
+
+    private void UserPicked_Callback(UserBasicDtoModel model)
+    {
+        User = model;
+
+        hasChangesFlag = true;
+    }
 
     private void PhoneNumberCreateSuccess_Callback(PhoneNumberDetailDtoModel model)
     {
@@ -369,18 +383,6 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
         hasChangesFlag = true;
     }
 
-    //private void PhoneNumberModifySuccess_Callback(PhoneNumberDetailDtoModel model)
-    //{
-    //    if (outgoingPhoneNumber != null)
-    //    {
-    //        PhoneNumbers.Remove(outgoingPhoneNumber);
-    //    }
-
-    //    PhoneNumbers.Add(model);
-
-    //    hasChangesFlag = true;
-    //}
-
     private void EmailAddressCreateSuccess_Callback(EmailAddressDetailDtoModel model)
     {
         inEmailAddresses.Add(model);
@@ -389,15 +391,6 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
         hasChangesFlag = true;
     }
-
-    //private void EmailAddressModifySuccess_Callback(EmailAddressDetailDtoModel model)
-    //{
-    //    if (outgoingEmailAddress != null) EmailAddresses.Remove(outgoingEmailAddress);
-
-    //    EmailAddresses.Add(model);
-
-    //    hasChangesFlag = true;
-    //}
 
     private void PostalAddressCreateSuccess_Callback(PostalAddressDetailDtoModel model)
     {
@@ -408,15 +401,6 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
         hasChangesFlag = true;
     }
 
-    //private void PostalAddressModifySuccess_Callback(PostalAddressDetailDtoModel model)
-    //{
-    //    if (outgoingPostalAddress != null) PostalAddresses.Remove(outgoingPostalAddress);
-
-    //    PostalAddresses.Add(model);
-
-    //    hasChangesFlag = true;
-    //}
-
     private void WebSiteAddressCreateSuccess_Callback(WebSiteAddressDetailDtoModel model)
     {
         inWebSiteAddresses.Add(model);
@@ -425,15 +409,6 @@ public sealed class PersonConfigurationPageModel : AbstractConfigurationPageMode
 
         hasChangesFlag = true;
     }
-
-    //private void WebSiteAddressModifySuccess_Callback(WebSiteAddressDetailDtoModel model)
-    //{
-    //    if (outgoingWebSiteAddress != null) WebSiteAddresses.Remove(outgoingWebSiteAddress);
-
-    //    WebSiteAddresses.Add(model);
-
-    //    hasChangesFlag = true;
-    //}
 
     internal void SetImagePickedModel(ImageCreateRequestModel model)
     {

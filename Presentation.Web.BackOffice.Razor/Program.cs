@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate;
@@ -93,14 +94,17 @@ public class Program
 
                 var backOfficeMmanagementPermissionId = new PermissionId(PermissionConstants.BACKOFFICE_MANAGEMENT_PERMISSION);
 
-                if (!dbContext.Permissions.Any(entity => entity.Id == backOfficeMmanagementPermissionId))
+                DbSet<Permission> permissionSet = dbContext.Set<Permission>();
+                DbSet<User> userSet = dbContext.Set<User>();
+
+                if (permissionSet.Any(entity => entity.Id == backOfficeMmanagementPermissionId))
                 {
-                    dbContext.Permissions.Add(PermissionConstants.BACKOFFICE_MANAGEMENT_PERMISSION.ToPermissionEntity());
+                    permissionSet.Add(PermissionConstants.BACKOFFICE_MANAGEMENT_PERMISSION.ToPermissionEntity());
 
                     if (!hasSeedingChanges) hasSeedingChanges = true;
                 }
 
-                if (!dbContext.Users.Any())
+                if (!userSet.Any())
                 {
                     var defaultUserConfiguration = new DefaultUserConfiguration();
 
@@ -117,7 +121,7 @@ public class Program
 
                     defaultUser.Signature = serviceScope.ServiceProvider.GetService<IDataIntegrityServicePort>()!.GetEntitySignatureAsync(defaultUser).GetAwaiter().GetResult();
 
-                    dbContext.Users.Add(defaultUser);
+                    userSet.Add(defaultUser);
 
                     if (!hasSeedingChanges) hasSeedingChanges = true;
                 }
@@ -130,7 +134,9 @@ public class Program
                 app.UseHsts();
             }
 
-            Role[] atStartUpRoles = [.. dbContext!.Roles.Include(e => e.PermissionBridges).ThenInclude(b => b.Linked)];
+            DbSet<Role> roleSet = dbContext!.Set<Role>();
+
+            Role[] atStartUpRoles = [.. roleSet.Include(e => e.PermissionBridges).ThenInclude(b => b.Linked)];
 
             Ports.Manager.IRoleRuntimeManagerPort roleMemoryManager = app.Services.GetService<Ports.Manager.IRoleRuntimeManagerPort>()!;
 

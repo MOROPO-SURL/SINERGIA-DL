@@ -186,6 +186,16 @@
             </ShellContent.Icon>
         </ShellContent>
         <ShellContent
+            Title="Actividades económicas"
+            ContentTemplate="{DataTemplate local_ui_pages:EconomicActivitiesManagementPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphEconomicActivities}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
             Title="Unidades de medida"
             Route="UnitMeasurementsManagementPage"
             ContentTemplate="{DataTemplate local_ui_pages:UnitMeasurementsManagementPage}">
