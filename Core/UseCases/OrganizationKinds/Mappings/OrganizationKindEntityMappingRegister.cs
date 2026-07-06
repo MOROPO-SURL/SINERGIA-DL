@@ -30,9 +30,9 @@ internal sealed class OrganizationKindEntityMappingRegister : IRegister
             .MapWith(src => new(
                 new OrganizationKindId(Guid.NewGuid()),
                 src.IsEnabled,
-                false,
                 src.Priority,
                 src.Name,
+                src.DevelopmentActorProfileKind,
                 src.Description
             ));
 

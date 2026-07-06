@@ -1,9 +1,7 @@
 ﻿using Mapster;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Archive;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Disable;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Enable;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Remove;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Unarchive;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.DTOs;
@@ -32,11 +30,5 @@ internal class OrganizationKindMappingRegister : IRegister
 
         config.NewConfig<Guid, OrganizationKindDisableCommand>()
             .MapWith(src => new OrganizationKindDisableCommand(src));
-
-        config.NewConfig<Guid, OrganizationKindArchiveCommand>()
-            .MapWith(src => new OrganizationKindArchiveCommand(src));
-
-        config.NewConfig<Guid, OrganizationKindUnarchiveCommand>()
-            .MapWith(src => new OrganizationKindUnarchiveCommand(src));
     }
 }

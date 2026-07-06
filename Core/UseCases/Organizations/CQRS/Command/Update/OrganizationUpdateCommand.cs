@@ -5,7 +5,6 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.C
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Update.Clipped;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Enumerations;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Update;
 
@@ -15,7 +14,7 @@ public record OrganizationUpdateCommand(
     bool IsEnabled,
     bool IsArchived,
     int Priority,
-    Guid OrganizationKindId,
+    Guid KindId,
     IEnumerable<EmailAddressDetailDto> InEmailAddresses,
     IEnumerable<EmailAddressDetailDto> OutEmailAddresses,
     IEnumerable<PhoneNumberDetailDto> InPhoneNumbers,
@@ -27,6 +26,5 @@ public record OrganizationUpdateCommand(
     IEnumerable<OrganizationPersonRelationshipClippedCreateCommand> InPersonRelationships,
     IEnumerable<OrganizationPersonRelationshipClippedUpdateCommand> PatchPersonRelationships,
     IEnumerable<PersonBasicDto> OutPersonRelationships,
-    DevelopmentActorProfileKind? DevelopmentActorProfileKind = null,
     string? About = null,
     ImageCreateCommand? Image = null) : IUpdateCommand<Guid, OrganizationDetailDto>;

@@ -51,7 +51,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
 
     public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-    public string? Objective { get => objective; set => SetProperty(ref objective, value); }
+    public string Objective { get => objective; set => SetProperty(ref objective, value); }
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 

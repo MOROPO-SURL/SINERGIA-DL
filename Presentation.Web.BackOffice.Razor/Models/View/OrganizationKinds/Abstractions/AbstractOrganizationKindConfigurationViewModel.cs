@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Enumerations;
+using System.ComponentModel.DataAnnotations;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.OrganizationKinds.Abstractions;
 
@@ -10,6 +11,9 @@ public abstract class AbstractOrganizationKindConfigurationViewModel
     public string Name { get; set; } = null!;
 
     public bool IsEnabled { get; set; }
+
+    [Display(Name = nameof(DevelopmentActorProfileKind))]
+    public DevelopmentActorProfileKind? DevelopmentActorProfileKind { get; set; }
 
     [DataType(DataType.MultilineText)]
     [Display(Name = nameof(Description))]

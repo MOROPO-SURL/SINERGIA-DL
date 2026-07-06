@@ -40,14 +40,13 @@ internal sealed class OrganizationEntityMappingRegister : IRegister
                 src.IsEnabled,
                 src.Name,
                 src.Priority,
-                new OrganizationKindId(src.OrganizationKindId),
+                new OrganizationKindId(src.KindId),
                 src.EmailAddresses.Select(item => item.Adapt<EmailAddress>()).ToArray(),
                 src.PhoneNumbers.Select(item => item.Adapt<PhoneNumber>()).ToArray(),
                 src.PostalAddresses.Select(item => item.Adapt<PostalAddress>()).ToArray(),
                 src.WebSiteAddresses.Select(item => item.Adapt<WebSiteAddress>()).ToArray(),
                 Array.Empty<PersonOrganizationBrigde>(),
                 Array.Empty<OrganizationClassificationBridge>(),
-                src.DevelopmentActorProfileKind,
                 null,
                 null,
                 null,
@@ -63,6 +62,7 @@ internal sealed class OrganizationEntityMappingRegister : IRegister
             });
 
         config.NewConfig<OrganizationUpdateCommand, Organization>()
+            .Map(dest => dest.KindId, src => new OrganizationKindId(src.KindId))
             .AfterMapping((src, dest) =>
             {
                 foreach (PhoneNumberDetailDto item in src.InPhoneNumbers)

@@ -2,7 +2,6 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Bridges;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Enumerations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.Values;
@@ -31,15 +30,14 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
         bool enabled,
         string name,
         int priority,
-        OrganizationKindId organizationKindId,
+        OrganizationKindId kindId,
         IEnumerable<EmailAddress> emailAddresses,
         IEnumerable<PhoneNumber> phoneNumbers,
         IEnumerable<PostalAddress> postalAddresses,
         IEnumerable<WebSiteAddress> webSiteAddresses,
         IEnumerable<PersonOrganizationBrigde> personBrigdes,
         IEnumerable<OrganizationClassificationBridge> classificationBridges,
-        DevelopmentActorProfileKind? developmentActorProfileKind,
-        OrganizationKind? organizationKind = null, 
+        OrganizationKind? kind = null, 
         Organization? owner = null, 
         OrganizationId? ownerId = null, 
         string? about = null, 
@@ -54,9 +52,8 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
         OwnerId = ownerId;
         Image = image;
         ImageId = imageId;
-        KindId = organizationKindId;
-        Kind = organizationKind;
-        DevelopmentActorProfileKind = developmentActorProfileKind;
+        KindId = kindId;
+        Kind = kind;
         About = about;
 
         this.emailAddresses = [.. emailAddresses];
@@ -85,8 +82,6 @@ public class Organization : AbstractAuditableEntity<OrganizationId, Guid>, IAggr
 
     public OrganizationKind? Kind { get; set; }
     public OrganizationKindId KindId { get; set; }
-
-    public DevelopmentActorProfileKind? DevelopmentActorProfileKind { get; set; }
 
     public IReadOnlyList<EmailAddress> EmailAddresses => [.. emailAddresses];
 

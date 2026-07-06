@@ -88,7 +88,7 @@ public class OrganizationsController: ControllerBase
 
             OrganizationBasicDto[] result = await mediator.Send(new DevelopmentActorProfilableOrganizationListQuery(
                 entity => 
-                    entity.DevelopmentActorProfileKind == developmentActorProfileKind.Adapt<Domain.Aggretates.OrganizationAggregate.Enumerations.DevelopmentActorProfileKind>() &&
+                    entity.Kind!.DevelopmentActorProfileKind == developmentActorProfileKind.Adapt<Domain.Aggretates.OrganizationAggregate.Enumerations.DevelopmentActorProfileKind>() &&
                     entity.PersonBridges.Any(bridge => bridge.Main!.UserId == domainUserId && bridge.IsRepresentative == true)));
 
             return Ok(mapper.Map<OrganizationBasicDtoModel[]>(result));

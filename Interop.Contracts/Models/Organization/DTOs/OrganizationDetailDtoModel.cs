@@ -19,6 +19,5 @@ public record OrganizationDetailDtoModel(
     PersonBasicDtoModel[] RepresentativePersons,
     PersonBasicDtoModel[] NonRepresentativePersons,
     string? Alias = null,
-    Enumerations.DevelopmentActorProfileKind? DevelopmentActorProfileKind = null,
     string? About = null,
     ImageBasicDtoModel? Image = null);

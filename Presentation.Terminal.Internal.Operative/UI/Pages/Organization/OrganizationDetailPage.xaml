@@ -282,28 +282,18 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </VerticalStackLayout>
-                <FlexLayout Wrap="Wrap">
-                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
-                        <VerticalStackLayout.Behaviors>
-                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
-                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=5, MediumContainerColumn=6, SmallContainerColumn=8}" />
-                        </VerticalStackLayout.Behaviors>
-                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Perfil de actor del desarrollo" />
-                        <Label Text="{Binding Model.DevelopmentActorProfileKind, Converter={StaticResource StringToLocalizedStringConverter}, TargetNullValue='---'}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
-                        <VerticalStackLayout.Behaviors>
-                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
-                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}" />
-                        </VerticalStackLayout.Behaviors>
-                        <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Text="Prioridad" />
-                        <Label
-                            Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Model.Priority}" />
-                    </VerticalStackLayout>
-                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <VerticalStackLayout.Behaviors>
+                        <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                            ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}" />
+                    </VerticalStackLayout.Behaviors>
+                    <Label 
+                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                        Text="Prioridad" />
+                    <Label
+                        Style="{StaticResource ValuePropertyLabelStyle}"
+                        Text="{Binding Model.Priority}" />
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
         <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />

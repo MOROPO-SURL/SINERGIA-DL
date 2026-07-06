@@ -9,7 +9,7 @@ public record OrganizationUpdateRequestModel(
     string Name,
     bool IsEnabled,
     int Priority,
-    Guid OrganizationKindId,
+    Guid KindId,
     EmailAddressDetailDtoModel[] InEmailAddresses,
     EmailAddressDetailDtoModel[] OutEmailAddresses,
     PhoneNumberDetailDtoModel[] InPhoneNumbers,
@@ -21,6 +21,5 @@ public record OrganizationUpdateRequestModel(
     OrganizationPersonRelationshipConfigurationRequestModel[] InPersonRelationships,
     OrganizationPersonRelationshipConfigurationRequestModel[] PatchPersonRelationships,
     PersonBasicDtoModel[] OutPersonRelationships,
-    Enumerations.DevelopmentActorProfileKind? DevelopmentActorProfileKind = null,
     string? About = null,
     ImageCreateRequestModel? Image = null);

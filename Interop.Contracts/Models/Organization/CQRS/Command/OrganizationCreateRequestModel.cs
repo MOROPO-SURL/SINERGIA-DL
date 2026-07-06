@@ -7,12 +7,11 @@ public record OrganizationCreateRequestModel(
     string Name,
     bool IsEnabled,
     int Priority,
-    Guid OrganizationKindId,
+    Guid KindId,
     EmailAddressDetailDtoModel[] EmailAddresses,
     PhoneNumberDetailDtoModel[] PhoneNumbers,
     PostalAddressDetailDtoModel[] PostalAddresses,
     WebSiteAddressDetailDtoModel[] WebSiteAddresses,
     OrganizationPersonRelationshipConfigurationRequestModel[] PersonRelationships,
-    Enumerations.DevelopmentActorProfileKind? DevelopmentActorProfileKind = null,
     string? About = null,
     ImageCreateRequestModel? Image = null);

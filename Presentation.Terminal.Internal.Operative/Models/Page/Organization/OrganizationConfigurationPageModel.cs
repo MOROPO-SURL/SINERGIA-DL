@@ -43,7 +43,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
     private int priority = 1;
     private string name = null!;
     private OrganizationKindBasicDtoModel kind = null!;
-    private DevelopmentActorProfileKind? developmentActorProfileKind;
     private string? about;
     private ImageSource? imageSource;
 
@@ -432,7 +431,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         #endregion
 
         AvailableKinds = availableKinds;
-        AvailableDevelopmentActorProfileKinds = (DevelopmentActorProfileKind[])Enum.GetValues(typeof(DevelopmentActorProfileKind));
 
         if (model is null) return;
 
@@ -440,7 +438,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         priority = model.Priority;
         name = model.Name;
         kind = availableKinds.First(item => item.Equals(model.Kind));
-        developmentActorProfileKind = model.DevelopmentActorProfileKind;
         about = model.About;
 
         PhoneNumbers = [.. model.PhoneNumbers];
@@ -459,8 +456,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
 
     public OrganizationKindBasicDtoModel Kind { get => kind; set => SetProperty(ref kind, value); }
 
-    public DevelopmentActorProfileKind? DevelopmentActorProfileKind { get => developmentActorProfileKind; set => SetProperty(ref developmentActorProfileKind, value); }
-
     public string? About { get => about; set => SetProperty(ref about, value); }
 
     public ObservableCollection<PhoneNumberDetailDtoModel> PhoneNumbers { get; set; } = [];
@@ -478,8 +473,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
     public ImageSource? ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
 
     public OrganizationKindBasicDtoModel[] AvailableKinds { get; init; }
-
-    public DevelopmentActorProfileKind[] AvailableDevelopmentActorProfileKinds { get; init; }
 
     public ICommand CreatePhoneNumberCommand { get; private set; }
 
@@ -539,7 +532,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
                 [.. PostalAddresses],
                 [.. WebSiteAddresses],
                 [.. inPersonRelationships],
-                developmentActorProfileKind,
                 about,
                 imagePickedModel
             ));
@@ -567,7 +559,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
                 [.. inPersonRelationships],
                 [.. patchPersonRelationships],
                 [.. outPersonRelationships],
-                developmentActorProfileKind,
                 about,
                 imagePickedModel
             ));

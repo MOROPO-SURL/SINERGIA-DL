@@ -4,12 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Archive;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Disable;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Enable;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Remove;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Unarchive;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Query.Count;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.CQRS.Query.Detail;
@@ -43,7 +41,7 @@ public class OrganizationKindsController : ControllerBase
     {
         try
         {
-            PaginateQueryResultModel<OrganizationKindBasicDto> result = await mediator.Send(new OrganizationKindPaginateQuery(sheet, limit, entity => !entity.IsArchived));
+            PaginateQueryResultModel<OrganizationKindBasicDto> result = await mediator.Send(new OrganizationKindPaginateQuery(sheet, limit));
 
             return Ok(mapper.Map<PaginateResultModel<OrganizationKindBasicDtoModel>>(result));
         }
@@ -64,7 +62,7 @@ public class OrganizationKindsController : ControllerBase
             PaginateQueryResultModel<OrganizationKindBasicDto> result = await mediator.Send(new OrganizationKindPaginateQuery(
                 sheet,
                 limit,
-                entity => !entity.IsArchived && EF.Functions.ILike(entity.Name, $"%{parameter}%")));
+                entity => EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<OrganizationKindBasicDtoModel>>(result));
         }
@@ -171,40 +169,6 @@ public class OrganizationKindsController : ControllerBase
         try
         {
             await mediator.Send(new OrganizationKindDisableCommand(key));
-
-            return Ok();
-        }
-        catch (Exception exception)
-        {
-            logger.LogError(exception, exception.Message);
-
-            return Problem();
-        }
-    }
-
-    [HttpPatch("{key}/unarchive")]
-    public async Task<IActionResult> UnarchiveAsync(Guid key)
-    {
-        try
-        {
-            await mediator.Send(new OrganizationKindUnarchiveCommand(key));
-
-            return Ok();
-        }
-        catch (Exception exception)
-        {
-            logger.LogError(exception, exception.Message);
-
-            return Problem();
-        }
-    }
-
-    [HttpPatch("{key}/archive")]
-    public async Task<IActionResult> ArchiveAsync(Guid key)
-    {
-        try
-        {
-            await mediator.Send(new OrganizationKindArchiveCommand(key));
 
             return Ok();
         }

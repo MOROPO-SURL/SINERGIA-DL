@@ -519,17 +519,6 @@
                 </VerticalStackLayout>
                 <BoxView Style="{StaticResource FormFluentChildSeparatorBoxViewStyle}" />
                 <FlexLayout Wrap="Wrap">
-                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
-                        <VerticalStackLayout.Behaviors>
-                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
-                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=5, MediumContainerColumn=6, SmallContainerColumn=8}" />
-                        </VerticalStackLayout.Behaviors>
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Perfil de actor del desarrollo" />
-                        <Picker 
-                            ItemsSource="{Binding AvailableDevelopmentActorProfileKinds}"
-                            ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizedStringConverter}, TargetNullValue='Ninguno'}"
-                            SelectedItem="{Binding DevelopmentActorProfileKind}" />
-                    </VerticalStackLayout>
                     <Grid Style="{StaticResource FormFlexWrappedChildGridStyle}">
                         <Grid.Behaviors>
                             <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior>

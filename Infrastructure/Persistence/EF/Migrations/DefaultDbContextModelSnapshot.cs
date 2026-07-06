@@ -426,9 +426,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int?>("DevelopmentActorProfileKind")
-                        .HasColumnType("integer");
-
                     b.Property<Guid?>("ImageId")
                         .HasColumnType("uuid");
 
@@ -480,8 +477,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasMaxLength(480)
                         .HasColumnType("character varying(480)");
 
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("boolean");
+                    b.Property<int?>("DevelopmentActorProfileKind")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("boolean");
