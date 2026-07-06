@@ -24,7 +24,7 @@ public partial class AppShell : Shell
 
     private void UserProfileMenuItem_Clicked(object sender, EventArgs eventArgs)
     {
-        Launcher.OpenAsync(new Uri(Constants.InteropConstants.USER_PROFILE_URL)).GetAwaiter().GetResult();
+        Launcher.OpenAsync(new Uri(Common.Constants.InteropConstants.USER_PROFILE_URL)).GetAwaiter().GetResult();
     }
 
     private void LogOutMenuItem_Clicked(object sender, EventArgs eventArgs)

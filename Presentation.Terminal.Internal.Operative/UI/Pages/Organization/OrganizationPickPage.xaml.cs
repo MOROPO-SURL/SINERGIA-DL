@@ -24,7 +24,7 @@ public partial class OrganizationPickPage :
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Terminal.Common.Constants.CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected void CancelToolbarItem_Clicked(object sender, EventArgs eventArgs)
     {

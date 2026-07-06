@@ -2,13 +2,13 @@
 <ContentView 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
-    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
-    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Views.Card.OrganizationCardView"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card.OrganizationCardView"
     x:DataType="interop_dto_models:OrganizationBasicDtoModel">
     <ContentView.Resources>
         <ResourceDictionary>
-            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+            <local_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame Padding="0">

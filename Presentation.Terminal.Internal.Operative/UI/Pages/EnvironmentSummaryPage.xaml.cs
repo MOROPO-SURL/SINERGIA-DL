@@ -34,16 +34,16 @@ public partial class EnvironmentSummaryPage : BaseBindingContextedContentPage<Mo
 
     private async void StrategicProjectKindAdminButton_Clicked(object sender, EventArgs e)
     {
-        await Launcher.OpenAsync($"{Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/strategicprojectkinds");
+        await Launcher.OpenAsync($"{Terminal.Common.Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/strategicprojectkinds");
     }
 
     private async void OrganizationKindAdminButton_Clicked(object sender, EventArgs e)
     {
-        await Launcher.OpenAsync($"{Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/organizationkinds");
+        await Launcher.OpenAsync($"{Terminal.Common.Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/organizationkinds");
     }
 
     private async void FeatureKindAdminButton_Clicked(object sender, EventArgs e)
     {
-        await Launcher.OpenAsync($"{Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/featurekinds");
+        await Launcher.OpenAsync($"{Terminal.Common.Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/featurekinds");
     }
 }

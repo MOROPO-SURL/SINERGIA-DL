@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;
 
 public static class ListEntityPageConstants
 {

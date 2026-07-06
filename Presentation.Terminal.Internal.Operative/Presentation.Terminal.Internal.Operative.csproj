@@ -160,9 +160,6 @@
 	  <Compile Update="UI\Pages\PublicPolicy\PublicPolicyDetailPage.xaml.cs">
 	    <DependentUpon>PublicPolicyDetailPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="UI\Pages\StrategySummaryPage.xaml.cs">
-	    <DependentUpon>StrategySummaryPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="UI\Pages\TerritoryPotentialsManagementPage.xaml.cs">
 	    <DependentUpon>TerritoryPotentialsManagementPage.xaml</DependentUpon>
 	  </Compile>
@@ -222,9 +219,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Common\Detail\WebSiteAddressDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\DiagnosticSummaryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\EconomicActivitiesManagementPage.xaml">
@@ -332,9 +326,6 @@
 	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\StrategySummaryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\TerritoryPotentialsManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -411,9 +402,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Views\Card\MacroprogramCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\OrganizationCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Views\Card\PersonCardView.xaml">

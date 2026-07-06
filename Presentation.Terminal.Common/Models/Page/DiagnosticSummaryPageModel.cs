@@ -6,12 +6,12 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PublicPolicy.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.TerritorialBarrier.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.TerritoryPotential.DTOs;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.View;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
 using System.Collections.ObjectModel;
 
-namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page;
 
 public sealed class DiagnosticSummaryPageModel : BasePageModel
 {
@@ -51,12 +51,12 @@ public sealed class DiagnosticSummaryPageModel : BasePageModel
             TerritoryPotentialDetailDtoModel[] territoryPotentials = await territoryPotentialApiClient.GetAllAsync();
             PublicPolicyDetailDtoModel[] publicPolicies = await publicPolicyApiClient.GetAllAsync();
 
-            List<PublicPolicyGroupViewModel> publicPolicyGroups = 
+            List<PublicPolicyGroupViewModel> publicPolicyGroups =
             [
                 new PublicPolicyGroupViewModel(PublicPolicyKind.National, [.. publicPolicies.Where(item => item.Kind == PublicPolicyKind.National)]),
                 new PublicPolicyGroupViewModel(PublicPolicyKind.Territorial, [.. publicPolicies.Where(item => item.Kind == PublicPolicyKind.Territorial)]),
-                new PublicPolicyGroupViewModel(PublicPolicyKind.Provincial, [.. publicPolicies.Where(item => item.Kind == PublicPolicyKind.Provincial)]), 
-                new PublicPolicyGroupViewModel(PublicPolicyKind.Municipal, [.. publicPolicies.Where(item => item.Kind == PublicPolicyKind.Municipal)])    
+                new PublicPolicyGroupViewModel(PublicPolicyKind.Provincial, [.. publicPolicies.Where(item => item.Kind == PublicPolicyKind.Provincial)]),
+                new PublicPolicyGroupViewModel(PublicPolicyKind.Municipal, [.. publicPolicies.Where(item => item.Kind == PublicPolicyKind.Municipal)])
             ];
 
             Dispatcher.Dispatch(() =>

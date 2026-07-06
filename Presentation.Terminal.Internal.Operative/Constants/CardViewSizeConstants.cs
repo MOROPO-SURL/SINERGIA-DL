@@ -24,9 +24,6 @@ public static class CardViewSizeConstants
     public static double FEATURE_DEFAULT_CARD_VIEW_HEIGHT = 120;
     public static double FEATURE_DEFAULT_CARD_VIEW_WIDTH = 400;
 
-    public static double ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT = 120;
-    public static double ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH = 360;
-
     public static double MACROPROGRAM_DEFAULT_CARD_VIEW_HEIGHT = 96;
     public static double MACROPROGRAM_DEFAULT_CARD_VIEW_WIDTH = 320;
 

@@ -22,7 +22,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>SINERGIA-DL MiPyMEs CAM Camagüey</ApplicationTitle>
+		<ApplicationTitle>MiPyMEs SINERGIA-DL CAM Camagüey</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>cu.moropo.pdlcolabcmg.sinergiadl.cmg.pyme</ApplicationId>
@@ -82,6 +82,14 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LocalizationResources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\MainPage.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -89,6 +97,13 @@
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>LocalizationResources.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
+	    <SubType>Designer</SubType>
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

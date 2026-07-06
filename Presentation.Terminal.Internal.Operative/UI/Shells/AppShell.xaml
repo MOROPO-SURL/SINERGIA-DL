@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_ui_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages"
+    xmlns:common_ui_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     Title="Navegación"
     FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}">
     <Shell.FlyoutBehavior>
@@ -31,7 +32,7 @@
     </ShellContent>
     <ShellContent
         Title="Diagnóstico"
-        ContentTemplate="{DataTemplate local_ui_pages:DiagnosticSummaryPage}">
+        ContentTemplate="{DataTemplate common_ui_pages:DiagnosticSummaryPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
@@ -93,7 +94,7 @@
     </FlyoutItem>
     <ShellContent
         Title="Estrategia"
-        ContentTemplate="{DataTemplate local_ui_pages:StrategySummaryPage}">
+        ContentTemplate="{DataTemplate common_ui_pages:StrategySummaryPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"

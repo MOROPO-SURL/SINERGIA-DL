@@ -32,6 +32,9 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#1E1E1E</Color>
 
+    <Color x:Key="ToolbarItemLightTintColor">#000000</Color>
+    <Color x:Key="ToolbarItemDarkTintColor">#FFFFFF</Color>
+
     <!-- ========== SUCCESS (ÉXITO) - VERDE VIVO/PASTEL ========== -->
     <!-- TEMA LIGHT: Verde pastel vibrante como fondo principal -->
     <Color x:Key="LightSuccessBackground">#FF4CAF50</Color>
@@ -827,6 +830,17 @@
         </Setter>
         <Setter Property="ColumnSpacing" Value="6" />
         <Setter Property="RowSpacing" Value="6" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="FormFlexWrappedChildFrameStyle">
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Padding">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,8">
+                    <On Platform="Android" Value="0,0,0,24" />
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!--#endregion-->

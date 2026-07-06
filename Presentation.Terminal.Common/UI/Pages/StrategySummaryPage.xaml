@@ -2,13 +2,13 @@
 <common_ui_base_pages:BaseBindingContextedContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View"
-    xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page"
+    xmlns:local_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.View"
+    xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page"
     xmlns:interop_project_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategySummaryPage"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.StrategySummaryPage"
     x:TypeArguments="local_page_models:StrategySummaryPageModel"
     x:DataType="local_page_models:StrategySummaryPageModel"
     Title="Estrategia">
@@ -26,7 +26,7 @@
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
                     FontFamily="MaterialDesignIcons" 
-                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
                     Glyph="&#xF450;" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
@@ -37,7 +37,7 @@
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
                     FontFamily="MaterialDesignIcons"  
-                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
                     Glyph="&#xF1DA;" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>

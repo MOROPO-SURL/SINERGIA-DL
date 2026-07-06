@@ -1,11 +1,11 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Enumerations;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
-namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages;
 
 public partial class DiagnosticSummaryPage : BaseBindingContextedContentPage<DiagnosticSummaryPageModel>
 {
@@ -45,7 +45,7 @@ public partial class DiagnosticSummaryPage : BaseBindingContextedContentPage<Dia
             Timeout = TimeSpan.FromSeconds(30.0)
         };
 
-        httpClient.GetByteArrayAsync(Constants.InteropConstants.REPORT_DIAGNOSTIC_URL).ContinueWith(task =>
+        httpClient.GetByteArrayAsync(Common.Constants.InteropConstants.REPORT_DIAGNOSTIC_URL).ContinueWith(task =>
         {
             Dispatcher.Dispatch(async () =>
             {

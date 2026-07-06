@@ -4,11 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
     xmlns:local_pick_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization"
-    xmlns:local_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Views.Card"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Organization.OrganizationPickPage"
     x:TypeArguments="interop_dto_models:OrganizationBasicDtoModel,local_pick_page_models:OrganizationPickPageModel"
@@ -59,21 +60,21 @@
                             <GridItemsLayout 
                                 Orientation="Vertical" 
                                 Span="2" 
-                                HorizontalItemSpacing="{Static local_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
-                                VerticalItemSpacing="{Static local_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                                HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.Behaviors>
                             <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
-                                ItemSpacing="{Static local_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
-                                ItemWidth="{Static local_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH}" />
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH}" />
                         </CollectionView.Behaviors>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_ui_card_views:OrganizationCardView HeightRequest="{Static local_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}">
+                                <common_ui_card_views:OrganizationCardView HeightRequest="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
                                     </ContentView.GestureRecognizers>
-                                </local_ui_card_views:OrganizationCardView>
+                                </common_ui_card_views:OrganizationCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

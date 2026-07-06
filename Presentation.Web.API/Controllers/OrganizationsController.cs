@@ -1,4 +1,5 @@
-﻿using MapsterMapper;
+﻿using Mapster;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +13,10 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.R
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Unarchive;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Query.Detail;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Query.List;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
@@ -66,6 +69,29 @@ public class OrganizationsController: ControllerBase
                 entity => !entity.IsArchived && EF.Functions.ILike(entity.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<OrganizationBasicDtoModel>>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet]
+    [Route("list/developmentprofilable/{developmentActorProfileKind}/user/{userId}")]
+    public async Task<ActionResult<PaginateResultModel<OrganizationBasicDtoModel>>> ListDevelopmentActorProfilablesAsync(Interop.Contracts.Enumerations.DevelopmentActorProfileKind developmentActorProfileKind, string userId)
+    {
+        try
+        {
+            UserId domainUserId = new(userId);
+
+            OrganizationBasicDto[] result = await mediator.Send(new DevelopmentActorProfilableOrganizationListQuery(
+                entity => 
+                    entity.DevelopmentActorProfileKind == developmentActorProfileKind.Adapt<Domain.Aggretates.OrganizationAggregate.Enumerations.DevelopmentActorProfileKind>() &&
+                    entity.PersonBridges.Any(bridge => bridge.Main!.UserId == domainUserId && bridge.IsRepresentative == true)));
+
+            return Ok(mapper.Map<OrganizationBasicDtoModel[]>(result));
         }
         catch (Exception exception)
         {

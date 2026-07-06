@@ -2,13 +2,25 @@
 <Application 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common_style_resources="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Resources.Styles;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.App">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <common_style_resources:SharedStylesDictionary />
+
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <x:String x:Key="FontMaterialDesignIcons">MaterialDesignIcons</x:String>
+
+            <x:String x:Key="IconGlyphContext">&#xF002B;</x:String>
+            <x:String x:Key="IconGlyphEDL">&#xFA1C;</x:String>
+            <x:String x:Key="IconGlyphHelp">&#xF87D;</x:String>
+            <x:String x:Key="IconGlyphConfig">&#xF66A;</x:String>
+            <x:String x:Key="IconGlyphUserProfile">&#xF009;</x:String>
+            <x:String x:Key="IconGlyphLogOut">&#xFA47;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
