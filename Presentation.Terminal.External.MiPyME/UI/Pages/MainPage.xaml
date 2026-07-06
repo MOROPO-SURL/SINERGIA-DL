@@ -81,12 +81,6 @@
                             </common_ui_card_views:OrganizationCardView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                    <CollectionView.EmptyView>
-                        <Label
-                            Style="{StaticResource CollectionPageEmptyViewLabelStyle}"
-                            Margin="8"
-                            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}" />
-                    </CollectionView.EmptyView>
                     <CollectionView.Header>
                         <VerticalStackLayout IsVisible="{OnPlatform Default='true', Android='false'}">
                             <VerticalStackLayout HorizontalOptions="Start">

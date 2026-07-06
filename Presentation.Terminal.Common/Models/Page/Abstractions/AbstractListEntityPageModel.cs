@@ -4,6 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
@@ -132,7 +133,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
                 {
                     currentItemsPageNumber--;
 
-                    IPlatformApplication.Current!.Services.GetRequiredService<IExceptionHandlingHelperPort>().HandleException(task.Exception);
+                    HandleException(task.Exception);
                 }
                 else
                 {
@@ -148,5 +149,10 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
                 IsBusy = false;
             });
         });
+    }
+
+    protected virtual void HandleException(Exception? exception)
+    {
+        IPlatformApplication.Current!.Services.GetRequiredService<IExceptionHandlingHelperPort>().HandleException(exception);
     }
 }
