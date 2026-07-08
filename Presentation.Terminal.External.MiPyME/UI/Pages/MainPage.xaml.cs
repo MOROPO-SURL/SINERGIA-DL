@@ -1,5 +1,7 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages;
@@ -22,7 +24,32 @@ public partial class MainPage :
 
     public async Task PresentItemDetailUserInterfaceAsync(OrganizationBasicDtoModel model)
     {
-        await DisplayAlert("Aviso", "Funcionalidad en construcción. Espere nuevas versiones de la aplicación.", "Aceptar");
+        IsBusy = true;
+
+        ISessionManagerPort sessionManager = IPlatformApplication.Current!.Services.GetRequiredService<ISessionManagerPort>();
+
+        OrganizationQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+
+        await apiClient.GetAsync(model.Id).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                IsBusy = false;
+
+                if (!task.IsCompletedSuccessfully)
+                {
+                    IPlatformApplication.Current!.Services.GetRequiredService<Terminal.Common.Ports.Helper.IExceptionHandlingHelperPort>().HandleException(task.Exception);
+
+                    return;
+                }
+
+                PersonBasicDtoModel representative = task.Result.RepresentativePersons.First(item => item.UserId == sessionManager.CurrentSession!.User.Id);
+
+                Common.Models.Page.AppShellPageModel pageModel = new(task.Result, representative);
+
+                Application.Current!.MainPage = new Shells.AppShell(pageModel);
+            });
+        });
     }
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;

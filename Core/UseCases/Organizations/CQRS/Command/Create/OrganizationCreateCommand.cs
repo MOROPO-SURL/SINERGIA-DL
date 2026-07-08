@@ -18,4 +18,4 @@ public record OrganizationCreateCommand(
     IEnumerable<WebSiteAddressDetailDto> WebSiteAddresses,
     IEnumerable<OrganizationPersonRelationshipClippedCreateCommand> PersonRelationships,
     string? About = null,
-    ImageCreateCommand? Image = null) : ICreateCommand<OrganizationDetailDto>;
+    ImageCreateCommand? NewImage = null) : ICreateCommand<OrganizationDetailDto>;

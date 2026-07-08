@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Models.Page"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.UI.Pages.DashboardPage"
+    x:DataType="local_page_models:DashboardPageModel"
+    Title="Panel de Control">
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout>
+                <Label
+                    FontSize="Header"
+                    FontAttributes="Bold"
+                    Text="{Binding Organization.Name}" />
+                <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                    <VerticalStackLayout 
+                        Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                        <Frame
+                            Style="{StaticResource WarningToastFrameStyle}">
+                            <StackLayout 
+                                Orientation="Horizontal"
+                                Spacing="8">
+                                <Label
+                                    VerticalOptions="Center"
+                                    FontSize="32"
+                                    FontFamily="MaterialDesignIcons"
+                                    Text="&#xF01FA;" />
+                                <Label 
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                    Text="No se ha definido el perfil de actor del desarrollo para esta entidad. Diríjase a la sección &#x0022;Perfil de actor del desarrollo&#x0022; para completar el proceso." />
+                                <Button
+                                    Text="Ir a la sección"
+                                    Clicked="GoDevelopmentActorProfileSecctionButton_Clicked" />
+                            </StackLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</ContentPage>

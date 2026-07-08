@@ -55,7 +55,8 @@
                         </Border.StrokeShape>
                         <Image
                             WidthRequest="160" HeightRequest="160"
-                            Source="{Binding Model.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                            Source="{Binding Model.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}"
+                            Aspect="AspectFill" />
                     </Border>
                 </VerticalStackLayout>
                 <FlexLayout Wrap="Wrap">

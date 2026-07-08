@@ -12,17 +12,21 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame Padding="0">
-        <Grid ColumnSpacing="4" RowSpacing="4">
+        <Grid ColumnSpacing="0" RowSpacing="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Image
                 Grid.Column="0"
                 Aspect="AspectFill"
                 Source="{Binding Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
-            <StackLayout 
+            <BoxView
                 Grid.Column="1"
+                Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
+            <StackLayout 
+                Grid.Column="2"
                 Padding="8"
                 Orientation="Vertical">
                 <Label

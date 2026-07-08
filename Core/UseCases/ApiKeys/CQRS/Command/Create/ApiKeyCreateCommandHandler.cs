@@ -22,7 +22,7 @@ internal sealed class ApiKeyCreateCommandHandler :
         this.dataIntegrityService = dataIntegrityService;
     }
 
-    protected override async Task ApplyManualMappingAsync(ApiKeyCreateCommand request, ApiKey entity)
+    protected override async Task PerformPreCreateAsync(ApiKeyCreateCommand request, ApiKey entity)
     {
         foreach (var item in request.Permissions!)
         {

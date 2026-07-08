@@ -26,6 +26,7 @@ internal sealed class PersonEntityMappingRegister : IRegister
         config.NewConfig<Person, PersonBasicDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest.Image, src => src.Image.Adapt<ImageBasicDto>())
+            .Map(dest => dest.UserId, src => src.UserId == null ? null : src.UserId!.Value.Value)
             .Map(dest => dest, src => src);
 
         config.NewConfig<Person, PersonDetailDto>()

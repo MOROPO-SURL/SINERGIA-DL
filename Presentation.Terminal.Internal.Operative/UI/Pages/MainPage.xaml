@@ -45,7 +45,7 @@
                                 VerticalOptions="Center"
                                 FontSize="32"
                                 FontFamily="MaterialDesignIcons"
-                                Text="&#xF026;" />
+                                Text="&#xF01FA;" />
                             <Label 
                                 HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                                 Text="El entorno complementario del sistema no está completado para asegurar la operación mínima del sistema. Dirijase a la sección Complementos para los detalles." />

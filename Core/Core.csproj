@@ -12,6 +12,7 @@
 		<PackageReference Include="FluentValidation" Version="12.1.1" />
 		<PackageReference Include="Mapster" Version="10.0.6" />
 		<PackageReference Include="MediatR" Version="14.1.0" />
+		<PackageReference Include="MediaTypeMap.Core" Version="2.3.3" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -19,5 +19,5 @@ public record PersonUpdateRequestModel(
     string? LastName = null,
     string? Alias = null,
     string? About = null,
-    ImageCreateRequestModel? Image = null,
+    ImageCreateRequestModel? NewImage = null,
     UserBasicDtoModel? User = null);

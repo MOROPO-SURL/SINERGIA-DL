@@ -54,7 +54,9 @@
                                 ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}" />
                         </Frame.Behaviors>
                         <Grid>
-                            <Image Source="{Binding ImageSource, TargetNullValue='default_person_picture.jpg'}" />
+                            <Image 
+                                Source="{Binding ImageSource, TargetNullValue='default_person_picture.jpg'}"
+                                Aspect="AspectFill" />
                             <Grid BackgroundColor="#A7000000">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />

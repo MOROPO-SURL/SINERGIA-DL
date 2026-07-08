@@ -35,15 +35,32 @@
                             Spacing="16">
                             <VerticalStackLayout>
                                 <Label
+                                    HorizontalOptions="Center"
+                                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                    FontSize="96"
+                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                    Text="&#xF81E;" />
+                                <Label
+                                    FontSize="{OnPlatform Default='Header', Android=40}"
                                     HorizontalTextAlignment="Center"
-                                    FontAttributes="Bold"
+                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                    Text="SINERGIA DL" />
+                                <Label
                                     FontSize="Large"
-                                    Text="Gestión del Desarrollo Local" />
+                                    HorizontalTextAlignment="Center"
+                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                    Text="CAM Camagüey" />
                                 <Label
                                     HorizontalTextAlignment="Center"
+                                    Margin="0,16,0,0"
                                     FontAttributes="Bold"
                                     FontSize="Medium"
-                                    Text="CAM Camagüey" />
+                                    Text="Gestión del Desarrollo" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="Large"
+                                    FontAttributes="Bold"
+                                    Text="Operaciones" />
                             </VerticalStackLayout>
                             <Entry
                                 Text="{Binding UserName}"

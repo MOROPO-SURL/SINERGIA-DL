@@ -8,7 +8,7 @@ public class Image : AbstractAuditableEntity<ImageId, Guid>, IAggregateRoot<Imag
 {
     private Image() : base(new ImageId(default)) { }
 
-    public Image(ImageId id, string contentType, long length, string? about, int height, int width) : base(id)
+    public Image(ImageId id, string contentType, long length, int height, int width, string? about = null) : base(id)
     {
         ContentType = contentType;
         Length = length;

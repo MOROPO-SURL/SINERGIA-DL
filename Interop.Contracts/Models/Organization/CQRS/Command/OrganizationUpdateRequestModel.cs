@@ -22,4 +22,4 @@ public record OrganizationUpdateRequestModel(
     OrganizationPersonRelationshipConfigurationRequestModel[] PatchPersonRelationships,
     PersonBasicDtoModel[] OutPersonRelationships,
     string? About = null,
-    ImageCreateRequestModel? Image = null);
+    ImageCreateRequestModel? NewImage = null);

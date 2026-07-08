@@ -14,6 +14,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.Ports.Repositor
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKindTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Features.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureTraces.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Images.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreas.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreaTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.KeyVariables.Ports.Repository;
@@ -53,6 +54,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.F
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.FeatureKindTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Features;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.FeatureTraces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Images;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.InterestAreas;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.InterestAreaTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.KeyVariables;
@@ -93,6 +95,8 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<DefaultDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IPermissionQueryRepositoryPort, PermissionQueryRepositoryPortAdapter>();
+
+        services.AddScoped<IImageCommandRepositoryPort, ImageCommandRepositoryPortAdapter>();
 
         services.AddScoped<IRoleQueryRepositoryPort, RoleQueryRepositoryPortAdapter>();
         services.AddScoped<IRoleCommandRepositoryPort, RoleCommandRepositoryPortAdapter>();
@@ -185,6 +189,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IDataIntegrityServicePort, LocalDataIntegrityServicePortAdapter>();
         services.AddSingleton<IStringHashingServicePort, SHA256StringHashingServicePortAdapter>();
+        services.AddSingleton<IFileStoreServicePort, RelativePathLocalFileServicePortAdapter>();
 
         services.AddScoped<ISaveChangesInterceptor, UserChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, RoleChangeDomainTracingInterceptor>();

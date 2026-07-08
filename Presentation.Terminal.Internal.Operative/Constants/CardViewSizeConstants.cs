@@ -5,8 +5,6 @@ public static class CardViewSizeConstants
     public static double OBJECTIVE_DEFAULT_CARD_VIEW_HEIGHT = 120;
     public static double OBJECTIVE_DEFAULT_CARD_VIEW_WIDTH = 320;
 
-    public static double PERSON_DEFAULT_CARD_VIEW_HEIGHT = 208;
-    public static double PERSON_DEFAULT_CARD_VIEW_WIDTH = 160;
     public static double PERSON_CONFIGURATION_CARD_VIEW_WIDTH = 216;
 
     public static double TERRITORIALBARRIER_DEFAULT_CARD_VIEW_HEIGHT = 76;

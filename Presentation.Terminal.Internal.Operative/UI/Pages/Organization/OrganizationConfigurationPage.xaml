@@ -4,12 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization"
-    xmlns:local_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Views.Card"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:interop_common_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
@@ -56,7 +56,9 @@
                                 ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}" />
                         </Frame.Behaviors>
                         <Grid>
-                            <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <Image 
+                                Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}"
+                                Aspect="AspectFill" />
                             <Grid BackgroundColor="#A7000000">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
@@ -421,9 +423,9 @@
                                                 <ColumnDefinition />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <local_ui_card_views:PersonCardView 
+                                            <common_ui_card_views:PersonCardView 
                                                 Grid.Column="0"
-                                                HeightRequest="{Static local_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                                                HeightRequest="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}"/>
                                             <VerticalStackLayout 
                                                 Grid.Column="1"
                                                 Spacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
@@ -492,9 +494,9 @@
                                                 <ColumnDefinition />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <local_ui_card_views:PersonCardView 
+                                            <common_ui_card_views:PersonCardView 
                                                 Grid.Column="0"
-                                                HeightRequest="{Static local_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                                                HeightRequest="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}"/>
                                             <VerticalStackLayout 
                                                 Grid.Column="1"
                                                 Spacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">

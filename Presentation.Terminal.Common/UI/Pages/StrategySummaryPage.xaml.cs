@@ -40,12 +40,12 @@ public partial class StrategySummaryPage : BaseBindingContextedContentPage<Strat
 
         ConcreteBindingContext.IsBusy = true;
 
-        var httpClient = new HttpClient(Terminal.Common.Factories.HttpClientHandlerFactory.Build())
+        var httpClient = new HttpClient(Factories.HttpClientHandlerFactory.Build())
         {
             Timeout = TimeSpan.FromSeconds(30.0)
         };
 
-        httpClient.GetByteArrayAsync(Common.Constants.InteropConstants.REPORT_STRATEGIC_URL).ContinueWith(task =>
+        httpClient.GetByteArrayAsync(Terminal.Common.Constants.InteropConstants.REPORT_STRATEGIC_URL).ContinueWith(task =>
         {
             Dispatcher.Dispatch(async () =>
             {

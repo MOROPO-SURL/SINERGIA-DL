@@ -47,5 +47,5 @@ public partial class PersonsManagementPage :
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Common.Constants.CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT;
 }

@@ -18,6 +18,8 @@ internal sealed class OrganizationCommandRepositoryPortAdapter :
     protected override IQueryable<Organization> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
+            .AsSplitQuery()
+            .Include(entity => entity.Image)
             .Include(entity => entity.PersonBridges);
     }
 }

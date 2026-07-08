@@ -2,12 +2,176 @@
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common_external_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.Models.Page;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
+    xmlns:common_external_ui_organization_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.Organization;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
     xmlns:local_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Pages"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Shells.AppShell"
-    Shell.FlyoutBehavior="Disabled"
-    Title="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL">
+    x:DataType="common_external_page_models:AppShellPageModel"
+    Shell.FlyoutBehavior="{OnIdiom Default={Static FlyoutBehavior.Locked}, Phone={Static FlyoutBehavior.Flyout}}"
+    Title="Navegación"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+
+            <Color x:Key="LightHomeButtonBackgroundColor">#AFACACAC</Color>
+            <Color x:Key="DarkHomeButtonBackgroundColor">#AF3C3C3C</Color>
+        </ResourceDictionary>
+    </Shell.Resources>
+    <Shell.FlyoutHeader>
+        <Grid Padding="0,0,0,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="48" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="48" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Image
+                Grid.RowSpan="2"
+                HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                Source="{Binding Organization.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}"
+                Aspect="AspectFill" />
+            <Button
+                Style="{StaticResource FontIconImageButtonStyle}"
+                Grid.Row="0"
+                HorizontalOptions="Start" VerticalOptions="Start"
+                Margin="8"
+                Text="&#xF2DE;"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightHomeButtonBackgroundColor}, Dark={StaticResource DarkHomeButtonBackgroundColor}}"
+                Clicked="BackHomeButton_Clicked" />
+            <BoxView
+                Grid.Row="2"
+                Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
+            <Grid Grid.Row="1" Grid.RowSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="1" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border 
+                    Grid.Column="0" Grid.RowSpan="3"
+                    HorizontalOptions="Center" VerticalOptions="Center"
+                    Margin="8,0"
+                    StrokeThickness="4"
+                    StrokeLineJoin="Bevel">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="40" />
+                    </Border.StrokeShape>
+                    <Image
+                        WidthRequest="80" HeightRequest="80"
+                        Source="{Binding Representative.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}"
+                        Aspect="AspectFill" />
+                </Border>
+                <Label
+                    Grid.Column="1" Grid.Row="2"
+                    VerticalOptions="Center"
+                    LineBreakMode="TailTruncation">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Representative.Name}" />
+                            <Span Text="{Binding Representative.LastName, StringFormat=' {0}'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+            <Label
+                Grid.Row="4"
+                Margin="8,0"
+                HorizontalTextAlignment="Center"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                Text="{Binding Organization.Name}" />
+        </Grid>
+    </Shell.FlyoutHeader>
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local_pages:MainPage}"
-        Route="MainPage" />
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:DashboardPage}"
+        Route="DashboardPage">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphDashboard}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Datos de la entidad"
+            ContentTemplate="{DataTemplate common_external_ui_organization_pages:OrganizationDetailPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphOrganization}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+            Title="Perfil de actor del desarrollo"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconDevelopmentActorProfile}" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
+    <ShellContent
+        Title="Informes al CAM"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphReport}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Prioridades de apoyo social"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphSocialResponsabilityDemands}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+            Title="Acciones de Responsabilidad Social"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphSocialResponsabilityActions}" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
+    <MenuItem
+        Text="Configuración"
+        Clicked="ConfigurationMenuItem_Clicked">
+        <MenuItem.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphConfig}" />
+        </MenuItem.IconImageSource>
+    </MenuItem>
+    <MenuItem
+        Text="Centro de Ayuda"
+        Clicked="HelpMenuItem_Clicked">
+        <MenuItem.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphHelp}" />
+        </MenuItem.IconImageSource>
+    </MenuItem>
 </Shell>

@@ -10,4 +10,13 @@ public static class StringExtensions
     {
         return new Permission(new Domain.Aggretates.PermissionAggregate.Values.PermissionId(self), family, $"{self}{PREMISSION_DESCRIPTION_SUFFIX}");
     }
+
+    internal static string ToDefaultFileStorageCategory(this string contentType)
+    {
+        if (contentType.StartsWith("image/")) return "images";
+
+        if (contentType.StartsWith("video/")) return "videos";
+
+        return "documents";
+    }
 }

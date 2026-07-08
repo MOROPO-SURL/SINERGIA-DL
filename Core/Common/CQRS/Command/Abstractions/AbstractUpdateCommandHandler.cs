@@ -27,12 +27,18 @@ internal abstract class AbstractUpdateCommandHandler<TEntity, TId, TIdValue, TUp
 
         entity = mapper.Map(request, entity);
 
-        await ApplyManualMappingAsync(request, entity);
+        Action? postCreateDelegatedAction = await PerformPreUpdateAsync(request, entity);
 
         await entityCommandRepository.UpdateAsync(entity);
+
+        postCreateDelegatedAction?.Invoke();
+
+        await PerformPostUpdateAsync(request, entity);
 
         return mapper.Map<TEntity, TDetailDto>(await entityQueryRepository.GetAsync(entity.Id));
     }
 
-    protected virtual Task ApplyManualMappingAsync(TUpdateCommand request, TEntity entity) => Task.CompletedTask;
+    protected virtual Task<Action?> PerformPreUpdateAsync(TUpdateCommand request, TEntity entity) => Task.FromResult<Action?>(null);
+
+    protected virtual Task PerformPostUpdateAsync(TUpdateCommand request, TEntity entity) => Task.CompletedTask;
 }

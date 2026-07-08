@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseDetailEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_common_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Organization;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.Organization.OrganizationDetailPage"
+    x:TypeArguments="interop_dto_models:OrganizationDetailDtoModel,common_detail_page_models:OrganizationDetailPageModel"
+    x:DataType="common_detail_page_models:OrganizationDetailPageModel"
+    Title="Datos de la entidad">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+            <common_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Modificar"
+            Command="{Binding ModifyCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
+                    Glyph="&#xF90B;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Border
+                        HorizontalOptions="Center"
+                        StrokeThickness="4"
+                        StrokeLineJoin="Bevel">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Image
+                            WidthRequest="160" HeightRequest="160"
+                            Source="{Binding Model.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}"
+                            Aspect="AspectFill" />
+                    </Border>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Nombre" />
+                    <Label Text="{Binding Model.Name}" />
+                </VerticalStackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=5, MediumContainerColumn=6, SmallContainerColumn=8}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Tipo" />
+                        <Label Text="{Binding Model.Kind.Name}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Acerca de" />
+                    <Label Text="{Binding Model.About, TargetNullValue='---'}" />
+                </VerticalStackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Teléfonos" />
+                        <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                        <CollectionView ItemsSource="{Binding Model.PhoneNumbers}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="interop_common_dto_models:PhoneNumberDetailDtoModel">
+                                    <Frame Padding="8">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Margin="8"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Value, Mode=OneTime}" />
+                                            <Button
+                                                Style="{StaticResource FontIconImageButtonStyle}"
+                                                VerticalOptions="Center"
+                                                Text="&#xF2FD;"
+                                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailPhoneNumberCommand, Mode=OneTime}"
+                                                CommandParameter="{Binding Mode=OneTime}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Correos electrónicos" />
+                        <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                        <CollectionView ItemsSource="{Binding Model.EmailAddresses}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="interop_common_dto_models:EmailAddressDetailDtoModel">
+                                    <Frame Padding="8">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Margin="8"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Value, Mode=OneTime}"/>
+                                            <Button
+                                                Style="{StaticResource FontIconImageButtonStyle}"
+                                                VerticalOptions="Center"
+                                                Text="&#xF2FD;"
+                                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailEmailAddressCommand, Mode=OneTime}"
+                                                CommandParameter="{Binding Mode=OneTime}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Direcciones postales" />
+                        <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                        <CollectionView ItemsSource="{Binding Model.PostalAddresses}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="interop_common_dto_models:PostalAddressDetailDtoModel">
+                                    <Frame Padding="8">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Margin="8"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Street}" />
+                                                        <Span Text="{Binding Number, StringFormat=', {0}'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Button
+                                                Style="{StaticResource FontIconImageButtonStyle}"
+                                                VerticalOptions="Center"
+                                                Text="&#xF2FD;"
+                                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailPostalAddressCommand, Mode=OneTime}"
+                                                CommandParameter="{Binding Mode=OneTime}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Sitios webs" />
+                        <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                        <CollectionView ItemsSource="{Binding Model.WebSiteAddresses}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="interop_common_dto_models:WebSiteAddressDetailDtoModel">
+                                    <Frame Padding="8">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Margin="8"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Url, Mode=OneTime}"/>
+                                            <Button
+                                                Style="{StaticResource FontIconImageButtonStyle}"
+                                                VerticalOptions="Center"
+                                                Text="&#xF2FD;"
+                                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailWebSiteAddressCommand, Mode=OneTime}"
+                                                CommandParameter="{Binding Mode=OneTime}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Personas representantes" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.RepresentativePersons}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                    Orientation="Vertical" 
+                                    Span="2" 
+                                    HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                    VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Behaviors>
+                            <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_WIDTH}" />
+                        </CollectionView.Behaviors>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <common_ui_card_views:PersonCardView HeightRequest="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Personas no representantes" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.NonRepresentativePersons}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical" 
+                                Span="2" 
+                                HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Behaviors>
+                            <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_WIDTH}" />
+                        </CollectionView.Behaviors>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <common_ui_card_views:PersonCardView HeightRequest="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</common_ui_base_pages:BaseDetailEntityPage>

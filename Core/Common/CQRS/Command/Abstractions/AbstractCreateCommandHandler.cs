@@ -28,12 +28,15 @@ internal abstract class AbstractCreateCommandHandler<TEntity, TId, TIdValue, TCr
     {
         TEntity entity = mapper.Map<TEntity>(request);
 
-        await ApplyManualMappingAsync(request, entity);
+        await PerformPreCreateAsync(request, entity);
 
         await entityCommandRepository.AddAsync(entity);
+
+        await PerformPostCreateAsync(request, entity);
 
         return mapper.Map<TEntity, TDetailDto>(await entityQueryRepository.GetAsync(entity.Id));
     }
 
-    protected virtual Task ApplyManualMappingAsync(TCreateCommand request, TEntity entity) => Task.CompletedTask;
+    protected virtual Task PerformPreCreateAsync(TCreateCommand request, TEntity entity) => Task.CompletedTask;
+    protected virtual Task PerformPostCreateAsync(TCreateCommand request, TEntity entity) => Task.CompletedTask;
 }

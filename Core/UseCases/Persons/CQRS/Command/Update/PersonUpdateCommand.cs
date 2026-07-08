@@ -26,5 +26,5 @@ public record PersonUpdateCommand(
     string? LastName = null,
     string? Alias = null,
     string? About = null,
-    ImageCreateCommand? Image = null,
+    ImageCreateCommand? NewImage = null,
     UserBasicDto? User = null) : IUpdateCommand<Guid, PersonDetailDto>;

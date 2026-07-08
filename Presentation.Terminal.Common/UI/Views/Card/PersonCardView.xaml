@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card.PersonCardView"
+    x:DataType="interop_dto_models:PersonBasicDtoModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame>
+        <VerticalStackLayout Spacing="4">
+            <Border 
+                HorizontalOptions="Center"
+                Margin="0,8"
+                StrokeThickness="4"
+                StrokeLineJoin="Bevel">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="48" />
+                </Border.StrokeShape>
+                <Image
+                    WidthRequest="96" HeightRequest="96"
+                    Source="{Binding Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+            </Border>
+            <Label
+                FontAttributes="Bold"
+                LineBreakMode="TailTruncation"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Name}" />
+            <Label
+                MaxLines="1"
+                LineBreakMode="TailTruncation"
+                HorizontalTextAlignment="Center"
+                Text="{Binding LastName}" />
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>

@@ -14,4 +14,4 @@ public record OrganizationCreateRequestModel(
     WebSiteAddressDetailDtoModel[] WebSiteAddresses,
     OrganizationPersonRelationshipConfigurationRequestModel[] PersonRelationships,
     string? About = null,
-    ImageCreateRequestModel? Image = null);
+    ImageCreateRequestModel? NewImage = null);

@@ -1,4 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.CQRS.Command;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presenters;
 
@@ -103,9 +104,13 @@ public sealed class ImagePickPresenter
 
         using (Stream imageFileStream = await task.Result.OpenReadAsync())
         {
-            using MemoryStream bufferMemomryStream = new((int)imageFileStream.Length);
+            using SkiaSharp.SKManagedStream skStream = new(imageFileStream);
+            
+            using SkiaSharp.SKImage skImage = SkiaSharp.SKImage.FromBitmap(SkiaSharp.SKBitmap.Decode(skStream));
 
-            result = new ImageCreateRequestModel(Guid.NewGuid(), bufferMemomryStream.ToArray(), task.Result.ContentType);
+            using SkiaSharp.SKData skData = skImage.Encode(task.Result.ContentType.ToSKEncodedImageFormat(), 75);
+
+            result = new ImageCreateRequestModel(Guid.NewGuid(), skData.ToArray(), task.Result.ContentType);
         }
 
         pageBindingContext!.IsBusy = false;

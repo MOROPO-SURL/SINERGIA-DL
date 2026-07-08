@@ -30,12 +30,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="UI\Pages\Organization\OrganizationDetailPage.xaml.cs">
+	    <DependentUpon>OrganizationDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Organization\OrganizationConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\Organization\OrganizationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Organization\OrganizationConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

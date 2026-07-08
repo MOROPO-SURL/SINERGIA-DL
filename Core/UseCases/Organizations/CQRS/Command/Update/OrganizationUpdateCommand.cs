@@ -27,4 +27,4 @@ public record OrganizationUpdateCommand(
     IEnumerable<OrganizationPersonRelationshipClippedUpdateCommand> PatchPersonRelationships,
     IEnumerable<PersonBasicDto> OutPersonRelationships,
     string? About = null,
-    ImageCreateCommand? Image = null) : IUpdateCommand<Guid, OrganizationDetailDto>;
+    ImageCreateCommand? NewImage = null) : IUpdateCommand<Guid, OrganizationDetailDto>;
