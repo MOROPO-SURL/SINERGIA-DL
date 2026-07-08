@@ -11,7 +11,7 @@
             <local_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Frame>
+    <Frame InputTransparent="True">
         <VerticalStackLayout Spacing="4">
             <Border 
                 HorizontalOptions="Center"

@@ -25,4 +25,9 @@ public partial class DashboardPage : ContentPage
 
 		IsEnabled = true;
     }
+
+    private async void GoDevelopmentActorProfileSecctionButton_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(new ShellNavigationState("///DevelopmentActorProfile"));
+    }
 }

@@ -11,7 +11,9 @@
             <local_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Frame Padding="0">
+    <Frame 
+        Padding="0"
+        InputTransparent="True">
         <Grid ColumnSpacing="0" RowSpacing="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />

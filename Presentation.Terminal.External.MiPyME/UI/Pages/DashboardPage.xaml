@@ -4,16 +4,59 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Models.Page"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.UI.Pages.DashboardPage"
     x:DataType="local_page_models:DashboardPageModel"
     Title="Panel de Control">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="OperativePrimary">#004755</Color>
+
+            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid>
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout>
-                <Label
-                    FontSize="Header"
-                    FontAttributes="Bold"
-                    Text="{Binding Organization.Name}" />
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop 
+                                Color="{StaticResource OperativePrimary}"
+                                Offset="0" />
+                            <GradientStop 
+                                Color="{StaticResource Primary}"
+                                Offset="1" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <VerticalStackLayout 
+                        HorizontalOptions="Center"
+                        Margin="32" 
+                        Spacing="8">
+                        <Border
+                            HorizontalOptions="Center"
+                            StrokeThickness="4"
+                            StrokeLineJoin="Bevel">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Image
+                                WidthRequest="160"
+                                Source="{Binding Organization.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                        </Border>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontSize="Large"
+                            TextColor="White"
+                            Text="{Binding Organization.Name}" />
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            TextColor="White"
+                            Text="{Binding Organization.Kind.Name}" />
+                    </VerticalStackLayout>
+                </Grid>
                 <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
                     <VerticalStackLayout 
                         Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
@@ -31,7 +74,8 @@
                                     HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                                     Text="No se ha definido el perfil de actor del desarrollo para esta entidad. Diríjase a la sección &#x0022;Perfil de actor del desarrollo&#x0022; para completar el proceso." />
                                 <Button
-                                    Text="Ir a la sección"
+                                    VerticalOptions="Center"
+                                    Text="{OnIdiom Default='Ir a la sección', Phone='Ir'}"
                                     Clicked="GoDevelopmentActorProfileSecctionButton_Clicked" />
                             </StackLayout>
                         </Frame>

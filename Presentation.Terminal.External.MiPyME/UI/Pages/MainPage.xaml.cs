@@ -20,6 +20,8 @@ public partial class MainPage :
         InitializeComponent();
 
         ConcreteBindingContext.BindPresenter(this);
+
+        if (DeviceInfo.Current.Platform == DevicePlatform.Android) ItemsCollectionView.Header = BindingContext;
     }
 
     public async Task PresentItemDetailUserInterfaceAsync(OrganizationBasicDtoModel model)
