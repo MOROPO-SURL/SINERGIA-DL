@@ -6,6 +6,7 @@
     xmlns:common_external_ui_organization_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.Organization;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
     xmlns:local_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Pages"
     xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Shells.AppShell"
     x:DataType="common_external_page_models:AppShellPageModel"
     Shell.FlyoutBehavior="{OnIdiom Default={Static FlyoutBehavior.Locked}, Phone={Static FlyoutBehavior.Flyout}}"
@@ -28,7 +29,7 @@
                 <RowDefinition Height="48" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Image
+            <ffimageloading_views:CachedImage
                 Grid.RowSpan="2"
                 HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
                 Source="{Binding Organization.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}"
@@ -63,7 +64,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="40" />
                     </Border.StrokeShape>
-                    <Image
+                    <ffimageloading_views:CachedImage
                         WidthRequest="80" HeightRequest="80"
                         Source="{Binding Representative.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}"
                         Aspect="AspectFill" />

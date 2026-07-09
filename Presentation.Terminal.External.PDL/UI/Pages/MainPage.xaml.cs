@@ -26,7 +26,7 @@ public partial class MainPage :
 
     public async Task PresentItemDetailUserInterfaceAsync(OrganizationBasicDtoModel model)
     {
-        IsBusy = true;
+        ConcreteBindingContext.IsBusy = true;
 
         ISessionManagerPort sessionManager = IPlatformApplication.Current!.Services.GetRequiredService<ISessionManagerPort>();
 
@@ -36,7 +36,7 @@ public partial class MainPage :
         {
             Dispatcher.Dispatch(() =>
             {
-                IsBusy = false;
+                ConcreteBindingContext.IsBusy = false;
 
                 if (!task.IsCompletedSuccessfully)
                 {

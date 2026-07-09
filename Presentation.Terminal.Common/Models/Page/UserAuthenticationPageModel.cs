@@ -1,4 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Factories;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Validators;
@@ -87,6 +88,8 @@ public class UserAuthenticationPageModel : BasePageModel, Interfaces.IValidableC
 
                     Application.Current!.MainPage!.NavigationPopModalPageAsync().ContinueWith(_ =>
                     {
+                        FFImageLoading.ImageService.Instance.Configuration.HttpClient = new HttpClient(HttpClientHandlerFactory.Build());
+
                         if (successCallbackAction == null) return;
 
                         Dispatcher.Dispatch(successCallbackAction);

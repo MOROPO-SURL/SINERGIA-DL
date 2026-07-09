@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card.OrganizationCardView"
     x:DataType="interop_dto_models:OrganizationBasicDtoModel">
     <ContentView.Resources>
@@ -13,14 +14,14 @@
     </ContentView.Resources>
     <Frame 
         Padding="0"
-        InputTransparent="True">
+        InputTransparent="{OnPlatform Default=False, Android=True}">
         <Grid ColumnSpacing="0" RowSpacing="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="1" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
-            <Image
+            <ffimageloading_views:CachedImage
                 Grid.Column="0"
                 Aspect="AspectFill"
                 Source="{Binding Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />

@@ -8,12 +8,12 @@
     
     <!--#region Color Definitions -->
 
-    <Color x:Key="Primary">#004755</Color>
+    <Color x:Key="Primary">#007181</Color>
     <Color x:Key="PrimaryDark">#00c2cc</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#008d88</Color>
+    <Color x:Key="Tertiary">#004755</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

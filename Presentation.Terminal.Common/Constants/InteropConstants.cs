@@ -4,11 +4,11 @@ public static class InteropConstants
 {
 #if DEBUG
 #if ANDROID
-    public const string REPORT_DIAGNOSTIC_URL = "https://10.0.2.2:7045/report/diagnostic/print";
-    public const string REPORT_STRATEGIC_URL = "https://10.0.2.2:7045/report/strategic/print";
-    public const string USER_PROFILE_URL = "https://10.0.2.2:7123/session";
-    public const string ADMINISTRATION_BASE_URL = "https://10.0.2.2:7123/management";
-    public const string API_BASE_URL = "https://10.0.2.2:7235";
+    public const string REPORT_DIAGNOSTIC_URL = "https://192.168.1.102:7045/report/diagnostic/print";
+    public const string REPORT_STRATEGIC_URL = "https://192.168.1.102:7045/report/strategic/print";
+    public const string USER_PROFILE_URL = "https://192.168.1.102:7123/session";
+    public const string ADMINISTRATION_BASE_URL = "https://192.168.1.102:7123/management";
+    public const string API_BASE_URL = "https://192.168.1.102:7235";
 #else
     public const string REPORT_DIAGNOSTIC_URL = "https://localhost:7045/report/diagnostic/print";
     public const string REPORT_STRATEGIC_URL = "https://localhost:7045/report/strategic/print";

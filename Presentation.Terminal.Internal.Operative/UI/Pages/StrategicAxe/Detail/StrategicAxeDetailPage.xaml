@@ -13,6 +13,7 @@
     xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicAxe.Detail.StrategicAxeDetailPage"
     x:TypeArguments="interop_dto_models:StrategicAxeDetailDtoModel,local_detail_page_models:StrategicAxeDetailPageModel"
     x:DataType="local_detail_page_models:StrategicAxeDetailPageModel"
@@ -88,7 +89,7 @@
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="36" />
                                     </Border.StrokeShape>
-                                    <Image
+                                    <ffimageloading_views:CachedImage
                                         WidthRequest="72" HeightRequest="72"
                                         Source="{Binding Model.Coordinator.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                                 </Border>

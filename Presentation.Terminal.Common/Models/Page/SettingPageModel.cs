@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Factories;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Validators;
 using System.ComponentModel.DataAnnotations;
@@ -47,6 +48,8 @@ public class SettingPageModel : BasePageModel, Interfaces.IValidableConfiguratio
                 settingManager.UseProxyAuthentication = useProxyAuthentication;
                 settingManager.ProxyUsername = proxyUsername;
                 settingManager.ProxyPassword = proxyPassword;
+
+                FFImageLoading.ImageService.Instance.Configuration.HttpClient = new HttpClient(HttpClientHandlerFactory.Build());
 
                 applySuccessCallbackAction.Invoke();
             }

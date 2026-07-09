@@ -22,7 +22,7 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Commo
         {
             httpClient = new HttpClient(Terminal.Common.Factories.HttpClientHandlerFactory.Build())
             {
-                BaseAddress = new Uri(Constants.InteropConstants.API_BASE_URL)
+                BaseAddress = new Uri(Terminal.Common.Constants.InteropConstants.API_BASE_URL)
             };
 
             KeyValuePair<string, string> authorizationHeader = GetAuthorizeHeader();

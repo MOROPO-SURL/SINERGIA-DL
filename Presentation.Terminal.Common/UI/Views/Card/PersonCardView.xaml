@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card.PersonCardView"
     x:DataType="interop_dto_models:PersonBasicDtoModel">
     <ContentView.Resources>
@@ -11,7 +12,7 @@
             <local_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Frame InputTransparent="True">
+    <Frame InputTransparent="{OnPlatform Default=False, Android=True}">
         <VerticalStackLayout Spacing="4">
             <Border 
                 HorizontalOptions="Center"
@@ -21,7 +22,7 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="48" />
                 </Border.StrokeShape>
-                <Image
+                <ffimageloading_views:CachedImage
                     WidthRequest="96" HeightRequest="96"
                     Source="{Binding Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
             </Border>
