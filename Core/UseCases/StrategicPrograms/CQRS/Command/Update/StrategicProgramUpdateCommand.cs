@@ -1,4 +1,6 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Create.Addon;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs;
 
@@ -17,5 +19,9 @@ public record StrategicProgramUpdateCommand(
     ProgramObjectiveDetailDto[] OutObjectives,
     ProgramActionAddonCreateCommand[] InActions,
     ProgramActionAddonUpdateCommand[] PatchActions,
-    ProgramActionDetailDto[] OutActions, 
+    ProgramActionDetailDto[] OutActions,
+    OrganizationBasicDto[] InOrganizations,
+    OrganizationBasicDto[] OutOrganizations,
+    MacroprogramBasicDto[] InMacroprograms,
+    MacroprogramBasicDto[] OutMacroprograms,
     string? Description = null) : IUpdateCommand<Guid, StrategicProgramDetailDto>;

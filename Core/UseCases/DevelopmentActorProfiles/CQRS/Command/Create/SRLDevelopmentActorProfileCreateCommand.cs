@@ -7,6 +7,7 @@ public record SRLDevelopmentActorProfileCreateCommand(
     Guid Id,
     bool IsEnabled,
     Guid OwnerId,
+    string FiscalIdentificationCode,
     int MainEconomicActivityId,
     IEnumerable<int> SecoundaryEconomicActivities,        
     string? About = null) : ICreateCommand<SRLDevelopmentActorProfileDetailDto>;

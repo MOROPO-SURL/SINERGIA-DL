@@ -4,7 +4,10 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Comma
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
 
@@ -38,11 +41,10 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
                 src.Priority,
                 new Domain.Aggretates.PersonAggregate.Values.PersonId(src.CoordinatorId),
                 src.Objective,
-                Array.Empty<ProgramObjective>(), //src.Objectives.Select(item => new ProgramObjective(new ProgramObjectiveId(item.Id), new StrategicProgramId(src.Id), item.IsEnabled, item.Name, Array.Empty<ProgramObjectiveStrategicProjectBridge>(), item.Description)).ToArray(),
                 Array.Empty<ProgramAction>(), //src.Actions.Select(item => new ProgramAction(new ProgramActionId(item.Id), new StrategicProgramId(src.Id), item.Title, item.Priority, Array.Empty<ProgramActionInterestAreaBridge>(), item.Description)).ToArray(),
                 Array.Empty<ProgramProjectIdea>(),
-                Array.Empty<ProgramImpact>(),
-                Array.Empty<Domain.Bridges.StrategicProgramOrganizationBridge>(),
+                src.Organizations.Select(item => new StrategicProgramOrganizationBridge(new StrategicProgramId(src.Id), new OrganizationId(item.Id), null)).ToArray(),
+                src.Macroprograms.Select(item => new StrategicProgramMacroprogramBridge(new StrategicProgramId(src.Id), new MacroprogramId(item.Id), null)).ToArray(),
                 null,
                 null,
                 src.Description
@@ -130,6 +132,34 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
                 //}
 
                 //#endregion
+
+                #region Organizations
+
+                foreach (var item in src.InOrganizations)
+                {
+                    dest.LinkOrganizationById(new OrganizationId(item.Id));
+                }
+
+                foreach (var item in src.OutOrganizations)
+                {
+                    dest.UnlinkOrganizationById(new OrganizationId(item.Id));
+                }
+
+                #endregion
+
+                #region Macroprograms
+
+                foreach (var item in src.InMacroprograms)
+                {
+                    dest.LinkMacroprogramById(new MacroprogramId(item.Id));
+                }
+
+                foreach (var item in src.OutMacroprograms)
+                {
+                    dest.UnlinkMacroprogramById(new MacroprogramId(item.Id));
+                }
+
+                #endregion
             });
     }
 }

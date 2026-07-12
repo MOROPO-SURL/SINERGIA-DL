@@ -28,6 +28,10 @@ internal sealed class SRLDevelopmentActorProfileEntityTypeConfiguration : IEntit
         builder.Property(entity => entity.OwnerId)
             .HasConversion(id => id.Value, value => new Domain.Aggretates.OrganizationAggregate.Values.OrganizationId(value));
 
+        builder.Property(entity => entity.FiscalIdentificationCode)
+            .IsRequired()
+            .HasMaxLength(120);
+
         builder.Property(entity => entity.MainEconomicActivityId)
             .HasConversion(id => id.Value, value => new Domain.Aggretates.EconomicActivityAggregate.Values.EconomicActivityId(value));
 

@@ -1,12 +1,19 @@
 ﻿using FluentValidation;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Macroprogram.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Macroprogram;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Organization;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicProgram.Configuration;
 
@@ -25,9 +32,97 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
     private string? description;
     private int priority = 1;
 
+    private readonly List<OrganizationBasicDtoModel> inOrganizations = [];
+    private readonly List<OrganizationBasicDtoModel> outOrganizations = [];
+
+    private readonly List<MacroprogramBasicDtoModel> inMacroprograms = [];
+    private readonly List<MacroprogramBasicDtoModel> outMacroprograms = [];
+
     public StrategicProgramConfigurationPageModel(StrategicProgramDetailDtoModel? model, StrategicLineBasicDtoModel[] availableLines, Action<StrategicProgramDetailDtoModel> successActionCallback) : base(model, successActionCallback, new StrategicProgramConfigurationValidator())
     {
         AvailableLines = availableLines;
+
+        #region Commands
+
+        #region Organizations
+
+        AddOrganizationCommand = new Command(async () =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new OrganizationPickPage(OrganizationPicked_Callback)));
+        });
+
+        RemoveOrganizationCommand = new Command<OrganizationBasicDtoModel>(model =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inOrganizations)
+                {
+                    if (item.Id != model.Id) continue;
+
+                    inOrganizations.Remove(inOrganizations.First(item => item.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outOrganizations.Add(model);
+                }
+
+                Dispatcher.Dispatch(() => Organizations.Remove(model));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        #endregion
+
+        #region Macroprograms
+
+        AddMacroprogramCommand = new Command(async () =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new MacroprogramPickPage(MacroprogramPicked_Callback)));
+        });
+
+        RemoveMacroprogramCommand = new Command<MacroprogramBasicDtoModel>(model =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inMacroprograms)
+                {
+                    if (item.Id != model.Id) continue;
+
+                    inMacroprograms.Remove(inMacroprograms.First(item => item.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outMacroprograms.Add(model);
+                }
+
+                Dispatcher.Dispatch(() => Macroprograms.Remove(model));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        #endregion
+
+        #endregion
 
         if (model is null) return;
 
@@ -54,6 +149,18 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
+    public ObservableCollection<OrganizationBasicDtoModel> Organizations { get; private set; } = [];
+
+    public ICommand AddOrganizationCommand { get; private set; }
+
+    public ICommand RemoveOrganizationCommand { get; private set; }
+
+    public ObservableCollection<MacroprogramBasicDtoModel> Macroprograms { get; private set; } = [];
+
+    public ICommand AddMacroprogramCommand { get; private set; }
+
+    public ICommand RemoveMacroprogramCommand { get; private set; }
+
     public StrategicLineBasicDtoModel[] AvailableLines { get; private set; }
 
     protected override Task<StrategicProgramDetailDtoModel> PerformCreationAsync()
@@ -68,6 +175,8 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
                 coordinator.Id,
                 objective,
                 priority,
+                [.. inOrganizations],
+                [.. inMacroprograms],
                 description
             ));
     }
@@ -85,9 +194,31 @@ public sealed class StrategicProgramConfigurationPageModel : AbstractConfigurati
                 objective,
                 priority,
                 true,
+                [.. inOrganizations],
+                [.. outOrganizations],
+                [.. inMacroprograms],
+                [.. outMacroprograms],
                 description
             ));
     }
 
     public override IValidationContext? ValidationContext => new ValidationContext<StrategicProgramConfigurationPageModel>(this);
+
+    private void OrganizationPicked_Callback(OrganizationBasicDtoModel model)
+    {
+        inOrganizations.Add(model);
+
+        Organizations.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void MacroprogramPicked_Callback(MacroprogramBasicDtoModel model)
+    {
+        inMacroprograms.Add(model);
+
+        Macroprograms.Add(model);
+
+        hasChangesFlag = true;
+    }
 }

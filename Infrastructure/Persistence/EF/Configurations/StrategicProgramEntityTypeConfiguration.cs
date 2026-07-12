@@ -1,13 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.InterestAreaAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Values;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
 
@@ -22,6 +26,8 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
     private const string IMPACTS_TABLE_NAME = "strategicprogram_impacts";
     private const string IMPACTINDICATORS_TABLE_NAME = "strategicprogram_impactindicators";
     private const string OBJECTIVE_STRATEGICPROJECT_BRIDGES_TABLE_NAME = "strategicprogram_objective_strategicproject_bridges";
+    private const string STRATEGICPROGRAM_ORGANIZATION_BRIDGES_TABLE_NAME = "strategicprogram_organization_bridges";
+    private const string STRATEGICPROGRAM_MACROPROGRAM_BRIDGES_TABLE_NAME = "strategicprogram_macroprogram_bridges";
 
     public void Configure(EntityTypeBuilder<StrategicProgram> builder)
     {
@@ -56,24 +62,77 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
 
         builder
             .OwnsMany(entity => entity.Objetives, Configure)
-            .Navigation(entity => entity.Objetives).UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasField("objetives");
+            .Navigation(entity => entity.Objetives)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("objetives");
 
         builder
             .OwnsMany(entity => entity.Actions, Configure)
-            .Navigation(entity => entity.Actions).UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasField("actions");
+            .Navigation(entity => entity.Actions)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("actions");
 
         builder
             .OwnsMany(entity => entity.ProjectIdeas, Configure)
-            .Navigation(entity => entity.ProjectIdeas).UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasField("projectIdeas");
+            .Navigation(entity => entity.ProjectIdeas)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("projectIdeas");
 
         builder
             .OwnsMany(entity => entity.Impacts, Configure)
             .Navigation(entity => entity.Impacts)
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasField("impacts");
+
+        builder
+            .OwnsMany(entity => entity.MacroprogramBridges, Configure)
+            .Navigation(entity => entity.MacroprogramBridges)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("macroprogramBridges");
+
+        builder
+            .OwnsMany(entity => entity.OrganizationBridges, Configure)
+            .Navigation(entity => entity.OrganizationBridges)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("organizationBridges");
+    }
+
+    private static void Configure(OwnedNavigationBuilder<StrategicProgram, StrategicProgramOrganizationBridge> builder)
+    {
+        builder.ToTable(STRATEGICPROGRAM_ORGANIZATION_BRIDGES_TABLE_NAME);
+
+        builder.Property(entity => entity.MainId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new StrategicProgramId(value));
+
+        builder.Property(entity => entity.LinkedId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new OrganizationId(value));
+
+        builder.HasKey(bridge => new { bridge.MainId, bridge.LinkedId });
+
+        builder.WithOwner().HasForeignKey(bridge => bridge.MainId);
+
+        builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
+    }
+
+    private static void Configure(OwnedNavigationBuilder<StrategicProgram, StrategicProgramMacroprogramBridge> builder)
+    {
+        builder.ToTable(STRATEGICPROGRAM_MACROPROGRAM_BRIDGES_TABLE_NAME);
+
+        builder.WithOwner().HasForeignKey(bridge => bridge.MainId);
+
+        builder.Property(bridge => bridge.MainId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new StrategicProgramId(value));
+
+        builder.Property(bridge => bridge.LinkedId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new MacroprogramId(value));
+
+        builder.HasKey(bridge => new { bridge.MainId, bridge.LinkedId });
+
+        builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
     }
 
     private static void Configure(OwnedNavigationBuilder<StrategicProgram, ProgramObjective> builder)

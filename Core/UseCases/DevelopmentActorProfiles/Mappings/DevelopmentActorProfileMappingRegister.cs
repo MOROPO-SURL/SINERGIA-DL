@@ -24,6 +24,7 @@ internal sealed class DevelopmentActorProfileMappingRegister : IRegister
                 false,
                 src.IsEnabled,
                 new Domain.Aggretates.OrganizationAggregate.Values.OrganizationId(src.OwnerId),
+                src.FiscalIdentificationCode,
                 new Domain.Aggretates.EconomicActivityAggregate.Values.EconomicActivityId(src.MainEconomicActivityId),
                 src.SecoundaryEconomicActivities.Select(item => new DevelopmentActorProfileEconomicActivityBridge(new DevelopmentActorProfileId(src.Id), new Domain.Aggretates.EconomicActivityAggregate.Values.EconomicActivityId(item), null)),
                 Array.Empty<DevelopmentActorProfileProductionActivity>(),

@@ -3,6 +3,7 @@
 public record SRLDevelopmentActorProfileUpdateRequestModel(
     Guid Id,
     Guid OwnerId,
+    string FiscalIdentificationCode,
     int MainEconomicActivityId,
     IEnumerable<int> InSecoundaryEconomicActivities,
     IEnumerable<int> OutSecoundaryEconomicActivities,

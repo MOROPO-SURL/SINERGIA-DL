@@ -115,6 +115,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasMaxLength(55)
                         .HasColumnType("character varying(55)");
 
+                    b.Property<string>("FiscalIdentificationCode")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
+
                     b.Property<bool>("IsArchived")
                         .HasColumnType("boolean");
 
@@ -124,12 +129,17 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<int>("MainEconomicActivityId")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("ModalityId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MainEconomicActivityId");
+
+                    b.HasIndex("ModalityId");
 
                     b.HasIndex("OwnerId");
 
@@ -148,6 +158,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<string>("About")
                         .HasMaxLength(2048)
                         .HasColumnType("character varying(2048)");
+
+                    b.Property<string>("FiscalIdentificationCode")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
 
                     b.Property<bool>("IsArchived")
                         .HasColumnType("boolean");
@@ -500,6 +515,36 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .IsUnique();
 
                     b.ToTable("organizationkinds", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate.PDLModality", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name");
+
+                    b.ToTable("pdlmodalities", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate.Permission", b =>
@@ -2044,21 +2089,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.ToTable("role_permission_bridges", (string)null);
                 });
 
-            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges.StrategicProgramOrganizationBridge", b =>
-                {
-                    b.Property<Guid>("MainId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("LinkedId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("MainId", "LinkedId");
-
-                    b.HasIndex("LinkedId");
-
-                    b.ToTable("strategicprogram_organization_bridges", (string)null);
-                });
-
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges.UserRoleBridge", b =>
                 {
                     b.Property<string>("MainId")
@@ -2083,10 +2113,10 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                 {
                     b.HasBaseType("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Abstractions.AbstractPDLDevelopmentActorProfile");
 
-                    b.Property<Guid>("TitularOrganizationId")
+                    b.Property<Guid>("HolderOrganizationId")
                         .HasColumnType("uuid");
 
-                    b.HasIndex("TitularOrganizationId");
+                    b.HasIndex("HolderOrganizationId");
 
                     b.HasDiscriminator().HasValue("LegalOwnedPDLDevelopmentActorProfile");
                 });
@@ -2095,10 +2125,10 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                 {
                     b.HasBaseType("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Abstractions.AbstractPDLDevelopmentActorProfile");
 
-                    b.Property<Guid>("TitularPersonId")
+                    b.Property<Guid>("HolderPersonId")
                         .HasColumnType("uuid");
 
-                    b.HasIndex("TitularPersonId");
+                    b.HasIndex("HolderPersonId");
 
                     b.HasDiscriminator().HasValue("NaturalOwnedPDLDevelopmentActorProfile");
                 });
@@ -2108,6 +2138,12 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate.EconomicActivity", "MainEconomicActivity")
                         .WithMany()
                         .HasForeignKey("MainEconomicActivityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate.PDLModality", "Modality")
+                        .WithMany()
+                        .HasForeignKey("ModalityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -2251,6 +2287,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Navigation("CommercialActivities");
 
                     b.Navigation("MainEconomicActivity");
+
+                    b.Navigation("Modality");
 
                     b.Navigation("Owner");
 
@@ -3008,7 +3046,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Macroprogram", "Linked")
                                 .WithMany()
                                 .HasForeignKey("LinkedId")
-                                .OnDelete(DeleteBehavior.Cascade)
+                                .OnDelete(DeleteBehavior.Restrict)
                                 .IsRequired();
 
                             b1.WithOwner()
@@ -3060,7 +3098,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.PublicPolicy", "Linked")
                                 .WithMany()
                                 .HasForeignKey("LinkedId")
-                                .OnDelete(DeleteBehavior.Cascade)
+                                .OnDelete(DeleteBehavior.Restrict)
                                 .IsRequired();
 
                             b1.WithOwner()
@@ -3156,6 +3194,58 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasForeignKey("LineId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges.StrategicProgramMacroprogramBridge", "MacroprogramBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("strategicprogram_macroprogram_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Macroprogram", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges.StrategicProgramOrganizationBridge", "OrganizationBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("strategicprogram_organization_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
 
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramAction", "Actions", b1 =>
                         {
@@ -3448,7 +3538,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                     b.Navigation("Line");
 
+                    b.Navigation("MacroprogramBridges");
+
                     b.Navigation("Objetives");
+
+                    b.Navigation("OrganizationBridges");
 
                     b.Navigation("ProjectIdeas");
                 });
@@ -3778,25 +3872,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Navigation("Main");
                 });
 
-            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges.StrategicProgramOrganizationBridge", b =>
-                {
-                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "Linked")
-                        .WithMany()
-                        .HasForeignKey("LinkedId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", "Main")
-                        .WithMany("OrganizationBridges")
-                        .HasForeignKey("MainId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Linked");
-
-                    b.Navigation("Main");
-                });
-
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges.UserRoleBridge", b =>
                 {
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate.Role", "Linked")
@@ -3818,24 +3893,24 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.LegalOwnedPDLDevelopmentActorProfile", b =>
                 {
-                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "Titular")
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", "Holder")
                         .WithMany()
-                        .HasForeignKey("TitularOrganizationId")
+                        .HasForeignKey("HolderOrganizationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Titular");
+                    b.Navigation("Holder");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.NaturalOwnedPDLDevelopmentActorProfile", b =>
                 {
-                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Titular")
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Person", "Holder")
                         .WithMany()
-                        .HasForeignKey("TitularPersonId")
+                        .HasForeignKey("HolderPersonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Titular");
+                    b.Navigation("Holder");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ApiKeyAggregate.ApiKey", b =>
@@ -3861,11 +3936,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.RoleAggregate.Role", b =>
                 {
                     b.Navigation("PermissionBridges");
-                });
-
-            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", b =>
-                {
-                    b.Navigation("OrganizationBridges");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate.User", b =>
