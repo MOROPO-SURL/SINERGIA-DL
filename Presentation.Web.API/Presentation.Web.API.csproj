@@ -9,6 +9,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="wwwroot\media\documents\**" />
+	  <Compile Remove="wwwroot\media\images\**" />
+	  <Content Remove="wwwroot\media\documents\**" />
+	  <Content Remove="wwwroot\media\images\**" />
+	  <EmbeddedResource Remove="wwwroot\media\documents\**" />
+	  <EmbeddedResource Remove="wwwroot\media\images\**" />
+	  <None Remove="wwwroot\media\documents\**" />
+	  <None Remove="wwwroot\media\images\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Mapster.DependencyInjection" Version="10.0.6" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.25" />
 		<PackageReference Include="NSwag.AspNetCore" Version="14.6.3" />
@@ -18,6 +29,12 @@
 		<ProjectReference Include="..\Core\Core.csproj" />
 		<ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
 		<ProjectReference Include="..\Interop.Contracts\Interop.Contracts.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\media\" />
+	  <Folder Include="wwwroot\media\images" />
+	  <Folder Include="wwwroot\media\documents" />
 	</ItemGroup>
 
 </Project>

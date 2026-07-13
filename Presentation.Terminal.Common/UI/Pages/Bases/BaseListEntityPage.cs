@@ -1,6 +1,6 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
 public class BaseListEntityPage<TBasicModel, TListPageModel> : BaseContentPage
     where TListPageModel : AbstractListEntityPageModel<TBasicModel>
@@ -47,7 +47,7 @@ public class BaseListEntityPage<TBasicModel, TListPageModel> : BaseContentPage
 
             return columnCount * rowCount;
         }
-        
+
         return 10;
     }
 }

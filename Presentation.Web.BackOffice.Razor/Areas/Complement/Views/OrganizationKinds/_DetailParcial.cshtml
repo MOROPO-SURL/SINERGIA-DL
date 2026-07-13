@@ -5,6 +5,15 @@
 <dl class="mb-0">
     <dt>Nombre</dt>
     <dd>@Model.Name</dd>
+    <dt>Perfil de Actor del Desarrollo</dt>
+    @if (!string.IsNullOrEmpty(Model.Description))
+    {
+        <dd>@Model.DevelopmentActorProfileKind</dd>
+    }
+    else
+    {
+        <dd>---</dd>
+    }
     <dt>Descripción</dt>
     @if (!string.IsNullOrEmpty(Model.Description))
     {

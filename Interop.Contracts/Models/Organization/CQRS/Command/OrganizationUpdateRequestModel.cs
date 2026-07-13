@@ -1,5 +1,6 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.CQRS.Command;
 
@@ -8,7 +9,7 @@ public record OrganizationUpdateRequestModel(
     string Name,
     bool IsEnabled,
     int Priority,
-    Guid OrganizationKindId,
+    Guid KindId,
     EmailAddressDetailDtoModel[] InEmailAddresses,
     EmailAddressDetailDtoModel[] OutEmailAddresses,
     PhoneNumberDetailDtoModel[] InPhoneNumbers,
@@ -17,5 +18,8 @@ public record OrganizationUpdateRequestModel(
     PostalAddressDetailDtoModel[] OutPostalAddresses,
     WebSiteAddressDetailDtoModel[] InWebSiteAddresses,
     WebSiteAddressDetailDtoModel[] OutWebSiteAddresses,
+    OrganizationPersonRelationshipConfigurationRequestModel[] InPersonRelationships,
+    OrganizationPersonRelationshipConfigurationRequestModel[] PatchPersonRelationships,
+    PersonBasicDtoModel[] OutPersonRelationships,
     string? About = null,
-    ImageCreateRequestModel? Image = null);
+    ImageCreateRequestModel? NewImage = null);

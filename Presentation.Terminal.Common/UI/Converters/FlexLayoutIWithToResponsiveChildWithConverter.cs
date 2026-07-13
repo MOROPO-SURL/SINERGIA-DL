@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;
 
 public sealed class FlexLayoutIWithToResponsiveChildWithConverter : IValueConverter
 {

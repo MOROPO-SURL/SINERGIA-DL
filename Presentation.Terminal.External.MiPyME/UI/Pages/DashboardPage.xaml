@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Models.Page"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.UI.Pages.DashboardPage"
+    x:DataType="local_page_models:DashboardPageModel"
+    Title="Panel de Control">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="OperativePrimary">#007181</Color>
+
+            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout>
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop 
+                                Color="{StaticResource OperativePrimary}"
+                                Offset="0" />
+                            <GradientStop 
+                                Color="{StaticResource Primary}"
+                                Offset="1" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <VerticalStackLayout 
+                        HorizontalOptions="Center"
+                        Margin="32" 
+                        Spacing="8">
+                        <Border
+                            HorizontalOptions="Center"
+                            StrokeThickness="4"
+                            StrokeLineJoin="Bevel">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <ffimageloading_views:CachedImage
+                                WidthRequest="160"
+                                Source="{Binding Organization.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                        </Border>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontSize="Large"
+                            TextColor="White"
+                            Text="{Binding Organization.Name}" />
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            TextColor="White"
+                            Text="{Binding Organization.Kind.Name}" />
+                    </VerticalStackLayout>
+                </Grid>
+                <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                    <VerticalStackLayout 
+                        Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                        <Frame
+                            Style="{StaticResource WarningToastFrameStyle}">
+                            <StackLayout 
+                                Orientation="Horizontal"
+                                Spacing="8">
+                                <Label
+                                    VerticalOptions="Center"
+                                    FontSize="32"
+                                    FontFamily="MaterialDesignIcons"
+                                    Text="&#xF01FA;" />
+                                <Label 
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                    Text="No se ha definido el perfil de actor del desarrollo para esta entidad. Diríjase a la sección &#x0022;Perfil de actor del desarrollo&#x0022; para completar el proceso." />
+                                <Button
+                                    VerticalOptions="Center"
+                                    Text="{OnIdiom Default='Ir a la sección', Phone='Ir'}"
+                                    Clicked="GoDevelopmentActorProfileSecctionButton_Clicked" />
+                            </StackLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</ContentPage>

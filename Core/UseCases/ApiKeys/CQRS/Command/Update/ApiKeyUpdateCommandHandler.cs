@@ -25,7 +25,7 @@ internal sealed class ApiKeyUpdateCommandHandler :
         this.permissionBridgeCommandRepository = permissionBridgeCommandRepository;
     }
 
-    protected override async Task ApplyManualMappingAsync(ApiKeyUpdateCommand request, ApiKey entity)
+    protected override async Task<Action?> PerformPreUpdateAsync(ApiKeyUpdateCommand request, ApiKey entity)
     {
         List<ApiKeyPermissionBridge> outgoins = [.. entity.PermissionBridges];
 
@@ -49,5 +49,7 @@ internal sealed class ApiKeyUpdateCommandHandler :
         {
             await permissionBridgeCommandRepository.DeleteAsync(item, false);
         }
+
+        return null;
     }
 }

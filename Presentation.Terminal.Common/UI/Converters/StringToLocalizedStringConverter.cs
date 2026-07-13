@@ -1,7 +1,7 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Helper;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
 using System.Globalization;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;
 
 public class StringToLocalizedStringConverter : IValueConverter
 {
@@ -9,9 +9,7 @@ public class StringToLocalizedStringConverter : IValueConverter
     {
         if (value == null) return null;
 
-        var concreteValue = (string)value;
-
-        return IPlatformApplication.Current!.Services.GetRequiredService<ILocalizationHelperPort>()?.GetString(concreteValue, culture) ?? concreteValue;
+        return IPlatformApplication.Current!.Services.GetRequiredService<ILocalizationHelperPort>()?.GetString(value.ToString()!, culture) ?? value.ToString();
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

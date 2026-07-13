@@ -1,4 +1,5 @@
-﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.OrganizationKinds
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Enumerations
+@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.OrganizationKinds
 
 @model OrganizationKindUpdateViewModel
 
@@ -21,6 +22,10 @@
     };
 
     Layout = "_BackendLayout";
+
+    DevelopmentActorProfileKind[] developmentActorKinds = (DevelopmentActorProfileKind[])Enum.GetValues(typeof(DevelopmentActorProfileKind));
+
+    SelectListItem[] availableDevelopmentActorKinds = [.. developmentActorKinds.Select(item => new SelectListItem { Value = item.ToString(), Text = item.ToString() })];
 }
 
 <hr class="mt-0 mb-4" />
@@ -47,6 +52,11 @@
                             @Html.EditorFor(model => model.IsEnabled) Habilitado
                         </label>
                     </div>
+                </div>
+                <div class="col-md-9 mb-3">
+                    @Html.LabelFor(model => model.DevelopmentActorProfileKind, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.DevelopmentActorProfileKind, availableDevelopmentActorKinds, "-- Ninguno --", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DevelopmentActorProfileKind, null, new { @class = "text-danger" })
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Validators;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
 
 internal sealed class StrategicProgramConfigurationValidator : AbstractValidator<Models.Page.StrategicProgram.Configuration.StrategicProgramConfigurationPageModel>
 {

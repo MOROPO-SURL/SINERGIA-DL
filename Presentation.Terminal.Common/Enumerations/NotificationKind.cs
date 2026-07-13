@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Enumerations;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Enumerations;
 
 public enum NotificationKind
 {

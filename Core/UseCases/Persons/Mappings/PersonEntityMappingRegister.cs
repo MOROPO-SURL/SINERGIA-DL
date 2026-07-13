@@ -6,6 +6,9 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.Mappings;
@@ -23,6 +26,7 @@ internal sealed class PersonEntityMappingRegister : IRegister
         config.NewConfig<Person, PersonBasicDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest.Image, src => src.Image.Adapt<ImageBasicDto>())
+            .Map(dest => dest.UserId, src => src.UserId == null ? null : src.UserId!.Value.Value)
             .Map(dest => dest, src => src);
 
         config.NewConfig<Person, PersonDetailDto>()
@@ -50,16 +54,21 @@ internal sealed class PersonEntityMappingRegister : IRegister
                 src.PhoneNumbers.Select(item => item.Adapt<PhoneNumber>()).ToArray(),
                 src.PostalAddresses.Select(item => item.Adapt<PostalAddress>()).ToArray(),
                 src.WebSiteAddresses.Select(item => item.Adapt<WebSiteAddress>()).ToArray(),
+                Array.Empty<PersonOrganizationBrigde>(),
                 src.LastName,
                 src.Alias,
                 null,
                 src.About,
                 null,
+                null,
+                src.User == null ? null : new UserId(src.User.Id),
                 null
             ));
 
         config.NewConfig<PersonUpdateCommand, Person>()
             .Map(dest => dest.Id, src => new PersonId(src.Id))
+            .Map(dest => dest.UserId, src => (UserId?)(src.User == null ? null : new UserId(src.User.Id)))
+            .Map(dest => dest.User, src => (User?)null)
             .Map(dest => dest, src => src)
             .AfterMapping((src, dest) =>
             {

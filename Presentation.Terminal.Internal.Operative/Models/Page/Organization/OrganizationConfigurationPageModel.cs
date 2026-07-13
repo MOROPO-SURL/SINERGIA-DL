@@ -1,21 +1,24 @@
 ﻿using FluentValidation;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OrganizationKind.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Common.Configuration;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Common.Configuration;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Common.Detail;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Validators;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Common.Configuration;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Common.Configuration;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Common.Detail;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Validators;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Person;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization;
 
 public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPageModel<OrganizationDetailDtoModel, OrganizationDetailDtoModel>
 {
@@ -33,6 +36,9 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
     private readonly List<PostalAddressDetailDtoModel> outPostalAddresses = [];
     private readonly List<WebSiteAddressDetailDtoModel> inWebSiteAddresses = [];
     private readonly List<WebSiteAddressDetailDtoModel> outWebSiteAddresses = [];
+    private readonly List<OrganizationPersonRelationshipConfigurationRequestModel> inPersonRelationships = [];
+    private readonly List<OrganizationPersonRelationshipConfigurationRequestModel> patchPersonRelationships = [];
+    private readonly List<PersonBasicDtoModel> outPersonRelationships = [];
 
     private int priority = 1;
     private string name = null!;
@@ -48,11 +54,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         {
             await Application.Current!.MainPage!.NavigationPushPageAsync(new PhoneNumberConfigurationPage(new PhoneNumberConfigurationPageModel(null, PhoneNumberCreateSuccess_Callback, new PhoneNumberConfigurationValidator())));
         });
-
-        //UpdatePhoneNumberCommand = new Command<PhoneNumberDetailDtoModel>(async model =>
-        //{
-        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new PhoneNumberConfigurationPage(new PhoneNumberConfigurationPageModel(model, PhoneNumberModifySuccess_Callback, new PhoneNumberConfigurationValidator())));
-        //});
 
         DetailPhoneNumberCommand = new Command<PhoneNumberDetailDtoModel>(async model =>
         {
@@ -98,11 +99,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
             await Application.Current!.MainPage!.NavigationPushPageAsync(new EmailAddressConfigurationPage(new EmailAddressConfigurationPageModel(null, EmailAddressCreateSuccess_Callback, new EmailAddressConfigurationValidator())));
         });
 
-        //UpdateEmailAddressCommand = new Command<EmailAddressDetailDtoModel>(async model =>
-        //{
-        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new EmailAddressConfigurationPage(new EmailAddressConfigurationPageModel(model, EmailAddressModifySuccess_Callback, new EmailAddressConfigurationValidator())));
-        //});
-
         DetailEmailAddressCommand = new Command<EmailAddressDetailDtoModel>(async model =>
         {
             await Application.Current!.MainPage!.NavigationPushModalPageAsync(new EmailAddressDetailPage(model));
@@ -146,11 +142,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         {
             await Application.Current!.MainPage!.NavigationPushPageAsync(new PostalAddressConfigurationPage(new PostalAddressConfigurationPageModel(null, PostalAddressCreateSuccess_Callback, new PostalAddressConfigurationValidator())));
         });
-
-        //UpdatePostalAddressCommand = new Command<PostalAddressDetailDtoModel>(async model =>
-        //{
-        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new PostalAddressConfigurationPage(new PostalAddressConfigurationPageModel(model, PostalAddressModifySuccess_Callback, new PostalAddressConfigurationValidator())));
-        //});
 
         DetailPostalAddressCommand = new Command<PostalAddressDetailDtoModel>(async model =>
         {
@@ -196,11 +187,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
             await Application.Current!.MainPage!.NavigationPushPageAsync(new WebSiteAddressConfigurationPage(new WebSiteAddressConfigurationPageModel(null, WebSiteAddressCreateSuccess_Callback, new WebSiteAddressConfigurationValidator())));
         });
 
-        //UpdateWebSiteAddressCommand = new Command<WebSiteAddressDetailDtoModel>(async model =>
-        //{
-        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new WebSiteAddressConfigurationPage(new WebSiteAddressConfigurationPageModel(model, WebSiteAddressModifySuccess_Callback, new WebSiteAddressConfigurationValidator())));
-        //});
-
         DetailWebSiteAddressCommand = new Command<WebSiteAddressDetailDtoModel>(async model =>
         {
             await Application.Current!.MainPage!.NavigationPushModalPageAsync(new WebSiteAddressDetailPage(model));
@@ -238,6 +224,212 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
 
         #endregion
 
+        #region Representative Persons
+
+        AddRepresentativePersonCommand = new Command(async () =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new PersonPickPage(RepresentativePersonPicked_Callback)));
+        });
+
+        RemoveRepresentativePersonCommand = new Command<PersonBasicDtoModel>(model =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inPersonRelationships)
+                {
+                    if (item.Person.Id != model.Id) continue;
+
+                    inPersonRelationships.Remove(inPersonRelationships.First(item => item.Person.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in patchPersonRelationships)
+                    {
+                        if (item.Person.Id != model.Id) continue;
+
+                        patchPersonRelationships.Remove(patchPersonRelationships.First(item => item.Person.Id == model.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outPersonRelationships.Add(model);
+                }
+
+                Dispatcher.Dispatch(() => RepresentativePersons.Remove(model));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        SetAsNonRepresentativePersonCommand = new Command<PersonBasicDtoModel>(model =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea mover a esta persona al grupo de los no representantes de la entidad en el sistema?", "Confirmar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                Dispatcher.Dispatch(() =>
+                {
+                    bool handled = false;
+
+                    foreach (var item in inPersonRelationships)
+                    {
+                        if (item.Person.Id != model.Id) continue;
+
+                        inPersonRelationships.Remove(inPersonRelationships.First(item => item.Person.Id == model.Id));
+
+                        inPersonRelationships.Add(new OrganizationPersonRelationshipConfigurationRequestModel(model, false));
+
+                        handled = true;
+
+                        break;
+                    }
+
+                    if (!handled)
+                    {
+                        foreach (var item in patchPersonRelationships)
+                        {
+                            if (item.Person.Id != model.Id) continue;
+
+                            patchPersonRelationships.Remove(inPersonRelationships.First(item => item.Person.Id == model.Id));
+
+                            patchPersonRelationships.Add(new OrganizationPersonRelationshipConfigurationRequestModel(model, false));
+
+                            handled = true;
+
+                            break;
+                        }
+                    }
+
+                    if (!handled)
+                    {
+                        patchPersonRelationships.Add(new OrganizationPersonRelationshipConfigurationRequestModel(model, false));
+                    }
+
+                    RepresentativePersons.Remove(model);
+                    NonRepresentativePersons.Add(model);
+
+                    hasChangesFlag = true;
+                });
+            });
+        });
+
+        #endregion
+
+        #region NonRepresentative Persons
+
+        AddNonRepresentativePersonCommand = new Command(async () =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new PersonPickPage(NonRepresentativePersonPicked_Callback)));
+        });
+
+        RemoveNonRepresentativePersonCommand = new Command<PersonBasicDtoModel>(model =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inPersonRelationships)
+                {
+                    if (item.Person.Id != model.Id) continue;
+
+                    inPersonRelationships.Remove(inPersonRelationships.First(item => item.Person.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in patchPersonRelationships)
+                    {
+                        if (item.Person.Id != model.Id) continue;
+
+                        patchPersonRelationships.Remove(patchPersonRelationships.First(item => item.Person.Id == model.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outPersonRelationships.Add(model);
+                }
+
+                Dispatcher.Dispatch(() => NonRepresentativePersons.Remove(model));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        SetAsRepresentativePersonCommand = new Command<PersonBasicDtoModel>(model =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea mover a esta persona al grupo de los representantes de la entidad en el sistema?", "Confirmar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                Dispatcher.Dispatch(() =>
+                {
+                    bool handled = false;
+
+                    foreach (var item in inPersonRelationships)
+                    {
+                        if (item.Person.Id != model.Id) continue;
+
+                        inPersonRelationships.Remove(inPersonRelationships.First(item => item.Person.Id == model.Id));
+
+                        inPersonRelationships.Add(new OrganizationPersonRelationshipConfigurationRequestModel(model, true));
+
+                        handled = true;
+
+                        break;
+                    }
+
+                    if (!handled)
+                    {
+                        foreach (var item in patchPersonRelationships)
+                        {
+                            if (item.Person.Id != model.Id) continue;
+
+                            patchPersonRelationships.Remove(inPersonRelationships.First(item => item.Person.Id == model.Id));
+
+                            patchPersonRelationships.Add(new OrganizationPersonRelationshipConfigurationRequestModel(model, true));
+
+                            handled = true;
+
+                            break;
+                        }
+                    }
+
+                    if (!handled)
+                    {
+                        patchPersonRelationships.Add(new OrganizationPersonRelationshipConfigurationRequestModel(model, true));
+                    }
+
+                    NonRepresentativePersons.Remove(model);
+                    RepresentativePersons.Add(model);
+
+                    hasChangesFlag = true;
+                });
+            });                
+        });
+
+        #endregion
+
         AvailableKinds = availableKinds;
 
         if (model is null) return;
@@ -246,12 +438,15 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         priority = model.Priority;
         name = model.Name;
         kind = availableKinds.First(item => item.Equals(model.Kind));
+        imageSource = model.Image?.ToImageSource();
         about = model.About;
 
         PhoneNumbers = [.. model.PhoneNumbers];
         EmailAddresses = [.. model.EmailAddresses];
         PostalAddresses = [.. model.PostalAddresses];
         WebSiteAddresses = [.. model.WebSiteAddresses];
+        RepresentativePersons = [.. model.RepresentativePersons];
+        NonRepresentativePersons = [.. model.NonRepresentativePersons];
     }
 
     public Guid? Id { get; set; }
@@ -272,13 +467,15 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
 
     public ObservableCollection<WebSiteAddressDetailDtoModel> WebSiteAddresses { get; set; } = [];
 
+    public ObservableCollection<PersonBasicDtoModel> RepresentativePersons { get; set; } = [];
+
+    public ObservableCollection<PersonBasicDtoModel> NonRepresentativePersons { get; set; } = [];
+
     public ImageSource? ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
 
-    public OrganizationKindBasicDtoModel[] AvailableKinds { get; private set; }
+    public OrganizationKindBasicDtoModel[] AvailableKinds { get; init; }
 
     public ICommand CreatePhoneNumberCommand { get; private set; }
-
-    //public ICommand UpdatePhoneNumberCommand { get; private set; }
 
     public ICommand DetailPhoneNumberCommand { get; private set; }
 
@@ -286,15 +483,11 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
 
     public ICommand CreateEmailAddressCommand { get; private set; }
 
-    //public ICommand UpdateEmailAddressCommand { get; private set; }
-
     public ICommand DetailEmailAddressCommand { get; private set; }
 
     public ICommand RemoveEmailAddressCommand { get; private set; }
 
     public ICommand CreatePostalAddressCommand { get; private set; }
-
-    //public ICommand UpdatePostalAddressCommand { get; private set; }
 
     public ICommand DetailPostalAddressCommand { get; private set; }
 
@@ -302,11 +495,21 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
 
     public ICommand CreateWebSiteAddressCommand { get; private set; }
 
-    //public ICommand UpdateWebSiteAddressCommand { get; private set; }
-
     public ICommand DetailWebSiteAddressCommand { get; private set; }
 
     public ICommand RemoveWebSiteAddressCommand { get; private set; }
+
+    public ICommand AddRepresentativePersonCommand { get; private set; }
+
+    public ICommand AddNonRepresentativePersonCommand { get; private set; }
+
+    public ICommand RemoveRepresentativePersonCommand { get; private set; }
+
+    public ICommand RemoveNonRepresentativePersonCommand { get; private set; }
+
+    public ICommand SetAsRepresentativePersonCommand { get; private set; }
+
+    public ICommand SetAsNonRepresentativePersonCommand { get; private set; }
 
     protected override void DisposeUnmanagedResources()
     {
@@ -321,15 +524,16 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
 
         return apiClient.CreateAsync(new OrganizationCreateRequestModel
             (
-                Name!,
+                name!,
                 true,
-                Priority,
-                Kind.Id,
+                priority,
+                kind.Id,
                 [.. EmailAddresses],
                 [.. PhoneNumbers],
                 [.. PostalAddresses],
                 [.. WebSiteAddresses],
-                About,
+                [.. inPersonRelationships],
+                about,
                 imagePickedModel
             ));
     }
@@ -341,10 +545,10 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         return apiClient.UpdateAsync(new OrganizationUpdateRequestModel
             (
                 Id!.Value,
-                Name!,
+                name!,
                 true,
-                Priority,
-                Kind.Id,
+                priority,
+                kind.Id,
                 [.. inEmailAddresses],
                 [.. outEmailAddresses],
                 [.. inPhoneNumbers],
@@ -353,12 +557,22 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
                 [.. outPostalAddresses],
                 [.. inWebSiteAddresses],
                 [.. outWebSiteAddresses],
-                About,
+                [.. inPersonRelationships],
+                [.. patchPersonRelationships],
+                [.. outPersonRelationships],
+                about,
                 imagePickedModel
             ));
     }
 
     public override IValidationContext? ValidationContext => new ValidationContext<OrganizationConfigurationPageModel>(this);
+
+    internal void SetImagePickedModel(ImageCreateRequestModel model)
+    {
+        imagePickedModel = model;
+
+        hasChangesFlag = true;
+    }
 
     private void PhoneNumberCreateSuccess_Callback(PhoneNumberDetailDtoModel model)
     {
@@ -369,18 +583,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         hasChangesFlag = true;
     }
 
-    //private void PhoneNumberModifySuccess_Callback(PhoneNumberDetailDtoModel model)
-    //{
-    //    if (outgoingPhoneNumber != null)
-    //    {
-    //        PhoneNumbers.Remove(outgoingPhoneNumber);
-    //    }
-
-    //    PhoneNumbers.Add(model);
-
-    //    hasChangesFlag = true;
-    //}
-
     private void EmailAddressCreateSuccess_Callback(EmailAddressDetailDtoModel model)
     {
         inEmailAddresses.Add(model);
@@ -389,15 +591,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
 
         hasChangesFlag = true;
     }
-
-    //private void EmailAddressModifySuccess_Callback(EmailAddressDetailDtoModel model)
-    //{
-    //    if (outgoingEmailAddress != null) EmailAddresses.Remove(outgoingEmailAddress);
-
-    //    EmailAddresses.Add(model);
-
-    //    hasChangesFlag = true;
-    //}
 
     private void PostalAddressCreateSuccess_Callback(PostalAddressDetailDtoModel model)
     {
@@ -408,15 +601,6 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         hasChangesFlag = true;
     }
 
-    //private void PostalAddressModifySuccess_Callback(PostalAddressDetailDtoModel model)
-    //{
-    //    if (outgoingPostalAddress != null) PostalAddresses.Remove(outgoingPostalAddress);
-
-    //    PostalAddresses.Add(model);
-
-    //    hasChangesFlag = true;
-    //}
-
     private void WebSiteAddressCreateSuccess_Callback(WebSiteAddressDetailDtoModel model)
     {
         inWebSiteAddresses.Add(model);
@@ -426,19 +610,21 @@ public sealed class OrganizationConfigurationPageModel : AbstractConfigurationPa
         hasChangesFlag = true;
     }
 
-    //private void WebSiteAddressModifySuccess_Callback(WebSiteAddressDetailDtoModel model)
-    //{
-    //    if (outgoingWebSiteAddress != null) WebSiteAddresses.Remove(outgoingWebSiteAddress);
-
-    //    WebSiteAddresses.Add(model);
-
-    //    hasChangesFlag = true;
-    //}
-
-    internal void SetImagePickedModel(ImageCreateRequestModel model)
+    private void RepresentativePersonPicked_Callback(PersonBasicDtoModel model)
     {
-        imagePickedModel = model;
+        inPersonRelationships.Add(new OrganizationPersonRelationshipConfigurationRequestModel(model, true));
 
-        hasChangesFlag = true;
+        RepresentativePersons.Add(model);
+
+        hasChangesFlag= true;
+    }
+
+    private void NonRepresentativePersonPicked_Callback(PersonBasicDtoModel model)
+    {
+        inPersonRelationships.Add(new OrganizationPersonRelationshipConfigurationRequestModel(model, false));
+
+        NonRepresentativePersons.Add(model);
+
+        hasChangesFlag= true;
     }
 }

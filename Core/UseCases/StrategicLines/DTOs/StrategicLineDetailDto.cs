@@ -1,4 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.DTOs;
@@ -17,5 +18,6 @@ public record StrategicLineDetailDto(
     StrategicLineSpecificObjectiveDetailDto[] SpecificObjectives,
     PublicPolicyBasicDto[] PublicPolicies,
     OrganizationBasicDto[] Organizations,
+    MacroprogramBasicDto[] Macroprograms,
     StrategicAxeBasicDto? Axe = null, 
     string? Description = null) : IDetailDto;

@@ -5,10 +5,10 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProjectKind.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Validators;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicProject.Configuration;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicProject.Configuration;
 
 public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurationPageModel<StrategicProjectDetailDtoModel, StrategicProjectDetailDtoModel>
 {
@@ -51,7 +51,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
 
     public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-    public string? Objective { get => objective; set => SetProperty(ref objective, value); }
+    public string Objective { get => objective; set => SetProperty(ref objective, value); }
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 

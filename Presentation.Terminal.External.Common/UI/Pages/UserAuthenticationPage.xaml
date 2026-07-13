@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<common_base_pages:BaseBindingContextedContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.UserAuthenticationPage"
+    x:TypeArguments="common_page_models:UserAuthenticationPageModel"
+    x:DataType="common_page_models:UserAuthenticationPageModel"
+    Title="Iniciar sesión">
+    <ContentPage.Resources>
+        <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView
+                HorizontalOptions="Center"
+                Orientation="Vertical">
+                <Grid>
+                    <VerticalStackLayout 
+                        HorizontalOptions="Center" VerticalOptions="Center"
+                        WidthRequest="280"
+                        Spacing="16">
+                        <VerticalStackLayout>
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                FontAttributes="Bold"
+                                FontSize="Large"
+                                Text="Gestión del Desarrollo Local" />
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="CAM Camagüey" />
+                        </VerticalStackLayout>
+                        <Entry
+                            Text="{Binding UserName}"
+                            Placeholder="usuario">
+                        </Entry>
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static common_page_models:UserAuthenticationPageModel.UserNameValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                        <Entry
+                            Text="{Binding Password}"
+                            Placeholder="contraseña"
+                            IsPassword="true"
+                            ReturnCommand="{Binding ApplyCommand, Mode=OneTime}">
+                        </Entry>
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static common_page_models:UserAuthenticationPageModel.PasswordValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                        <Button
+                            Style="{StaticResource PrimaryKindButtonStyle}"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                            HorizontalOptions="Center"
+                            Text="Iniciar"
+                            Command="{Binding ApplyCommand, Mode=OneTime}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </ScrollView>
+            <Button
+                Style="{StaticResource FontIconImageButtonStyle}"
+                HorizontalOptions="End" VerticalOptions="Start"
+                Margin="16"
+                Text="{StaticResource IconGlyphConfig}"
+                Clicked="SettingButton_Clicked" />
+            <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>               
+    </ContentPage.Content>
+</common_base_pages:BaseBindingContextedContentPage>

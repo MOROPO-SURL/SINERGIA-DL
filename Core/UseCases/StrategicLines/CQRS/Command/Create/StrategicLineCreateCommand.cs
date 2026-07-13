@@ -1,4 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Create.Clipped;
@@ -16,6 +17,7 @@ public record StrategicLineCreateCommand(
     StrategicLineSpecificObjectiveClippedCreateCommand[] SpecificObjectives,
     PublicPolicyBasicDto[] PublicPolicies,
     OrganizationBasicDto[] Organizations,
+    MacroprogramBasicDto[] Macroprograms,
     Guid CoordinatorId, 
     int? AxeId = null, 
     string? Description = null) : ICreateCommand<StrategicLineDetailDto>;

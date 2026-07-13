@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Macroprogram.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PublicPolicy.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;
 
@@ -18,5 +19,7 @@ public record StrategicLineUpdateRequestModel(
     PublicPolicyBasicDtoModel[] OutPublicPolicies,
     OrganizationBasicDtoModel[] InOrganizations,
     OrganizationBasicDtoModel[] OutOrganizations,
+    MacroprogramBasicDtoModel[] InMacroprograms,
+    MacroprogramBasicDtoModel[] OutMacroprograms,
     int? AxeId = null, 
     string? Description = null);

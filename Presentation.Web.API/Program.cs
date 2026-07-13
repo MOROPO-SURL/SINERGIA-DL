@@ -91,6 +91,7 @@ public class Program
         app.Services.ApplyCoreMappings();
         app.Services.ApplyMappins();
 
+        app.UseStaticFiles();
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();

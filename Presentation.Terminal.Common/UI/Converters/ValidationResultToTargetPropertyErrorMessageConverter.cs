@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;
 
 public class ValidationResultToTargetPropertyErrorMessageConverter : IValueConverter
 {

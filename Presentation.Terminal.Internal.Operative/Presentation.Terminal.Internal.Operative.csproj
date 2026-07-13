@@ -12,18 +12,18 @@
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
 		<OutputType>Exe</OutputType>
-		<AssemblyName>SINERGIA-DT-CAMCMG-Operaciones</AssemblyName>
-		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative</RootNamespace>
+		<AssemblyName>SINERGIA-DL-CMG-Operaciones</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>SINERGIA DT Operaciones CAM Camagüey</ApplicationTitle>
+		<ApplicationTitle>SINERGIA-DL Operaciones CAM Camagüey</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>cu.moropo.pdlcolab.sinergiadt.camcmg.operative</ApplicationId>
+		<ApplicationId>cu.moropo.pdlcolabcmg.sinergiadl.cmg.oper</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>0.5.2</ApplicationDisplayVersion>
@@ -46,10 +46,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#004755" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#007181" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#007181" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -74,6 +74,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+		<PackageReference Include="SkiaSharp" Version="4.148.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -81,6 +82,12 @@
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LocalizationResources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\EconomicActivitiesManagementPage.xaml.cs">
+	    <DependentUpon>EconomicActivitiesManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\EconomicActivity\EconomicActivityDetailPage.xaml.cs">
+	    <DependentUpon>EconomicActivityDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\Feature\FeatureConfigurationPage.xaml.cs">
 	    <DependentUpon>FeatureConfigurationPage.xaml</DependentUpon>
@@ -154,9 +161,6 @@
 	  <Compile Update="UI\Pages\PublicPolicy\PublicPolicyDetailPage.xaml.cs">
 	    <DependentUpon>PublicPolicyDetailPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="UI\Pages\StrategySummaryPage.xaml.cs">
-	    <DependentUpon>StrategySummaryPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="UI\Pages\TerritoryPotentialsManagementPage.xaml.cs">
 	    <DependentUpon>TerritoryPotentialsManagementPage.xaml</DependentUpon>
 	  </Compile>
@@ -197,28 +201,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="UI\Pages\Common\Configuration\EmailAddressConfigurationPage.xaml">
+	  <MauiXaml Update="UI\Pages\EconomicActivitiesManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Common\Configuration\PhoneNumberConfigurationPage.xaml">
+	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Common\Configuration\PostalAddressConfigurationPage.xaml">
+	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Common\Configuration\WebSiteAddressConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Common\Detail\PhoneNumberDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Common\Detail\PostalAddressDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Common\Detail\WebSiteAddressDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\DiagnosticSummaryPage.xaml">
+	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\EnvironmentSummaryPage.xaml">
@@ -231,6 +223,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\FeaturesManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Macroprogram\MacroprogramPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Organization\OrganizationPickPage.xaml">
@@ -311,9 +306,6 @@
 	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\StrategySummaryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\TerritoryPotentialsManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -330,9 +322,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Objective\Configuration\ObjectiveProjectionConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Common\Detail\EmailAddressDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Objective\Detail\ObjectiveActionDetailPage.xaml">
@@ -383,13 +372,19 @@
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\OrganizationCardView.xaml">
+	  <MauiXaml Update="UI\Pages\User\UserPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\PersonCardView.xaml">
+	  <MauiXaml Update="UI\Views\Card\EconomicActivityCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\MacroprogramCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Views\Card\PublicPolicyCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\UserCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -397,6 +392,10 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Interop.Connect.Internal.Operative\Interop.Connect.Internal.Operative.csproj" />
 	  <ProjectReference Include="..\Presentation.Terminal.Common\Presentation.Terminal.Common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\Page\Common\" />
 	</ItemGroup>
 
 </Project>

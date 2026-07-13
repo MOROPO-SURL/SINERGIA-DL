@@ -25,7 +25,7 @@ internal sealed class FullUserUpdateCommandHandler :
         this.userRoleBridgeCommandRepository = userRoleBridgeCommandRepository;
     }
 
-    protected override async Task ApplyManualMappingAsync(FullUserUpdateCommand request, User entity)
+    protected override async Task<Action?> PerformPreUpdateAsync(FullUserUpdateCommand request, User entity)
     {
         entity.Signature = await dataIntegrityService.GetEntitySignatureAsync(entity);
 
@@ -51,5 +51,7 @@ internal sealed class FullUserUpdateCommandHandler :
         {
             await userRoleBridgeCommandRepository.DeleteAsync(item, false);
         }
+
+        return null;
     }
 }

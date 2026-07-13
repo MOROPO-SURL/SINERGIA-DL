@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Constants;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Constants;
 
 public static class CommonDetailPageConstants
 {

@@ -1,0 +1,3 @@
+﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.CQRS.Query;
+
+public record DevelopmentActorProfilableOrganizationListRequestModel(string UserId, Enumerations.DevelopmentActorProfileKind DevelopmentActorProfileKind);

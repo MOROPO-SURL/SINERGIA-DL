@@ -16,6 +16,8 @@ internal sealed class PersonQueryRepositoryPortAdapter : AbstractEntityQueryRepo
     protected override IQueryable<Person> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .Include(entity => entity.Image);
+            .Include(entity => entity.Image)
+            .Include(entity => entity.User)
+            .Include(entity => entity.OrganizationBrigdes).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.Image);
     }
 }

@@ -15,6 +15,8 @@ internal static class EntityStateExtensions
 
             case EntityState.Deleted: return TraceKind.Remotion;
 
+            case EntityState.Unchanged: return TraceKind.Edition;
+
             default: throw new InvalidOperationException();
         }
     }

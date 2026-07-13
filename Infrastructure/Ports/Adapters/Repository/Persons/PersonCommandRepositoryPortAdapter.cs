@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.Ports.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
@@ -10,5 +11,11 @@ internal sealed class PersonCommandRepositoryPortAdapter : AbstractEntityCommand
 {
     public PersonCommandRepositoryPortAdapter(DefaultDbContext dbContext) : base(dbContext)
     {
+    }
+
+    protected override IQueryable<Person> GetQueryableDbSet()
+    {
+        return base.GetQueryableDbSet()
+            .Include(entity => entity.OrganizationBrigdes);
     }
 }

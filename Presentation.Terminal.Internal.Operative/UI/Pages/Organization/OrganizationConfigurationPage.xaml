@@ -2,17 +2,26 @@
 <common_ui_base_pages:BaseConfigurationEntityPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization"
+    xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
+    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:interop_common_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
-    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.Organization.OrganizationConfigurationPage"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Organization.OrganizationConfigurationPage"
     x:TypeArguments="interop_dto_models:OrganizationBasicDtoModel,interop_dto_models:OrganizationDetailDtoModel,local_configuration_page_models:OrganizationConfigurationPageModel"
     x:DataType="local_configuration_page_models:OrganizationConfigurationPageModel"
     Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"
@@ -47,7 +56,9 @@
                                 ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}" />
                         </Frame.Behaviors>
                         <Grid>
-                            <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <Image 
+                                Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}"
+                                Aspect="AspectFill" />
                             <Grid BackgroundColor="#A7000000">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
@@ -282,7 +293,7 @@
                                                             </FormattedString>
                                                         </Label.FormattedText>
                                                     </Label>
-                                                <Button
+                                                    <Button
                                                         Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Center"
                                                         Text="&#xF2FD;"
@@ -366,6 +377,148 @@
                         </Frame>
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Personas representantes" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Command="{Binding AddRepresentativePersonCommand, Mode=OneTime}" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding RepresentativePersons}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout 
+                                        Orientation="Vertical" 
+                                        Span="2" 
+                                        HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                        VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                        ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                        ItemWidth="{Static local_constants:CardViewSizeConstants.PERSON_CONFIGURATION_CARD_VIEW_WIDTH}" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <common_ui_card_views:PersonCardView 
+                                                Grid.Column="0"
+                                                HeightRequest="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                                            <VerticalStackLayout 
+                                                Grid.Column="1"
+                                                Spacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xF019;"
+                                                    ToolTipProperties.Text="Definir como persona no representativa de la entidad"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.SetAsNonRepresentativePersonCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                                <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                    Text="&#xFA78;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemoveRepresentativePersonCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Personas no representantes" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Command="{Binding AddNonRepresentativePersonCommand, Mode=OneTime}" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding NonRepresentativePersons}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout 
+                                        Orientation="Vertical" 
+                                        Span="2" 
+                                        HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                        VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                        ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                        ItemWidth="{Static local_constants:CardViewSizeConstants.PERSON_CONFIGURATION_CARD_VIEW_WIDTH}" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <common_ui_card_views:PersonCardView 
+                                                Grid.Column="0"
+                                                HeightRequest="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                                            <VerticalStackLayout 
+                                                Grid.Column="1"
+                                                Spacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xF019;"
+                                                    ToolTipProperties.Text="Definir como persona representativa de la entidad"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.SetAsRepresentativePersonCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                                <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                    Text="&#xFA78;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemoveNonRepresentativePersonCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
                 <BoxView Style="{StaticResource FormFluentChildSeparatorBoxViewStyle}" />
                 <FlexLayout Wrap="Wrap">
                     <Grid Style="{StaticResource FormFlexWrappedChildGridStyle}">

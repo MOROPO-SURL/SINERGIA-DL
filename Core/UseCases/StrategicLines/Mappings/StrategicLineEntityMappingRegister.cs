@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.DTOs;
@@ -7,17 +8,14 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Update;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.Mappings;
 
@@ -52,6 +50,7 @@ internal sealed class StrategicLineEntityMappingRegister : IRegister
             .Map(dest => dest.SpecificObjectives, src => src.SpecificObjectives.OrderBy(entity => entity.Index).Select(entity => entity.Adapt<StrategicLineSpecificObjectiveDetailDto>()).ToArray())
             .Map(dest => dest.PublicPolicies, src => src.PublicPolicyBridges.OrderBy(bridge => bridge.Linked!.PublishedAt).Select(bridge => bridge.Linked.Adapt<PublicPolicyBasicDto>()).ToArray())
             .Map(dest => dest.Organizations, src => src.OrganizationBridges.OrderBy(bridge => bridge.Linked!.Priority).Select(bridge => bridge.Linked.Adapt<OrganizationBasicDto>()).ToArray())
+            .Map(dest => dest.Macroprograms, src => src.MacroprogramBridges.OrderBy(bridge => bridge.Linked!.Index).Select(bridge => bridge.Linked.Adapt<MacroprogramBasicDto>()).ToArray())
             .Map(dest => dest, src => src);
 
         config.NewConfig<StrategicLineDetailQuery, StrategicLineId>()
@@ -70,6 +69,7 @@ internal sealed class StrategicLineEntityMappingRegister : IRegister
                 Array.Empty<StrategicLineAction>(),
                 src.Organizations.Select(item => new StrategicLineOrganizationBridge(new StrategicLineId(src.Id), new OrganizationId(item.Id), null)).ToArray(),
                 src.PublicPolicies.Select(item => new StrategicLinePublicPolicyBridge(new StrategicLineId(src.Id), new PublicPolicyId(item.Id), null)).ToArray(),
+                src.Macroprograms.Select(item => new StrategicLineMacroprogramBridge(new StrategicLineId(src.Id), new MacroprogramId(item.Id), null)).ToArray(),
                 src.AxeId == null ? null : new StrategicAxeId(src.AxeId.Value),
                 null,
                 null,
@@ -109,12 +109,12 @@ internal sealed class StrategicLineEntityMappingRegister : IRegister
 
                 foreach (var item in src.InPublicPolicies)
                 {
-                    dest.AddPublicPolicyBridge(new PublicPolicyId(item.Id));
+                    dest.LinkPublicPolicyById(new PublicPolicyId(item.Id));
                 }
 
                 foreach (var item in src.OutPublicPolicies)
                 {
-                    dest.RemovePublicPolicyBridge(new PublicPolicyId(item.Id));
+                    dest.UnlinkPublicPolicy(new PublicPolicyId(item.Id));
                 }
 
                 #endregion
@@ -123,12 +123,26 @@ internal sealed class StrategicLineEntityMappingRegister : IRegister
 
                 foreach (var item in src.InOrganizations)
                 {
-                    dest.AddOrganizationBridge(new OrganizationId(item.Id));
+                    dest.LinkOrganizationById(new OrganizationId(item.Id));
                 }
 
                 foreach (var item in src.OutOrganizations)
                 {
-                    dest.RemoveOrganizationBridge(new OrganizationId(item.Id));
+                    dest.UnlinkOrganizationById(new OrganizationId(item.Id));
+                }
+
+                #endregion
+
+                #region Macroprograms
+
+                foreach (var item in src.InMacroprograms)
+                {
+                    dest.LinkMacroprogramById(new MacroprogramId(item.Id));
+                }
+
+                foreach (var item in src.OutMacroprograms)
+                {
+                    dest.UnlinkMacroprogramById(new MacroprogramId(item.Id));
                 }
 
                 #endregion

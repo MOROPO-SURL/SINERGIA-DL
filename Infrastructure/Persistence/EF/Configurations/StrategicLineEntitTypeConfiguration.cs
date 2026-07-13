@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PublicPolicyAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
@@ -16,6 +17,7 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
 
     private const string STRATEGICLINE_ORGANIZATION_BRIDGES_TABLE_NAME = "strategicline_organization_bridges";
     private const string STRATEGICLINE_PUBLICPOLICY_BRIDGES_TABLE_NAME = "strategicline_publicpolicy_bridges";
+    private const string STRATEGICLINE_MACROPROGRAM_BRIDGES_TABLE_NAME = "strategicline_macroprogram_bridges";
     private const string ACTIONS_TABLE_NAME = "strategicline_strategicactions";
     private const string SPECIFICOBJECTIVES_TABLE_NAME = "strategicline_specificobjectives";
 
@@ -70,6 +72,12 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
             .Navigation(entity => entity.PublicPolicyBridges)
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasField("publicPolicyBridges");
+
+        builder
+            .OwnsMany(entity => entity.MacroprogramBridges, Configure)
+            .Navigation(entity => entity.MacroprogramBridges)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("macroprogramBridges");
     }
 
     private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineOrganizationBridge> builder)
@@ -106,6 +114,23 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.Property(bridge => bridge.LinkedId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new PublicPolicyId(value));
+    }
+
+    private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineMacroprogramBridge> builder)
+    {
+        builder.ToTable(STRATEGICLINE_MACROPROGRAM_BRIDGES_TABLE_NAME);
+
+        builder.HasKey(bridge => new { bridge.MainId, bridge.LinkedId });
+
+        builder.WithOwner().HasForeignKey(bridge => bridge.MainId);
+
+        builder.Property(bridge => bridge.MainId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new StrategicLineId(value));
+
+        builder.Property(bridge => bridge.LinkedId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new MacroprogramId(value));
     }
 
     private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineSpecificObjective> builder)

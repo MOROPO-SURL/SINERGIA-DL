@@ -26,7 +26,8 @@ public static class ManagementDashboardConstants
                 new  ManagementDashboardSectionViewModel("Entidades", "organizations", "Index", "Complement", "mdi mdi-domain", "any"),
                 new  ManagementDashboardSectionViewModel("Tipos de Entidad", "organizationkinds", "Index", "Complement", "mdi mdi-office-building", "any"),
                 new  ManagementDashboardSectionViewModel("Clasificaciones", "classifications", "Index", "Complement", "mdi mdi-star-box-outline", "any"),
-                new  ManagementDashboardSectionViewModel("Tipos de Proyecto", "strategicprojectkinds", "Index", "Complement", "mdi mdi-folder-settings-variant-outline", "any")
+                new  ManagementDashboardSectionViewModel("Tipos de Proyecto", "strategicprojectkinds", "Index", "Complement", "mdi mdi-folder-settings-variant-outline", "any"),
+                new  ManagementDashboardSectionViewModel("Actividades económica", "economicactivities", "Index", "Complement", "mdi mdi-gold", "any")
             ]),
         new KeyValuePair<string, ManagementDashboardSectionViewModel[]>(
             "Diagnóstico",

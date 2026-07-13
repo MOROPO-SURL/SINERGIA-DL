@@ -1,6 +1,7 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Create.Clipped;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.Create;
@@ -10,10 +11,11 @@ public record OrganizationCreateCommand(
     bool IsEnabled,
     bool IsArchived,
     int Priority,
-    Guid OrganizationKindId,
-    EmailAddressDetailDto[] EmailAddresses,
-    PhoneNumberDetailDto[] PhoneNumbers,
-    PostalAddressDetailDto[] PostalAddresses,
-    WebSiteAddressDetailDto[] WebSiteAddresses,
+    Guid KindId,
+    IEnumerable<EmailAddressDetailDto> EmailAddresses,
+    IEnumerable<PhoneNumberDetailDto> PhoneNumbers,
+    IEnumerable<PostalAddressDetailDto> PostalAddresses,
+    IEnumerable<WebSiteAddressDetailDto> WebSiteAddresses,
+    IEnumerable<OrganizationPersonRelationshipClippedCreateCommand> PersonRelationships,
     string? About = null,
-    ImageCreateCommand? Image = null) : ICreateCommand<OrganizationDetailDto>;
+    ImageCreateCommand? NewImage = null) : ICreateCommand<OrganizationDetailDto>;

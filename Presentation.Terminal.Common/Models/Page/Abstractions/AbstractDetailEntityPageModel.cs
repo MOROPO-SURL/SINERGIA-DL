@@ -1,11 +1,11 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Bases;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Helper;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
 using System.Windows.Input;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
 public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageModel
 {
@@ -79,6 +79,13 @@ public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageMode
 
                                 Dispatcher.Dispatch(() =>
                                 {
+
+                                    /* Cambio no fusionado mediante combinación del proyecto 'Presentation.Terminal.Common (net8.0-android)'
+                                    Antes:
+                                                                        Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+                                    Después:
+                                                                        Application.Current!.PresentToastNotification(NotificationKind.Success, "Cambios aplicados con éxito.");
+                                    */
                                     Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
                                 });
                             });
@@ -121,6 +128,13 @@ public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageMode
 
         changeCallbackAction?.Invoke();
 
+
+        /* Cambio no fusionado mediante combinación del proyecto 'Presentation.Terminal.Common (net8.0-android)'
+        Antes:
+                Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+        Después:
+                Application.Current!.PresentToastNotification(NotificationKind.Success, "Cambios aplicados con éxito.");
+        */
         Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
     }
 }

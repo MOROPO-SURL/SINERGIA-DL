@@ -1,12 +1,13 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Bases;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Interfaces;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Helper;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Ports.Manager;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Interfaces;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
 public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, ICollectionViewSizeChangeReloadItemsPageModel
 {
@@ -32,7 +33,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
             LoadItems(true);
         });
 
-        SearchCommand = new Command(() => 
+        SearchCommand = new Command(() =>
         {
             if (IsBusy) return;
 
@@ -132,7 +133,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
                 {
                     currentItemsPageNumber--;
 
-                    IPlatformApplication.Current!.Services.GetRequiredService<IExceptionHandlingHelperPort>().HandleException(task.Exception);
+                    HandleException(task.Exception);
                 }
                 else
                 {
@@ -148,5 +149,10 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
                 IsBusy = false;
             });
         });
+    }
+
+    protected virtual void HandleException(Exception? exception)
+    {
+        IPlatformApplication.Current!.Services.GetRequiredService<IExceptionHandlingHelperPort>().HandleException(exception);
     }
 }

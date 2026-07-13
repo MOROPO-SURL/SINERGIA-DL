@@ -1,7 +1,8 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Extensions;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 
 public static class ApplicationExtensions
 {
+
     public static void PresentToastNotification(this Application self, Enumerations.NotificationKind kind, string message, TimeSpan? delay = null, TimeSpan? time = null)
     {
         //#if WINDOWS

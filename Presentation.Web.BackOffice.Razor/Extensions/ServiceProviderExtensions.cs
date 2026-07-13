@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.ApiKeys.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.ApiKeyTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Authentication.Mappings;
@@ -91,6 +92,8 @@ internal static class ServiceProviderExtensions
             new StrategicProgramMappingRegister(),
 
             new StrategicProjectMappingRegister(),
+
+            new EconomicActivityMappingRegister(),
 
             new UserTraceMappingRegister(),
 

@@ -1,6 +1,8 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
@@ -13,9 +15,11 @@ public class StrategicAxe :
     INamedEntity<StrategicAxeId, int>, 
     IEnableableEntity<StrategicAxeId, int>
 {
+    private readonly List<StrategicAxeMacroprogramBridge> macroprogramBridges = [];
+
     private StrategicAxe() : base(new StrategicAxeId(default)) { }
 
-    public StrategicAxe(StrategicAxeId id, bool isArchived, string name, bool isEnabled, Person? coordinator = null, PersonId? coordinatorId = null, string? description = null) : base(id)
+    public StrategicAxe(StrategicAxeId id, bool isArchived, string name, bool isEnabled, StrategicAxeMacroprogramBridge[] macroprogramBridges, Person? coordinator = null, PersonId? coordinatorId = null, string? description = null) : base(id)
     {
         IsArchived = isArchived;
         Name = name;
@@ -23,6 +27,8 @@ public class StrategicAxe :
         IsEnabled = isEnabled;
         CoordinatorId = coordinatorId;
         Coordinator = coordinator;
+
+        this.macroprogramBridges = [.. macroprogramBridges];
     }
 
     public bool IsArchived { get; set; }
@@ -35,4 +41,10 @@ public class StrategicAxe :
     public PersonId? CoordinatorId { get; set; }
 
     public string? Description { get; set; }
+
+    public IReadOnlyList<StrategicAxeMacroprogramBridge> MacroprogramBridges => [.. macroprogramBridges];
+
+    public void LinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.Add(new StrategicAxeMacroprogramBridge(Id, macroprogramId));
+
+    public void UnlinkMacroprogramById(MacroprogramId macroprogramId) => macroprogramBridges.Remove(macroprogramBridges.First(bridge => bridge.LinkedId == macroprogramId));
 }

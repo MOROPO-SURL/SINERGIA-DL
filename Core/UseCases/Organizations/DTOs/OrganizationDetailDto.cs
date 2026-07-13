@@ -1,6 +1,7 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 
@@ -15,6 +16,8 @@ public record OrganizationDetailDto(
     PhoneNumberDetailDto[] PhoneNumbers,
     PostalAddressDetailDto[] PostalAddresses,
     WebSiteAddressDetailDto[] WebSiteAddresses,
+    PersonBasicDto[] RepresentativePersons,
+    PersonBasicDto[] NonRepresentativePersons,
     string? Alias = null, 
     string? About = null, 
     ImageBasicDto? Image = null) : IDetailDto;

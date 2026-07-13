@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative {
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative {
     using System;
     
     
@@ -39,8 +39,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Localiza" +
-                            "tionResources", typeof(LocalizationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Locali" +
+                            "zationResources", typeof(LocalizationResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -58,6 +58,69 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operati
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Creación.
+        /// </summary>
+        internal static string Creation {
+            get {
+                return ResourceManager.GetString("Creation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Modificación.
+        /// </summary>
+        internal static string Edition {
+            get {
+                return ResourceManager.GetString("Edition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PDL con titularidad estatal.
+        /// </summary>
+        internal static string LegalPDL {
+            get {
+                return ResourceManager.GetString("LegalPDL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PDL con titularidad de persona natural.
+        /// </summary>
+        internal static string NaturalPDL {
+            get {
+                return ResourceManager.GetString("NaturalPDL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Eliminación.
+        /// </summary>
+        internal static string Remotion {
+            get {
+                return ResourceManager.GetString("Remotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sociedad mercantil de Responsabilidad Limitada.
+        /// </summary>
+        internal static string SRL {
+            get {
+                return ResourceManager.GetString("SRL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Visualización.
+        /// </summary>
+        internal static string Visualization {
+            get {
+                return ResourceManager.GetString("Visualization", resourceCulture);
             }
         }
     }

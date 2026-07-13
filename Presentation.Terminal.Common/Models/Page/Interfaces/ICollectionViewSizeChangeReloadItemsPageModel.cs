@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Interfaces;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Interfaces;
 
 internal interface ICollectionViewSizeChangeReloadItemsPageModel
 {

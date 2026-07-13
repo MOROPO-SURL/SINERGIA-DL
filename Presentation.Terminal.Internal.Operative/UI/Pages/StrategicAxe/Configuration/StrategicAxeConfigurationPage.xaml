@@ -2,24 +2,28 @@
 <common_ui_base_pages:BaseConfigurationEntityPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicAxe.Configuration"
+    xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
+    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicAxe.Configuration"
+    xmlns:local_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Views.Card"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
-    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicAxe.Configuration.StrategicAxeConfigurationPage"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicAxe.Configuration.StrategicAxeConfigurationPage"
     x:TypeArguments="interop_dto_models:StrategicAxeBasicDtoModel,interop_dto_models:StrategicAxeDetailDtoModel,local_configuration_page_models:StrategicAxeConfigurationPageModel"
     x:DataType="local_configuration_page_models:StrategicAxeConfigurationPageModel"
     Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
         <ResourceDictionary>
             <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
-            <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToColorConverter" TrueValue="DimGray" FalseValue="Transparent" />
 
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -96,21 +100,20 @@
                                 ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}" />
                         </VerticalStackLayout.Behaviors>
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Coordinador (opcional)" />
-                        <Frame>
+                        <Frame IsVisible="{Binding Coordinator, Converter={StaticResource IsNotNullConverter}}">
                             <Grid ColumnSpacing="8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Border 
-                                    BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
                                     Grid.Column="0"
                                     StrokeThickness="4"
                                     StrokeLineJoin="Bevel">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="36" />
                                     </Border.StrokeShape>
-                                    <Image
+                                    <ffimageloading_views:CachedImage
                                         WidthRequest="72" HeightRequest="72"
                                         Source="{Binding Coordinator.Image, Converter={StaticResource ImageBasicModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                                 </Border>
@@ -119,13 +122,11 @@
                                     VerticalOptions="Center"
                                     Spacing="8">
                                     <Label
-                                        BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
                                         FontAttributes="Bold"
                                         LineBreakMode="TailTruncation"
                                         ToolTipProperties.Text="{Binding Coordinator.Name}"
                                         Text="{Binding Coordinator.Name}" />
                                     <Label
-                                        BackgroundColor="{Binding Coordinator, Converter={StaticResource IsNullToColorConverter}}"
                                         MaxLines="1"
                                         LineBreakMode="TailTruncation"
                                         ToolTipProperties.Text="{Binding Coordinator.LastName}"
@@ -139,6 +140,69 @@
                             Clicked="CoordinatorPickButton_Clicked" />
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Macroprogramas" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Command="{Binding AddMacroprogramCommand, Mode=OneTime}" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Macroprograms}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout 
+                                        Orientation="Vertical" 
+                                        Span="2" 
+                                        HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                        VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                        ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                        ItemWidth="{Static local_constants:CardViewSizeConstants.MACROPROGRAM_DEFAULT_CARD_VIEW_WIDTH}" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <local_ui_card_views:MacroprogramCardView 
+                                                Grid.Column="0"
+                                                HeightRequest="{Static local_constants:CardViewSizeConstants.MACROPROGRAM_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                                            <Button
+                                                Grid.Column="1"
+                                                Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                VerticalOptions="Start"
+                                                Text="&#xFA78;"
+                                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemoveMacroprogramCommand, Mode=OneTime}"
+                                                CommandParameter="{Binding Mode=OneTime}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="200" />

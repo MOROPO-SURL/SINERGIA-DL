@@ -1,7 +1,10 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Enumerations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UserAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
@@ -15,10 +18,31 @@ public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<Pe
     private readonly List<PhoneNumber> phoneNumbers = [];
     private readonly List<PostalAddress> postalAddresses = [];
     private readonly List<WebSiteAddress> webSiteAddresses = [];
+    private readonly List<PersonOrganizationBrigde> organizationBrigdes = [];
 
     private Person() : base(new PersonId(default)) { }
 
-    public Person(PersonId id, int priority, bool isEnabled, bool isArchived, string name, Sex sex, CivilStatus civilStatus, EmailAddress[] emailAddresses, PhoneNumber[] phoneNumbers, PostalAddress[] postalAddresses, WebSiteAddress[] webSiteAddresses, string? lastName = null, string? alias = null, DateTime? bornDate = null, string? about = null, Image? image = null, ImageId? imageId = null) : base(id)
+    public Person(
+        PersonId id, 
+        int priority, 
+        bool isEnabled, 
+        bool isArchived, 
+        string name, 
+        Sex sex, 
+        CivilStatus civilStatus,
+        IEnumerable<EmailAddress> emailAddresses,
+        IEnumerable<PhoneNumber> phoneNumbers,
+        IEnumerable<PostalAddress> postalAddresses,
+        IEnumerable<WebSiteAddress> webSiteAddresses,
+        IEnumerable<PersonOrganizationBrigde> organizationBrigdes, 
+        string? lastName = null, 
+        string? alias = null, 
+        DateTime? bornDate = null, 
+        string? about = null,
+        ImageId? imageId = null, 
+        Image? image = null,
+        UserId? userId = null,
+        User? user = null) : base(id)
     {
         Alias = alias;
         BornDate = bornDate;
@@ -30,13 +54,16 @@ public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<Pe
         LastName = lastName;
         Sex = sex;
         CivilStatus = civilStatus;
-        Image = image;
         ImageId = imageId;
+        Image = image;
+        UserId = userId;
+        User = user;
 
         this.emailAddresses = [.. emailAddresses];
         this.phoneNumbers = [.. phoneNumbers];
         this.postalAddresses = [.. postalAddresses];
         this.webSiteAddresses = [.. webSiteAddresses];
+        this.organizationBrigdes = [.. organizationBrigdes];
     }
 
     public string? Alias { get; set; }
@@ -62,6 +89,9 @@ public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<Pe
     public Image? Image { get; set; }
     public ImageId? ImageId { get; set; }
 
+    public UserId? UserId { get; set; }
+    public User? User { get; set; }
+
     public IReadOnlyList<EmailAddress> EmailAddresses => [.. emailAddresses];
 
     public IReadOnlyList<PhoneNumber> PhoneNumbers => [.. phoneNumbers];
@@ -70,45 +100,25 @@ public class Person : AbstractAuditableEntity<PersonId, Guid>, IAggregateRoot<Pe
 
     public IReadOnlyList<WebSiteAddress> WebSiteAddresses => [.. webSiteAddresses];
 
-    public List<PersonOrganizationBrigde> OrganizationBrigde { get; set; } = [];
+    public IReadOnlyList<PersonOrganizationBrigde> OrganizationBrigdes => [.. organizationBrigdes];
 
-    public void Add(EmailAddress value)
-    {
-        emailAddresses.Add(value);
-    }
+    public void Add(EmailAddress value) => emailAddresses.Add(value);
 
-    public void Remove(EmailAddress value)
-    {
-        emailAddresses.Remove(value);
-    }
+    public void Remove(EmailAddress value) => emailAddresses.Remove(value);
 
-    public void Add(PhoneNumber value)
-    {
-        phoneNumbers.Add(value);
-    }
+    public void Add(PhoneNumber value) => phoneNumbers.Add(value);
 
-    public void Remove(PhoneNumber value)
-    {
-        phoneNumbers.Remove(value);
-    }
+    public void Remove(PhoneNumber value) => phoneNumbers.Remove(value);
 
-    public void Add(PostalAddress value) 
-    { 
-        postalAddresses.Add(value);
-    }
+    public void Add(PostalAddress value) => postalAddresses.Add(value);
 
-    public void Remove(PostalAddress value)
-    {
-        postalAddresses.Remove(value);
-    }
+    public void Remove(PostalAddress value) => postalAddresses.Remove(value);
 
-    public void Add(WebSiteAddress value) 
-    {  
-        webSiteAddresses.Add(value); 
-    }
+    public void Add(WebSiteAddress value) => webSiteAddresses.Add(value);
 
-    public void Remove(WebSiteAddress value)
-    {
-        webSiteAddresses.Remove(value);
-    }
+    public void Remove(WebSiteAddress value) => webSiteAddresses.Remove(value);
+
+    public void LinkOrganizationById(OrganizationId organizationId, bool IsRepresentative) => organizationBrigdes.Add(new PersonOrganizationBrigde(Id, organizationId, IsRepresentative));
+
+    public void UnlinkOrganizationById(OrganizationId organizationId) => organizationBrigdes.Remove(organizationBrigdes.First(bridge => bridge.LinkedId == organizationId));
 }

@@ -22,7 +22,7 @@ internal sealed class UserCreateCommandHandler :
         this.dataIntegrityService = dataIntegrityService;
     }
 
-    protected override async Task ApplyManualMappingAsync(UserCreateCommand request, User entity)
+    protected override async Task PerformPreCreateAsync(UserCreateCommand request, User entity)
     {
         entity.Signature = await dataIntegrityService.GetEntitySignatureAsync(entity);
 

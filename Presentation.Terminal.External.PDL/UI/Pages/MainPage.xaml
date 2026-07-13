@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseListEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.Models.Page"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Pages.MainPage"
+    x:TypeArguments="interop_dto_models:OrganizationBasicDtoModel,local_page_models:MainPageModel"
+    x:DataType="local_page_models:MainPageModel"
+    Title="Inicio"
+    IsEnabled="{Binding IsEnabled}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Ayuda"
+            Clicked="HelpToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="{StaticResource FontMaterialDesignIcons}" 
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
+                    Glyph="{StaticResource IconGlyphHelp}"  />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Ajustes"
+            Clicked="ConfigurationToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="{StaticResource FontMaterialDesignIcons}" 
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
+                    Glyph="{StaticResource IconGlyphConfig}"  />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Salir"
+            Clicked="LogOutToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="{StaticResource FontMaterialDesignIcons}" 
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
+                    Glyph="{StaticResource IconGlyphLogOut}"  />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid VerticalOptions="FillAndExpand">
+                <CollectionView
+                    x:Name="ItemsCollectionView"
+                    Style="{StaticResource ListEntityPageCollectionViewStyle}"
+                    ItemsSource="{Binding Items}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout 
+                            Orientation="Vertical" 
+                            Span="2" 
+                            HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                            VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.Behaviors>
+                        <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                            ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                            ItemWidth="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH}" />
+                    </CollectionView.Behaviors>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <common_ui_card_views:OrganizationCardView HeightRequest="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}">
+                                <ContentView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
+                                </ContentView.GestureRecognizers>
+                            </common_ui_card_views:OrganizationCardView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Header>
+                        <VerticalStackLayout IsVisible="{OnPlatform Default='true', Android='false'}">
+                            <VerticalStackLayout HorizontalOptions="Start">
+                                <Label
+                                    Margin="0,0,8,0"
+                                    FontAttributes="Bold"
+                                    Text="Estrategia de Desarrollo Local CAM Camagüey" />
+                                <BoxView 
+                                    Style="{StaticResource DetailSectionSeparatorBoxViewStyle}"
+                                    Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                            </VerticalStackLayout>
+                            <FlexLayout Wrap="Wrap">
+                                <Frame 
+                                    Style="{StaticResource FormFlexWrappedChildFrameStyle}"
+                                    Padding="16">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="DiagnosticSummaryFrameTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <Frame.Behaviors>
+                                        <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                            ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}" />
+                                    </Frame.Behaviors>
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="32" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="32" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Label
+                                            Grid.Column="1" Grid.Row="0"
+                                            HorizontalOptions="Center"
+                                            FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                            FontSize="{OnPlatform Default='Header', Android=64}"
+                                            Text="{StaticResource IconGlyphContext}" />
+                                        <Label 
+                                            Grid.Column="1" Grid.Row="1"
+                                            HorizontalTextAlignment="Center"
+                                            Margin="0,8,0,0"
+                                            FontSize="Medium"
+                                            FontAttributes="Bold"
+                                            Text="Dianóstico estratégico" />
+                                        <Label 
+                                            Grid.Column="1" Grid.Row="2"
+                                            Style="{StaticResource OffLabelStyle}"
+                                            HorizontalTextAlignment="Center"
+                                            Text="Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos" />
+                                        <Label
+                                            Grid.Column="2" Grid.RowSpan="3"
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                            FontSize="Large"
+                                            Text="&#xFB10;" />
+                                    </Grid>
+                                </Frame>
+                                <Frame 
+                                    Style="{StaticResource FormFlexWrappedChildFrameStyle}"
+                                    Padding="16">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="EDLSummaryFrameTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <Frame.Behaviors>
+                                        <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                            ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}" />
+                                    </Frame.Behaviors>
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="32" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="32" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Label
+                                            Grid.Column="1" Grid.Row="0"
+                                            HorizontalOptions="Center"
+                                            FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                            FontSize="{OnPlatform Default='Header', Android=64}"
+                                            Text="{StaticResource IconGlyphEDL}" />
+                                        <Label 
+                                            Grid.Column="1" Grid.Row="1"
+                                            HorizontalTextAlignment="Center"
+                                            Margin="0,8,0,0"
+                                            FontSize="Medium"
+                                            FontAttributes="Bold"
+                                            Text="Componentes de la estrategia" />
+                                        <Label 
+                                            Grid.Column="1" Grid.Row="2"
+                                            Style="{StaticResource OffLabelStyle}"
+                                            HorizontalTextAlignment="Center"
+                                            Text="Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos" />
+                                        <Label
+                                            Grid.Column="2" Grid.RowSpan="3"
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                            FontSize="Large"
+                                            Text="&#xFB10;" />
+                                    </Grid>
+                                </Frame>
+                            </FlexLayout>
+                            <StackLayout 
+                                Orientation="Horizontal"
+                                Margin="0,16,0,0">
+                                <VerticalStackLayout VerticalOptions="End">
+                                    <Label
+                                        Margin="0,0,8,0"
+                                        FontAttributes="Bold"
+                                        Text="PDLs que representas" />
+                                    <BoxView 
+                                        Style="{StaticResource DetailSectionSeparatorBoxViewStyle}"
+                                        Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                                </VerticalStackLayout>
+                                <Button
+                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="&#xF450;"
+                                    Command="{Binding ReloadCommand}" />
+                            </StackLayout>
+                        </VerticalStackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.HeaderTemplate>
+                        <DataTemplate x:DataType="local_page_models:MainPageModel">
+                            <VerticalStackLayout IsVisible="{OnPlatform Default='false', Android='true'}">
+                                <VerticalStackLayout HorizontalOptions="Start">
+                                    <Label
+                                        Margin="0,0,8,0"
+                                        FontAttributes="Bold"
+                                        Text="Estrategia de Desarrollo Local CAM Camagüey" />
+                                    <BoxView 
+                                        Style="{StaticResource DetailSectionSeparatorBoxViewStyle}"
+                                        Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                                </VerticalStackLayout>
+                                <FlexLayout Wrap="Wrap">
+                                    <Frame 
+                                        Style="{StaticResource FormFlexWrappedChildFrameStyle}"
+                                        Padding="16">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="DiagnosticSummaryFrameTapGestureRecognizer_Tapped" />
+                                        </Frame.GestureRecognizers>
+                                        <Frame.Behaviors>
+                                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}" />
+                                        </Frame.Behaviors>
+                                        <Grid ColumnSpacing="16">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="32" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="32" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label
+                                                Grid.Column="1" Grid.Row="0"
+                                                HorizontalOptions="Center"
+                                                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                                FontSize="{OnPlatform Default='Header', Android=64}"
+                                                Text="{StaticResource IconGlyphContext}" />
+                                            <Label 
+                                                Grid.Column="1" Grid.Row="1"
+                                                HorizontalTextAlignment="Center"
+                                                Margin="0,8,0,0"
+                                                FontSize="Medium"
+                                                FontAttributes="Bold"
+                                                Text="Dianóstico estratégico" />
+                                            <Label 
+                                                Grid.Column="1" Grid.Row="2"
+                                                Style="{StaticResource OffLabelStyle}"
+                                                HorizontalTextAlignment="Center"
+                                                Text="Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos" />
+                                            <Label
+                                                Grid.Column="2" Grid.RowSpan="3"
+                                                HorizontalOptions="Center" VerticalOptions="Center"
+                                                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                                FontSize="Large"
+                                                Text="&#xFB10;" />
+                                        </Grid>
+                                    </Frame>
+                                    <Frame 
+                                        Style="{StaticResource FormFlexWrappedChildFrameStyle}"
+                                        Padding="16">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="EDLSummaryFrameTapGestureRecognizer_Tapped" />
+                                        </Frame.GestureRecognizers>
+                                        <Frame.Behaviors>
+                                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}" />
+                                        </Frame.Behaviors>
+                                        <Grid ColumnSpacing="16">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="32" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="32" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label
+                                                Grid.Column="1" Grid.Row="0"
+                                                HorizontalOptions="Center"
+                                                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                                FontSize="{OnPlatform Default='Header', Android=64}"
+                                                Text="{StaticResource IconGlyphEDL}" />
+                                            <Label 
+                                                Grid.Column="1" Grid.Row="1"
+                                                HorizontalTextAlignment="Center"
+                                                Margin="0,8,0,0"
+                                                FontSize="Medium"
+                                                FontAttributes="Bold"
+                                                Text="Componentes de la estrategia" />
+                                            <Label 
+                                                Grid.Column="1" Grid.Row="2"
+                                                Style="{StaticResource OffLabelStyle}"
+                                                HorizontalTextAlignment="Center"
+                                                Text="Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos" />
+                                            <Label
+                                                Grid.Column="2" Grid.RowSpan="3"
+                                                HorizontalOptions="Center" VerticalOptions="Center"
+                                                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                                FontSize="Large"
+                                                Text="&#xFB10;" />
+                                        </Grid>
+                                    </Frame>
+                                </FlexLayout>
+                                <StackLayout 
+                                    Orientation="Horizontal"
+                                    Margin="0,16,0,0">
+                                    <VerticalStackLayout VerticalOptions="End">
+                                        <Label
+                                            Margin="0,0,8,0"
+                                            FontAttributes="Bold"
+                                            Text="PDLs que representas" />
+                                        <BoxView 
+                                            Style="{StaticResource DetailSectionSeparatorBoxViewStyle}"
+                                            Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                                    </VerticalStackLayout>
+                                    <Button
+                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                        HorizontalOptions="EndAndExpand"
+                                        Text="&#xF450;"
+                                        Command="{Binding ReloadCommand}" />
+                                </StackLayout>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.HeaderTemplate>
+                </CollectionView>
+            </Grid>
+            <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</common_ui_base_pages:BaseListEntityPage>

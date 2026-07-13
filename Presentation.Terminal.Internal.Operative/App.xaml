@@ -2,8 +2,8 @@
 <Application 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:common_style_resources="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common"
-    x:Class="MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.App">
+    xmlns:common_style_resources="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Resources.Styles;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.App">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -36,6 +36,7 @@
             <x:String x:Key="IconGlyphLogOut">&#xFA47;</x:String>
             <x:String x:Key="IconGlyphComplements">&#xF638;</x:String>
             <x:String x:Key="IconGlyphMacroprograms">&#xFCE5;</x:String>
+            <x:String x:Key="IconGlyphEconomicActivities">&#xF027A;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

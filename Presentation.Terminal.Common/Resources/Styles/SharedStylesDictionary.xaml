@@ -3,17 +3,17 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.UI.Views"
-    x:Class="MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles.SharedStylesDictionary">
+    xmlns:local_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Resources.Styles.SharedStylesDictionary">
     
     <!--#region Color Definitions -->
 
-    <Color x:Key="Primary">#0042fc</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
+    <Color x:Key="Primary">#007181</Color>
+    <Color x:Key="PrimaryDark">#00c2cc</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Tertiary">#004755</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
@@ -31,6 +31,9 @@
     <Color x:Key="Gray800">#2F2F2F</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#1E1E1E</Color>
+
+    <Color x:Key="ToolbarItemLightTintColor">#000000</Color>
+    <Color x:Key="ToolbarItemDarkTintColor">#FFFFFF</Color>
 
     <!-- ========== SUCCESS (ÉXITO) - VERDE VIVO/PASTEL ========== -->
     <!-- TEMA LIGHT: Verde pastel vibrante como fondo principal -->
@@ -560,8 +563,8 @@
                     </VisualState>
                     <VisualState x:Name="PointerOver">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{StaticResource White}" />
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource Tertiary}}" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimaryDark}, Dark={StaticResource Primary}}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
@@ -827,6 +830,17 @@
         </Setter>
         <Setter Property="ColumnSpacing" Value="6" />
         <Setter Property="RowSpacing" Value="6" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="FormFlexWrappedChildFrameStyle">
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Padding">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Thickness" Default="0,0,0,8">
+                    <On Platform="Android" Value="0,0,0,24" />
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!--#endregion-->

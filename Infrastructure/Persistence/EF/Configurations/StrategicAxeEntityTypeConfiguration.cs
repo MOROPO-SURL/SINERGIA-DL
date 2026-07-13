@@ -1,13 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
 
 internal class StrategicAxeEntityTypeConfiguration : IEntityTypeConfiguration<StrategicAxe>
 {
     private const string ROOT_TABLE_NAME = "strategicaxes";
+    private const string STRATEGICAXE_MACROPROGRAM_BRIDGES_TABLE_NAME = "strategicaxe_macroprogram_bridges";
 
     public void Configure(EntityTypeBuilder<StrategicAxe> builder)
     {
@@ -26,5 +29,28 @@ internal class StrategicAxeEntityTypeConfiguration : IEntityTypeConfiguration<St
             .HasMaxLength(2048);
 
         builder.HasOne(entity => entity.Coordinator).WithMany().HasForeignKey(entity => entity.CoordinatorId).OnDelete(DeleteBehavior.SetNull);
+
+        builder
+            .OwnsMany(entity => entity.MacroprogramBridges, Configure)
+            .Navigation(entity => entity.MacroprogramBridges)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("macroprogramBridges");
+    }
+
+    private static void Configure(OwnedNavigationBuilder<StrategicAxe, StrategicAxeMacroprogramBridge> builder)
+    {
+        builder.ToTable(STRATEGICAXE_MACROPROGRAM_BRIDGES_TABLE_NAME);
+
+        builder.HasKey(bridge => new { bridge.MainId, bridge.LinkedId });
+
+        builder.WithOwner().HasForeignKey(bridge => bridge.MainId);
+
+        builder.Property(bridge => bridge.MainId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new StrategicAxeId(value));
+
+        builder.Property(bridge => bridge.LinkedId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new MacroprogramId(value));
     }
 }

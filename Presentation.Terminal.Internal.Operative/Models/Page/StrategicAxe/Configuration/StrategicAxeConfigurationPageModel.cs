@@ -1,13 +1,18 @@
 ﻿using FluentValidation;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Macroprogram.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Common.Models.Page.Abstractions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Validators;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Macroprogram;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicAxe.Configuration;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicAxe.Configuration;
 
 public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPageModel<StrategicAxeDetailDtoModel, StrategicAxeDetailDtoModel>
 {
@@ -19,14 +24,62 @@ public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPa
     private PersonBasicDtoModel? coordinator;
     private string? description;
 
+    private readonly List<MacroprogramBasicDtoModel> inMacroprograms = [];
+    private readonly List<MacroprogramBasicDtoModel> outMacroprograms = [];
+
     public StrategicAxeConfigurationPageModel(StrategicAxeDetailDtoModel? model, Action<StrategicAxeDetailDtoModel> successActionCallback) : base(model, successActionCallback, new StrategicAxeConfigurationValidator())
     {
+        #region Commands
+
+        #region Macroprograms
+
+        AddMacroprogramCommand = new Command(async () =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new MacroprogramPickPage(MacroprogramPicked_Callback)));
+        });
+
+        RemoveMacroprogramCommand = new Command<MacroprogramBasicDtoModel>(model =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inMacroprograms)
+                {
+                    if (item.Id != model.Id) continue;
+
+                    inMacroprograms.Remove(inMacroprograms.First(item => item.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outMacroprograms.Add(model);
+                }
+
+                Dispatcher.Dispatch(() => Macroprograms.Remove(model));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        #endregion
+
+        #endregion
+
         if (model is null) return;
 
         Id = model.Id;
         name = model.Name;
         coordinator = model.Coordinator;
         description = model.Description;
+
+        Macroprograms = [.. model.Macroprograms];
     }
 
     public int Id { get => id; set => SetProperty(ref id, value); }
@@ -37,6 +90,12 @@ public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPa
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
+    public ObservableCollection<MacroprogramBasicDtoModel> Macroprograms { get; private set; } = [];
+
+    public ICommand AddMacroprogramCommand { get; private set; }
+
+    public ICommand RemoveMacroprogramCommand { get; private set; }
+
     protected override Task<StrategicAxeDetailDtoModel> PerformCreationAsync()
     {
         StrategicAxeCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
@@ -46,6 +105,7 @@ public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPa
                 Id,
                 true,
                 Name!,
+                [.. inMacroprograms],
                 Coordinator?.Id,
                 Description
             ));
@@ -60,10 +120,21 @@ public sealed class StrategicAxeConfigurationPageModel : AbstractConfigurationPa
                 Id!,
                 true,
                 Name!,
+                [.. inMacroprograms],
+                [.. outMacroprograms],
                 Coordinator?.Id,
                 Description
             ));
     }
 
     public override IValidationContext? ValidationContext => new ValidationContext<StrategicAxeConfigurationPageModel>(this);
+
+    private void MacroprogramPicked_Callback(MacroprogramBasicDtoModel model)
+    {
+        inMacroprograms.Add(model);
+
+        Macroprograms.Add(model);
+
+        hasChangesFlag = true;
+    }
 }

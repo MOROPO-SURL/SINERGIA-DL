@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Terminal.Internal.Operative.Platforms.iOS;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Platforms.iOS;
 
 public class Program
 {

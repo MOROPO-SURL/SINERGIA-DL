@@ -15,9 +15,9 @@ public interface IEntityQueryRepositoryPort<TEntity, TId, TIdValue>
 
     Task<TEntity?> FindOneByAsync(Expression<Func<TEntity, bool>> criteria);
 
-    IQueryable<TEntity> GetAllQueryable();
+    IQueryable<TEntity> GetAllQueryable(Expression<Func<TEntity, object>>? orderExpression = null, bool isOrderDesending = false);
 
-    IQueryable<TEntity> GetFindByQueryable(Expression<Func<TEntity, bool>> criteria);
+    IQueryable<TEntity> GetFindByQueryable(Expression<Func<TEntity, bool>> criteria, Expression<Func<TEntity, object>>? orderExpression = null, bool isOrderDesending = false);
 
     IQueryable<TEntity> GetPageQueryable(int page, int limit, Expression<Func<TEntity, object>> orderExpression, bool isOrderDesending = false, Expression<Func<TEntity, bool>>? criteria = null);
 }

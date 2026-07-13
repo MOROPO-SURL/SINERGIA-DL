@@ -4,6 +4,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Query.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
+using System.Linq.Expressions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Query.Abstractions;
 
@@ -29,4 +30,8 @@ internal abstract class AbstractListQueryHandler<TEntity, TId, TIdValue, TDto, T
 
         return Task.FromResult(entityQueryRepository!.GetAllQueryable().ProjectToType<TDto>().ToArray());
     }
+
+    protected virtual Expression<Func<TEntity, object>> OrderExpression => entity => entity.Id;
+
+    protected virtual bool IsOrderDescending => false;
 }
