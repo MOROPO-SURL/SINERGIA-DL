@@ -17,7 +17,9 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreaTraces.Ports.Rep
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.KeyVariables.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.KeyVariableTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.MacroprogramTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ObjectiveTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationTraces.Ports.Repository;
@@ -54,7 +56,9 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.I
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.KeyVariables;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.KeyVariableTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Macroprograms;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.MacroprogramTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Objectives;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.ObjectiveTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.OrganizationKinds;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Organizations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.OrganizationTraces;
@@ -170,6 +174,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IFeatureTraceQueryRepositoryPort, FeatureTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IInterestAreaTraceQueryRepositoryPort, InterestAreaTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IKeyVariableTraceQueryRepositoryPort, KeyVariableTraceQueryRepositoryPortAdapter>();
+        services.AddScoped<IMacroprogramTraceQueryRepositoryPort, MacroprogramTraceQueryRepositoryPortAdapter>();
+        services.AddScoped<IObjectiveTraceQueryRepositoryPort, ObjectiveTraceQueryRepositoryPortAdapter>();
 
         services.AddScoped<IIdentityAuthenticationServicePort, LocalIdentityAuthenticationServicePortAdapter>();
 
@@ -184,6 +190,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISaveChangesInterceptor, FeatureChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, InterestAreaChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, KeyVariableChangeDomainTracingInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, MacroprogramChangeDomainTracingInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, ObjectiveChangeDomainTracingInterceptor>();
 
         return services;
     }

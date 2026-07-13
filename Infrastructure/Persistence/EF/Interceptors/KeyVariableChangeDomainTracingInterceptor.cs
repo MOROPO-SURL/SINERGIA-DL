@@ -9,7 +9,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Service;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Interceptors;
 
-internal class KeyVariableChangeDomainTracingInterceptor : Abstractions.AbstractChangeDomainTracingInterceptor<KeyVariableTrace, KeyVariable, KeyVariableId, Guid>
+internal sealed class KeyVariableChangeDomainTracingInterceptor : Abstractions.AbstractChangeDomainTracingInterceptor<KeyVariableTrace, KeyVariable, KeyVariableId, Guid>
 {
     public KeyVariableChangeDomainTracingInterceptor(IDomainChangeAuthorProvisionServicePort traceAuthorProvisionService) : base(traceAuthorProvisionService)
     {
