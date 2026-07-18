@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.InterestAreaAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Bridges;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicLineAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges;
@@ -19,15 +17,16 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
 {
     private const string ROOT_TABLE_NAME = "strategicprograms";
 
-    private const string ACTIONS_TABLE_NAME = "strategicprogram_actions";
-    private const string ACTION_INTERESTAREA_BRIDGES_TABLE_NAME = "strategicprogram_action_interestarea_bridges";
-    private const string PROJECTIDEAS_TABLE_NAME = "strategicprogram_projectideas";
-    private const string OBJETIVES_TABLE_NAME = "strategicprogram_objetives";
+    private const string SPECIFICOBJETIVES_TABLE_NAME = "strategicprogram_specificobjetives";
+    private const string SPECIFICOBJECTIVE_STRATEGICPROJECT_BRIDGES_TABLE_NAME = "strategicprogram_specificobjective_strategicproject_bridges";
     private const string IMPACTS_TABLE_NAME = "strategicprogram_impacts";
-    private const string IMPACTINDICATORS_TABLE_NAME = "strategicprogram_impactindicators";
-    private const string OBJECTIVE_STRATEGICPROJECT_BRIDGES_TABLE_NAME = "strategicprogram_objective_strategicproject_bridges";
     private const string STRATEGICPROGRAM_ORGANIZATION_BRIDGES_TABLE_NAME = "strategicprogram_organization_bridges";
     private const string STRATEGICPROGRAM_MACROPROGRAM_BRIDGES_TABLE_NAME = "strategicprogram_macroprogram_bridges";
+    private const string ACTIONS_TABLE_NAME = "strategicprogram_actions";
+    private const string ACTION_INDICATORS_TABLE_NAME = "strategicprogram_action_indicators";
+    private const string ACTION_INDICATOR_MILESTONES_TABLE_NAME = "strategicprogram_action_indicator_milestones";
+    private const string ACTION_INDICATOR_CHANGES_TABLE_NAME = "strategicprogram_action_indicator_changes";
+    private const string ACTION_INTERESTAREA_BRIDGES_TABLE_NAME = "strategicprogram_action_interestarea_bridges";
 
     public void Configure(EntityTypeBuilder<StrategicProgram> builder)
     {
@@ -53,7 +52,6 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
             .HasMaxLength(2048);
 
         builder.Property(entity => entity.CoordinatorId)
-            .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new PersonId(value));
 
         builder.HasOne(entity => entity.Line).WithMany().HasForeignKey(entity => entity.LineId).OnDelete(DeleteBehavior.Restrict);
@@ -61,22 +59,16 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
         builder.HasOne(entity => entity.Coordinator).WithMany().HasForeignKey(entity => entity.CoordinatorId).OnDelete(DeleteBehavior.Restrict);
 
         builder
-            .OwnsMany(entity => entity.Objetives, Configure)
-            .Navigation(entity => entity.Objetives)
+            .OwnsMany(entity => entity.SpecificObjectives, Configure)
+            .Navigation(entity => entity.SpecificObjectives)
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasField("objetives");
+                .HasField("specificObjectives");
 
         builder
             .OwnsMany(entity => entity.Actions, Configure)
             .Navigation(entity => entity.Actions)
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasField("actions");
-
-        builder
-            .OwnsMany(entity => entity.ProjectIdeas, Configure)
-            .Navigation(entity => entity.ProjectIdeas)
-                .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasField("projectIdeas");
 
         builder
             .OwnsMany(entity => entity.Impacts, Configure)
@@ -135,38 +127,37 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
         builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
     }
 
-    private static void Configure(OwnedNavigationBuilder<StrategicProgram, ProgramObjective> builder)
+    private static void Configure(OwnedNavigationBuilder<StrategicProgram, ProgramSpecificObjective> builder)
     {
-        builder.ToTable(OBJETIVES_TABLE_NAME);
+        builder.ToTable(SPECIFICOBJETIVES_TABLE_NAME);
 
-        builder.HasKey(entity => new { entity.Id, entity.StrategicProgramId });
+        builder.HasKey(entity => new { entity.Id, entity.ProgramId });
 
-        builder.WithOwner().HasForeignKey(entity => new { entity.StrategicProgramId });
+        builder.WithOwner().HasForeignKey(entity => new { entity.ProgramId });
 
         builder.Property(entity => entity.Id)
             .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new ProgramObjectiveId(value));
+            .HasConversion(id => id.Value, value => new ProgramSpecificObjectiveId(value));
 
-        builder.Property(entity => entity.StrategicProgramId)
+        builder.Property(entity => entity.ProgramId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicProgramId(value));
 
-        builder.Property(entity => entity.Name)
-            .HasMaxLength(360);
+        builder.Property(entity => entity.Content)
+            .HasMaxLength(1024);
 
-        builder.Property(entity => entity.Description)
-            .HasMaxLength(2048);
+        builder.HasIndex(entity => new { entity.Index, entity.Id, entity.ProgramId }).IsUnique();
 
         builder
-            .OwnsMany(entity => entity.StrategicProjectBridges, Configure)
-            .Navigation(entity => entity.StrategicProjectBridges)
+            .OwnsMany(entity => entity.ProjectBridges, Configure)
+            .Navigation(entity => entity.ProjectBridges)
             .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasField("strategicProjectBridges");
+            .HasField("projectBridges");
     }
 
-    private static void Configure(OwnedNavigationBuilder<ProgramObjective, ProgramObjectiveStrategicProjectBridge> builder)
+    private static void Configure(OwnedNavigationBuilder<ProgramSpecificObjective, ProgramSpecificObjectiveStrategicProjectBridge> builder)
     {
-        builder.ToTable(OBJECTIVE_STRATEGICPROJECT_BRIDGES_TABLE_NAME);
+        builder.ToTable(SPECIFICOBJECTIVE_STRATEGICPROJECT_BRIDGES_TABLE_NAME);
 
         builder.HasKey(entity => new { entity.ProgramObjectiveId, entity.StrategicProgramId, entity.LinkedId });
 
@@ -174,7 +165,7 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
 
         builder.Property(entity => entity.ProgramObjectiveId)
             .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new ProgramObjectiveId(value));
+            .HasConversion(id => id.Value, value => new ProgramSpecificObjectiveId(value));
 
         builder.Property(entity => entity.StrategicProgramId)
             .ValueGeneratedNever()
@@ -187,25 +178,46 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
         builder.HasOne(bridge => bridge.Linked).WithMany().HasForeignKey(bridge => bridge.LinkedId).OnDelete(DeleteBehavior.Cascade);
     }
 
+    private static void Configure(OwnedNavigationBuilder<StrategicProgram, ProgramImpact> builder)
+    {
+        builder.ToTable(IMPACTS_TABLE_NAME);
+
+        builder.Property(entity => entity.Id)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new ProgramImpactId(value));
+
+        builder.Property(entity => entity.ProgramId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new StrategicProgramId(value));
+
+        builder.Property(entity => entity.Name)
+            .HasMaxLength(360);
+
+        builder.Property(entity => entity.Description)
+            .HasMaxLength(2048);
+
+        builder.HasKey(entity => new { entity.Id, entity.ProgramId });
+
+        builder.WithOwner().HasForeignKey(entity => new { entity.ProgramId });
+
+        builder.HasIndex(entity => new { entity.Name, entity.Id, entity.ProgramId }).IsUnique();
+    }
+
     private static void Configure(OwnedNavigationBuilder<StrategicProgram, ProgramAction> builder)
     {
         builder.ToTable(ACTIONS_TABLE_NAME);
 
-        builder.HasKey(entity => new { entity.Id, entity.StrategicProgramId });
+        builder.HasKey(entity => new { entity.Id, entity.ProgramId });
 
-        builder.WithOwner().HasForeignKey(entity => new { entity.StrategicProgramId });
+        builder.WithOwner().HasForeignKey(entity => new { entity.ProgramId });
 
         builder.Property(entity => entity.Id)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new ProgramActionId(value));
 
-        builder.Property(entity => entity.StrategicProgramId)
+        builder.Property(entity => entity.ProgramId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new StrategicProgramId(value));
-
-        //builder.Property(entity => entity.ParentId)
-        //    .ValueGeneratedNever()
-        //    .HasConversion(id => id!.Value.Value, value => new ProgramActionId(value));
 
         builder.Property(entity => entity.Title)
             .HasMaxLength(360);
@@ -213,13 +225,17 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
         builder.Property(entity => entity.Description)
             .HasMaxLength(2048);
 
-        //builder.HasOne(entity => entity.Parent).WithMany().HasForeignKey(entity => entity.ParentId);
-
         builder
             .OwnsMany(entity => entity.InterestAreaBridges, Configure)
             .Navigation(entity => entity.InterestAreaBridges)
             .UsePropertyAccessMode(PropertyAccessMode.Field)
             .HasField("interestAreaBridges");
+
+        builder
+            .OwnsMany(entity => entity.Indicators, Configure)
+            .Navigation(entity => entity.Indicators)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("indicators");
     }
 
     private static void Configure(OwnedNavigationBuilder<ProgramAction, ProgramActionInterestAreaBridge> builder)
@@ -245,78 +261,19 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
         builder.HasOne(bridge => bridge.Linked).WithMany().HasForeignKey(bridge => bridge.LinkedId).OnDelete(DeleteBehavior.Cascade);
     }
 
-    private static void Configure(OwnedNavigationBuilder<StrategicProgram, ProgramProjectIdea> builder)
+    private static void Configure(OwnedNavigationBuilder<ProgramAction, ProgramActionIndicator> builder)
     {
-        builder.ToTable(PROJECTIDEAS_TABLE_NAME);
-
-        builder.HasKey(entity => new { entity.Id, entity.StrategicProgramId });
-
-        builder.WithOwner().HasForeignKey(entity => new { entity.StrategicProgramId });
+        builder.ToTable(ACTION_INDICATORS_TABLE_NAME);
 
         builder.Property(entity => entity.Id)
             .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new ProgramProjectIdeaId(value));
+            .HasConversion(id => id.Value, value => new ProgramActionIndicatorId(value));
 
-        builder.Property(entity => entity.StrategicProgramId)
-            .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new StrategicProgramId(value));
-
-        builder.Property(entity => entity.Name)
-            .HasMaxLength(360);
-
-        builder.Property(entity => entity.Description)
-            .HasMaxLength(2048);
-
-        builder.HasIndex(entity => new { entity.Name, entity.Id, entity.StrategicProgramId }).IsUnique();
-    }
-
-    private static void Configure(OwnedNavigationBuilder<StrategicProgram, ProgramImpact> builder)
-    {
-        builder.ToTable(IMPACTS_TABLE_NAME);
-
-        builder.HasKey(entity => new { entity.Id, entity.StrategicProgramId });
-
-        builder.WithOwner().HasForeignKey(entity => new { entity.StrategicProgramId });
-
-        builder.Property(entity => entity.Id)
-            .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new ProgramImpactId(value));
-
-        builder.Property(entity => entity.StrategicProgramId)
-            .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new StrategicProgramId(value));
-
-        builder.Property(entity => entity.Name)
-            .HasMaxLength(360);
-
-        builder.Property(entity => entity.Description)
-            .HasMaxLength(2048);
-
-        builder.HasIndex(entity => new { entity.Name, entity.Id, entity.StrategicProgramId }).IsUnique();
-
-        builder
-            .OwnsMany(entity => entity.ImpactIndicator, Configure)
-            .Navigation(entity => entity.ImpactIndicator).UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasField("impactIndicators");
-    }
-
-    private static void Configure(OwnedNavigationBuilder<ProgramImpact, ImpactIndicator> builder)
-    {
-        builder.ToTable(IMPACTINDICATORS_TABLE_NAME);
-
-        builder.HasKey(entity => new { entity.Id, entity.ProgramImpactId, entity.StrategicProgramId });
-
-        builder.WithOwner().HasForeignKey(entity => new { entity.ProgramImpactId, entity.StrategicProgramId });
-
-        builder.Property(entity => entity.Id)
-            .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new ImpactIndicatorId(value));
-
-        builder.Property(entity => entity.ProgramImpactId)
+        builder.Property(entity => entity.ActionId)
            .ValueGeneratedNever()
-           .HasConversion(id => id.Value, value => new ProgramImpactId(value));
+           .HasConversion(id => id.Value, value => new ProgramActionId(value));
 
-        builder.Property(entity => entity.StrategicProgramId)
+        builder.Property(entity => entity.ProgramId)
            .ValueGeneratedNever()
            .HasConversion(id => id.Value, value => new StrategicProgramId(value));
 
@@ -326,8 +283,80 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
         builder.Property(entity => entity.Alias)
             .HasMaxLength(360);
 
-        builder.HasIndex(entity => new { entity.Name, entity.Id, entity.ProgramImpactId, entity.StrategicProgramId }).IsUnique();
+        builder.HasKey(entity => new { entity.Id, entity.ActionId, entity.ProgramId });
+
+        builder.WithOwner().HasForeignKey(entity => new { entity.ActionId, entity.ProgramId });
+
+        builder.HasIndex(entity => new { entity.Name, entity.Id, entity.ActionId, entity.ProgramId }).IsUnique();
 
         builder.HasOne(entity => entity.UnitMeasurement).WithMany().HasForeignKey(entity => entity.UnitMeasurementId).OnDelete(DeleteBehavior.Restrict);
+
+        builder
+            .OwnsMany(entity => entity.Milestones, Configure)
+            .Navigation(entity => entity.Milestones)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("milestones");
+
+        builder
+            .OwnsMany(entity => entity.Changes, Configure)
+            .Navigation(entity => entity.Changes)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("changes");
+    }
+
+    private static void Configure(OwnedNavigationBuilder<ProgramActionIndicator, ProgramActionIndicatorMilestone> builder)
+    {
+        builder.ToTable(ACTION_INDICATOR_MILESTONES_TABLE_NAME);
+
+        builder.Property(entity => entity.Id)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new ProgramActionIndicatorMilestoneId(value));
+
+        builder.Property(entity => entity.IndicatorId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new ProgramActionIndicatorId(value));
+
+        builder.Property(entity => entity.ActionId)
+           .ValueGeneratedNever()
+           .HasConversion(id => id.Value, value => new ProgramActionId(value));
+
+        builder.Property(entity => entity.ProgramId)
+           .ValueGeneratedNever()
+           .HasConversion(id => id.Value, value => new StrategicProgramId(value));
+
+        builder.Property(entity => entity.Description)
+            .HasMaxLength(512);
+
+        builder.HasKey(entity => new { entity.Id, entity.IndicatorId, entity.ActionId, entity.ProgramId });
+
+        builder.WithOwner().HasForeignKey(entity => new { entity.IndicatorId, entity.ActionId, entity.ProgramId });
+    }
+
+    private static void Configure(OwnedNavigationBuilder<ProgramActionIndicator, ProgramActionIndicatorChange> builder)
+    {
+        builder.ToTable(ACTION_INDICATOR_CHANGES_TABLE_NAME);
+
+        builder.Property(entity => entity.Id)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new ProgramActionIndicatorChangeId(value));
+
+        builder.Property(entity => entity.IndicatorId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new ProgramActionIndicatorId(value));
+
+        builder.Property(entity => entity.ActionId)
+           .ValueGeneratedNever()
+           .HasConversion(id => id.Value, value => new ProgramActionId(value));
+
+        builder.Property(entity => entity.ProgramId)
+           .ValueGeneratedNever()
+           .HasConversion(id => id.Value, value => new StrategicProgramId(value));
+
+        builder.Property(entity => entity.Context)
+            .HasMaxLength(512);
+
+        builder.HasKey(entity => new { entity.Id, entity.IndicatorId, entity.ActionId, entity.ProgramId });
+
+        builder.WithOwner().HasForeignKey(entity => new { entity.IndicatorId, entity.ActionId, entity.ProgramId });
     }
 }

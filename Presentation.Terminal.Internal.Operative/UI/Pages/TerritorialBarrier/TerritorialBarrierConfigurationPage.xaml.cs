@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.TerritorialBarrier;
 
-public partial class TerritorialBarrierConfigurationPage : BaseConfigurationEntityPage<TerritorialBarrierBasicDtoModel, TerritorialBarrierDetailDtoModel, TerritorialBarrierConfigurationPageModel>
+public partial class TerritorialBarrierConfigurationPage : BaseConfigurationEntityPage<TerritorialBarrierDetailDtoModel, TerritorialBarrierDetailDtoModel, TerritorialBarrierConfigurationPageModel>
 {
     public TerritorialBarrierConfigurationPage(TerritorialBarrierConfigurationPageModel bindingContextModel) : base(bindingContextModel)
     {

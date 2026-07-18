@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.EconomicActivity;
 
-public partial class EconomicActivityConfigurationPage : BaseConfigurationEntityPage<EconomicActivityBasicDtoModel, EconomicActivityDetailDtoModel, EconomicActivityConfigurationPageModel>
+public partial class EconomicActivityConfigurationPage : BaseConfigurationEntityPage<EconomicActivityDetailDtoModel, EconomicActivityDetailDtoModel, EconomicActivityConfigurationPageModel>
 {
     public EconomicActivityConfigurationPage(EconomicActivityConfigurationPageModel bindingContextModel) : base(bindingContextModel)
     {

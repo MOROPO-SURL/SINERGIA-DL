@@ -2,8 +2,8 @@
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;
 
-public class BaseConfigurationEntityPage<TBasicModel, TDetailModel, TConfigurationPageModel> : BaseContentPage
-    where TConfigurationPageModel : AbstractConfigurationPageModel<TDetailModel, TDetailModel>
+public class BaseConfigurationEntityPage<TInModel, TOutModel, TConfigurationPageModel> : BaseContentPage
+    where TConfigurationPageModel : AbstractConfigurationPageModel<TInModel, TOutModel>
 {
     public BaseConfigurationEntityPage(TConfigurationPageModel bindingContextModel)
     {

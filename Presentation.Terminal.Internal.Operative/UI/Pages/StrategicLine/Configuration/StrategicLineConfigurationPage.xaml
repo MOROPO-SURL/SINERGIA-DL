@@ -16,7 +16,7 @@
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicLine.Configuration.StrategicLineConfigurationPage"
-    x:TypeArguments="interop_dto_models:StrategicLineBasicDtoModel,interop_dto_models:StrategicLineDetailDtoModel,local_configuration_page_models:StrategicLineConfigurationPageModel"
+    x:TypeArguments="interop_dto_models:StrategicLineDetailDtoModel,interop_dto_models:StrategicLineDetailDtoModel,local_configuration_page_models:StrategicLineConfigurationPageModel"
     x:DataType="local_configuration_page_models:StrategicLineConfigurationPageModel"
     Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
@@ -199,7 +199,7 @@
                                     <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_dto_models:StrategicLineSpecificObjectiveDetailDtoModel">
+                                    <DataTemplate x:DataType="interop_dto_models:SpecificObjectiveDetailDtoModel">
                                         <Frame Padding="8">
                                             <StackLayout Orientation="Horizontal" Spacing="8">
                                                 <Label

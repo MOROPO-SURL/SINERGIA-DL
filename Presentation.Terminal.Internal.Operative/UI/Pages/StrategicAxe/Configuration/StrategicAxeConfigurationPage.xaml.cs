@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicAxe.Configuration;
 
-public partial class StrategicAxeConfigurationPage : BaseConfigurationEntityPage<StrategicAxeBasicDtoModel, StrategicAxeDetailDtoModel, StrategicAxeConfigurationPageModel>
+public partial class StrategicAxeConfigurationPage : BaseConfigurationEntityPage<StrategicAxeDetailDtoModel, StrategicAxeDetailDtoModel, StrategicAxeConfigurationPageModel>
 {
 	public StrategicAxeConfigurationPage(StrategicAxeConfigurationPageModel bindingContextModel) : base(bindingContextModel)
 	{

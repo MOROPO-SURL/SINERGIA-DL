@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProgram.Configuration;
 
-public partial class StrategicProgramConfigurationPage : BaseConfigurationEntityPage<StrategicProgramBasicDtoModel, StrategicProgramDetailDtoModel, StrategicProgramConfigurationPageModel>
+public partial class StrategicProgramConfigurationPage : BaseConfigurationEntityPage<StrategicProgramDetailDtoModel, StrategicProgramDetailDtoModel, StrategicProgramConfigurationPageModel>
 {
 	public StrategicProgramConfigurationPage(StrategicProgramConfigurationPageModel bindingContextModel) : base(bindingContextModel)
 	{
@@ -23,7 +23,5 @@ public partial class StrategicProgramConfigurationPage : BaseConfigurationEntity
     private void CoordinatorPicked_Callback(PersonBasicDtoModel model)
     {
         ConcreteBindingContext.Coordinator = model;
-
-        this.NavigationPopModalPageAsync();
     }
 }

@@ -14,14 +14,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggr
 
 public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid>, IAggregateRoot<StrategicProgramId, Guid>, IArchivableEntity<StrategicProgramId, Guid>, INamedEntity<StrategicProgramId, Guid>, IEnableableEntity<StrategicProgramId, Guid>, IPriorizableEntity<StrategicProgramId, Guid>
 {
-    private readonly List<ProgramObjective> objetives = [];
+    private readonly List<ProgramSpecificObjective> specificObjectives = [];
     private readonly List<ProgramAction> actions = [];
-    private readonly List<ProgramProjectIdea> projectIdeas = [];
     private readonly List<ProgramImpact> impacts = [];
     private readonly List<StrategicProgramOrganizationBridge> organizationBridges = [];
     private readonly List<StrategicProgramMacroprogramBridge> macroprogramBridges = [];
 
-    private StrategicProgram() : base(new StrategicProgramId(default)) { }
+    private StrategicProgram() : base(default) { }
 
     public StrategicProgram(
         StrategicProgramId id, 
@@ -31,11 +30,12 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
         bool isArchived, 
         int priority, 
         PersonId coordinatorId, 
-        string objective, 
-        ProgramAction[] actions, 
-        ProgramProjectIdea[] projectIdeas, 
-        StrategicProgramOrganizationBridge[] organizationBridges,
-        StrategicProgramMacroprogramBridge[] macroprogramBridges,
+        string objective,
+        IEnumerable<ProgramSpecificObjective> specificObjectives,
+        IEnumerable<ProgramAction> actions,
+        IEnumerable<ProgramImpact> impacts,
+        IEnumerable<StrategicProgramOrganizationBridge> organizationBridges,
+        IEnumerable<StrategicProgramMacroprogramBridge> macroprogramBridges,
         StrategicLine? line = null, 
         Person? coordinator = null, 
         string? description = null) : base(id)
@@ -50,11 +50,11 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
         CoordinatorId = coordinatorId;
         Coordinator = coordinator;
         Line = line;
-
+        this.specificObjectives = [.. specificObjectives];
         this.actions = [.. actions];
-        this.projectIdeas = [.. projectIdeas];
-        this.organizationBridges = [.. organizationBridges];
+        this.impacts = [.. impacts];
         this.macroprogramBridges = [.. macroprogramBridges];
+        this.organizationBridges = [.. organizationBridges];
     }
 
     public StrategicLineId LineId { get; set; }
@@ -76,19 +76,25 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
     public PersonId CoordinatorId { get; set; }
 
     // TODO Remove
-    public IReadOnlyList<ProgramObjective> Objetives => [.. objetives];
+    public IReadOnlyList<ProgramSpecificObjective> SpecificObjectives => [.. specificObjectives];
 
     public IReadOnlyList<ProgramAction> Actions => [.. actions];
-    // TODO Cada accion tiene indicadores y metas anuales
 
-    public IReadOnlyList<ProgramProjectIdea> ProjectIdeas => [.. projectIdeas];
-
-    // TODO Remove
     public IReadOnlyList<ProgramImpact> Impacts => [.. impacts];
 
     public IReadOnlyList<StrategicProgramOrganizationBridge> OrganizationBridges => [.. organizationBridges];
 
     public IReadOnlyList<StrategicProgramMacroprogramBridge> MacroprogramBridges => [.. macroprogramBridges];
+
+    public void AddSpecificObjective(ProgramSpecificObjective entity)
+    {
+        specificObjectives.Add(entity);
+    }
+
+    public void RemoveSpecificObjective(ProgramSpecificObjective entity)
+    {
+        specificObjectives.Remove(specificObjectives.First(_entity => _entity.Id == entity.Id));
+    }
 
     public void AddAction(ProgramAction entity)
     {
@@ -97,17 +103,17 @@ public class StrategicProgram : AbstractAuditableEntity<StrategicProgramId, Guid
 
     public void RemoveAction(ProgramAction entity)
     {
-        actions.Remove(actions.First(_entity => _entity.Id == entity.Id));
+        actions.Remove(actions.First(_entity => _entity.Id == entity.Id && _entity.ProgramId == entity.ProgramId));
     }
 
-    public void AddIdea(ProgramProjectIdea entity)
+    public void AddImpact(ProgramImpact entity)
     {
-        projectIdeas.Add(entity);
+        impacts.Add(entity);
     }
 
-    public void RemoveIdea(ProgramProjectIdea entity)
+    public void RemoveImpact(ProgramImpact entity)
     {
-        projectIdeas.Remove(projectIdeas.First(_entity => _entity.Id == entity.Id));
+        impacts.Remove(impacts.First(_entity => _entity.Id == entity.Id && _entity.ProgramId == entity.ProgramId));
     }
 
     public void LinkOrganizationById(OrganizationId organizationId) => organizationBridges.Add(new StrategicProgramOrganizationBridge(Id, organizationId));

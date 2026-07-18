@@ -156,7 +156,7 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.Property(entity => entity.Content)
             .HasMaxLength(2048);
 
-        builder.HasIndex(entity => new { entity.Index, entity.Id }).IsUnique();
+        builder.HasIndex(entity => new { entity.Index, entity.Id, entity.StrategicLineId }).IsUnique();
     }
 
     private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineAction> builder)

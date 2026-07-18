@@ -64,24 +64,7 @@ public abstract class AbstractConfigurationPageModel<TInModel, TOutModel> : Base
                         {
                             if (!PresentChangeNotification) return;
 
-                            Dispatcher.Dispatch(() =>
-                            {
-
-                                /* Cambio no fusionado mediante combinación del proyecto 'Presentation.Terminal.Common (net8.0-android)'
-                                Antes:
-                                                                Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
-                                Después:
-                                                                Application.Current!.PresentToastNotification(NotificationKind.Success, "Cambios aplicados con éxito.");
-                                */
-
-                                /* Cambio no fusionado mediante combinación del proyecto 'Presentation.Terminal.Common (net8.0-android)'
-                                Antes:
-                                                                Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
-                                Después:
-                                                                Application.Current!.PresentToastNotification(NotificationKind.Success, "Cambios aplicados con éxito.");
-                                */
-                                Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
-                            });
+                            Dispatcher.Dispatch(() => Application.Current!.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito."));
                         });
                     }
                     else

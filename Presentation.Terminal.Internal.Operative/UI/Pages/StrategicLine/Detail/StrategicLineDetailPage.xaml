@@ -155,7 +155,7 @@
                             <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
                         </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="interop_dto_models:StrategicLineSpecificObjectiveDetailDtoModel">
+                            <DataTemplate x:DataType="interop_dto_models:SpecificObjectiveDetailDtoModel">
                                 <Frame Padding="8">
                                     <StackLayout Orientation="Horizontal" Spacing="8">
                                         <Label

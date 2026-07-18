@@ -3,6 +3,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs.Clipped;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs;
 
@@ -14,6 +15,9 @@ public record StrategicProgramDetailDto(
     bool IsEnabled, 
     int Priority, 
     string Objective,
+    StrategicLineSpecificObjectiveDetailDto[] SpecificObjectives,
     OrganizationBasicDto[] Organizations,
     MacroprogramBasicDto[] Macroprograms,
+    ImpactClippedDetailDto[] Impacts,
+    ActionClippedDetailDto[] Actions,
     string? Description = null) : IDetailDto;

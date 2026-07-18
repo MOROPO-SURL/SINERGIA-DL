@@ -26,7 +26,7 @@ internal sealed class StrategicLineSpecificObjectiveConfigurationValidator : Abs
     {
         if (model.Id != null)
         {
-            StrategicLineSpecificObjectiveDetailDtoModel? target = configurationPageModel.SpecificObjectives.FirstOrDefault(item => item.Index == model.Index);
+            SpecificObjectiveDetailDtoModel? target = configurationPageModel.SpecificObjectives.FirstOrDefault(item => item.Index == model.Index);
 
             if (target == null) return true;
 

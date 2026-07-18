@@ -7,6 +7,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PublicPolicy.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.CQRS.Command.Clipped;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
@@ -35,9 +36,9 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
     private PersonBasicDtoModel coordinator = null!;
     private string? description;
 
-    private readonly List<StrategicLineSpecificObjectiveCreateRequestModel> inSpecificObjectives = [];
-    private readonly List<StrategicLineSpecificObjectiveUpdateRequestModel> patchSpecificObjectives = [];
-    private readonly List<StrategicLineSpecificObjectiveDetailDtoModel> outSpecificObjectives = [];
+    private readonly List<SpecificObjectiveCreateClippedRequestModel> inSpecificObjectives = [];
+    private readonly List<SpecificObjectiveUpdateClippedRequestModel> patchSpecificObjectives = [];
+    private readonly List<SpecificObjectiveDetailDtoModel> outSpecificObjectives = [];
 
     private readonly List<PublicPolicyBasicDtoModel> inPublicPolicies = [];
     private readonly List<PublicPolicyBasicDtoModel> outPublicPolicies = [];
@@ -61,12 +62,12 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
             await Application.Current!.MainPage!.NavigationPushPageAsync(new StrategicLineSpecificObjectiveConfigurationPage(new StrategicLineSpecificObjectiveConfigurationPageModel(null, SpecificObjectiveCreateSuccess_Callback, new StrategicLineSpecificObjectiveConfigurationValidator(this))));
         });
 
-        UpdateSpecificObjectiveCommand = new Command<StrategicLineSpecificObjectiveDetailDtoModel>(async model =>
+        UpdateSpecificObjectiveCommand = new Command<SpecificObjectiveDetailDtoModel>(async model =>
         {
             await Application.Current!.MainPage!.NavigationPushPageAsync(new StrategicLineSpecificObjectiveConfigurationPage(new StrategicLineSpecificObjectiveConfigurationPageModel(model, SpecificObjectiveModifySuccess_Callback, new StrategicLineSpecificObjectiveConfigurationValidator(this))));
         });
 
-        RemoveSpecificObjectiveCommand = new Command<StrategicLineSpecificObjectiveDetailDtoModel>(model => 
+        RemoveSpecificObjectiveCommand = new Command<SpecificObjectiveDetailDtoModel>(model => 
         {
             Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
             {
@@ -108,7 +109,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
             });
         });
 
-        DetailSpecificObjectiveCommand = new Command<StrategicLineSpecificObjectiveDetailDtoModel>(async model =>
+        DetailSpecificObjectiveCommand = new Command<SpecificObjectiveDetailDtoModel>(async model =>
         {
             await Application.Current!.MainPage!.NavigationPushModalPageAsync(new StrategicLineSpecificObjectiveDetailPage(model));
         });
@@ -264,7 +265,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
-    public ObservableCollection<StrategicLineSpecificObjectiveDetailDtoModel> SpecificObjectives { get; private set; } = [];
+    public ObservableCollection<SpecificObjectiveDetailDtoModel> SpecificObjectives { get; private set; } = [];
 
     public ICommand CreateSpecificObjectiveCommand { get; private set; }
 
@@ -369,9 +370,9 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
         hasChangesFlag = true;
     }
     
-    private void SpecificObjectiveCreateSuccess_Callback(StrategicLineSpecificObjectiveDetailDtoModel model)
+    private void SpecificObjectiveCreateSuccess_Callback(SpecificObjectiveDetailDtoModel model)
     {
-        inSpecificObjectives.Add(new StrategicLineSpecificObjectiveCreateRequestModel(model.Index, model.Content));
+        inSpecificObjectives.Add(new SpecificObjectiveCreateClippedRequestModel(model.Index, model.Content));
 
         // TODO Order list !!!
         SpecificObjectives.Add(model);
@@ -379,7 +380,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
         hasChangesFlag = true;
     }
 
-    private void SpecificObjectiveModifySuccess_Callback(StrategicLineSpecificObjectiveDetailDtoModel model)
+    private void SpecificObjectiveModifySuccess_Callback(SpecificObjectiveDetailDtoModel model)
     {
         bool handled = false;
 
@@ -389,7 +390,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
             inSpecificObjectives.Remove(item);
 
-            inSpecificObjectives.Add(new StrategicLineSpecificObjectiveCreateRequestModel(model.Index, model.Content));
+            inSpecificObjectives.Add(new SpecificObjectiveCreateClippedRequestModel(model.Index, model.Content));
 
             handled = true;
 
@@ -404,7 +405,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
                 patchSpecificObjectives.Remove(item);
 
-                patchSpecificObjectives.Add(new StrategicLineSpecificObjectiveUpdateRequestModel(model.Id, model.Index, model.Content));
+                patchSpecificObjectives.Add(new SpecificObjectiveUpdateClippedRequestModel(model.Id, model.Index, model.Content));
 
                 handled = true;
 
@@ -414,7 +415,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
         if (!handled)
         {
-            patchSpecificObjectives.Add(new StrategicLineSpecificObjectiveUpdateRequestModel(model.Id, model.Index, model.Content));
+            patchSpecificObjectives.Add(new SpecificObjectiveUpdateClippedRequestModel(model.Id, model.Index, model.Content));
         }
 
         var index = -1;
@@ -426,7 +427,7 @@ public sealed class StrategicLineConfigurationPageModel : AbstractConfigurationP
 
             if (item.Id != model.Id) continue;
 
-            SpecificObjectives[index] = new StrategicLineSpecificObjectiveDetailDtoModel(model.Id, model.Index, model.Content);
+            SpecificObjectives[index] = new SpecificObjectiveDetailDtoModel(model.Id, model.Index, model.Content);
 
             break;
         }

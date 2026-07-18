@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseConfigurationEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicProgram.Configuration.Clipped"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProgram.Configuration.Clipped.SpecificObjectiveClippedConfigurationPage"
+    x:TypeArguments="interop_dto_models:SpecificObjectiveDetailDtoModel,interop_dto_models:SpecificObjectiveDetailDtoModel,local_configuration_page_models:SpecificObjectiveClippedConfigurationPageModel"
+    x:DataType="local_configuration_page_models:SpecificObjectiveClippedConfigurationPageModel"
+    Shell.TabBarIsVisible="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Command="{Binding ApplyCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xf12c;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Command="{Binding CancelCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xf156;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <StackLayout 
+                    Style="{StaticResource FormFluentChildStackLayoutStyle}"
+                    Orientation="Horizontal"
+                    Spacing="16">
+                    <Grid
+                        WidthRequest="108"
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Número" />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Index}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Value="{Binding Index}" />
+                        <Label Grid.Row="2">
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:SpecificObjectiveClippedConfigurationPageModel.IndexValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </Grid>
+                </StackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contenido" />
+                    <Editor Text="{Binding Content}" HeightRequest="200" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:SpecificObjectiveClippedConfigurationPageModel.ContentValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</common_ui_base_pages:BaseConfigurationEntityPage>

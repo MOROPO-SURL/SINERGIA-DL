@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.TerritoryPotential;
 
-public partial class TerritoryPotentialConfigurationPage : BaseConfigurationEntityPage<TerritoryPotentialBasicDtoModel, TerritoryPotentialDetailDtoModel, TerritoryPotentialConfigurationPageModel>
+public partial class TerritoryPotentialConfigurationPage : BaseConfigurationEntityPage<TerritoryPotentialDetailDtoModel, TerritoryPotentialDetailDtoModel, TerritoryPotentialConfigurationPageModel>
 {
     public TerritoryPotentialConfigurationPage(TerritoryPotentialConfigurationPageModel bindingContextModel) : base(bindingContextModel)
     {

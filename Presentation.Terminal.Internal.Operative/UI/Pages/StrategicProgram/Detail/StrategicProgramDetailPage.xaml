@@ -123,6 +123,115 @@
                         Style="{StaticResource ValuePropertyLabelStyle}"
                         Text="{Binding Model.Objective}" />
                 </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Objetivos específicos" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.SpecificObjectives}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:SpecificObjectiveDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label
+                                            Margin="8"
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            LineBreakMode="TailTruncation">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Index, StringFormat='{0}.'}" />
+                                                    <Span Text=" " />
+                                                    <Span Text="{Binding Content}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailSpecificObjectiveCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Impactos esperados" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Impacts}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:ImpactDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="FillAndExpand"
+                                            Margin="8">
+                                            <Label 
+                                                LineBreakMode="TailTruncation"
+                                                FontAttributes="Bold"
+                                                Text="{Binding Name}" />
+                                            <Label 
+                                                Style="{StaticResource OffLabelStyle}"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Description, TargetNullValue='---'}" />
+                                        </VerticalStackLayout>
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailImpactCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Acciones" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Actions}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:ActionDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label
+                                            Margin="8"
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Title}" />
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailActionCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"

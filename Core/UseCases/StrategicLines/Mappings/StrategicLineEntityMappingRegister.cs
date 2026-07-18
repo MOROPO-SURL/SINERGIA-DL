@@ -23,16 +23,16 @@ internal sealed class StrategicLineEntityMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-
-        config.NewConfig<StrategicLineDetailDto, StrategicLineSpecificObjective>()
-            .Map(dest => dest.Id, src => new StrategicLineSpecificObjectiveId(src.Id))
-            .Map(dest => dest, src => src);
+        // TODO Remove !!!
+        //config.NewConfig<StrategicLineDetailDto, StrategicLineSpecificObjective>()
+        //    .Map(dest => dest.Id, src => new StrategicLineSpecificObjectiveId(src.Id))
+        //    .Map(dest => dest, src => src);
 
         config.NewConfig<StrategicLineSpecificObjective, StrategicLineSpecificObjectiveDetailDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest, src => src);
 
-        config.NewConfig<StrategicLineSpecificObjectiveClippedCreateCommand, StrategicLineSpecificObjective>()
+        config.NewConfig<SpecificObjectiveClippedCreateCommand, StrategicLineSpecificObjective>()
             .Map(dest => dest.Id, src => new StrategicLineSpecificObjectiveId(Guid.NewGuid()))
             .Map(dest => dest, src => src);
 

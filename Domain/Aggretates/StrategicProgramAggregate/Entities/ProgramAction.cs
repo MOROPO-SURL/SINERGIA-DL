@@ -7,21 +7,30 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggr
 
 public class ProgramAction : AbstractEntity<ProgramActionId, Guid>, IPriorizableEntity<ProgramActionId, Guid>
 {
+    private readonly List<ProgramActionIndicator> indicators = [];
     private readonly List<ProgramActionInterestAreaBridge> interestAreaBridges = [];
 
-    private ProgramAction() : base(new ProgramActionId(default)) { }
+    private ProgramAction() : base(default) { }
 
-    public ProgramAction(ProgramActionId id, StrategicProgramId strategicProgramId, string title, int priority, ProgramActionInterestAreaBridge[] interestAreaBridges, string? description = null) : base(id)
+    public ProgramAction(
+        ProgramActionId id, 
+        StrategicProgramId programId, 
+        string title, 
+        int priority, 
+        IEnumerable<ProgramActionIndicator> indicators,
+        IEnumerable<ProgramActionInterestAreaBridge> interestAreaBridges, 
+        string? description = null) : base(id)
     {
-        StrategicProgramId = strategicProgramId;
+        ProgramId = programId;
         Priority = priority;
         Title = title;
         Description = description;
 
+        this.indicators = [.. indicators];
         this.interestAreaBridges = [.. interestAreaBridges];
     }
 
-    public StrategicProgramId StrategicProgramId { get; set; }
+    public StrategicProgramId ProgramId { get; set; }
 
     public string Title { get; set; } = null!;
 
@@ -29,8 +38,17 @@ public class ProgramAction : AbstractEntity<ProgramActionId, Guid>, IPriorizable
 
     public string? Description { get; set; }
 
-    //public ProgramAction? Parent { get; set; }
-    //public ProgramActionId? ParentId { get; set; }
+    public IReadOnlyList<ProgramActionIndicator> Indicators => [.. indicators];
 
-    public ProgramActionInterestAreaBridge[] InterestAreaBridges => [.. interestAreaBridges];
+    public IReadOnlyList<ProgramActionInterestAreaBridge> InterestAreaBridges => [.. interestAreaBridges];
+
+    public void AddIndicator(ProgramActionIndicator entity)
+    {
+        indicators.Add(entity);
+    }
+
+    public void RemoveIndicator(ProgramActionIndicator entity) 
+    {
+        indicators.Remove(indicators.First(_entity => _entity.Id == entity.Id && _entity.ActionId == entity.ActionId && _entity.ProgramId == entity.ProgramId));
+    }
 }

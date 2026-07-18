@@ -13,6 +13,9 @@ public record StrategicProgramDetailDtoModel(
     StrategicLineBasicDtoModel Line, 
     PersonBasicDtoModel Coordinator, 
     string Objective,
+    SpecificObjectiveDetailDtoModel[] SpecificObjectives,
+    ImpactDetailDtoModel[] Impacts,
+    ActionDetailDtoModel[] Actions,
     OrganizationBasicDtoModel[] Organizations,
     MacroprogramBasicDtoModel[] Macroprograms,
     string? Description = null);

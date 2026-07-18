@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicLine.Configuration;
 
-public partial class StrategicLineConfigurationPage : BaseConfigurationEntityPage<StrategicLineBasicDtoModel, StrategicLineDetailDtoModel, StrategicLineConfigurationPageModel>
+public partial class StrategicLineConfigurationPage : BaseConfigurationEntityPage<StrategicLineDetailDtoModel, StrategicLineDetailDtoModel, StrategicLineConfigurationPageModel>
 {
 	public StrategicLineConfigurationPage(StrategicLineConfigurationPageModel bindingContextModel) : base(bindingContextModel)
 	{

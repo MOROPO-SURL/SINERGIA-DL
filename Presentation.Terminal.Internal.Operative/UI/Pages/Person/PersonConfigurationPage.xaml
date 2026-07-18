@@ -12,7 +12,7 @@
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Person.PersonConfigurationPage"
-    x:TypeArguments="interop_dto_models:PersonBasicDtoModel,interop_dto_models:PersonDetailDtoModel,local_configuration_page_models:PersonConfigurationPageModel"
+    x:TypeArguments="interop_dto_models:PersonDetailDtoModel,interop_dto_models:PersonDetailDtoModel,local_configuration_page_models:PersonConfigurationPageModel"
     x:DataType="local_configuration_page_models:PersonConfigurationPageModel"
     Shell.TabBarIsVisible="False">
     <ContentPage.Resources>

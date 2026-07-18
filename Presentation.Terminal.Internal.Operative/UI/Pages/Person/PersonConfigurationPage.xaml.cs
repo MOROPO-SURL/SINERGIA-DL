@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presente
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Person;
 
-public partial class PersonConfigurationPage : BaseConfigurationEntityPage<PersonBasicDtoModel, PersonDetailDtoModel, PersonConfigurationPageModel>
+public partial class PersonConfigurationPage : BaseConfigurationEntityPage<PersonDetailDtoModel, PersonDetailDtoModel, PersonConfigurationPageModel>
 {
     public PersonConfigurationPage(PersonConfigurationPageModel bindingContextModel) : base(bindingContextModel)
     {

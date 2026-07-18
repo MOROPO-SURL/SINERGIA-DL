@@ -15,7 +15,7 @@
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicAxe.Configuration.StrategicAxeConfigurationPage"
-    x:TypeArguments="interop_dto_models:StrategicAxeBasicDtoModel,interop_dto_models:StrategicAxeDetailDtoModel,local_configuration_page_models:StrategicAxeConfigurationPageModel"
+    x:TypeArguments="interop_dto_models:StrategicAxeDetailDtoModel,interop_dto_models:StrategicAxeDetailDtoModel,local_configuration_page_models:StrategicAxeConfigurationPageModel"
     x:DataType="local_configuration_page_models:StrategicAxeConfigurationPageModel"
     Shell.TabBarIsVisible="False">
     <ContentPage.Resources>

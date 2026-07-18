@@ -6,6 +6,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate
 
 public sealed class PDLModality : AbstractEntity<PDLModalityId, Guid>, IAggregateRoot<PDLModalityId, Guid>, IEnableableEntity<PDLModalityId, Guid>, IArchivableEntity<PDLModalityId, Guid>, INamedEntity<PDLModalityId, Guid>, IPriorizableEntity<PDLModalityId, Guid>
 {
+    private PDLModality() : base(default) { }
+
     public PDLModality(PDLModalityId id, string name, bool isArchived, bool isEnabled, int priority, string? description = null) : base(id)
     {
         Name = name;
@@ -15,7 +17,7 @@ public sealed class PDLModality : AbstractEntity<PDLModalityId, Guid>, IAggregat
         Description = description;
     }
 
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     public bool IsArchived { get; set; }
 
