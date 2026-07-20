@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.Mo
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.Organization;
 
-public partial class OrganizationConfigurationPage : BaseConfigurationEntityPage<OrganizationBasicDtoModel, OrganizationDetailDtoModel, OrganizationConfigurationPageModel>
+public partial class OrganizationConfigurationPage : BaseConfigurationEntityPage<OrganizationDetailDtoModel, OrganizationDetailDtoModel, OrganizationConfigurationPageModel>
 {
     public OrganizationConfigurationPage(OrganizationConfigurationPageModel bindingContextModel) : base(bindingContextModel)
     {

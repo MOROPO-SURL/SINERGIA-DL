@@ -11,7 +11,7 @@
     xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.Organization.OrganizationConfigurationPage"
-    x:TypeArguments="interop_dto_models:OrganizationBasicDtoModel,interop_dto_models:OrganizationDetailDtoModel,local_configuration_page_models:OrganizationConfigurationPageModel"
+    x:TypeArguments="interop_dto_models:OrganizationDetailDtoModel,interop_dto_models:OrganizationDetailDtoModel,local_configuration_page_models:OrganizationConfigurationPageModel"
     x:DataType="local_configuration_page_models:OrganizationConfigurationPageModel"
     Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
