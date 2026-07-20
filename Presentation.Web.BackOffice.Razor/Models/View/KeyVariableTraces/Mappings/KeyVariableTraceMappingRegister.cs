@@ -5,7 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.KeyVariableTraces.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.KeyVariableTraces.Mappings;
 
-public sealed class KeyVariableTraceMappingRegister : IRegister
+internal sealed class KeyVariableTraceMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

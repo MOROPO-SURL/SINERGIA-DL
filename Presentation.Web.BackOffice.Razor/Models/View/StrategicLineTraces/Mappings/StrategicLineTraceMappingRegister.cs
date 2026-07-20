@@ -5,7 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLineTraces.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.StrategicLineTraces.Mappings;
 
-public sealed class StrategicLineTraceMappingRegister : IRegister
+internal sealed class StrategicLineTraceMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

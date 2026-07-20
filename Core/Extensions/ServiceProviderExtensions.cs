@@ -20,6 +20,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.MacroprogramTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ObjectiveTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKinds.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationKindTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OrganizationTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Permissions.Mappings;
@@ -153,12 +154,15 @@ public static class ServiceProviderExtensions
 
             new EconomicActivityEntityMappingRegister(),
 
-            new DevelopmentActorProfileMappingRegister()
+            new DevelopmentActorProfileMappingRegister(),
+
             new KeyVariableTraceEntityMappingRegister(),
 
             new MacroprogramTraceEntityMappingRegister(),
 
-            new ObjectiveTraceEntityMappingRegister()
+            new ObjectiveTraceEntityMappingRegister(),
+
+            new OrganizationKindTraceEntityMappingRegister()
         );
     }
 }

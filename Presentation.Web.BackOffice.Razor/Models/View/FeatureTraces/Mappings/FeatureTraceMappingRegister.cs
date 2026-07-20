@@ -5,7 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureTraces.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.FeatureTraces.Mappings;
 
-public sealed class FeatureTraceMappingRegister : IRegister
+internal sealed class FeatureTraceMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

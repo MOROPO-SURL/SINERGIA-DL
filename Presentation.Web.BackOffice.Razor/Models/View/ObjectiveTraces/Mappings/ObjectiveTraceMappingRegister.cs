@@ -5,7 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ObjectiveTraces.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.ObjectiveTraces.Mappings;
 
-public class ObjectiveTraceMappingRegister : IRegister
+internal class ObjectiveTraceMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

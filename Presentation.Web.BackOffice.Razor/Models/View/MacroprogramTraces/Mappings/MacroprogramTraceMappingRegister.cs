@@ -5,7 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.MacroprogramTraces.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.MacroprogramTraces.Mappings;
 
-public class MacroprogramTraceMappingRegister : IRegister
+internal class MacroprogramTraceMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

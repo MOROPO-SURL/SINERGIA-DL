@@ -5,7 +5,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.InterestAreaTraces.DTOs;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.InterestAreaTraces.Mappings;
 
-public sealed class InterestAreaTraceMappingRegister : IRegister
+internal sealed class InterestAreaTraceMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
