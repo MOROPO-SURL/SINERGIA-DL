@@ -153,11 +153,11 @@ public sealed class ActionClippedConfigurationPageModel : AbstractConfigurationP
 
     protected override Task<ActionConfigurationResultCompousedModel> PerformCreationAsync()
     {
-        Guid Id = Guid.NewGuid();
+        Guid id = Guid.NewGuid();
 
         return Task.FromResult(new ActionConfigurationResultCompousedModel(
-            new ActionDetailDtoModel(Id, title, priority, [.. Indicators], description),
-            new ActionUpdateClippedRequestModel(Id, title, priority, inIndicators, [], [], description)));
+            new ActionDetailDtoModel(id, title, priority, [.. Indicators], description),
+            new ActionUpdateClippedRequestModel(id, title, priority, inIndicators, [], [], description)));
     }
 
     protected override Task<ActionConfigurationResultCompousedModel> PerformEditionAsync()
@@ -187,27 +187,27 @@ public sealed class ActionClippedConfigurationPageModel : AbstractConfigurationP
 
     public ICommand DetailIndicatorCommand { get; init; }
 
-    private void IndicatorCreateSuccess_Callback(ActionIndicatorDetailDtoModel model)
+    private void IndicatorCreateSuccess_Callback(IndicatorConfigurationResultCompousedModel model)
     {
-        inIndicators.Add(new ActionIndicatorCreateClippedRequestModel(model.Id, model.Name, model.UnitMeasurement, model.Alias));
+        inIndicators.Add(new ActionIndicatorCreateClippedRequestModel(model.UpdateRequest.Id, model.UpdateRequest.Name, model.UpdateRequest.UnitMeasurement, model.UpdateRequest.Priority, model.UpdateRequest.InMilestones, model.UpdateRequest.Alias));
 
         // TODO Order list !!!
-        Indicators.Add(model);
+        Indicators.Add(model.Detail);
 
         hasChangesFlag = true;
     }
 
-    private void IndicatorModifySuccess_Callback(ActionIndicatorDetailDtoModel model)
+    private void IndicatorModifySuccess_Callback(IndicatorConfigurationResultCompousedModel model)
     {
         bool handled = false;
 
         foreach (var item in inIndicators)
         {
-            if (item.Id != model.Id) continue;
+            if (item.Id != model.UpdateRequest.Id) continue;
 
             inIndicators.Remove(item);
 
-            inIndicators.Add(new ActionIndicatorCreateClippedRequestModel(model.Id, model.Name, model.UnitMeasurement, model.Alias));
+            inIndicators.Add(new ActionIndicatorCreateClippedRequestModel(model.UpdateRequest.Id, model.UpdateRequest.Name, model.UpdateRequest.UnitMeasurement, model.UpdateRequest.Priority, model.UpdateRequest.InMilestones, model.UpdateRequest.Alias));
 
             handled = true;
 
@@ -218,11 +218,11 @@ public sealed class ActionClippedConfigurationPageModel : AbstractConfigurationP
         {
             foreach (var item in patchIndicators)
             {
-                if (item.Id != model.Id) continue;
+                if (item.Id != model.UpdateRequest.Id) continue;
 
                 patchIndicators.Remove(item);
 
-                patchIndicators.Add(new ActionIndicatorUpdateClippedRequestModel(model.Id, model.Name, model.UnitMeasurement, model.Alias));
+                patchIndicators.Add(model.UpdateRequest);
 
                 handled = true;
 
@@ -232,7 +232,7 @@ public sealed class ActionClippedConfigurationPageModel : AbstractConfigurationP
 
         if (!handled)
         {
-            patchIndicators.Add(new ActionIndicatorUpdateClippedRequestModel(model.Id, model.Name, model.UnitMeasurement, model.Alias));
+            patchIndicators.Add(model.UpdateRequest);
         }
 
         var index = -1;
@@ -242,9 +242,9 @@ public sealed class ActionClippedConfigurationPageModel : AbstractConfigurationP
         {
             index++;
 
-            if (item.Id != model.Id) continue;
+            if (item.Id != model.Detail.Id) continue;
 
-            Indicators[index] = new ActionIndicatorDetailDtoModel(model.Id, model.Name, model.UnitMeasurement, model.Alias);
+            Indicators[index] = model.Detail;
 
             break;
         }

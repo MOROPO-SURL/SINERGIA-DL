@@ -6,4 +6,6 @@ public record ActionIndicatorDetailDtoModel(
     Guid Id,
     string Name,
     UnitMeasurementBasicDtoModel UnitMeasurement,
+    int Priority,
+    ActionIndicatorMilestoneDetailDtoModel[] Milestones,
     string? Alias = null);

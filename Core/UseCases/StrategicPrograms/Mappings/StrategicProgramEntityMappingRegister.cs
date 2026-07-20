@@ -12,6 +12,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregat
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
+using System;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.Mappings;
 
@@ -44,6 +45,8 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
             .MapWith(src => src.Value);
 
         config.NewConfig<ProgramActionIndicatorId, Guid>().MapWith(src => src.Value);
+
+        config.NewConfig<ProgramActionIndicatorMilestoneId, Guid>().MapWith(src => src.Value);
 
         config.NewConfig<StrategicProgram, StrategicProgramBasicDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
@@ -81,7 +84,15 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
                         new(src.Id), 
                         _item.Name, 
                         new(_item.UnitMeasurement.Id), 
-                        Array.Empty<ProgramActionIndicatorMilestone>(),
+                        src.Priority,
+                        _item.Milestones.Select(__item => new ProgramActionIndicatorMilestone(
+                            new(__item.Id),
+                            new(_item.Id),
+                            new(item.Id),
+                            new(src.Id),
+                            __item.At,
+                            __item.Amount,
+                            __item.Description)),
                         _item.Alias, null)).ToArray(),
                     Array.Empty<ProgramActionInterestAreaBridge>(),
                     item.Description)).ToArray(),
@@ -101,7 +112,7 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
             .Map(dest => dest.Id, src => new ProgramActionId(src.Id))
             .Map(dest => dest, src => src);
 
-        _ = config.NewConfig<StrategicProgramUpdateCommand, StrategicProgram>()
+        config.NewConfig<StrategicProgramUpdateCommand, StrategicProgram>()
             .Map(dest => dest.Id, src => new StrategicProgramId(src.Id))
             .Map(dest => dest, src => src)
             .AfterMapping((src, dest) =>
@@ -169,7 +180,31 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
 
                 foreach (var item in src.InActions)
                 {
-                    ProgramAction entity = new(new(item.Id), dest.Id, item.Title, item.Priority, [], [], item.Description);
+                    ProgramActionId actionId = new(item.Id);
+
+                    ProgramAction entity = new(
+                        actionId, 
+                        dest.Id, 
+                        item.Title, 
+                        item.Priority, 
+                        item.Indicators.Select(item => new ProgramActionIndicator(
+                            new(item.Id), 
+                            actionId, 
+                            dest.Id, 
+                            item.Name, 
+                            new(item.UnitMeasurement.Id), 
+                            item.Priority, 
+                            item.Milestones.Select(_item => new ProgramActionIndicatorMilestone(
+                                new(_item.Id), 
+                                new(item.Id), 
+                                actionId, 
+                                dest.Id, 
+                                _item.At, 
+                                _item.Amount, 
+                                _item.Description)), 
+                            item.Alias)), 
+                        [], 
+                        item.Description);
 
                     dest.AddAction(entity);
                 }
@@ -193,7 +228,24 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
 
                     foreach (var _item in item.InIndicators)
                     {
-                        ProgramActionIndicator _entity = new(new(_item.Id), entity.Id, dest.Id, _item.Name, new(_item.UnitMeasurement.Id), [], _item.Alias);
+                        ProgramActionIndicatorId indicatorId = new(_item.Id);
+
+                        ProgramActionIndicator _entity = new(
+                            indicatorId, 
+                            entity.Id, 
+                            dest.Id, 
+                            _item.Name, 
+                            new(_item.UnitMeasurement.Id), 
+                            _item.Priority, 
+                            _item.Milestones.Select(__item => new ProgramActionIndicatorMilestone(
+                                new(__item.Id), 
+                                indicatorId, 
+                                entity.Id, 
+                                dest.Id, 
+                                __item.At, 
+                                __item.Amount, 
+                                __item.Description)), 
+                            _item.Alias);
 
                         entity.AddIndicator(_entity);
                     }
@@ -219,6 +271,33 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
                         {
                             _entity.UnitMeasurement = null;
                             _entity.UnitMeasurementId = new(_item.UnitMeasurement.Id);
+                        }
+
+                        foreach (var __item in _item.InMilestones)
+                        {
+                            ProgramActionIndicatorMilestone __entity = new(new(__item.Id), _entity.Id, entity.Id, dest.Id, __item.At, __item.Amount, __item.Description);
+
+                            _entity.AddMilestone(__entity);
+                        }
+
+                        foreach (var __item in _item.OutMilestones)
+                        {
+                            ProgramActionIndicatorMilestone __entity = _item.Adapt<ProgramActionIndicatorMilestone>();
+
+                            __entity.IndicatorId = _entity.Id;
+                            __entity.ActionId = entity.Id;
+                            __entity.ProgramId = dest.Id;
+
+                            _entity.RemoveMilestone(__entity);
+                        }
+
+                        foreach (var __item in _item.PatchMilestones)
+                        {
+                            ProgramActionIndicatorMilestone __entity = _entity.Milestones.First(__entity => __entity.Id.Value == __item.Id && __entity.IndicatorId == _entity.Id && __entity.ActionId == entity.Id && __entity.ProgramId == dest.Id);
+
+                            __entity.At = __item.At;
+                            __entity.Amount = __item.Amount;
+                            __entity.Description = __item.Description;
                         }
                     }
                 }

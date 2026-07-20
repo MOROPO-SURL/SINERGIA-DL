@@ -330,6 +330,8 @@ internal sealed class StrategicProgramEntityTypeConfiguration : IEntityTypeConfi
         builder.HasKey(entity => new { entity.Id, entity.IndicatorId, entity.ActionId, entity.ProgramId });
 
         builder.WithOwner().HasForeignKey(entity => new { entity.IndicatorId, entity.ActionId, entity.ProgramId });
+
+        builder.HasIndex(entity => new { entity.Id, entity.IndicatorId, entity.ActionId, entity.ProgramId, entity.At }).IsUnique();
     }
 
     private static void Configure(OwnedNavigationBuilder<ProgramActionIndicator, ProgramActionIndicatorChange> builder)

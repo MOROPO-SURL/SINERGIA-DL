@@ -3,6 +3,6 @@
 public record ActionCreateClippedRequestModel(
     Guid Id, 
     string Title, 
-    int Priority, 
+    int Priority,
     IEnumerable<ActionIndicatorCreateClippedRequestModel> Indicators,
     string? Description = null);

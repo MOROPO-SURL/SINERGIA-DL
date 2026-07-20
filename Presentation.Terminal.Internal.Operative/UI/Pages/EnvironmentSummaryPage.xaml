@@ -33,8 +33,8 @@
                 FalseObject="Se requiere configuración mínima del entorno complementario" />
             <communitytoolkit_converters:BoolToObjectConverter 
                 x:Key="BoolToTitle" 
-                TrueObject="Al menos una definida"
-                FalseObject="0 definidas" />
+                TrueObject="Al menos un elemento definido"
+                FalseObject="No se han definido elementos" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -95,6 +95,7 @@
                                         Text="{Binding HasAnyFeatureKind, Converter={StaticResource HasAnyToGlyph}}" />
                                     <Label
                                         HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
                                         TextColor="{Binding HasAnyFeatureKind, Converter={StaticResource BoolToColor}}"
                                         Text="{Binding HasAnyFeatureKind, Converter={StaticResource BoolToTitle}}" />
                                     <Button
@@ -126,6 +127,7 @@
                                         Text="{Binding HasAnyOrganizationKind, Converter={StaticResource HasAnyToGlyph}}" />
                                     <Label
                                         HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
                                         TextColor="{Binding HasAnyOrganizationKind, Converter={StaticResource BoolToColor}}"
                                         Text="{Binding HasAnyOrganizationKind, Converter={StaticResource BoolToTitle}}" />
                                     <Button
@@ -157,6 +159,7 @@
                                         Text="{Binding HasAnyProjectKind, Converter={StaticResource HasAnyToGlyph}}" />
                                     <Label
                                         HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
                                         TextColor="{Binding HasAnyProjectKind, Converter={StaticResource BoolToColor}}"
                                         Text="{Binding HasAnyProjectKind, Converter={StaticResource BoolToTitle}}" />
                                     <Button
@@ -184,12 +187,13 @@
                                         Margin="0,8,0,0"
                                         FontFamily="MaterialDesignIcons"
                                         FontSize="36"
-                                        TextColor="{Binding HasAnyProjectKind, Converter={StaticResource BoolToColor}}"
-                                        Text="{Binding HasAnyProjectKind, Converter={StaticResource HasAnyToGlyph}}" />
+                                        TextColor="{Binding HasAnyUnitMeasurement, Converter={StaticResource BoolToColor}}"
+                                        Text="{Binding HasAnyUnitMeasurement, Converter={StaticResource HasAnyToGlyph}}" />
                                     <Label
                                         HorizontalOptions="Center"
-                                        TextColor="{Binding HasAnyProjectKind, Converter={StaticResource BoolToColor}}"
-                                        Text="{Binding HasAnyProjectKind, Converter={StaticResource BoolToTitle}}" />
+                                        HorizontalTextAlignment="Center"
+                                        TextColor="{Binding HasAnyUnitMeasurement, Converter={StaticResource BoolToColor}}"
+                                        Text="{Binding HasAnyUnitMeasurement, Converter={StaticResource BoolToTitle}}" />
                                     <Button
                                         Style="{StaticResource PrimaryKindButtonStyle}"
                                         HorizontalOptions="Center"

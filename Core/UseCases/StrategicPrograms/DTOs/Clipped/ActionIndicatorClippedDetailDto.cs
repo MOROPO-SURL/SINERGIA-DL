@@ -7,6 +7,6 @@ public record ActionIndicatorClippedDetailDto(
     Guid Id,
     string Name,
     UnitMeasurementBasicDto UnitMeasurement,
+    int Priority,
     ActionIndicatorMilestoneClippedDetailDto[] Milestones,
-    ActionIndicatorChangeClippedDetailDto[] Changes,
     string? Alias = null) : IDetailDto;

@@ -2,4 +2,10 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.CQRS.Command.Clipped;
 
-public record ActionIndicatorCreateClippedRequestModel(Guid Id, string Name, UnitMeasurementBasicDtoModel UnitMeasurement, string? Alias = null);
+public record ActionIndicatorCreateClippedRequestModel(
+    Guid Id, 
+    string Name, 
+    UnitMeasurementBasicDtoModel UnitMeasurement, 
+    int Priority,
+    IEnumerable<ActionIndicatorMilestoneCreateClippedRequestModel> Milestones,
+    string? Alias = null);

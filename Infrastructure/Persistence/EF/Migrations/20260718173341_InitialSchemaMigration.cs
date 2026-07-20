@@ -2137,6 +2137,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     Name = table.Column<string>(type: "character varying(360)", maxLength: 360, nullable: false),
                     Alias = table.Column<string>(type: "character varying(360)", maxLength: 360, nullable: true),
                     UnitMeasurementId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Priority = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
@@ -2258,10 +2259,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                 name: "strategicprogram_action_indicator_milestones",
                 columns: table => new
                 {
-                    Id = table.Column<DateOnly>(type: "date", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ProgramId = table.Column<Guid>(type: "uuid", nullable: false),
                     ActionId = table.Column<Guid>(type: "uuid", nullable: false),
                     IndicatorId = table.Column<Guid>(type: "uuid", nullable: false),
+                    At = table.Column<DateOnly>(type: "date", nullable: false),
                     Amount = table.Column<float>(type: "real", nullable: false),
                     Description = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true)
                 },
@@ -2692,6 +2694,12 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                 name: "IX_strategicprogram_action_indicator_changes_IndicatorId_Actio~",
                 table: "strategicprogram_action_indicator_changes",
                 columns: new[] { "IndicatorId", "ActionId", "ProgramId" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_strategicprogram_action_indicator_milestones_Id_IndicatorId~",
+                table: "strategicprogram_action_indicator_milestones",
+                columns: new[] { "Id", "IndicatorId", "ActionId", "ProgramId", "At" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_strategicprogram_action_indicator_milestones_IndicatorId_Ac~",

@@ -5,6 +5,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.CQRS.C
 public record ActionIndicatorClippedCreateCommand(
     Guid Id, 
     string Name, 
-    UnitMeasurementBasicDto UnitMeasurement, 
+    UnitMeasurementBasicDto UnitMeasurement,
+    int Priority,
+    IEnumerable<ActionIndicatorMilestoneClippedCreateCommand> Milestones,
     string? Alias = null, 
     string? Description = null);

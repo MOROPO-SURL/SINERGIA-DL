@@ -2,4 +2,4 @@
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs.Clipped;
 
-public record ActionIndicatorMilestoneClippedDetailDto(DateOnly Id, float Amount, string? Description = null) : IDetailDto;
+public record ActionIndicatorMilestoneClippedDetailDto(Guid Id, DateOnly At, float Amount, string? Description = null) : IDetailDto;

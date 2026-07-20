@@ -270,6 +270,9 @@
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Configuration\Clipped\IndicatorClippedConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProgram\Configuration\Clipped\MilestoneClippedConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Configuration\Clipped\SpecificObjectiveClippedConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -280,6 +283,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Detail\Clipped\IndicatorClippedDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProgram\Detail\Clipped\MilestoneClippedDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Detail\Clipped\SpecificObjectiveClippedDetailPage.xaml">

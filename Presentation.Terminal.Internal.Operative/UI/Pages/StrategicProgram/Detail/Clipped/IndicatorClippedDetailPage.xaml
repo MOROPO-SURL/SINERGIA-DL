@@ -15,7 +15,7 @@
         <Grid>
             <Grid
                 Padding="10"
-                MaximumWidthRequest="480"
+                MaximumWidthRequest="528"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
                     <VerticalStackLayout Margin="20">
@@ -47,6 +47,45 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
+                        <VerticalStackLayout Margin="0,8,0,0">
+                            <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Metas" />
+                            <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                            <CollectionView ItemsSource="{Binding Model.Milestones}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_dto_models:ActionIndicatorMilestoneDetailDtoModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                                <Label 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Margin="8"
+                                                    LineBreakMode="TailTruncation">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Alcanzar" />
+                                                            <Span Text="{Binding Amount, StringFormat=' {0}'}" FontAttributes="Bold" />
+                                                            <Span Text=" para el" />
+                                                            <Span Text="{Binding At, StringFormat=' {0}'}" FontAttributes="Bold" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    VerticalOptions="Center"
+                                                    Text="&#xF2FD;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailMilestoneCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Frame>
                 <Button

@@ -75,6 +75,14 @@
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
                         </VerticalStackLayout>
+                        <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Prioridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Model.Priority}" />
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Frame>
                 <Button

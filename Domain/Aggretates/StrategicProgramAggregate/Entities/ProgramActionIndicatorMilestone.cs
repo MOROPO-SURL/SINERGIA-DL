@@ -3,11 +3,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
 
-public sealed class ProgramActionIndicatorMilestone : AbstractEntity<ProgramActionIndicatorMilestoneId, DateOnly>
+public sealed class ProgramActionIndicatorMilestone : AbstractEntity<ProgramActionIndicatorMilestoneId, Guid>
 {
     private ProgramActionIndicatorMilestone() : base(default) { }
 
-    public ProgramActionIndicatorMilestone(ProgramActionIndicatorMilestoneId id, StrategicProgramId programId, ProgramActionId actionId, ProgramActionIndicatorId indicatorId, DateTime at, float amount, string? description = null) : base(id)
+    public ProgramActionIndicatorMilestone(ProgramActionIndicatorMilestoneId id, ProgramActionIndicatorId indicatorId, ProgramActionId actionId, StrategicProgramId programId, DateOnly at, float amount, string? description = null) : base(id)
     {
         ProgramId = programId;
         ActionId = actionId;
@@ -21,6 +21,8 @@ public sealed class ProgramActionIndicatorMilestone : AbstractEntity<ProgramActi
     public ProgramActionId ActionId { get; set; }
 
     public ProgramActionIndicatorId IndicatorId { get; set; }
+
+    public DateOnly At { get; set; }
 
     public float Amount { get; set; }
 

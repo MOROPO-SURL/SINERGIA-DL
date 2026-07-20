@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20260713152646_InitialSchemaMigration")]
+    [Migration("20260718173341_InitialSchemaMigration")]
     partial class InitialSchemaMigration
     {
         /// <inheritdoc />
@@ -3343,6 +3343,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                         .HasMaxLength(360)
                                         .HasColumnType("character varying(360)");
 
+                                    b2.Property<int>("Priority")
+                                        .HasColumnType("integer");
+
                                     b2.Property<Guid>("UnitMeasurementId")
                                         .HasColumnType("uuid");
 
@@ -3402,8 +3405,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                                     b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities.ProgramActionIndicatorMilestone", "Milestones", b3 =>
                                         {
-                                            b3.Property<DateOnly>("Id")
-                                                .HasColumnType("date");
+                                            b3.Property<Guid>("Id")
+                                                .HasColumnType("uuid");
 
                                             b3.Property<Guid>("IndicatorId")
                                                 .HasColumnType("uuid");
@@ -3417,6 +3420,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                             b3.Property<float>("Amount")
                                                 .HasColumnType("real");
 
+                                            b3.Property<DateOnly>("At")
+                                                .HasColumnType("date");
+
                                             b3.Property<string>("Description")
                                                 .HasMaxLength(512)
                                                 .HasColumnType("character varying(512)");
@@ -3424,6 +3430,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                                             b3.HasKey("Id", "IndicatorId", "ActionId", "ProgramId");
 
                                             b3.HasIndex("IndicatorId", "ActionId", "ProgramId");
+
+                                            b3.HasIndex("Id", "IndicatorId", "ActionId", "ProgramId", "At")
+                                                .IsUnique();
 
                                             b3.ToTable("strategicprogram_action_indicator_milestones", (string)null);
 
@@ -3539,7 +3548,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.WithOwner()
                                 .HasForeignKey("ProgramId");
 
-                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges.ProgramObjectiveStrategicProjectBridge", "ProjectBridges", b2 =>
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges.ProgramSpecificObjectiveStrategicProjectBridge", "ProjectBridges", b2 =>
                                 {
                                     b2.Property<Guid>("ProgramObjectiveId")
                                         .HasColumnType("uuid");
