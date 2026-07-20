@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.PublicPolicy;
 
-public partial class PublicPolicyConfigurationPage : BaseConfigurationEntityPage<PublicPolicyBasicDtoModel, PublicPolicyDetailDtoModel, PublicPolicyConfigurationPageModel>
+public partial class PublicPolicyConfigurationPage : BaseConfigurationEntityPage<PublicPolicyDetailDtoModel, PublicPolicyDetailDtoModel, PublicPolicyConfigurationPageModel>
 {
     public PublicPolicyConfigurationPage(PublicPolicyConfigurationPageModel bindingContextModel) : base(bindingContextModel)
     {

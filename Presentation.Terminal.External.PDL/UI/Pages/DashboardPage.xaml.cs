@@ -1,3 +1,5 @@
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.Models.Page;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.Models.Page;
 
@@ -24,6 +26,16 @@ public partial class DashboardPage : ContentPage
 		}
 
 		IsEnabled = true;
+    }
+
+    private void DiagnosticSummaryFrameTapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        this.NavigationPushPageAsync(new DiagnosticSummaryPage());
+    }
+
+    private void EDLSummaryFrameTapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        this.NavigationPushPageAsync(new StrategySummaryPage());
     }
 
     private async void GoDevelopmentActorProfileSecctionButton_Clicked(object sender, EventArgs e)

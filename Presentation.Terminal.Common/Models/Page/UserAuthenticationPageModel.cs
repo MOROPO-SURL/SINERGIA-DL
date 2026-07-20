@@ -60,6 +60,10 @@ public class UserAuthenticationPageModel : BasePageModel, Interfaces.IValidableC
                                 {
                                     message = "Datos incorrectos.";
                                 }
+                                else if (httpRequestException.StatusCode == System.Net.HttpStatusCode.Locked)
+                                {
+                                    message = "Usuario no habilitado.";
+                                }
                                 else if (httpRequestException.StatusCode == System.Net.HttpStatusCode.Forbidden)
                                 {
                                     message = "Usuario no autorizado.";

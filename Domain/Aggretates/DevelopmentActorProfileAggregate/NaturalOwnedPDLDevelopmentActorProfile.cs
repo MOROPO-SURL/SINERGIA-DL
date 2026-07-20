@@ -5,6 +5,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregat
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
 
@@ -18,23 +20,26 @@ public sealed class NaturalOwnedPDLDevelopmentActorProfile : Abstractions.Abstra
         DevelopmentActorProfileId id,
         bool isArchived,
         bool isEnabled,
-        OrganizationId ownerId, 
+        OrganizationId ownerId,
+        string fiscalIdentificationCode,
+        PDLModalityId modalityId,
         EconomicActivityId mainEconomicActivityId, 
         IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, 
         IEnumerable<DevelopmentActorProfileProductionActivity> productionActivities, 
         IEnumerable<DevelopmentActorProfileCommercialActivity> commercialActivities, 
         IEnumerable<DevelopmentActorProfileServicingActivity> servicingActivities,
-        PersonId titularPersonId,
+        PersonId holderPersonId,
         string? About = null, 
-        Organization? organization = null, 
+        Organization? owner = null,
+        PDLModality? modality = null,
         EconomicActivity? mainEconomicActivity = null,
-        Person? titular = null) : base(id, isArchived, isEnabled, ownerId, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, organization, mainEconomicActivity)
+        Person? holder = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, modalityId, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, modality, mainEconomicActivity)
     {
-        TitularPersonId = titularPersonId;
+        HolderPersonId = holderPersonId;
 
-        Titular = titular;
+        Holder = holder;
     }
 
-    public PersonId TitularPersonId { get; set; }
-    public Person? Titular { get; set; }
+    public PersonId HolderPersonId { get; set; }
+    public Person? Holder { get; set; }
 }

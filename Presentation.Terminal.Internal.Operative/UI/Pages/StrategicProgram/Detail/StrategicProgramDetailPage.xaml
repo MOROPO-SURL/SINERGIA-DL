@@ -2,10 +2,14 @@
 <common_ui_base_pages:BaseDetailEntityPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
     xmlns:local_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicProgram.Detail"
+    xmlns:local_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Views.Card"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
@@ -119,6 +123,115 @@
                         Style="{StaticResource ValuePropertyLabelStyle}"
                         Text="{Binding Model.Objective}" />
                 </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Objetivos específicos" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.SpecificObjectives}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:SpecificObjectiveDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label
+                                            Margin="8"
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            LineBreakMode="TailTruncation">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Index, StringFormat='{0}.'}" />
+                                                    <Span Text=" " />
+                                                    <Span Text="{Binding Content}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailSpecificObjectiveCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Impactos esperados" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Impacts}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:ImpactDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="FillAndExpand"
+                                            Margin="8">
+                                            <Label 
+                                                LineBreakMode="TailTruncation"
+                                                FontAttributes="Bold"
+                                                Text="{Binding Name}" />
+                                            <Label 
+                                                Style="{StaticResource OffLabelStyle}"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Description, TargetNullValue='---'}" />
+                                        </VerticalStackLayout>
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailImpactCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Acciones" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Actions}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:ActionDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label
+                                            Margin="8"
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Title}" />
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailActionCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
@@ -126,6 +239,58 @@
                     <Label
                         Style="{StaticResource ValuePropertyLabelStyle}"
                         Text="{Binding Model.Description, TargetNullValue='---'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Macroprogramas" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Macroprograms}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical" 
+                                Span="2" 
+                                HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Behaviors>
+                            <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static local_constants:CardViewSizeConstants.MACROPROGRAM_DEFAULT_CARD_VIEW_WIDTH}" />
+                        </CollectionView.Behaviors>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <local_ui_card_views:MacroprogramCardView HeightRequest="{Static local_constants:CardViewSizeConstants.MACROPROGRAM_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Grupo de trabajo" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Organizations}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical" 
+                                Span="2" 
+                                HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Behaviors>
+                            <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH}" />
+                        </CollectionView.Behaviors>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <common_ui_card_views:OrganizationCardView HeightRequest="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 

@@ -11,7 +11,7 @@
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.UnitMeasurement.UnitMeasurementConfigurationPage"
-    x:TypeArguments="interop_dto_models:UnitMeasurementBasicDtoModel,interop_dto_models:UnitMeasurementDetailDtoModel,local_configuration_page_models:UnitMeasurementConfigurationPageModel"
+    x:TypeArguments="interop_dto_models:UnitMeasurementDetailDtoModel,interop_dto_models:UnitMeasurementDetailDtoModel,local_configuration_page_models:UnitMeasurementConfigurationPageModel"
     x:DataType="local_configuration_page_models:UnitMeasurementConfigurationPageModel"
     Shell.TabBarIsVisible="False">
     <ContentPage.Resources>

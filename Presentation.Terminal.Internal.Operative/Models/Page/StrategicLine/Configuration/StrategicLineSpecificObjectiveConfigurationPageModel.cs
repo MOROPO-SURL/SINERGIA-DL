@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicLine.Configuration;
 
-public sealed class StrategicLineSpecificObjectiveConfigurationPageModel : AbstractConfigurationPageModel<StrategicLineSpecificObjectiveDetailDtoModel, StrategicLineSpecificObjectiveDetailDtoModel>
+public sealed class StrategicLineSpecificObjectiveConfigurationPageModel : AbstractConfigurationPageModel<SpecificObjectiveDetailDtoModel, SpecificObjectiveDetailDtoModel>
 {
     public static string IndexValidableProperty => nameof(Index);
     public static string ContentValidableProperty => nameof(Content);
@@ -12,7 +12,7 @@ public sealed class StrategicLineSpecificObjectiveConfigurationPageModel : Abstr
     private int index = 1;
     private string content = null!;
 
-    public StrategicLineSpecificObjectiveConfigurationPageModel(StrategicLineSpecificObjectiveDetailDtoModel? model, Action<StrategicLineSpecificObjectiveDetailDtoModel> successCallbackAction, IValidator validator) : base(model, successCallbackAction, validator)
+    public StrategicLineSpecificObjectiveConfigurationPageModel(SpecificObjectiveDetailDtoModel? model, Action<SpecificObjectiveDetailDtoModel> successCallbackAction, IValidator validator) : base(model, successCallbackAction, validator)
     {
         if (model == null) return;
 
@@ -29,14 +29,14 @@ public sealed class StrategicLineSpecificObjectiveConfigurationPageModel : Abstr
 
     protected override bool PresentChangeNotification => false;
 
-    protected override Task<StrategicLineSpecificObjectiveDetailDtoModel> PerformCreationAsync()
+    protected override Task<SpecificObjectiveDetailDtoModel> PerformCreationAsync()
     {
-        return Task.FromResult(new StrategicLineSpecificObjectiveDetailDtoModel(Guid.NewGuid(), Index, Content));
+        return Task.FromResult(new SpecificObjectiveDetailDtoModel(Guid.NewGuid(), Index, Content));
     }
 
-    protected override Task<StrategicLineSpecificObjectiveDetailDtoModel> PerformEditionAsync()
+    protected override Task<SpecificObjectiveDetailDtoModel> PerformEditionAsync()
     {
-        return Task.FromResult(new StrategicLineSpecificObjectiveDetailDtoModel(Id!.Value, Index, Content));
+        return Task.FromResult(new SpecificObjectiveDetailDtoModel(Id!.Value, Index, Content));
     }
 
     public override IValidationContext? ValidationContext => new ValidationContext<StrategicLineSpecificObjectiveConfigurationPageModel>(this);

@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.UnitMeasurement;
 
-public partial class UnitMeasurementConfigurationPage : BaseConfigurationEntityPage<UnitMeasurementBasicDtoModel, UnitMeasurementDetailDtoModel, UnitMeasurementConfigurationPageModel>
+public partial class UnitMeasurementConfigurationPage : BaseConfigurationEntityPage<UnitMeasurementDetailDtoModel, UnitMeasurementDetailDtoModel, UnitMeasurementConfigurationPageModel>
 {
     public UnitMeasurementConfigurationPage(UnitMeasurementConfigurationPageModel bindingContextModel) : base(bindingContextModel)
     {

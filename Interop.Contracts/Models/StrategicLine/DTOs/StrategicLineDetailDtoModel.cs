@@ -13,7 +13,7 @@ public record StrategicLineDetailDtoModel(
     PersonBasicDtoModel Coordinator, 
     bool IsEnable, 
     string Objective,
-    StrategicLineSpecificObjectiveDetailDtoModel[] SpecificObjectives,
+    SpecificObjectiveDetailDtoModel[] SpecificObjectives,
     PublicPolicyBasicDtoModel[] PublicPolicies,
     OrganizationBasicDtoModel[] Organizations,
     MacroprogramBasicDtoModel[] Macroprograms,

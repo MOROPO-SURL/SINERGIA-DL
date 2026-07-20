@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProject.Configuration;
 
-public partial class StrategicProjectConfigurationPage : BaseConfigurationEntityPage<StrategicProjectBasicDtoModel, StrategicProjectDetailDtoModel, StrategicProjectConfigurationPageModel>
+public partial class StrategicProjectConfigurationPage : BaseConfigurationEntityPage<StrategicProjectDetailDtoModel, StrategicProjectDetailDtoModel, StrategicProjectConfigurationPageModel>
 {
 	public StrategicProjectConfigurationPage(StrategicProjectConfigurationPageModel bindingContextModel) : base(bindingContextModel)
 	{

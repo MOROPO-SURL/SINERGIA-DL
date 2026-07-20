@@ -1,7 +1,23 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Macroprograms.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs.Clipped;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.DTOs;
 
-public record StrategicProgramDetailDto(Guid Id, string Name, StrategicLineBasicDto Line, PersonBasicDto Coordinator, bool IsEnabled, int Priority, string Objective, string? Description = null) : IDetailDto;
+public record StrategicProgramDetailDto(
+    Guid Id, 
+    string Name, 
+    StrategicLineBasicDto Line, 
+    PersonBasicDto Coordinator, 
+    bool IsEnabled, 
+    int Priority, 
+    string Objective,
+    StrategicLineSpecificObjectiveDetailDto[] SpecificObjectives,
+    OrganizationBasicDto[] Organizations,
+    MacroprogramBasicDto[] Macroprograms,
+    ImpactClippedDetailDto[] Impacts,
+    ActionClippedDetailDto[] Actions,
+    string? Description = null) : IDetailDto;

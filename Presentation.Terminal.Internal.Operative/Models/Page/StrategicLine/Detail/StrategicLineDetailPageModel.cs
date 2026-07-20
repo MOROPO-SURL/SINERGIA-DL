@@ -17,7 +17,7 @@ public sealed class StrategicLineDetailPageModel : AbstractDetailEntityPageModel
 
     public StrategicLineDetailPageModel(StrategicLineDetailDtoModel model, Action? changeCallbackAction = null) : base(model, changeCallbackAction)
     {
-        DetailSpecificObjectiveCommand = new Command<StrategicLineSpecificObjectiveDetailDtoModel>(async model =>
+        DetailSpecificObjectiveCommand = new Command<SpecificObjectiveDetailDtoModel>(async model =>
         {
             await Application.Current!.MainPage!.NavigationPushModalPageAsync(new StrategicLineSpecificObjectiveDetailPage(model));
         });
@@ -49,9 +49,9 @@ public sealed class StrategicLineDetailPageModel : AbstractDetailEntityPageModel
 
     public StrategicLineTraceDetailDtoModel[]? Traces { get => traces; private set => SetProperty(ref traces, value); }
 
-    public ICommand DetailSpecificObjectiveCommand { get; private set; }
+    public ICommand DetailSpecificObjectiveCommand { get; init; }
 
-    public ICommand FetchTraceCommand { get; private set; }
+    public ICommand FetchTraceCommand { get; init; }
 
     protected override async Task PerformRemotionAsync(StrategicLineDetailDtoModel model)
     {

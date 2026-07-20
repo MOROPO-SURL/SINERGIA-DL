@@ -11,7 +11,7 @@
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProject.Configuration.StrategicProjectConfigurationPage"
-    x:TypeArguments="interop_dto_models:StrategicProjectBasicDtoModel,interop_dto_models:StrategicProjectDetailDtoModel,local_configuration_page_models:StrategicProjectConfigurationPageModel"
+    x:TypeArguments="interop_dto_models:StrategicProjectDetailDtoModel,interop_dto_models:StrategicProjectDetailDtoModel,local_configuration_page_models:StrategicProjectConfigurationPageModel"
     x:DataType="local_configuration_page_models:StrategicProjectConfigurationPageModel"
     Shell.TabBarIsVisible="False">
     <ContentPage.ToolbarItems>

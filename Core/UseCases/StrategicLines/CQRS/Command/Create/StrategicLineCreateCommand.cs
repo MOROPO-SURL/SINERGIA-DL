@@ -14,7 +14,7 @@ public record StrategicLineCreateCommand(
     int Priority, 
     bool IsEnabled, 
     string Objective,
-    StrategicLineSpecificObjectiveClippedCreateCommand[] SpecificObjectives,
+    SpecificObjectiveClippedCreateCommand[] SpecificObjectives,
     PublicPolicyBasicDto[] PublicPolicies,
     OrganizationBasicDto[] Organizations,
     MacroprogramBasicDto[] Macroprograms,

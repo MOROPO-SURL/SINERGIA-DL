@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Ba
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Feature;
 
-public partial class FeatureConfigurationPage : BaseConfigurationEntityPage<FeatureBasicDtoModel, FeatureDetailDtoModel, FeatureConfigurationPageModel>
+public partial class FeatureConfigurationPage : BaseConfigurationEntityPage<FeatureDetailDtoModel, FeatureDetailDtoModel, FeatureConfigurationPageModel>
 {
     public FeatureConfigurationPage(FeatureConfigurationPageModel bindingContextModel) : base(bindingContextModel)
     {

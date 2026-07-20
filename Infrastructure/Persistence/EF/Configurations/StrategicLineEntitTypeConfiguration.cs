@@ -114,6 +114,8 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.Property(bridge => bridge.LinkedId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new PublicPolicyId(value));
+
+        builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
     }
 
     private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineMacroprogramBridge> builder)
@@ -131,6 +133,8 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.Property(bridge => bridge.LinkedId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new MacroprogramId(value));
+
+        builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
     }
 
     private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineSpecificObjective> builder)
@@ -152,7 +156,7 @@ internal sealed class StrategicLineEntitTypeConfiguration : IEntityTypeConfigura
         builder.Property(entity => entity.Content)
             .HasMaxLength(2048);
 
-        builder.HasIndex(entity => new { entity.Index, entity.Id }).IsUnique();
+        builder.HasIndex(entity => new { entity.Index, entity.Id, entity.StrategicLineId }).IsUnique();
     }
 
     private static void Configure(OwnedNavigationBuilder<StrategicLine, StrategicLineAction> builder)

@@ -6,7 +6,7 @@
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicLine.Detail.StrategicLineSpecificObjectiveDetailPage"
-    x:TypeArguments="interop_dto_models:StrategicLineSpecificObjectiveDetailDtoModel,local_detail_page_models:StrategicLineSpecificObjectiveDetailPageModel"
+    x:TypeArguments="interop_dto_models:SpecificObjectiveDetailDtoModel,local_detail_page_models:StrategicLineSpecificObjectiveDetailPageModel"
     x:DataType="local_detail_page_models:StrategicLineSpecificObjectiveDetailPageModel"
     Title="Detalles de Objetivo Específico"
     BackgroundColor="Transparent"

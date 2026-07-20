@@ -8,6 +8,7 @@ public record SRLDevelopmentActorProfileUpdateCommand(
     bool IsArchived,
     bool IsEnabled,
     Guid OwnerId,
+    string FiscalIdentificationCode,
     int MainEconomicActivityId,
     IEnumerable<int> InSecoundaryEconomicActivities,
     IEnumerable<int> OutSecoundaryEconomicActivities,

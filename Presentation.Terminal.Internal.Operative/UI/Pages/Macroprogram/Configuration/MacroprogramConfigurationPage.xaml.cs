@@ -4,7 +4,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Macroprogram.Configuration;
 
-public partial class MacroprogramConfigurationPage : BaseConfigurationEntityPage<MacroprogramBasicDtoModel, MacroprogramDetailDtoModel, MacroprogramConfigurationPageModel>
+public partial class MacroprogramConfigurationPage : BaseConfigurationEntityPage<MacroprogramDetailDtoModel, MacroprogramDetailDtoModel, MacroprogramConfigurationPageModel>
 {
 	public MacroprogramConfigurationPage(MacroprogramConfigurationPageModel bindingContextModel) : base(bindingContextModel)
 	{

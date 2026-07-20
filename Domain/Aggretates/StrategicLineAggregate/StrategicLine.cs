@@ -62,10 +62,6 @@ public class StrategicLine :
 
     public string Objective { get; set; } = null!;
 
-    // TODO SpecigficObjective
-
-    // TODO PublicPolicy Bridges !!
-
     public string? Description { get; set; }
 
     public Person? Coordinator { get; set; } = null!;

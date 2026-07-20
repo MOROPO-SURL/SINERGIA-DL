@@ -17,7 +17,13 @@ internal sealed class StrategicProgramQueryRepositoryPortAdapter : AbstractEntit
     {
         return base.GetQueryableDbSet()
             .AsSplitQuery()
+            // TODO Choise to use if required!!
+            //.IgnoreAutoIncludes()
             .Include(entity => entity.Line).ThenInclude(entity => entity!.Axe)
-            .Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image);
+            .Include(entity => entity.Coordinator).ThenInclude(entity => entity!.Image)
+            .Include(entity => entity.Actions).ThenInclude(entity => entity.Indicators).ThenInclude(entity => entity.UnitMeasurement)
+            .Include(entity => entity.MacroprogramBridges).ThenInclude(bridge => bridge.Linked)
+            .Include(entity => entity.OrganizationBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.Kind)
+            .Include(entity => entity.OrganizationBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.Image);
     }
 }

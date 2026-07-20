@@ -19,11 +19,12 @@ public abstract class AbstractDevelopmentActorProfile : AbstractEntity<Developme
 
     protected AbstractDevelopmentActorProfile() : base(new DevelopmentActorProfileId(default)) { }
 
-    public AbstractDevelopmentActorProfile(DevelopmentActorProfileId id, bool isArchived, bool isEnabled, OrganizationId ownerId, EconomicActivityId mainEconomicActivityId, IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, IEnumerable<DevelopmentActorProfileProductionActivity> productionActivities, IEnumerable<DevelopmentActorProfileCommercialActivity> commercialActivities, IEnumerable<DevelopmentActorProfileServicingActivity> servicingActivities, string? About = null, Organization? owner = null, EconomicActivity? mainEconomicActivity = null) : base(id)
+    public AbstractDevelopmentActorProfile(DevelopmentActorProfileId id, bool isArchived, bool isEnabled, OrganizationId ownerId, string fiscalIdentificationCode, EconomicActivityId mainEconomicActivityId, IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, IEnumerable<DevelopmentActorProfileProductionActivity> productionActivities, IEnumerable<DevelopmentActorProfileCommercialActivity> commercialActivities, IEnumerable<DevelopmentActorProfileServicingActivity> servicingActivities, string? About = null, Organization? owner = null, EconomicActivity? mainEconomicActivity = null) : base(id)
     {
         IsArchived = isArchived;
         IsEnabled = isEnabled;
         OwnerId = ownerId;
+        FiscalIdentificationCode = fiscalIdentificationCode;
         MainEconomicActivityId = mainEconomicActivityId;
 
         this.secoundaryEconomicActivityBridges = [.. secoundaryEconomicActivityBridges];
@@ -41,6 +42,8 @@ public abstract class AbstractDevelopmentActorProfile : AbstractEntity<Developme
 
     public OrganizationId OwnerId { get; set; }
     public Organization? Owner { get; set; }
+
+    public string FiscalIdentificationCode { get; set; } = null!;
 
     public EconomicActivityId MainEconomicActivityId { get; set; }
     public EconomicActivity? MainEconomicActivity { get; set; }

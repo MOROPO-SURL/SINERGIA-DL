@@ -6,6 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal</AssemblyName>
 		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal</RootNamespace>
+		<Version>0.6.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

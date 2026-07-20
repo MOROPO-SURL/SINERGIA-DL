@@ -57,6 +57,8 @@ public sealed class EnvironmentSummaryPageModel : BasePageModel
                         hasAnyOrganizationKind &&
                         hasAnyProjectKind &&
                         hasAnyUnitMeasurement;
+
+
                 }
                 else
                 {

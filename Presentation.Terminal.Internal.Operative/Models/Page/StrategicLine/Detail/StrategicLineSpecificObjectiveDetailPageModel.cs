@@ -3,15 +3,15 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicLine.Detail;
 
-public sealed class StrategicLineSpecificObjectiveDetailPageModel : AbstractDetailEntityPageModel<StrategicLineSpecificObjectiveDetailDtoModel>
+public sealed class StrategicLineSpecificObjectiveDetailPageModel : AbstractDetailEntityPageModel<SpecificObjectiveDetailDtoModel>
 {
-    public StrategicLineSpecificObjectiveDetailPageModel(StrategicLineSpecificObjectiveDetailDtoModel model) : base(model, null)
+    public StrategicLineSpecificObjectiveDetailPageModel(SpecificObjectiveDetailDtoModel model) : base(model, null)
     {
     }
 
     protected override bool PresentChangeNotification => false;
 
-    protected override Task PerformRemotionAsync(StrategicLineSpecificObjectiveDetailDtoModel model)
+    protected override Task PerformRemotionAsync(SpecificObjectiveDetailDtoModel model)
     {
         throw new NotImplementedException();
     }

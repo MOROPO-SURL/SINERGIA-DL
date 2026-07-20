@@ -20,7 +20,8 @@ public sealed class SRLDevelopmentActorProfile : Abstractions.AbstractDevelopmen
         DevelopmentActorProfileId id, 
         bool isArchived, 
         bool isEnabled, 
-        OrganizationId ownerId, 
+        OrganizationId ownerId,
+        string fiscalIdentificationCode,
         EconomicActivityId mainEconomicActivityId, 
         IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, 
         IEnumerable<DevelopmentActorProfileProductionActivity> productionActivities, 
@@ -29,8 +30,8 @@ public sealed class SRLDevelopmentActorProfile : Abstractions.AbstractDevelopmen
         IEnumerable<SRLDevelopmentActorProfileOrganizationBridge> organizationBridges,
         IEnumerable<SRLDevelopmentActorProfilePersonBridge> personBridges,
         string? About = null, 
-        Organization? organization = null, 
-        EconomicActivity? mainEconomicActivity = null) : base(id, isArchived, isEnabled, ownerId, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, organization, mainEconomicActivity)
+        Organization? owner = null, 
+        EconomicActivity? mainEconomicActivity = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, mainEconomicActivity)
     {
         this.organizationBridges = [.. organizationBridges];
         this.personBridges = [.. personBridges];

@@ -25,6 +25,13 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
             builder.Property(entity => entity.OwnerId)
                 .HasConversion(id => id.Value, value => new Domain.Aggretates.OrganizationAggregate.Values.OrganizationId(value));
 
+            builder.Property(entity => entity.FiscalIdentificationCode)
+                .IsRequired()
+                .HasMaxLength(120);
+
+            builder.Property(entity => entity.ModalityId)
+                .HasConversion(id => id.Value, value => new Domain.Aggretates.PDLModalityAggregate.Values.PDLModalityId(value));
+
             builder.Property(entity => entity.MainEconomicActivityId)
                 .HasConversion(id => id.Value, value => new Domain.Aggretates.EconomicActivityAggregate.Values.EconomicActivityId(value));
 
@@ -34,6 +41,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
             builder.HasKey(entity => entity.Id);
 
             builder.HasOne(entity => entity.Owner).WithMany().HasForeignKey(entity => entity.OwnerId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(entity => entity.Modality).WithMany().HasForeignKey(entity => entity.ModalityId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(entity => entity.MainEconomicActivity).WithMany().HasForeignKey(entity => entity.MainEconomicActivityId).OnDelete(DeleteBehavior.Restrict);
 
             builder.OwnsMany(entity => entity.ProductionActivities, Configure)
@@ -160,10 +168,10 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
     {
         public void Configure(EntityTypeBuilder<NaturalOwnedPDLDevelopmentActorProfile> builder)
         {
-            builder.Property(entity => entity.TitularPersonId)
+            builder.Property(entity => entity.HolderPersonId)
                 .HasConversion(id => id.Value, value => new Domain.Aggretates.PersonAggregate.Values.PersonId(value));
 
-            builder.HasOne(entity => entity.Titular).WithMany().HasForeignKey(entity => entity.TitularPersonId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(entity => entity.Holder).WithMany().HasForeignKey(entity => entity.HolderPersonId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasBaseType<AbstractPDLDevelopmentActorProfile>();
         }
@@ -173,10 +181,10 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configur
     {
         public void Configure(EntityTypeBuilder<LegalOwnedPDLDevelopmentActorProfile> builder)
         {
-            builder.Property(entity => entity.TitularOrganizationId)
+            builder.Property(entity => entity.HolderOrganizationId)
                 .HasConversion(id => id.Value, value => new Domain.Aggretates.OrganizationAggregate.Values.OrganizationId(value));
 
-            builder.HasOne(entity => entity.Titular).WithMany().HasForeignKey(entity => entity.TitularOrganizationId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(entity => entity.Holder).WithMany().HasForeignKey(entity => entity.HolderOrganizationId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasBaseType<AbstractPDLDevelopmentActorProfile>();
         }

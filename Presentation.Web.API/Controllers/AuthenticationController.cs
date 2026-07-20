@@ -33,25 +33,25 @@ public class AuthenticationController : ControllerBase
 
             return Ok(mapper.Map<AuthenticatedSessionDtoModel>(result));
         }
-        catch (ArgumentOutOfRangeException)
-        {
-            // User not found!!
-            return Problem(statusCode: (int)HttpStatusCode.NoContent);
-        }
         catch (InvalidDataException)
         {
             // User signature validation fail!!
-            return Problem(statusCode: (int)HttpStatusCode.Conflict);
+            return Problem(statusCode: (int)HttpStatusCode.ExpectationFailed);
         }
         catch (InvalidOperationException)
         {
             // User disabled!!
-            return Problem(statusCode: (int)HttpStatusCode.PreconditionFailed);
+            return Problem(statusCode: (int)HttpStatusCode.Locked);
         }
         catch (AccessViolationException)
         {
             // Max authentication failure reached!!
             return Problem(statusCode: (int)HttpStatusCode.Forbidden);
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            // User not found!!
+            return Problem(statusCode: (int)HttpStatusCode.Unauthorized);
         }
         catch (UnauthorizedAccessException)
         {
