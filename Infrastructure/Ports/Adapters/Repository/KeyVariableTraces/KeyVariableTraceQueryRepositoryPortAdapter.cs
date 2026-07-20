@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Repositories
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.KeyVariableTraces;
 
-internal class KeyVariableTraceQueryRepositoryPortAdapter : AbstractEntityQueryRepositoryPortAdapter<KeyVariableTrace, TraceId, long>, IKeyVariableTraceQueryRepositoryPort
+internal sealed class KeyVariableTraceQueryRepositoryPortAdapter : AbstractEntityQueryRepositoryPortAdapter<KeyVariableTrace, TraceId, long>, IKeyVariableTraceQueryRepositoryPort
 {
     public KeyVariableTraceQueryRepositoryPortAdapter(DefaultDbContext dbContext) : base(dbContext)
     {

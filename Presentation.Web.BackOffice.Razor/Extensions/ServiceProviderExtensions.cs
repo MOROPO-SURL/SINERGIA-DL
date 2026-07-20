@@ -14,7 +14,9 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.V
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.KeyVariables.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.KeyVariableTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Macroprograms.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.MacroprogramTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Objectives.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.ObjectiveTraces.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.OrganizationKinds.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Organizations.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.OrganizationTraces.Mappings;
@@ -116,6 +118,10 @@ internal static class ServiceProviderExtensions
             new InterestAreaTraceMappingRegister(),
 
             new KeyVariableTraceMappingRegister(),
+
+            new MacroprogramTraceMappingRegister(),
+
+            new ObjectiveTraceMappingRegister(),
 
             new SessionProfileUpdateViewModelMappingRegister(self.GetRequiredService<IHttpContextAccessor>())
         );
