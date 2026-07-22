@@ -22,6 +22,7 @@ public sealed class NaturalOwnedPDLDevelopmentActorProfile : Abstractions.Abstra
         bool isEnabled,
         OrganizationId ownerId,
         string fiscalIdentificationCode,
+        DateOnly bornAt,
         PDLModalityId modalityId,
         EconomicActivityId mainEconomicActivityId, 
         IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, 
@@ -33,7 +34,7 @@ public sealed class NaturalOwnedPDLDevelopmentActorProfile : Abstractions.Abstra
         Organization? owner = null,
         PDLModality? modality = null,
         EconomicActivity? mainEconomicActivity = null,
-        Person? holder = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, modalityId, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, modality, mainEconomicActivity)
+        Person? holder = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, bornAt, modalityId, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, modality, mainEconomicActivity)
     {
         HolderPersonId = holderPersonId;
 

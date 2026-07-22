@@ -19,11 +19,15 @@ public partial class DashboardPage : ContentPage
         base.OnAppearing();
 
 		if (!IsEnabled)
-		{
-			AppShellPageModel parentBindingContext = (AppShellPageModel)Parent.BindingContext;
+        {
+            AppShellPageModel parentBindingContext = (AppShellPageModel)Parent.BindingContext;
 
-            BindingContext = new DashboardPageModel(parentBindingContext.Organization, parentBindingContext.Representative);
-		}
+            DashboardPageModel concreteBindingContext = new(parentBindingContext.Organization, parentBindingContext.Representative);
+
+            BindingContext = concreteBindingContext;
+
+            concreteBindingContext.LoadState();
+        }
 
 		IsEnabled = true;
     }

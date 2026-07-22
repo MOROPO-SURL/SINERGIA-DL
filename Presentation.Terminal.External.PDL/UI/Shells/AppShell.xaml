@@ -114,7 +114,7 @@
         </ShellContent>
         <ShellContent
             Title="Perfil de actor del desarrollo"
-            ContentTemplate="{DataTemplate ContentPage}"
+            ContentTemplate="{DataTemplate local_pages:DevelopmentActorProfileDetailPage}"
             Route="DevelopmentActorProfile">
             <ShellContent.Icon>
                 <FontImageSource

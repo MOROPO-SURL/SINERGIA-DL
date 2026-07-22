@@ -2,9 +2,9 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.EconomicActivity.
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.EconomicActivity;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.Models.Page.EconomicActivity;
 
-namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.EconomicActivity;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.EconomicActivity;
 
 public partial class EconomicActivityPickPage :
     BaseListEntityPage<EconomicActivityBasicDtoModel, EconomicActivityPickPageModel>,
@@ -24,7 +24,7 @@ public partial class EconomicActivityPickPage :
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewSizeConstants.ECONOMICACTIVITY_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Terminal.Common.Constants.CardViewSizeConstants.ECONOMICACTIVITY_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected void CancelToolbarItem_Clicked(object sender, EventArgs eventArgs)
     {

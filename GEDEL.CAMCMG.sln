@@ -31,9 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interop.Connect.Internal.Op
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Terminal.External.PDL", "Presentation.Terminal.External.PDL\Presentation.Terminal.External.PDL.csproj", "{A1254F00-0DDE-46FA-B4AD-9B6CCB04E5F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Terminal.External.Common", "Presentation.Terminal.External.Common\Presentation.Terminal.External.Common.csproj", "{4B982DB2-D797-456B-AE0E-8DD0EC605A04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Terminal.External.Common", "Presentation.Terminal.External.Common\Presentation.Terminal.External.Common.csproj", "{4B982DB2-D797-456B-AE0E-8DD0EC605A04}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Terminal.External.MiPyME", "Presentation.Terminal.External.MiPyME\Presentation.Terminal.External.MiPyME.csproj", "{66CE6C24-DC1A-4B9D-B446-056A4AF3F1B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.Connect.External.Common", "Interop.Connect.External.Common\Interop.Connect.External.Common.csproj", "{CDEBC9A1-45E8-4613-9CE5-4F5BDBE92742}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{66CE6C24-DC1A-4B9D-B446-056A4AF3F1B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66CE6C24-DC1A-4B9D-B446-056A4AF3F1B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66CE6C24-DC1A-4B9D-B446-056A4AF3F1B0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CDEBC9A1-45E8-4613-9CE5-4F5BDBE92742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDEBC9A1-45E8-4613-9CE5-4F5BDBE92742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDEBC9A1-45E8-4613-9CE5-4F5BDBE92742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDEBC9A1-45E8-4613-9CE5-4F5BDBE92742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

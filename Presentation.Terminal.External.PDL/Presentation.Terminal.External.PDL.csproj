@@ -102,6 +102,12 @@
 	  <MauiXaml Update="UI\Pages\DashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfileConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfileDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

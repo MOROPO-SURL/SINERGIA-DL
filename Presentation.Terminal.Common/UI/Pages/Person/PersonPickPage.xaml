@@ -2,19 +2,18 @@
 <common_ui_base_pages:BaseListEntityPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
-    xmlns:local_pick_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Organization"
-    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
-    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
-    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
-    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
-    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
-    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:local_pick_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Person"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Organization.OrganizationPickPage"
-    x:TypeArguments="interop_dto_models:OrganizationBasicDtoModel,local_pick_page_models:OrganizationPickPageModel"
-    x:DataType="local_pick_page_models:OrganizationPickPageModel"
-    Title="Seleccionar Entidad"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Person.PersonPickPage"
+    x:TypeArguments="interop_dto_models:PersonBasicDtoModel,local_pick_page_models:PersonPickPageModel"
+    x:DataType="local_pick_page_models:PersonPickPageModel"
+    Title="Seleccionar Persona"
     IsEnabled="{Binding IsEnabled}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -48,7 +47,7 @@
             <StackLayout Orientation="Vertical">
                 <SearchBar 
                     Style="{StaticResource ListEntityPageSearchBarStyle}"
-                    Placeholder="-- buscar por nombre o alias --"
+                    Placeholder="-- buscar por nombre, apellidos o alias --"
                     Text="{Binding SearchParameter}"
                     SearchCommand="{Binding SearchCommand, Mode=OneTime}" />
                 <Grid VerticalOptions="FillAndExpand">
@@ -66,15 +65,15 @@
                         <CollectionView.Behaviors>
                             <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
                                 ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
-                                ItemWidth="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH}" />
+                                ItemWidth="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_WIDTH}" />
                         </CollectionView.Behaviors>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <common_ui_card_views:OrganizationCardView HeightRequest="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}">
+                                <common_ui_card_views:PersonCardView HeightRequest="{Static common_constants:CardViewSizeConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
                                     </ContentView.GestureRecognizers>
-                                </common_ui_card_views:OrganizationCardView>
+                                </common_ui_card_views:PersonCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

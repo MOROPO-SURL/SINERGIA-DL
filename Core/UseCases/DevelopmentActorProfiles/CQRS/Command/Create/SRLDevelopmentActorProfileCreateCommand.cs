@@ -8,6 +8,9 @@ public record SRLDevelopmentActorProfileCreateCommand(
     bool IsEnabled,
     Guid OwnerId,
     string FiscalIdentificationCode,
+    DateOnly BornAt,
     int MainEconomicActivityId,
-    IEnumerable<int> SecoundaryEconomicActivities,        
+    IEnumerable<int> SecoundaryEconomicActivityIds,  
+    IEnumerable<Guid> OrganizationPartnerIds,
+    IEnumerable<Guid> PersonPartnerIds,
     string? About = null) : ICreateCommand<SRLDevelopmentActorProfileDetailDto>;

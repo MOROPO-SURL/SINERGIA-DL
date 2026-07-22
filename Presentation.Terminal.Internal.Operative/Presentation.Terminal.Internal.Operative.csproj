@@ -98,9 +98,6 @@
 	  <Compile Update="UI\Pages\FeaturesManagementPage.xaml.cs">
 	    <DependentUpon>FeaturesManagementPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="UI\Pages\Organization\OrganizationPickPage.xaml.cs">
-	    <DependentUpon>OrganizationPickPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="UI\Pages\StrategicProgram\Configuration\Clipped\ActionClippedConfigurationPage.xaml.cs">
 	    <DependentUpon>ActionClippedConfigurationPage.xaml</DependentUpon>
 	  </Compile>
@@ -228,9 +225,6 @@
 	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityPickPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\EnvironmentSummaryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -244,12 +238,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Macroprogram\MacroprogramPickPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Organization\OrganizationPickPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Person\PersonPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyPickPage.xaml">
@@ -421,9 +409,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\User\UserPickPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\EconomicActivityCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Views\Card\MacroprogramCardView.xaml">

@@ -65,6 +65,7 @@
                 </Grid>
                 <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
                     <VerticalStackLayout 
+                        IsVisible="{Binding IsDevelopmentActorProfileMissing}"
                         Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                         <Frame
                             Style="{StaticResource WarningToastFrameStyle}">

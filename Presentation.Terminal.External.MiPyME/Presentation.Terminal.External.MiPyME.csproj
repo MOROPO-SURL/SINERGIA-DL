@@ -89,6 +89,12 @@
 	  <Compile Update="UI\Pages\DashboardPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\DevelopmentActorProfileConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\DevelopmentActorProfileDetailPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\MainPage.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
@@ -112,6 +118,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="UI\Pages\DashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfileConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfileDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">

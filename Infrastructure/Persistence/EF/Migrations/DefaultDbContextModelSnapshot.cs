@@ -110,6 +110,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasMaxLength(2048)
                         .HasColumnType("character varying(2048)");
 
+                    b.Property<DateOnly>("BornAt")
+                        .HasColumnType("date");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(55)
@@ -158,6 +161,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<string>("About")
                         .HasMaxLength(2048)
                         .HasColumnType("character varying(2048)");
+
+                    b.Property<DateOnly>("BornAt")
+                        .HasColumnType("date");
 
                     b.Property<string>("FiscalIdentificationCode")
                         .IsRequired()

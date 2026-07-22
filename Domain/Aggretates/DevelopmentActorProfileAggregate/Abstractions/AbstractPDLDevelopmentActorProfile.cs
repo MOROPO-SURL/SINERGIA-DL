@@ -20,6 +20,7 @@ public abstract class AbstractPDLDevelopmentActorProfile : AbstractDevelopmentAc
         bool isEnabled, 
         OrganizationId ownerId,
         string fiscalIdentificationCode,
+        DateOnly bornAt,
         PDLModalityId modalityId,
         EconomicActivityId mainEconomicActivityId, 
         IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, 
@@ -29,7 +30,7 @@ public abstract class AbstractPDLDevelopmentActorProfile : AbstractDevelopmentAc
         string? About = null, 
         Organization? owner = null, 
         PDLModality? modality = null,
-        EconomicActivity? mainEconomicActivity = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, mainEconomicActivity)
+        EconomicActivity? mainEconomicActivity = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, bornAt, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, mainEconomicActivity)
     {
         ModalityId = modalityId;
         Modality = modality;

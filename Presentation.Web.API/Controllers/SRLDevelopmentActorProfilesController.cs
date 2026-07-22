@@ -94,6 +94,44 @@ public class SRLDevelopmentActorProfilesController : ControllerBase
         }
     }
 
+    [HttpGet("by/owner/{key}")]
+    public async Task<ActionResult<SRLDevelopmentActorProfileDetailDtoModel>> GetBasicByOwnerAsync(Guid key)
+    {
+        try
+        {
+            SRLDevelopmentActorProfileBasicDto result = await mediator.Send(new SRLDevelopmentActorProfileBasicByOwnerQuery(key));
+
+            SRLDevelopmentActorProfileBasicDtoModel model = mapper.Map<SRLDevelopmentActorProfileBasicDtoModel>(result);
+
+            return Ok(model);
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet("by/owner/{key}/detail")]
+    public async Task<ActionResult<SRLDevelopmentActorProfileDetailDtoModel>> GetDetailByOwnerAsync(Guid key)
+    {
+        try
+        {
+            SRLDevelopmentActorProfileDetailDto result = await mediator.Send(new SRLDevelopmentActorProfileDetailByOwnerQuery(key));
+
+            SRLDevelopmentActorProfileDetailDtoModel model = mapper.Map<SRLDevelopmentActorProfileDetailDtoModel>(result);
+
+            return Ok(model);
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
     [HttpPost]
     public async Task<ActionResult<SRLDevelopmentActorProfileDetailDtoModel>> CreateAsync(SRLDevelopmentActorProfileCreateRequestModel model)
     {
