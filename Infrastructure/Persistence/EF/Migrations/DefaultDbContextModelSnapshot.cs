@@ -765,6 +765,34 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.ToTable("services", (string)null);
                 });
 
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<DateTime?>("EndAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("StartAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("socialsupportdemands", (string)null);
+                });
+
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.StrategicAxe", b =>
                 {
                     b.Property<int>("Id")
@@ -3023,6 +3051,140 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", b =>
+                {
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Bridges.SocialSupportDemandImageBridge", "ImageBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId")
+                                .IsUnique();
+
+                            b1.ToTable("socialsupportdemand_image_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Image", "Linked")
+                                .WithOne()
+                                .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand.ImageBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Bridges.SocialSupportDemandImageBridge", "LinkedId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Entities.Location", "Locations", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("SocialSupportDemandId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Description")
+                                .HasMaxLength(2048)
+                                .HasColumnType("character varying(2048)");
+
+                            b1.Property<Guid?>("FeatureImageId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(512)
+                                .HasColumnType("character varying(512)");
+
+                            b1.HasKey("Id", "SocialSupportDemandId");
+
+                            b1.HasIndex("FeatureImageId")
+                                .IsUnique();
+
+                            b1.HasIndex("SocialSupportDemandId");
+
+                            b1.ToTable("socialsupportdemand_locations", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Image", "FeatureImage")
+                                .WithOne()
+                                .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand.Locations#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Entities.Location", "FeatureImageId")
+                                .OnDelete(DeleteBehavior.Cascade);
+
+                            b1.WithOwner()
+                                .HasForeignKey("SocialSupportDemandId");
+
+                            b1.OwnsOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PostalAddress", "PostalAddress", b2 =>
+                                {
+                                    b2.Property<Guid>("LocationId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("LocationSocialSupportDemandId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<string>("Context")
+                                        .HasColumnType("text");
+
+                                    b2.Property<string>("Name")
+                                        .HasColumnType("text");
+
+                                    b2.Property<string>("Number")
+                                        .HasColumnType("text");
+
+                                    b2.Property<string>("Street")
+                                        .IsRequired()
+                                        .HasColumnType("text");
+
+                                    b2.Property<int?>("ZipCode")
+                                        .HasColumnType("integer");
+
+                                    b2.HasKey("LocationId", "LocationSocialSupportDemandId");
+
+                                    b2.ToTable("socialsupportdemand_locations");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("LocationId", "LocationSocialSupportDemandId");
+                                });
+
+                            b1.OwnsOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Values.Coordinate", "Coordinate", b2 =>
+                                {
+                                    b2.Property<Guid>("LocationId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("LocationSocialSupportDemandId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<float>("Latitude")
+                                        .HasColumnType("real");
+
+                                    b2.Property<float>("Longitude")
+                                        .HasColumnType("real");
+
+                                    b2.HasKey("LocationId", "LocationSocialSupportDemandId");
+
+                                    b2.ToTable("socialsupportdemand_locations");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("LocationId", "LocationSocialSupportDemandId");
+                                });
+
+                            b1.Navigation("Coordinate")
+                                .IsRequired();
+
+                            b1.Navigation("FeatureImage");
+
+                            b1.Navigation("PostalAddress")
+                                .IsRequired();
+                        });
+
+                    b.Navigation("ImageBridges");
+
+                    b.Navigation("Locations");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.StrategicAxe", b =>
