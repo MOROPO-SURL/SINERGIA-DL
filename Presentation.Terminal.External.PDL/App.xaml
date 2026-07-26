@@ -28,6 +28,7 @@
             <x:String x:Key="IconGlyphConfig">&#xF66A;</x:String>
             <x:String x:Key="IconGlyphUserProfile">&#xF009;</x:String>
             <x:String x:Key="IconGlyphLogOut">&#xFA47;</x:String>
+            <x:String x:Key="IconGlyphMapPoint">&#xF352;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

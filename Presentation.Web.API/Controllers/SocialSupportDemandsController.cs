@@ -15,9 +15,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.CQRS.Qu
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.CQRS.Query.List;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;
+using System.Linq.Expressions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers;
 
@@ -62,6 +64,46 @@ public sealed class SocialSupportDemandsController : ControllerBase
         try
         {
             PaginateQueryResultModel<SocialSupportDemandBasicDto> result = await mediator.Send(new SocialSupportDemandPaginateQuery(sheet, limit, entity => !entity.IsArchived && EF.Functions.ILike(entity.Title, $"%{parameter}%")));
+
+            return Ok(mapper.Map<PaginateResultModel<SocialSupportDemandBasicDtoModel>>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet]
+    [Route("currents/page/{sheet}/limit/{limit}")]
+    public async Task<ActionResult<PaginateResultModel<SocialSupportDemandBasicDtoModel>>> GetCurrentsAsync(int sheet, int limit)
+    {
+        try
+        {
+            Expression<Func<SocialSupportDemand, bool>> filterExpression = entity => !entity.IsArchived && entity.IsEnabled && ((entity.StartAt <= DateTime.Now && entity.EndAt >= DateTime.Now) || (entity.StartAt == null && entity.EndAt >= DateTime.Now) || (entity.EndAt == null && entity.StartAt <= DateTime.Now) || (entity.StartAt == null && entity.EndAt == null));
+
+            PaginateQueryResultModel<SocialSupportDemandBasicDto> result = await mediator.Send(new SocialSupportDemandPaginateQuery(sheet, limit, filterExpression));
+
+            return Ok(mapper.Map<PaginateResultModel<SocialSupportDemandBasicDtoModel>>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet]
+    [Route("currents/page/{sheet}/limit/{limit}/filter/{parameter}")]
+    public async Task<ActionResult<PaginateResultModel<SocialSupportDemandBasicDtoModel>>> FilterCurrentAsync(int sheet, int limit, string parameter)
+    {
+        try
+        {
+            Expression<Func<SocialSupportDemand, bool>> filterExpression = entity => !entity.IsArchived && entity.IsEnabled && ((entity.StartAt <= DateTime.Now && entity.EndAt >= DateTime.Now) || (entity.StartAt == null && entity.EndAt >= DateTime.Now) || (entity.EndAt == null && entity.StartAt <= DateTime.Now) || (entity.StartAt == null && entity.EndAt == null));
+
+            PaginateQueryResultModel<SocialSupportDemandBasicDto> result = await mediator.Send(new SocialSupportDemandPaginateQuery(sheet, limit, filterExpression));
 
             return Ok(mapper.Map<PaginateResultModel<SocialSupportDemandBasicDtoModel>>(result));
         }

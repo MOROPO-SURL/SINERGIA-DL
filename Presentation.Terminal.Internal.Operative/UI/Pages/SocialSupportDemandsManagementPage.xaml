@@ -2,7 +2,6 @@
 <common_ui_base_pages:BaseListEntityPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
     xmlns:local_management_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.SocialSupportDemand"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
@@ -68,11 +67,11 @@
                         <CollectionView.Behaviors>
                             <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
                                 ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
-                                ItemWidth="{Static local_constants:CardViewSizeConstants.SOCIALSUPPORTDEMAND_DEFAULT_CARD_VIEW_WIDTH}" />
+                                ItemWidth="{Static common_constants:CardViewSizeConstants.SOCIALSUPPORTDEMAND_DEFAULT_CARD_VIEW_WIDTH}" />
                         </CollectionView.Behaviors>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_dto_models:SocialSupportDemandBasicDtoModel">
-                                <Frame HeightRequest="{Static local_constants:CardViewSizeConstants.SOCIALSUPPORTDEMAND_DEFAULT_CARD_VIEW_HEIGHT}">
+                                <Frame HeightRequest="{Static common_constants:CardViewSizeConstants.SOCIALSUPPORTDEMAND_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
                                     </Frame.GestureRecognizers>

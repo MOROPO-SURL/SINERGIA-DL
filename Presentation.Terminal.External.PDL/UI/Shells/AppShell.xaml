@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:common_external_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.Models.Page;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
     xmlns:common_external_ui_organization_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.Organization;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
+    xmlns:common_external_ui_socialsupportdemaind_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.SocialSupportDemand;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
     xmlns:local_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Pages"
     xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
@@ -136,8 +137,8 @@
     </ShellContent>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            Title="Prioridades de apoyo social"
-            ContentTemplate="{DataTemplate ContentPage}">
+            Title="Prioridades de asistencia social"
+            ContentTemplate="{DataTemplate common_external_ui_socialsupportdemaind_pages:SocialSupportDemandsListPage}">
             <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
