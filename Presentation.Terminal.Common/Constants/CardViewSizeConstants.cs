@@ -12,4 +12,6 @@ public static class CardViewSizeConstants
 
     public static double ECONOMICACTIVITY_DEFAULT_CARD_VIEW_HEIGHT = 96;
     public static double ECONOMICACTIVITY_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double IMAGE_SQUARE_CARD_VIEW_SIZE = 280;
 }

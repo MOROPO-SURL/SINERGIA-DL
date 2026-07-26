@@ -208,6 +208,28 @@
             </ShellContent.Icon>
         </ShellContent>
     </FlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Prioridades de asistencia social"
+            ContentTemplate="{DataTemplate local_ui_pages:SocialSupportDemandsManagementPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphSocialSupportDemands}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+            Title="Acciones de responsabilidad social"
+            ContentTemplate="{DataTemplate ContentPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphSocialResponsabilityActions}" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
     <MenuItem
         Text="Configuración"
         Clicked="ConfigurationMenuItem_Clicked">

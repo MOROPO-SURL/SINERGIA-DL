@@ -1,0 +1,14 @@
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.DTOs;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;
+
+public record SocialSupportDemandDetailDtoModel(
+    Guid Id,
+    string Title,
+    int Priority,
+    bool IsEnabled,
+    bool IsArchived,
+    IEnumerable<LocationDetailDtoModel> Locations,
+    IEnumerable<ImageBasicDtoModel> Images,
+    DateTime? StartAt = null,
+    DateTime? EndAt = null, string? Description = null);

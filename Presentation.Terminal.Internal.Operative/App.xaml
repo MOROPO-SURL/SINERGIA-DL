@@ -37,6 +37,9 @@
             <x:String x:Key="IconGlyphComplements">&#xF638;</x:String>
             <x:String x:Key="IconGlyphMacroprograms">&#xFCE5;</x:String>
             <x:String x:Key="IconGlyphEconomicActivities">&#xF027A;</x:String>
+            <x:String x:Key="IconGlyphSocialSupportDemands">&#xF146;</x:String>
+            <x:String x:Key="IconGlyphSocialResponsabilityActions">&#xF898;</x:String>
+            <x:String x:Key="IconGlyphMapPoint">&#xF352;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -98,6 +98,9 @@
 	  <Compile Update="UI\Pages\FeaturesManagementPage.xaml.cs">
 	    <DependentUpon>FeaturesManagementPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\SocialSupportDemandsManagementPage.xaml.cs">
+	    <DependentUpon>SocialSupportDemandsManagementPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\StrategicProgram\Configuration\Clipped\ActionClippedConfigurationPage.xaml.cs">
 	    <DependentUpon>ActionClippedConfigurationPage.xaml</DependentUpon>
 	  </Compile>
@@ -241,6 +244,21 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialSupportDemandsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Configuration\LocationConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Configuration\SocialSupportDemandConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Detail\LocationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Detail\SocialSupportDemandDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicLine\Configuration\StrategicLineSpecificObjectiveConfigurationPage.xaml">

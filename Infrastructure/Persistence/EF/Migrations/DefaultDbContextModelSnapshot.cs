@@ -777,6 +777,12 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<DateTime?>("EndAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("Priority")
                         .HasColumnType("integer");
 

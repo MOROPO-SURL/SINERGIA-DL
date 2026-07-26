@@ -25,7 +25,7 @@ internal sealed class FullUserUpdateCommandHandler :
         this.userRoleBridgeCommandRepository = userRoleBridgeCommandRepository;
     }
 
-    protected override async Task<Action?> PerformPreUpdateAsync(FullUserUpdateCommand request, User entity)
+    protected override async Task<object?> PerformPreUpdateAsync(FullUserUpdateCommand request, User entity)
     {
         entity.Signature = await dataIntegrityService.GetEntitySignatureAsync(entity);
 

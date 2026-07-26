@@ -28,15 +28,15 @@ internal sealed class PersonUpdateCommandHandler :
         this.logger = logger;
     }
 
-    protected override async Task<Action?> PerformPreUpdateAsync(PersonUpdateCommand request, Person entity)
+    protected override async Task<object?> PerformPreUpdateAsync(PersonUpdateCommand request, Person entity)
     {
-        Action? postUpdateAction = null;
+        object? postUpdateContext = null;
 
         if (request.NewImage != null)
         {
             Image? currentImage = entity.Image;
 
-            postUpdateAction = currentImage == null ? null : new Action(() => RemoveOutgoingImage(currentImage));
+            postUpdateContext = currentImage;
 
             ImageId imageId = new(Guid.NewGuid());
 
@@ -52,18 +52,23 @@ internal sealed class PersonUpdateCommandHandler :
             entity.Image = image;
         }
 
-        return postUpdateAction;
+        return postUpdateContext;
     }
 
-    private void RemoveOutgoingImage(Image entity)
+    protected override Task PerformPostUpdateAsync(PersonUpdateCommand request, Person entity, object? context = null)
     {
-        try
+        if (context is not null && context is Image image)
         {
-            fileStoreService.DeleteFile(entity.Id.Value.ToString(), entity.ContentType);
+            try
+            {
+                fileStoreService.DeleteFile(image.Id.Value.ToString(), image.ContentType);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, ex.Message);
-        }
+
+        return Task.CompletedTask;
     }
 }

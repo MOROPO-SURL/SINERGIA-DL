@@ -5,17 +5,19 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate;
 
-public sealed class SocialSupportDemand : AbstractEntity<SocialSupportDemandId, Guid>, IAggregateRoot<SocialSupportDemandId, Guid>, IPriorizableEntity<SocialSupportDemandId, Guid>
+public sealed class SocialSupportDemand : AbstractEntity<SocialSupportDemandId, Guid>, IAggregateRoot<SocialSupportDemandId, Guid>, IEnableableEntity<SocialSupportDemandId, Guid>, IArchivableEntity<SocialSupportDemandId, Guid>, IPriorizableEntity<SocialSupportDemandId, Guid>
 {
     private readonly List<Entities.Location> locations = [];
     private readonly List<Bridges.SocialSupportDemandImageBridge> imageBridges = [];
 
     private SocialSupportDemand() : base(default) { }
 
-    public SocialSupportDemand(SocialSupportDemandId id, string title, int priority, IEnumerable<Entities.Location> locations, IEnumerable<Bridges.SocialSupportDemandImageBridge> imageBridges, DateTime? startAt = null, DateTime? endAt = null, string? description = null) : base(id)
+    public SocialSupportDemand(SocialSupportDemandId id, string title, int priority, bool isEnabled, bool isArchived, IEnumerable<Entities.Location> locations, IEnumerable<Bridges.SocialSupportDemandImageBridge> imageBridges, DateTime? startAt = null, DateTime? endAt = null, string? description = null) : base(id)
     {
         Title = title;
         Priority = priority;
+        IsEnabled = isEnabled;
+        IsArchived = isArchived;
         this.locations = [.. locations];
         this.imageBridges = [.. imageBridges];
         StartAt = startAt;
@@ -26,6 +28,10 @@ public sealed class SocialSupportDemand : AbstractEntity<SocialSupportDemandId, 
     public string Title { get; set; } = null!;
 
     public int Priority { get; set; }
+
+    public bool IsArchived { get; set; }
+
+    public bool IsEnabled { get; set; }
 
     public DateTime? StartAt { get; set; }
 
@@ -39,9 +45,9 @@ public sealed class SocialSupportDemand : AbstractEntity<SocialSupportDemandId, 
 
     public void AddLocation(Entities.Location entity) => locations.Add(entity);
 
-    public void RemoveLocationById(LocationId locationId) => locations.Remove(locations.First(entity => entity.Id == locationId));
+    public void RemoveLocation(Entities.Location location) => locations.Remove(location);
 
     public void LinkImageById(ImageId imageId) => imageBridges.Add(new Bridges.SocialSupportDemandImageBridge(Id, imageId));
 
-    public void UnlinkImageById(ImageId imageId) => imageBridges.Remove(imageBridges.First(bridge => bridge.LinkedId == imageId));
+    public void RemoveImageBridge(Bridges.SocialSupportDemandImageBridge bridge) => imageBridges.Remove(bridge);
 }

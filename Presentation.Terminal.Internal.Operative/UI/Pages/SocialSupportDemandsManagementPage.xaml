@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseListEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
+    xmlns:local_management_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.SocialSupportDemand"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.SocialSupportDemandsManagementPage"
+    x:TypeArguments="interop_dto_models:SocialSupportDemandBasicDtoModel,local_management_page_models:SocialSupportDemandsManagementPageModel"
+    x:DataType="local_management_page_models:SocialSupportDemandsManagementPageModel"
+    Title="Gestión de Prioridades de asistencia social"
+    IsEnabled="{Binding IsEnabled}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:SocialSupportDemmandToPertinenceMessageConverter x:Key="SocialSupportDemmandToPertinenceMessageConverter" />
+
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Agregar"
+            Command="{Binding CreateCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"  
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xf415;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Actualizar"
+            Command="{Binding ReloadCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xF450;"  />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar 
+                    Style="{StaticResource ListEntityPageSearchBarStyle}"
+                    Placeholder="-- buscar por título --"
+                    Text="{Binding SearchParameter}"
+                    SearchCommand="{Binding SearchCommand, Mode=OneTime}" />
+                <Grid VerticalOptions="FillAndExpand">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Style="{StaticResource ListEntityPageCollectionViewStyle}"
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical" 
+                                Span="2" 
+                                HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Behaviors>
+                            <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static local_constants:CardViewSizeConstants.SOCIALSUPPORTDEMAND_DEFAULT_CARD_VIEW_WIDTH}" />
+                        </CollectionView.Behaviors>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:SocialSupportDemandBasicDtoModel">
+                                <Frame HeightRequest="{Static local_constants:CardViewSizeConstants.SOCIALSUPPORTDEMAND_DEFAULT_CARD_VIEW_HEIGHT}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailItemCommand, Mode=OneTime}" CommandParameter="{Binding Mode=OneTime}" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout>
+                                        <Label
+                                            VerticalOptions="FillAndExpand"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2"
+                                            Text="{Binding Title}" />
+                                        <VerticalStackLayout>
+                                            <Label 
+                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                Margin="0,8,0,0"
+                                                Text="Demanda" />
+                                            <Label Text="{Binding Converter={StaticResource SocialSupportDemmandToPertinenceMessageConverter}}" />
+                                        </VerticalStackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label
+                                Style="{StaticResource CollectionPageEmptyViewLabelStyle}"
+                                Margin="8"
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                    Style="{StaticResource ListEntityPageLoadMoreButtonStyle}"
+                                    Command="{Binding LoadMoreCommand, Mode=OneTime}" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</common_ui_base_pages:BaseListEntityPage>

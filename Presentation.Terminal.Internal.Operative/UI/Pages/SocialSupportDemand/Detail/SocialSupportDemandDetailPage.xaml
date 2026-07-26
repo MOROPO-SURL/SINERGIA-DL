@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseDetailEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Constants"
+    xmlns:local_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.SocialSupportDemand.Detail"
+    xmlns:local_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Views.Card"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:image_interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.SocialSupportDemand.Detail.SocialSupportDemandDetailPage"
+    x:TypeArguments="interop_dto_models:SocialSupportDemandDetailDtoModel,local_detail_page_models:SocialSupportDemandDetailPageModel"
+    x:DataType="local_detail_page_models:SocialSupportDemandDetailPageModel"
+    Shell.TabBarIsVisible="False"
+    Title="Detalles de Prioridad de asistencia social">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
+            <common_ui_converters:PostalAddressDetailDtoModelToStringConverter x:Key="PostalAddressDetailDtoModelToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Modificar"
+            Command="{Binding ModifyCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"  
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xF90B;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Eliminar"
+            Command="{Binding RemoveCommand, Mode=OneTime}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xFA79;"  />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label 
+                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                        Text="Título" />
+                    <Label
+                        Style="{StaticResource ValuePropertyLabelStyle}"
+                        Text="{Binding Model.Title}"/>
+                </VerticalStackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}" 
+                            Text="Fecha de inicio" />
+                        <Label Text="{Binding Model.StartAt, StringFormat='{0:D}', TargetNullValue='---'}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}" 
+                            Text="Fecha de fin" />
+                        <Label Text="{Binding Model.EndAt, StringFormat='{0:D}', TargetNullValue='---'}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label 
+                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                        Text="Descripción" />
+                    <Label
+                        Style="{StaticResource ValuePropertyLabelStyle}"
+                        Text="{Binding Model.Description, TargetNullValue='---'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Localizaciones" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Locations}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout 
+                                Orientation="Vertical"
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:LocationDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            Margin="8,0,0,0">
+                                            <Label 
+                                                LineBreakMode="TailTruncation"
+                                                FontAttributes="Bold"
+                                                Text="{Binding Name, Mode=OneTime}" />
+                                            <Label
+                                                Style="{StaticResource OffLabelStyle}"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding PostalAddress, Converter={StaticResource PostalAddressDetailDtoModelToStringConverter}, Mode=OneTime}" />
+                                        </VerticalStackLayout>
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Imágenes" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Images}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical" 
+                                Span="2" 
+                                HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Behaviors>
+                            <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static common_constants:CardViewSizeConstants.IMAGE_SQUARE_CARD_VIEW_SIZE}" />
+                        </CollectionView.Behaviors>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="image_interop_dto_models:ImageBasicDtoModel">
+                                <Grid HeightRequest="{Static common_constants:CardViewSizeConstants.IMAGE_SQUARE_CARD_VIEW_SIZE}">
+                                    <Frame 
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        Padding="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                        <ffimageloading_views:CachedImage
+                                            Source="{Binding Converter={StaticResource ImageBasicModelToImageSourceConverter,ImageBasicModelToImageSourceConverter}, Mode=OneTime}" />
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label 
+                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                        Text="Prioridad" />
+                    <Label
+                        Style="{StaticResource ValuePropertyLabelStyle}"
+                        Text="{Binding Model.Priority}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</common_ui_base_pages:BaseDetailEntityPage>

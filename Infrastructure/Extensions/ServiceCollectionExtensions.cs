@@ -33,6 +33,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PersonTraces.Ports.Repositor
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.RoleTraces.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLineTraces.Ports.Repository;
@@ -76,6 +77,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.P
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.PublicPolicies;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Roles;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.RoleTraces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.SocialSupportDemands;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicAxes;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicLines;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicLineTraces;
@@ -178,6 +180,9 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<ISRLDevelopmentActorProfileQueryRepositoryPort, SRLDevelopmentActorProfileQueryRepositoryPortAdapter>();
         services.AddScoped<ISRLDevelopmentActorProfileCommandRepositoryPort, SRLDevelopmentActorProfileCommandRepositoryPortAdapter>();
+
+        services.AddScoped<ISocialSupportDemandQueryRepositoryPort, SocialSupportDemandQueryRepositoryPortAdapter>();
+        services.AddScoped<ISocialSupportDemandCommandRepositoryPort, SocialSupportDemandCommandRepositoryPortAdapter>();
 
         services.AddScoped<IUserTraceQueryRepositoryPort, UserTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IRoleTraceQueryRepositoryPort, RoleTraceQueryRepositoryPortAdapter>();
