@@ -134,6 +134,16 @@
             </ShellContent.Icon>
         </ShellContent>
         <ShellContent
+            Title="Ideas de proyecto"
+            ContentTemplate="{DataTemplate local_ui_pages:StrategicProjectIdeasManagementPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphProjectIdea}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
             Title="Proyectos"
             ContentTemplate="{DataTemplate local_ui_pages:StrategicProjectsManagementPage}">
             <ShellContent.Icon>

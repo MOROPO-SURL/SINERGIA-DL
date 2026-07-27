@@ -1,30 +1,31 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramProjectIdeaAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectIdeaAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramProjectIdeaAggregate;
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectIdeaAggregate;
 
-public class StrategicProjectIdea : AbstractAuditableEntity<StrategicProjectIdeaId, Guid>, IAggregateRoot<StrategicProjectIdeaId, Guid>, INamedEntity<StrategicProjectIdeaId, Guid>, IArchivableEntity<StrategicProjectIdeaId, Guid>, IEnableableEntity<StrategicProjectIdeaId, Guid>, IPriorizableEntity<StrategicProjectIdeaId, Guid>
+public class StrategicProjectIdea : AbstractAuditableEntity<StrategicProjectIdeaId, Guid>, IAggregateRoot<StrategicProjectIdeaId, Guid>, IArchivableEntity<StrategicProjectIdeaId, Guid>, IEnableableEntity<StrategicProjectIdeaId, Guid>, IPriorizableEntity<StrategicProjectIdeaId, Guid>
 {
     private StrategicProjectIdea() : base(new StrategicProjectIdeaId(default)) { }
 
     public StrategicProjectIdea(
-        StrategicProjectIdeaId id, 
-        StrategicProgramId programId, 
-        string title, 
-        int priority, 
-        bool isArchived, 
-        bool isEnabled, 
+        StrategicProjectIdeaId id,
+        StrategicProgramId programId,
+        string title,
+        int priority,
+        bool isArchived,
+        bool isEnabled,
         StrategicProgram? program = null,
         string? description = null) : base(id)
     {
         ProgramId = programId;
-        Name = title;
+        Title = title;
         Priority = priority;
         IsArchived = isArchived;
         IsEnabled = isEnabled;
+        Program = program;
         Description = description;
     }
 
@@ -37,7 +38,7 @@ public class StrategicProjectIdea : AbstractAuditableEntity<StrategicProjectIdea
 
     public int Priority { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string Title { get; set; } = null!;
 
     public string? Description { get; set; }
 }

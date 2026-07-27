@@ -119,6 +119,15 @@
 	  <Compile Update="UI\Pages\StrategicProgram\Detail\Clipped\SpecificObjectiveClippedDetailPage.xaml.cs">
 	    <DependentUpon>SpecificObjectiveClippedDetailPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\StrategicProjectIdea\Configuration\StrategicProjectIdeaConfigurationPage.xaml.cs">
+	    <DependentUpon>StrategicProjectIdeaConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategicProjectIdea\Detail\StrategicProjectIdeaDetailPage.xaml.cs">
+	    <DependentUpon>StrategicProjectIdeaDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategicProjectIdeasManagementPage.xaml.cs">
+	    <DependentUpon>StrategicProjectIdeasManagementPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\StrategicProjectsManagementPage.xaml.cs">
 	    <DependentUpon>StrategicProjectsManagementPage.xaml</DependentUpon>
 	  </Compile>
@@ -295,6 +304,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Detail\Clipped\SpecificObjectiveClippedDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProjectIdea\Configuration\StrategicProjectIdeaConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProjectIdea\Detail\StrategicProjectIdeaDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProjectIdeasManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProjectsManagementPage.xaml">

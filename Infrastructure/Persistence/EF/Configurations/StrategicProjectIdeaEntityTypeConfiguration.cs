@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramProjectIdeaAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramProjectIdeaAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectIdeaAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectIdeaAggregate.Values;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
 
@@ -23,13 +23,13 @@ internal sealed class StrategicProjectIdeaEntityTypeConfiguration : IEntityTypeC
         builder.Property(entity => entity.ProgramId)
             .HasConversion(id => id.Value, value => new StrategicProgramId(value));
 
-        builder.Property(entity => entity.Name)
+        builder.Property(entity => entity.Title)
             .HasMaxLength(360);
 
         builder.Property(entity => entity.Description)
             .HasMaxLength(2048);
 
-        builder.HasIndex(entity => entity.Name);
+        builder.HasIndex(entity => entity.Title);
 
         builder.HasOne(entity => entity.Program).WithMany().HasForeignKey(entity => entity.ProgramId).OnDelete(DeleteBehavior.Restrict);
     }

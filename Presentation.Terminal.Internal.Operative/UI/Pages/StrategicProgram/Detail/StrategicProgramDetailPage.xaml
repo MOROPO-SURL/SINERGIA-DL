@@ -67,7 +67,7 @@
                             <FormattedString>
                                 <Span Text="{Binding Model.Line.Axe.Id, StringFormat='{0}.'}" />
                                 <Span Text="{Binding Model.Line.Index, StringFormat='{0}.'}" />
-                                <Span Text="{Binding Model.Line.Name}" />
+                                <Span Text="{Binding Model.Line.Name, StringFormat=' {0}'}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
