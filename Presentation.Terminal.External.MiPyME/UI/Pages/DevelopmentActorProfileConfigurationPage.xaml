@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Models.Page"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:location_interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
@@ -20,8 +21,10 @@
         <ResourceDictionary>
             <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToColorConverter" TrueValue="DimGray" FalseValue="Transparent" />
             <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToMainActivityIdLabelMinWidthConverter" TrueValue="48" FalseValue="-1" />
+            <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToMainLocationVerticalSpacingConverter" TrueValue="2" FalseValue="0" />
+            <common_ui_converters:PostalAddressDetailDtoModelToStringConverter x:Key="PostalAddressDetailDtoModelToStringConverter" />
 
-            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -310,6 +313,112 @@
                                                 Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemoveSecoundaryEconomicActivityCommand, Mode=OneTime}"
                                                 CommandParameter="{Binding Mode=OneTime}" />
                                         </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Localización de domicilio social" />
+                    <Frame Padding="8">
+                        <StackLayout Orientation="Horizontal" Spacing="8">
+                            <VerticalStackLayout 
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                Margin="8,0,0,0"
+                                Spacing="{Binding MainLocation, Converter={StaticResource IsNullToMainLocationVerticalSpacingConverter}}">
+                                <Label 
+                                    BackgroundColor="{Binding MainLocation, Converter={StaticResource IsNullToColorConverter}}"
+                                    LineBreakMode="TailTruncation"
+                                    FontAttributes="Bold"
+                                    Text="{Binding MainLocation.Name}" />
+                                <Label
+                                    Style="{StaticResource OffLabelStyle}"
+                                    BackgroundColor="{Binding MainLocation, Converter={StaticResource IsNullToColorConverter}}"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding MainLocation.PostalAddress, Converter={StaticResource PostalAddressDetailDtoModelToStringConverter}}" />
+                            </VerticalStackLayout>
+                            <Button
+                                IsEnabled="{Binding MainLocation, Converter={StaticResource IsNotNullConverter}}"
+                                Style="{StaticResource FontIconImageButtonStyle}"
+                                VerticalOptions="Center"
+                                Text="&#xF2FD;"
+                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand}"
+                                CommandParameter="{Binding MainLocation}" />
+                        </StackLayout>
+                    </Frame>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Command="{Binding MainLocationPickCommand, Mode=OneTime}" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_page_models:DevelopmentActorProfileConfigurationPageModel.MainLocationValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Localizaciones comerciales" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Command="{Binding AddCommercialLocationCommand, Mode=OneTime}" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding CommercialLocations}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="location_interop_dto_models:LocationDetailDtoModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                                <VerticalStackLayout 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Margin="8,0,0,0">
+                                                    <Label 
+                                                        LineBreakMode="TailTruncation"
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Name, Mode=OneTime}" />
+                                                    <Label
+                                                        Style="{StaticResource OffLabelStyle}"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding PostalAddress, Converter={StaticResource PostalAddressDetailDtoModelToStringConverter}, Mode=OneTime}" />
+                                                </VerticalStackLayout>
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    VerticalOptions="Center"
+                                                    Text="&#xF2FD;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                                <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                    VerticalOptions="Center"
+                                                    Text="&#xFA78;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DeleteCommercialLocationCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                            </StackLayout>
+                                        </Frame>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>

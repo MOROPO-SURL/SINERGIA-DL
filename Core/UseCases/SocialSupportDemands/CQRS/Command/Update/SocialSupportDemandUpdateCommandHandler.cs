@@ -6,18 +6,17 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Images.Ports.Repository;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.CQRS.Command.Create.Clipped;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Locations.CQRS.Command.Create;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Locations.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.Ports.Repository;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Update.Clipped;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Bridges;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Values;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.CQRS.Command.Update;
 
@@ -25,13 +24,15 @@ internal sealed class SocialSupportDemandUpdateCommandHandler :
     AbstractUpdateCommandHandler<SocialSupportDemand, SocialSupportDemandId, Guid, SocialSupportDemandUpdateCommand, SocialSupportDemandDetailDto>,
     IRequestHandler<SocialSupportDemandUpdateCommand, SocialSupportDemandDetailDto>
 {
+    private readonly ILocationCommandRepository locationCommandRepository;
     private readonly IImageCommandRepositoryPort imageCommandRepository;
     private readonly IFileStoreServicePort fileStoreService;
     private readonly ILogger logger;
 
-    public SocialSupportDemandUpdateCommandHandler(ILogger<SocialSupportDemandUpdateCommandHandler> logger, IFileStoreServicePort fileStoreService, IImageCommandRepositoryPort imageCommandRepository, ISocialSupportDemandQueryRepositoryPort entityQueryRepository, ISocialSupportDemandCommandRepositoryPort entityCommandRepository, IMapper mapper)
+    public SocialSupportDemandUpdateCommandHandler(ILogger<SocialSupportDemandUpdateCommandHandler> logger, IFileStoreServicePort fileStoreService, IImageCommandRepositoryPort imageCommandRepository, ILocationCommandRepository locationCommandRepository, ISocialSupportDemandQueryRepositoryPort entityQueryRepository, ISocialSupportDemandCommandRepositoryPort entityCommandRepository, IMapper mapper)
         : base(entityCommandRepository, entityQueryRepository, mapper)
     {
+        this.locationCommandRepository = locationCommandRepository;
         this.fileStoreService = fileStoreService;
         this.imageCommandRepository = imageCommandRepository;
         this.logger = logger;
@@ -41,7 +42,7 @@ internal sealed class SocialSupportDemandUpdateCommandHandler :
     {
         List<Image> deletedImages = [];
 
-        foreach (LocationClippedCreateCommand model in request.InLocations)
+        foreach (LocationCreateCommand model in request.InLocations)
         {
             LocationId locationId = new(model.Id);
 
@@ -57,54 +58,61 @@ internal sealed class SocialSupportDemandUpdateCommandHandler :
                 await fileStoreService.SaveFileAsync(imageId.Value.ToString(), model.FeatureImageCreateCommand.ContentType, model.FeatureImageCreateCommand.ContentData);
             }
 
-            Location location = new(locationId, entity.Id, model.Name, model.PostalAddress.Adapt<PostalAddress>(), model.Coordinate.Adapt<Coordinate>(), imageId, image, model.Description);
+            await locationCommandRepository.AddAsync(
+                new(locationId, model.Name, model.PostalAddress.Adapt<PostalAddress>(), model.Coordinate.Adapt<Coordinate>(), imageId, image, model.Description),
+                false);
 
-            entity.AddLocation(location);
+            entity.LinkLocationById(locationId);
         }
 
-        foreach (Guid locationId in request.OutLocationIds)
+        foreach (Guid locationId in request.LinkLocationIds)
         {
-            Location location = entity.Locations.First(item => item.Id.Value == locationId);
-
-            if (location.FeatureImage != null)
-            {
-                deletedImages.Add(location.FeatureImage);
-
-                await imageCommandRepository.DeleteAsync(location.FeatureImage, false);
-            }
-
-            entity.RemoveLocation(location);
+            entity.LinkLocationById(new LocationId(locationId));
         }
 
-        foreach(LocationClippedUpdateCommand model in request.PatchLocations)
+        foreach (Guid locationId in request.UnlinkLocationIds)
         {
-            Location location = entity.Locations.First(item => item.Id.Value == model.Id);
+            SocialSupportDemandLocationBridge bridge = entity.LocationBridges.First(item => item.LinkedId.Value == locationId);
 
-            location.Name = model.Name;
-            location.Coordinate = model.Coordinate.Adapt<Coordinate>();
-            location.PostalAddress = model.PostalAddress.Adapt<PostalAddress>();
-            location.Description = model.Description;
+            //if (bridge.Linked!.FeatureImage != null)
+            //{
+            //    deletedImages.Add(bridge.Linked.FeatureImage);
 
-            if (model.FeatureImageCreateCommand != null)
-            {
-                Image? currentImage = location.FeatureImage;
+            //    await imageCommandRepository.DeleteAsync(bridge.Linked.FeatureImage, false);
+            //}
 
-                if (currentImage != null) deletedImages.Add(currentImage);
-
-                ImageId imageId = new(Guid.NewGuid());
-
-                Image image = new(imageId, model.FeatureImageCreateCommand.ContentType, model.FeatureImageCreateCommand.ContentData.Length, 0, 0);
-
-                await imageCommandRepository.AddAsync(image, false);
-
-                if (currentImage != null) await imageCommandRepository.DeleteAsync(currentImage, false);
-
-                await fileStoreService.SaveFileAsync(image.Id.Value.ToString(), image.ContentType, model.FeatureImageCreateCommand.ContentData);
-
-                location.FeatureImageId = image.Id;
-                location.FeatureImage = image;
-            }
+            entity.RemoveLocationBridge(bridge);
         }
+
+        //foreach(LocationUpdateCommand model in request.PatchLocations)
+        //{
+        //    SocialSupportDemandLocationBridge bridge = entity.LocationBridges.First(item => item.LinkedId.Value == model.Id);
+
+        //    bridge.Linked!.Name = model.Name;
+        //    bridge.Linked.Coordinate = model.Coordinate.Adapt<Coordinate>();
+        //    bridge.Linked.PostalAddress = model.PostalAddress.Adapt<PostalAddress>();
+        //    bridge.Linked.Description = model.Description;
+
+        //    if (model.FeatureImageCreateCommand != null)
+        //    {
+        //        Image? currentImage = bridge.Linked.FeatureImage;
+
+        //        if (currentImage != null) deletedImages.Add(currentImage);
+
+        //        ImageId imageId = new(Guid.NewGuid());
+
+        //        Image image = new(imageId, model.FeatureImageCreateCommand.ContentType, model.FeatureImageCreateCommand.ContentData.Length, 0, 0);
+
+        //        await imageCommandRepository.AddAsync(image, false);
+
+        //        if (currentImage != null) await imageCommandRepository.DeleteAsync(currentImage, false);
+
+        //        await fileStoreService.SaveFileAsync(image.Id.Value.ToString(), image.ContentType, model.FeatureImageCreateCommand.ContentData);
+
+        //        bridge.Linked.FeatureImageId = image.Id;
+        //        bridge.Linked.FeatureImage = image;
+        //    }
+        //}
 
         foreach (ImageCreateCommand model in request.InImages)
         {

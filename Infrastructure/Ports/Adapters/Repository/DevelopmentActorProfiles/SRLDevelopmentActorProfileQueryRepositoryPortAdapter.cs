@@ -20,6 +20,8 @@ internal sealed class SRLDevelopmentActorProfileQueryRepositoryPortAdapter : Abs
             .Include(entity => entity.Owner).ThenInclude(entity => entity!.Image)
             .Include(entity => entity.MainEconomicActivity)
             .Include(entity => entity.SecoundaryEconomicActivityBridges).ThenInclude(bridge => bridge.Linked)
+            .Include(entity => entity.MainLocation).ThenInclude(entity => entity!.FeatureImage)
+            .Include(entity => entity.LocationBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.FeatureImage)
             .Include(entity => entity.OrganizationBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.Image)
             .Include(entity => entity.PersonBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.Image);
     }

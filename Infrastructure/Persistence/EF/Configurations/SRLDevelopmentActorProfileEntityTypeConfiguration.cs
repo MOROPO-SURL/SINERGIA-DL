@@ -13,6 +13,7 @@ internal sealed class SRLDevelopmentActorProfileEntityTypeConfiguration : IEntit
     private const string PRODUCTION_ACTIVITY_TABLE_NAME = "srldevelopmentactorprofile_productionactivities";
     private const string COMMERCIAL_ACTIVITY_TABLE_NAME = "srldevelopmentactorprofile_commercialactivities";
     private const string SERVICING_ACTIVITY_TABLE_NAME = "srldevelopmentactorprofile_servicingactivities";
+    private const string LOCATION_BRIDGE_TABLE_NAME = "srldevelopmentactorprofile_location_bridges";
     private const string ECONOMICACTIVITY_BRIDGE_TABLE_NAME = "srldevelopmentactorprofile_economicactivity_bridges";
     private const string ORGANIZATION_BRIDGE_TABLE_NAME = "srldevelopmentactorprofile_organization_bridges";
     private const string PERSON_BRIDGE_TABLE_NAME = "srldevelopmentactorprofile_person_bridges";
@@ -35,6 +36,9 @@ internal sealed class SRLDevelopmentActorProfileEntityTypeConfiguration : IEntit
         builder.Property(entity => entity.MainEconomicActivityId)
             .HasConversion(id => id.Value, value => new Domain.Aggretates.EconomicActivityAggregate.Values.EconomicActivityId(value));
 
+        builder.Property(entity => entity.MainLocationId)
+            .HasConversion(id => id.Value, value => new Domain.Aggretates.LocationAggregate.Values.LocationId(value));
+
         builder.Property(entity => entity.About)
             .HasMaxLength(2048);
 
@@ -42,6 +46,7 @@ internal sealed class SRLDevelopmentActorProfileEntityTypeConfiguration : IEntit
 
         builder.HasOne(entity => entity.Owner).WithMany().HasForeignKey(entity => entity.OwnerId).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(entity => entity.MainEconomicActivity).WithMany().HasForeignKey(entity => entity.MainEconomicActivityId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(entity => entity.MainLocation).WithMany().HasForeignKey(entity => entity.MainLocationId).OnDelete(DeleteBehavior.Restrict);
 
         builder.OwnsMany(entity => entity.ProductionActivities, Configure)
             .Navigation(entity => entity.ProductionActivities)
@@ -58,6 +63,11 @@ internal sealed class SRLDevelopmentActorProfileEntityTypeConfiguration : IEntit
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasField("servicingActivities");
 
+        builder.OwnsMany(entity => entity.LocationBridges, Configure)
+            .Navigation(entity => entity.LocationBridges)
+                .UsePropertyAccessMode(PropertyAccessMode.Field)
+                .HasField("locationBridges");
+
         builder.OwnsMany(entity => entity.SecoundaryEconomicActivityBridges, Configure)
             .Navigation(entity => entity.SecoundaryEconomicActivityBridges)
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
@@ -72,6 +82,25 @@ internal sealed class SRLDevelopmentActorProfileEntityTypeConfiguration : IEntit
             .Navigation(entity => entity.PersonBridges)
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
                 .HasField("personBridges");
+    }
+
+    private void Configure(OwnedNavigationBuilder<SRLDevelopmentActorProfile, DevelopmentActorProfileLocationBridge> builder)
+    {
+        builder.ToTable(LOCATION_BRIDGE_TABLE_NAME);
+
+        builder.Property(entity => entity.MainId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new DevelopmentActorProfileId(value));
+
+        builder.Property(entity => entity.LinkedId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new Domain.Aggretates.LocationAggregate.Values.LocationId(value));
+
+        builder.HasKey(entity => new { entity.MainId, entity.LinkedId });
+
+        builder.WithOwner().HasForeignKey(entity => entity.MainId);
+
+        builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
     }
 
     private void Configure(OwnedNavigationBuilder<SRLDevelopmentActorProfile, DevelopmentActorProfileProductionActivity> builder)

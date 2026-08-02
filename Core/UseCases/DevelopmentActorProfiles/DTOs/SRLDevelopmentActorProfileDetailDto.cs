@@ -1,5 +1,6 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.EconomicActivities.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Locations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
 
@@ -12,6 +13,8 @@ public record SRLDevelopmentActorProfileDetailDto(
     DateOnly BornAt,
     EconomicActivityBasicDto MainEconomicActivity,
     IEnumerable<EconomicActivityBasicDto> SecoundaryEconomicActivities,
+    LocationDetailDto MainLocation,
+    IEnumerable<LocationDetailDto> CommercialLocations,
     IEnumerable<OrganizationBasicDto> OrganizationPartners,
     IEnumerable<PersonBasicDto> PersonPartners,
     string? About = null) : IDetailDto;

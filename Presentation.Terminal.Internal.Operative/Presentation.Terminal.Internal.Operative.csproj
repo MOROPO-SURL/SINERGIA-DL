@@ -258,13 +258,7 @@
 	  <MauiXaml Update="UI\Pages\SocialSupportDemandsManagementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Configuration\LocationConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Configuration\SocialSupportDemandConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Detail\LocationDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Detail\SocialSupportDemandDetailPage.xaml">

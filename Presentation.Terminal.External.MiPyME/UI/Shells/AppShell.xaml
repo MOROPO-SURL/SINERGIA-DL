@@ -127,7 +127,7 @@
     </FlyoutItem>
     <ShellContent
         Title="Informes al CAM"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate local_pages:OperationReportsManagementPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"

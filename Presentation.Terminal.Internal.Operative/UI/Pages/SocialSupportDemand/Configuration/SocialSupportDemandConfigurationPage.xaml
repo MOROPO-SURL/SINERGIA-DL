@@ -5,6 +5,7 @@
     xmlns:local_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View"
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.SocialSupportDemand.Configuration"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:location_interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
@@ -143,7 +144,7 @@
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
                                 Text="Agregar"
-                                Command="{Binding CreateLocationCommand, Mode=OneTime}" />
+                                Command="{Binding AddLocationCommand, Mode=OneTime}" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
                                 Color="DimGray" />
@@ -157,7 +158,7 @@
                                     <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_dto_models:LocationDetailDtoModel">
+                                    <DataTemplate x:DataType="location_interop_dto_models:LocationDetailDtoModel">
                                         <Frame Padding="8">
                                             <StackLayout Orientation="Horizontal" Spacing="8">
                                                 <VerticalStackLayout 
@@ -178,12 +179,12 @@
                                                     Text="&#xF2FD;"
                                                     Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand, Mode=OneTime}"
                                                     CommandParameter="{Binding Mode=OneTime}" />
-                                                <Button
+                                                <!--<Button
                                                     Style="{StaticResource FontIconImageButtonStyle}"
                                                     VerticalOptions="Center"
                                                     Text="&#xF90B;"
                                                     Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.UpdateLocationCommand, Mode=OneTime}"
-                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                                    CommandParameter="{Binding Mode=OneTime}" />-->
                                                 <Button
                                                     Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     VerticalOptions="Center"

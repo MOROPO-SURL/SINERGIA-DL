@@ -2,14 +2,13 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Bridges;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Entities;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
 
 internal sealed class SocialSupportDemandEntityTypeConfiguration : IEntityTypeConfiguration<SocialSupportDemand>
 {
     private const string TABLE_NAME = "socialsupportdemands";
-    private const string LOCATION_TABLE_NAME = "socialsupportdemand_locations";
+    private const string LOCATION_BRIDGE_TABLE_NAME = "socialsupportdemand_location_bridges";
     private const string IMAGE_BRIDGE_TABLE_NAME = "socialsupportdemand_image_bridges";
 
     public void Configure(EntityTypeBuilder<SocialSupportDemand> builder)
@@ -30,10 +29,10 @@ internal sealed class SocialSupportDemandEntityTypeConfiguration : IEntityTypeCo
         builder.HasKey(entity => entity.Id);
 
         builder
-            .OwnsMany(entity => entity.Locations, Configure)
-            .Navigation(entity => entity.Locations)
+            .OwnsMany(entity => entity.LocationBridges, Configure)
+            .Navigation(entity => entity.LocationBridges)
                 .UsePropertyAccessMode(PropertyAccessMode.Field)
-                .HasField("locations");
+                .HasField("locationBridges");
 
         builder
             .OwnsMany(entity => entity.ImageBridges, Configure)
@@ -42,37 +41,23 @@ internal sealed class SocialSupportDemandEntityTypeConfiguration : IEntityTypeCo
                 .HasField("imageBridges");
     }
 
-    public void Configure(OwnedNavigationBuilder<SocialSupportDemand, Location> builder)
+    public void Configure(OwnedNavigationBuilder<SocialSupportDemand, SocialSupportDemandLocationBridge> builder)
     {
-        builder.ToTable(LOCATION_TABLE_NAME);
+        builder.ToTable(LOCATION_BRIDGE_TABLE_NAME);
 
-        builder.Property(entity => entity.Id)
-            .ValueGeneratedNever()
-            .HasConversion(id => id.Value, value => new Domain.Aggretates.SocialSupportDemandAggregate.Values.LocationId(value));
-
-        builder.Property(entity => entity.SocialSupportDemandId)
+        builder.Property(entity => entity.MainId)
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new Domain.Aggretates.SocialSupportDemandAggregate.Values.SocialSupportDemandId(value));
 
-        builder.Property(entity => entity.Name)
-            .IsRequired()
-            .HasMaxLength(512);
+        builder.Property(entity => entity.LinkedId)
+            .ValueGeneratedNever()
+            .HasConversion(id => id.Value, value => new Domain.Aggretates.LocationAggregate.Values.LocationId(value));
 
-        builder.Property(entity => entity.FeatureImageId)
-            .HasConversion(new Converters.NullableImageIdConverter());
+        builder.HasKey(entity => new { entity.MainId, entity.LinkedId });
 
-        builder.Property(entity => entity.Description)
-            .HasMaxLength(2048);
+        builder.WithOwner().HasForeignKey(entity => entity.MainId);
 
-        builder.HasKey(entity => new { entity.Id, entity.SocialSupportDemandId });
-
-        builder.WithOwner().HasForeignKey(entity => entity.SocialSupportDemandId);
-
-        builder.OwnsOne(entity => entity.Coordinate);
-
-        builder.OwnsOne(entity => entity.PostalAddress);
-
-        builder.HasOne(entity => entity.FeatureImage).WithOne().HasForeignKey<Location>(entity => entity.FeatureImageId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
     }
 
     public void Configure(OwnedNavigationBuilder<SocialSupportDemand, SocialSupportDemandImageBridge> builder) 

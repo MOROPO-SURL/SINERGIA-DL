@@ -9,11 +9,11 @@ using System.Linq.Expressions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Query.Abstractions;
 
-internal abstract class AbstractPaginateQueryHandler<TEntity, TId, TIdValue, TPaginateQuery, TBasicDto> : IRequestHandler<TPaginateQuery, PaginateQueryResultModel<TBasicDto>>
+internal abstract class AbstractPaginateQueryHandler<TEntity, TId, TIdValue, TPaginateQuery, TDto> : IRequestHandler<TPaginateQuery, PaginateQueryResultModel<TDto>>
     where TEntity : class, IEntity<TId, TIdValue>
     where TId : struct, IId<TIdValue>
-    where TPaginateQuery : IPaginateQuery<TEntity, TId, TIdValue, TBasicDto>
-    where TBasicDto : IDto
+    where TPaginateQuery : IPaginateQuery<TEntity, TId, TIdValue, TDto>
+    where TDto : IDto
 {
     private readonly IEntityQueryRepositoryPort<TEntity, TId, TIdValue> entityQueryRepository;
 
@@ -22,7 +22,7 @@ internal abstract class AbstractPaginateQueryHandler<TEntity, TId, TIdValue, TPa
         this.entityQueryRepository = entityQueryRepository;
     }
 
-    public async Task<PaginateQueryResultModel<TBasicDto>> Handle(TPaginateQuery request, CancellationToken cancellationToken)
+    public async Task<PaginateQueryResultModel<TDto>> Handle(TPaginateQuery request, CancellationToken cancellationToken)
     {
         int count = request.Criteria == null ? await entityQueryRepository.CountAsync() : await entityQueryRepository.CountAsync(request.Criteria);
 
@@ -39,9 +39,9 @@ internal abstract class AbstractPaginateQueryHandler<TEntity, TId, TIdValue, TPa
             page = 1;
         }
 
-        TBasicDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, OrderExpression, IsOrderDescending, request.Criteria).ProjectToType<TBasicDto>()];
+        TDto[] result = count <= 0 ? [] : [.. entityQueryRepository.GetPageQueryable(page, request.Limit, OrderExpression, IsOrderDescending, request.Criteria).Select(entity => entity.Adapt<TDto>())];
 
-        return new PaginateQueryResultModel<TBasicDto>
+        return new PaginateQueryResultModel<TDto>
         {
             Page = page,
             Limit = request.Limit,

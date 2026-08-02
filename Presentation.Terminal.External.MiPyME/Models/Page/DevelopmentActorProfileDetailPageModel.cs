@@ -1,9 +1,11 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.External.Common.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n.Detail;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.UI.Pages;
 using System.Text.Json;
 using System.Windows.Input;
@@ -22,11 +24,18 @@ public sealed class DevelopmentActorProfileDetailPageModel : BasePageModel
 
             Application.Current!.MainPage!.NavigationPushPageAsync(new DevelopmentActorProfileConfigurationPage(new DevelopmentActorProfileConfigurationPageModel(model!, ConfigurationSuccess_Callback, new Validators.DevelopmentActorProfileConfigurationValidator())));
         });
+
+        DetailLocationCommand = new Command<LocationDetailDtoModel>(async model =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new LocationDetailPage(model));
+        });
     }
 
     public SRLDevelopmentActorProfileDetailDtoModel? Model { get => model; set => SetProperty(ref model, value); }
 
-    public ICommand ModifyCommand { get; set; }
+    public ICommand ModifyCommand { get; init; }
+
+    public ICommand DetailLocationCommand { get; init; }
 
     public void Initialize()
     {
@@ -69,6 +78,8 @@ public sealed class DevelopmentActorProfileDetailPageModel : BasePageModel
     private void ConfigurationSuccess_Callback(SRLDevelopmentActorProfileDetailDtoModel model)
     {
         Model = model;
+
+        ((Common.Models.Page.AppShellPageModel)((UI.Shells.AppShell)Application.Current!.MainPage!).BindingContext).DevelopmentProfileId = model.Id;
 
         Application.Current!.PresentToastNotification(Terminal.Common.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
     }

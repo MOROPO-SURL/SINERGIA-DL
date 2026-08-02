@@ -3,10 +3,14 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.External.Common.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.EconomicActivity.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n.Detail;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Person;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.EconomicActivity;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Organization;
@@ -20,6 +24,7 @@ public sealed class DevelopmentActorProfileConfigurationPageModel : AbstractConf
     public static string BornAtValidableProperty => nameof(BornAt);
     public static string FiscalIdentificationCodeValidableProperty => nameof(FiscalIdentificationCode);
     public static string MainEconomicActivityValidableProperty => nameof(MainEconomicActivity);
+    public static string MainLocationValidableProperty => nameof(MainLocation);
     public static string OrganizationPartnersValidableProperty => nameof(OrganizationPartners);
     public static string PersonPartnersValidableProperty => nameof(PersonPartners);
     public static string AboutValidableProperty => nameof(About);
@@ -33,10 +38,15 @@ public sealed class DevelopmentActorProfileConfigurationPageModel : AbstractConf
     private readonly List<EconomicActivityBasicDtoModel> inSecoundaryEconomicActivities = [];
     private readonly List<EconomicActivityBasicDtoModel> outSecoundaryEconomicActivities = [];
 
+    private readonly List<LocationCreateRequestModel> inLocations = [];
+    private readonly List<Guid> linkLocationIds = [];
+    private readonly List<Guid> unlinkLocationIds = [];
+
     private string fiscalIdentificationCode;
     private DateTime bornAt;
     private string? about;
     private EconomicActivityBasicDtoModel mainEconomicActivity;
+    private LocationDetailDtoModel mainLocation;
 
     public DevelopmentActorProfileConfigurationPageModel(SRLDevelopmentActorProfileDetailDtoModel? model, Action<SRLDevelopmentActorProfileDetailDtoModel> successCallbackAction, IValidator validator) : base(model, successCallbackAction, validator)
     {
@@ -164,6 +174,67 @@ public sealed class DevelopmentActorProfileConfigurationPageModel : AbstractConf
 
         #endregion
 
+        #region Locations
+
+        MainLocationPickCommand = new Command(async () =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new LocationPickPage(MainLocationPicked_Callback, MainLocationCreateSuccess_Callback)));
+        });
+
+        AddCommercialLocationCommand = new Command(async () =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new LocationPickPage(CommercialLocationPicked_Callback, CommercialLocationCreateSuccess_Callback)));
+        });
+
+        RemoveCommercialLocationCommand = new Command<LocationDetailDtoModel>(model =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var item in inLocations)
+                {
+                    if (item.Id != model.Id) continue;
+
+                    inLocations.Remove(inLocations.First(item => item.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in linkLocationIds)
+                    {
+                        if (item != model.Id) continue;
+
+                        linkLocationIds.Remove(item);
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    unlinkLocationIds.Add(model.Id);
+                }
+
+                Dispatcher.Dispatch(() => CommercialLocations!.Remove(model));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        DetailLocationCommand = new Command<LocationDetailDtoModel>(async model =>
+        {
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new LocationDetailPage(model, inLocations.FirstOrDefault(item => item.Id == model.Id)?.FeatureImageCreateRequest ?? null));
+        });
+
+        #endregion
+
         #endregion
 
         Id = model?.Id;
@@ -171,10 +242,11 @@ public sealed class DevelopmentActorProfileConfigurationPageModel : AbstractConf
         bornAt = model?.BornAt.ToDateTime(default) ?? DateTime.Now;
         about = model?.About;
         mainEconomicActivity = model?.MainEconomicActivity ?? null!;
-
-        SecoundaryEconomicActivities = [.. model?.SecoundaryEconomicActivities];
-        OrganizationPartners = [.. model?.OrganizationPartners];
-        PersonPartners = [.. model?.PersonPartners];
+        mainLocation = model?.MainLocation ?? null!;
+        SecoundaryEconomicActivities = [.. model?.SecoundaryEconomicActivities ?? []];
+        CommercialLocations = [.. model?.CommercialLocations ?? []];
+        OrganizationPartners = [.. model?.OrganizationPartners ?? []];
+        PersonPartners = [.. model?.PersonPartners ?? []];
     }
 
     public override IValidationContext? ValidationContext => new ValidationContext<DevelopmentActorProfileConfigurationPageModel>(this);
@@ -190,6 +262,9 @@ public sealed class DevelopmentActorProfileConfigurationPageModel : AbstractConf
             DateOnly.FromDateTime(bornAt),
             mainEconomicActivity.Id,
             inSecoundaryEconomicActivities.Select(item => item.Id),
+            mainLocation.Id,
+            [.. inLocations],
+            [.. linkLocationIds],
             inOrganizationPartners.Select(item => item.Id),
             inPersonPartners.Select(item => item.Id),
             about));
@@ -206,6 +281,10 @@ public sealed class DevelopmentActorProfileConfigurationPageModel : AbstractConf
             mainEconomicActivity.Id,
             inSecoundaryEconomicActivities.Select(item => item.Id),
             outSecoundaryEconomicActivities.Select(item => item.Id),
+            mainLocation.Id,
+            [.. inLocations],
+            [.. linkLocationIds],
+            [.. unlinkLocationIds],
             inOrganizationPartners.Select(item => item.Id),
             outOrganizationPartners.Select(item => item.Id),
             inPersonPartners.Select(item => item.Id),
@@ -228,6 +307,18 @@ public sealed class DevelopmentActorProfileConfigurationPageModel : AbstractConf
     public ICommand AddSecoundaryEconomicActivityCommand { get; init; }
 
     public ICommand RemoveSecoundaryEconomicActivityCommand { get; init; }
+
+    public LocationDetailDtoModel MainLocation { get => mainLocation; set => SetProperty(ref mainLocation, value); }
+
+    public ICommand MainLocationPickCommand { get; init; }
+
+    public ObservableCollection<LocationDetailDtoModel> CommercialLocations { get; init; }
+
+    public ICommand AddCommercialLocationCommand { get; init; }
+
+    public ICommand RemoveCommercialLocationCommand { get; init; }
+
+    public ICommand DetailLocationCommand { get; init; }
 
     public ObservableCollection<PersonBasicDtoModel> PersonPartners { get; init; } = [];
 
@@ -273,6 +364,56 @@ public sealed class DevelopmentActorProfileConfigurationPageModel : AbstractConf
         inSecoundaryEconomicActivities.Add(model);
 
         SecoundaryEconomicActivities.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void MainLocationCreateSuccess_Callback(LocationUpdateRequestModel model)
+    {
+        if (mainLocation != null)
+        {
+            LocationCreateRequestModel? currentMainLocation = inLocations.FirstOrDefault(item => item.Id == mainLocation.Id);
+
+            if (currentMainLocation != null) inLocations.Remove(currentMainLocation);
+        }
+
+        inLocations.Add(new LocationCreateRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
+
+        MainLocation = new LocationDetailDtoModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, null, model.Description);
+
+        hasChangesFlag = true;
+    }
+
+    private void CommercialLocationCreateSuccess_Callback(LocationUpdateRequestModel model)
+    {
+        inLocations.Add(new LocationCreateRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
+
+        // TODO Order list !!!
+        CommercialLocations.Add(new LocationDetailDtoModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, null, model.Description));
+
+        hasChangesFlag = true;
+    }
+
+    private void MainLocationPicked_Callback(LocationDetailDtoModel model)
+    {
+        if (mainLocation != null)
+        {
+            LocationCreateRequestModel? currentMainLocation = inLocations.FirstOrDefault(item => item.Id == mainLocation.Id);
+
+            if (currentMainLocation != null) inLocations.Remove(currentMainLocation);
+        }
+
+        MainLocation = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void CommercialLocationPicked_Callback(LocationDetailDtoModel model)
+    {
+        linkLocationIds.Add(model.Id);
+
+        // TODO Order list !!!
+        CommercialLocations.Add(model);
 
         hasChangesFlag = true;
     }

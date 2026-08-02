@@ -22,7 +22,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/publicpolicies")]
-public class PublicPoliciesController: ControllerBase
+public class PublicPoliciesController : ControllerBase
 {
     private readonly ISender mediator;
     private readonly IMapper mapper;

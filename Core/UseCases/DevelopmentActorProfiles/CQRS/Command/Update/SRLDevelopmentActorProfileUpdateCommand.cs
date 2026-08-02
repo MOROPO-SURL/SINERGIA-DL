@@ -1,5 +1,6 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Locations.CQRS.Command.Create;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.CQRS.Command.Update;
 
@@ -13,6 +14,10 @@ public record SRLDevelopmentActorProfileUpdateCommand(
     int MainEconomicActivityId,
     IEnumerable<int> InSecoundaryEconomicActivityIds,
     IEnumerable<int> OutSecoundaryEconomicActivityIds,
+    Guid MainLocationId,
+    IEnumerable<LocationCreateCommand> InLocations,
+    IEnumerable<Guid> LinkLocationIds,
+    IEnumerable<Guid> UnlinkLocationIds,
     IEnumerable<Guid> InOrganizationPartnerIds,
     IEnumerable<Guid> OutOrganizationPartnerIds,
     IEnumerable<Guid> InPersonPartnerIds,

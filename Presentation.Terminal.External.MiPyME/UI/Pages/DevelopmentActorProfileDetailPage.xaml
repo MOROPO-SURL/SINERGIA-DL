@@ -3,17 +3,23 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Models.Page"
-    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.UI.Pages.DevelopmentActorProfileDetailPage"
     x:TypeArguments="local_page_models:DevelopmentActorProfileDetailPageModel"
     x:DataType="local_page_models:DevelopmentActorProfileDetailPageModel"
     Title="Perfil de actor del desarrollo">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:PostalAddressDetailDtoModelToStringConverter x:Key="PostalAddressDetailDtoModelToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Modificar"
@@ -137,6 +143,71 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <common_ui_card_views:EconomicActivityCardView HeightRequest="{Static common_constants:CardViewSizeConstants.ECONOMICACTIVITY_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Localización de domicilio social" />
+                    <Frame Padding="8">
+                        <StackLayout Orientation="Horizontal" Spacing="8">
+                            <VerticalStackLayout 
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                Margin="8,0,0,0">
+                                <Label 
+                                    LineBreakMode="TailTruncation"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Model.MainLocation.Name}" />
+                                <Label
+                                    Style="{StaticResource OffLabelStyle}"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding Model.MainLocation.PostalAddress, Converter={StaticResource PostalAddressDetailDtoModelToStringConverter}}" />
+                            </VerticalStackLayout>
+                            <Button
+                                Style="{StaticResource FontIconImageButtonStyle}"
+                                VerticalOptions="Center"
+                                Text="&#xF2FD;"
+                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand}"
+                                CommandParameter="{Binding Model.MainLocation}" />
+                        </StackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Localizaciones comerciales" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView
+                        Grid.ColumnSpan="2" Grid.Row="2"
+                        ItemsSource="{Binding Model.CommercialLocations}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:LocationDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            Margin="8,0,0,0">
+                                            <Label 
+                                                LineBreakMode="TailTruncation"
+                                                FontAttributes="Bold"
+                                                Text="{Binding Name, Mode=OneTime}" />
+                                            <Label
+                                                Style="{StaticResource OffLabelStyle}"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding PostalAddress, Converter={StaticResource PostalAddressDetailDtoModelToStringConverter}, Mode=OneTime}" />
+                                        </VerticalStackLayout>
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseConfigurationEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Location.Configuration"
+    xmlns:interop_command_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.CQRS.Command;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n.Configuration.LocationConfigurationPage"
+    x:TypeArguments="interop_command_models:LocationUpdateRequestModel,interop_command_models:LocationUpdateRequestModel,local_configuration_page_models:LocationConfigurationPageModel"
+    x:DataType="local_configuration_page_models:LocationConfigurationPageModel"
+    Shell.TabBarIsVisible="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Command="{Binding ApplyCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xf12c;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Command="{Binding CancelCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"
+                    Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                    Glyph="&#xf156;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <Grid HeightRequest="320">
+                    <Frame 
+                        HorizontalOptions="Center" VerticalOptions="Center"
+                        Margin="16,8"
+                        Padding="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                        <Grid>
+                            <ffimageloading_views:CachedImage
+                                Source="{Binding FeatureImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <Grid BackgroundColor="#A7000000">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="FeatureImageLayoutTapGestureRecognizer_Tapped" />
+                                </Grid.GestureRecognizers>
+                                <Label
+                                    Text="&#xF8CB;"
+                                    TextColor="White"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="96" />
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                    <Entry Text="{Binding Name}" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:LocationConfigurationPageModel.NameValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:LocationConfigurationPageModel.DescriptionValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <StackLayout 
+                    Style="{StaticResource FormFluentChildStackLayoutStyle}"
+                    Orientation="Horizontal"
+                    Spacing="8"
+                    Margin="8,12,8,0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Geolocalización" />
+                    <BoxView
+                        Style="{StaticResource FormFluentChildSeparatorBoxViewStyle}"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                        Margin="0"
+                        HeightRequest="2" />                    
+                </StackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>                        
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Latitud" />
+                        <Entry Text="{Binding LatitudeCoordinate}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:LocationConfigurationPageModel.LatitudeCoordinateValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>                        
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Longitud" />
+                        <Entry Text="{Binding LongitudeCoordinate}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:LocationConfigurationPageModel.LongitudeCoordinateValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <StackLayout 
+                    Style="{StaticResource FormFluentChildStackLayoutStyle}"
+                    Orientation="Horizontal"
+                    Spacing="8"
+                    Margin="8,16,8,0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Dirección postal" />
+                    <BoxView
+                        Style="{StaticResource FormFluentChildSeparatorBoxViewStyle}"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                        Margin="0"
+                        HeightRequest="2" />
+                </StackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=10, ExtraLargeContainerColumn=9, LargeContainerColumn=8, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Calle" />
+                        <Entry Text="{Binding PostalAddressStreet}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:LocationConfigurationPageModel.PostalAddressStreetValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Número (opcional)" />
+                        <Entry Text="{Binding PostalAddressNumber}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entrecalles, esquina, reparto, ciudad, provincia, etc." />
+                    <Editor 
+                        HeightRequest="120"
+                        Text="{Binding PostalAddressContext}" />
+                </VerticalStackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código postal (opcional)" />
+                        <Entry Text="{Binding PostalAddressZipCode}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</common_ui_base_pages:BaseConfigurationEntityPage>

@@ -5,7 +5,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Sh
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.Ports.Adapter.Helper;
 
-internal sealed class CurrentOrganizationDetailDtoModelBindingHelperPortAdapter : ICurrentOrganizationDetailDtoModelBindingHelperPort
+internal sealed class CurrentOrganizationDetailDtoModelBindingHelperPortAdapter : IAppShellContextBindingHelperPort
 {
     public OrganizationDetailDtoModel GetCurrent()
     {

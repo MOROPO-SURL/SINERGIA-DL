@@ -37,13 +37,16 @@ internal sealed class DevelopmentActorProfileMappingRegister : IRegister
                 src.FiscalIdentificationCode,
                 src.BornAt,
                 new Domain.Aggretates.EconomicActivityAggregate.Values.EconomicActivityId(src.MainEconomicActivityId),
+                new Domain.Aggretates.LocationAggregate.Values.LocationId(src.MainLocationId),
                 src.SecoundaryEconomicActivityIds.Select(item => new DevelopmentActorProfileEconomicActivityBridge(new DevelopmentActorProfileId(src.Id), new Domain.Aggretates.EconomicActivityAggregate.Values.EconomicActivityId(item), null)),
+                Array.Empty<DevelopmentActorProfileLocationBridge>(),
                 Array.Empty<DevelopmentActorProfileProductionActivity>(),
                 Array.Empty<DevelopmentActorProfileCommercialActivity>(),
                 Array.Empty<DevelopmentActorProfileServicingActivity>(),
                 src.OrganizationPartnerIds.Select(item => new SRLDevelopmentActorProfileOrganizationBridge(new DevelopmentActorProfileId(src.Id), new Domain.Aggretates.OrganizationAggregate.Values.OrganizationId(item), null)),
                 src.PersonPartnerIds.Select(item => new SRLDevelopmentActorProfilePersonBridge(new DevelopmentActorProfileId(src.Id), new Domain.Aggretates.PersonAggregate.Values.PersonId(item), null)),
                 src.About,
+                null,
                 null,
                 null));
 
@@ -56,7 +59,7 @@ internal sealed class DevelopmentActorProfileMappingRegister : IRegister
                 }
                 foreach (int item in src.OutSecoundaryEconomicActivityIds)
                 {
-                    dest.UnlinkSecoundaryEconomicActivityById(new Domain.Aggretates.EconomicActivityAggregate.Values.EconomicActivityId(item));
+                    dest.RemoveSecoundaryEconomicActivityBridge(dest.SecoundaryEconomicActivityBridges.First(bridge => bridge.LinkedId.Value == item));
                 }
 
                 foreach (Guid item in src.InOrganizationPartnerIds)

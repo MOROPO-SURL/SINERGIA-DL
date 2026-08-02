@@ -17,4 +17,7 @@ public static class CardViewSizeConstants
 
     public static double SOCIALSUPPORTDEMAND_DEFAULT_CARD_VIEW_HEIGHT = 120;
     public static double SOCIALSUPPORTDEMAND_DEFAULT_CARD_VIEW_WIDTH = 480;
+
+    public static double LOCATION_DEFAULT_CARD_VIEW_HEIGHT = 76;
+    public static double LOCATION_DEFAULT_CARD_VIEW_WIDTH = 480;
 }

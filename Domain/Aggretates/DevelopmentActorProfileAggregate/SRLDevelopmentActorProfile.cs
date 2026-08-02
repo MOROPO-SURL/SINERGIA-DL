@@ -3,6 +3,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileA
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PersonAggregate.Values;
@@ -23,8 +25,10 @@ public sealed class SRLDevelopmentActorProfile : Abstractions.AbstractDevelopmen
         OrganizationId ownerId,
         string fiscalIdentificationCode,
         DateOnly bornAt,
-        EconomicActivityId mainEconomicActivityId, 
-        IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, 
+        EconomicActivityId mainEconomicActivityId,
+        LocationId mainLocationId, 
+        IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges,
+        IEnumerable<DevelopmentActorProfileLocationBridge> locationBridges,
         IEnumerable<DevelopmentActorProfileProductionActivity> productionActivities, 
         IEnumerable<DevelopmentActorProfileCommercialActivity> commercialActivities, 
         IEnumerable<DevelopmentActorProfileServicingActivity> servicingActivities,
@@ -32,7 +36,8 @@ public sealed class SRLDevelopmentActorProfile : Abstractions.AbstractDevelopmen
         IEnumerable<SRLDevelopmentActorProfilePersonBridge> personBridges,
         string? About = null, 
         Organization? owner = null, 
-        EconomicActivity? mainEconomicActivity = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, bornAt, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, mainEconomicActivity)
+        EconomicActivity? mainEconomicActivity = null, 
+        Location? mainLocation = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, bornAt, mainEconomicActivityId, mainLocationId, secoundaryEconomicActivityBridges, locationBridges, productionActivities, commercialActivities, servicingActivities, About, owner, mainEconomicActivity, mainLocation)
     {
         this.organizationBridges = [.. organizationBridges];
         this.personBridges = [.. personBridges];

@@ -11,6 +11,10 @@ public sealed class DevelopmentActorProfileConfigurationValidator : AbstractVali
             .NotNull()
             .WithName("Actividad económica principal");
 
+        RuleFor(model => model.MainLocation)
+            .NotNull()
+            .WithName("Localización de domicilio social");
+
         RuleFor(model => model.FiscalIdentificationCode)
             .NotEmpty()
             .Matches("^[0-9]+$")

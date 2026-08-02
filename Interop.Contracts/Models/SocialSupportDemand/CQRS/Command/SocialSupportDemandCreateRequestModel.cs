@@ -1,4 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.CQRS.Command;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.CQRS.Command;
 
@@ -7,7 +8,8 @@ public record SocialSupportDemandCreateRequestModel(
     string Title,
     int Priority,
     bool IsEnabled,
-    IEnumerable<Clipped.LocationCreateClippedRequestModel> Locations,
+    IEnumerable<LocationCreateRequestModel> InLocations,
+    IEnumerable<Guid> LinkLocationIds,
     IEnumerable<ImageCreateRequestModel> Images,
     DateTime? StartAt = null,
     DateTime? EndAt = null,

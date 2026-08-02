@@ -29,7 +29,7 @@ public static class MauiProgram
                 .AddSingleton<IHttpClientProviderPort, Common.Ports.Adapter.Provider.HttpClientHelperProvider>()
                 .AddSingleton<IExceptionHandlingHelperPort, Common.Ports.Adapter.Helper.ExceptionHandlingHelperPortAdapter>()
                 .AddSingleton<ILocalizationHelperPort, Ports.Adapter.Helper.LocalizationHelperPortAdapter>()
-                .AddSingleton<ICurrentOrganizationDetailDtoModelBindingHelperPort, Ports.Adapter.Helper.CurrentOrganizationDetailDtoModelBindingHelperPortAdapter>();
+                .AddSingleton<IAppShellContextBindingHelperPort, Ports.Adapter.Helper.CurrentOrganizationDetailDtoModelBindingHelperPortAdapter>();
 
 #if DEBUG
         builder.Logging.AddDebug();

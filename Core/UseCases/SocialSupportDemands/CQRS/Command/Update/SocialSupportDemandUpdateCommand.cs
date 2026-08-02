@@ -1,8 +1,7 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.CQRS.Command.Interfaces;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.CQRS.Command.Create.Clipped;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Locations.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.CQRS.Command.Update.Clipped;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.CQRS.Command.Update;
 
@@ -11,9 +10,9 @@ public record SocialSupportDemandUpdateCommand(
     string Title,
     int Priority,
     bool IsEnabled,
-    IEnumerable<LocationClippedCreateCommand> InLocations,
-    IEnumerable<LocationClippedUpdateCommand> PatchLocations,
-    IEnumerable<Guid> OutLocationIds,
+    IEnumerable<LocationCreateCommand> InLocations,
+    IEnumerable<Guid> LinkLocationIds,
+    IEnumerable<Guid> UnlinkLocationIds,
     IEnumerable<ImageCreateCommand> InImages,
     IEnumerable<Guid> OutImageIds,
     DateTime? StartAt = null,

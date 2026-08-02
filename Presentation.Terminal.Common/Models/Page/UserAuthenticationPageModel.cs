@@ -76,6 +76,10 @@ public class UserAuthenticationPageModel : BasePageModel, Interfaces.IValidableC
                                 {
                                     message = "Servicio no disponible en este momento.";
                                 }
+                                else if (httpRequestException.StatusCode == null)
+                                {
+                                    message = "No se puede acceder al servidor. Revise su conexión de red y/o la disponibilidad del servicio.";
+                                }
                             }
                             else if (targetException is SocketException || targetException is System.Net.WebException)
                             {

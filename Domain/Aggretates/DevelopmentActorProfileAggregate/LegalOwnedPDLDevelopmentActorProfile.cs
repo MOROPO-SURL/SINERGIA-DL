@@ -1,12 +1,14 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate.Values;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate;
 
@@ -22,8 +24,10 @@ public sealed class LegalOwnedPDLDevelopmentActorProfile : Abstractions.Abstract
         string fiscalIdentificationCode,
         DateOnly bornAt,
         PDLModalityId modalityId,
-        EconomicActivityId mainEconomicActivityId, 
-        IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, 
+        EconomicActivityId mainEconomicActivityId,
+        LocationId mainLocationId, 
+        IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges,
+        IEnumerable<DevelopmentActorProfileLocationBridge> locationBridges,
         IEnumerable<DevelopmentActorProfileProductionActivity> productionActivities, 
         IEnumerable<DevelopmentActorProfileCommercialActivity> commercialActivities, 
         IEnumerable<DevelopmentActorProfileServicingActivity> servicingActivities,
@@ -31,8 +35,9 @@ public sealed class LegalOwnedPDLDevelopmentActorProfile : Abstractions.Abstract
         string? About = null, 
         Organization? owner = null,
         PDLModality? modality = null,
-        EconomicActivity? mainEconomicActivity = null,
-        Organization? titular = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, bornAt, modalityId, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, modality, mainEconomicActivity)
+        EconomicActivity? mainEconomicActivity = null, 
+        Location? mainLocation = null,
+        Organization? titular = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, bornAt, modalityId, mainEconomicActivityId, mainLocationId, secoundaryEconomicActivityBridges, locationBridges, productionActivities, commercialActivities, servicingActivities, About, owner, modality, mainEconomicActivity, mainLocation)
     {
         HolderOrganizationId = holderOrganizationId;
 

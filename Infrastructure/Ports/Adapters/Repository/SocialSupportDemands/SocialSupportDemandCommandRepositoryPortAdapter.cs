@@ -17,7 +17,7 @@ internal sealed class SocialSupportDemandCommandRepositoryPortAdapter : Abstract
     {
         return base.GetQueryableDbSet()
             .AsSplitQuery()
-            .Include(entity => entity.Locations).ThenInclude(entity => entity.FeatureImage)
+            .Include(entity => entity.LocationBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.FeatureImage)
             .Include(entity => entity.ImageBridges).ThenInclude(bridge => bridge.Linked);
     }
 }

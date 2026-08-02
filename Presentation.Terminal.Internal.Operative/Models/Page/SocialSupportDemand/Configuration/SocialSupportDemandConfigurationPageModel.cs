@@ -2,15 +2,15 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.CQRS.Command;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.CQRS.Command.Clipped;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n.Detail;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.SocialSupportDemand.Configuration;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.SocialSupportDemand.Detail;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -30,9 +30,9 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
     DateTime endAt;
     private string? description;
 
-    private readonly List<LocationCreateClippedRequestModel> inLocations = [];
-    private readonly List<LocationUpdateClippedRequestModel> patchLocations = [];
-    private readonly List<Guid> outLocationIds = [];
+    private readonly List<LocationCreateRequestModel> inLocations = [];
+    private readonly List<Guid> linkLocationIds = [];
+    private readonly List<Guid> unlinkLocationIds = [];
 
     private readonly List<ImageCreateRequestModel> inImages = [];
     private readonly List<Guid> outImageIds = [];
@@ -43,51 +43,51 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
 
         #region Locations
 
-        CreateLocationCommand = new Command(async () =>
+        AddLocationCommand = new Command(async () =>
         {
-            await Application.Current!.MainPage!.NavigationPushPageAsync(new LocationConfigurationPage(new LocationConfigurationPageModel(null, LocationCreateSuccess_Callback, new SocialSupportDemandLocationConfigurationValidator())));
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new NavigationPage(new LocationPickPage(LocationPicked_Callback, LocationCreateSuccess_Callback)));
         });
 
-        UpdateLocationCommand = new Command<LocationDetailDtoModel>(async model =>
-        {
-            LocationUpdateClippedRequestModel? updateModel = null;
+        //UpdateLocationCommand = new Command<LocationDetailDtoModel>(async model =>
+        //{
+        //    LocationUpdateRequestModel? updateModel = null;
 
-            bool handled = false;
+        //    bool handled = false;
 
-            foreach (var item in inLocations)
-            {
-                if (item.Id != model.Id) continue;
+        //    foreach (var item in inLocations)
+        //    {
+        //        if (item.Id != model.Id) continue;
 
-                LocationCreateClippedRequestModel createModel = inLocations.First(item => item.Id == model.Id);
+        //        LocationCreateRequestModel createModel = inLocations.First(item => item.Id == model.Id);
 
-                updateModel = new LocationUpdateClippedRequestModel(createModel.Id, createModel.Name, createModel.Coordinate, createModel.PostalAddress, createModel.FeatureImageCreateRequest, createModel.Description);
+        //        updateModel = new LocationUpdateRequestModel(createModel.Id, createModel.Name, createModel.Coordinate, createModel.PostalAddress, createModel.FeatureImageCreateRequest, createModel.Description);
 
-                handled = true;
+        //        handled = true;
 
-                break;
-            }
+        //        break;
+        //    }
 
-            if (!handled)
-            {
-                foreach (var item in patchLocations)
-                {
-                    if (item.Id != model.Id) continue;
+        //    if (!handled)
+        //    {
+        //        foreach (var item in patchLocations)
+        //        {
+        //            if (item.Id != model.Id) continue;
 
-                    updateModel = patchLocations.First(item => item.Id == model.Id);
+        //            updateModel = patchLocations.First(item => item.Id == model.Id);
 
-                    handled = true;
+        //            handled = true;
 
-                    break;
-                }
-            }
+        //            break;
+        //        }
+        //    }
 
-            if (!handled)
-            {
-                updateModel = new(model.Id, model.Name, model.Coordinate, model.PostalAddress, null, model.Description);
-            }
+        //    if (!handled)
+        //    {
+        //        updateModel = new(model.Id, model.Name, model.Coordinate, model.PostalAddress, null, model.Description);
+        //    }
 
-            await Application.Current!.MainPage!.NavigationPushPageAsync(new LocationConfigurationPage(new LocationConfigurationPageModel(updateModel, LocationUpdateSuccess_Callback, new SocialSupportDemandLocationConfigurationValidator())));
-        });
+        //    await Application.Current!.MainPage!.NavigationPushPageAsync(new LocationConfigurationPage(new LocationConfigurationPageModel(updateModel, LocationUpdateSuccess_Callback, new SocialSupportDemandLocationConfigurationValidator())));
+        //});
 
         DeleteLocationCommand = new Command<LocationDetailDtoModel>(model =>
         {
@@ -110,11 +110,11 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
 
                 if (!handled)
                 {
-                    foreach (var item in patchLocations)
+                    foreach (var item in linkLocationIds)
                     {
-                        if (item.Id != model.Id) continue;
+                        if (item != model.Id) continue;
 
-                        patchLocations.Remove(patchLocations.First(item => item.Id == model.Id));
+                        linkLocationIds.Remove(item);
 
                         break;
                     }
@@ -122,7 +122,7 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
 
                 if (!handled)
                 {
-                    outLocationIds.Add(model.Id);
+                    unlinkLocationIds.Add(model.Id);
                 }
 
                 Dispatcher.Dispatch(() => Locations!.Remove(model));
@@ -133,7 +133,7 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
 
         DetailLocationCommand = new Command<LocationDetailDtoModel>(async model =>
         {
-            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new LocationDetailPage(model, inLocations.FirstOrDefault(item => item.Id == model.Id)?.FeatureImageCreateRequest ?? patchLocations.FirstOrDefault(item => item.Id == model.Id)?.FeatureImageCreateRequest ?? null));
+            await Application.Current!.MainPage!.NavigationPushModalPageAsync(new LocationDetailPage(model, inLocations.FirstOrDefault(item => item.Id == model.Id)?.FeatureImageCreateRequest ?? null));
         });
 
         #endregion
@@ -206,9 +206,9 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
 
     public ObservableCollection<LocationDetailDtoModel> Locations { get; init; }
 
-    public ICommand CreateLocationCommand { get; init; }
+    public ICommand AddLocationCommand { get; init; }
 
-    public ICommand UpdateLocationCommand { get; init; }
+    //public ICommand UpdateLocationCommand { get; init; }
 
     public ICommand DeleteLocationCommand { get; init; }
 
@@ -231,6 +231,7 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
                 priority,
                 true,
                 [.. inLocations],
+                [.. linkLocationIds],
                 [.. inImages],
                 hasStartAt ? startAt : null,
                 hasEndAt ? endAt : null,
@@ -249,8 +250,8 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
                 priority,
                 true,
                 [.. inLocations],
-                [.. patchLocations],
-                [.. outLocationIds],
+                [.. linkLocationIds],
+                [.. unlinkLocationIds],
                 [.. inImages],
                 [.. outImageIds],
                 hasStartAt ? startAt : null,
@@ -259,9 +260,9 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
             ));
     }
 
-    private void LocationCreateSuccess_Callback(LocationUpdateClippedRequestModel model)
+    private void LocationCreateSuccess_Callback(LocationUpdateRequestModel model)
     {
-        inLocations.Add(new LocationCreateClippedRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
+        inLocations.Add(new LocationCreateRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
 
         // TODO Order list !!!
         Locations.Add(new LocationDetailDtoModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, null, model.Description));
@@ -269,60 +270,70 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
         hasChangesFlag = true;
     }
 
-    private void LocationUpdateSuccess_Callback(LocationUpdateClippedRequestModel model)
+    private void LocationPicked_Callback(LocationDetailDtoModel model)
     {
-        bool handled = false;
-
-        foreach (var item in inLocations)
-        {
-            if (item.Id != model.Id) continue;
-
-            inLocations.Remove(item);
-
-            inLocations.Add(new LocationCreateClippedRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
-
-            handled = true;
-
-            break;
-        }
-
-        if (!handled)
-        {
-            foreach (var item in patchLocations)
-            {
-                if (item.Id != model.Id) continue;
-
-                patchLocations.Remove(item);
-
-                patchLocations.Add(new LocationUpdateClippedRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
-
-                handled = true;
-
-                break;
-            }
-        }
-
-        if (!handled)
-        {
-            patchLocations.Add(new LocationUpdateClippedRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
-        }
-
-        var index = -1;
+        linkLocationIds.Add(model.Id);
 
         // TODO Order list !!!
-        foreach (var item in Locations)
-        {
-            index++;
-
-            if (item.Id != model.Id) continue;
-
-            Locations[index] = new LocationDetailDtoModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, null, model.Description);
-
-            break;
-        }
+        Locations.Add(model);
 
         hasChangesFlag = true;
     }
+
+    //private void LocationUpdateSuccess_Callback(LocationUpdateRequestModel model)
+    //{
+    //    bool handled = false;
+
+    //    foreach (var item in inLocations)
+    //    {
+    //        if (item.Id != model.Id) continue;
+
+    //        inLocations.Remove(item);
+
+    //        inLocations.Add(new LocationCreateRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
+
+    //        handled = true;
+
+    //        break;
+    //    }
+
+    //    if (!handled)
+    //    {
+    //        foreach (var item in patchLocations)
+    //        {
+    //            if (item.Id != model.Id) continue;
+
+    //            patchLocations.Remove(item);
+
+    //            patchLocations.Add(new LocationUpdateRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
+
+    //            handled = true;
+
+    //            break;
+    //        }
+    //    }
+
+    //    if (!handled)
+    //    {
+    //        patchLocations.Add(new LocationUpdateRequestModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, model.FeatureImageCreateRequest, model.Description));
+    //    }
+
+    //    var index = -1;
+
+    //    // TODO Order list !!!
+    //    foreach (var item in Locations)
+    //    {
+    //        index++;
+
+    //        if (item.Id != model.Id) continue;
+
+    //        Locations[index] = new LocationDetailDtoModel(model.Id, model.Name, model.Coordinate, model.PostalAddress, null, model.Description);
+
+    //        break;
+    //    }
+
+    //    hasChangesFlag = true;
+    //}
 
     public void ImagePickSuccess_Callback(ImageCreateRequestModel model)
     {
