@@ -9,7 +9,7 @@ public record SocialSupportDemandUpdateRequestModel(
     int Priority,
     bool IsEnabled,
     IEnumerable<LocationCreateRequestModel> InLocations,
-    IEnumerable<Guid> linkLocationIds,
+    IEnumerable<Guid> LinkLocationIds,
     IEnumerable<Guid> UnlinkLocationIds,
     IEnumerable<ImageCreateRequestModel> InImages,
     IEnumerable<Guid> OutImageIds,

@@ -41,7 +41,7 @@ internal sealed class SocialSupportDemandEntityTypeConfiguration : IEntityTypeCo
                 .HasField("imageBridges");
     }
 
-    public void Configure(OwnedNavigationBuilder<SocialSupportDemand, SocialSupportDemandLocationBridge> builder)
+    private static void Configure(OwnedNavigationBuilder<SocialSupportDemand, SocialSupportDemandLocationBridge> builder)
     {
         builder.ToTable(LOCATION_BRIDGE_TABLE_NAME);
 
@@ -60,7 +60,7 @@ internal sealed class SocialSupportDemandEntityTypeConfiguration : IEntityTypeCo
         builder.HasOne(entity => entity.Linked).WithMany().HasForeignKey(entity => entity.LinkedId).OnDelete(DeleteBehavior.Restrict);
     }
 
-    public void Configure(OwnedNavigationBuilder<SocialSupportDemand, SocialSupportDemandImageBridge> builder) 
+    private static void Configure(OwnedNavigationBuilder<SocialSupportDemand, SocialSupportDemandImageBridge> builder) 
     {
         builder.ToTable(IMAGE_BRIDGE_TABLE_NAME);
 

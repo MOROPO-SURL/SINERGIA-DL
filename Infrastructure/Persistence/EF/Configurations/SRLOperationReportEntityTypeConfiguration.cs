@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
 
-internal sealed class OperationReportEntityTypeConfiguration : IEntityTypeConfiguration<SRLOperationReport>
+internal sealed class SRLOperationReportEntityTypeConfiguration : IEntityTypeConfiguration<SRLOperationReport>
 {
     private const string TABLE_NAME = "srloperationreports";
     private const string ACCOUNTING_ENTRY_TABLE_NAME = "srloperationreport_accountingentries";

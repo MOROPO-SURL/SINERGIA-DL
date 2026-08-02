@@ -23,4 +23,4 @@ public record SRLOperationReportDetailDto(
     IEnumerable<KeyValuePair<OperationReportAccountingEntryCurrency, float>> OperativeTaxEntries,
     IEnumerable<KeyValuePair<OperationReportAccountingEntryCurrency, float>> SellTaxEntries,
     IEnumerable<KeyValuePair<OperationReportAccountingEntryCurrency, float>> HumanResourcePayloadEntries,
-    string? description = null) : IDetailDto;
+    string? Description = null) : IDetailDto;

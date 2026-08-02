@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseConfigurationEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Models.Page.SocialResponsabilityAction"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialResponsabilityAction.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:location_interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.View;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.UI.Pages.SocialResponsabilityAction.SocialResponsabilityActionConfigurationPage"
+    x:TypeArguments="interop_dto_models:SRLSocialResponsabilityActionDetailDtoModel,interop_dto_models:SRLSocialResponsabilityActionDetailDtoModel,local_configuration_page_models:SocialResponsabilityActionConfigurationPageModel"
+    x:DataType="local_configuration_page_models:SocialResponsabilityActionConfigurationPageModel"
+    Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:PostalAddressDetailDtoModelToStringConverter x:Key="PostalAddressDetailDtoModelToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Command="{Binding ApplyCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
+                    Glyph="&#xf12c;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Command="{Binding CancelCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
+                    Glyph="&#xf156;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Título" />
+                    <Entry Text="{Binding Title}" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:SocialResponsabilityActionConfigurationPageModel.TitleValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
+                        <DatePicker Date="{Binding At}" Format="dd/MM/yyyy" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_configuration_page_models:SocialResponsabilityActionConfigurationPageModel.AtValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="200" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:SocialResponsabilityActionConfigurationPageModel.DescriptionValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Localizaciones" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Command="{Binding AddLocationCommand, Mode=OneTime}" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Locations}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="location_interop_dto_models:LocationDetailDtoModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                                <VerticalStackLayout 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Margin="8,0,0,0">
+                                                    <Label 
+                                                        LineBreakMode="TailTruncation"
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Name, Mode=OneTime}" />
+                                                    <Label
+                                                        Style="{StaticResource OffLabelStyle}"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding PostalAddress, Converter={StaticResource PostalAddressDetailDtoModelToStringConverter}, Mode=OneTime}" />
+                                                </VerticalStackLayout>
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    VerticalOptions="Center"
+                                                    Text="&#xF2FD;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                                <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                    VerticalOptions="Center"
+                                                    Text="&#xFA78;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DeleteLocationCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:SocialResponsabilityActionConfigurationPageModel.LocationsValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Imágenes" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AddImageButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Images}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout 
+                                        Orientation="Vertical" 
+                                        Span="2" 
+                                        HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                        VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                        ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                        ItemWidth="{Static common_constants:CardViewSizeConstants.IMAGE_SQUARE_CARD_VIEW_SIZE}" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="common_ui_view_models:ImageListItemViewModel">
+                                        <Grid HeightRequest="{Static common_constants:CardViewSizeConstants.IMAGE_SQUARE_CARD_VIEW_SIZE}">
+                                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                                <Frame 
+                                                    Margin="16"
+                                                    Padding="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                                    <ffimageloading_views:CachedImage
+                                                        Source="{Binding Source}" />
+                                                </Frame>
+                                                <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                    HorizontalOptions="End" VerticalOptions="Start"
+                                                    Text="&#xFA78;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DeleteImageCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</common_ui_base_pages:BaseConfigurationEntityPage>

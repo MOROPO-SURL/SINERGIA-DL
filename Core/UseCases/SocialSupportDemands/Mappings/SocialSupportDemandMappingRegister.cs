@@ -15,7 +15,11 @@ internal sealed class SocialSupportDemandMappingRegister : IRegister
     {
         config.NewConfig<Guid, SocialSupportDemandId>().MapWith(src => new SocialSupportDemandId(src));
 
+        config.NewConfig<Guid?, SocialSupportDemandId?>().MapWith(src => src == null ? null : new SocialSupportDemandId(src.Value));
+
         config.NewConfig<SocialSupportDemandId, Guid>().MapWith(src => src.Value);
+
+        config.NewConfig<SocialSupportDemandId?, Guid?>().MapWith(src => src == null ? null : src.Value.Value);
 
         config.NewConfig<SocialSupportDemand, SocialSupportDemandDetailDto>()
             .Map(dest => dest.Images, src => src.ImageBridges.Select(bridge => bridge.Linked.Adapt<ImageBasicDto>()))

@@ -8,9 +8,9 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDema
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.View;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n.Detail;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -20,6 +20,7 @@ public sealed class SocialSupportDemandConfigurationPageModel : AbstractConfigur
 {
     public static string TitleValidableProperty => nameof(Title);
     public static string EndAtValidableProperty => nameof(EndAt);
+    public static string LocationsValidableProperty => nameof(Locations);
     public static string DescriptionValidableProperty => nameof(Description);
 
     private string title;

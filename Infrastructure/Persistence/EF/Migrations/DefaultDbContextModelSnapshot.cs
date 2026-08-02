@@ -847,6 +847,41 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.ToTable("services", (string)null);
                 });
 
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.SRLSocialResponsabilityAction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid?>("DemandId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DemandId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("srlsocialresposabilityactions", (string)null);
+                });
+
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", b =>
                 {
                     b.Property<Guid>("Id")
@@ -3312,6 +3347,80 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.SRLSocialResponsabilityAction", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", "Demand")
+                        .WithMany()
+                        .HasForeignKey("DemandId");
+
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.SRLDevelopmentActorProfile", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionImageBridge", "ImageBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId")
+                                .IsUnique();
+
+                            b1.ToTable("srlsocialresposabilityaction_image_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Image", "Linked")
+                                .WithOne()
+                                .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.SRLSocialResponsabilityAction.ImageBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionImageBridge", "LinkedId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionLocationBridge", "LocationBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("srlsocialresposabilityaction_location_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.Navigation("Demand");
+
+                    b.Navigation("ImageBridges");
+
+                    b.Navigation("LocationBridges");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", b =>

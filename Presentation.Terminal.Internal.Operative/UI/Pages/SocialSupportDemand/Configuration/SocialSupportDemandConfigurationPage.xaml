@@ -2,12 +2,12 @@
 <common_ui_base_pages:BaseConfigurationEntityPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View"
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.SocialSupportDemand.Configuration"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialSupportDemand.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:location_interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.View;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
@@ -198,6 +198,13 @@
                             </CollectionView>
                         </Grid>
                     </Frame>
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:SocialSupportDemandConfigurationPageModel.LocationsValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
                 </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Imágenes" />
@@ -239,7 +246,7 @@
                                     <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="local_view_models:ImageListItemViewModel">
+                                    <DataTemplate x:DataType="common_ui_view_models:ImageListItemViewModel">
                                         <Grid HeightRequest="{Static common_constants:CardViewSizeConstants.IMAGE_SQUARE_CARD_VIEW_SIZE}">
                                             <Grid HorizontalOptions="Center" VerticalOptions="Center">
                                                 <Frame 
