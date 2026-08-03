@@ -1,3 +1,4 @@
+using Mapsui.UI.Maui;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.Models.Page;
@@ -7,6 +8,8 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyM
 
 public partial class DashboardPage : ContentPage
 {
+    private MapView mapView = null!;
+
 	public DashboardPage()
 	{
 		InitializeComponent();
@@ -18,7 +21,7 @@ public partial class DashboardPage : ContentPage
     {
         base.OnAppearing();
 
-		if (!IsEnabled)
+        if (!IsEnabled)
         {
             AppShellPageModel parentBindingContext = (AppShellPageModel)Parent.BindingContext;
 
@@ -29,7 +32,7 @@ public partial class DashboardPage : ContentPage
             concreteBindingContext.LoadState();
         }
 
-		IsEnabled = true;
+        IsEnabled = true;
     }
 
     private void DiagnosticSummaryFrameTapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

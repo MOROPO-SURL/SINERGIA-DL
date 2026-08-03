@@ -92,7 +92,7 @@
         </Grid>
     </Shell.FlyoutHeader>
     <ShellContent
-        Title="Panel de Control"
+        Title="Portada"
         ContentTemplate="{DataTemplate local_pages:DashboardPage}"
         Route="DashboardPage">
         <ShellContent.Icon>

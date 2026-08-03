@@ -32,6 +32,8 @@ public partial class MainPage : BaseBindingContextedContentPage<MainPageModel>
         IsEnabled = true;
 
         ReloadToolbarItem_Clicked(this, EventArgs.Empty);
+
+        MapWrapperView.ReloadDataLayers();
     }
 
     private void ReloadToolbarItem_Clicked(object sender, EventArgs eventArgs)

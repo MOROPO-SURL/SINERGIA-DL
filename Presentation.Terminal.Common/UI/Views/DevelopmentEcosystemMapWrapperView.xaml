@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.DevelopmentEcosystemMapWrapperView">
+    <Frame Padding="8">
+        <Grid>
+            <ContentView x:Name="MapContentView" />
+            <Grid 
+                x:Name="MapFallbackOverviewGrid"
+                IsVisible="False"
+                BackgroundColor="#A7000000"
+                Padding="32">
+                <Label 
+                    HorizontalOptions="Center" VerticalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    TextColor="White"
+                    Text="No fue posible obtener los datos de los actores económicos en este momento." />
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentView>

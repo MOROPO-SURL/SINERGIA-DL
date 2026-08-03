@@ -2,7 +2,7 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.External.Common.Clients;
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
 
 public sealed class SRLDevelopmentActorProfilesQueryApiClient
 {
@@ -11,6 +11,11 @@ public sealed class SRLDevelopmentActorProfilesQueryApiClient
     public SRLDevelopmentActorProfilesQueryApiClient(IHttpClientProviderPort httpClientProvider)
     {
         this.httpClientProvider = httpClientProvider;
+    }
+
+    public Task<SRLDevelopmentActorProfileDetailDtoModel[]> GetAllAsync()
+    {
+        return httpClientProvider.GetHttpClient().SendGetAsync<SRLDevelopmentActorProfileDetailDtoModel[]>("api/srldevelopmentactorprofiles");
     }
 
     public Task<SRLDevelopmentActorProfileBasicDtoModel> GetBasicByOwnerAsync(Guid id)

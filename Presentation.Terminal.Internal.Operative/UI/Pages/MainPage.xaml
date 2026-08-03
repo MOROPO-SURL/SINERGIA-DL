@@ -15,6 +15,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -55,6 +56,21 @@
                         </StackLayout>
                     </Frame>
                 </VerticalStackLayout>
+                <VerticalStackLayout 
+                    HorizontalOptions="Start"
+                    Margin="8,0">
+                    <Label
+                        Margin="0,0,8,0"
+                        FontAttributes="Bold"
+                        Text="Ecosistema de actores del desarrollo" />
+                    <BoxView 
+                        Style="{StaticResource DetailSectionSeparatorBoxViewStyle}"
+                        Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                </VerticalStackLayout>
+                <common_ui_views:DevelopmentEcosystemMapWrapperView
+                    x:Name="MapWrapperView"
+                    Margin="8"
+                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X / 2'}" />
             </VerticalStackLayout>
         </ScrollView>
         <common_ui_views:BusyView IsVisible="{Binding IsBusy}" />
