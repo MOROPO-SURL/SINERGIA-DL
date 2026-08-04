@@ -29,8 +29,25 @@ internal sealed class OperationReportMappingRegister : IRegister
             .Map(dest => dest.HumanResourcePayloadEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.HumanResourcePayload).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
             .Map(dest => dest, src => src);
 
-        config.NewConfig<SRLOperationReportCreateCommand, SRLOperationReport>()
-            .MapWith(src => Build(src));
+        config.NewConfig<SRLOperationReportCreateCommand, SRLOperationReport>().MapWith(src => Build(src));
+
+        config.NewConfig<PDLOperationReportCreateCommand, PDLOperationReport>().MapWith(src => new PDLOperationReport(
+            new OperationReportId(default),
+            new Domain.Aggretates.DevelopmentActorProfileAggregate.Values.DevelopmentActorProfileId(src.OwnerId),
+            DateTime.Now,
+            src.Period,
+            src.EmployeeCount,
+            src.FemaleEmployeeCount,
+            src.DiscapacityEmployeeCount,
+            src.GridEnergySpend,
+            src.RenerenewableEnergyGeneration,
+            src.RenerenewableEnergyExportation,
+            src.Income,
+            src.IncomeBankDeposit,
+            src.PeriodResult,
+            src.CAMComission,
+            src.Description,
+            null));
     }
 
     private static SRLOperationReport Build(SRLOperationReportCreateCommand model)

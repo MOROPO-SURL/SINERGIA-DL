@@ -203,6 +203,8 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<ISRLOperationReportQueryRepositoryPort, SRLOperationReportQueryRepositoryPortAdapter>();
         services.AddScoped<ISRLOperationReportCommandRepositoryPort, SRLOperationReportCommandRepositoryPortAdapter>();
+        services.AddScoped<IPDLOperationReportQueryRepositoryPort, PDLOperationReportQueryRepositoryPortAdapter>();
+        services.AddScoped<IPDLOperationReportCommandRepositoryPort, PDLOperationReportCommandRepositoryPortAdapter>();
 
         services.AddScoped<ISRLSocialResponsabilityActionQueryRepositoryPort, SRLSocialResponsabilityActionQueryRepositoryPortAdapter>();
         services.AddScoped<ISRLSocialResponsabilityActionCommandRepositoryPort, SRLSocialResponsabilityActionCommandRepositoryPortAdapter>();

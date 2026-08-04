@@ -98,6 +98,15 @@
 	  <Compile Update="UI\Pages\DevelopmentActorProfile\NaturalOwnedPDLDevelopmentActorProfileDetailPage.xaml.cs">
 	    <DependentUpon>NaturalOwnedPDLDevelopmentActorProfileDetailPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\OperationReportsManagementPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\OperationReport\OperationReportConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\OperationReport\OperationReportDetailPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -124,6 +133,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\DevelopmentActorProfile\NaturalOwnedPDLDevelopmentActorProfileDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OperationReportsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OperationReport\OperationReportConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OperationReport\OperationReportDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">

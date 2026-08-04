@@ -471,6 +471,65 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.ToTable("objectives", (string)null);
                 });
 
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.PDLOperationReport", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<float>("CAMComission")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<int>("DiscapacityEmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FemaleEmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("GridEnergySpend")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Income")
+                        .HasColumnType("real");
+
+                    b.Property<float>("IncomeBankDeposit")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("Period")
+                        .HasColumnType("date");
+
+                    b.Property<float>("PeriodResult")
+                        .HasColumnType("real");
+
+                    b.Property<float>("RenerenewableEnergyExportation")
+                        .HasColumnType("real");
+
+                    b.Property<float>("RenerenewableEnergyGeneration")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId", "Period")
+                        .IsUnique();
+
+                    b.ToTable("pdloperationreports", (string)null);
+                });
+
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.SRLOperationReport", b =>
                 {
                     b.Property<long>("Id")
@@ -2973,6 +3032,17 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Navigation("Challenges");
 
                     b.Navigation("Projections");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.PDLOperationReport", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Abstractions.AbstractPDLDevelopmentActorProfile", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.SRLOperationReport", b =>

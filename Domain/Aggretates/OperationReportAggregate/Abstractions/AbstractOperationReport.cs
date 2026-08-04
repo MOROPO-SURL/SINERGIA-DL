@@ -7,8 +7,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggre
 
 public abstract class AbstractOperationReport : AbstractEntity<OperationReportId, long>, IAggregateRoot<OperationReportId, long>
 {
-    protected List<Entities.OperationReportAccountingEntry> accountingEntries = [];
-
     internal protected AbstractOperationReport() : base(default) { }
 
     protected AbstractOperationReport(
@@ -22,7 +20,6 @@ public abstract class AbstractOperationReport : AbstractEntity<OperationReportId
         float gridEnergySpend,
         float renerenewableEnergyGeneration,
         float renerenewableEnergyExportation,
-        IEnumerable<Entities.OperationReportAccountingEntry> accountingEntries,
         string? description = null) : base(id)
     {
         OwnerId = ownerId;
@@ -35,8 +32,6 @@ public abstract class AbstractOperationReport : AbstractEntity<OperationReportId
         RenerenewableEnergyGeneration = renerenewableEnergyGeneration;
         RenerenewableEnergyExportation = renerenewableEnergyExportation;
         Description = description;
-
-        this.accountingEntries = [.. accountingEntries];
     }
 
     public DevelopmentActorProfileId OwnerId { get; set; }
@@ -58,6 +53,4 @@ public abstract class AbstractOperationReport : AbstractEntity<OperationReportId
     public float RenerenewableEnergyExportation { get; set; }
 
     public string? Description { get; set; }
-
-    public IReadOnlyList<Entities.OperationReportAccountingEntry> AccountingEntries => [.. accountingEntries];
 }
