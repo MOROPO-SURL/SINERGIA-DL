@@ -6,13 +6,9 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyM
 
 public sealed class DashboardPageModel : AbstractContextPageModel
 {
-    private bool isDevelopmentActorProfileMissing;
-
     public DashboardPageModel(OrganizationDetailDtoModel organization, PersonBasicDtoModel representative) : base(organization, representative, null)
     {
     }
-
-    public bool IsDevelopmentActorProfileMissing { get => isDevelopmentActorProfileMissing; set => SetProperty(ref isDevelopmentActorProfileMissing, value); }
 
     public void LoadState()
     {

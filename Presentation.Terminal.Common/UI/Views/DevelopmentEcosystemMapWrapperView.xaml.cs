@@ -6,15 +6,14 @@ using Mapsui.UI.Maui;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;
 
 public partial class DevelopmentEcosystemMapWrapperView : ContentView
 {
-    private MemoryLayer srlLayer;
-
-	public DevelopmentEcosystemMapWrapperView()
+    public DevelopmentEcosystemMapWrapperView()
 	{
 		InitializeComponent();
 	}
@@ -30,6 +29,10 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
             IsMyLocationButtonVisible = false
         };
 
+        mapView.Map.HomeIsCalledOnce = true;
+
+        mapView.Map.Navigator.CenterOnAndZoomTo(SphericalMercator.FromLonLat(-77.917516107770112, 21.382514975314585).ToMPoint(), 20);
+
         mapView.Info += Map_Info;
 
         mapView.Map.Widgets.Enqueue(new Mapsui.Widgets.ScaleBar.ScaleBarWidget(mapView.Map)
@@ -43,8 +46,6 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
         {
             Name = "Base"
         });
-
-        mapView.Map.Home = map => map.CenterOnAndZoomTo(SphericalMercator.FromLonLat(-77.917516107770112, 21.382514975314585).ToMPoint(), map.Resolutions[12]);
 
         MapContentView.Content = mapView;
 
@@ -73,20 +74,24 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
 
     public void ReloadDataLayers()
     {
-        SRLDevelopmentActorProfilesQueryApiClient srlDevelopmentActorProfileApiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+        IHttpClientProviderPort httpClientProvider = IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>();
 
-        var listSrlTask = srlDevelopmentActorProfileApiClient.GetAllAsync();
+        SRLDevelopmentActorProfilesQueryApiClient srlDevelopmentActorProfileApiClient = new(httpClientProvider);
+        NaturalOwnedPDLDevelopmentActorProfilesQueryApiClient naturalOwnedPDLDevelopmentActorProfileApiClient = new(httpClientProvider);
+        LegalOwnedPDLDevelopmentActorProfilesQueryApiClient legalOwnedPDLDevelopmentActorProfileApiClient = new(httpClientProvider);
 
-        srlDevelopmentActorProfileApiClient.GetAllAsync().ContinueWith(task =>
+        Task<SRLDevelopmentActorProfileDetailDtoModel[]> listSrlTask = srlDevelopmentActorProfileApiClient.GetAllAsync();
+        Task<NaturalOwnedPDLDevelopmentActorProfileDetailDtoModel[]> listNaturalPDLTask = naturalOwnedPDLDevelopmentActorProfileApiClient.GetAllAsync();
+        Task<LegalOwnedPDLDevelopmentActorProfileDetailDtoModel[]> listLegalPDLTask = legalOwnedPDLDevelopmentActorProfileApiClient.GetAllAsync();
+
+        Task.WhenAll(listSrlTask, listNaturalPDLTask, listLegalPDLTask).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() => MapFallbackOverviewGrid.IsVisible = !task.IsCompletedSuccessfully);
 
-            if (srlLayer == null)
-            {
-                srlLayer = BuildSRLsLayer(task.Result);
+            MapView mapView = (MapView)MapContentView.Content;
 
-                ((MapView)MapContentView.Content).Map.Layers.Add(srlLayer);
-            }
+            mapView.Map.Layers.Add(BuildSRLsLayer(listSrlTask.Result));
+            mapView.Map.Layers.Add(BuildPDLsLayer(listNaturalPDLTask.Result, listLegalPDLTask.Result));
         });
     }
 
@@ -94,13 +99,15 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
     {
         List<IFeature> features = [];
 
+        Mapsui.Styles.Color pinColor = Mapsui.Styles.Color.Blue;
+
         foreach (SRLDevelopmentActorProfileDetailDtoModel srl in srls)
         {
             PointFeature mainLocationPointFeature = new(SphericalMercator.FromLonLat(srl.MainLocation.Coordinate.Longitude, srl.MainLocation.Coordinate.Latitude).ToMPoint());
 
             mainLocationPointFeature[nameof(SRLDevelopmentActorProfileDetailDtoModel)] = srl;
 
-            mainLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(Mapsui.Styles.Color.Blue, 0.6));
+            mainLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
             mainLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
             {
                 Title = srl.Owner.Name,
@@ -110,6 +117,7 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
                 Subtitle = srl.MainLocation.Name,
                 SubtitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
                 SubtitleFontColor = Mapsui.Styles.Color.Gray,
+                SubtitleTextAlignment = Mapsui.Widgets.Alignment.Center,
                 MaxWidth = 180,
                 Type = Mapsui.Styles.CalloutType.Detail,
                 RectRadius = 8,
@@ -120,21 +128,159 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
 
             features.Add(mainLocationPointFeature);
 
-            //foreach (LocationDetailDtoModel item in srl.CommercialLocations)
-            //{
-            //    PointFeature commercialLocationPointFeature = new(SphericalMercator.FromLonLat(srl.MainLocation.Coordinate.Longitude, srl.MainLocation.Coordinate.Latitude).ToMPoint());
+            foreach (LocationDetailDtoModel item in srl.CommercialLocations)
+            {
+                PointFeature commercialLocationPointFeature = new(SphericalMercator.FromLonLat(item.Coordinate.Longitude, item.Coordinate.Latitude).ToMPoint());
 
-            //    commercialLocationPointFeature[nameof(SRLDevelopmentActorProfileDetailDtoModel)] = srl;
+                commercialLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
+                commercialLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
+                {
+                    Title = srl.Owner.Name,
+                    TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                    TitleFontColor = Mapsui.Styles.Color.Black,
+                    TitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                    Subtitle = item.Name,
+                    SubtitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                    SubtitleFontColor = Mapsui.Styles.Color.Gray,
+                    SubtitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                    MaxWidth = 180,
+                    Type = Mapsui.Styles.CalloutType.Detail,
+                    RectRadius = 8,
+                    ShadowWidth = 4,
+                    Enabled = false,
+                    SymbolOffset = new Mapsui.Styles.Offset(0, Mapsui.Styles.SymbolStyle.DefaultHeight * 1f)
+                });
 
-            //    commercialLocationPointFeature.Styles.Add(new Mapsui.Styles.SymbolStyle { BitmapId = GetType().LoadSvgId("Resources.Images.actor-srl.svg"), SymbolScale = 0.36 });
-
-            //    features.Add(commercialLocationPointFeature);
-            //}
+                features.Add(commercialLocationPointFeature);
+            }
         }
 
         return new()
         {
             Name = "SRLs",
+            IsMapInfoLayer = true,
+            Style = null,
+            Features = features
+        };
+    }
+
+    private MemoryLayer BuildPDLsLayer(NaturalOwnedPDLDevelopmentActorProfileDetailDtoModel[] naturalPDLs, LegalOwnedPDLDevelopmentActorProfileDetailDtoModel[] legalPDLs)
+    {
+        List<IFeature> features = [];
+
+        Mapsui.Styles.Color pinColor = Mapsui.Styles.Color.Green;
+
+        foreach (NaturalOwnedPDLDevelopmentActorProfileDetailDtoModel pdl in naturalPDLs)
+        {
+            PointFeature mainLocationPointFeature = new(SphericalMercator.FromLonLat(pdl.MainLocation.Coordinate.Longitude, pdl.MainLocation.Coordinate.Latitude).ToMPoint());
+
+            mainLocationPointFeature[nameof(SRLDevelopmentActorProfileDetailDtoModel)] = pdl;
+
+            mainLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
+            mainLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
+            {
+                Title = pdl.Owner.Name,
+                TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                TitleFontColor = Mapsui.Styles.Color.Black,
+                TitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                Subtitle = pdl.MainLocation.Name,
+                SubtitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                SubtitleFontColor = Mapsui.Styles.Color.Gray,
+                SubtitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                MaxWidth = 180,
+                Type = Mapsui.Styles.CalloutType.Detail,
+                RectRadius = 8,
+                ShadowWidth = 4,
+                Enabled = false,
+                SymbolOffset = new Mapsui.Styles.Offset(0, Mapsui.Styles.SymbolStyle.DefaultHeight * 1f)
+            });
+
+            features.Add(mainLocationPointFeature);
+
+            foreach (LocationDetailDtoModel item in pdl.CommercialLocations)
+            {
+                PointFeature commercialLocationPointFeature = new(SphericalMercator.FromLonLat(item.Coordinate.Longitude, item.Coordinate.Latitude).ToMPoint());
+
+                commercialLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
+                commercialLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
+                {
+                    Title = pdl.Owner.Name,
+                    TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                    TitleFontColor = Mapsui.Styles.Color.Black,
+                    TitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                    Subtitle = item.Name,
+                    SubtitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                    SubtitleFontColor = Mapsui.Styles.Color.Gray,
+                    SubtitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                    MaxWidth = 180,
+                    Type = Mapsui.Styles.CalloutType.Detail,
+                    RectRadius = 8,
+                    ShadowWidth = 4,
+                    Enabled = false,
+                    SymbolOffset = new Mapsui.Styles.Offset(0, Mapsui.Styles.SymbolStyle.DefaultHeight * 1f)
+                });
+
+                features.Add(commercialLocationPointFeature);
+            }
+        }
+
+        foreach (LegalOwnedPDLDevelopmentActorProfileDetailDtoModel pdl in legalPDLs)
+        {
+            PointFeature mainLocationPointFeature = new(SphericalMercator.FromLonLat(pdl.MainLocation.Coordinate.Longitude, pdl.MainLocation.Coordinate.Latitude).ToMPoint());
+
+            mainLocationPointFeature[nameof(SRLDevelopmentActorProfileDetailDtoModel)] = pdl;
+
+            mainLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
+            mainLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
+            {
+                Title = pdl.Owner.Name,
+                TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                TitleFontColor = Mapsui.Styles.Color.Black,
+                TitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                Subtitle = pdl.MainLocation.Name,
+                SubtitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                SubtitleFontColor = Mapsui.Styles.Color.Gray,
+                SubtitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                MaxWidth = 180,
+                Type = Mapsui.Styles.CalloutType.Detail,
+                RectRadius = 8,
+                ShadowWidth = 4,
+                Enabled = false,
+                SymbolOffset = new Mapsui.Styles.Offset(0, Mapsui.Styles.SymbolStyle.DefaultHeight * 1f)
+            });
+
+            features.Add(mainLocationPointFeature);
+
+            foreach (LocationDetailDtoModel item in pdl.CommercialLocations)
+            {
+                PointFeature commercialLocationPointFeature = new(SphericalMercator.FromLonLat(item.Coordinate.Longitude, item.Coordinate.Latitude).ToMPoint());
+
+                commercialLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
+                commercialLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
+                {
+                    Title = pdl.Owner.Name,
+                    TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                    TitleFontColor = Mapsui.Styles.Color.Black,
+                    TitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                    Subtitle = item.Name,
+                    SubtitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                    SubtitleFontColor = Mapsui.Styles.Color.Gray,
+                    SubtitleTextAlignment = Mapsui.Widgets.Alignment.Center,
+                    MaxWidth = 180,
+                    Type = Mapsui.Styles.CalloutType.Detail,
+                    RectRadius = 8,
+                    ShadowWidth = 4,
+                    Enabled = false,
+                    SymbolOffset = new Mapsui.Styles.Offset(0, Mapsui.Styles.SymbolStyle.DefaultHeight * 1f)
+                });
+
+                features.Add(commercialLocationPointFeature);
+            }
+        }
+
+        return new()
+        {
+            Name = "PDLs",
             IsMapInfoLayer = true,
             Style = null,
             Features = features

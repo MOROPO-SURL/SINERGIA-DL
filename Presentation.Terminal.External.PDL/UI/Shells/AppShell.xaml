@@ -92,7 +92,7 @@
         </Grid>
     </Shell.FlyoutHeader>
     <ShellContent
-        Title="Panel de Control"
+        Title="Portada"
         ContentTemplate="{DataTemplate local_pages:DashboardPage}"
         Route="DashboardPage">
         <ShellContent.Icon>
@@ -114,8 +114,8 @@
             </ShellContent.Icon>
         </ShellContent>
         <ShellContent
+            x:Name="DevelopmentActorProfileShellContent"
             Title="Perfil de actor del desarrollo"
-            ContentTemplate="{DataTemplate local_pages:DevelopmentActorProfileDetailPage}"
             Route="DevelopmentActorProfile">
             <ShellContent.Icon>
                 <FontImageSource

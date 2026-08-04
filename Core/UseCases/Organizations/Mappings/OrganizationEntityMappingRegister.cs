@@ -5,7 +5,6 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.CQRS.Command.U
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Persons.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationKindAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges;
@@ -34,32 +33,7 @@ internal sealed class OrganizationEntityMappingRegister : IRegister
             .Map(dest => dest, src => src);
 
         config.NewConfig<OrganizationCreateCommand, Organization>()
-            .MapWith(src => new(
-                new OrganizationId(Guid.NewGuid()),
-                false,
-                src.IsEnabled,
-                src.Name,
-                src.Priority,
-                new OrganizationKindId(src.KindId),
-                src.EmailAddresses.Select(item => item.Adapt<EmailAddress>()).ToArray(),
-                src.PhoneNumbers.Select(item => item.Adapt<PhoneNumber>()).ToArray(),
-                src.PostalAddresses.Select(item => item.Adapt<PostalAddress>()).ToArray(),
-                src.WebSiteAddresses.Select(item => item.Adapt<WebSiteAddress>()).ToArray(),
-                Array.Empty<PersonOrganizationBrigde>(),
-                Array.Empty<OrganizationClassificationBridge>(),
-                null,
-                null,
-                null,
-                src.About,
-                null,
-                null
-            )).AfterMapping((src, dest) =>
-            {
-                foreach (var item in src.PersonRelationships)
-                {
-                    dest.LinkPersonById(new Domain.Aggretates.PersonAggregate.Values.PersonId(item.PersonId), item.IsRepresentative);
-                }
-            });
+            .MapWith(src => Build(src));
 
         config.NewConfig<OrganizationUpdateCommand, Organization>()
             .Map(dest => dest.KindId, src => new OrganizationKindId(src.KindId))
@@ -122,5 +96,30 @@ internal sealed class OrganizationEntityMappingRegister : IRegister
                     dest.UnlinkPersonById(new Domain.Aggretates.PersonAggregate.Values.PersonId(item.Id));
                 }
             });
+    }
+
+    private static Organization Build(OrganizationCreateCommand src)
+    {
+        OrganizationId id = new(Guid.NewGuid());
+
+        return new Organization(
+            id,
+            false,
+            src.IsEnabled,
+            src.Name,
+            src.Priority,
+            new OrganizationKindId(src.KindId),
+            src.EmailAddresses.Select(item => item.Adapt<EmailAddress>()).ToArray(),
+            src.PhoneNumbers.Select(item => item.Adapt<PhoneNumber>()).ToArray(),
+            src.PostalAddresses.Select(item => item.Adapt<PostalAddress>()).ToArray(),
+            src.WebSiteAddresses.Select(item => item.Adapt<WebSiteAddress>()).ToArray(),
+            src.PersonRelationships.Select(item => new PersonOrganizationBrigde(new Domain.Aggretates.PersonAggregate.Values.PersonId(item.PersonId), id, item.IsRepresentative, null)),
+            [],
+            null,
+            null,
+            null,
+            src.About,
+            null,
+            null);
     }
 }

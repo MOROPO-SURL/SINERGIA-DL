@@ -11,14 +11,15 @@
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Pages.DashboardPage"
     x:DataType="local_page_models:DashboardPageModel"
-    Title="Panel de Control">
+    Title="Portada">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="OperativePrimary">#007181</Color>
 
             <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
-            
-            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
@@ -65,7 +66,7 @@
                 </Grid>
                 <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
                     <VerticalStackLayout 
-                        IsVisible="{Binding IsDevelopmentActorProfileMissing}"
+                        IsVisible="{Binding DevelopmentProfileId, Converter={StaticResource IsNullConverter}}"                         
                         Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                         <Frame
                             Style="{StaticResource WarningToastFrameStyle}">
@@ -89,7 +90,7 @@
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         HorizontalOptions="Start"
-                        Margin="8,0">
+                        Margin="8,8,8,0">
                         <Label
                             Margin="0,0,8,0"
                             FontAttributes="Bold"
@@ -198,40 +199,14 @@
                         <Label
                             Margin="0,0,8,0"
                             FontAttributes="Bold"
-                            Text="Últimos informes al CAM" />
+                            Text="Ecosistema de actores del desarrollo" />
                         <BoxView 
                             Style="{StaticResource DetailSectionSeparatorBoxViewStyle}"
                             Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
                     </VerticalStackLayout>
-                    <CollectionView>
-                        <CollectionView.EmptyView>
-                            <Label
-                                Style="{StaticResource CollectionPageEmptyViewLabelStyle}"
-                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
-                                Margin="8"
-                                HorizontalTextAlignment="Start" />
-                        </CollectionView.EmptyView>
-                    </CollectionView>
-                    <VerticalStackLayout 
-                        HorizontalOptions="Start"
-                        Margin="8,8,8,0">
-                        <Label
-                            Margin="0,0,8,0"
-                            FontAttributes="Bold"
-                            Text="Últimas acciones de Responsabilidad Social" />
-                        <BoxView 
-                            Style="{StaticResource DetailSectionSeparatorBoxViewStyle}"
-                            Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
-                    </VerticalStackLayout>
-                    <CollectionView>
-                        <CollectionView.EmptyView>
-                            <Label
-                                Style="{StaticResource CollectionPageEmptyViewLabelStyle}"
-                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
-                                Margin="8"
-                                HorizontalTextAlignment="Start" />
-                        </CollectionView.EmptyView>
-                    </CollectionView>
+                    <common_ui_views:DevelopmentEcosystemMapWrapperView
+                        Margin="8"
+                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X / 2'}" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

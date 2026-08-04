@@ -18,8 +18,8 @@
 
             <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
 
-            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
             <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
@@ -66,7 +66,7 @@
                 </Grid>
                 <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
                     <VerticalStackLayout 
-                        IsVisible="{Binding IsDevelopmentActorProfileMissing}"                            
+                        IsVisible="{Binding DevelopmentProfileId, Converter={StaticResource IsNullConverter}}"                         
                         Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                         <Frame
                             Style="{StaticResource WarningToastFrameStyle}">

@@ -9,8 +9,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileA
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.CQRS.Query.Paginate;
 
 internal sealed class SRLDevelopmentActorProfilePaginateQueryHandler :
-    AbstractPaginateQueryHandler<SRLDevelopmentActorProfile, DevelopmentActorProfileId, Guid, SRLDevelopmentActorProfilePaginateQuery, SRLDevelopmentActorProfileBasicDto>,
-    IRequestHandler<SRLDevelopmentActorProfilePaginateQuery, PaginateQueryResultModel<SRLDevelopmentActorProfileBasicDto>>
+    AbstractPaginateQueryHandler<SRLDevelopmentActorProfile, DevelopmentActorProfileId, Guid, SRLDevelopmentActorProfilePaginateQuery, DevelopmentActorProfileBasicDto>,
+    IRequestHandler<SRLDevelopmentActorProfilePaginateQuery, PaginateQueryResultModel<DevelopmentActorProfileBasicDto>>
 {
     public SRLDevelopmentActorProfilePaginateQueryHandler(ISRLDevelopmentActorProfileQueryRepositoryPort entityQueryRepository) : base(entityQueryRepository)
     {

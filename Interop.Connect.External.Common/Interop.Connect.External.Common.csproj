@@ -12,4 +12,8 @@
 		<ProjectReference Include="..\Interop.Connect\Interop.Connect.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Clients\" />
+	</ItemGroup>
+
 </Project>

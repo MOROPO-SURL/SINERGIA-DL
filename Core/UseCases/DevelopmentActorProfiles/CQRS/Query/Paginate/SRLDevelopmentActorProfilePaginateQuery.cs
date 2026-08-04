@@ -6,4 +6,4 @@ using System.Linq.Expressions;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.CQRS.Query.Paginate;
 
-public record SRLDevelopmentActorProfilePaginateQuery(int Page, int Limit, Expression<Func<SRLDevelopmentActorProfile, bool>>? Criteria = null) : IPaginateQuery<SRLDevelopmentActorProfile, DevelopmentActorProfileId, Guid, SRLDevelopmentActorProfileBasicDto>;
+public record SRLDevelopmentActorProfilePaginateQuery(int Page, int Limit, Expression<Func<SRLDevelopmentActorProfile, bool>>? Criteria = null) : IPaginateQuery<SRLDevelopmentActorProfile, DevelopmentActorProfileId, Guid, DevelopmentActorProfileBasicDto>;

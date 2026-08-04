@@ -1,3 +1,5 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OrganizationKind.DTOs;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Enumerations;
 
-public record OrganizationKindBasicDtoModel(Guid Id, string Name);
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OrganizationKind.DTOs;
+
+public record OrganizationKindBasicDtoModel(Guid Id, string Name, DevelopmentActorProfileKind? DevelopmentActorProfileKind);

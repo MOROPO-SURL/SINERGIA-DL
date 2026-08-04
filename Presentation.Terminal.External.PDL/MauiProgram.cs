@@ -3,9 +3,9 @@ using FFImageLoading.Maui;
 using Microsoft.Extensions.Logging;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Factories;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.Ports.Helper;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL;
 
@@ -18,6 +18,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .UseFFImageLoading()
+            .UseSkiaSharp(true)
             .UsePresentationCommonDefaults()
             .ConfigureFonts(fonts =>
             {

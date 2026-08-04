@@ -18,9 +18,9 @@ public sealed class SRLDevelopmentActorProfilesQueryApiClient
         return httpClientProvider.GetHttpClient().SendGetAsync<SRLDevelopmentActorProfileDetailDtoModel[]>("api/srldevelopmentactorprofiles");
     }
 
-    public Task<SRLDevelopmentActorProfileBasicDtoModel> GetBasicByOwnerAsync(Guid id)
+    public Task<DevelopmentActorProfileBasicDtoModel> GetBasicByOwnerAsync(Guid id)
     {
-        return httpClientProvider.GetHttpClient().SendGetAsync<SRLDevelopmentActorProfileBasicDtoModel>($"api/srldevelopmentactorprofiles/by/owner/{id}");
+        return httpClientProvider.GetHttpClient().SendGetAsync<DevelopmentActorProfileBasicDtoModel>($"api/srldevelopmentactorprofiles/by/owner/{id}");
     }
 
     public Task<SRLDevelopmentActorProfileDetailDtoModel> GetDetailByOwnerAsync(Guid id)

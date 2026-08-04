@@ -6,7 +6,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileA
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.CQRS.Query.Detail;
 
-internal sealed class SRLDevelopmentActorProfileBasicByOwnerQueryHandler : IRequestHandler<SRLDevelopmentActorProfileBasicByOwnerQuery, SRLDevelopmentActorProfileBasicDto>
+internal sealed class SRLDevelopmentActorProfileBasicByOwnerQueryHandler : IRequestHandler<SRLDevelopmentActorProfileBasicByOwnerQuery, DevelopmentActorProfileBasicDto>
 {
     private readonly ISRLDevelopmentActorProfileQueryRepositoryPort entityQueryRepository;
     private readonly IMapper mapper;
@@ -17,11 +17,11 @@ internal sealed class SRLDevelopmentActorProfileBasicByOwnerQueryHandler : IRequ
         this.mapper = mapper;
     }
 
-    public async Task<SRLDevelopmentActorProfileBasicDto> Handle(SRLDevelopmentActorProfileBasicByOwnerQuery request, CancellationToken cancellationToken)
+    public async Task<DevelopmentActorProfileBasicDto> Handle(SRLDevelopmentActorProfileBasicByOwnerQuery request, CancellationToken cancellationToken)
     {
         SRLDevelopmentActorProfile? entity = await entityQueryRepository.FindOneByAsync(entity => entity.OwnerId == new Domain.Aggretates.OrganizationAggregate.Values.OrganizationId(request.OwnerId));
 
-        SRLDevelopmentActorProfileBasicDto dto = mapper.Map<SRLDevelopmentActorProfileBasicDto>(entity!);
+        DevelopmentActorProfileBasicDto dto = mapper.Map<DevelopmentActorProfileBasicDto>(entity!);
 
         return dto;
     }
