@@ -208,6 +208,8 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<ISRLSocialResponsabilityActionQueryRepositoryPort, SRLSocialResponsabilityActionQueryRepositoryPortAdapter>();
         services.AddScoped<ISRLSocialResponsabilityActionCommandRepositoryPort, SRLSocialResponsabilityActionCommandRepositoryPortAdapter>();
+        services.AddScoped<IPDLSocialResponsabilityActionQueryRepositoryPort, PDLSocialResponsabilityActionQueryRepositoryPortAdapter>();
+        services.AddScoped<IPDLSocialResponsabilityActionCommandRepositoryPort, PDLSocialResponsabilityActionCommandRepositoryPortAdapter>();
 
         services.AddScoped<ILocationQueryRepositoryPort, LocationQueryRepositoryPortAdapter>();
         services.AddScoped<ILocationCommandRepository, LocationCommandRepositoryPortAdapter>();

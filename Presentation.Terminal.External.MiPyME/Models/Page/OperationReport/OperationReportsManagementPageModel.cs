@@ -12,7 +12,7 @@ public sealed class OperationReportsManagementPageModel : AbstractManagementEnti
     {
         SRLOperationReportQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
-        return apiClient.FilterPageByOwnerAsync(((Common.Models.Page.AppShellPageModel)((UI.Shells.AppShell)Application.Current!.MainPage!).BindingContext).DevelopmentProfileId!.Value, currentItemsPageNumber, currentItemsPageLimit);
+        return apiClient.FilterPageByOwnerAsync(((Application.Current!.MainPage as UI.Shells.AppShell)?.BindingContext as Common.Models.Page.AppShellPageModel)?.DevelopmentProfileId!.Value ?? default, currentItemsPageNumber, currentItemsPageLimit);
     }
 
     protected override void HandleException(Exception? exception)

@@ -148,7 +148,7 @@
         </ShellContent>
         <ShellContent
             Title="Acciones de Responsabilidad Social"
-            ContentTemplate="{DataTemplate ContentPage}">
+            ContentTemplate="{DataTemplate local_pages:SocialResponsabilityActionsManagementPage}">
             <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"

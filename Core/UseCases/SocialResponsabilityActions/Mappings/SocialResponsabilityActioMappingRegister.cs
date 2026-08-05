@@ -28,5 +28,17 @@ internal sealed class SocialResponsabilityActionMappingRegister : IRegister
             .Map(dest => dest.LocationBridges, src => Array.Empty<SocialResponsabilityActionLocationBridge>())
             .Map(dest => dest.ImageBridges, src => Array.Empty<SocialResponsabilityActionImageBridge>())
             .Map(dest => dest, src => src);
+
+        config.NewConfig<PDLSocialResponsabilityAction, PDLSocialResponsabilityActionDetailDto>()
+            .Map(dest => dest.Images, src => src.ImageBridges.Select(bridge => bridge.Linked.Adapt<ImageBasicDto>()))
+            .Map(dest => dest.Locations, src => src.LocationBridges.Select(bridge => bridge.Linked.Adapt<LocationDetailDto>()))
+            .Map(dest => dest, src => src);
+
+        config.NewConfig<PDLSocialResponsabilityActionCreateCommand, PDLSocialResponsabilityAction>()
+            .Map(dest => dest.Id, src => new SocialResponsabilityActionId(Guid.NewGuid()))
+            .Map(dest => dest.IsArchived, src => false)
+            .Map(dest => dest.LocationBridges, src => Array.Empty<SocialResponsabilityActionLocationBridge>())
+            .Map(dest => dest.ImageBridges, src => Array.Empty<SocialResponsabilityActionImageBridge>())
+            .Map(dest => dest, src => src);
     }
 }
