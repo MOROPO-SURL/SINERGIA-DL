@@ -1,3 +1,8 @@
 ﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.CQRS.Command.Create.Addon;
 
-public record ObjectiveActionAddonCreateCommand(int Index, string Title, string? Description = null);
+public record ObjectiveActionAddonCreateCommand(
+    Guid Id,
+    int Index, 
+    string Title,
+    IEnumerable<ObjectiveActionIndicatorCreateCommand> Indicators,
+    string? Description = null);

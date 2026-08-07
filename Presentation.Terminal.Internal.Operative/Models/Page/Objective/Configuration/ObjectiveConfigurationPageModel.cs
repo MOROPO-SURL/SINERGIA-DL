@@ -3,11 +3,12 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Compoused.Objective;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Objective.Configuration;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Objective.Detail;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Validators;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
-using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -438,27 +439,27 @@ public sealed class ObjectiveConfigurationPageModel : AbstractConfigurationPageM
         hasChangesFlag = true;
     }
 
-    private void ActionCreateSuccess_Callback(ObjectiveActionDetailDtoModel model)
+    private void ActionCreateSuccess_Callback(ObjectiveActionConfigurationResultCompousedModel model)
     {
-        inActions.Add(new ObjectiveActionCreateRequestModel(model.Id, model.Index, model.Title, model.Description));
+        inActions.Add(new ObjectiveActionCreateRequestModel(model.UpdateRequest.Id, model.UpdateRequest.Index, model.UpdateRequest.Title, model.UpdateRequest.InIndicators, model.UpdateRequest.Description));
 
         // TODO Order list !!!
-        Actions.Add(model);
+        Actions.Add(model.Detail);
 
         hasChangesFlag = true;
     }
 
-    private void ActionModifySuccess_Callback(ObjectiveActionDetailDtoModel model)
+    private void ActionModifySuccess_Callback(ObjectiveActionConfigurationResultCompousedModel model)
     {
         bool handled = false;
 
         foreach (var item in inActions)
         {
-            if (item.Id != model.Id) continue;
+            if (item.Id != model.UpdateRequest.Id) continue;
 
             inActions.Remove(item);
 
-            inActions.Add(new ObjectiveActionCreateRequestModel(model.Id, model.Index, model.Title, model.Description));
+            inActions.Add(new ObjectiveActionCreateRequestModel(model.UpdateRequest.Id, model.UpdateRequest.Index, model.UpdateRequest.Title, model.UpdateRequest.InIndicators, model.UpdateRequest.Description));
 
             handled = true;
 
@@ -469,11 +470,11 @@ public sealed class ObjectiveConfigurationPageModel : AbstractConfigurationPageM
         {
             foreach (var item in patchActions)
             {
-                if (item.Id != model.Id) continue;
+                if (item.Id != model.UpdateRequest.Id) continue;
 
                 patchActions.Remove(item);
 
-                patchActions.Add(new ObjectiveActionUpdateRequestModel(model.Id, model.Index, model.Title, model.Description));
+                patchActions.Add(model.UpdateRequest);
 
                 handled = true;
 
@@ -483,7 +484,7 @@ public sealed class ObjectiveConfigurationPageModel : AbstractConfigurationPageM
 
         if (!handled)
         {
-            patchActions.Add(new ObjectiveActionUpdateRequestModel(model.Id, model.Index, model.Title, model.Description));
+            patchActions.Add(model.UpdateRequest);
         }
 
         var index = -1;
@@ -493,9 +494,9 @@ public sealed class ObjectiveConfigurationPageModel : AbstractConfigurationPageM
         {
             index++;
 
-            if (item.Id != model.Id) continue;
+            if (item.Id != model.Detail.Id) continue;
 
-            Actions[index] = new ObjectiveActionDetailDtoModel(model.Id, model.Index, model.Title, model.Description);
+            Actions[index] = model.Detail;
 
             break;
         }

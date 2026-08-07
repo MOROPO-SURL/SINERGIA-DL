@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.Ports.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Objectives.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
@@ -10,5 +11,10 @@ internal sealed class ObjectiveCommandRepositoryPortAdapter : AbstractEntityComm
 {
     public ObjectiveCommandRepositoryPortAdapter(DefaultDbContext dbContext) : base(dbContext)
     {
+    }
+
+    protected override IQueryable<Objective> GetQueryableDbSet()
+    {
+        return base.GetQueryableDbSet().AsSplitQuery();
     }
 }
