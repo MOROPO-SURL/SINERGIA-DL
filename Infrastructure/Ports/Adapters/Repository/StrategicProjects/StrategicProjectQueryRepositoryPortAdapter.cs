@@ -17,6 +17,8 @@ internal sealed class StrategicProjectQueryRepositoryPortAdapter : AbstractEntit
     {
         return base.GetQueryableDbSet()
             .Include(entity => entity.Kind)
-            .Include(entity => entity.Program);
+            .Include(entity => entity.Program)
+            .Include(entity => entity.Indicators).ThenInclude(entity => entity.UnitMeasurement)
+            .Include(entity => entity.MacroprogramBridges).ThenInclude(bridge => bridge.Linked);
     }
 }

@@ -12,6 +12,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.SocialSupportD
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.StrategicAxes.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.StrategicLines.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.StrategicPrograms.Mappings;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.StrategicProjects.Mappings;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Models.UnitMeasurements.Mappings;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Extensions;
@@ -36,6 +37,7 @@ internal static class ServiceProviderExtensions
             new StrategicLineMappingRegister(),
             new StrategicAxeMappingRegister(),
             new StrategicProgramMappingRegister(),
+            new StrategicProjectMappingRegister(),
             new SocialSupportDemandMappingRegister()
         );
 

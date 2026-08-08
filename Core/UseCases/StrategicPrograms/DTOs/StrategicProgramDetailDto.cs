@@ -15,7 +15,7 @@ public record StrategicProgramDetailDto(
     bool IsEnabled, 
     int Priority, 
     string Objective,
-    StrategicLineSpecificObjectiveDetailDto[] SpecificObjectives,
+    SpecificObjectiveClippedDetailDto[] SpecificObjectives,
     OrganizationBasicDto[] Organizations,
     MacroprogramBasicDto[] Macroprograms,
     ImpactClippedDetailDto[] Impacts,

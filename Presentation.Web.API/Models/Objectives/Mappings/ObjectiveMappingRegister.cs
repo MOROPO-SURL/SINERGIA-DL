@@ -48,7 +48,7 @@ internal class ObjectiveMappingRegister : IRegister
             .Map(dest => dest.Id, src => Guid.NewGuid())
             .Map(dest => dest.Challenges, src => src.Challenges.Select(item => new ObjectiveChallengeAddonCreateCommand(item.Index, item.Title, item.Description)))
             .Map(dest => dest.Projections, src => src.Projections.Select(item => new ObjectiveProjectionAddonCreateCommand(item.Index, item.Title, item.Description)))
-            .Map(dest => dest.Actions, src => src.Actions.Select(item => new ObjectiveActionAddonCreateCommand(item.Index, item.Title, item.Description)))
+            .Map(dest => dest.Actions, src => src.Actions.Select(item => new ObjectiveActionAddonCreateCommand(item.Id, item.Index, item.Title, item.Indicators.Select(_item => _item.Adapt<ObjectiveActionIndicatorCreateCommand>()), item.Description)))
             .Map(dest => dest, src => src);
 
         config.NewConfig<ObjectiveUpdateRequestModel, ObjectiveUpdateCommand>()
@@ -58,9 +58,9 @@ internal class ObjectiveMappingRegister : IRegister
             .Map(dest => dest.InProjections, src => src.InProjections.Select(item => new ObjectiveProjectionAddonCreateCommand(item.Index, item.Title, item.Description)))
             .Map(dest => dest.PatchProjections, src => src.PatchProjections.Select(item => new ObjectiveProjectionAddonUpdateCommand(item.Id, item.Index, item.Title, item.Description)))
             .Map(dest => dest.OutProjections, src => src.OutProjections.Select(item => new ObjectiveProjectionDetailDto(item.Id, item.Index, item.Title, item.Description)))
-            .Map(dest => dest.InActions, src => src.InActions.Select(item => new ObjectiveActionAddonCreateCommand(item.Index, item.Title, item.Description)))
-            .Map(dest => dest.PatchActions, src => src.PatchActions.Select(item => new ObjectiveActionAddonUpdateCommand(item.Id, item.Index, item.Title, item.Description)))
-            .Map(dest => dest.OutActions, src => src.OutActions.Select(item => new ObjectiveActionDetailDto(item.Id, item.Index, item.Title, item.Description)))
+            .Map(dest => dest.InActions, src => src.InActions.Select(item => new ObjectiveActionAddonCreateCommand(item.Id, item.Index, item.Title, item.Indicators.Select(_item => _item.Adapt<ObjectiveActionIndicatorCreateCommand>()), item.Description)))
+            .Map(dest => dest.PatchActions, src => src.PatchActions.Select(item => new ObjectiveActionAddonUpdateCommand(item.Id, item.Index, item.Title, item.InIndicators.Select(item => item.Adapt<ObjectiveActionIndicatorCreateCommand>()), item.PatchIndicators.Select(item => item.Adapt<ObjectiveActionIndicatorAddonUpdateCommand>()), item.OutIndicators.Select(item => item.Adapt<ObjectiveActionIndicatorDetailDto>()), item.Description)))
+            .Map(dest => dest.OutActions, src => src.OutActions.Select(item => new ObjectiveActionDetailDto(item.Id, item.Index, item.Title, item.Indicators.Select(item => item.Adapt<ObjectiveActionIndicatorDetailDto>()).ToArray(), item.Description)))
             .Map(dest => dest, src => src);
     }
 }

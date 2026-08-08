@@ -1,0 +1,65 @@
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities;
+
+public sealed class ObjectiveActionIndicator : AbstractAuditableEntity<ObjectiveActionIndicatorId, Guid>, INamedEntity<ObjectiveActionIndicatorId, Guid>, IPriorizableEntity<ObjectiveActionIndicatorId, Guid>
+{
+    private readonly List<ObjectiveActionIndicatorMilestone> milestones = [];
+    private readonly List<ObjectiveActionIndicatorChange> changes = [];
+
+    private ObjectiveActionIndicator() : base(default) { }
+
+    public ObjectiveActionIndicator(
+        ObjectiveActionIndicatorId id,
+        ObjectiveActionId actionId,
+        ObjectiveId objectiveId,
+        string name,
+        UnitMeasurementId unitMeasurementId,
+        int priority,
+        IEnumerable<ObjectiveActionIndicatorMilestone> milestones,
+        string? alias = null,
+        UnitMeasurement? unitMeasurement = null) : base(id)
+    {
+        ActionId = actionId;
+        ObjectiveId = objectiveId;
+        Name = name;
+        UnitMeasurementId = unitMeasurementId;
+        Priority = priority;
+        Alias = alias;
+        UnitMeasurement = unitMeasurement;
+
+        this.milestones = [.. milestones];
+    }
+
+    public ObjectiveId ObjectiveId { get; set; }
+
+    public ObjectiveActionId ActionId { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public string? Alias { get; set; }
+
+    public UnitMeasurementId UnitMeasurementId { get; set; }
+    public UnitMeasurement? UnitMeasurement { get; set; }
+
+    public int Priority { get; set; }
+
+    public IReadOnlyList<ObjectiveActionIndicatorMilestone> Milestones => [.. milestones];
+
+    public IReadOnlyList<ObjectiveActionIndicatorChange> Changes => [.. changes];
+
+    public void AddMilestone(ObjectiveActionIndicatorMilestone entity)
+    {
+        milestones.Add(entity);
+    }
+
+    public void RemoveMilestone(ObjectiveActionIndicatorMilestone entity)
+    {
+        milestones.Remove(milestones.First(_entity => _entity.Id == entity.Id && _entity.IndicatorId == entity.IndicatorId && _entity.ActionId == entity.ActionId && _entity.ObjectiveId == entity.ObjectiveId));
+    }
+
+}

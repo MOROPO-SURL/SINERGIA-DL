@@ -17,6 +17,19 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
         config.NewConfig<Guid, ObjectiveId>()
             .MapWith(src => new ObjectiveId(src));
 
+        config.NewConfig<ObjectiveId, Guid>()
+            .MapWith(src => src.Value);
+
+        config.NewConfig<Guid, ObjectiveActionId>()
+            .MapWith(src => new ObjectiveActionId(src));
+
+        config.NewConfig<ObjectiveActionId, Guid>()
+            .MapWith(src => src.Value);
+
+        config.NewConfig<ObjectiveActionIndicatorId, Guid>().MapWith(src => src.Value);
+
+        config.NewConfig<ObjectiveActionIndicatorMilestoneId, Guid>().MapWith(src => src.Value);
+
         config.NewConfig<Objective, ObjectiveBasicDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest, src => src);
@@ -25,7 +38,7 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest.Challanges, src => src.Challenges.Select(entity => new ObjectiveChallengeDetailDto(entity.Id.Value, entity.Index, entity.Title, entity.Description)))
             .Map(dest => dest.Projections, src => src.Projections.Select(entity => new ObjectiveProjectionDetailDto(entity.Id.Value, entity.Index, entity.Title, entity.Description)))
-            .Map(dest => dest.Actions, src => src.Actions.Select(entity => new ObjectiveActionDetailDto(entity.Id.Value, entity.Index, entity.Title, entity.Description)))
+            //.Map(dest => dest.Actions, src => src.Actions.Select(entity => new ObjectiveActionDetailDto(entity.Id.Value, entity.Index, entity.Title, entity.Indicators, entity.Description)))
             .Map(dest => dest, src => src);
 
         config.NewConfig<ObjectiveDetailQuery, ObjectiveId>()
@@ -40,7 +53,28 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
                 src.Title,
                 src.Challenges.Select(item => new ObjectiveChallenge(new ObjectiveChallengeId(Guid.NewGuid()), new ObjectiveId(src.Id), item.Index, item.Title, item.Description)).ToArray(),
                 src.Projections.Select(item => new ObjectiveProjection(new ObjectiveProjectionId(Guid.NewGuid()), new ObjectiveId(src.Id), item.Index, item.Title, item.Description)).ToArray(),
-                src.Actions.Select(item => new ObjectiveAction(new ObjectiveActionId(Guid.NewGuid()), new ObjectiveId(src.Id), item.Index, item.Title, item.Description)).ToArray(),
+                src.Actions.Select(item => new ObjectiveAction(
+                    new(item.Id),
+                    new(src.Id),
+                    item.Index,
+                    item.Title,
+                    item.Indicators.Select(_item => new ObjectiveActionIndicator(
+                        new(_item.Id),
+                        new(item.Id),
+                        new(src.Id),
+                        _item.Name,
+                        new(_item.UnitMeasurement.Id),
+                        _item.Priority,
+                        _item.Milestones.Select(__item => new ObjectiveActionIndicatorMilestone(
+                            new(__item.Id),
+                            new(_item.Id),
+                            new(item.Id),
+                            new(src.Id),
+                            __item.At,
+                            __item.Amount,
+                            __item.Description)),
+                        _item.Alias, null)).ToArray(),
+                    item.Description)).ToArray(),
                 src.Description
             ));
 
@@ -139,9 +173,30 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
 
                 foreach (var item in src.InActions)
                 {
-                    ObjectiveAction entity = item.Adapt<ObjectiveAction>();
+                    ObjectiveActionId actionId = new(item.Id);
 
-                    entity.ObjectiveId = dest.Id;
+                    ObjectiveAction entity = new(
+                        actionId,
+                        dest.Id,
+                        item.Index,
+                        item.Title,
+                        item.Indicators.Select(item => new ObjectiveActionIndicator(
+                            new(item.Id),
+                            actionId,
+                            dest.Id,
+                            item.Name,
+                            new(item.UnitMeasurement.Id),
+                            item.Priority,
+                            item.Milestones.Select(_item => new ObjectiveActionIndicatorMilestone(
+                                new(_item.Id),
+                                new(item.Id),
+                                actionId,
+                                dest.Id,
+                                _item.At,
+                                _item.Amount,
+                                _item.Description)),
+                            item.Alias)),
+                        item.Description);
 
                     dest.AddAction(entity);
                 }
@@ -157,11 +212,86 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
 
                 foreach (var item in src.PatchActions)
                 {
-                    ObjectiveAction target = dest.Actions.First(entity => entity.Id.Value == item.Id);
+                    ObjectiveAction entity = dest.Actions.First(_entity => _entity.Id.Value == item.Id && _entity.ObjectiveId == dest.Id);
 
-                    target.Index = item.Index;
-                    target.Title = item.Title;
-                    target.Description = item.Description;
+                    entity.Title = item.Title;
+                    entity.Index = item.Index;
+                    entity.Description = item.Description;
+
+                    foreach (var _item in item.InIndicators)
+                    {
+                        ObjectiveActionIndicatorId indicatorId = new(_item.Id);
+
+                        ObjectiveActionIndicator _entity = new(
+                            indicatorId,
+                            entity.Id,
+                            dest.Id,
+                            _item.Name,
+                            new(_item.UnitMeasurement.Id),
+                            _item.Priority,
+                            _item.Milestones.Select(__item => new ObjectiveActionIndicatorMilestone(
+                                new(__item.Id),
+                                indicatorId,
+                                entity.Id,
+                                dest.Id,
+                                __item.At,
+                                __item.Amount,
+                                __item.Description)),
+                            _item.Alias);
+
+                        entity.AddIndicator(_entity);
+                    }
+
+                    foreach (var _item in item.OutIndicators)
+                    {
+                        ObjectiveActionIndicator _entity = _item.Adapt<ObjectiveActionIndicator>();
+
+                        _entity.ActionId = entity.Id;
+                        _entity.ObjectiveId = dest.Id;
+
+                        entity.RemoveIndicator(_entity);
+                    }
+
+                    foreach (var _item in item.PatchIndicators)
+                    {
+                        ObjectiveActionIndicator _entity = entity.Indicators.First(_entity => _entity.Id.Value == _item.Id && _entity.ActionId == entity.Id && _entity.ObjectiveId == dest.Id);
+
+                        _entity.Name = _item.Name;
+                        _entity.Alias = _item.Alias;
+
+                        if (_entity.UnitMeasurementId.Value != _item.UnitMeasurement.Id)
+                        {
+                            _entity.UnitMeasurement = null;
+                            _entity.UnitMeasurementId = new(_item.UnitMeasurement.Id);
+                        }
+
+                        foreach (var __item in _item.InMilestones)
+                        {
+                            ObjectiveActionIndicatorMilestone __entity = new(new(__item.Id), _entity.Id, entity.Id, dest.Id, __item.At, __item.Amount, __item.Description);
+
+                            _entity.AddMilestone(__entity);
+                        }
+
+                        foreach (var __item in _item.OutMilestones)
+                        {
+                            ObjectiveActionIndicatorMilestone __entity = _item.Adapt<ObjectiveActionIndicatorMilestone>();
+
+                            __entity.IndicatorId = _entity.Id;
+                            __entity.ActionId = entity.Id;
+                            __entity.ObjectiveId = dest.Id;
+
+                            _entity.RemoveMilestone(__entity);
+                        }
+
+                        foreach (var __item in _item.PatchMilestones)
+                        {
+                            ObjectiveActionIndicatorMilestone __entity = _entity.Milestones.First(__entity => __entity.Id.Value == __item.Id && __entity.IndicatorId == _entity.Id && __entity.ActionId == entity.Id && __entity.ObjectiveId == dest.Id);
+
+                            __entity.At = __item.At;
+                            __entity.Amount = __item.Amount;
+                            __entity.Description = __item.Description;
+                        }
+                    }
                 }
 
                 #endregion
