@@ -2,7 +2,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.CQRS.Query.Paginate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.PublicPolicies.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.CQRS.Command.Archive;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.CQRS.Command.Remove;
@@ -12,6 +15,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PublicPolicy.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialResponsabilityAction.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.SocialResponsabilityAction.DTOs;
 
@@ -40,6 +44,24 @@ public class SRLSocialResponsabilityActionsController : ControllerBase
         try
         {
             PaginateQueryResultModel<SRLSocialResponsabilityActionBasicDto> result = await mediator.Send(new SRLSocialResponsabilityActionPaginateQuery(sheet, limit, entity => !entity.IsArchived));
+
+            return Ok(mapper.Map<PaginateResultModel<SRLSocialResponsabilityActionBasicDtoModel>>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet]
+    [Route("page/{sheet}/limit/{limit}/filter/{parameter}")]
+    public async Task<ActionResult<PaginateResultModel<SRLSocialResponsabilityActionBasicDtoModel>>> FilterAsync(int sheet, int limit, string parameter)
+    {
+        try
+        {
+            PaginateQueryResultModel<SRLSocialResponsabilityActionBasicDto> result = await mediator.Send(new SRLSocialResponsabilityActionPaginateQuery(sheet, limit, entity => !entity.IsArchived && (EF.Functions.ILike(entity.Title, $"%{parameter}%") || EF.Functions.ILike(entity.Owner!.Owner!.Name, $"%{parameter}%"))));
 
             return Ok(mapper.Map<PaginateResultModel<SRLSocialResponsabilityActionBasicDtoModel>>(result));
         }

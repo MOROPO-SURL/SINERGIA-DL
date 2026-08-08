@@ -16,16 +16,16 @@ public static class MauiProgram
         
         builder
             .UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkit()  
             .UseFFImageLoading()
             .UseSkiaSharp(true)
-            .UsePresentationCommonDefaults()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("materialdesignicons-webfont.ttf", "MaterialDesignIcons");
             })
+            .UsePresentationCommonDefaults()
             .Services
                 .AddSingleton<IHttpClientProviderPort, Ports.Adapter.Provider.HttpClientHelperProvider>()
                 .AddSingleton<IExceptionHandlingHelperPort, Ports.Adapter.Helper.ExceptionHandlingHelperPortAdapter>()

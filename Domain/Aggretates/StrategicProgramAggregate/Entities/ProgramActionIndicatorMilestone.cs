@@ -12,6 +12,7 @@ public sealed class ProgramActionIndicatorMilestone : AbstractEntity<ProgramActi
         ProgramId = programId;
         ActionId = actionId;
         IndicatorId = indicatorId;
+        At = at;
         Amount = amount;
         Description = description;
     }

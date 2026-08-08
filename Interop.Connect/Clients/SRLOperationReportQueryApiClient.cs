@@ -26,6 +26,11 @@ public sealed class SRLOperationReportQueryApiClient
         return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<SRLOperationReportBasicDtoModel>>($"{USECASE_BASE_URI_SEGMENT}/page/{page}/limit/{limit}");
     }
 
+    public Task<PaginateResultModel<SRLOperationReportBasicDtoModel>> FilterPageAsync(int page, int limit, string parameter)
+    {
+        return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<SRLOperationReportBasicDtoModel>>($"{USECASE_BASE_URI_SEGMENT}/page/{page}/limit/{limit}/filter/{parameter}");
+    }
+
     public Task<PaginateResultModel<SRLOperationReportBasicDtoModel>> FilterPageByOwnerAsync(Guid ownerId, int page, int limit)
     {
         return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<SRLOperationReportBasicDtoModel>>($"{USECASE_BASE_URI_SEGMENT}/owner/{ownerId}/page/{page}/limit/{limit}");

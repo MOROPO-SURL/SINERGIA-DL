@@ -59,6 +59,17 @@ public class ProgramActionIndicator : AbstractAuditableEntity<ProgramActionIndic
 
     public void RemoveMilestone(ProgramActionIndicatorMilestone entity)
     {
-        milestones.Remove(milestones.First(_entity => _entity.Id == entity.Id && _entity.IndicatorId == entity.IndicatorId && _entity.ActionId == entity.ActionId && _entity.ProgramId == entity.ProgramId));
+        milestones.Remove(entity);
+    }
+
+    public void AddChange(ProgramActionIndicatorChange entity)
+    {
+        changes.Add(entity);
+    }
+
+    public void RemoveChange(ProgramActionIndicatorChange entity)
+    {
+        changes.Remove(entity);
+        //changes.Remove(changes.First(_entity => _entity.Id == entity.Id && _entity.IndicatorId == entity.IndicatorId && _entity.ActionId == entity.ActionId && _entity.ProgramId == entity.ProgramId));
     }
 }

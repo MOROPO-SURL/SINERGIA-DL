@@ -40,4 +40,13 @@ public static class CardViewSizeConstants
 
     public static double USER_DEFAULT_CARD_VIEW_HEIGHT = 76;
     public static double USER_DEFAULT_CARD_VIEW_WIDTH = 320;
+
+    public static double SOCIALRESPONSABILITYACTION_DEFAULT_CARD_VIEW_HEIGHT = 168;
+    public static double SOCIALRESPONSABILITYACTION_DEFAULT_CARD_VIEW_WIDTH = 480;
+
+    public static double OPERATIONREPORT_DEFAULT_CARD_VIEW_HEIGHT = 156;
+    public static double OPERATIONREPORT_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double INDICATOR_STATE_CARD_VIEW_HEIGHT = 76;
+    public static double INDICATOR_STATE_CARD_VIEW_WIDTH = 400;
 }

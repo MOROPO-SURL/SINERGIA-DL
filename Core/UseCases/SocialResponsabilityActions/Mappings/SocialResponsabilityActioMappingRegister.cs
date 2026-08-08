@@ -1,6 +1,7 @@
 ﻿using Mapster;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Locations.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate;
@@ -17,7 +18,12 @@ internal sealed class SocialResponsabilityActionMappingRegister : IRegister
 
         config.NewConfig<Guid, SocialResponsabilityActionId>().MapWith(src => new SocialResponsabilityActionId(src));
 
+        config.NewConfig<SRLSocialResponsabilityAction, SRLSocialResponsabilityActionBasicDto>()
+            .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
+            .Map(dest => dest, src => src);
+
         config.NewConfig<SRLSocialResponsabilityAction, SRLSocialResponsabilityActionDetailDto>()
+            .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
             .Map(dest => dest.Images, src => src.ImageBridges.Select(bridge => bridge.Linked.Adapt<ImageBasicDto>()))
             .Map(dest => dest.Locations, src => src.LocationBridges.Select(bridge => bridge.Linked.Adapt<LocationDetailDto>()))
             .Map(dest => dest, src => src);
@@ -29,7 +35,12 @@ internal sealed class SocialResponsabilityActionMappingRegister : IRegister
             .Map(dest => dest.ImageBridges, src => Array.Empty<SocialResponsabilityActionImageBridge>())
             .Map(dest => dest, src => src);
 
+        config.NewConfig<PDLSocialResponsabilityAction, PDLSocialResponsabilityActionBasicDto>()
+            .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
+            .Map(dest => dest, src => src);
+
         config.NewConfig<PDLSocialResponsabilityAction, PDLSocialResponsabilityActionDetailDto>()
+            .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
             .Map(dest => dest.Images, src => src.ImageBridges.Select(bridge => bridge.Linked.Adapt<ImageBasicDto>()))
             .Map(dest => dest.Locations, src => src.LocationBridges.Select(bridge => bridge.Linked.Adapt<LocationDetailDto>()))
             .Map(dest => dest, src => src);

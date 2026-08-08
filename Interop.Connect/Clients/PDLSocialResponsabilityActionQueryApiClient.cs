@@ -26,6 +26,11 @@ public sealed class PDLSocialResponsabilityActionQueryApiClient
         return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<PDLSocialResponsabilityActionBasicDtoModel>>($"{USECASE_BASE_URI_SEGMENT}/page/{page}/limit/{limit}");
     }
 
+    public Task<PaginateResultModel<PDLSocialResponsabilityActionBasicDtoModel>> FilterPageAsync(int page, int limit, string parameter)
+    {
+        return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<PDLSocialResponsabilityActionBasicDtoModel>>($"{USECASE_BASE_URI_SEGMENT}/page/{page}/limit/{limit}/filter/{parameter}");
+    }
+
     public Task<PaginateResultModel<PDLSocialResponsabilityActionBasicDtoModel>> FilterPageByOwnerAsync(Guid ownerId, int page, int limit)
     {
         return httpClientProvider.GetHttpClient().SendGetAsync<PaginateResultModel<PDLSocialResponsabilityActionBasicDtoModel>>($"{USECASE_BASE_URI_SEGMENT}/owner/{ownerId}/page/{page}/limit/{limit}");

@@ -18,6 +18,7 @@ public sealed class IndicatorClippedConfigurationPageModel : AbstractConfigurati
     public static string NameValidableProperty => nameof(Name);
     public static string AliasValidableProperty => nameof(Alias);
     public static string UnitMeasurementValidableProperty => nameof(UnitMeasurement);
+    public static string MilestonesValidableProperty => nameof(Milestones);
 
     private string name = null!;
     private int priority = 1;

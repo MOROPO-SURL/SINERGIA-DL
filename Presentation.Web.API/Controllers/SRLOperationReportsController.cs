@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.CQRS.Command.Update;
@@ -37,6 +38,24 @@ public class SRLOperationReportsController : ControllerBase
         try
         {
             PaginateQueryResultModel<SRLOperationReportBasicDto> result = await mediator.Send(new SRLOperationReportPaginateQuery(sheet, limit));
+
+            return Ok(mapper.Map<PaginateResultModel<SRLOperationReportBasicDtoModel>>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet]
+    [Route("page/{sheet}/limit/{limit}/filter/{parameter}")]
+    public async Task<ActionResult<PaginateResultModel<SRLOperationReportBasicDtoModel>>> FilterAsync(int sheet, int limit, string parameter)
+    {
+        try
+        {
+            PaginateQueryResultModel<SRLOperationReportBasicDto> result = await mediator.Send(new SRLOperationReportPaginateQuery(sheet, limit, entity => EF.Functions.ILike(entity.Owner!.Owner!.Name, $"%{parameter}%")));
 
             return Ok(mapper.Map<PaginateResultModel<SRLOperationReportBasicDtoModel>>(result));
         }

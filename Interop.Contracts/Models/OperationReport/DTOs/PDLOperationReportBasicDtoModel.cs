@@ -1,3 +1,5 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.DTOs;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;
 
-public record PDLOperationReportBasicDtoModel(long Id, DateTime At, DateOnly Period);
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.DTOs;
+
+public record PDLOperationReportBasicDtoModel(long Id, DateTime At, DateOnly Period, OrganizationBasicDtoModel Organization);

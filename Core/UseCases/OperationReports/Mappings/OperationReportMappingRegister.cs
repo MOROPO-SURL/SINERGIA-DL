@@ -1,6 +1,7 @@
 ﻿using Mapster;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Enumerations;
@@ -16,7 +17,12 @@ internal sealed class OperationReportMappingRegister : IRegister
 
         config.NewConfig<long, OperationReportId>().MapWith(src => new OperationReportId(src));
 
+        config.NewConfig<SRLOperationReport, SRLOperationReportBasicDto>()
+            .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
+            .Map(dest => dest, src => src);
+
         config.NewConfig<SRLOperationReport, SRLOperationReportDetailDto>()
+            .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
             .Map(dest => dest.IncomeSummaryEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.IncomeSummary).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
             .Map(dest => dest.IncomeEcommerceEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.IncomeEcommerce).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
             .Map(dest => dest.IncomeBankDepositEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.IncomeBankDeposit).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
@@ -27,6 +33,14 @@ internal sealed class OperationReportMappingRegister : IRegister
             .Map(dest => dest.OperativeTaxEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.OperativeTax).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
             .Map(dest => dest.SellTaxEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.SellTax).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
             .Map(dest => dest.HumanResourcePayloadEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.HumanResourcePayload).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
+            .Map(dest => dest, src => src);
+
+        config.NewConfig<PDLOperationReport, PDLOperationReportBasicDto>()
+            .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
+            .Map(dest => dest, src => src);
+
+        config.NewConfig<PDLOperationReport, PDLOperationReportDetailDto>()
+            .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
             .Map(dest => dest, src => src);
 
         config.NewConfig<SRLOperationReportCreateCommand, SRLOperationReport>().MapWith(src => Build(src));

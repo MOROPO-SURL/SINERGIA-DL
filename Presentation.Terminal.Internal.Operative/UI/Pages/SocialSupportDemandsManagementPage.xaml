@@ -13,6 +13,7 @@
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.SocialSupportDemandsManagementPage"
     x:TypeArguments="interop_dto_models:SocialSupportDemandBasicDtoModel,local_management_page_models:SocialSupportDemandsManagementPageModel"
     x:DataType="local_management_page_models:SocialSupportDemandsManagementPageModel"
+    Shell.TabBarIsVisible="False"
     Title="Gestión de Prioridades de asistencia social"
     IsEnabled="{Binding IsEnabled}">
     <ContentPage.Resources>

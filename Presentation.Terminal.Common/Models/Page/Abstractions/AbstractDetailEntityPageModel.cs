@@ -7,14 +7,14 @@ using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
-public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageModel
+public abstract class AbstractDetailEntityPageModel<TModel> : BasePageModel
 {
     private readonly Action? changeCallbackAction;
-    private TDetailModel model;
+    private TModel model;
 
-    private IDetailItemPageModelPresenter<TDetailModel> presenter = null!;
+    private IDetailItemPageModelPresenter<TModel> presenter = null!;
 
-    protected AbstractDetailEntityPageModel(TDetailModel model, Action? changeCallbackAction = null)
+    protected AbstractDetailEntityPageModel(TModel model, Action? changeCallbackAction = null)
     {
         this.model = model;
 
@@ -99,20 +99,20 @@ public abstract class AbstractDetailEntityPageModel<TDetailModel> : BasePageMode
 
     protected virtual string? RemovePermissionCode => null;
 
-    public TDetailModel Model { get => model; set => SetProperty(ref model, value); }
+    public TModel Model { get => model; set => SetProperty(ref model, value); }
 
     public ICommand ModifyCommand { get; set; }
 
     public ICommand RemoveCommand { get; set; }
 
-    public void BindPresenter(IDetailItemPageModelPresenter<TDetailModel> presenter)
+    public void BindPresenter(IDetailItemPageModelPresenter<TModel> presenter)
     {
         this.presenter = presenter;
     }
 
-    protected abstract Task PerformRemotionAsync(TDetailModel model);
+    protected abstract Task PerformRemotionAsync(TModel model);
 
-    protected void ConfigurationSuccess_Callback(TDetailModel model)
+    protected void ConfigurationSuccess_Callback(TModel model)
     {
         Model = model;
 

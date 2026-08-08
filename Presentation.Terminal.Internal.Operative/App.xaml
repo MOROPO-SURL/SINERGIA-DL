@@ -41,6 +41,8 @@
             <x:String x:Key="IconGlyphSocialSupportDemands">&#xF146;</x:String>
             <x:String x:Key="IconGlyphSocialResponsabilityActions">&#xF898;</x:String>
             <x:String x:Key="IconGlyphMapPoint">&#xF352;</x:String>
+            <x:String x:Key="IconGlyphReport">&#xF85D;</x:String>
+            <x:String x:Key="IconGlyphRhombusMedium">&#xF45D;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

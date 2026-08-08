@@ -97,8 +97,35 @@
 	  <Compile Update="UI\Pages\FeaturesManagementPage.xaml.cs">
 	    <DependentUpon>FeaturesManagementPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\SRLOperationReportsListPage.xaml.cs">
+	    <DependentUpon>SRLOperationReportsListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\PDLOperationReportsListPage.xaml.cs">
+	    <DependentUpon>PDLOperationReportsListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\OperationReport\PDLOperationReportDetailPage.xaml.cs">
+	    <DependentUpon>PDLOperationReportDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\OperationReport\SRLOperationReportDetailPage.xaml.cs">
+	    <DependentUpon>SRLOperationReportDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\PDLSocialResponsabilityActionsListPage.xaml.cs">
+	    <DependentUpon>PDLSocialResponsabilityActionsListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SRLSocialResponsabilityActionsListPage.xaml.cs">
+	    <DependentUpon>SRLSocialResponsabilityActionsListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SocialResponsabilityAction\PDLSocialResponsabilityActionDetailPage.xaml.cs">
+	    <DependentUpon>PDLSocialResponsabilityActionDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SocialResponsabilityAction\SRLSocialResponsabilityActionDetailPage.xaml.cs">
+	    <DependentUpon>SRLSocialResponsabilityActionDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\SocialSupportDemandsManagementPage.xaml.cs">
 	    <DependentUpon>SocialSupportDemandsManagementPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\StrategicProgramListForIndicatorsPage.xaml.cs">
+	    <DependentUpon>StrategicProgramListForIndicatorsPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\StrategicProgram\Configuration\Clipped\ActionClippedConfigurationPage.xaml.cs">
 	    <DependentUpon>ActionClippedConfigurationPage.xaml</DependentUpon>
@@ -236,9 +263,6 @@
 	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\EnvironmentSummaryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Feature\FeatureConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -251,7 +275,34 @@
 	  <MauiXaml Update="UI\Pages\Macroprogram\MacroprogramPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\ObjectiveListForIndicatorsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SRLOperationReportsListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\PDLOperationReportsListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OperationReport\PDLOperationReportDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OperationReport\SRLOperationReportDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\PublicPolicy\PublicPolicyPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\PDLSocialResponsabilityActionsListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SRLSocialResponsabilityActionsListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialResponsabilityAction\PDLSocialResponsabilityActionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialResponsabilityAction\SRLSocialResponsabilityActionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\SocialSupportDemandsManagementPage.xaml">
@@ -269,6 +320,12 @@
 	  <MauiXaml Update="UI\Pages\StrategicLine\Detail\StrategicLineSpecificObjectiveDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProgramListForIndicatorsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProgram\ActionIndicatorStateListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Configuration\Clipped\ActionClippedConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -282,6 +339,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Configuration\Clipped\SpecificObjectiveClippedConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProgram\Configuration\IndicatorChangeConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Detail\Clipped\ActionClippedDetailPage.xaml">
@@ -299,6 +359,9 @@
 	  <MauiXaml Update="UI\Pages\StrategicProgram\Detail\Clipped\SpecificObjectiveClippedDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProgram\Detail\IndicatorStateDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProjectIdea\Configuration\StrategicProjectIdeaConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -306,6 +369,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProjectIdeasManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\StrategicProjectListForIndicatorsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\StrategicProjectsManagementPage.xaml">

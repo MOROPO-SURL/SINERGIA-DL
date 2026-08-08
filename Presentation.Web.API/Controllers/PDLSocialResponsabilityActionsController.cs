@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.CQRS.Command.Archive;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.CQRS.Command.Create;
@@ -40,6 +41,24 @@ public class PDLSocialResponsabilityActionsController : ControllerBase
         try
         {
             PaginateQueryResultModel<PDLSocialResponsabilityActionBasicDto> result = await mediator.Send(new PDLSocialResponsabilityActionPaginateQuery(sheet, limit, entity => !entity.IsArchived));
+
+            return Ok(mapper.Map<PaginateResultModel<PDLSocialResponsabilityActionBasicDtoModel>>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet]
+    [Route("page/{sheet}/limit/{limit}/filter/{parameter}")]
+    public async Task<ActionResult<PaginateResultModel<SRLSocialResponsabilityActionBasicDtoModel>>> FilterAsync(int sheet, int limit, string parameter)
+    {
+        try
+        {
+            PaginateQueryResultModel<PDLSocialResponsabilityActionBasicDto> result = await mediator.Send(new PDLSocialResponsabilityActionPaginateQuery(sheet, limit, entity => !entity.IsArchived && (EF.Functions.ILike(entity.Title, $"%{parameter}%") || EF.Functions.ILike(entity.Owner!.Owner!.Name, $"%{parameter}%"))));
 
             return Ok(mapper.Map<PaginateResultModel<PDLSocialResponsabilityActionBasicDtoModel>>(result));
         }

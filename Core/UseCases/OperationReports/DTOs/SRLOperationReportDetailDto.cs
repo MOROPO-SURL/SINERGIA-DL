@@ -1,4 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.DTOs.Interfaces;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Enumerations;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.DTOs;
@@ -7,6 +8,7 @@ public record SRLOperationReportDetailDto(
     long Id, 
     DateTime At,
     DateOnly Period,
+    OrganizationBasicDto Organization,
     int EmployeeCount,
     int FemaleEmployeeCount,
     int DiscapacityEmployeeCount,

@@ -29,7 +29,7 @@ public partial class StrategicProgramsManagementPage :
     {
         StrategicLineQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
-        StrategicLineBasicDtoModel[] lines = (await apiClient.GetPageAsync(1, 30)).Items;
+        StrategicLineBasicDtoModel[] lines = (await apiClient.GetPageAsync(1, 100)).Items;
 
         Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new StrategicProgramConfigurationPage(new StrategicProgramConfigurationPageModel(null, lines, model => ConcreteBindingContext.LoadItems(true)))));
     }

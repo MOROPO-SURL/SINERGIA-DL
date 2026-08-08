@@ -17,6 +17,7 @@ internal sealed class SRLSocialResponsabilityActionQueryRepositoryPortAdapter : 
     {
         return base.GetQueryableDbSet()
             .AsSplitQuery()
+            .Include(entity => entity.Owner).ThenInclude(entity => entity!.Owner).ThenInclude(entity => entity!.Image)
             .Include(entity => entity.LocationBridges).ThenInclude(bridge => bridge.Linked).ThenInclude(entity => entity!.FeatureImage)
             .Include(entity => entity.ImageBridges).ThenInclude(bridge => bridge.Linked);
     }
