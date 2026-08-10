@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseConfigurationEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_configuration_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Objective.Configuration"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Objective.Configuration.IndicatorChangeConfigurationPage"
+    x:TypeArguments="interop_dto_models:IndicatorChangeDetailDtoModel,interop_dto_models:IndicatorChangeDetailDtoModel,local_configuration_page_models:IndicatorChangeConfigurationPageModel"
+    x:DataType="local_configuration_page_models:IndicatorChangeConfigurationPageModel"
+    Shell.TabBarIsVisible="False"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid>
+                <Grid
+                    Padding="10"
+                    MaximumWidthRequest="480"
+                    VerticalOptions="Center">
+                    <Frame Style="{StaticResource PopupFrameStyle}">
+                        <StackLayout Margin="20" Spacing="20">
+                            <VerticalStackLayout Spacing="20">
+                                <Label 
+                                    Margin="0,0,0,10"
+                                    Text="Actualizar indicador"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium" />
+                                <VerticalStackLayout Spacing="6">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Indicador" />
+                                    <Label Text="{Binding IndicatorName}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="6">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Candidad" />
+                                    <StackLayout Orientation="Horizontal" Spacing="10">
+                                        <Entry 
+                                            HorizontalOptions="FillAndExpand"
+                                            Text="{Binding Amount}" />
+                                        <Label
+                                            VerticalOptions="Center"
+                                            FontAttributes="Bold"
+                                            Text="{Binding UnitMeasurement.Symbol}" />
+                                    </StackLayout>
+                                    <Label 
+                                        FontAttributes="Italic"
+                                        TextColor="{AppThemeBinding Dark={StaticResource LightInfoBorder}, Light={StaticResource DarkInfoBorder}}">
+                                        <Label.Behaviors>
+                                            <common_ui_behaviors:DecimalSymbolIdicatotionLabelBehavior />
+                                        </Label.Behaviors>
+                                    </Label>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="6">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
+                                    <DatePicker Date="{Binding At}" MaximumDate="{Static local_configuration_page_models:IndicatorChangeConfigurationPageModel.MAX_AT}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="6">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                                    <Editor Text="{Binding Context}" HeightRequest="96" />
+                                    <Label>
+                                        <Label.Behaviors>
+                                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                                TargetValidationPropertyName="{Static local_configuration_page_models:IndicatorChangeConfigurationPageModel.ContextValidableProperty}"
+                                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                                        </Label.Behaviors>
+                                    </Label>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <Button 
+                                    Style="{StaticResource PrimaryKindButtonStyle}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Aplicar"
+                                    Command="{Binding ApplyCommand, Mode=OneTime}" />
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Cancelar"
+                                    Command="{Binding CancelCommand, Mode=OneTime}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Button
+                        Style="{StaticResource DetailPageCloseButtonStyle}"
+                        Command="{Binding CancelCommand, Mode=OneTime}" />
+                </Grid>
+            </Grid>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</common_ui_base_pages:BaseConfigurationEntityPage>

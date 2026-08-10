@@ -5,9 +5,9 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProgram.Detail;
 
-public partial class IndicatorStateDetailPage : BaseDetailEntityPage<IndicatorStateViewModel, IndicatorStateDetailPageModel>
+public partial class IndicatorStateDetailPage : BaseDetailEntityPage<StrategicProgramIndicatorStateViewModel, IndicatorStateDetailPageModel>
 {
-    public IndicatorStateDetailPage(IndicatorStateViewModel model) : base(new IndicatorStateDetailPageModel(model))
+    public IndicatorStateDetailPage(StrategicProgramIndicatorStateViewModel model) : base(new IndicatorStateDetailPageModel(model))
     {
         InitializeComponent();
     }

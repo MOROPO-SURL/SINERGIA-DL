@@ -3,11 +3,11 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View;
 
-public sealed class IndicatorStateViewModel : BaseBindableModel
+public sealed class StrategicProgramIndicatorStateViewModel : BaseBindableModel
 {
     private IndicatorChangeDetailDtoModel? lastChange;
 
-    public IndicatorStateViewModel(Guid actionId, ActionIndicatorDetailDtoModel indicator, ActionIndicatorMilestoneDetailDtoModel targetMilestone, IndicatorChangeDetailDtoModel? lastChange = null)
+    public StrategicProgramIndicatorStateViewModel(Guid actionId, ActionIndicatorDetailDtoModel indicator, ActionIndicatorMilestoneDetailDtoModel targetMilestone, IndicatorChangeDetailDtoModel? lastChange = null)
     {
         ActionId = actionId;
         Indicator = indicator;

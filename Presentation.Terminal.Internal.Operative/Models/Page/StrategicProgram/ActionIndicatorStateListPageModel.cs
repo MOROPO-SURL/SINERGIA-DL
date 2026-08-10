@@ -7,7 +7,7 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicProgram;
 
-public sealed class ActionIndicatorStateListPageModel : AbstractListEntityPageModel<IndicatorStateActionGroupedViewModel>
+public sealed class ActionIndicatorStateListPageModel : AbstractListEntityPageModel<StrategicProgramIndicatorStateActionGroupedViewModel>
 {
     public ActionIndicatorStateListPageModel(StrategicProgramDetailDtoModel program)
     {
@@ -16,17 +16,17 @@ public sealed class ActionIndicatorStateListPageModel : AbstractListEntityPageMo
 
     public StrategicProgramDetailDtoModel Program { get; init; }
 
-    protected override async Task<PaginateResultModel<IndicatorStateActionGroupedViewModel>> FetchItemsAsync(int currentItemsPageNumber, int currentItemsPageLimit)
+    protected override async Task<PaginateResultModel<StrategicProgramIndicatorStateActionGroupedViewModel>> FetchItemsAsync(int currentItemsPageNumber, int currentItemsPageLimit)
     {
         StrategicProgramActionIndicatorChangeQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
         IndicatorChangeDetailDtoModel[] lastChanges = await apiClient.GetLastsByProgramAsync(Program.Id);
 
-        List<IndicatorStateActionGroupedViewModel> groups = [];
+        List<StrategicProgramIndicatorStateActionGroupedViewModel> groups = [];
 
         foreach (ActionDetailDtoModel action in Program.Actions)
         {
-            List<IndicatorStateViewModel> items = [];
+            List<StrategicProgramIndicatorStateViewModel> items = [];
 
             foreach (ActionIndicatorDetailDtoModel indicator in action.Indicators)
             {
@@ -34,13 +34,13 @@ public sealed class ActionIndicatorStateListPageModel : AbstractListEntityPageMo
 
                 if (targetMilestone == null) continue;
 
-                items.Add(new IndicatorStateViewModel(action.Id, indicator, targetMilestone!, lastChanges.FirstOrDefault(_item => _item.ProgramId == Program.Id && _item.ActionId == action.Id && _item.IndicatorId == indicator.Id)));
+                items.Add(new StrategicProgramIndicatorStateViewModel(action.Id, indicator, targetMilestone!, lastChanges.FirstOrDefault(_item => _item.ProgramId == Program.Id && _item.ActionId == action.Id && _item.IndicatorId == indicator.Id)));
             }
 
-            groups.Add(new IndicatorStateActionGroupedViewModel(action, items));
+            groups.Add(new StrategicProgramIndicatorStateActionGroupedViewModel(action, items));
         }
 
-        return new PaginateResultModel<IndicatorStateActionGroupedViewModel>
+        return new PaginateResultModel<StrategicProgramIndicatorStateActionGroupedViewModel>
         {
             Page = 1,
             Limit = groups.Count,

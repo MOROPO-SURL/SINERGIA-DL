@@ -142,6 +142,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IObjectiveQueryRepositoryPort, ObjectiveQueryRepositoryPortAdapter>();
         services.AddScoped<IObjectiveCommandRepositoryPort, ObjectiveCommandRepositoryPortAdapter>();
+        services.AddScoped<IObjectiveActionIndicatorChangeQueryRepositoryPort, ObjectiveActionIndicatorChangeQueryRepositoryPortAdapter>();
 
         services.AddScoped<IPersonQueryRepositoryPort, PersonQueryRepositoryPortAdapter>();
         services.AddScoped<IPersonCommandRepositoryPort, PersonCommandRepositoryPortAdapter>();

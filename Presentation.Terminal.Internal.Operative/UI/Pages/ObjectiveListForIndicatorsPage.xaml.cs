@@ -1,7 +1,11 @@
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Objective;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.Objective;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages;
 
@@ -20,7 +24,16 @@ public partial class ObjectiveListForIndicatorsPage :
     {
         ConcreteBindingContext.IsBusy = true;
 
-        // TODO doit !!!
+        ObjectiveQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+
+        ObjectiveDetailDtoModel result = await apiClient.GetAsync(model.Id);
+
+        Dispatcher.Dispatch(() =>
+        {
+            ConcreteBindingContext.IsBusy = false;
+
+            this.NavigationPushPageAsync(new ActionIndicatorStateListPage(result));
+        });
     }
 
     protected override CollectionView GetItemsCollectionView() => ItemsCollectionView;

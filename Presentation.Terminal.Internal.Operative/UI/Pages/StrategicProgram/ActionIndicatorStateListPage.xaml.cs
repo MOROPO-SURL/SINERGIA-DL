@@ -10,8 +10,8 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProgram;
 
 public partial class ActionIndicatorStateListPage :
-    BaseListEntityPage<IndicatorStateActionGroupedViewModel, ActionIndicatorStateListPageModel>,
-    IListItemsPageModelPresenter<IndicatorStateActionGroupedViewModel>
+    BaseListEntityPage<StrategicProgramIndicatorStateActionGroupedViewModel, ActionIndicatorStateListPageModel>,
+    IListItemsPageModelPresenter<StrategicProgramIndicatorStateActionGroupedViewModel>
 {
     public ActionIndicatorStateListPage(StrategicProgramDetailDtoModel program) : base(new ActionIndicatorStateListPageModel(program))
     {
@@ -34,7 +34,7 @@ public partial class ActionIndicatorStateListPage :
     }
 
 
-    public Task PresentItemDetailUserInterfaceAsync(IndicatorStateActionGroupedViewModel model)
+    public Task PresentItemDetailUserInterfaceAsync(StrategicProgramIndicatorStateActionGroupedViewModel model)
     {
         throw new InvalidOperationException();
     }
@@ -45,23 +45,23 @@ public partial class ActionIndicatorStateListPage :
 
     private void AddChangeButton_Clicked(object sender, EventArgs args)
     {
-        IndicatorStateViewModel model = (IndicatorStateViewModel)(sender as BindableObject)!.BindingContext;
+        StrategicProgramIndicatorStateViewModel model = (StrategicProgramIndicatorStateViewModel)(sender as BindableObject)!.BindingContext;
 
         this.NavigationPushModalPageAsync(new IndicatorChangeConfigurationPage(new Models.Page.StrategicProgram.Configuration.IndicatorChangeConfigurationPageModel(ConcreteBindingContext.Program.Id, model.ActionId, model.Indicator.Id, model.Indicator.Name, model.Indicator.UnitMeasurement, AddChangeSuccess_Callback, new Validators.StrategicProgramActionIndicatorChangeConfigurationValidator())));
     }
 
     private void DetailLastChangeButton_Clicked(object sender, EventArgs args)
     {
-        IndicatorStateViewModel model = (IndicatorStateViewModel)(sender as BindableObject)!.BindingContext;
+        StrategicProgramIndicatorStateViewModel model = (StrategicProgramIndicatorStateViewModel)(sender as BindableObject)!.BindingContext;
 
         this.NavigationPushModalPageAsync(new IndicatorStateDetailPage(model));
     }
 
     private void AddChangeSuccess_Callback(IndicatorChangeDetailDtoModel model)
     {
-        IndicatorStateActionGroupedViewModel groupd = ConcreteBindingContext.Items.Single(item => item.Id == model.ActionId);
+        StrategicProgramIndicatorStateActionGroupedViewModel groupd = ConcreteBindingContext.Items.Single(item => item.Id == model.ActionId);
 
-        IndicatorStateViewModel item = groupd.Single(_item => _item.Indicator.Id == model.IndicatorId);
+        StrategicProgramIndicatorStateViewModel item = groupd.Single(_item => _item.Indicator.Id == model.IndicatorId);
 
         if (item.LastChange?.Id > model.Id) return;
 

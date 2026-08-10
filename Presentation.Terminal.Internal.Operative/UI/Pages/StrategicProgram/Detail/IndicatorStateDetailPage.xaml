@@ -6,7 +6,7 @@
     xmlns:local_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProgram.Detail.IndicatorStateDetailPage"
-    x:TypeArguments="local_view_models:IndicatorStateViewModel,local_detail_page_models:IndicatorStateDetailPageModel"
+    x:TypeArguments="local_view_models:StrategicProgramIndicatorStateViewModel,local_detail_page_models:IndicatorStateDetailPageModel"
     x:DataType="local_detail_page_models:IndicatorStateDetailPageModel"
     Title="Estado de Indicador"
     BackgroundColor="Transparent"

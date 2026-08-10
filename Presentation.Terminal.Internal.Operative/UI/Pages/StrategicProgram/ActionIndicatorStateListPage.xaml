@@ -11,7 +11,7 @@
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProgram.ActionIndicatorStateListPage"
-    x:TypeArguments="local_view_models:IndicatorStateActionGroupedViewModel,local_page_models:ActionIndicatorStateListPageModel"
+    x:TypeArguments="local_view_models:StrategicProgramIndicatorStateActionGroupedViewModel,local_page_models:ActionIndicatorStateListPageModel"
     x:DataType="local_page_models:ActionIndicatorStateListPageModel"
     Shell.TabBarIsVisible="False"
     Title="Actualización de indicadores de Programa"
@@ -58,7 +58,7 @@
                                 ItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="local_view_models:IndicatorStateActionGroupedViewModel">
+                            <DataTemplate x:DataType="local_view_models:StrategicProgramIndicatorStateActionGroupedViewModel">
                                 <VerticalStackLayout>
                                     <VerticalStackLayout Padding="8,0">
                                         <Label 
@@ -84,7 +84,7 @@
                                                 ItemWidth="{Static local_constants:CardViewSizeConstants.INDICATOR_STATE_CARD_VIEW_WIDTH}" />
                                         </CollectionView.Behaviors>
                                         <CollectionView.ItemTemplate>
-                                            <DataTemplate x:DataType="local_view_models:IndicatorStateViewModel">
+                                            <DataTemplate x:DataType="local_view_models:StrategicProgramIndicatorStateViewModel">
                                                 <Frame HeightRequest="{Static local_constants:CardViewSizeConstants.INDICATOR_STATE_CARD_VIEW_HEIGHT}">
                                                     <Grid ColumnSpacing="12">
                                                         <Grid.ColumnDefinitions>

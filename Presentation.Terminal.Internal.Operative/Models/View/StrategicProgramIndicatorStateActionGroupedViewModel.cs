@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View;
 
-public sealed class IndicatorStateActionGroupedViewModel : ObservableCollection<IndicatorStateViewModel>
+public sealed class StrategicProgramIndicatorStateActionGroupedViewModel : ObservableCollection<StrategicProgramIndicatorStateViewModel>
 {
-    public IndicatorStateActionGroupedViewModel(ActionDetailDtoModel action, IEnumerable<IndicatorStateViewModel> items) : base(items)
+    public StrategicProgramIndicatorStateActionGroupedViewModel(ActionDetailDtoModel action, IEnumerable<StrategicProgramIndicatorStateViewModel> items) : base(items)
     {
         Id = action.Id;
         Title = action.Title;

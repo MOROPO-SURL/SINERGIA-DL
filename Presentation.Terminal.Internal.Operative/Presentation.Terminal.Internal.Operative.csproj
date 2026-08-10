@@ -89,4 +89,28 @@
 	  <ProjectReference Include="..\Presentation.Terminal.Common\Presentation.Terminal.Common.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="UI\Pages\Objective\ActionIndicatorStateListPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Objective\Configuration\IndicatorChangeConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Objective\Detail\IndicatorStateDetailPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\Objective\ActionIndicatorStateListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Objective\Configuration\IndicatorChangeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Objective\Detail\IndicatorStateDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
