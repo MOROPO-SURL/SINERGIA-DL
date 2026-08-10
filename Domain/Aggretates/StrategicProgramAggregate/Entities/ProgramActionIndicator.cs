@@ -52,24 +52,11 @@ public class ProgramActionIndicator : AbstractAuditableEntity<ProgramActionIndic
 
     public IReadOnlyList<ProgramActionIndicatorChange> Changes => [.. changes];
 
-    public void AddMilestone(ProgramActionIndicatorMilestone entity)
-    {
-        milestones.Add(entity);
-    }
+    public void AddMilestone(ProgramActionIndicatorMilestone entity) => milestones.Add(entity);
 
-    public void RemoveMilestone(ProgramActionIndicatorMilestone entity)
-    {
-        milestones.Remove(entity);
-    }
+    public void RemoveMilestone(ProgramActionIndicatorMilestone entity) => milestones.Remove(entity);
 
-    public void AddChange(ProgramActionIndicatorChange entity)
-    {
-        changes.Add(entity);
-    }
+    public void AddChange(ProgramActionIndicatorChange entity) => changes.Add(entity);
 
-    public void RemoveChange(ProgramActionIndicatorChange entity)
-    {
-        changes.Remove(entity);
-        //changes.Remove(changes.First(_entity => _entity.Id == entity.Id && _entity.IndicatorId == entity.IndicatorId && _entity.ActionId == entity.ActionId && _entity.ProgramId == entity.ProgramId));
-    }
+    public void RemoveChange(ProgramActionIndicatorChange entity) => changes.Remove(entity);
 }

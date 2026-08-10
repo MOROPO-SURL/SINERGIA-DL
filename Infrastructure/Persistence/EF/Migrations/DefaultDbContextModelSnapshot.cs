@@ -2982,6 +2982,135 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.WithOwner()
                                 .HasForeignKey("ObjectiveId");
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveActionIndicator", "Indicators", b2 =>
+                                {
+                                    b2.Property<Guid>("Id")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("ActionId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("ObjectiveId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<string>("Alias")
+                                        .HasMaxLength(360)
+                                        .HasColumnType("character varying(360)");
+
+                                    b2.Property<DateTime>("CreatedAt")
+                                        .HasColumnType("timestamp without time zone");
+
+                                    b2.Property<string>("Name")
+                                        .IsRequired()
+                                        .HasMaxLength(360)
+                                        .HasColumnType("character varying(360)");
+
+                                    b2.Property<int>("Priority")
+                                        .HasColumnType("integer");
+
+                                    b2.Property<Guid>("UnitMeasurementId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<DateTime?>("UpdatedAt")
+                                        .HasColumnType("timestamp without time zone");
+
+                                    b2.HasKey("Id", "ActionId", "ObjectiveId");
+
+                                    b2.HasIndex("UnitMeasurementId");
+
+                                    b2.HasIndex("ActionId", "ObjectiveId");
+
+                                    b2.HasIndex("Name", "Id", "ActionId", "ObjectiveId")
+                                        .IsUnique();
+
+                                    b2.ToTable("objective_action_indicators", (string)null);
+
+                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate.UnitMeasurement", "UnitMeasurement")
+                                        .WithMany()
+                                        .HasForeignKey("UnitMeasurementId")
+                                        .OnDelete(DeleteBehavior.Restrict)
+                                        .IsRequired();
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("ActionId", "ObjectiveId");
+
+                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveActionIndicatorChange", "Changes", b3 =>
+                                        {
+                                            b3.Property<DateTime>("Id")
+                                                .HasColumnType("timestamp without time zone");
+
+                                            b3.Property<Guid>("IndicatorId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("ActionId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("ObjectiveId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<float>("Amount")
+                                                .HasColumnType("real");
+
+                                            b3.Property<string>("Context")
+                                                .HasMaxLength(512)
+                                                .HasColumnType("character varying(512)");
+
+                                            b3.HasKey("Id", "IndicatorId", "ActionId", "ObjectiveId");
+
+                                            b3.HasIndex("IndicatorId", "ActionId", "ObjectiveId");
+
+                                            b3.ToTable("objective_action_indicator_changes", (string)null);
+
+                                            b3.WithOwner()
+                                                .HasForeignKey("IndicatorId", "ActionId", "ObjectiveId");
+                                        });
+
+                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveActionIndicatorMilestone", "Milestones", b3 =>
+                                        {
+                                            b3.Property<Guid>("Id")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("IndicatorId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("ActionId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("ObjectiveId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<float>("Amount")
+                                                .HasColumnType("real");
+
+                                            b3.Property<DateOnly>("At")
+                                                .HasColumnType("date");
+
+                                            b3.Property<string>("Description")
+                                                .HasMaxLength(512)
+                                                .HasColumnType("character varying(512)");
+
+                                            b3.HasKey("Id", "IndicatorId", "ActionId", "ObjectiveId");
+
+                                            b3.HasIndex("IndicatorId", "ActionId", "ObjectiveId");
+
+                                            b3.HasIndex("Id", "IndicatorId", "ActionId", "ObjectiveId", "At")
+                                                .IsUnique();
+
+                                            b3.ToTable("objective_action_indicator_milestones", (string)null);
+
+                                            b3.WithOwner()
+                                                .HasForeignKey("IndicatorId", "ActionId", "ObjectiveId");
+                                        });
+
+                                    b2.Navigation("Changes");
+
+                                    b2.Navigation("Milestones");
+
+                                    b2.Navigation("UnitMeasurement");
+                                });
+
+                            b1.Navigation("Indicators");
                         });
 
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveChallenge", "Challenges", b1 =>
@@ -4247,9 +4376,194 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Bridges.StrategicProjectMacroprogramBridge", "MacroprogramBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("strategicproject_macroprogram_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Macroprogram", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities.ProjectIndicator", "Indicators", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Alias")
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.Property<int>("Priority")
+                                .HasColumnType("integer");
+
+                            b1.Property<Guid>("UnitMeasurementId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("Id", "ProjectId");
+
+                            b1.HasIndex("ProjectId");
+
+                            b1.HasIndex("UnitMeasurementId");
+
+                            b1.HasIndex("Name", "Id", "ProjectId")
+                                .IsUnique();
+
+                            b1.ToTable("strategicproject_indicators", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId");
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate.UnitMeasurement", "UnitMeasurement")
+                                .WithMany()
+                                .HasForeignKey("UnitMeasurementId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities.ProjectIndicatorChange", "Changes", b2 =>
+                                {
+                                    b2.Property<DateTime>("Id")
+                                        .HasColumnType("timestamp without time zone");
+
+                                    b2.Property<Guid>("IndicatorId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("ProjectId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<float>("Amount")
+                                        .HasColumnType("real");
+
+                                    b2.Property<string>("Context")
+                                        .HasMaxLength(512)
+                                        .HasColumnType("character varying(512)");
+
+                                    b2.HasKey("Id", "IndicatorId", "ProjectId");
+
+                                    b2.HasIndex("IndicatorId", "ProjectId");
+
+                                    b2.ToTable("strategicproject_indicator_changes", (string)null);
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("IndicatorId", "ProjectId");
+                                });
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities.ProjectIndicatorMilestone", "Milestones", b2 =>
+                                {
+                                    b2.Property<Guid>("Id")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("IndicatorId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("ProjectId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<float>("Amount")
+                                        .HasColumnType("real");
+
+                                    b2.Property<DateOnly>("At")
+                                        .HasColumnType("date");
+
+                                    b2.Property<string>("Description")
+                                        .HasMaxLength(512)
+                                        .HasColumnType("character varying(512)");
+
+                                    b2.HasKey("Id", "IndicatorId", "ProjectId");
+
+                                    b2.HasIndex("IndicatorId", "ProjectId");
+
+                                    b2.HasIndex("Id", "IndicatorId", "ProjectId", "At")
+                                        .IsUnique();
+
+                                    b2.ToTable("strategicproject_indicator_milestones", (string)null);
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("IndicatorId", "ProjectId");
+                                });
+
+                            b1.Navigation("Changes");
+
+                            b1.Navigation("Milestones");
+
+                            b1.Navigation("UnitMeasurement");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities.ProjectSpecificObjective", "SpecificObjectives", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Content")
+                                .IsRequired()
+                                .HasMaxLength(1024)
+                                .HasColumnType("character varying(1024)");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<int>("Index")
+                                .HasColumnType("integer");
+
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("Id", "ProjectId");
+
+                            b1.HasIndex("ProjectId");
+
+                            b1.HasIndex("Index", "Id", "ProjectId")
+                                .IsUnique();
+
+                            b1.ToTable("strategicproject_specificobjetives", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId");
+                        });
+
+                    b.Navigation("Indicators");
+
                     b.Navigation("Kind");
 
+                    b.Navigation("MacroprogramBridges");
+
                     b.Navigation("Program");
+
+                    b.Navigation("SpecificObjectives");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectIdeaAggregate.StrategicProjectIdea", b =>

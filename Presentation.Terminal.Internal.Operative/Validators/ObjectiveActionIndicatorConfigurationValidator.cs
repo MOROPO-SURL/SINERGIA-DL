@@ -19,5 +19,9 @@ internal sealed class ObjectiveActionIndicatorConfigurationValidator : AbstractV
         RuleFor(model => model.UnitMeasurement)
             .NotNull()
             .WithName("Unidad de medida");
+
+        RuleFor(model => model.Milestones)
+            .NotEmpty()
+            .WithName("Metas");
     }
 }

@@ -23,7 +23,7 @@
                 IsVisible="{OnIdiom Default=true, Phone=false}"
                 HorizontalOptions="StartAndExpand"
                 Aspect="AspectFill"
-                Source="shell_header.jpg" />
+                Source="shell_cmg_header.jpg" />
             <Grid HorizontalOptions="EndAndExpand">
                 <ScrollView
                     HorizontalOptions="Center"

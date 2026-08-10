@@ -6,16 +6,11 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Query
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.DTOs.Clipped;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Values;
-using System.Linq;
-using System;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.CQRS.Command.Create.Clipped;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicProjects.Mappings;
 
@@ -23,25 +18,19 @@ internal sealed class StrategicProjectEntityMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<Guid, StrategicProjectId>()
-            .MapWith(src => new StrategicProjectId(src));
+        config.NewConfig<Guid, StrategicProjectId>().MapWith(src => new StrategicProjectId(src));
+        config.NewConfig<StrategicProjectId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<StrategicProjectId, Guid>()
-            .MapWith(src => src.Value);
+        config.NewConfig<Guid, ProjectSpecificObjectiveId>().MapWith(src => new ProjectSpecificObjectiveId(src));
+        config.NewConfig<ProjectSpecificObjectiveId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<Guid, ProjectSpecificObjectiveId>()
-            .MapWith(src => new ProjectSpecificObjectiveId(src));
-
-        config.NewConfig<ProjectSpecificObjectiveId, Guid>()
-            .MapWith(src => src.Value);
-
-        config.NewConfig<Guid, ProjectIndicatorId>()
-            .MapWith(src => new ProjectIndicatorId(src));
-
-        config.NewConfig<ProjectIndicatorId, Guid>()
-            .MapWith(src => src.Value);
+        config.NewConfig<Guid, ProjectIndicatorId>().MapWith(src => new ProjectIndicatorId(src));
+        config.NewConfig<ProjectIndicatorId, Guid>().MapWith(src => src.Value);
 
         config.NewConfig<ProjectIndicatorMilestoneId, Guid>().MapWith(src => src.Value);
+
+        config.NewConfig<DateTime, ProjectIndicatorChangeId>().MapWith(src => new ProjectIndicatorChangeId(src));
+        config.NewConfig<ProjectIndicatorChangeId, DateTime>().MapWith(src => src.Value);
 
         config.NewConfig<StrategicProject, StrategicProjectBasicDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
@@ -167,6 +156,7 @@ internal sealed class StrategicProjectEntityMappingRegister : IRegister
                  foreach (var item in src.PatchIndicators)
                  {
                      ProjectIndicator entity = dest.Indicators.First(entity => entity.Id.Value == item.Id && entity.ProjectId == dest.Id);
+                     
                      entity.Name = item.Name;
                      entity.Alias = item.Alias;
 
@@ -187,10 +177,7 @@ internal sealed class StrategicProjectEntityMappingRegister : IRegister
                      {
                          ProjectIndicatorMilestone _entity = item.Adapt<ProjectIndicatorMilestone>();
 
-                         _entity.IndicatorId = entity.Id;
-                         _entity.ProjectId = dest.Id;
-
-                         entity.RemoveMilestone(_entity);
+                         entity.RemoveMilestone(entity.Milestones.First(_entity => _entity.Id.Value == _item.Id && _entity.IndicatorId == entity.Id && _entity.ProjectId == dest.Id));
                      }
 
                      foreach (var _item in item.PatchMilestones)

@@ -13,7 +13,7 @@
     <Shell.FlyoutHeader>
         <Grid Padding="0,0,0,16">
             <Image 
-                Source="shell_header.jpg" />
+                Source="shell_cmg_header.jpg" />
             <Image 
                 VerticalOptions="End"
                 Source="{AppThemeBinding Light='shell_header_frame_artwork_light.png', Dark='shell_header_frame_artwork_dark.png'}" />
