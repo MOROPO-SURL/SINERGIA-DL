@@ -26,7 +26,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/organizations")]
-public class OrganizationsController: ControllerBase
+public class OrganizationsController : ControllerBase
 {
     private readonly ISender mediator;
     private readonly IMapper mapper;

@@ -28,7 +28,7 @@ public partial class StrategicProjectDetailPage : BaseDetailEntityPage<Strategic
         StrategicProgramQueryApiClient programApiClient = new(httpClientProvider);
 
         StrategicProjectKindBasicDtoModel[] kinds = (await projectKindApiClient.GetPageAsync(1, 30)).Items;
-        StrategicProgramBasicDtoModel[] programs = (await programApiClient.GetPageAsync(1, 30)).Items;
+        StrategicProgramBasicDtoModel[] programs = (await programApiClient.GetPageAsync(1, 100)).Items;
 
         Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.StrategicProjectConfigurationPage(new StrategicProjectConfigurationPageModel(model, kinds, programs, configurationSuccessCallbackAction))));
     }

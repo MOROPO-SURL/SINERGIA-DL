@@ -49,6 +49,7 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Commo
 
                         return;
                     }
+
                     if (httpRequestException.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                     {
                         Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, "Su sesión a caducado por tiempo de inactividad. Se le solicitará inicio de sesión nuevamente", OK_ACTION).ContinueWith(async _ =>
@@ -62,9 +63,17 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Commo
 
                         return;
                     }
+
                     if (httpRequestException.StatusCode == System.Net.HttpStatusCode.Forbidden)
                     {
                         Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, $"Su usuario no cuenta con los permisos requeridos para realizar la operación solicitada.{Environment.NewLine}{Environment.NewLine}{SUPPORT_ORIENTATION_MESSAGE}", OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+
+                        return;
+                    }
+                    
+                    if (httpRequestException.StatusCode == null)
+                    {
+                        Application.Current!.MainPage!.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, NETWORK_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
 
                         return;
                     }

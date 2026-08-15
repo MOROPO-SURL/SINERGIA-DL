@@ -91,7 +91,7 @@
                                                     <FormattedString>
                                                         <Span Text="{Binding Line.Axe.Id, StringFormat='{0}.'}" />
                                                         <Span Text="{Binding Line.Index, StringFormat='{0}.'}" />
-                                                        <Span Text="{Binding Line.Name}" />
+                                                        <Span Text="{Binding Line.Name, StringFormat=' {0}'}" />
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>

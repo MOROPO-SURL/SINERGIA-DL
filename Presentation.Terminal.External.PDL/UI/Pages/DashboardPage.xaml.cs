@@ -22,7 +22,11 @@ public partial class DashboardPage : ContentPage
 		{
 			AppShellPageModel parentBindingContext = (AppShellPageModel)Parent.BindingContext;
 
-            BindingContext = new DashboardPageModel(parentBindingContext.Organization, parentBindingContext.Representative);
+            DashboardPageModel concreteBindingContext = new(parentBindingContext.Organization, parentBindingContext.Representative);
+
+            BindingContext = concreteBindingContext;
+
+            concreteBindingContext.LoadState();
 		}
 
 		IsEnabled = true;

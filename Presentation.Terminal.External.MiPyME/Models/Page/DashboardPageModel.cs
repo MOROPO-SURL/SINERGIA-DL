@@ -6,7 +6,12 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyM
 
 public sealed class DashboardPageModel : AbstractContextPageModel
 {
-    public DashboardPageModel(OrganizationDetailDtoModel organization, PersonBasicDtoModel representative) : base(organization, representative)
+    public DashboardPageModel(OrganizationDetailDtoModel organization, PersonBasicDtoModel representative) : base(organization, representative, null)
     {
+    }
+
+    public void LoadState()
+    {
+        DevelopmentProfileId = ((Common.Models.Page.AppShellPageModel)Shell.Current!.BindingContext).DevelopmentProfileId;
     }
 }

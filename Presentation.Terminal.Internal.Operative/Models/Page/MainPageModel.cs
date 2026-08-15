@@ -7,11 +7,23 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Opera
 
 public sealed class MainPageModel : BasePageModel
 {
-    private bool isEnvironmentNotReady;
+    private bool isEnvironmentReady;
+    private bool hasAnyFeatureKind;
+    private bool hasAnyOrganizationKind;
+    private bool hasAnyProjectKind;
+    private bool hasAnyUnitMeasurement;
 
-    public bool IsEnvironmentNotReady { get => isEnvironmentNotReady; set => SetProperty(ref isEnvironmentNotReady, value); }
+    public bool IsEnvironmentReady { get => isEnvironmentReady; set => SetProperty(ref isEnvironmentReady, value); }
 
-    public void PerformEnvironmentReadyCheck()
+    public bool HasAnyFeatureKind { get => hasAnyFeatureKind; set => SetProperty(ref hasAnyFeatureKind, value); }
+
+    public bool HasAnyOrganizationKind { get => hasAnyOrganizationKind; set => SetProperty(ref hasAnyOrganizationKind, value); }
+
+    public bool HasAnyProjectKind { get => hasAnyProjectKind; set => SetProperty(ref hasAnyProjectKind, value); }
+
+    public bool HasAnyUnitMeasurement { get => hasAnyUnitMeasurement; set => SetProperty(ref hasAnyUnitMeasurement, value); }
+
+    public void LoadSummary()
     {
         IHttpClientProviderPort httpClientHelperProvider = IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>();
 
@@ -35,16 +47,16 @@ public sealed class MainPageModel : BasePageModel
 
                 if (task.IsCompletedSuccessfully)
                 {
-                    bool hasAnyFeatureKind = featureKindCountTask.Result > 0;
-                    bool hasAnyOrganizationKind = organizationKindCountTask.Result > 0;
-                    bool hasAnyProjectKind = organizationKindCountTask.Result > 0;
-                    bool hasAnyUnitMeasurement = unitMeasurementCountTask.Result > 0;
+                    HasAnyFeatureKind = featureKindCountTask.Result > 0;
+                    HasAnyOrganizationKind = organizationKindCountTask.Result > 0;
+                    HasAnyProjectKind = projectKindCountTask.Result > 0;
+                    HasAnyUnitMeasurement = unitMeasurementCountTask.Result > 0;
 
-                    IsEnvironmentNotReady =
-                        !hasAnyFeatureKind ||
-                        !hasAnyOrganizationKind ||
-                        !hasAnyProjectKind ||
-                        !hasAnyUnitMeasurement;
+                    IsEnvironmentReady =
+                        hasAnyFeatureKind &&
+                        hasAnyOrganizationKind &&
+                        hasAnyProjectKind &&
+                        hasAnyUnitMeasurement;
                 }
                 else
                 {

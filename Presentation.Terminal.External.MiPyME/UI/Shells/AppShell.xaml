@@ -5,6 +5,7 @@
     xmlns:local_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.UI.Pages"
     xmlns:common_external_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.Models.Page;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
     xmlns:common_external_ui_organization_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.Organization;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
+    xmlns:common_external_ui_socialsupportdemaind_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common.UI.Pages.SocialSupportDemand;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Common"
     xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.UI.Shells.AppShell"
@@ -91,7 +92,7 @@
         </Grid>
     </Shell.FlyoutHeader>
     <ShellContent
-        Title="Panel de Control"
+        Title="Portada"
         ContentTemplate="{DataTemplate local_pages:DashboardPage}"
         Route="DashboardPage">
         <ShellContent.Icon>
@@ -114,7 +115,7 @@
         </ShellContent>
         <ShellContent
             Title="Perfil de actor del desarrollo"
-            ContentTemplate="{DataTemplate ContentPage}"
+            ContentTemplate="{DataTemplate local_pages:DevelopmentActorProfileDetailPage}"
             Route="DevelopmentActorProfile">
             <ShellContent.Icon>
                 <FontImageSource
@@ -126,7 +127,7 @@
     </FlyoutItem>
     <ShellContent
         Title="Informes al CAM"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate local_pages:OperationReportsManagementPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
@@ -136,8 +137,8 @@
     </ShellContent>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            Title="Prioridades de apoyo social"
-            ContentTemplate="{DataTemplate ContentPage}">
+            Title="Prioridades de asistencia social"
+            ContentTemplate="{DataTemplate common_external_ui_socialsupportdemaind_pages:SocialSupportDemandsListPage}">
             <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
@@ -147,7 +148,7 @@
         </ShellContent>
         <ShellContent
             Title="Acciones de Responsabilidad Social"
-            ContentTemplate="{DataTemplate ContentPage}">
+            ContentTemplate="{DataTemplate local_pages:SocialResponsabilityActionsManagementPage}">
             <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="{StaticResource FontMaterialDesignIcons}"

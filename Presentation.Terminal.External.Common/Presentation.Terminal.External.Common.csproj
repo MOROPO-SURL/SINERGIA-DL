@@ -26,14 +26,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Interop.Connect.External.Common\Interop.Connect.External.Common.csproj" />
 	  <ProjectReference Include="..\Presentation.Terminal.Common\Presentation.Terminal.Common.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="UI\Pages\EconomicActivity\EconomicActivityPickPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\Organization\OrganizationDetailPage.xaml.cs">
 	    <DependentUpon>OrganizationDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\Organization\OrganizationConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SocialSupportDemand\Detail\LocationDetailPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SocialSupportDemand\Detail\SocialSupportDemandDetailPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
@@ -42,15 +52,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\EconomicActivity\EconomicActivityPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Organization\OrganizationDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Organization\OrganizationConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Detail\LocationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialSupportDemand\Detail\SocialSupportDemandDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialSupportDemand\SocialSupportDemandsListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="UI\Views\" />
 	</ItemGroup>
 
 </Project>

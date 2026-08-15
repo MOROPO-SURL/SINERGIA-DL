@@ -24,32 +24,62 @@ public partial class MainPage :
         if (DeviceInfo.Current.Platform == DevicePlatform.Android) ItemsCollectionView.Header = BindingContext;
     }
 
-    public async Task PresentItemDetailUserInterfaceAsync(OrganizationBasicDtoModel model)
+    public Task PresentItemDetailUserInterfaceAsync(OrganizationBasicDtoModel model)
     {
         ConcreteBindingContext.IsBusy = true;
 
-        ISessionManagerPort sessionManager = IPlatformApplication.Current!.Services.GetRequiredService<ISessionManagerPort>();
+        return Task.Run(async () =>
+        {
+            ISessionManagerPort sessionManager = IPlatformApplication.Current!.Services.GetRequiredService<ISessionManagerPort>();
 
-        OrganizationQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+            IHttpClientProviderPort httpClientProvider = IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>();
 
-        await apiClient.GetAsync(model.Id).ContinueWith(task =>
+            OrganizationQueryApiClient organizationApiClient = new(httpClientProvider);
+            NaturalOwnedPDLDevelopmentActorProfilesQueryApiClient naturalPDLClient = new(httpClientProvider);
+            LegalOwnedPDLDevelopmentActorProfilesQueryApiClient legalPDLClient = new(httpClientProvider);
+
+            Guid? developmentActorProfileId;
+
+            OrganizationDetailDtoModel organization = await organizationApiClient.GetAsync(model.Id);
+
+            try
+            {
+                developmentActorProfileId = (await naturalPDLClient.GetBasicByOwnerAsync(organization.Id)).Id;
+            }
+            catch (System.Text.Json.JsonException)
+            {
+                try
+                {
+                    developmentActorProfileId = (await legalPDLClient.GetBasicByOwnerAsync(organization.Id)).Id;
+                }
+                catch (System.Text.Json.JsonException)
+                {
+                    developmentActorProfileId = null;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            PersonBasicDtoModel representative = organization.RepresentativePersons.First(item => item.UserId == sessionManager.CurrentSession!.User.Id);
+
+            Common.Models.Page.AppShellPageModel pageModel = new(organization, representative, developmentActorProfileId);
+
+            Dispatcher.Dispatch(() => Application.Current!.MainPage = new Shells.AppShell(pageModel));
+        }).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() =>
             {
                 ConcreteBindingContext.IsBusy = false;
 
-                if (!task.IsCompletedSuccessfully)
-                {
-                    IPlatformApplication.Current!.Services.GetRequiredService<Terminal.Common.Ports.Helper.IExceptionHandlingHelperPort>().HandleException(task.Exception);
+                if (task.IsCompletedSuccessfully) return;
 
-                    return;
-                }
-
-                PersonBasicDtoModel representative = task.Result.RepresentativePersons.First(item => item.UserId == sessionManager.CurrentSession!.User.Id);
-
-                Common.Models.Page.AppShellPageModel pageModel = new(task.Result, representative);
-
-                Application.Current!.MainPage = new Shells.AppShell(pageModel);
+                IPlatformApplication.Current!.Services.GetRequiredService<Terminal.Common.Ports.Helper.IExceptionHandlingHelperPort>().HandleException(task.Exception);
             });
         });
     }

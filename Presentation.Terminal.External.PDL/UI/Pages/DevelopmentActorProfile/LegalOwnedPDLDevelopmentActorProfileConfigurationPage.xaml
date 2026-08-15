@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseConfigurationEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.Models.Page.DevelopmentActorProfile"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:location_interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_converters="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Converters;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Pages.LegalOwnedPDLDevelopmentActorProfileConfigurationPage"
+    x:TypeArguments="interop_dto_models:LegalOwnedPDLDevelopmentActorProfileDetailDtoModel,interop_dto_models:LegalOwnedPDLDevelopmentActorProfileDetailDtoModel,local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel"
+    x:DataType="local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel"
+    Shell.TabBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToColorConverter" TrueValue="DimGray" FalseValue="Transparent" />
+            <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToMainActivityIdLabelMinWidthConverter" TrueValue="48" FalseValue="-1" />
+            <common_ui_converters:IsNullToObjectConverter x:Key="IsNullToMainLocationVerticalSpacingConverter" TrueValue="2" FalseValue="0" />
+            <common_ui_converters:PostalAddressDetailDtoModelToStringConverter x:Key="PostalAddressDetailDtoModelToStringConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Command="{Binding ApplyCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons" 
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
+                    Glyph="&#xf12c;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Command="{Binding CancelCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="MaterialDesignIcons"
+                    Color="{AppThemeBinding Light={StaticResource ToolbarItemLightTintColor}, Dark={StaticResource ToolbarItemDarkTintColor}}"
+                    Glyph="&#xf156;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Style="{StaticResource FormScrollRootVerticalStackLayoutStyle}">
+                <FlexLayout Wrap="Wrap">
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=10}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha de fundación" />
+                        <DatePicker Date="{Binding BornAt}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel.BornAtValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="NIT" />
+                        <Entry Text="{Binding FiscalIdentificationCode}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel.FiscalIdentificationCodeValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Style="{StaticResource FormFlexWrappedChildVerticalStackLayoutStyle}">
+                        <VerticalStackLayout.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}" />
+                        </VerticalStackLayout.Behaviors>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Modalidad" />
+                        <Picker 
+                            ItemsSource="{Binding AvailableModalities}"
+                            ItemDisplayBinding="{Binding Path=Name}"
+                            SelectedItem="{Binding Modality}" />
+                        <Label>
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel.ModalityValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout Wrap="Wrap">
+                    <Grid Style="{StaticResource FormFlexWrappedChildGridStyle}">
+                        <Grid.Behaviors>
+                            <common_ui_behaviors:FlexLayoutResponsiveChildViewBehavior 
+                                ResponsiveColumnConfiguration="{common_ui_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}" />
+                        </Grid.Behaviors>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="{Static common_constants:CardViewSizeConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Style="{StaticResource CaptionFieldLabelStyle}" 
+                            Grid.Row="0"
+                            Text="Titular" />
+                        <Frame 
+                            IsVisible="{Binding Holder, Converter={StaticResource IsNullConverter}}"
+                            Grid.Row="1"
+                            Padding="0">
+                            <Grid ColumnSpacing="0" RowSpacing="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="1" />
+                                    <ColumnDefinition Width="3*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    Color="DimGray" />
+                                <BoxView
+                                    Grid.Column="1"
+                                    Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
+                                <StackLayout 
+                                    Grid.Column="2"
+                                    Padding="8"
+                                    Orientation="Vertical">
+                                    <BoxView
+                                        VerticalOptions="FillAndExpand"
+                                        Color="DimGray" />
+                                    <Label 
+                                        HorizontalOptions="Start"
+                                        Margin="0,8,0,4"
+                                        BackgroundColor="DimGray"
+                                        TextColor="DimGray"
+                                        Text="Tipo" />
+                                    <Label BackgroundColor="DimGray" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                        <ContentView 
+                            IsVisible="{Binding Holder, Converter={StaticResource IsNotNullConverter}}"
+                            Grid.Row="1">
+                            <common_ui_card_views:OrganizationCardView BindingContext="{Binding Holder}" />
+                        </ContentView>
+                        <Button
+                            Grid.Row="2"
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Command="{Binding HolderPickCommand}" />
+                        <Label Grid.Row="3">
+                            <Label.Behaviors>
+                                <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                    TargetValidationPropertyName="{Static local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel.HolderValidableProperty}"
+                                    InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                            </Label.Behaviors>
+                        </Label>
+                    </Grid>
+                </FlexLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Actividad económica principal" />
+                    <Frame InputTransparent="{OnPlatform Default=False, Android=True}">
+                        <Grid ColumnSpacing="4" RowSpacing="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                MinimumWidthRequest="{Binding MainEconomicActivity, Converter={StaticResource IsNullToMainActivityIdLabelMinWidthConverter}}"
+                                BackgroundColor="{Binding MainEconomicActivity, Converter={StaticResource IsNullToColorConverter}}"
+                                VerticalOptions="Start"
+                                Text="{Binding MainEconomicActivity.Id, StringFormat='{0}.'}" />
+                            <Label
+                                Grid.Column="1"
+                                BackgroundColor="{Binding MainEconomicActivity, Converter={StaticResource IsNullToColorConverter}}"
+                                Text="{Binding MainEconomicActivity.Name}" />
+                        </Grid>
+                    </Frame>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Command="{Binding PickMainEconomicActivityCommand, Mode=OneTime}" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel.MainEconomicActivityValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Actividades secundarias" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Command="{Binding AddSecoundaryEconomicActivityCommand, Mode=OneTime}" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding SecoundaryEconomicActivities}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout 
+                                        Orientation="Vertical" 
+                                        Span="2" 
+                                        HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                        VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                        ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                        ItemWidth="{Static common_constants:CardViewSizeConstants.ECONOMICACTIVITY_DEFAULT_CARD_VIEW_WIDTH}" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <common_ui_card_views:EconomicActivityCardView 
+                                                Grid.Column="0"
+                                                HeightRequest="{Static common_constants:CardViewSizeConstants.ECONOMICACTIVITY_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                                            <Button
+                                                Grid.Column="1"
+                                                Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                VerticalOptions="Start"
+                                                Text="&#xFA78;"
+                                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.RemoveSecoundaryEconomicActivityCommand, Mode=OneTime}"
+                                                CommandParameter="{Binding Mode=OneTime}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Localización de domicilio social" />
+                    <Frame Padding="8">
+                        <StackLayout Orientation="Horizontal" Spacing="8">
+                            <VerticalStackLayout 
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                Margin="8,0,0,0"
+                                Spacing="{Binding MainLocation, Converter={StaticResource IsNullToMainLocationVerticalSpacingConverter}}">
+                                <Label 
+                                    BackgroundColor="{Binding MainLocation, Converter={StaticResource IsNullToColorConverter}}"
+                                    LineBreakMode="TailTruncation"
+                                    FontAttributes="Bold"
+                                    Text="{Binding MainLocation.Name}" />
+                                <Label
+                                    Style="{StaticResource OffLabelStyle}"
+                                    BackgroundColor="{Binding MainLocation, Converter={StaticResource IsNullToColorConverter}}"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding MainLocation.PostalAddress, Converter={StaticResource PostalAddressDetailDtoModelToStringConverter}}" />
+                            </VerticalStackLayout>
+                            <Button
+                                IsEnabled="{Binding MainLocation, Converter={StaticResource IsNotNullConverter}}"
+                                Style="{StaticResource FontIconImageButtonStyle}"
+                                VerticalOptions="Center"
+                                Text="&#xF2FD;"
+                                Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand}"
+                                CommandParameter="{Binding MainLocation}" />
+                        </StackLayout>
+                    </Frame>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Command="{Binding MainLocationPickCommand, Mode=OneTime}" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel.MainLocationValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Localizaciones comerciales" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Command="{Binding AddCommercialLocationCommand, Mode=OneTime}" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding CommercialLocations}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="location_interop_dto_models:LocationDetailDtoModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                                <VerticalStackLayout 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Margin="8,0,0,0">
+                                                    <Label 
+                                                        LineBreakMode="TailTruncation"
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Name, Mode=OneTime}" />
+                                                    <Label
+                                                        Style="{StaticResource OffLabelStyle}"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding PostalAddress, Converter={StaticResource PostalAddressDetailDtoModelToStringConverter}, Mode=OneTime}" />
+                                                </VerticalStackLayout>
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    VerticalOptions="Center"
+                                                    Text="&#xF2FD;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailLocationCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                                <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                    VerticalOptions="Center"
+                                                    Text="&#xFA78;"
+                                                    Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DeleteCommercialLocationCommand, Mode=OneTime}"
+                                                    CommandParameter="{Binding Mode=OneTime}" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acerca de (Opcional)" />
+                    <Editor Text="{Binding About}" HeightRequest="320" />
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_page_models:LegalOwnedPDLDevelopmentActorProfileConfigurationPageModel.AboutValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <common_ui_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</common_ui_base_pages:BaseConfigurationEntityPage>

@@ -4,12 +4,11 @@ using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Manager;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presenters.Interfaces;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
-public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, ICollectionViewSizeChangeReloadItemsPageModel
+public abstract class AbstractListEntityPageModel<TModel> : BasePageModel, ICollectionViewSizeChangeReloadItemsPageModel
 {
     private int currentItemsPageNumber;
     private int currentItemsPageLimit;
@@ -18,7 +17,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
     private bool hasMoreItems;
     private string? searchParameter;
 
-    private IListItemsPageModelPresenter<TBasicModel> presenter = null!;
+    private IListItemsPageModelPresenter<TModel> presenter = null!;
 
     protected AbstractListEntityPageModel()
     {
@@ -44,7 +43,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
 
         LoadMoreCommand = new Command(() => LoadItems());
 
-        DetailItemCommand = new Command<TBasicModel>(model =>
+        DetailItemCommand = new Command<TModel>(model =>
         {
             if (IsBusy) return;
 
@@ -66,7 +65,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
 
     protected virtual string? DetailPermissionCode => null;
 
-    public System.Collections.ObjectModel.ObservableCollection<TBasicModel> Items { get; private set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<TModel> Items { get; private set; } = [];
 
     public bool IsEnabled { get => isEnabled; set => SetProperty(ref isEnabled, value); }
 
@@ -82,12 +81,12 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
 
     public ICommand DetailItemCommand { get; set; }
 
-    public void BindPresenter(IListItemsPageModelPresenter<TBasicModel> presenter)
+    public void BindPresenter(IListItemsPageModelPresenter<TModel> presenter)
     {
         this.presenter = presenter;
     }
 
-    protected abstract Task<PaginateResultModel<TBasicModel>> FetchItemsAsync(int currentItemsPageNumber, int currentItemsPageLimit);
+    protected abstract Task<PaginateResultModel<TModel>> FetchItemsAsync(int currentItemsPageNumber, int currentItemsPageLimit);
 
     public void LoadItems(bool reset = false)
     {
@@ -137,7 +136,7 @@ public abstract class AbstractListEntityPageModel<TBasicModel> : BasePageModel, 
                 }
                 else
                 {
-                    foreach (TBasicModel model in task.Result.Items)
+                    foreach (TModel model in task.Result.Items)
                     {
                         Items.Add(model);
                     }

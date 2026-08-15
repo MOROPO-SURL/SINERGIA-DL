@@ -32,15 +32,32 @@ public partial class MainPage : BaseBindingContextedContentPage<MainPageModel>
         IsEnabled = true;
 
         ReloadToolbarItem_Clicked(this, EventArgs.Empty);
+
+        MapWrapperView.ReloadDataLayers();
     }
 
     private void ReloadToolbarItem_Clicked(object sender, EventArgs eventArgs)
     {
-        ConcreteBindingContext.PerformEnvironmentReadyCheck();
+        ConcreteBindingContext.LoadSummary();
     }
 
-    private async void GoComplementSecctionButton_Clicked(object sender, EventArgs e)
+    private async void UnitMeasurementManageButton_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(new ShellNavigationState($"///{typeof(EnvironmentSummaryPage).Name}"));
+        await Shell.Current.GoToAsync(new ShellNavigationState($"///{typeof(UnitMeasurementsManagementPage).Name}"));
+    }
+
+    private async void StrategicProjectKindAdminButton_Clicked(object sender, EventArgs e)
+    {
+        await Launcher.OpenAsync($"{Terminal.Common.Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/strategicprojectkinds");
+    }
+
+    private async void OrganizationKindAdminButton_Clicked(object sender, EventArgs e)
+    {
+        await Launcher.OpenAsync($"{Terminal.Common.Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/organizationkinds");
+    }
+
+    private async void FeatureKindAdminButton_Clicked(object sender, EventArgs e)
+    {
+        await Launcher.OpenAsync($"{Terminal.Common.Constants.InteropConstants.ADMINISTRATION_BASE_URL}/complement/featurekinds");
     }
 }

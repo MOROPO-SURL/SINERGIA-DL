@@ -17,8 +17,10 @@ internal sealed class ObjectiveQueryRepositoryPortAdapter : AbstractEntityQueryR
     {
         return base.GetQueryableDbSet()
             .AsSplitQuery()
-            // TODO Choise to use if required!!
-            //.IgnoreAutoIncludes()
-            .Include(entity => entity.Actions).ThenInclude(entity => entity.Indicators).ThenInclude(entity => entity.UnitMeasurement);
+            .IgnoreAutoIncludes()
+            .Include(entity => entity.Challenges)
+            .Include(entity => entity.Projections)
+            .Include(entity => entity.Actions).ThenInclude(entity => entity.Indicators).ThenInclude(entity => entity.UnitMeasurement)
+            .Include(entity => entity.Actions).ThenInclude(entity => entity.Indicators).ThenInclude(entity => entity.Milestones);
     }
 }

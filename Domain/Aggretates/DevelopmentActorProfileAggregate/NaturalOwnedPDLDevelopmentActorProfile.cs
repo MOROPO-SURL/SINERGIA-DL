@@ -3,6 +3,8 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileA
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate;
@@ -22,9 +24,12 @@ public sealed class NaturalOwnedPDLDevelopmentActorProfile : Abstractions.Abstra
         bool isEnabled,
         OrganizationId ownerId,
         string fiscalIdentificationCode,
+        DateOnly bornAt,
         PDLModalityId modalityId,
         EconomicActivityId mainEconomicActivityId, 
-        IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges, 
+        LocationId mainLocationId, 
+        IEnumerable<DevelopmentActorProfileEconomicActivityBridge> secoundaryEconomicActivityBridges,
+        IEnumerable<DevelopmentActorProfileLocationBridge> locationBridges,
         IEnumerable<DevelopmentActorProfileProductionActivity> productionActivities, 
         IEnumerable<DevelopmentActorProfileCommercialActivity> commercialActivities, 
         IEnumerable<DevelopmentActorProfileServicingActivity> servicingActivities,
@@ -32,8 +37,9 @@ public sealed class NaturalOwnedPDLDevelopmentActorProfile : Abstractions.Abstra
         string? About = null, 
         Organization? owner = null,
         PDLModality? modality = null,
-        EconomicActivity? mainEconomicActivity = null,
-        Person? holder = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, modalityId, mainEconomicActivityId, secoundaryEconomicActivityBridges, productionActivities, commercialActivities, servicingActivities, About, owner, modality, mainEconomicActivity)
+        EconomicActivity? mainEconomicActivity = null, 
+        Location? mainLocation = null,
+        Person? holder = null) : base(id, isArchived, isEnabled, ownerId, fiscalIdentificationCode, bornAt, modalityId, mainEconomicActivityId, mainLocationId, secoundaryEconomicActivityBridges, locationBridges, productionActivities, commercialActivities, servicingActivities, About, owner, modality, mainEconomicActivity, mainLocation)
     {
         HolderPersonId = holderPersonId;
 

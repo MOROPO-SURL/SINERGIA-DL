@@ -11,6 +11,7 @@ public sealed class ProjectIndicatorMilestone : AbstractEntity<ProjectIndicatorM
     {
         ProjectId = projectId;
         IndicatorId = indicatorId;
+        At = at;
         Amount = amount;
         Description = description;
     }

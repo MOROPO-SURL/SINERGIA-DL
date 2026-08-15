@@ -25,7 +25,7 @@ internal sealed class ApiKeyUpdateCommandHandler :
         this.permissionBridgeCommandRepository = permissionBridgeCommandRepository;
     }
 
-    protected override async Task<Action?> PerformPreUpdateAsync(ApiKeyUpdateCommand request, ApiKey entity)
+    protected override async Task<object?> PerformPreUpdateAsync(ApiKeyUpdateCommand request, ApiKey entity)
     {
         List<ApiKeyPermissionBridge> outgoins = [.. entity.PermissionBridges];
 

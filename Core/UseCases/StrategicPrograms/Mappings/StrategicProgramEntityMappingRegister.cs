@@ -12,7 +12,6 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregat
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.Values;
-using System;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.Mappings;
 
@@ -20,33 +19,25 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<Guid, StrategicProgramId>()
-            .MapWith(src => new StrategicProgramId(src));
+        config.NewConfig<Guid, StrategicProgramId>().MapWith(src => new StrategicProgramId(src));
+        config.NewConfig<StrategicProgramId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<StrategicProgramId, Guid>()
-            .MapWith(src => src.Value);
+        config.NewConfig<Guid, ProgramSpecificObjectiveId>().MapWith(src => new ProgramSpecificObjectiveId(src));
+        config.NewConfig<ProgramSpecificObjectiveId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<Guid, ProgramSpecificObjectiveId>()
-            .MapWith(src => new ProgramSpecificObjectiveId(src));
+        config.NewConfig<Guid, ProgramImpactId>().MapWith(src => new ProgramImpactId(src));
+        config.NewConfig<ProgramImpactId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<ProgramSpecificObjectiveId, Guid>()
-            .MapWith(src => src.Value);
+        config.NewConfig<Guid, ProgramActionId>().MapWith(src => new ProgramActionId(src));
+        config.NewConfig<ProgramActionId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<Guid, ProgramImpactId>()
-            .MapWith(src => new ProgramImpactId(src));
-
-        config.NewConfig<ProgramImpactId, Guid>()
-            .MapWith(src => src.Value);
-
-        config.NewConfig<Guid, ProgramActionId>()
-            .MapWith(src => new ProgramActionId(src));
-
-        config.NewConfig<ProgramActionId, Guid>()
-            .MapWith(src => src.Value);
-
+        config.NewConfig<Guid, ProgramActionIndicatorId>().MapWith(src => new ProgramActionIndicatorId(src));
         config.NewConfig<ProgramActionIndicatorId, Guid>().MapWith(src => src.Value);
 
         config.NewConfig<ProgramActionIndicatorMilestoneId, Guid>().MapWith(src => src.Value);
+
+        config.NewConfig<DateTime, ProgramActionIndicatorChangeId>().MapWith(src => new ProgramActionIndicatorChangeId(src));
+        config.NewConfig<ProgramActionIndicatorChangeId, DateTime>().MapWith(src => src.Value);
 
         config.NewConfig<StrategicProgram, StrategicProgramBasicDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
@@ -275,7 +266,7 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
 
                         foreach (var __item in _item.InMilestones)
                         {
-                            ProgramActionIndicatorMilestone __entity = new(new(__item.Id), _entity.Id, entity.Id, dest.Id, __item.At, __item.Amount, __item.Description);
+                            ProgramActionIndicatorMilestone __entity = new(new ProgramActionIndicatorMilestoneId(__item.Id), _entity.Id, entity.Id, dest.Id, __item.At, __item.Amount, __item.Description);
 
                             _entity.AddMilestone(__entity);
                         }
@@ -284,11 +275,7 @@ internal sealed class StrategicProgramEntityMappingRegister : IRegister
                         {
                             ProgramActionIndicatorMilestone __entity = _item.Adapt<ProgramActionIndicatorMilestone>();
 
-                            __entity.IndicatorId = _entity.Id;
-                            __entity.ActionId = entity.Id;
-                            __entity.ProgramId = dest.Id;
-
-                            _entity.RemoveMilestone(__entity);
+                            _entity.RemoveMilestone(_entity.Milestones.First(___entity => ___entity.Id.Value == __item.Id && ___entity.IndicatorId == _entity.Id && ___entity.ActionId == entity.Id && ___entity.ProgramId == dest.Id));
                         }
 
                         foreach (var __item in _item.PatchMilestones)

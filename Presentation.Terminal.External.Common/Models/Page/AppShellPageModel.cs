@@ -5,7 +5,7 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.Commo
 
 public sealed class AppShellPageModel : Abstractions.AbstractContextPageModel
 {
-    public AppShellPageModel(OrganizationDetailDtoModel organization, PersonBasicDtoModel representative) : base(organization, representative)
+    public AppShellPageModel(OrganizationDetailDtoModel organization, PersonBasicDtoModel representative, Guid? developmentProfileId) : base(organization, representative, developmentProfileId)
     {
     }
 }

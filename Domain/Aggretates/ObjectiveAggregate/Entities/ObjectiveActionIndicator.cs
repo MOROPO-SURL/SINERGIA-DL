@@ -52,14 +52,11 @@ public sealed class ObjectiveActionIndicator : AbstractAuditableEntity<Objective
 
     public IReadOnlyList<ObjectiveActionIndicatorChange> Changes => [.. changes];
 
-    public void AddMilestone(ObjectiveActionIndicatorMilestone entity)
-    {
-        milestones.Add(entity);
-    }
+    public void AddMilestone(ObjectiveActionIndicatorMilestone entity) => milestones.Add(entity);
 
-    public void RemoveMilestone(ObjectiveActionIndicatorMilestone entity)
-    {
-        milestones.Remove(milestones.First(_entity => _entity.Id == entity.Id && _entity.IndicatorId == entity.IndicatorId && _entity.ActionId == entity.ActionId && _entity.ObjectiveId == entity.ObjectiveId));
-    }
+    public void RemoveMilestone(ObjectiveActionIndicatorMilestone entity) => milestones.Remove(entity);
 
+    public void AddChange(ObjectiveActionIndicatorChange entity) => changes.Add(entity);
+
+    public void RemoveChange(ObjectiveActionIndicatorChange entity) => changes.Remove(entity);
 }

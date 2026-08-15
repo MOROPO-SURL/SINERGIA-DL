@@ -23,6 +23,7 @@
             <x:String x:Key="IconGlyphLine">&#xF054;</x:String>
             <x:String x:Key="IconGlyphProgram">&#xF030E;</x:String>
             <x:String x:Key="IconGlyphProject">&#xF00AA;</x:String>
+            <x:String x:Key="IconGlyphProjectIdea">&#xF6E7;</x:String>
             <x:String x:Key="IconGlyphBarrier">&#xF4A1;</x:String>
             <x:String x:Key="IconGlyphPotential">&#xF008F;</x:String>
             <x:String x:Key="IconGlyphPublicPolicy">&#xF5D1;</x:String>
@@ -37,6 +38,11 @@
             <x:String x:Key="IconGlyphComplements">&#xF638;</x:String>
             <x:String x:Key="IconGlyphMacroprograms">&#xFCE5;</x:String>
             <x:String x:Key="IconGlyphEconomicActivities">&#xF027A;</x:String>
+            <x:String x:Key="IconGlyphSocialSupportDemands">&#xF146;</x:String>
+            <x:String x:Key="IconGlyphSocialResponsabilityActions">&#xF898;</x:String>
+            <x:String x:Key="IconGlyphMapPoint">&#xF352;</x:String>
+            <x:String x:Key="IconGlyphReport">&#xF85D;</x:String>
+            <x:String x:Key="IconGlyphRhombusMedium">&#xF45D;</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

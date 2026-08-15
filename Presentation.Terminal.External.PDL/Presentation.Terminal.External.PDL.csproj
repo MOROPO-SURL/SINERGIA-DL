@@ -86,6 +86,36 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LocalizationResources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\DevelopmentActorProfile\LegalOwnedPDLDevelopmentActorProfileConfigurationPage.xaml.cs">
+	    <DependentUpon>LegalOwnedPDLDevelopmentActorProfileConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\DevelopmentActorProfile\NaturalOwnedPDLDevelopmentActorProfileConfigurationPage.xaml.cs">
+	    <DependentUpon>NaturalOwnedPDLDevelopmentActorProfileConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\DevelopmentActorProfile\LegalOwnedPDLDevelopmentActorProfileDetailPage.xaml.cs">
+	    <DependentUpon>LegalOwnedPDLDevelopmentActorProfileDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\DevelopmentActorProfile\NaturalOwnedPDLDevelopmentActorProfileDetailPage.xaml.cs">
+	    <DependentUpon>NaturalOwnedPDLDevelopmentActorProfileDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\OperationReportsManagementPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\OperationReport\OperationReportConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\OperationReport\OperationReportDetailPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SocialResponsabilityActionsManagementPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SocialResponsabilityAction\SocialResponsabilityActionConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SocialResponsabilityAction\SocialResponsabilityActionDetailPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\UserAuthenticationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -100,6 +130,36 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="UI\Pages\DashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfile\LegalOwnedPDLDevelopmentActorProfileConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfile\NaturalOwnedPDLDevelopmentActorProfileConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfile\LegalOwnedPDLDevelopmentActorProfileDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfile\NaturalOwnedPDLDevelopmentActorProfileDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OperationReportsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OperationReport\OperationReportConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\OperationReport\OperationReportDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialResponsabilityActionsManagementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialResponsabilityAction\SocialResponsabilityActionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SocialResponsabilityAction\SocialResponsabilityActionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\UserAuthenticationPage.xaml">

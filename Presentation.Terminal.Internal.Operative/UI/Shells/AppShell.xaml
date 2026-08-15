@@ -11,9 +11,9 @@
         <OnIdiom Default="Flyout" Desktop="Locked" />
     </Shell.FlyoutBehavior>
     <Shell.FlyoutHeader>
-        <Grid Padding="0,0,0,8">
+        <Grid Padding="0,0,0,16">
             <Image 
-                Source="shell_header.jpg" />
+                Source="shell_cmg_header.jpg" />
             <Image 
                 VerticalOptions="End"
                 Source="{AppThemeBinding Light='shell_header_frame_artwork_light.png', Dark='shell_header_frame_artwork_dark.png'}" />
@@ -30,16 +30,44 @@
                 Glyph="{StaticResource IconGlyphDashboard}" />
         </ShellContent.Icon>
     </ShellContent>
-    <ShellContent
-        Title="Diagnóstico"
-        ContentTemplate="{DataTemplate common_ui_pages:DiagnosticSummaryPage}">
-        <ShellContent.Icon>
+    <MenuFlyoutItem Text="Resumen">
+        <MenuFlyoutItem.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" 
-                Glyph="{StaticResource IconGlyphContext}" />
-        </ShellContent.Icon>
-    </ShellContent>
+                Glyph="{StaticResource IconGlyphRhombusMedium}" />
+        </MenuFlyoutItem.IconImageSource>
+    </MenuFlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Dianóstico estratégico"
+            ContentTemplate="{DataTemplate common_ui_pages:DiagnosticSummaryPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphContext}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+            Title="Componentes de la estrategia"
+            ContentTemplate="{DataTemplate common_ui_pages:StrategySummaryPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphEDL}" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
+    <MenuFlyoutItem Text="Estrategia">
+        <MenuFlyoutItem.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphRhombusMedium}" />
+        </MenuFlyoutItem.IconImageSource>
+    </MenuFlyoutItem>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Caracter. del territ."
@@ -92,16 +120,6 @@
             </ShellContent.Icon>
         </ShellContent>
     </FlyoutItem>
-    <ShellContent
-        Title="Estrategia"
-        ContentTemplate="{DataTemplate common_ui_pages:StrategySummaryPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="{StaticResource FontMaterialDesignIcons}"
-                Color="{AppThemeBinding Light=Black, Dark=White}" 
-                Glyph="{StaticResource IconGlyphEDL}" />
-        </ShellContent.Icon>
-    </ShellContent>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Ejes estratégicos"
@@ -134,6 +152,16 @@
             </ShellContent.Icon>
         </ShellContent>
         <ShellContent
+            Title="Ideas de proyecto"
+            ContentTemplate="{DataTemplate local_ui_pages:StrategicProjectIdeasManagementPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphProjectIdea}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
             Title="Proyectos"
             ContentTemplate="{DataTemplate local_ui_pages:StrategicProjectsManagementPage}">
             <ShellContent.Icon>
@@ -144,17 +172,54 @@
             </ShellContent.Icon>
         </ShellContent>
     </FlyoutItem>
-    <ShellContent
-        Title="Complementarios"
-        Route="EnvironmentSummaryPage"
-        ContentTemplate="{DataTemplate local_ui_pages:EnvironmentSummaryPage}">
-        <ShellContent.Icon>
+    <MenuFlyoutItem Text="Estado de indicadores">
+        <MenuFlyoutItem.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontMaterialDesignIcons}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" 
-                Glyph="{StaticResource IconGlyphComplements}" />
-        </ShellContent.Icon>
-    </ShellContent>
+                Glyph="{StaticResource IconGlyphRhombusMedium}" />
+        </MenuFlyoutItem.IconImageSource>
+    </MenuFlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Objetivos"
+            ContentTemplate="{DataTemplate local_ui_pages:ObjectiveListForIndicatorsPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphObjective}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+            Title="Programas"
+            ContentTemplate="{DataTemplate local_ui_pages:StrategicProgramListForIndicatorsPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphProgram}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+            Title="Proyectos"
+            ContentTemplate="{DataTemplate local_ui_pages:StrategicProjectListForIndicatorsPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="{StaticResource FontMaterialDesignIcons}"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" 
+                    Glyph="{StaticResource IconGlyphProject}" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
+    <MenuFlyoutItem Text="Complementarios">
+        <MenuFlyoutItem.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphRhombusMedium}" />
+        </MenuFlyoutItem.IconImageSource>
+    </MenuFlyoutItem>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Macroprogramas"
@@ -205,6 +270,50 @@
                     FontFamily="{StaticResource FontMaterialDesignIcons}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" 
                     Glyph="{StaticResource IconGlyphUnitMeasurement}" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
+    <FlyoutItem 
+        Title="Informes al CAM"
+        FlyoutDisplayOptions="AsSingleItem">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphReport}" />
+        </FlyoutItem.Icon>
+        <ShellContent 
+            Title="PDLs"
+            ContentTemplate="{DataTemplate local_ui_pages:PDLOperationReportsListPage}" />
+        <ShellContent 
+            Title="MiPyMEs"
+            ContentTemplate="{DataTemplate local_ui_pages:SRLOperationReportsListPage}" />
+    </FlyoutItem>
+    <FlyoutItem 
+        Title="Acciones de responsabilidad social"
+        FlyoutDisplayOptions="AsSingleItem">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphSocialResponsabilityActions}" />
+        </FlyoutItem.Icon>
+        <ShellContent 
+            Title="PDLs"
+            ContentTemplate="{DataTemplate local_ui_pages:PDLSocialResponsabilityActionsListPage}" />
+        <ShellContent 
+            Title="MiPyMEs"
+            ContentTemplate="{DataTemplate local_ui_pages:SRLSocialResponsabilityActionsListPage}" />
+    </FlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent             
+            Title="Prioridades de asistencia social"
+            ContentTemplate="{DataTemplate local_ui_pages:SocialSupportDemandsManagementPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" 
+                Glyph="{StaticResource IconGlyphSocialSupportDemands}" />
             </ShellContent.Icon>
         </ShellContent>
     </FlyoutItem>

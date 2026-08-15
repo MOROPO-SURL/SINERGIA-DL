@@ -14,21 +14,24 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<Guid, ObjectiveId>()
-            .MapWith(src => new ObjectiveId(src));
+        config.NewConfig<Guid, ObjectiveId>().MapWith(src => new ObjectiveId(src));
+        config.NewConfig<ObjectiveId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<ObjectiveId, Guid>()
-            .MapWith(src => src.Value);
+        config.NewConfig<Guid, ObjectiveActionId>().MapWith(src => new ObjectiveActionId(src));
+        config.NewConfig<ObjectiveActionId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<Guid, ObjectiveActionId>()
-            .MapWith(src => new ObjectiveActionId(src));
+        config.NewConfig<ObjectiveActionIndicatorId, Guid>().MapWith(src => src.Value);
+        config.NewConfig<ObjectiveActionIndicatorMilestoneId, Guid>().MapWith(src => src.Value);
 
-        config.NewConfig<ObjectiveActionId, Guid>()
-            .MapWith(src => src.Value);
+        config.NewConfig<ObjectiveActionId, Guid>().MapWith(src => src.Value);
 
+        config.NewConfig<Guid, ObjectiveActionIndicatorId>().MapWith(src => new ObjectiveActionIndicatorId(src));
         config.NewConfig<ObjectiveActionIndicatorId, Guid>().MapWith(src => src.Value);
 
         config.NewConfig<ObjectiveActionIndicatorMilestoneId, Guid>().MapWith(src => src.Value);
+
+        config.NewConfig<DateTime, ObjectiveActionIndicatorChangeId>().MapWith(src => new ObjectiveActionIndicatorChangeId(src));
+        config.NewConfig<ObjectiveActionIndicatorChangeId, DateTime>().MapWith(src => src.Value);
 
         config.NewConfig<Objective, ObjectiveBasicDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
@@ -38,11 +41,9 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest.Challanges, src => src.Challenges.Select(entity => new ObjectiveChallengeDetailDto(entity.Id.Value, entity.Index, entity.Title, entity.Description)))
             .Map(dest => dest.Projections, src => src.Projections.Select(entity => new ObjectiveProjectionDetailDto(entity.Id.Value, entity.Index, entity.Title, entity.Description)))
-            //.Map(dest => dest.Actions, src => src.Actions.Select(entity => new ObjectiveActionDetailDto(entity.Id.Value, entity.Index, entity.Title, entity.Indicators, entity.Description)))
             .Map(dest => dest, src => src);
 
-        config.NewConfig<ObjectiveDetailQuery, ObjectiveId>()
-            .MapWith(src => new ObjectiveId(src.Id));
+        config.NewConfig<ObjectiveDetailQuery, ObjectiveId>().MapWith(src => new ObjectiveId(src.Id));
 
         config.NewConfig<ObjectiveCreateCommand, Objective>()
             .MapWith(src => new(
@@ -276,11 +277,7 @@ internal sealed class ObjectiveEntityMappingRegister : IRegister
                         {
                             ObjectiveActionIndicatorMilestone __entity = _item.Adapt<ObjectiveActionIndicatorMilestone>();
 
-                            __entity.IndicatorId = _entity.Id;
-                            __entity.ActionId = entity.Id;
-                            __entity.ObjectiveId = dest.Id;
-
-                            _entity.RemoveMilestone(__entity);
+                            _entity.RemoveMilestone(_entity.Milestones.First(___entity => ___entity.Id.Value == __item.Id && ___entity.IndicatorId == _entity.Id && ___entity.ActionId == entity.Id && ___entity.ObjectiveId == dest.Id));
                         }
 
                         foreach (var __item in _item.PatchMilestones)

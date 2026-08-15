@@ -158,6 +158,13 @@
                             </CollectionView>
                         </Grid>
                     </Frame>
+                    <Label>
+                        <Label.Behaviors>
+                            <common_ui_behaviors:ValidationMessageLabelBehavior 
+                                TargetValidationPropertyName="{Static local_configuration_page_models:ObjectiveIndicatorConfigurationPageModel.MilestonesValidableProperty}"
+                                InvalidStateStyle="{StaticResource ValidationMessageLabelStyle}" />
+                        </Label.Behaviors>
+                    </Label>
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

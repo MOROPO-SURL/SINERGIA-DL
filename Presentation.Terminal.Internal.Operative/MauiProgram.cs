@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative;
 
@@ -15,15 +16,16 @@ public static class MauiProgram
         
         builder
             .UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkit()  
             .UseFFImageLoading()
-            .UsePresentationCommonDefaults()
+            .UseSkiaSharp(true)
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("materialdesignicons-webfont.ttf", "MaterialDesignIcons");
             })
+            .UsePresentationCommonDefaults()
             .Services
                 .AddSingleton<IHttpClientProviderPort, Ports.Adapter.Provider.HttpClientHelperProvider>()
                 .AddSingleton<IExceptionHandlingHelperPort, Ports.Adapter.Helper.ExceptionHandlingHelperPortAdapter>()

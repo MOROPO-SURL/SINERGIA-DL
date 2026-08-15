@@ -12,6 +12,7 @@ public sealed class ObjectiveActionIndicatorMilestone : AbstractEntity<Objective
         ObjectiveId = objectiveId;
         ActionId = actionId;
         IndicatorId = indicatorId;
+        At = at;
         Amount = amount;
         Description = description;
     }

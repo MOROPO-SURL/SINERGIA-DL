@@ -110,6 +110,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasMaxLength(2048)
                         .HasColumnType("character varying(2048)");
 
+                    b.Property<DateOnly>("BornAt")
+                        .HasColumnType("date");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(55)
@@ -129,6 +132,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<int>("MainEconomicActivityId")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("MainLocationId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("ModalityId")
                         .HasColumnType("uuid");
 
@@ -138,6 +144,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.HasKey("Id");
 
                     b.HasIndex("MainEconomicActivityId");
+
+                    b.HasIndex("MainLocationId");
 
                     b.HasIndex("ModalityId");
 
@@ -159,6 +167,9 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasMaxLength(2048)
                         .HasColumnType("character varying(2048)");
 
+                    b.Property<DateOnly>("BornAt")
+                        .HasColumnType("date");
+
                     b.Property<string>("FiscalIdentificationCode")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -173,12 +184,17 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<int>("MainEconomicActivityId")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("MainLocationId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MainEconomicActivityId");
+
+                    b.HasIndex("MainLocationId");
 
                     b.HasIndex("OwnerId");
 
@@ -359,6 +375,31 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.ToTable("keyvariables", (string)null);
                 });
 
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<Guid?>("FeatureImageId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FeatureImageId")
+                        .IsUnique();
+
+                    b.ToTable("locations", (string)null);
+                });
+
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Macroprogram", b =>
                 {
                     b.Property<Guid>("Id")
@@ -428,6 +469,112 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .IsUnique();
 
                     b.ToTable("objectives", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.PDLOperationReport", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<float>("CAMComission")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<int>("DiscapacityEmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FemaleEmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("GridEnergySpend")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Income")
+                        .HasColumnType("real");
+
+                    b.Property<float>("IncomeBankDeposit")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("Period")
+                        .HasColumnType("date");
+
+                    b.Property<float>("PeriodResult")
+                        .HasColumnType("real");
+
+                    b.Property<float>("RenerenewableEnergyExportation")
+                        .HasColumnType("real");
+
+                    b.Property<float>("RenerenewableEnergyGeneration")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId", "Period")
+                        .IsUnique();
+
+                    b.ToTable("pdloperationreports", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.SRLOperationReport", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<int>("DiscapacityEmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FemaleEmployeeCount")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("GridEnergySpend")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("Period")
+                        .HasColumnType("date");
+
+                    b.Property<float>("RenerenewableEnergyExportation")
+                        .HasColumnType("real");
+
+                    b.Property<float>("RenerenewableEnergyGeneration")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId", "Period")
+                        .IsUnique();
+
+                    b.ToTable("srloperationreports", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", b =>
@@ -525,9 +672,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Property<string>("Description")
                         .HasMaxLength(512)
                         .HasColumnType("character varying(512)");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("boolean");
 
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("boolean");
@@ -759,6 +903,110 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.ToTable("services", (string)null);
                 });
 
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.PDLSocialResponsabilityAction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid?>("DemandId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DemandId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("pdlsocialresposabilityactions", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.SRLSocialResponsabilityAction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid?>("DemandId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DemandId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("srlsocialresposabilityactions", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<DateTime?>("EndAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("StartAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("socialsupportdemands", (string)null);
+                });
+
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.StrategicAxe", b =>
                 {
                     b.Property<int>("Id")
@@ -896,47 +1144,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.ToTable("strategicprograms", (string)null);
                 });
 
-            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramProjectIdeaAggregate.StrategicProjectIdea", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(2048)
-                        .HasColumnType("character varying(2048)");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(360)
-                        .HasColumnType("character varying(360)");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("ProgramId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name");
-
-                    b.HasIndex("ProgramId");
-
-                    b.ToTable("strategicprojectideas", (string)null);
-                });
-
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.StrategicProject", b =>
                 {
                     b.Property<Guid>("Id")
@@ -987,6 +1194,47 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .IsUnique();
 
                     b.ToTable("strategicprojects", (string)null);
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectIdeaAggregate.StrategicProjectIdea", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ProgramId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(360)
+                        .HasColumnType("character varying(360)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.HasIndex("Title");
+
+                    b.ToTable("strategicprojectideas", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectKindAggregate.StrategicProjectKind", b =>
@@ -2182,6 +2430,12 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "MainLocation")
+                        .WithMany()
+                        .HasForeignKey("MainLocationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PDLModalityAggregate.PDLModality", "Modality")
                         .WithMany()
                         .HasForeignKey("ModalityId")
@@ -2299,6 +2553,32 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.Navigation("Service");
                         });
 
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Bridges.DevelopmentActorProfileLocationBridge", "LocationBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("pdldevelopmentactorprofile_location_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Bridges.DevelopmentActorProfileEconomicActivityBridge", "SecoundaryEconomicActivityBridges", b1 =>
                         {
                             b1.Property<Guid>("MainId")
@@ -2327,7 +2607,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                     b.Navigation("CommercialActivities");
 
+                    b.Navigation("LocationBridges");
+
                     b.Navigation("MainEconomicActivity");
+
+                    b.Navigation("MainLocation");
 
                     b.Navigation("Modality");
 
@@ -2345,6 +2629,12 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate.EconomicActivity", "MainEconomicActivity")
                         .WithMany()
                         .HasForeignKey("MainEconomicActivityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "MainLocation")
+                        .WithMany()
+                        .HasForeignKey("MainLocationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -2511,6 +2801,32 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                             b1.Navigation("Linked");
                         });
 
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Bridges.DevelopmentActorProfileLocationBridge", "LocationBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("srldevelopmentactorprofile_location_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Bridges.DevelopmentActorProfileEconomicActivityBridge", "SecoundaryEconomicActivityBridges", b1 =>
                         {
                             b1.Property<Guid>("MainId")
@@ -2539,7 +2855,11 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                     b.Navigation("CommercialActivities");
 
+                    b.Navigation("LocationBridges");
+
                     b.Navigation("MainEconomicActivity");
+
+                    b.Navigation("MainLocation");
 
                     b.Navigation("OrganizationBridges");
 
@@ -2563,6 +2883,70 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .IsRequired();
 
                     b.Navigation("Kind");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Image", "FeatureImage")
+                        .WithOne()
+                        .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "FeatureImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.OwnsOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.PostalAddress", "PostalAddress", b1 =>
+                        {
+                            b1.Property<Guid>("LocationId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Context")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Name")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Number")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<int?>("ZipCode")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("LocationId");
+
+                            b1.ToTable("locations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("LocationId");
+                        });
+
+                    b.OwnsOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Values.Coordinate", "Coordinate", b1 =>
+                        {
+                            b1.Property<Guid>("LocationId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<float>("Latitude")
+                                .HasColumnType("real");
+
+                            b1.Property<float>("Longitude")
+                                .HasColumnType("real");
+
+                            b1.HasKey("LocationId");
+
+                            b1.ToTable("locations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("LocationId");
+                        });
+
+                    b.Navigation("Coordinate")
+                        .IsRequired();
+
+                    b.Navigation("FeatureImage");
+
+                    b.Navigation("PostalAddress")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Objective", b =>
@@ -2598,6 +2982,135 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
 
                             b1.WithOwner()
                                 .HasForeignKey("ObjectiveId");
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveActionIndicator", "Indicators", b2 =>
+                                {
+                                    b2.Property<Guid>("Id")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("ActionId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("ObjectiveId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<string>("Alias")
+                                        .HasMaxLength(360)
+                                        .HasColumnType("character varying(360)");
+
+                                    b2.Property<DateTime>("CreatedAt")
+                                        .HasColumnType("timestamp without time zone");
+
+                                    b2.Property<string>("Name")
+                                        .IsRequired()
+                                        .HasMaxLength(360)
+                                        .HasColumnType("character varying(360)");
+
+                                    b2.Property<int>("Priority")
+                                        .HasColumnType("integer");
+
+                                    b2.Property<Guid>("UnitMeasurementId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<DateTime?>("UpdatedAt")
+                                        .HasColumnType("timestamp without time zone");
+
+                                    b2.HasKey("Id", "ActionId", "ObjectiveId");
+
+                                    b2.HasIndex("UnitMeasurementId");
+
+                                    b2.HasIndex("ActionId", "ObjectiveId");
+
+                                    b2.HasIndex("Name", "Id", "ActionId", "ObjectiveId")
+                                        .IsUnique();
+
+                                    b2.ToTable("objective_action_indicators", (string)null);
+
+                                    b2.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate.UnitMeasurement", "UnitMeasurement")
+                                        .WithMany()
+                                        .HasForeignKey("UnitMeasurementId")
+                                        .OnDelete(DeleteBehavior.Restrict)
+                                        .IsRequired();
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("ActionId", "ObjectiveId");
+
+                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveActionIndicatorChange", "Changes", b3 =>
+                                        {
+                                            b3.Property<DateTime>("Id")
+                                                .HasColumnType("timestamp without time zone");
+
+                                            b3.Property<Guid>("IndicatorId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("ActionId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("ObjectiveId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<float>("Amount")
+                                                .HasColumnType("real");
+
+                                            b3.Property<string>("Context")
+                                                .HasMaxLength(512)
+                                                .HasColumnType("character varying(512)");
+
+                                            b3.HasKey("Id", "IndicatorId", "ActionId", "ObjectiveId");
+
+                                            b3.HasIndex("IndicatorId", "ActionId", "ObjectiveId");
+
+                                            b3.ToTable("objective_action_indicator_changes", (string)null);
+
+                                            b3.WithOwner()
+                                                .HasForeignKey("IndicatorId", "ActionId", "ObjectiveId");
+                                        });
+
+                                    b2.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveActionIndicatorMilestone", "Milestones", b3 =>
+                                        {
+                                            b3.Property<Guid>("Id")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("IndicatorId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("ActionId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<Guid>("ObjectiveId")
+                                                .HasColumnType("uuid");
+
+                                            b3.Property<float>("Amount")
+                                                .HasColumnType("real");
+
+                                            b3.Property<DateOnly>("At")
+                                                .HasColumnType("date");
+
+                                            b3.Property<string>("Description")
+                                                .HasMaxLength(512)
+                                                .HasColumnType("character varying(512)");
+
+                                            b3.HasKey("Id", "IndicatorId", "ActionId", "ObjectiveId");
+
+                                            b3.HasIndex("IndicatorId", "ActionId", "ObjectiveId");
+
+                                            b3.HasIndex("Id", "IndicatorId", "ActionId", "ObjectiveId", "At")
+                                                .IsUnique();
+
+                                            b3.ToTable("objective_action_indicator_milestones", (string)null);
+
+                                            b3.WithOwner()
+                                                .HasForeignKey("IndicatorId", "ActionId", "ObjectiveId");
+                                        });
+
+                                    b2.Navigation("Changes");
+
+                                    b2.Navigation("Milestones");
+
+                                    b2.Navigation("UnitMeasurement");
+                                });
+
+                            b1.Navigation("Indicators");
                         });
 
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ObjectiveAggregate.Entities.ObjectiveChallenge", "Challenges", b1 =>
@@ -2683,6 +3196,54 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Navigation("Challenges");
 
                     b.Navigation("Projections");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.PDLOperationReport", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Abstractions.AbstractPDLDevelopmentActorProfile", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.SRLOperationReport", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.SRLDevelopmentActorProfile", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Entities.OperationReportAccountingEntry", "AccountingEntries", b1 =>
+                        {
+                            b1.Property<int>("Kind")
+                                .HasColumnType("integer");
+
+                            b1.Property<long>("ReportId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<int>("Currency")
+                                .HasColumnType("integer");
+
+                            b1.Property<float>("Amount")
+                                .HasColumnType("real");
+
+                            b1.HasKey("Kind", "ReportId", "Currency");
+
+                            b1.HasIndex("ReportId");
+
+                            b1.ToTable("srloperationreport_accountingentries", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ReportId");
+                        });
+
+                    b.Navigation("AccountingEntries");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OrganizationAggregate.Organization", b =>
@@ -3017,6 +3578,214 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.PDLSocialResponsabilityAction", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", "Demand")
+                        .WithMany()
+                        .HasForeignKey("DemandId");
+
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Abstractions.AbstractPDLDevelopmentActorProfile", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionImageBridge", "ImageBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId")
+                                .IsUnique();
+
+                            b1.ToTable("pdlsocialresposabilityaction_image_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Image", "Linked")
+                                .WithOne()
+                                .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.PDLSocialResponsabilityAction.ImageBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionImageBridge", "LinkedId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionLocationBridge", "LocationBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("pdlsocialresposabilityaction_location_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.Navigation("Demand");
+
+                    b.Navigation("ImageBridges");
+
+                    b.Navigation("LocationBridges");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.SRLSocialResponsabilityAction", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", "Demand")
+                        .WithMany()
+                        .HasForeignKey("DemandId");
+
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.SRLDevelopmentActorProfile", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionImageBridge", "ImageBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId")
+                                .IsUnique();
+
+                            b1.ToTable("srlsocialresposabilityaction_image_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Image", "Linked")
+                                .WithOne()
+                                .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.SRLSocialResponsabilityAction.ImageBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionImageBridge", "LinkedId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialResponsabilityActionAggregate.Bridges.SocialResponsabilityActionLocationBridge", "LocationBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("srlsocialresposabilityaction_location_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.Navigation("Demand");
+
+                    b.Navigation("ImageBridges");
+
+                    b.Navigation("LocationBridges");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand", b =>
+                {
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Bridges.SocialSupportDemandImageBridge", "ImageBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId")
+                                .IsUnique();
+
+                            b1.ToTable("socialsupportdemand_image_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate.Image", "Linked")
+                                .WithOne()
+                                .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.SocialSupportDemand.ImageBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Bridges.SocialSupportDemandImageBridge", "LinkedId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.SocialSupportDemandAggregate.Bridges.SocialSupportDemandLocationBridge", "LocationBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("socialsupportdemand_location_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.LocationAggregate.Location", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.Navigation("ImageBridges");
+
+                    b.Navigation("LocationBridges");
                 });
 
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicAxeAggregate.StrategicAxe", b =>
@@ -3593,17 +4362,6 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.Navigation("SpecificObjectives");
                 });
 
-            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramProjectIdeaAggregate.StrategicProjectIdea", b =>
-                {
-                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", "Program")
-                        .WithMany()
-                        .HasForeignKey("ProgramId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Program");
-                });
-
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.StrategicProject", b =>
                 {
                     b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectKindAggregate.StrategicProjectKind", "Kind")
@@ -3618,7 +4376,203 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Bridges.StrategicProjectMacroprogramBridge", "MacroprogramBridges", b1 =>
+                        {
+                            b1.Property<Guid>("MainId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId");
+
+                            b1.ToTable("strategicproject_macroprogram_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.MacroprogramAggregate.Macroprogram", "Linked")
+                                .WithMany()
+                                .HasForeignKey("LinkedId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities.ProjectIndicator", "Indicators", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Alias")
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(360)
+                                .HasColumnType("character varying(360)");
+
+                            b1.Property<int>("Priority")
+                                .HasColumnType("integer");
+
+                            b1.Property<Guid>("UnitMeasurementId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("Id", "ProjectId");
+
+                            b1.HasIndex("ProjectId");
+
+                            b1.HasIndex("UnitMeasurementId");
+
+                            b1.HasIndex("Name", "Id", "ProjectId")
+                                .IsUnique();
+
+                            b1.ToTable("strategicproject_indicators", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId");
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.UnitMeasurementAggregate.UnitMeasurement", "UnitMeasurement")
+                                .WithMany()
+                                .HasForeignKey("UnitMeasurementId")
+                                .OnDelete(DeleteBehavior.Restrict)
+                                .IsRequired();
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities.ProjectIndicatorChange", "Changes", b2 =>
+                                {
+                                    b2.Property<DateTime>("Id")
+                                        .HasColumnType("timestamp without time zone");
+
+                                    b2.Property<Guid>("IndicatorId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("ProjectId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<float>("Amount")
+                                        .HasColumnType("real");
+
+                                    b2.Property<string>("Context")
+                                        .HasMaxLength(512)
+                                        .HasColumnType("character varying(512)");
+
+                                    b2.HasKey("Id", "IndicatorId", "ProjectId");
+
+                                    b2.HasIndex("IndicatorId", "ProjectId");
+
+                                    b2.ToTable("strategicproject_indicator_changes", (string)null);
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("IndicatorId", "ProjectId");
+                                });
+
+                            b1.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities.ProjectIndicatorMilestone", "Milestones", b2 =>
+                                {
+                                    b2.Property<Guid>("Id")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("IndicatorId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<Guid>("ProjectId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<float>("Amount")
+                                        .HasColumnType("real");
+
+                                    b2.Property<DateOnly>("At")
+                                        .HasColumnType("date");
+
+                                    b2.Property<string>("Description")
+                                        .HasMaxLength(512)
+                                        .HasColumnType("character varying(512)");
+
+                                    b2.HasKey("Id", "IndicatorId", "ProjectId");
+
+                                    b2.HasIndex("IndicatorId", "ProjectId");
+
+                                    b2.HasIndex("Id", "IndicatorId", "ProjectId", "At")
+                                        .IsUnique();
+
+                                    b2.ToTable("strategicproject_indicator_milestones", (string)null);
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("IndicatorId", "ProjectId");
+                                });
+
+                            b1.Navigation("Changes");
+
+                            b1.Navigation("Milestones");
+
+                            b1.Navigation("UnitMeasurement");
+                        });
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectAggregate.Entities.ProjectSpecificObjective", "SpecificObjectives", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("ProjectId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Content")
+                                .IsRequired()
+                                .HasMaxLength(1024)
+                                .HasColumnType("character varying(1024)");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<int>("Index")
+                                .HasColumnType("integer");
+
+                            b1.Property<DateTime?>("UpdatedAt")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("Id", "ProjectId");
+
+                            b1.HasIndex("ProjectId");
+
+                            b1.HasIndex("Index", "Id", "ProjectId")
+                                .IsUnique();
+
+                            b1.ToTable("strategicproject_specificobjetives", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProjectId");
+                        });
+
+                    b.Navigation("Indicators");
+
                     b.Navigation("Kind");
+
+                    b.Navigation("MacroprogramBridges");
+
+                    b.Navigation("Program");
+
+                    b.Navigation("SpecificObjectives");
+                });
+
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProjectIdeaAggregate.StrategicProjectIdea", b =>
+                {
+                    b.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.StrategicProgramAggregate.StrategicProgram", "Program")
+                        .WithMany()
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Program");
                 });

@@ -48,13 +48,11 @@ public class ProjectIndicator : AbstractAuditableEntity<ProjectIndicatorId, Guid
 
     public IReadOnlyList<ProjectIndicatorChange> Changes => [.. changes];
 
-    public void AddMilestone(ProjectIndicatorMilestone entity)
-    {
-        milestones.Add(entity);
-    }
+    public void AddMilestone(ProjectIndicatorMilestone entity) => milestones.Add(entity);
 
-    public void RemoveMilestone(ProjectIndicatorMilestone entity)
-    {
-        milestones.Remove(milestones.First(_entity => _entity.Id == entity.Id && _entity.IndicatorId == entity.IndicatorId && _entity.ProjectId == entity.ProjectId));
-    }
+    public void RemoveMilestone(ProjectIndicatorMilestone entity) => milestones.Remove(entity);
+
+    public void AddChange(ProjectIndicatorChange entity) => changes.Add(entity);
+
+    public void RemoveChange(ProjectIndicatorChange entity) => changes.Remove(entity);
 }

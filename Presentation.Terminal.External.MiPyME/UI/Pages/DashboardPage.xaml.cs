@@ -7,7 +7,7 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyM
 
 public partial class DashboardPage : ContentPage
 {
-	public DashboardPage()
+    public DashboardPage()
 	{
 		InitializeComponent();
 
@@ -18,14 +18,18 @@ public partial class DashboardPage : ContentPage
     {
         base.OnAppearing();
 
-		if (!IsEnabled)
-		{
-			AppShellPageModel parentBindingContext = (AppShellPageModel)Parent.BindingContext;
+        if (!IsEnabled)
+        {
+            AppShellPageModel parentBindingContext = (AppShellPageModel)Parent.BindingContext;
 
-            BindingContext = new DashboardPageModel(parentBindingContext.Organization, parentBindingContext.Representative);
-		}
+            DashboardPageModel concreteBindingContext = new(parentBindingContext.Organization, parentBindingContext.Representative);
 
-		IsEnabled = true;
+            BindingContext = concreteBindingContext;
+
+            concreteBindingContext.LoadState();
+        }
+
+        IsEnabled = true;
     }
 
     private void DiagnosticSummaryFrameTapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

@@ -14,6 +14,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.CQR
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.CQRS.Query.Detail;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.CQRS.Query.Paginate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SRLDevelopmentActorProfiles.CQRS.Query.List;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;
@@ -38,13 +39,13 @@ public class SRLDevelopmentActorProfilesController : ControllerBase
 
     [HttpGet]
     [Route("page/{sheet}/limit/{limit}")]
-    public async Task<ActionResult<PaginateResultModel<SRLDevelopmentActorProfileBasicDtoModel>>> GetAsync(int sheet, int limit)
+    public async Task<ActionResult<PaginateResultModel<DevelopmentActorProfileBasicDtoModel>>> GetAsync(int sheet, int limit)
     {
         try
         {
-            PaginateQueryResultModel<SRLDevelopmentActorProfileBasicDto> result = await mediator.Send(new SRLDevelopmentActorProfilePaginateQuery(sheet, limit, entity => !entity.IsArchived));
+            PaginateQueryResultModel<DevelopmentActorProfileBasicDto> result = await mediator.Send(new SRLDevelopmentActorProfilePaginateQuery(sheet, limit, entity => !entity.IsArchived));
 
-            return Ok(mapper.Map<PaginateResultModel<SRLDevelopmentActorProfileBasicDtoModel>>(result));
+            return Ok(mapper.Map<PaginateResultModel<DevelopmentActorProfileBasicDtoModel>>(result));
         }
         catch (Exception exception)
         {
@@ -56,16 +57,33 @@ public class SRLDevelopmentActorProfilesController : ControllerBase
 
     [HttpGet]
     [Route("page/{sheet}/limit/{limit}/filter/{parameter}")]
-    public async Task<ActionResult<PaginateResultModel<SRLDevelopmentActorProfileBasicDtoModel>>> FilterAsync(int sheet, int limit, string parameter)
+    public async Task<ActionResult<PaginateResultModel<DevelopmentActorProfileBasicDtoModel>>> FilterAsync(int sheet, int limit, string parameter)
     {
         try
         {
-            PaginateQueryResultModel<SRLDevelopmentActorProfileBasicDto> result = await mediator.Send(new SRLDevelopmentActorProfilePaginateQuery(
+            PaginateQueryResultModel<DevelopmentActorProfileBasicDto> result = await mediator.Send(new SRLDevelopmentActorProfilePaginateQuery(
                 sheet,
                 limit,
                 entity => !entity.IsArchived && EF.Functions.ILike(entity.Owner!.Name, $"%{parameter}%")));
 
-            return Ok(mapper.Map<PaginateResultModel<SRLDevelopmentActorProfileBasicDtoModel>>(result));
+            return Ok(mapper.Map<PaginateResultModel<DevelopmentActorProfileBasicDtoModel>>(result));
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<SRLDevelopmentActorProfileDetailDtoModel[]>> GetAsync()
+    {
+        try
+        {
+            SRLDevelopmentActorProfileDetailDto[] result = await mediator.Send(new SRLDevelopmentActorProfileListQuery());
+
+            return Ok(mapper.Map<SRLDevelopmentActorProfileDetailDtoModel[]>(result));
         }
         catch (Exception exception)
         {
@@ -81,6 +99,44 @@ public class SRLDevelopmentActorProfilesController : ControllerBase
         try
         {
             SRLDevelopmentActorProfileDetailDto result = await mediator.Send(new SRLDevelopmentActorProfileDetailQuery(key));
+
+            SRLDevelopmentActorProfileDetailDtoModel model = mapper.Map<SRLDevelopmentActorProfileDetailDtoModel>(result);
+
+            return Ok(model);
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet("by/owner/{key}")]
+    public async Task<ActionResult<SRLDevelopmentActorProfileDetailDtoModel>> GetBasicByOwnerAsync(Guid key)
+    {
+        try
+        {
+            DevelopmentActorProfileBasicDto result = await mediator.Send(new SRLDevelopmentActorProfileBasicByOwnerQuery(key));
+
+            DevelopmentActorProfileBasicDtoModel model = mapper.Map<DevelopmentActorProfileBasicDtoModel>(result);
+
+            return Ok(model);
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, exception.Message);
+
+            return Problem();
+        }
+    }
+
+    [HttpGet("by/owner/{key}/detail")]
+    public async Task<ActionResult<SRLDevelopmentActorProfileDetailDtoModel>> GetDetailByOwnerAsync(Guid key)
+    {
+        try
+        {
+            SRLDevelopmentActorProfileDetailDto result = await mediator.Send(new SRLDevelopmentActorProfileDetailByOwnerQuery(key));
 
             SRLDevelopmentActorProfileDetailDtoModel model = mapper.Map<SRLDevelopmentActorProfileDetailDtoModel>(result);
 

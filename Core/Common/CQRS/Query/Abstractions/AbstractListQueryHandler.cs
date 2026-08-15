@@ -25,10 +25,10 @@ internal abstract class AbstractListQueryHandler<TEntity, TId, TIdValue, TDto, T
     {
         if (request.Criteria != null)
         {
-            return Task.FromResult(entityQueryRepository!.GetFindByQueryable(request.Criteria!).ProjectToType<TDto>().ToArray());
+            return Task.FromResult(entityQueryRepository!.GetFindByQueryable(request.Criteria!).Select(entity => entity.Adapt<TDto>()).ToArray());
         }
 
-        return Task.FromResult(entityQueryRepository!.GetAllQueryable().ProjectToType<TDto>().ToArray());
+        return Task.FromResult(entityQueryRepository!.GetAllQueryable().Select(entity => entity.Adapt<TDto>()).ToArray());
     }
 
     protected virtual Expression<Func<TEntity, object>> OrderExpression => entity => entity.Id;
