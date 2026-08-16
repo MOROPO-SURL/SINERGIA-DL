@@ -16,8 +16,11 @@ internal sealed class StrategicProjectQueryRepositoryPortAdapter : AbstractEntit
     protected override IQueryable<StrategicProject> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
+            .AsSplitQuery()
+            .IgnoreAutoIncludes()
             .Include(entity => entity.Kind)
             .Include(entity => entity.Program)
+            .Include(entity => entity.SpecificObjectives)
             .Include(entity => entity.Indicators).ThenInclude(entity => entity.UnitMeasurement)
             .Include(entity => entity.MacroprogramBridges).ThenInclude(bridge => bridge.Linked);
     }

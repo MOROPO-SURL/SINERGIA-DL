@@ -187,6 +187,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IStrategicProjectKindQueryRepositoryPort, StrategicProjectKindQueryRepositoryPortAdapter>();
         services.AddScoped<IStrategicProjectKindCommandRepositoryPort, StrategicProjectKindCommandRepositoryPortAdapter>();
+        services.AddScoped<IStrategicProjectIndicatorChangeQueryRepositoryPort, StrategicProjectIndicatorChangeQueryRepositoryPortAdapter>();
 
         services.AddScoped<IStrategicProjectQueryRepositoryPort, StrategicProjectQueryRepositoryPortAdapter>();
         services.AddScoped<IStrategicProjectCommandRepositoryPort, StrategicProjectCommandRepositoryPortAdapter>();

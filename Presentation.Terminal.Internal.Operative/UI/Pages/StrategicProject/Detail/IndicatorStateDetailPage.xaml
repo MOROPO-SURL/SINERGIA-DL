@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<common_ui_base_pages:BaseDetailEntityPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicProject.Detail"
+    xmlns:local_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.View"
+    xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.StrategicProject.Detail.IndicatorStateDetailPage"
+    x:TypeArguments="local_view_models:StrategicProjectIndicatorStateViewModel,local_detail_page_models:IndicatorStateDetailPageModel"
+    x:DataType="local_detail_page_models:IndicatorStateDetailPageModel"
+    Title="Estado de Indicador"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="400"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <VerticalStackLayout Margin="20">
+                        <Label 
+                            Margin="0,0,0,8"
+                            Text="Detalles"
+                            FontAttributes="Bold"
+                            FontSize="Medium" />
+                        <Label 
+                            Margin="0,0,0,12"
+                            Text="Última actualización"
+                            FontAttributes="Bold" />
+                        <Label
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
+                            Margin="0"
+                            Text="Fecha" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Model.LastChange.Id, StringFormat='{0:D}, {0:h:mm tt}'}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
+                            Text="Descripción" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Model.LastChange.Context, TargetNullValue='---'}" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</common_ui_base_pages:BaseDetailEntityPage>
