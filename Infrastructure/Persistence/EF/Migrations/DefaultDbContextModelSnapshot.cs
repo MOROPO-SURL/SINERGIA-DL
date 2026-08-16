@@ -201,6 +201,33 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                     b.ToTable("srldevelopmentactorprofiles", (string)null);
                 });
 
+            modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DocumentAggregate.Document", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(180)
+                        .HasColumnType("character varying(180)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<long>("Length")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(240)
+                        .HasColumnType("character varying(240)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("documents", (string)null);
+                });
+
             modelBuilder.Entity("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.EconomicActivityAggregate.EconomicActivity", b =>
                 {
                     b.Property<int>("Id")
@@ -3206,6 +3233,35 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Bridges.OperationReportDocumentBridge", "DocumentBridges", b1 =>
+                        {
+                            b1.Property<long>("MainId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId")
+                                .IsUnique();
+
+                            b1.ToTable("pdloperationreport_document_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DocumentAggregate.Document", "Linked")
+                                .WithOne()
+                                .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.PDLOperationReport.DocumentBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Bridges.OperationReportDocumentBridge", "LinkedId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
+
+                    b.Navigation("DocumentBridges");
+
                     b.Navigation("Owner");
                 });
 
@@ -3216,6 +3272,33 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Bridges.OperationReportDocumentBridge", "DocumentBridges", b1 =>
+                        {
+                            b1.Property<long>("MainId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<Guid>("LinkedId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MainId", "LinkedId");
+
+                            b1.HasIndex("LinkedId")
+                                .IsUnique();
+
+                            b1.ToTable("srloperationreport_document_bridges", (string)null);
+
+                            b1.HasOne("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DocumentAggregate.Document", "Linked")
+                                .WithOne()
+                                .HasForeignKey("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.SRLOperationReport.DocumentBridges#MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Bridges.OperationReportDocumentBridge", "LinkedId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("MainId");
+
+                            b1.Navigation("Linked");
+                        });
 
                     b.OwnsMany("MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Entities.OperationReportAccountingEntry", "AccountingEntries", b1 =>
                         {
@@ -3242,6 +3325,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migratio
                         });
 
                     b.Navigation("AccountingEntries");
+
+                    b.Navigation("DocumentBridges");
 
                     b.Navigation("Owner");
                 });

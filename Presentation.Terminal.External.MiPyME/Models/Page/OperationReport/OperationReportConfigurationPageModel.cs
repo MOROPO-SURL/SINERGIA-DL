@@ -1,12 +1,14 @@
 ﻿using FluentValidation;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Enumerations;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Document.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Document.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Interop.Connect.Client;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Models.Page.OperationReport;
 
@@ -37,8 +39,49 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
     private float humanResourcePayload;
     private string? description;
 
+    private readonly List<DocumentCreateRequestModel> inDocuments = [];
+    private readonly List<Guid> outDocumentIds = [];
+
     public OperationReportConfigurationPageModel(Guid ownerId, SRLOperationReportDetailDtoModel? model, Action<SRLOperationReportDetailDtoModel> successCallbackAction, IValidator validator) : base(model, successCallbackAction, validator)
     {
+        #region Commands
+
+        #region Documents
+
+        DeleteDocumentCommand = new Command<DocumentBasicDtoModel>(item =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var model in inDocuments)
+                {
+                    if (model.Id != item.Id) continue;
+
+                    inDocuments.Remove(inDocuments.First(_item => _item.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outDocumentIds.Add(item.Id);
+                }
+
+                Dispatcher.Dispatch(() => Documents!.Remove(item));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        #endregion
+
+        #endregion
+
         OwnerId = ownerId;
 
         DateTime now = DateTime.Now;
@@ -62,6 +105,8 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
         sellTax = model?.SellTaxEntries.Single(item => item.Key == OperationReportAccountingEntryCurrency.Default).Value ?? 0;
         humanResourcePayload = model?.HumanResourcePayloadEntries.Single(item => item.Key == OperationReportAccountingEntryCurrency.Default).Value ?? 0;
         description = model?.Description;
+
+        Documents = [.. model?.Documents ?? []];
     }
 
     public override IValidationContext? ValidationContext => new ValidationContext<OperationReportConfigurationPageModel>(this);
@@ -90,6 +135,7 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
                 [new KeyValuePair<OperationReportAccountingEntryCurrency, float>(OperationReportAccountingEntryCurrency.Default, operativeTax)],
                 [new KeyValuePair<OperationReportAccountingEntryCurrency, float>(OperationReportAccountingEntryCurrency.Default, sellTax)],
                 [new KeyValuePair<OperationReportAccountingEntryCurrency, float>(OperationReportAccountingEntryCurrency.Default, humanResourcePayload)],
+                [.. inDocuments],
                 Description
             ));
     }
@@ -118,6 +164,8 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
                 [new KeyValuePair<OperationReportAccountingEntryCurrency, float>(OperationReportAccountingEntryCurrency.Default, operativeTax)],
                 [new KeyValuePair<OperationReportAccountingEntryCurrency, float>(OperationReportAccountingEntryCurrency.Default, sellTax)],
                 [new KeyValuePair<OperationReportAccountingEntryCurrency, float>(OperationReportAccountingEntryCurrency.Default, humanResourcePayload)],
+                [.. inDocuments],
+                [.. outDocumentIds],
                 Description
             ));
     }
@@ -161,10 +209,23 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
 
     public float HumanResourcePayload { get => humanResourcePayload; set => SetProperty(ref humanResourcePayload, value); }
 
+    public ObservableCollection<DocumentBasicDtoModel> Documents { get; init; }
+
+    public ICommand DeleteDocumentCommand { get; init; }
+
     private void ReviewPeriod()
     {
         if (period.Day == 28) return;
 
         Period = new DateTime(period.Year, period.Month, 28);
+    }
+
+    public void DocumentPickSuccess_Callback(DocumentCreateRequestModel model)
+    {
+        inDocuments.Add(model);
+
+        Documents.Add(new DocumentBasicDtoModel(model.Id, model.Name, MimeTypes.MimeTypeMap.GetExtension(model.ContentType), model.ContentData.Length));
+
+        hasChangesFlag = true;
     }
 }

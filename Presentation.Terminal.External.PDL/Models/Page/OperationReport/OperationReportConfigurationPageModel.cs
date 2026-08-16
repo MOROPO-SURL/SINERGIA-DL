@@ -1,9 +1,13 @@
 ﻿using FluentValidation;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Document.CQRS.Command;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Document.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.CQRS.Command;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.Interop.Connect.Client;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.Models.Page.OperationReport;
 
@@ -27,8 +31,49 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
     private float camComission;
     private string? description;
 
+    private readonly List<DocumentCreateRequestModel> inDocuments = [];
+    private readonly List<Guid> outDocumentIds = [];
+
     public OperationReportConfigurationPageModel(Guid ownerId, PDLOperationReportDetailDtoModel? model, Action<PDLOperationReportDetailDtoModel> successCallbackAction, IValidator validator) : base(model, successCallbackAction, validator)
     {
+        #region Commands
+
+        #region Documents
+
+        DeleteDocumentCommand = new Command<DocumentBasicDtoModel>(item =>
+        {
+            Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                bool handled = false;
+
+                foreach (var model in inDocuments)
+                {
+                    if (model.Id != item.Id) continue;
+
+                    inDocuments.Remove(inDocuments.First(_item => _item.Id == model.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outDocumentIds.Add(item.Id);
+                }
+
+                Dispatcher.Dispatch(() => Documents!.Remove(item));
+
+                hasChangesFlag = true;
+            });
+        });
+
+        #endregion
+
+        #endregion
+
         OwnerId = ownerId;
 
         DateTime now = DateTime.Now;
@@ -46,6 +91,8 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
         periodResult = model?.PeriodResult ?? 0;
         camComission = model?.CAMComission ?? 0;
         description = model?.Description;
+
+        Documents = [.. model?.Documents ?? []];
     }
 
     public override IValidationContext? ValidationContext => new ValidationContext<OperationReportConfigurationPageModel>(this);
@@ -68,6 +115,7 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
                 incomeBankDeposit,
                 periodResult,
                 camComission,
+                [.. inDocuments],
                 Description
             ));
     }
@@ -90,6 +138,8 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
                 incomeBankDeposit,
                 periodResult,
                 camComission,
+                [.. inDocuments],
+                [.. outDocumentIds],
                 Description
             ));
     }
@@ -121,10 +171,23 @@ public sealed class OperationReportConfigurationPageModel : AbstractConfiguratio
 
     public float CAMComission { get => camComission; set => SetProperty(ref camComission, value); }
 
+    public ObservableCollection<DocumentBasicDtoModel> Documents { get; init; }
+
+    public ICommand DeleteDocumentCommand { get; init; }
+
     private void ReviewPeriod()
     {
         if (period.Day == 28) return;
 
         Period = new DateTime(period.Year, period.Month, 28);
+    }
+
+    public void DocumentPickSuccess_Callback(DocumentCreateRequestModel model)
+    {
+        inDocuments.Add(model);
+
+        Documents.Add(new DocumentBasicDtoModel(model.Id, model.Name, MimeTypes.MimeTypeMap.GetExtension(model.ContentType), model.ContentData.Length));
+
+        hasChangesFlag = true;
     }
 }

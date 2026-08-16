@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Constants;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate;
 
 namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
 
@@ -13,10 +14,10 @@ public static class StringExtensions
 
     internal static string ToDefaultFileStorageCategory(this string contentType)
     {
-        if (contentType.StartsWith("image/")) return "images";
+        if (contentType.StartsWith("image/")) return FileHandlingConstants.FILE_CATEGORY_IMAGE;
 
-        if (contentType.StartsWith("video/")) return "videos";
+        if (contentType.StartsWith("video/")) return FileHandlingConstants.FILE_CATEGORY_VIDEO;
 
-        return "documents";
+        return FileHandlingConstants.FILE_CATEGORY_DOCUMENT;
     }
 }

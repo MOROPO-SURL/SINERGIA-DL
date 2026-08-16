@@ -20,4 +20,7 @@ public static class CardViewSizeConstants
 
     public static double LOCATION_DEFAULT_CARD_VIEW_HEIGHT = 76;
     public static double LOCATION_DEFAULT_CARD_VIEW_WIDTH = 480;
+
+    public static double DOCUMENT_DEFAULT_CARD_VIEW_HEIGHT = 128;
+    public static double DOCUMENT_DEFAULT_CARD_VIEW_WIDTH = 560;
 }

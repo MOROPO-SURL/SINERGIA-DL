@@ -1,4 +1,6 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.CQRS.Command;
+﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Document.CQRS.Command;
+
+namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.CQRS.Command;
 
 public record PDLOperationReportUpdateRequestModel(
     long Id,
@@ -13,4 +15,6 @@ public record PDLOperationReportUpdateRequestModel(
     float IncomeBankDeposit,
     float PeriodResult,
     float CAMComission,
+    IEnumerable<DocumentCreateRequestModel> InDocuments,
+    IEnumerable<Guid> OutDocumentIds,
     string? Description = null);

@@ -16,6 +16,7 @@ internal sealed class PDLOperationReportQueryRepositoryPortAdapter : AbstractEnt
     protected override IQueryable<PDLOperationReport> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .Include(entity => entity.Owner).ThenInclude(entity => entity!.Owner).ThenInclude(entity => entity!.Image);
+            .Include(entity => entity.Owner).ThenInclude(entity => entity!.Owner).ThenInclude(entity => entity!.Image)
+            .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Linked);
     }
 }

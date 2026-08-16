@@ -6,7 +6,7 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.ImageAggregate;
 
 public class Image : AbstractAuditableEntity<ImageId, Guid>, IAggregateRoot<ImageId, Guid>
 {
-    private Image() : base(new ImageId(default)) { }
+    private Image() : base(default) { }
 
     public Image(ImageId id, string contentType, long length, int height, int width, string? about = null) : base(id)
     {

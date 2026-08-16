@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.Ports.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
@@ -10,5 +11,12 @@ internal sealed class PDLOperationReportCommandRepositoryPortAdapter : AbstractE
 {
     public PDLOperationReportCommandRepositoryPortAdapter(DefaultDbContext dbContext) : base(dbContext)
     {
+    }
+
+    protected override IQueryable<PDLOperationReport> GetQueryableDbSet()
+    {
+        return base.GetQueryableDbSet()
+            .AsSplitQuery()
+            .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Linked);
     }
 }

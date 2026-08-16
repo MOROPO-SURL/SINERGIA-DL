@@ -1,6 +1,7 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.OperationReport.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Presenters;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.MiPyME.Models.Page.OperationReport;
 using System.Xml.Linq;
 
@@ -120,5 +121,10 @@ public partial class OperationReportConfigurationPage : BaseConfigurationEntityP
                 await DisplayAlert("Aviso", "No fue posible importar del documento facilitado. Formato no compatible.", "Aceptar");
             }
         });
+    }
+
+    private void AddDocumentButton_Clicked(object sender, EventArgs eventArgs)
+    {
+        DocumentPickPresenter.Instance.BeginDocumentPickAsync(this, ConcreteBindingContext.DocumentPickSuccess_Callback);
     }
 }
