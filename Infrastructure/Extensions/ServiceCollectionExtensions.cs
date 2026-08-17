@@ -9,6 +9,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Authentication.Ports.Service
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Classifications.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.ClassificationTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.DevelopmentActorProfiles.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Documents.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.EconomicActivities.Ports;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKinds.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.FeatureKindTraces.Ports.Repository;
@@ -39,6 +40,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.RoleTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxeTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLineTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.Ports.Repository;
@@ -58,6 +60,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.A
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Classifications;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.ClassificationTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.DevelopmentActorProfiles;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.Documents;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.EconomicActivities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.FeatureKinds;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.FeatureKindTraces;
@@ -88,6 +91,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.R
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.SocialResponsabilityActions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.SocialSupportDemands;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicAxes;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicAxeTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicLines;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicLineTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicPrograms;
@@ -115,6 +119,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPermissionQueryRepositoryPort, PermissionQueryRepositoryPortAdapter>();
 
         services.AddScoped<IImageCommandRepositoryPort, ImageCommandRepositoryPortAdapter>();
+
+        services.AddScoped<IDocumentCommandRepositoryPort, DocumentCommandRepositoryPortAdapter>();
 
         services.AddScoped<IRoleQueryRepositoryPort, RoleQueryRepositoryPortAdapter>();
         services.AddScoped<IRoleCommandRepositoryPort, RoleCommandRepositoryPortAdapter>();
@@ -183,6 +189,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IStrategicProjectKindQueryRepositoryPort, StrategicProjectKindQueryRepositoryPortAdapter>();
         services.AddScoped<IStrategicProjectKindCommandRepositoryPort, StrategicProjectKindCommandRepositoryPortAdapter>();
+        services.AddScoped<IStrategicProjectIndicatorChangeQueryRepositoryPort, StrategicProjectIndicatorChangeQueryRepositoryPortAdapter>();
 
         services.AddScoped<IStrategicProjectQueryRepositoryPort, StrategicProjectQueryRepositoryPortAdapter>();
         services.AddScoped<IStrategicProjectCommandRepositoryPort, StrategicProjectCommandRepositoryPortAdapter>();
@@ -233,6 +240,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMacroprogramTraceQueryRepositoryPort, MacroprogramTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IObjectiveTraceQueryRepositoryPort, ObjectiveTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IOrganizationKindTraceQueryRepositoryPort, OrganizationKindTraceQueryRepositoryPortAdapter>();
+        services.AddScoped<IStrategicAxeTraceQueryRepositoryPort, StrategicAxeTraceQueryRepositoryPortAdapter>();
 
         services.AddScoped<IIdentityAuthenticationServicePort, LocalIdentityAuthenticationServicePortAdapter>();
 
@@ -251,6 +259,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISaveChangesInterceptor, MacroprogramChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, ObjectiveChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, OrganizationKindChangeDomainTracingInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, StrategicAxeChangeDomainTracingInterceptor>();
 
         return services;
     }

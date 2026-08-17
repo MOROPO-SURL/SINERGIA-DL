@@ -16,6 +16,7 @@ internal sealed class SRLOperationReportQueryRepositoryPortAdapter : AbstractEnt
     protected override IQueryable<SRLOperationReport> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .Include(entity => entity.Owner).ThenInclude(entity => entity!.Owner).ThenInclude(entity => entity!.Image);
+            .Include(entity => entity.Owner).ThenInclude(entity => entity!.Owner).ThenInclude(entity => entity!.Image)
+            .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Linked);
     }
 }

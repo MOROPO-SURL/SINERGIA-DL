@@ -1,4 +1,5 @@
 ﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DevelopmentActorProfileAggregate.Values;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.DocumentAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Values;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Abstractions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
@@ -7,6 +8,8 @@ namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggre
 
 public abstract class AbstractOperationReport : AbstractEntity<OperationReportId, long>, IAggregateRoot<OperationReportId, long>
 {
+    protected readonly List<Bridges.OperationReportDocumentBridge> documentBridges = [];
+
     internal protected AbstractOperationReport() : base(default) { }
 
     protected AbstractOperationReport(
@@ -20,6 +23,7 @@ public abstract class AbstractOperationReport : AbstractEntity<OperationReportId
         float gridEnergySpend,
         float renerenewableEnergyGeneration,
         float renerenewableEnergyExportation,
+        IEnumerable<Bridges.OperationReportDocumentBridge> documentBridges,
         string? description = null) : base(id)
     {
         OwnerId = ownerId;
@@ -32,6 +36,8 @@ public abstract class AbstractOperationReport : AbstractEntity<OperationReportId
         RenerenewableEnergyGeneration = renerenewableEnergyGeneration;
         RenerenewableEnergyExportation = renerenewableEnergyExportation;
         Description = description;
+
+        this.documentBridges = [.. documentBridges];
     }
 
     public DevelopmentActorProfileId OwnerId { get; set; }
@@ -53,4 +59,10 @@ public abstract class AbstractOperationReport : AbstractEntity<OperationReportId
     public float RenerenewableEnergyExportation { get; set; }
 
     public string? Description { get; set; }
+
+    public IReadOnlyList<Bridges.OperationReportDocumentBridge> DocumentBridges => [.. documentBridges];
+
+    public void LinkDocumentById(DocumentId imageId) => documentBridges.Add(new Bridges.OperationReportDocumentBridge(Id, imageId));
+
+    public void RemoveDocumentBridge(Bridges.OperationReportDocumentBridge bridge) => documentBridges.Remove(bridge);
 }

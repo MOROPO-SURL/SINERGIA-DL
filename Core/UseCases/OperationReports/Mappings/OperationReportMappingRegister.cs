@@ -1,8 +1,10 @@
 ﻿using Mapster;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Documents.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.CQRS.Command.Create;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.OperationReports.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Organizations.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Bridges;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Entities;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Enumerations;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.OperationReportAggregate.Values;
@@ -33,6 +35,7 @@ internal sealed class OperationReportMappingRegister : IRegister
             .Map(dest => dest.OperativeTaxEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.OperativeTax).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
             .Map(dest => dest.SellTaxEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.SellTax).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
             .Map(dest => dest.HumanResourcePayloadEntries, src => src.AccountingEntries.Where(entity => entity.Kind == OperationReportAccountingEntryKind.HumanResourcePayload).GroupBy(entity => entity.Currency).Select(group => new KeyValuePair<OperationReportAccountingEntryCurrency, float>(group.Key, group.First().Amount)))
+            .Map(dest => dest.Documents, src => src.DocumentBridges.Select(bridge => bridge.Linked.Adapt<DocumentBasicDto>()))
             .Map(dest => dest, src => src);
 
         config.NewConfig<PDLOperationReport, PDLOperationReportBasicDto>()
@@ -41,6 +44,7 @@ internal sealed class OperationReportMappingRegister : IRegister
 
         config.NewConfig<PDLOperationReport, PDLOperationReportDetailDto>()
             .Map(dest => dest.Organization, src => src.Owner!.Owner.Adapt<OrganizationBasicDto>())
+            .Map(dest => dest.Documents, src => src.DocumentBridges.Select(bridge => bridge.Linked.Adapt<DocumentBasicDto>()))
             .Map(dest => dest, src => src);
 
         config.NewConfig<SRLOperationReportCreateCommand, SRLOperationReport>().MapWith(src => Build(src));
@@ -60,6 +64,7 @@ internal sealed class OperationReportMappingRegister : IRegister
             src.IncomeBankDeposit,
             src.PeriodResult,
             src.CAMComission,
+            Array.Empty<OperationReportDocumentBridge>(),
             src.Description,
             null));
     }
@@ -93,6 +98,7 @@ internal sealed class OperationReportMappingRegister : IRegister
             model.RenerenewableEnergyGeneration,
             model.RenerenewableEnergyExportation,
             accountingEntries,
+            Array.Empty<OperationReportDocumentBridge>(),
             model.Description,
             null);
     }

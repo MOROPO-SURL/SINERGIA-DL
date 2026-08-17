@@ -23,9 +23,10 @@ public sealed class PDLOperationReport : Abstractions.AbstractOperationReport
         float incomeBankDeposit,
         float periodResult,
         float camComission,
+        IEnumerable<Bridges.OperationReportDocumentBridge> documentBridges,
         string? description = null,
         AbstractPDLDevelopmentActorProfile? owner = null)
-        : base(id, ownerId, at, period, employeeCount, femaleEmployeeCount, discapacityEmployeeCount, gridEnergySpend, renerenewableEnergyGeneration, renerenewableEnergyExportation, description)
+        : base(id, ownerId, at, period, employeeCount, femaleEmployeeCount, discapacityEmployeeCount, gridEnergySpend, renerenewableEnergyGeneration, renerenewableEnergyExportation, documentBridges, description)
     {
         Owner = owner;
         Income = income;

@@ -21,10 +21,11 @@ public sealed class SRLOperationReport : Abstractions.AbstractOperationReport
         float gridEnergySpend,
         float renerenewableEnergyGeneration,
         float renerenewableEnergyExportation,
-        IEnumerable<Entities.OperationReportAccountingEntry> accountingEntries, 
+        IEnumerable<Entities.OperationReportAccountingEntry> accountingEntries,
+        IEnumerable<Bridges.OperationReportDocumentBridge> documentBridges,
         string? description = null, 
         SRLDevelopmentActorProfile? owner = null)
-        : base(id, ownerId, at, period, employeeCount, femaleEmployeeCount, discapacityEmployeeCount, gridEnergySpend, renerenewableEnergyGeneration, renerenewableEnergyExportation, description)
+        : base(id, ownerId, at, period, employeeCount, femaleEmployeeCount, discapacityEmployeeCount, gridEnergySpend, renerenewableEnergyGeneration, renerenewableEnergyExportation, documentBridges, description)
     {
         Owner = owner;
 

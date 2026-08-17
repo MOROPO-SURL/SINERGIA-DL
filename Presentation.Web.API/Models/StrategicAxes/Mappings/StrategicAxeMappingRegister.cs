@@ -11,7 +11,6 @@ public class StrategicAxeMappingRegister : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<StrategicAxeCreateRequestModel, StrategicAxeCreateCommand>()
-            .Map(dest => dest.Id, src => Guid.NewGuid())
             .Map(dest => dest.Macroprograms, src => src.Macroprograms.Select(item => item.Adapt<MacroprogramBasicDto>()).ToArray())
             .Map(dest => dest, src => src);
 

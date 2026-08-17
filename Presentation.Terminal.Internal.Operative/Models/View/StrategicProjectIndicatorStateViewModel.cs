@@ -5,9 +5,9 @@ namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Opera
 
 public sealed class StrategicProjectIndicatorStateViewModel : BaseBindableModel
 {
-    private IndicatorChangeProjectDetailDtoModel? lastChange;
+    private IndicatorChangeDetailDtoModel? lastChange;
 
-    public StrategicProjectIndicatorStateViewModel(Guid actionId, IndicatorDetailDtoModel indicator, IndicatorMilestoneDetailDtoModel targetMilestone, IndicatorChangeProjectDetailDtoModel? lastChange = null)
+    public StrategicProjectIndicatorStateViewModel(IndicatorDetailDtoModel indicator, IndicatorMilestoneDetailDtoModel targetMilestone, IndicatorChangeDetailDtoModel? lastChange = null)
     {
         Indicator = indicator;
         TargetMilestone = targetMilestone;
@@ -16,8 +16,8 @@ public sealed class StrategicProjectIndicatorStateViewModel : BaseBindableModel
     }
 
     public IndicatorDetailDtoModel Indicator { get; init; }
-
+    
     public IndicatorMilestoneDetailDtoModel TargetMilestone { get; init; }
-
-    public IndicatorChangeProjectDetailDtoModel? LastChange { get => lastChange; set => SetProperty(ref lastChange, value); }
+    
+    public IndicatorChangeDetailDtoModel? LastChange { get => lastChange; set => SetProperty(ref lastChange, value); }
 }

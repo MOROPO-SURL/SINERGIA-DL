@@ -18,6 +18,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MediaTypeMap.Core" Version="2.3.3" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="FFImageLoading.Maui" Version="1.2.8" />
 		<PackageReference Include="FluentValidation" Version="12.1.1" />
