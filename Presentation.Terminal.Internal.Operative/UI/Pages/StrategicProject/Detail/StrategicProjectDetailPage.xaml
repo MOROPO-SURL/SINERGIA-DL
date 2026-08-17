@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.StrategicProject.Detail"
+    xmlns:local_ui_card_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Views.Card"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
@@ -73,12 +74,117 @@
                         Text="{Binding Model.Objective}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Objetivos específicos" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.SpecificObjectives}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:SpecificObjectiveProjectDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label
+                                            Margin="8"
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            LineBreakMode="TailTruncation">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Index, StringFormat='{0}.'}" />
+                                                    <Span Text=" " />
+                                                    <Span Text="{Binding Content}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailSpecificObjectiveCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="0,8,0,0">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Indicadores" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Indicators}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_dto_models:IndicatorDetailDtoModel">
+                                <Frame Padding="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label 
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            Margin="8"
+                                            LineBreakMode="TailTruncation">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Name}" />
+                                                    <Span Text="{Binding Alias, TargetNullValue='', StringFormat=' ({0})'}" />
+                                                    <Span Text="{Binding UnitMeasurement.Name, StringFormat=', {0}'}" />
+                                                    <Span Text="{Binding UnitMeasurement.Symbol, StringFormat=' ({0})'}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button
+                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                            VerticalOptions="Center"
+                                            Text="&#xF2FD;"
+                                            Command="{Binding Source={RelativeSource AncestorType={Type Page}}, Path=BindingContext.DetailIndicatorCommand, Mode=OneTime}"
+                                            CommandParameter="{Binding Mode=OneTime}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
                         Style="{StaticResource CaptionPropertyLabelStyle}"
                         Text="Descripción" />
                     <Label
                         Style="{StaticResource ValuePropertyLabelStyle}"
                         Text="{Binding Model.Description, TargetNullValue='---'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Macroprogramas" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <CollectionView ItemsSource="{Binding Model.Macroprograms}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical" 
+                                Span="2" 
+                                HorizontalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" 
+                                VerticalItemSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Behaviors>
+                            <common_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior 
+                                ItemSpacing="{Static common_constants:ListEntityPageConstants.ADAPTABLE_GRIDITESMLAYOUT_COLLECTIONVIEW_BEHAVIOR_ITEMSSPACING}" 
+                                ItemWidth="{Static local_constants:CardViewSizeConstants.MACROPROGRAM_DEFAULT_CARD_VIEW_WIDTH}" />          
+                        </CollectionView.Behaviors>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <local_ui_card_views:MacroprogramCardView HeightRequest="{Static local_constants:CardViewSizeConstants.MACROPROGRAM_DEFAULT_CARD_VIEW_HEIGHT}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </VerticalStackLayout>
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label 
