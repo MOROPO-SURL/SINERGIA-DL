@@ -4,6 +4,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicAxe.DTOs
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProjectIdea.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Bases;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.View;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
@@ -17,7 +18,7 @@ public sealed class StrategySummaryPageModel : BasePageModel
 
     public DateTime LoadedAt { get => loadedAt; set => SetProperty(ref loadedAt, value); }
 
-    public ObservableCollection<DeepStrategicAxeViewModel> Axes { get; private set; } = [];
+    public ObservableCollection<DeepStrategicLineViewModel> Lines { get; private set; } = [];
 
     public void LoadSummary()
     {
@@ -32,20 +33,23 @@ public sealed class StrategySummaryPageModel : BasePageModel
             StrategicAxeQueryApiClient strategicAxeQueryApiClient = new(httpClientProvider);
             StrategicLineQueryApiClient strategicLineApiClient = new(httpClientProvider);
             StrategicProgramQueryApiClient strategicProgramApiClient = new(httpClientProvider);
+            StrategicProjectIdeaQueryApiClient strategicProjectIdeaApiClient = new(httpClientProvider);
             StrategicProjectQueryApiClient strategicProjectApiClient = new(httpClientProvider);
 
             StrategicAxeDetailDtoModel[] axes = await strategicAxeQueryApiClient.GetAllAsync();
             StrategicLineDetailDtoModel[] lines = [.. (await strategicLineApiClient.GetAllAsync())];
             StrategicProgramDetailDtoModel[] programs = await strategicProgramApiClient.GetAllAsync();
+            StrategicProjectIdeaDetailDtoModel[] ideas = await strategicProjectIdeaApiClient.GetAllAsync();
             StrategicProjectDetailDtoModel[] projects = await strategicProjectApiClient.GetAllAsync();
 
-            List<DeepStrategicAxeViewModel> deepAxes = [];
+            StrategicLineDetailDtoModel[] axedlines = [.. lines.Where(item => item.Axe != null)];
+            StrategicLineDetailDtoModel[] nonaxedlines = [.. lines.Where(item => item.Axe == null)];
+
+            List<DeepStrategicLineViewModel> deepLines = [];
 
             foreach (StrategicAxeDetailDtoModel axe in axes)
             {
-                List<DeepStrategicLineViewModel> deepLines = [];
-
-                StrategicLineDetailDtoModel[] axeLines = [.. lines.Where(item => item.Axe != null && item.Axe!.Id == axe.Id)];
+                StrategicLineDetailDtoModel[] axeLines = [.. axedlines.Where(item => item.Axe!.Id == axe.Id)];
 
                 foreach (StrategicLineDetailDtoModel line in axeLines)
                 {
@@ -55,27 +59,37 @@ public sealed class StrategySummaryPageModel : BasePageModel
 
                     foreach (StrategicProgramDetailDtoModel program in linePrograms)
                     {
-                        deepPrograms.Add(new DeepStrategicProgramViewModel(program, projects.Where(item => item.Program.Id == program.Id)));
+                        deepPrograms.Add(new DeepStrategicProgramViewModel(program, ideas.Where(item => item.Program.Id == program.Id), projects.Where(item => item.Program.Id == program.Id)));
                     }
 
                     deepLines.Add(new DeepStrategicLineViewModel(line, deepPrograms));
                 }
+            }
 
-                deepAxes.Add(new DeepStrategicAxeViewModel(axe, deepLines));
+            foreach (StrategicLineDetailDtoModel line in nonaxedlines)
+            {
+                List<DeepStrategicProgramViewModel> deepPrograms = [];
+
+                StrategicProgramDetailDtoModel[] linePrograms = [.. programs.Where(item => item.Line.Id == line.Id)];
+
+                foreach (StrategicProgramDetailDtoModel program in linePrograms)
+                {
+                    deepPrograms.Add(new DeepStrategicProgramViewModel(program, ideas.Where(item => item.Program.Id == program.Id), projects.Where(item => item.Program.Id == program.Id)));
+                }
+
+                deepLines.Add(new DeepStrategicLineViewModel(line, deepPrograms));
             }
 
             Dispatcher.Dispatch(() =>
             {
                 LoadedAt = DateTime.Now;
 
-                Axes.Clear();
+                Lines.Clear();
 
-                foreach (DeepStrategicAxeViewModel item in deepAxes)
+                foreach (DeepStrategicLineViewModel item in deepLines)
                 {
-                    Axes.Add(item);
+                    Lines.Add(item);
                 }
-
-                // TODO Cached Axes a s Json file on local storage for offline presentation!!
             });
         }).ContinueWith(task =>
         {

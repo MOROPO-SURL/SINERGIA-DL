@@ -4,7 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_view_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.View"
     xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page"
+    xmlns:interop_line_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicLine.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_program_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:interop_project_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_projectidea_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProjectIdea.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_macroprogram_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Macroprogram.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_publicpolicy_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PublicPolicy.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_organization_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Organization.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
@@ -54,9 +60,9 @@
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label
                         FontAttributes="Bold"
-                        Text="Ejes estratégicos" />
+                        Text="Líneas estratégicas" />
                     <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
-                    <CollectionView ItemsSource="{Binding Axes}">
+                    <CollectionView ItemsSource="{Binding Lines}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
@@ -64,27 +70,64 @@
                             <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
                         </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="local_view_models:DeepStrategicAxeViewModel">
+                            <DataTemplate x:DataType="local_view_models:DeepStrategicLineViewModel">
                                 <VerticalStackLayout Spacing="8">
                                     <StackLayout Orientation="Horizontal" Spacing="4">
                                         <Label 
-                                            FontSize="Medium"
-                                            Text="{Binding Axe.Id, StringFormat='{0}.'}" />
+                                            FontSize="Medium">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Line.Axe.Id, StringFormat='{0}.'}" />
+                                                    <Span Text="{Binding Line.Index, StringFormat='{0}.'}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
                                         <Label
                                             HorizontalOptions="FillAndExpand"
                                             FontSize="Medium"
-                                            Text="{Binding Axe.Name}" />
+                                            Text="{Binding Line.Name}" />
                                     </StackLayout>
                                     <Label 
                                         Style="{StaticResource OffLabelStyle}"
-                                        IsVisible="{Binding Axe.Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
-                                        Text="{Binding Axe.Description}" />
-                                    <VerticalStackLayout Margin="16,0,0,0">
-                                        <Label
-                                            FontAttributes="Bold"
-                                            Text="Líneas estratégicas" />
-                                        <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
-                                        <CollectionView ItemsSource="{Binding Lines}">
+                                        IsVisible="{Binding Line.Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                        Text="{Binding Line.Description}" />
+                                    <VerticalStackLayout Spacing="0">
+                                        <Label 
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Eje estratégico" />
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Line.Axe.Id, FallbackValue='---'}" />
+                                                    <Span Text="{Binding Line.Axe.Name, StringFormat='. {0}'}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label 
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Coordinador" />
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Line.Coordinator.Name}" />
+                                                    <Span Text="{Binding Line.Coordinator.LastName, StringFormat=' {0}'}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label 
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Objetivo general" />
+                                        <Label Text="{Binding Line.Objective}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label 
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Objetivos específicos" />
+                                        <CollectionView ItemsSource="{Binding Line.SpecificObjectives}">
                                             <CollectionView.ItemsLayout>
                                                 <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                             </CollectionView.ItemsLayout>
@@ -92,23 +135,140 @@
                                                 <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
                                             </CollectionView.EmptyView>
                                             <CollectionView.ItemTemplate>
-                                                <DataTemplate x:DataType="local_view_models:DeepStrategicLineViewModel">
+                                                <DataTemplate x:DataType="interop_line_dto_models:SpecificObjectiveDetailDtoModel">
+                                                    <Grid ColumnSpacing="4">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label
+                                                            Grid.Column="0"
+                                                            Text="{Binding Index, StringFormat='{0}.'}" />
+                                                        <Label
+                                                            Grid.Column="1"
+                                                            Text="{Binding Content}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label 
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Macroprogramas" />
+                                        <CollectionView ItemsSource="{Binding Line.Macroprograms}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+                                            <CollectionView.EmptyView>
+                                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                            </CollectionView.EmptyView>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="interop_macroprogram_dto_models:MacroprogramBasicDtoModel">
+                                                    <Grid ColumnSpacing="4">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label
+                                                            Grid.Column="0"
+                                                            Text="{Binding Index, StringFormat='{0}.'}" />
+                                                        <Label
+                                                            Grid.Column="1"
+                                                            Text="{Binding Title}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label 
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Políticas públicas" />
+                                        <CollectionView ItemsSource="{Binding Line.PublicPolicies}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+                                            <CollectionView.EmptyView>
+                                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                            </CollectionView.EmptyView>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="interop_publicpolicy_dto_models:PublicPolicyBasicDtoModel">
+                                                    <Grid ColumnSpacing="4">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label
+                                                            Grid.Column="0"
+                                                            FontAttributes="Bold"
+                                                            Text="-" />
+                                                        <Label Grid.Column="1">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding Kind, StringFormat='({0})'}" />
+                                                                    <Span Text="{Binding Title, StringFormat=' {0}'}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label 
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Grupo de trabajo" />
+                                        <CollectionView ItemsSource="{Binding Line.Organizations}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+                                            <CollectionView.EmptyView>
+                                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                            </CollectionView.EmptyView>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="interop_organization_dto_models:OrganizationBasicDtoModel">
+                                                    <Grid ColumnSpacing="4">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label
+                                                            Grid.Column="0"
+                                                            FontAttributes="Bold"
+                                                            Text="-" />
+                                                        <Label
+                                                            Grid.Column="1"
+                                                            Text="{Binding Name}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Margin="24,0,0,0">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            Text="Programas" />
+                                        <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                                        <CollectionView ItemsSource="{Binding Programs}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+                                            <CollectionView.EmptyView>
+                                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                            </CollectionView.EmptyView>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="local_view_models:DeepStrategicProgramViewModel">
                                                     <VerticalStackLayout Spacing="8">
-                                                        <StackLayout Orientation="Horizontal" Spacing="4">
-                                                            <Label 
-                                                                FontSize="Medium">
-                                                                <Label.FormattedText>
-                                                                    <FormattedString>
-                                                                        <Span Text="{Binding Line.Axe.Id, StringFormat='{0}.'}" />
-                                                                        <Span Text="{Binding Line.Index, StringFormat='{0}.'}" />
-                                                                    </FormattedString>
-                                                                </Label.FormattedText>
-                                                            </Label>
-                                                            <Label
-                                                                HorizontalOptions="FillAndExpand"
-                                                                FontSize="Medium"
-                                                                Text="{Binding Line.Name}" />
-                                                        </StackLayout>
+                                                        <Label
+                                                            HorizontalOptions="FillAndExpand"
+                                                            FontSize="Medium"
+                                                            Text="{Binding Program.Name}" />
+                                                        <Label 
+                                                            Style="{StaticResource OffLabelStyle}"
+                                                            IsVisible="{Binding Program.Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                                            Text="{Binding Program.Description}" />
                                                         <VerticalStackLayout>
                                                             <Label 
                                                                 Style="{StaticResource CaptionPropertyLabelStyle}"
@@ -116,22 +276,23 @@
                                                             <Label>
                                                                 <Label.FormattedText>
                                                                     <FormattedString>
-                                                                        <Span Text="{Binding Line.Coordinator.Name}" />
-                                                                        <Span Text="{Binding Line.Coordinator.LastName, StringFormat=' {0}'}" />
+                                                                        <Span Text="{Binding Program.Coordinator.Name}" />
+                                                                        <Span Text="{Binding Program.Coordinator.LastName, StringFormat=' {0}'}" />
                                                                     </FormattedString>
                                                                 </Label.FormattedText>
                                                             </Label>
                                                         </VerticalStackLayout>
-                                                        <Label 
-                                                            Style="{StaticResource OffLabelStyle}"
-                                                            IsVisible="{Binding Line.Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
-                                                            Text="{Binding Line.Description}" />
-                                                        <VerticalStackLayout Margin="24,0,0,0">
-                                                            <Label
-                                                                FontAttributes="Bold"
-                                                                Text="Programas" />
-                                                            <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
-                                                            <CollectionView ItemsSource="{Binding Programs}">
+                                                        <VerticalStackLayout>
+                                                            <Label 
+                                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                Text="Objetivo general" />
+                                                            <Label Text="{Binding Program.Objective}" />
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout>
+                                                            <Label 
+                                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                Text="Objetivos específicos" />
+                                                            <CollectionView ItemsSource="{Binding Program.SpecificObjectives}">
                                                                 <CollectionView.ItemsLayout>
                                                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                                                 </CollectionView.ItemsLayout>
@@ -139,35 +300,236 @@
                                                                     <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
                                                                 </CollectionView.EmptyView>
                                                                 <CollectionView.ItemTemplate>
-                                                                    <DataTemplate x:DataType="local_view_models:DeepStrategicProgramViewModel">
-                                                                        <VerticalStackLayout Spacing="8">
+                                                                    <DataTemplate x:DataType="interop_program_dto_models:SpecificObjectiveDetailDtoModel">
+                                                                        <Grid ColumnSpacing="4">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition />
+                                                                            </Grid.ColumnDefinitions>
                                                                             <Label
-                                                                                HorizontalOptions="FillAndExpand"
-                                                                                FontSize="Medium"
-                                                                                Text="{Binding Program.Name}" />
+                                                                                Grid.Column="0"
+                                                                                Text="{Binding Index, StringFormat='{0}.'}" />
+                                                                            <Label
+                                                                                Grid.Column="1"
+                                                                                Text="{Binding Content}" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout>
+                                                            <Label 
+                                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                Text="Macroprogramas" />
+                                                            <CollectionView ItemsSource="{Binding Program.Macroprograms}">
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                                                </CollectionView.ItemsLayout>
+                                                                <CollectionView.EmptyView>
+                                                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                                                </CollectionView.EmptyView>
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="interop_macroprogram_dto_models:MacroprogramBasicDtoModel">
+                                                                        <Grid ColumnSpacing="4">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Label
+                                                                                Grid.Column="0"
+                                                                                Text="{Binding Index, StringFormat='{0}.'}" />
+                                                                            <Label
+                                                                                Grid.Column="1"
+                                                                                Text="{Binding Title}" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout>
+                                                            <Label 
+                                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                Text="Grupo de trabajo" />
+                                                            <CollectionView ItemsSource="{Binding Program.Organizations}">
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                                                </CollectionView.ItemsLayout>
+                                                                <CollectionView.EmptyView>
+                                                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                                                </CollectionView.EmptyView>
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="interop_organization_dto_models:OrganizationBasicDtoModel">
+                                                                        <Grid ColumnSpacing="4">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Label
+                                                                                Grid.Column="0"
+                                                                                FontAttributes="Bold"
+                                                                                Text="-" />
+                                                                            <Label
+                                                                                Grid.Column="1"
+                                                                                Text="{Binding Name}" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout>
+                                                            <Label 
+                                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                Text="Impactos esperados" />
+                                                            <CollectionView ItemsSource="{Binding Program.Impacts}">
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                                                </CollectionView.ItemsLayout>
+                                                                <CollectionView.EmptyView>
+                                                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                                                </CollectionView.EmptyView>
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="interop_program_dto_models:ImpactDetailDtoModel">
+                                                                        <Grid ColumnSpacing="4">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Label
+                                                                                Grid.Column="0"
+                                                                                FontAttributes="Bold"
+                                                                                Text="-" />
+                                                                            <Label Grid.Column="1">
+                                                                                <Label.FormattedText>
+                                                                                    <FormattedString>
+                                                                                        <Span Text="{Binding Name}" FontAttributes="Bold" />
+                                                                                        <Span Text="{Binding Description, StringFormat=': {0}'}" />
+                                                                                    </FormattedString>
+                                                                                </Label.FormattedText>
+                                                                            </Label>
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout>
+                                                            <Label 
+                                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                Text="Acciones" />
+                                                            <CollectionView ItemsSource="{Binding Program.Actions}">
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                                                </CollectionView.ItemsLayout>
+                                                                <CollectionView.EmptyView>
+                                                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                                                </CollectionView.EmptyView>
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="interop_program_dto_models:ActionDetailDtoModel">
+                                                                        <Grid ColumnSpacing="4">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Label
+                                                                                Grid.Column="0"
+                                                                                FontAttributes="Bold"
+                                                                                Text="-" />
+                                                                            <Label
+                                                                                Grid.Column="1"
+                                                                                Text="{Binding Title}" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout>
+                                                            <Label 
+                                                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                Text="Ideas de proyecto" />
+                                                            <CollectionView ItemsSource="{Binding Ideas}">
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                                                </CollectionView.ItemsLayout>
+                                                                <CollectionView.EmptyView>
+                                                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                                                </CollectionView.EmptyView>
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="interop_projectidea_dto_models:StrategicProjectIdeaBasicDtoModel">
+                                                                        <Grid ColumnSpacing="4">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Label
+                                                                                Grid.Column="0"
+                                                                                FontAttributes="Bold"
+                                                                                Text="-" />
+                                                                            <Label
+                                                                                Grid.Column="1"
+                                                                                Text="{Binding Title}" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout Margin="24,0,0,0">
+                                                            <Label
+                                                                FontAttributes="Bold"
+                                                                Text="Proyectos" />
+                                                            <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                                                            <CollectionView ItemsSource="{Binding Projects}">
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                                                </CollectionView.ItemsLayout>
+                                                                <CollectionView.EmptyView>
+                                                                    <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                                                </CollectionView.EmptyView>
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate x:DataType="interop_project_dto_models:StrategicProjectDetailDtoModel">
+                                                                        <Grid ColumnSpacing="8" RowSpacing="8">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="Auto" />
+                                                                            </Grid.RowDefinitions>
+                                                                            <Label
+                                                                                Grid.Column="0" Grid.RowSpan="2"
+                                                                                Margin="0,8,0,0"
+                                                                                VerticalOptions="Start"
+                                                                                FontFamily="{StaticResource FontMaterialDesignIcons}"
+                                                                                Text="&#xFA12;" />
                                                                             <Label 
+                                                                                Grid.Column="1" Grid.Row="0"
+                                                                                FontSize="Medium"
+                                                                                Text="{Binding Name}" />
+                                                                            <Label
+                                                                                IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                                                                Grid.Column="1" Grid.Row="2"
                                                                                 Style="{StaticResource OffLabelStyle}"
-                                                                                IsVisible="{Binding Program.Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
-                                                                                Text="{Binding Program.Description}" />
-                                                                            <VerticalStackLayout>
+                                                                                Text="{Binding Description}" />
+                                                                            <VerticalStackLayout Grid.Column="1" Grid.Row="1">
                                                                                 <Label 
                                                                                     Style="{StaticResource CaptionPropertyLabelStyle}"
-                                                                                    Text="Coordinador" />
-                                                                                <Label>
-                                                                                    <Label.FormattedText>
-                                                                                        <FormattedString>
-                                                                                            <Span Text="{Binding Program.Coordinator.Name}" />
-                                                                                            <Span Text="{Binding Program.Coordinator.LastName, StringFormat=' {0}'}" />
-                                                                                        </FormattedString>
-                                                                                    </Label.FormattedText>
-                                                                                </Label>
+                                                                                    Text="Tipo" />
+                                                                                <Label Text="{Binding Kind.Name}" />
                                                                             </VerticalStackLayout>
-                                                                            <VerticalStackLayout Margin="24,0,0,0">
-                                                                                <Label
-                                                                                    FontAttributes="Bold"
-                                                                                    Text="Proyectos" />
-                                                                                <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
-                                                                                <CollectionView ItemsSource="{Binding Projects}">
+                                                                            <VerticalStackLayout Grid.Column="1" Grid.Row="2">
+                                                                                <Label 
+                                                                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                                    Text="Objetivo general" />
+                                                                                <Label Text="{Binding Objective}" />
+                                                                            </VerticalStackLayout>
+                                                                            <VerticalStackLayout Grid.Column="1" Grid.Row="3">
+                                                                                <Label 
+                                                                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                                    Text="Objetivos específicos" />
+                                                                                <CollectionView ItemsSource="{Binding SpecificObjectives}">
                                                                                     <CollectionView.ItemsLayout>
                                                                                         <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                                                                     </CollectionView.ItemsLayout>
@@ -175,44 +537,53 @@
                                                                                         <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
                                                                                     </CollectionView.EmptyView>
                                                                                     <CollectionView.ItemTemplate>
-                                                                                        <DataTemplate x:DataType="interop_project_dto_models:StrategicProjectDetailDtoModel">
-                                                                                            <Grid ColumnSpacing="8" RowSpacing="8">
+                                                                                        <DataTemplate x:DataType="interop_project_dto_models:SpecificObjectiveProjectDetailDtoModel">
+                                                                                            <Grid ColumnSpacing="4">
                                                                                                 <Grid.ColumnDefinitions>
                                                                                                     <ColumnDefinition Width="Auto" />
                                                                                                     <ColumnDefinition />
                                                                                                 </Grid.ColumnDefinitions>
-                                                                                                <Grid.RowDefinitions>
-                                                                                                    <RowDefinition Height="Auto" />
-                                                                                                    <RowDefinition Height="Auto" />
-                                                                                                    <RowDefinition Height="Auto" />
-                                                                                                </Grid.RowDefinitions>
                                                                                                 <Label
-                                                                                                    Grid.Column="0" Grid.RowSpan="2"
-                                                                                                    Margin="0,8,0,0"
-                                                                                                    VerticalOptions="Start"
-                                                                                                    FontFamily="{StaticResource FontMaterialDesignIcons}"
-                                                                                                    Text="&#xFA12;" />
-                                                                                                <Label 
-                                                                                                    Grid.Column="1" Grid.Row="0"
-                                                                                                    FontSize="Medium"
-                                                                                                    Text="{Binding Name}" />
-                                                                                                <VerticalStackLayout Grid.Column="1" Grid.Row="1">
-                                                                                                    <Label 
-                                                                                                        Style="{StaticResource CaptionPropertyLabelStyle}"
-                                                                                                        Text="Tipo" />
-                                                                                                    <Label Text="{Binding Kind.Name}" />
-                                                                                                </VerticalStackLayout>
+                                                                                                    Grid.Column="0"
+                                                                                                    Text="{Binding Index, StringFormat='{0}.'}" />
                                                                                                 <Label
-                                                                                                    IsVisible="{Binding Description, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
-                                                                                                    Grid.Column="1" Grid.Row="2"
-                                                                                                    Style="{StaticResource OffLabelStyle}"
-                                                                                                    Text="{Binding Description}" />
+                                                                                                    Grid.Column="1"
+                                                                                                    Text="{Binding Content}" />
                                                                                             </Grid>
                                                                                         </DataTemplate>
                                                                                     </CollectionView.ItemTemplate>
                                                                                 </CollectionView>
                                                                             </VerticalStackLayout>
-                                                                        </VerticalStackLayout>
+                                                                            <VerticalStackLayout Grid.Column="1" Grid.Row="4">
+                                                                                <Label 
+                                                                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                                                                    Text="Macroprogramas" />
+                                                                                <CollectionView ItemsSource="{Binding Macroprograms}">
+                                                                                    <CollectionView.ItemsLayout>
+                                                                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                                                                    </CollectionView.ItemsLayout>
+                                                                                    <CollectionView.EmptyView>
+                                                                                        <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                                                                                    </CollectionView.EmptyView>
+                                                                                    <CollectionView.ItemTemplate>
+                                                                                        <DataTemplate x:DataType="interop_macroprogram_dto_models:MacroprogramBasicDtoModel">
+                                                                                            <Grid ColumnSpacing="4">
+                                                                                                <Grid.ColumnDefinitions>
+                                                                                                    <ColumnDefinition Width="Auto" />
+                                                                                                    <ColumnDefinition />
+                                                                                                </Grid.ColumnDefinitions>
+                                                                                                <Label
+                                                                                                    Grid.Column="0"
+                                                                                                    Text="{Binding Index, StringFormat='{0}.'}" />
+                                                                                                <Label
+                                                                                                    Grid.Column="1"
+                                                                                                    Text="{Binding Title}" />
+                                                                                            </Grid>
+                                                                                        </DataTemplate>
+                                                                                    </CollectionView.ItemTemplate>
+                                                                                </CollectionView>
+                                                                            </VerticalStackLayout>
+                                                                        </Grid>
                                                                     </DataTemplate>
                                                                 </CollectionView.ItemTemplate>
                                                             </CollectionView>

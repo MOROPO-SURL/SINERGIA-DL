@@ -22,7 +22,7 @@ public sealed class ObjectiveActionConfigurationPageModel : AbstractConfiguratio
     public static string DescriptionValidableProperty => nameof(Description);
 
     private int index = 1;
-    private string? title;
+    private string title;
     private string? description;
 
     private readonly List<ObjectiveActionIndicatorCreateRequestModel> inIndicators = [];
