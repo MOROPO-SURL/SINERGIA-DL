@@ -71,6 +71,7 @@ public class TerritoryPotentialsController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet()]
     public async Task<ActionResult<TerritoryPotentialDetailDtoModel[]>> GetAsync()
     {

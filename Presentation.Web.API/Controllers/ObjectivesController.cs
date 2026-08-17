@@ -73,6 +73,7 @@ public class ObjectivesController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet()]
     public async Task<ActionResult<ObjectiveDetailDtoModel[]>> GetAsync()
     {

@@ -71,6 +71,7 @@ public class PublicPoliciesController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet()]
     public async Task<ActionResult<PublicPolicyDetailDtoModel[]>> GetAsync()
     {

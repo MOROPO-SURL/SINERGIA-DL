@@ -73,6 +73,7 @@ public class StrategicProjectsController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet()]
     public async Task<ActionResult<StrategicProjectDetailDtoModel[]>> GetAsync()
     {

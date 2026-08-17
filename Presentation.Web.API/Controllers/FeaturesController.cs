@@ -72,6 +72,7 @@ public class FeaturesController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet()]
     public async Task<ActionResult<FeatureDetailDtoModel[]>> GetAsync()
     {

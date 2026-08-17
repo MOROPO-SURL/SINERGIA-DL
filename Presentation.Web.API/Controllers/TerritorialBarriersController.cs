@@ -71,6 +71,7 @@ public class TerritorialBarriersController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet()]
     public async Task<ActionResult<TerritorialBarrierDetailDtoModel[]>> GetAsync()
     {

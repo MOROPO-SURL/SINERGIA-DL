@@ -73,6 +73,7 @@ public class StrategicLinesController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet()]
     public async Task<ActionResult<StrategicLineDetailDtoModel[]>> GetAsync()
     {

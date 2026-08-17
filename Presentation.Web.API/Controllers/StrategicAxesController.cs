@@ -73,6 +73,7 @@ public class StrategicAxesController: ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet()]
     public async Task<ActionResult<StrategicAxeDetailDtoModel[]>> GetAsync()
     {

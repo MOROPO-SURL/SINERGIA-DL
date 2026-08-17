@@ -1,0 +1,333 @@
+﻿@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal.Models.View
+@using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal.Models.View.Tree
+
+@model StrategicReportViewModel
+
+@{
+    Layout = "_ReportLayout";
+}
+
+@section styles {
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.0;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        h5.h-seccion {
+            font-style: italic;
+            text-decoration: underline;
+            margin-bottom: 12px;
+        }
+
+        h4.h-title {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        li.li-indicator {
+            margin-bottom: 12px;
+        }
+
+            li.li-indicatorX > p {
+                margin-top: 16px;
+            }
+
+            li.li-indicator > h4.h-title {
+                margin-top: 8px;
+                margin-bottom: 8px;
+            }
+
+        div.index-box {
+            margin-left: 24px;
+        }
+
+        div.property-caption {
+            font-weight: bold;
+            font-size: 0.92rem;
+            color: dimgray;
+            margin-top: 16px;
+            margin-bottom: 4px;
+        }
+
+        .text-muted {
+            color: dimgray;
+            font-style: italic;
+            font-size: 0.92rem;
+        }
+
+        table td.td-number-collapsed {
+            width: 1px;
+        }
+    </style>
+}
+
+<h1 style="margin-top: 0;">Estrategia de Desarrollo Local</h1>
+
+<h2 style="color: dimgray;">Resumen</h2>
+
+<h5 class="h-seccion">Líneas estratégicas</h5>
+@foreach (var _item in Model.LineTrees)
+{
+    <h4 class="h-title">@_item.Line.Index<span>. </span>@_item.Line.Name</h4>
+    if (!string.IsNullOrEmpty(_item.Line.Description))
+    {
+        <p>@_item.Line.Description</p>
+    }
+    <div class="property-caption">Eje estratégico</div>
+    <p>@(_item.Line.Axe == null ? "---" : _item.Line.Axe.Name)</p>
+    <div class="property-caption">Coordinador</div>
+    <p>@_item.Line.Coordinator.Name @_item.Line.Coordinator.LastName</p>
+    <div class="property-caption">Objetivo general</div>
+    <p>@_item.Line.Objective</p>
+    <div class="property-caption">Objetivos específicos</div>
+    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+        @if (_item.Line.SpecificObjectives.Length <= 0)
+        {
+            <tr><td><i>---</i></td></tr>
+        }
+        else
+        {
+            foreach (var __item in _item.Line.SpecificObjectives)
+            {
+                <tr>
+                    <td class="td-number-collapsed">@__item.Index.</td>
+                    <td>@__item.Content</td>
+                </tr>
+            }
+        }
+    </table>
+    <div class="property-caption">Macroprogramas</div>
+    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+        @if (_item.Line.Macroprograms.Length <= 0)
+        {
+            <tr><td><i>---</i></td></tr>
+        }
+        else
+        {
+            foreach (var __item in _item.Line.Macroprograms)
+            {
+                <tr>
+                    <td class="td-number-collapsed">@__item.Index.</td>
+                    <td>@__item.Title</td>
+                </tr>
+            }
+        }
+    </table>
+    <div class="property-caption">Políticas públicas</div>
+    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+        @if (_item.Line.PublicPolicies.Length <= 0)
+        {
+            <tr><td><i>---</i></td></tr>
+        }
+        else
+        {
+            foreach (var __item in _item.Line.PublicPolicies)
+            {
+                <tr>
+                    <td class="td-number-collapsed">-</td>
+                    <td>(@__item.Kind) @__item.Title</td>
+                </tr>
+            }
+        }
+    </table>
+    <div class="property-caption">Grupo de trabajo</div>
+    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+        @if (_item.Line.Organizations.Length <= 0)
+        {
+            <tr><td><i>---</i></td></tr>
+        }
+        else
+        {
+            foreach (var __item in _item.Line.Organizations)
+            {
+                <tr>
+                    <td class="td-number-collapsed">-</td>
+                    <td>@__item.Name</td>
+                </tr>
+            }
+        }
+    </table>
+    <div class="index-box">
+        <h5 class="h-seccion">Programas</h5>
+        <ul>
+            @foreach (var __item in _item.ProgramTrees)
+            {
+                <li class="li-indicator">
+                    <h4 class="h-title">@__item.Program.Name</h4>
+                    @if (!string.IsNullOrEmpty(__item.Program.Description))
+                    {
+                        <p>@__item.Program.Description</p>
+                    }
+                    <div class="property-caption">Coordinador</div>
+                    <p>@__item.Program.Coordinator.Name @__item.Program.Coordinator.LastName</p>
+                    <div class="property-caption">Objetivo general</div>
+                    <p>@__item.Program.Objective</p>
+                    <div class="property-caption">Objetivos específicos</div>
+                    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+                        @if (__item.Program.SpecificObjectives.Length <= 0)
+                        {
+                            <tr><td><i>---</i></td></tr>
+                        }
+                        else
+                        {
+                            foreach (var ___item in __item.Program.SpecificObjectives)
+                            {
+                                <tr>
+                                    <td class="td-number-collapsed">@___item.Index.</td>
+                                    <td>@___item.Content</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <div class="property-caption">Macroprogramas</div>
+                    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+                        @if (__item.Program.Macroprograms.Length <= 0)
+                        {
+                            <tr><td><i>---</i></td></tr>
+                        }
+                        else
+                        {
+                            foreach (var ___item in __item.Program.Macroprograms)
+                            {
+                                <tr>
+                                    <td class="td-number-collapsed">@___item.Index.</td>
+                                    <td>@___item.Title</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <div class="property-caption">Grupo de trabajo</div>
+                    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+                        @if (__item.Program.Organizations.Length <= 0)
+                        {
+                            <tr><td><i>---</i></td></tr>
+                        }
+                        else
+                        {
+                            foreach (var ___item in __item.Program.Organizations)
+                            {
+                                <tr>
+                                    <td class="td-number-collapsed">-</td>
+                                    <td>@___item.Name</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <div class="property-caption">Impactos</div>
+                    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+                        @if (__item.Program.Impacts.Length <= 0)
+                        {
+                            <tr><td><i>---</i></td></tr>
+                        }
+                        else
+                        {
+                            foreach (var ___item in __item.Program.Impacts)
+                            {
+                                <tr>
+                                    <td class="td-number-collapsed">-</td>
+                                    <td><b>@___item.Name</b>: @___item.Description</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <div class="property-caption">Acciones</div>
+                    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+                        @if (__item.Program.Actions.Length <= 0)
+                        {
+                            <tr><td><i>---</i></td></tr>
+                        }
+                        else
+                        {
+                            foreach (var ___item in __item.Program.Actions)
+                            {
+                                <tr>
+                                    <td class="td-number-collapsed">-</td>
+                                    <td>@___item.Title</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <div class="property-caption">Ideas de proyecto</div>
+                    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+                        @if (__item.Ideas.Length <= 0)
+                        {
+                            <tr><td><i>---</i></td></tr>
+                        }
+                        else
+                        {
+                            foreach (var ___item in __item.Ideas)
+                            {
+                                <tr>
+                                    <td class="td-number-collapsed">-</td>
+                                    <td>@___item.Title</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+
+                    <div class="index-box">
+                        <h5 class="h-seccion">Proyectos</h5>
+                        <ul>
+                            @foreach (var ___item in __item.Projects)
+                            {
+                                <li class="li-indicator">
+                                    <h4 class="h-title">@___item.Name</h4>
+                                    @if (!string.IsNullOrEmpty(___item.Description))
+                                    {
+                                        <p>@___item.Description</p>
+                                    }
+                                    <div class="property-caption">Tipo</div>
+                                    <p>@___item.Kind.Name</p>
+                                    <div class="property-caption">Objetivo general</div>
+                                    <p>@___item.Objective</p>
+                                    <div class="property-caption">Objetivos específicos</div>
+                                    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+                                        @if (___item.SpecificObjectives.Length <= 0)
+                                        {
+                                            <tr><td><i>---</i></td></tr>
+                                        }
+                                        else
+                                        {
+                                            foreach (var ____item in ___item.SpecificObjectives)
+                                            {
+                                                <tr>
+                                                    <td class="td-number-collapsed">@____item.Index.</td>
+                                                    <td>@____item.Content</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+                                    <div class="property-caption">Macroprogramas</div>
+                                    <table class="table-no-lines" cellpadding="0" cellspacing="4">
+                                        @if (___item.Macroprograms.Length <= 0)
+                                        {
+                                            <tr><td><i>---</i></td></tr>
+                                        }
+                                        else
+                                        {
+                                            foreach (var ____item in ___item.Macroprograms)
+                                            {
+                                                <tr>
+                                                    <td class="td-number-collapsed">@____item.Index.</td>
+                                                    <td>@____item.Title</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
