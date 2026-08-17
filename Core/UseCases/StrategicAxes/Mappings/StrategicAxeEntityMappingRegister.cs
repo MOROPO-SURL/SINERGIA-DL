@@ -16,8 +16,9 @@ internal sealed class StrategicAxeEntityMappingRegister : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<int, StrategicAxeId>()
-            .MapWith(src => new StrategicAxeId(src));
+        config.NewConfig<int, StrategicAxeId>().MapWith(src => new StrategicAxeId(src));
+
+        config.NewConfig<StrategicAxeId, int>().MapWith(src => src.Value);
 
         config.NewConfig<StrategicAxe, StrategicAxeBasicDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
@@ -29,11 +30,9 @@ internal sealed class StrategicAxeEntityMappingRegister : IRegister
             .Map(dest => dest.Macroprograms, src => src.MacroprogramBridges.OrderBy(bridge => bridge.Linked!.Index).Select(bridge => bridge.Linked.Adapt<MacroprogramBasicDto>()).ToArray())
             .Map(dest => dest, src => src);
 
-        config.NewConfig<StrategicAxeDetailQuery, StrategicAxeId>()
-            .MapWith(src => new StrategicAxeId(src.Id));
+        config.NewConfig<StrategicAxeDetailQuery, StrategicAxeId>().MapWith(src => new StrategicAxeId(src.Id));
 
-        config.NewConfig<StrategicAxeCreateCommand, StrategicAxe>()
-            .MapWith(src => new(
+        config.NewConfig<StrategicAxeCreateCommand, StrategicAxe>().MapWith(src => new(
                 new StrategicAxeId(src.Id),
                 false,
                 src.Name,

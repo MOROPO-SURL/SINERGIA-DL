@@ -40,6 +40,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.RoleTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialResponsabilityActions.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.SocialSupportDemands.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxes.Ports.Repository;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicAxeTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLines.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicLineTraces.Ports.Repository;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.StrategicPrograms.Ports.Repository;
@@ -90,6 +91,7 @@ using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.R
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.SocialResponsabilityActions;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.SocialSupportDemands;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicAxes;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicAxeTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicLines;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicLineTraces;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Repository.StrategicPrograms;
@@ -238,6 +240,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMacroprogramTraceQueryRepositoryPort, MacroprogramTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IObjectiveTraceQueryRepositoryPort, ObjectiveTraceQueryRepositoryPortAdapter>();
         services.AddScoped<IOrganizationKindTraceQueryRepositoryPort, OrganizationKindTraceQueryRepositoryPortAdapter>();
+        services.AddScoped<IStrategicAxeTraceQueryRepositoryPort, StrategicAxeTraceQueryRepositoryPortAdapter>();
 
         services.AddScoped<IIdentityAuthenticationServicePort, LocalIdentityAuthenticationServicePortAdapter>();
 
@@ -256,6 +259,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISaveChangesInterceptor, MacroprogramChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, ObjectiveChangeDomainTracingInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, OrganizationKindChangeDomainTracingInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, StrategicAxeChangeDomainTracingInterceptor>();
 
         return services;
     }
