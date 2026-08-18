@@ -57,6 +57,12 @@
 	  <Compile Update="UI\Pages\Common\Detail\WebSiteAddressDetailPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\DevelopmentActorProfile\NaturalOwnedPDLDevelopmentActorProfileOverviewPage.xaml.cs">
+	    <DependentUpon>NaturalOwnedPDLDevelopmentActorProfileOverviewPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\DevelopmentActorProfile\LegalOwnedPDLDevelopmentActorProfileOverviewPage.xaml.cs">
+	    <DependentUpon>LegalOwnedPDLDevelopmentActorProfileOverviewPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\DiagnosticSummaryPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -121,6 +127,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Common\Detail\WebSiteAddressDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfile\NaturalOwnedPDLDevelopmentActorProfileOverviewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\DevelopmentActorProfile\LegalOwnedPDLDevelopmentActorProfileOverviewPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\DevelopmentActorProfile\SRLDevelopmentActorProfileOverviewPage.xaml">

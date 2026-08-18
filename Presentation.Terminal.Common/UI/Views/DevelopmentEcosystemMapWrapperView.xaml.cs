@@ -58,7 +58,26 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
 
         if (args.MapInfo!.Style is Mapsui.Styles.CalloutStyle)
         {
-            Application.Current!.MainPage!.NavigationPushModalPageAsync(new Pages.DevelopmentActorProfile.SRLDevelopmentActorProfileOverviewPage(new Models.Page.DevelopmentActorProfile.SRLDevelopmentActorProfileOverviewDetailPageModel((SRLDevelopmentActorProfileDetailDtoModel)args.MapInfo!.Feature[nameof(SRLDevelopmentActorProfileDetailDtoModel)]!)));
+            if (args.MapInfo.Feature[nameof(SRLDevelopmentActorProfileDetailDtoModel)] is SRLDevelopmentActorProfileDetailDtoModel srlProfile)
+            {
+                Application.Current!.MainPage!.NavigationPushModalPageAsync(new Pages.DevelopmentActorProfile.SRLDevelopmentActorProfileOverviewPage(new Models.Page.DevelopmentActorProfile.SRLDevelopmentActorProfileOverviewDetailPageModel(srlProfile)));
+
+                return;
+            }
+            
+            if (args.MapInfo.Feature[nameof(LegalOwnedPDLDevelopmentActorProfileDetailDtoModel)] is LegalOwnedPDLDevelopmentActorProfileDetailDtoModel legalPdlProfile)
+            {
+                Application.Current!.MainPage!.NavigationPushModalPageAsync(new Pages.DevelopmentActorProfile.LegalOwnedPDLDevelopmentActorProfileOverviewPage(new Models.Page.DevelopmentActorProfile.LegalOwnedPDLDevelopmentActorProfileOverviewDetailPageModel(legalPdlProfile)));
+
+                return;
+            }
+
+            if (args.MapInfo.Feature[nameof(NaturalOwnedPDLDevelopmentActorProfileDetailDtoModel)] is NaturalOwnedPDLDevelopmentActorProfileDetailDtoModel naturalPdlProfile)
+            {
+                Application.Current!.MainPage!.NavigationPushModalPageAsync(new Pages.DevelopmentActorProfile.NaturalOwnedPDLDevelopmentActorProfileOverviewPage(new Models.Page.DevelopmentActorProfile.NaturalOwnedPDLDevelopmentActorProfileOverviewDetailPageModel(naturalPdlProfile)));
+
+                return;
+            }
         }
         else
         {
@@ -132,6 +151,8 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
             {
                 PointFeature commercialLocationPointFeature = new(SphericalMercator.FromLonLat(item.Coordinate.Longitude, item.Coordinate.Latitude).ToMPoint());
 
+                commercialLocationPointFeature[nameof(SRLDevelopmentActorProfileDetailDtoModel)] = srl;
+
                 commercialLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
                 commercialLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
                 {
@@ -174,7 +195,7 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
         {
             PointFeature mainLocationPointFeature = new(SphericalMercator.FromLonLat(pdl.MainLocation.Coordinate.Longitude, pdl.MainLocation.Coordinate.Latitude).ToMPoint());
 
-            mainLocationPointFeature[nameof(SRLDevelopmentActorProfileDetailDtoModel)] = pdl;
+            mainLocationPointFeature[nameof(NaturalOwnedPDLDevelopmentActorProfileDetailDtoModel)] = pdl;
 
             mainLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
             mainLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
@@ -200,6 +221,8 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
             foreach (LocationDetailDtoModel item in pdl.CommercialLocations)
             {
                 PointFeature commercialLocationPointFeature = new(SphericalMercator.FromLonLat(item.Coordinate.Longitude, item.Coordinate.Latitude).ToMPoint());
+
+                commercialLocationPointFeature[nameof(NaturalOwnedPDLDevelopmentActorProfileDetailDtoModel)] = pdl;
 
                 commercialLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
                 commercialLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
@@ -228,7 +251,7 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
         {
             PointFeature mainLocationPointFeature = new(SphericalMercator.FromLonLat(pdl.MainLocation.Coordinate.Longitude, pdl.MainLocation.Coordinate.Latitude).ToMPoint());
 
-            mainLocationPointFeature[nameof(SRLDevelopmentActorProfileDetailDtoModel)] = pdl;
+            mainLocationPointFeature[nameof(LegalOwnedPDLDevelopmentActorProfileDetailDtoModel)] = pdl;
 
             mainLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
             mainLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle
@@ -254,6 +277,8 @@ public partial class DevelopmentEcosystemMapWrapperView : ContentView
             foreach (LocationDetailDtoModel item in pdl.CommercialLocations)
             {
                 PointFeature commercialLocationPointFeature = new(SphericalMercator.FromLonLat(item.Coordinate.Longitude, item.Coordinate.Latitude).ToMPoint());
+
+                commercialLocationPointFeature[nameof(LegalOwnedPDLDevelopmentActorProfileDetailDtoModel)] = pdl;
 
                 commercialLocationPointFeature.Styles.Add(Mapsui.Styles.SymbolStyles.CreatePinStyle(pinColor, 0.6));
                 commercialLocationPointFeature.Styles.Add(new Mapsui.Styles.CalloutStyle

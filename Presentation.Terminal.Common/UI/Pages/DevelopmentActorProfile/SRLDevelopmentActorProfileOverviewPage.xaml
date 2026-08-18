@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
     xmlns:local_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.DevelopmentActorProfile"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_economicactivity_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.EconomicActivity.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
@@ -67,6 +68,30 @@
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Model.MainEconomicActivity.Name}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertySpacedLabelStyle}"
+                            Text="Actividades secundarias" />
+                        <CollectionView
+                            ItemsSource="{Binding Model.SecoundaryEconomicActivities}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="interop_economicactivity_dto_models:EconomicActivityBasicDtoModel">
+                                    <Grid ColumnSpacing="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Text="-" FontAttributes="Bold" />
+                                        <Label Grid.Column="1" Text="{Binding Name}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                         <Label 
                             Style="{StaticResource CaptionPropertySpacedLabelStyle}"
                             Text="Acerca de" />
