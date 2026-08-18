@@ -4,16 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_detail_page_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.TerritorialBarrier"
     xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.TerritorialBarrier.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_trace_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.TerritorialBarrierTrace.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
     xmlns:interop_common_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:common_constants="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Constants;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_behaviors="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Behaviors;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_base_pages="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Bases;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
     xmlns:common_ui_views="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.UI.Pages.TerritorialBarrier.TerritorialBarrierDetailPage"
     x:TypeArguments="interop_dto_models:TerritorialBarrierDetailDtoModel,local_detail_page_models:TerritorialBarrierDetailPageModel"
     x:DataType="local_detail_page_models:TerritorialBarrierDetailPageModel"
     Shell.TabBarIsVisible="False"
     Title="Detalles de Barrera territorial">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Modificar"
@@ -46,6 +55,63 @@
                 <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
                     <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Descripción" />
                     <Label Text="{Binding Model.Description, TargetNullValue='---'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Style="{StaticResource FormFluentChildVerticalStackLayoutStyle}">
+                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Historial de cambios" />
+                    <BoxView Style="{StaticResource DetailSectionSeparatorBoxViewStyle}" />
+                    <Button
+                        IsVisible="{Binding Traces, Converter={StaticResource IsNullConverter}}"
+                        HorizontalOptions="Center"
+                        Text="Mostrar"
+                        Command="{Binding FetchTraceCommand, Mode=OneTime}" />
+                    <CollectionView 
+                        IsVisible="{Binding Traces, Converter={StaticResource IsNotNullConverter}}"
+                        ItemsSource="{Binding Traces}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Style="{StaticResource CollectionFrameEmptyViewLabelStyle}" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_trace_dto_models:TerritorialBarrierTraceDetailDtoModel">
+                                <Grid ColumnSpacing="{Static common_constants:ListEntityPageConstants.COLLECTIONVIEW_ITEMSLAYOUT_ITEMSPACING}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Grid.Column="0" Grid.RowSpan="3"
+                                        VerticalOptions="Center"
+                                        FontFamily="MaterialDesignIcons"
+                                        FontSize="48"
+                                        Text="&#xF0226;"
+                                        TextColor="DimGray" />
+                                    <Label
+                                        Grid.Column="1" Grid.Row="0"
+                                        FontAttributes="Bold"
+                                        Text="{Binding Kind, Converter={StaticResource StringToLocalizedStringConverter}}" />
+                                    <Label
+                                        Grid.Column="1" Grid.Row="1"
+                                        Text="{Binding Author}" />
+                                    <Label
+                                        Grid.Column="1" Grid.Row="2"
+                                        FontAttributes="Italic"
+                                        Text="{Binding CreatedAt}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button
+                        IsVisible="{Binding Traces, Converter={StaticResource IsNotNullConverter}}"
+                        HorizontalOptions="Center"
+                        Text="Actualizar"
+                        Command="{Binding FetchTraceCommand, Mode=OneTime}" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
