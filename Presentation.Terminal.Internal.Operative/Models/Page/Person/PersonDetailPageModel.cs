@@ -2,17 +2,45 @@
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs;
 using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
+using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PersonTrace.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
-using System.Windows.Input;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Ports.Helper;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Common.Detail;
+using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Page.Person;
 
 public sealed class PersonDetailPageModel : AbstractDetailEntityPageModel<PersonDetailDtoModel>
 {
+    private PersonTraceDetailDtoModel[]? traces;
+
     public PersonDetailPageModel(PersonDetailDtoModel model, Action? changeCallbackAction = null) : base(model, changeCallbackAction)
     {
+        FetchTraceCommand = new Command(() =>
+        {
+            IsBusy = true;
+
+            PersonTraceQueryApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
+
+            apiClient.GetForTargetAsync(Model.Id).ContinueWith(task =>
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    if (!task.IsCompletedSuccessfully)
+                    {
+                        IPlatformApplication.Current!.Services.GetRequiredService<IExceptionHandlingHelperPort>().HandleException(task.Exception);
+                    }
+                    else
+                    {
+                        Traces = task.Result;
+                    }
+
+                    IsBusy = false;
+                });
+            });
+        });
+
         DetailPhoneNumberCommand = new Command<PhoneNumberDetailDtoModel>(async model =>
         {
             await Application.Current!.MainPage!.NavigationPushModalPageAsync(new PhoneNumberDetailPage(model));
@@ -33,6 +61,10 @@ public sealed class PersonDetailPageModel : AbstractDetailEntityPageModel<Person
             await Application.Current!.MainPage!.NavigationPushModalPageAsync(new WebSiteAddressDetailPage(model));
         });
     }
+
+    public PersonTraceDetailDtoModel[]? Traces { get => traces; private set => SetProperty(ref traces, value); }
+
+    public ICommand FetchTraceCommand { get; init; }
 
     public ICommand DetailPhoneNumberCommand { get; private set; }
 

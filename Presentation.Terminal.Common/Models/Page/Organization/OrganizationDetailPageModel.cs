@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Organization;
 
-public sealed class OrganizationDetailPageModel : AbstractDetailEntityPageModel<OrganizationDetailDtoModel>
+public class OrganizationDetailPageModel : AbstractDetailEntityPageModel<OrganizationDetailDtoModel>
 {
     public OrganizationDetailPageModel(OrganizationDetailDtoModel model, Action? changeCallbackAction = null) : base(model, changeCallbackAction)
     {
