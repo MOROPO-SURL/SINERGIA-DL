@@ -23,7 +23,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <common_ui_converters:ImageBasicModelToImageSourceConverter x:Key="ImageBasicModelToImageSourceConverter" />
-            
+            <common_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+
             <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
