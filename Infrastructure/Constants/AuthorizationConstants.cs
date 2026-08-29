@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Constants;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Constants;
 
 public static class AuthorizationConstants
 {

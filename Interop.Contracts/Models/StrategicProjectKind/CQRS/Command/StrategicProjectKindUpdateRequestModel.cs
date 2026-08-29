@@ -1,3 +1,3 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProjectKind.CQRS.Command;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.StrategicProjectKind.CQRS.Command;
 
 public record StrategicProjectKindUpdateRequestModel(Guid Id, string Name, string? Description = null);

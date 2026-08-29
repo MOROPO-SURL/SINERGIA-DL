@@ -1,8 +1,8 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients.Abstracts;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Clients.Abstracts;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.StrategicProject.DTOs;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Clients;
 
 public sealed class StrategicProjectQueryApiClient : AbstractQueryApiClient<Guid, StrategicProjectBasicDtoModel, StrategicProjectDetailDtoModel>
 {

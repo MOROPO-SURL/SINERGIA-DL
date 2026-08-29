@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Common.Ports.Service;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Extensions;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Service;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Ports.Adapters.Service;
 
 internal sealed class RelativePathLocalFileServicePortAdapter : IFileStoreServicePort
 {

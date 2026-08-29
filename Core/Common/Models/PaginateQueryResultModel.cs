@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Models;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Common.Models;
 
 public class PaginateQueryResultModel<T>
 {

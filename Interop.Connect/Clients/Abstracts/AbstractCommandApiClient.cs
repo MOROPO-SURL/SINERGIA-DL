@@ -1,8 +1,8 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients.Extensions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients.Interfaces;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Clients.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Clients.Interfaces;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Ports.Provider;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients.Abstracts;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Clients.Abstracts;
 
 public abstract class AbstractCommandApiClient<TId, TCreateRequestModel, TUpdateRequestModel, TDetailDtoModel> : ICommandApiClient<TId, TCreateRequestModel, TUpdateRequestModel, TDetailDtoModel>
 {

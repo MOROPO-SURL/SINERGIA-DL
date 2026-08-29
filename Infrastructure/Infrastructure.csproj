@@ -4,8 +4,8 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure</AssemblyName>
-		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure</RootNamespace>
+		<AssemblyName>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Configurations;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.API.Configurations;
 using System.Security.Claims;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Extensions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.API.Extensions;
 
 internal static class ClaimIdentityExtensions
 {

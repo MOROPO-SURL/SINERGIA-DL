@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Extensions;
 
 public static class ExpressionExtensions
 {

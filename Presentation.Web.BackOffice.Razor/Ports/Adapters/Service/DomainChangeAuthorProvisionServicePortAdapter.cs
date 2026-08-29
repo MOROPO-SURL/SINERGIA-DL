@@ -1,6 +1,6 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Service;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Ports.Service;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Ports.Adapters.Service;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.BackOffice.Razor.Ports.Adapters.Service;
 
 public class DomainChangeAuthorProvisionServicePortAdapter : IDomainChangeAuthorProvisionServicePort
 {

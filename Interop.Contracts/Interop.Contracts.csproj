@@ -4,8 +4,8 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts</AssemblyName>
-		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts</RootNamespace>
+		<AssemblyName>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts</RootNamespace>
 	</PropertyGroup>
 
 </Project>

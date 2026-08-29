@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients.Interfaces;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Clients.Interfaces;
 
 public interface ICommandApiClient<TId, TCreateRequestModel, TUpdateRequestModel, TDetailDtoModel>
 {

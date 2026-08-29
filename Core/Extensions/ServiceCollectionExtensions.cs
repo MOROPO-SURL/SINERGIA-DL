@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Extensions;
 
 public static class ServiceCollectionExtensions
 {

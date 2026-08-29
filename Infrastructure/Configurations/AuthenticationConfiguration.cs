@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Configurations;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Configurations;
 
 public sealed class AuthenticationConfiguration
 {

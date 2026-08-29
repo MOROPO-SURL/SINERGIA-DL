@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Constants;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Constants;
 
 public static class FileHandlingConstants
 {

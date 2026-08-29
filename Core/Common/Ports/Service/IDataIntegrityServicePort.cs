@@ -1,6 +1,6 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Common.Aggregate.Intefaces;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Domain.Common.Aggregate.Intefaces;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Common.Ports.Service;
 
 public interface IDataIntegrityServicePort
 {

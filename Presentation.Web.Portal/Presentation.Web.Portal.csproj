@@ -4,8 +4,8 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal</AssemblyName>
-		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal</RootNamespace>
+		<AssemblyName>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.Portal</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.Portal</RootNamespace>
 		<Version>0.9.0</Version>
 	</PropertyGroup>
 

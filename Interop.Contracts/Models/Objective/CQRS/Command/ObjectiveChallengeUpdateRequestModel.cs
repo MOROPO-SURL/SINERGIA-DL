@@ -1,3 +1,3 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Objective.CQRS.Command;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Objective.CQRS.Command;
 
 public record ObjectiveChallengeUpdateRequestModel(Guid Id, int Index, string Title, string? Description = null);

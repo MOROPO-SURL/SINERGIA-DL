@@ -1,6 +1,6 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Constants;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Constants;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Extensions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.BackOffice.Razor.Extensions;
 
 public static class ClaimPrincipalExtensions
 {

@@ -1,3 +1,3 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.CQRS.Command;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Image.CQRS.Command;
 
 public sealed record ImageCreateRequestModel(Guid Id, byte[] ContentData, string ContentType, string? About = null);

@@ -4,8 +4,8 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<AssemblyName>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.External.Common</AssemblyName>
-		<RootNamespace>MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.External.Common</RootNamespace>
+		<AssemblyName>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.External.Common</AssemblyName>
+		<RootNamespace>MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.External.Common</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

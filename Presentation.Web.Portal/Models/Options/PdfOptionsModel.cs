@@ -1,6 +1,6 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal.Models;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.Portal.Models;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal.Models.Options;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.Portal.Models.Options;
 
 public class PdfOptionsModel
 {

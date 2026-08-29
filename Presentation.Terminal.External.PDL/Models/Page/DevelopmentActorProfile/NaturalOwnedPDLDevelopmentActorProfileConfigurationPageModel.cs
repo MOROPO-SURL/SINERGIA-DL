@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.EconomicActivity.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.CQRS.Command;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.PDLModality.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Person.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.DevelopmentActorProfile.CQRS.Command;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.DevelopmentActorProfile.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.EconomicActivity.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Location.CQRS.Command;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Location.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.PDLModality.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Person.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Pages.Locati0n;
@@ -179,7 +180,7 @@ public sealed class NaturalOwnedPDLDevelopmentActorProfileConfigurationPageModel
     {
         NaturalOwnedPDLDevelopmentActorProfilesCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
-        return apiClient.CreateAsync(new GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.CQRS.Command.NaturalOwnedPDLDevelopmentActorProfileCreateRequestModel(
+        return apiClient.CreateAsync(new NaturalOwnedPDLDevelopmentActorProfileCreateRequestModel(
             Guid.NewGuid(),
             ((Common.Models.Page.AppShellPageModel)Shell.Current!.BindingContext).Organization.Id,
             fiscalIdentificationCode,
@@ -198,7 +199,7 @@ public sealed class NaturalOwnedPDLDevelopmentActorProfileConfigurationPageModel
     {
         NaturalOwnedPDLDevelopmentActorProfilesCommandApiClient apiClient = new(IPlatformApplication.Current!.Services.GetRequiredService<IHttpClientProviderPort>());
 
-        return apiClient.UpdateAsync(new GEDEL.CAMCMG.Interop.Contracts.Models.DevelopmentActorProfile.CQRS.Command.NaturalOwnedPDLDevelopmentActorProfileUpdateRequestModel(
+        return apiClient.UpdateAsync(new NaturalOwnedPDLDevelopmentActorProfileUpdateRequestModel(
             Id!.Value,
             fiscalIdentificationCode,
             DateOnly.FromDateTime(bornAt),

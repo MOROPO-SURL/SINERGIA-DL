@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Bridges;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Domain.Bridges;
 using System.Security.Cryptography;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Configurations;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Persistence.EF.Configurations;
 
 internal class UserRoleBridgeEntityTypeConfiguration : IEntityTypeConfiguration<UserRoleBridge>
 {

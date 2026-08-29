@@ -1,8 +1,8 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Authentication.CQRS.Command;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.UseCases.Authentication.CQRS.Command;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.BackOffice.Razor.Models.View.Authentication.Mappings;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.BackOffice.Razor.Models.View.Authentication.Mappings;
 
 public sealed class AuthenticateRequestModelMappingRegister : IRegister
 {

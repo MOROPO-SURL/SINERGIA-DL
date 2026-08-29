@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate.Values;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Constants;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Domain.Aggretates.PermissionAggregate;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Domain.Aggretates.PermissionAggregate.Values;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Constants;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Extensions;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Persistence.EF;
 
 public class DefaultDbContext : DbContext
 {

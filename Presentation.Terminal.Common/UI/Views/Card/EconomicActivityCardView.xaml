@@ -2,7 +2,7 @@
 <ContentView 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.EconomicActivity.DTOs;assembly=MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts"
+    xmlns:interop_dto_models="clr-namespace:MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.EconomicActivity.DTOs;assembly=MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts"
     x:Class="MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.UI.Views.Card.EconomicActivityCardView"
     x:DataType="interop_dto_models:EconomicActivityBasicDtoModel">
     <Frame InputTransparent="{OnPlatform Default=False, Android=True}">

@@ -1,16 +1,16 @@
 using Mapster;
 using Microsoft.Extensions.Options;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Extensions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Configurations;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Service;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Configurations;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Extensions;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Ports.Adapter.Service;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Configurations;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Ports.Service;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.API.Configurations;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.API.Extensions;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.API.Ports.Adapter.Service;
 using NSwag;
 using System.Runtime.CompilerServices;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.API;
 
 public class Program
 {

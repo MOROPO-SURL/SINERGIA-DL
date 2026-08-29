@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.API.Configurations;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.API.Configurations;
 
 public sealed class JWTConfiguration
 {

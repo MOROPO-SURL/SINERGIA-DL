@@ -1,3 +1,3 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Clasification.CQRS.Query;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Clasification.CQRS.Query;
 
 public record ClasificationPaginateRequestModel(int Page, int Limit);

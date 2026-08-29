@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Presentation.Web.Portal.Ports.Service.Adapter;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Web.Portal.Ports.Service.Adapter;
 
 internal class WkhtmltopdfHtmlToPdfServicePortAdapter : IHtmlToPdfServicePort
 {

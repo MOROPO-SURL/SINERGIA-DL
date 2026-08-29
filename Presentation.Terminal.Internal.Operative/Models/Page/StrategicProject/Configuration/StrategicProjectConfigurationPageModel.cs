@@ -1,13 +1,13 @@
 ﻿using FluentValidation;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Internal.Operative.Clients;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Macroprogram.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProgram.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.CQRS.Command.Clipped;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProjectKind.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Clients;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Internal.Operative.Clients;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Macroprogram.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.StrategicProgram.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.StrategicProject.CQRS.Command;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.StrategicProject.CQRS.Command.Clipped;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.StrategicProject.DTOs;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.StrategicProjectKind.DTOs;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Internal.Operative.Models.Compoused.StrategicProject;
@@ -38,7 +38,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
 
     private readonly List<SpecificObjectiveProjectCreateClippedRequestModel> inSpecificObjectives = [];
     private readonly List<SpecificObjectiveProjectUpdateClippedRequestModel> patchSpecificObjectives = [];
-    private readonly List<GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel> outSpecificObjectives = [];
+    private readonly List<Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel> outSpecificObjectives = [];
 
     private readonly List<IndicatorCreateClippedRequestModel> inIndicators = [];
     private readonly List<IndicatorUpdateClippedRequestModel> patchIndicators = [];
@@ -61,12 +61,12 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
             await Application.Current!.MainPage!.NavigationPushPageAsync(new SpecificObjectiveProjectClippedConfigurationPage(new SpecificObjectiveProjectClippedConfigurationPageModel(null, SpecificObjectiveCreateSuccess_Callback, new StrategicProjectSpecificObjectiveConfigurationValidator(this))));
         });
 
-        UpdateSpecificObjectiveCommand = new Command<GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel>(async model =>
+        UpdateSpecificObjectiveCommand = new Command<Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel>(async model =>
         {
             await Application.Current!.MainPage!.NavigationPushPageAsync(new SpecificObjectiveProjectClippedConfigurationPage(new SpecificObjectiveProjectClippedConfigurationPageModel(model, SpecificObjectiveModifySuccess_Callback, new StrategicProjectSpecificObjectiveConfigurationValidator(this))));
         });
 
-        DeleteSpecificObjectiveCommand = new Command<GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel>(model =>
+        DeleteSpecificObjectiveCommand = new Command<Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel>(model =>
         {
             Application.Current!.MainPage!.DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
             {
@@ -108,7 +108,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
             });
         });
 
-        DetailSpecificObjectiveCommand = new Command<GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel>(async model =>
+        DetailSpecificObjectiveCommand = new Command<Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel>(async model =>
         {
             await Application.Current!.MainPage!.NavigationPushModalPageAsync(new SpecificObjectiveProjectClippedDetailPage(model));
         });
@@ -284,7 +284,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
 
     public string? Description { get => description; set => SetProperty(ref description, value); }
 
-    public ObservableCollection<GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel> SpecificObjectives { get; init; } = [];
+    public ObservableCollection<Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel> SpecificObjectives { get; init; } = [];
 
     public ICommand CreateSpecificObjectiveCommand { get; init; }
 
@@ -370,7 +370,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
         hasChangesFlag = true;
     }
 
-    private void SpecificObjectiveCreateSuccess_Callback(GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel model)
+    private void SpecificObjectiveCreateSuccess_Callback(Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel model)
     {
         inSpecificObjectives.Add(new SpecificObjectiveProjectCreateClippedRequestModel(model.Index, model.Content));
 
@@ -380,7 +380,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
         hasChangesFlag = true;
     }
 
-    private void SpecificObjectiveModifySuccess_Callback(GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel model)
+    private void SpecificObjectiveModifySuccess_Callback(Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel model)
     {
         bool handled = false;
 
@@ -427,7 +427,7 @@ public sealed class StrategicProjectConfigurationPageModel : AbstractConfigurati
 
             if (item.Id != model.Id) continue;
 
-            SpecificObjectives[index] = new GEDEL.CAMCMG.Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel(model.Id, model.Index, model.Content);
+            SpecificObjectives[index] = new Interop.Contracts.Models.StrategicProject.DTOs.SpecificObjectiveProjectDetailDtoModel(model.Id, model.Index, model.Content);
 
             break;
         }

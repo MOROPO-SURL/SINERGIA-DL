@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Persistence.EF.Migrations
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Persistence.EF.Migrations
 {
     /// <inheritdoc />
     public partial class DomainUpgrade14SchemaMigration : Migration

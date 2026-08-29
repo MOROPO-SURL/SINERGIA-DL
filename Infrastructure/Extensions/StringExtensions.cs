@@ -1,7 +1,7 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Constants;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.PermissionAggregate;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Constants;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Domain.Aggretates.PermissionAggregate;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Extensions;
 
 public static class StringExtensions
 {

@@ -1,4 +1,5 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Ports.Provider;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Ports.Provider;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Enumerations;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.External.PDL.UI.Pages;
 
@@ -14,8 +15,8 @@ public partial class AppShell : Shell
 
         DevelopmentActorProfileShellContent.ContentTemplate = model.Organization.Kind.DevelopmentActorProfileKind switch
         {
-            GEDEL.CAMCMG.Interop.Contracts.Enumerations.DevelopmentActorProfileKind.NaturalPDL => new DataTemplate(() => new NaturalOwnedPDLDevelopmentActorProfileDetailPage()),
-            GEDEL.CAMCMG.Interop.Contracts.Enumerations.DevelopmentActorProfileKind.LegalPDL => new DataTemplate(() => new LegalOwnedPDLDevelopmentActorProfileDetailPage()),
+            DevelopmentActorProfileKind.NaturalPDL => new DataTemplate(() => new NaturalOwnedPDLDevelopmentActorProfileDetailPage()),
+            DevelopmentActorProfileKind.LegalPDL => new DataTemplate(() => new LegalOwnedPDLDevelopmentActorProfileDetailPage()),
             _ => throw new InvalidOperationException(),
         };
     }

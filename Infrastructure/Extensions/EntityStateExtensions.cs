@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Domain.Aggretates.TraceAggregate.Enumerations;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Domain.Aggretates.TraceAggregate.Enumerations;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Extensions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Extensions;
 
 internal static class EntityStateExtensions
 {

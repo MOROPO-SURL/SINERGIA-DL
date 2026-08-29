@@ -1,4 +1,4 @@
-﻿namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Service;
+﻿namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Ports.Service;
 
 public interface IDomainChangeAuthorProvisionServicePort
 {

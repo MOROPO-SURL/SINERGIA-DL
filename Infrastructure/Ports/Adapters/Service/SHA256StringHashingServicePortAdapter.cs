@@ -1,6 +1,6 @@
-﻿using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.Common.Ports.Service;
+﻿using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.Common.Ports.Service;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Infrastructure.Ports.Adapters.Service;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Infrastructure.Ports.Adapters.Service;
 
 internal class SHA256StringHashingServicePortAdapter : IStringHashingServicePort
 {

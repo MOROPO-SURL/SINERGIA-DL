@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Image.CQRS.Command;
-using MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Contracts.Models.Location.CQRS.Command;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Image.CQRS.Command;
+using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Contracts.Models.Location.CQRS.Command;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Extensions;
 using MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Presentation.Terminal.Common.Models.Page.Abstractions;
 
@@ -81,8 +81,8 @@ public sealed class LocationConfigurationPageModel : AbstractConfigurationPageMo
         return Task.FromResult(new LocationUpdateRequestModel(
             Guid.NewGuid(),
             name,
-            new GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs.CoordinateValueDtoModel(latitudeCoordinate, longitudeCoordinate),
-            new GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs.PostalAddressDetailDtoModel(postalAddressStreet, postalAddressNumber, postalAddressContext, postalAddressZipCode),
+            new Interop.Contracts.Models.Common.DTOs.CoordinateValueDtoModel(latitudeCoordinate, longitudeCoordinate),
+            new Interop.Contracts.Models.Common.DTOs.PostalAddressDetailDtoModel(postalAddressStreet, postalAddressNumber, postalAddressContext, postalAddressZipCode),
             featureImagePicked,
             description));
     }
@@ -92,8 +92,8 @@ public sealed class LocationConfigurationPageModel : AbstractConfigurationPageMo
         return Task.FromResult(new LocationUpdateRequestModel(
             Id!.Value,
             name,
-            new GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs.CoordinateValueDtoModel(latitudeCoordinate, longitudeCoordinate),
-            new GEDEL.CAMCMG.Interop.Contracts.Models.Common.DTOs.PostalAddressDetailDtoModel(postalAddressStreet, postalAddressNumber, postalAddressContext, postalAddressZipCode),
+            new Interop.Contracts.Models.Common.DTOs.CoordinateValueDtoModel(latitudeCoordinate, longitudeCoordinate),
+            new Interop.Contracts.Models.Common.DTOs.PostalAddressDetailDtoModel(postalAddressStreet, postalAddressNumber, postalAddressContext, postalAddressZipCode),
             featureImagePicked,
             description));
     }

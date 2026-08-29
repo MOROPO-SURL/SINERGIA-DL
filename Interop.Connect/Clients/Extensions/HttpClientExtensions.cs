@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Interop.Connect.Clients.Extensions;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Interop.Connect.Clients.Extensions;
 
 public static class HttpClientExtensions
 {

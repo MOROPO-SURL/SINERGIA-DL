@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace MOROPO.PDLCoLabCMG.GEDEL.CAMCMG.Core.UseCases.Roles.CQRS.Command.Update;
+namespace MOROPO.PDLCoLabCMG.SINERGIADL.CMG.Core.UseCases.Roles.CQRS.Command.Update;
 
 internal class RoleUpdateCommandValidator : AbstractValidator<RoleUpdateCommand>
 {
